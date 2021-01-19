@@ -6,7 +6,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "rm -rf output && mkdir output && node src/index.js && abaplint"
+    "test": "rm -rf output && mkdir output && node src/index.js && abaplint --fix"
   },
   "repository": {
     "type": "git",
