@@ -4,9 +4,8 @@
   "version": "1.0.0",
   "description": "ABAP OpenAPI Client Generator",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "test": "rm -rf output && mkdir output && node src/index.js && abaplint --fix"
+    "test": "abaplint && rm -rf output && abap_transpile && rm -rf result && mkdir result && node index.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +19,7 @@
   "homepage": "https://github.com/abap-openapi/abap-openapi-client#readme",
   "dependencies": {
     "@abaplint/cli": "^2.65.0",
-    "mustache": "^4.1.0"
+    "@abaplint/runtime": "^1.1.25",
+    "@abaplint/transpiler-cli": "^1.1.25"
   }
 }
