@@ -34,6 +34,8 @@ async function run() {
   const main = new zcl_aopi_main();
   const result = await main.run({iv_json: spec});
 
+  console.log(abap.console.get());
+
   fs.writeFileSync(process.cwd() + path.sep + "result" + path.sep + "zcl_bar.clas.abap", result.get().clas.get());
   fs.writeFileSync(process.cwd() + path.sep + "result" + path.sep + "zif_bar.intf.abap", result.get().intf.get());
 }
