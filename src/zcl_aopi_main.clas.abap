@@ -13,22 +13,23 @@ CLASS zcl_aopi_main DEFINITION PUBLIC.
     DATA mo_json TYPE REF TO zcl_oapi_json.
 
     TYPES: BEGIN OF ty_parameter,
-             name TYPE string,
-             in TYPE string,
+             name        TYPE string,
+             abap_name   TYPE string,
+             in          TYPE string,
              description TYPE string,
-             required TYPE abap_bool,
+             required    TYPE abap_bool,
            END OF ty_parameter.
 
     TYPES ty_parameters TYPE STANDARD TABLE OF ty_parameter WITH DEFAULT KEY.
 
     TYPES: BEGIN OF ty_operation,
-             path TYPE string,
-             method TYPE string,
-             summary TYPE string,
-             description TYPE string,
+             path         TYPE string,
+             method       TYPE string,
+             summary      TYPE string,
+             description  TYPE string,
              operation_id TYPE string,
-             abap_name TYPE string,
-             parameters TYPE ty_parameters,
+             abap_name    TYPE string,
+             parameters   TYPE ty_parameters,
            END OF ty_operation.
 
     TYPES ty_operations TYPE STANDARD TABLE OF ty_operation WITH DEFAULT KEY.
@@ -157,7 +158,7 @@ CLASS zcl_aopi_main IMPLEMENTATION.
       rv_abap = |\n    IMPORTING\n|.
 
       LOOP AT it_parameters INTO ls_parameter.
-        lv_text = |      | && to_lower( ls_parameter-name ) && | TYPE string|.
+        lv_text = |      | && ls_parameter-abap_name && | TYPE string|.
         IF ls_parameter-required = abap_false.
           lv_text = lv_text && | OPTIONAL|.
         ENDIF.
@@ -209,6 +210,7 @@ CLASS zcl_aopi_main IMPLEMENTATION.
       ls_parameter-in = mo_json->value_string( iv_prefix && lv_member && '/in' ).
       ls_parameter-description = mo_json->value_string( iv_prefix && lv_member && '/description' ).
       ls_parameter-required = mo_json->value_boolean( iv_prefix && lv_member && '/required' ).
+      ls_parameter-abap_name = to_lower( ls_parameter-name ).
       IF ls_parameter-name IS NOT INITIAL. " it might be a #ref
         APPEND ls_parameter TO rt_parameters.
       ENDIF.
