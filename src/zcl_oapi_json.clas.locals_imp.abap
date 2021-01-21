@@ -7,7 +7,7 @@ CLASS lcl_stack DEFINITION.
     METHODS pop.
     METHODS is_array RETURNING VALUE(rv_array) TYPE abap_bool.
     METHODS get_and_increase_index RETURNING VALUE(rv_index) TYPE i.
-    METHODS get RETURNING VALUE(rv_path) TYPE string.
+    METHODS get_full_name RETURNING VALUE(rv_path) TYPE string.
   PRIVATE SECTION.
     TYPES: BEGIN OF ty_data,
              name TYPE string,
@@ -54,7 +54,7 @@ CLASS lcl_stack IMPLEMENTATION.
     DELETE mt_data INDEX lv_index.
   ENDMETHOD.
 
-  METHOD get.
+  METHOD get_full_name.
     DATA ls_data LIKE LINE OF mt_data.
     LOOP AT mt_data INTO ls_data.
       rv_path = rv_path && ls_data-name.
@@ -120,7 +120,7 @@ CLASS lcl_parser IMPLEMENTATION.
 
           IF lv_push IS NOT INITIAL.
             CLEAR ls_data.
-            ls_data-parent = lo_stack->get( ).
+            ls_data-parent = lo_stack->get_full_name( ).
             ls_data-name = lv_push.
             ls_data-full_name = ls_data-parent && ls_data-name.
             APPEND ls_data TO rt_data.
@@ -132,7 +132,7 @@ CLASS lcl_parser IMPLEMENTATION.
 
           IF li_open->qname-name = 'object' OR li_open->qname-name = 'array'.
             CLEAR ls_data.
-            ls_data-parent = lo_stack->get( ).
+            ls_data-parent = lo_stack->get_full_name( ).
             ls_data-name = '/'.
             ls_data-full_name = ls_data-parent && ls_data-name.
             APPEND ls_data TO rt_data.
@@ -148,7 +148,7 @@ CLASS lcl_parser IMPLEMENTATION.
 
         WHEN if_sxml_node=>co_nt_value.
           li_value ?= li_node.
-          lv_name = lo_stack->get( ).
+          lv_name = lo_stack->get_full_name( ).
 * todo, this can be optimized by peeking at the next node when adding to rt_data ?
           READ TABLE rt_data ASSIGNING <ls_data> WITH KEY full_name = lv_name.
           IF sy-subrc = 0.
