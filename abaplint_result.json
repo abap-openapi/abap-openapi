@@ -8,14 +8,14 @@
   },
   "dependencies": [
     {
-      "url": "https://github.com/abaplint/deps",
+      "url": "https://github.com/open-abap/open-abap",
       "folder": "/deps",
       "files": "/src/**/*.*"
     }
   ],
   "syntax": {
     "version": "v702",
-    "errorNamespace": "^(Z|Y|LCL_|TY_|LIF_)",
+    "errorNamespace": "",
     "globalConstants": [],
     "globalMacros": []
   },

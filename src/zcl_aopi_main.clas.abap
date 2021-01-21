@@ -44,7 +44,7 @@ CLASS zcl_aopi_main DEFINITION PUBLIC.
       IMPORTING is_operation TYPE ty_operation
       RETURNING VALUE(rv_abap) TYPE string.
 
-    METHODS paramters_to_abap
+    METHODS parameters_to_abap
       IMPORTING it_parameters TYPE ty_parameters
       RETURNING VALUE(rv_abap) TYPE string.
 
@@ -133,7 +133,7 @@ CLASS zcl_aopi_main IMPLEMENTATION.
           |* { ls_parameter-name }, { ls_parameter-required }, "{ ls_parameter-description }", { ls_parameter-in }\n|.
       ENDLOOP.
       rv_abap = rv_abap &&
-        |  METHODS { ls_operation-abap_name }{ paramters_to_abap( ls_operation-parameters ) }.\n|.
+        |  METHODS { ls_operation-abap_name }{ parameters_to_abap( ls_operation-parameters ) }.\n|.
     ENDLOOP.
     rv_abap = rv_abap && |ENDINTERFACE.|.
 
@@ -141,35 +141,34 @@ CLASS zcl_aopi_main IMPLEMENTATION.
 
   METHOD operation_implementation.
     rv_abap =
-      |    mi_client-request->set_method( '{ to_upper( is_operation-method ) }' ).\n| &&
+      |    mi_client->request->set_method( '{ to_upper( is_operation-method ) }' ).\n| &&
       |    mi_client->request->set_header_field( name = '~request_uri' value = '{ is_operation-path }' ).\n| &&
       |    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).\n| &&
       |    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).\n|.
   ENDMETHOD.
 
-  METHOD paramters_to_abap.
+  METHOD parameters_to_abap.
 
     DATA ls_parameter LIKE LINE OF it_parameters.
     DATA lt_tab TYPE string_table.
     DATA lv_text TYPE string.
 
-    IF lines( it_parameters ) = 0.
-      RETURN.
+    IF lines( it_parameters ) > 0.
+      rv_abap = |\n    IMPORTING\n|.
+
+      LOOP AT it_parameters INTO ls_parameter.
+        lv_text = |      | && to_lower( ls_parameter-name ) && | TYPE string|.
+        IF ls_parameter-required = abap_false.
+          lv_text = lv_text && | OPTIONAL|.
+        ENDIF.
+        APPEND lv_text TO lt_tab.
+      ENDLOOP.
+
+      lv_text = concat_lines_of( table = lt_tab
+                               sep = |\n| ).
     ENDIF.
 
-    rv_abap = |\n    IMPORTING\n|.
-
-    LOOP AT it_parameters INTO ls_parameter.
-      lv_text = |      | && to_lower( ls_parameter-name ) && | TYPE string|.
-      IF ls_parameter-required = abap_false.
-        lv_text = lv_text && | OPTIONAL|.
-      ENDIF.
-      APPEND lv_text TO lt_tab.
-    ENDLOOP.
-
-    lv_text = concat_lines_of( table = lt_tab
-                               sep = |\n| ).
-    rv_abap = rv_abap && lv_text.
+    rv_abap = rv_abap && lv_text && |\n    RAISING cx_static_check|.
 
   ENDMETHOD.
 
