@@ -2,9 +2,9 @@ name: test
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   test:
@@ -16,3 +16,4 @@ jobs:
         node-version: '12'
     - run: npm install
     - run: npm test
+    - run: npm run petstore
