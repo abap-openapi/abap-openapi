@@ -89,6 +89,7 @@ CLASS lcl_parser IMPLEMENTATION.
     DATA li_attribute TYPE REF TO if_sxml_attribute.
     DATA li_value TYPE REF TO if_sxml_value_node.
     DATA lv_push TYPE string.
+    DATA lv_name TYPE string.
     DATA lo_stack TYPE REF TO lcl_stack.
     DATA ls_data LIKE LINE OF rt_data.
 
@@ -147,7 +148,9 @@ CLASS lcl_parser IMPLEMENTATION.
 
         WHEN if_sxml_node=>co_nt_value.
           li_value ?= li_node.
-          READ TABLE rt_data ASSIGNING <ls_data> WITH KEY full_name = lo_stack->get( ).
+          lv_name = lo_stack->get( ).
+* todo, this can be optimized by peeking at the next node when adding to rt_data ?
+          READ TABLE rt_data ASSIGNING <ls_data> WITH KEY full_name = lv_name.
           IF sy-subrc = 0.
             <ls_data>-value = li_value->get_value( ).
           ENDIF.
