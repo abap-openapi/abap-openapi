@@ -34,6 +34,10 @@ CLASS zcl_aopi_main DEFINITION PUBLIC.
 
     TYPES ty_operations TYPE STANDARD TABLE OF ty_operation WITH DEFAULT KEY.
 
+    METHODS to_abap_name
+      IMPORTING iv_name TYPE string
+      RETURNING VALUE(rv_name) TYPE string.
+
     METHODS operations
       RETURNING VALUE(rt_operations) TYPE ty_operations.
 
@@ -166,11 +170,17 @@ CLASS zcl_aopi_main IMPLEMENTATION.
       ENDLOOP.
 
       lv_text = concat_lines_of( table = lt_tab
-                               sep = |\n| ).
+                                 sep = |\n| ).
     ENDIF.
 
     rv_abap = rv_abap && lv_text && |\n    RAISING cx_static_check|.
 
+  ENDMETHOD.
+
+  METHOD to_abap_name.
+    rv_name = to_lower( iv_name ).
+    REPLACE ALL OCCURRENCES OF '-' IN rv_name WITH '_'.
+    REPLACE ALL OCCURRENCES OF '/' IN rv_name WITH '_'.
   ENDMETHOD.
 
   METHOD operations.
@@ -193,7 +203,7 @@ CLASS zcl_aopi_main IMPLEMENTATION.
         ls_operation-description = mo_json->value_string( lv_prefix && '/description' ).
         ls_operation-operation_id = mo_json->value_string( lv_prefix && '/operationId' ).
         ls_operation-parameters = parameters( lv_prefix && '/parameters/' ).
-        ls_operation-abap_name = to_lower( ls_operation-operation_id ).
+        ls_operation-abap_name = to_abap_name( ls_operation-operation_id ).
         APPEND ls_operation TO rt_operations.
       ENDLOOP.
     ENDLOOP.
@@ -210,7 +220,7 @@ CLASS zcl_aopi_main IMPLEMENTATION.
       ls_parameter-in = mo_json->value_string( iv_prefix && lv_member && '/in' ).
       ls_parameter-description = mo_json->value_string( iv_prefix && lv_member && '/description' ).
       ls_parameter-required = mo_json->value_boolean( iv_prefix && lv_member && '/required' ).
-      ls_parameter-abap_name = to_lower( ls_parameter-name ).
+      ls_parameter-abap_name = to_abap_name( ls_parameter-name ).
       IF ls_parameter-name IS NOT INITIAL. " it might be a #ref
         APPEND ls_parameter TO rt_parameters.
       ENDIF.
