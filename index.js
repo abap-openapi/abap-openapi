@@ -32,6 +32,7 @@ async function run() {
 
   const zcl_aopi_main = require("./output/zcl_aopi_main.clas.js").zcl_aopi_main;
   const main = new zcl_aopi_main();
+  await main.constructor_();
   const result = await main.run({iv_json: spec});
 
   console.log(abap.console.get());
