@@ -20,4 +20,27 @@ INTERFACE zif_aopi_schema PUBLIC.
          END OF ty_operation.
 
   TYPES ty_operations TYPE STANDARD TABLE OF ty_operation WITH DEFAULT KEY.
+
+  TYPES: BEGIN OF ty_component_schema,
+           name TYPE string,
+           abap_name TYPE string,
+         END OF ty_component_schema.
+
+  TYPES ty_schemas TYPE STANDARD TABLE OF ty_component_schema WITH DEFAULT KEY.
+
+  TYPES: BEGIN OF ty_components,
+           schemas TYPE ty_schemas,
+         END OF ty_components.
+
+  TYPES: BEGIN OF ty_info,
+           title TYPE string,
+           description TYPE string,
+         END OF ty_info.
+
+  TYPES: BEGIN OF ty_specification,
+           openapi TYPE string,
+           info TYPE ty_info,
+           operations TYPE ty_operations,
+           components TYPE ty_components,
+         END OF ty_specification.
 ENDINTERFACE.

@@ -35,21 +35,21 @@ ENDCLASS.
 CLASS zcl_aopi_main IMPLEMENTATION.
 
   METHOD run.
-    DATA lt_operations TYPE zif_aopi_schema=>ty_operations.
+    DATA ls_specification TYPE zif_aopi_schema=>ty_specification.
     DATA lv_interface_name TYPE string.
     DATA lo_parser TYPE REF TO zcl_aopi_parser.
 
     CREATE OBJECT lo_parser.
-    lt_operations = lo_parser->parse( iv_json ).
+    ls_specification = lo_parser->parse( iv_json ).
     lv_interface_name = 'zif_bar'.
 
     rs_result-clas = build_class(
-        iv_interface_name = lv_interface_name
-        it_operations = lt_operations ).
+      iv_interface_name = lv_interface_name
+      it_operations = ls_specification-operations ).
 
     rs_result-intf = build_interface(
       iv_interface_name = lv_interface_name
-      it_operations = lt_operations ).
+      it_operations = ls_specification-operations ).
 
   ENDMETHOD.
 

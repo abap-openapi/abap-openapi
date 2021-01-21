@@ -2,7 +2,7 @@ CLASS zcl_aopi_parser DEFINITION PUBLIC.
   PUBLIC SECTION.
     METHODS parse
       IMPORTING iv_json TYPE string
-      RETURNING VALUE(rt_operations) TYPE zif_aopi_schema=>ty_operations.
+      RETURNING VALUE(rs_schema) TYPE zif_aopi_schema=>ty_specification.
 
   PRIVATE SECTION.
     DATA mo_json TYPE REF TO zcl_oapi_json.
@@ -27,7 +27,7 @@ CLASS zcl_aopi_parser IMPLEMENTATION.
 
     ASSERT mo_json->value_string( '/openapi' ) CP '3*'.
 
-    rt_operations = parse_operations( ).
+    rs_schema-operations = parse_operations( ).
 
   ENDMETHOD.
 
