@@ -4,7 +4,7 @@ CLASS lcl_stack DEFINITION.
       IMPORTING
         iv_name TYPE string
         iv_type TYPE string.
-    METHODS pop.
+    METHODS pop RETURNING VALUE(rv_name) TYPE string.
     METHODS is_array RETURNING VALUE(rv_array) TYPE abap_bool.
     METHODS get_and_increase_index RETURNING VALUE(rv_index) TYPE i.
     METHODS get_full_name RETURNING VALUE(rv_path) TYPE string.
@@ -34,7 +34,6 @@ CLASS lcl_stack IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD get_and_increase_index.
-
     DATA lv_index TYPE i.
     FIELD-SYMBOLS <ls_data> LIKE LINE OF mt_data.
 
@@ -44,14 +43,17 @@ CLASS lcl_stack IMPLEMENTATION.
       <ls_data>-array_index = <ls_data>-array_index + 1.
       rv_index = <ls_data>-array_index.
     ENDIF.
-
   ENDMETHOD.
 
   METHOD pop.
     DATA lv_index TYPE i.
+    DATA ls_data LIKE LINE OF mt_data.
     lv_index = lines( mt_data ).
-    ASSERT lv_index > 0.
-    DELETE mt_data INDEX lv_index.
+    IF lv_index > 0.
+      READ TABLE mt_data INTO ls_data INDEX lv_index. "#EC CI_SUBRC
+      rv_name = ls_data-name.
+      DELETE mt_data INDEX lv_index.
+    ENDIF.
   ENDMETHOD.
 
   METHOD get_full_name.
@@ -144,7 +146,10 @@ CLASS lcl_parser IMPLEMENTATION.
 
         WHEN if_sxml_node=>co_nt_element_close.
           li_close ?= li_node.
-          lo_stack->pop( ).
+          lv_name = lo_stack->pop( ).
+          IF lv_name = '/'.
+            lo_stack->pop( ).
+          ENDIF.
 
         WHEN if_sxml_node=>co_nt_value.
           li_value ?= li_node.

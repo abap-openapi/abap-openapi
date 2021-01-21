@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "abaplint && rm -rf output && abap_transpile && node output/index.js",
-    "petstore": "abaplint && rm -rf output && abap_transpile && rm -rf result && mkdir result && node index.js"
+    "petstore": "abaplint && rm -rf output && abap_transpile && rm -rf result && mkdir result && node index.js",
+    "lint_result": "abaplint abaplint_result.json"
   },
   "repository": {
     "type": "git",
