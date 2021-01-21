@@ -100,7 +100,7 @@
     "method_implemented_twice": true,
     "method_length": false,
     "method_overwrites_builtin": true,
-    "method_parameter_names": true,
+    "method_parameter_names": false,
     "mix_returning": true,
     "msag_consistency": true,
     "names_no_dash": true,

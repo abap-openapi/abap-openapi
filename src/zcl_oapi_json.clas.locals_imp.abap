@@ -100,6 +100,7 @@ CLASS lcl_parser IMPLEMENTATION.
     CREATE OBJECT lo_stack.
 
     li_reader = cl_sxml_string_reader=>create( cl_abap_codepage=>convert_to( iv_json ) ).
+*    WRITE '@KERNEL console.dir("parsing done");'.
 
     DO.
       li_node = li_reader->read_next_node( ).
@@ -162,6 +163,8 @@ CLASS lcl_parser IMPLEMENTATION.
 
       ENDCASE.
     ENDDO.
+
+*    WRITE '@KERNEL console.dir(rt_data.array().length);'.
 
     " LOOP AT rt_data INTO ls_data.
     "   WRITE: / 'PARENT: ', ls_data-parent.

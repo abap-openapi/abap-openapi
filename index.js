@@ -28,7 +28,10 @@ async function get(url) {
 }
 
 async function run() {
-  const spec = await get("https://petstore3.swagger.io/api/v3/openapi.json");
+  if (process.argv[2] === undefined || process.argv[2] === "") {
+    throw "supply url";
+  }
+  const spec = await get(process.argv[2]);
 
   const zcl_aopi_main = require("./output/zcl_aopi_main.clas.js").zcl_aopi_main;
   const main = new zcl_aopi_main();
