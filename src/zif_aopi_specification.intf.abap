@@ -1,4 +1,7 @@
-INTERFACE zif_aopi_schema PUBLIC.
+INTERFACE zif_aopi_specification PUBLIC.
+
+* OpenAPI v3 specification
+
   TYPES: BEGIN OF ty_parameter,
            name        TYPE string,
            abap_name   TYPE string,

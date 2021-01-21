@@ -2,7 +2,7 @@ CLASS zcl_aopi_parser DEFINITION PUBLIC.
   PUBLIC SECTION.
     METHODS parse
       IMPORTING iv_json TYPE string
-      RETURNING VALUE(rs_schema) TYPE zif_aopi_schema=>ty_specification.
+      RETURNING VALUE(rs_schema) TYPE zif_aopi_specification=>ty_specification.
 
   PRIVATE SECTION.
     DATA mo_json TYPE REF TO zcl_oapi_json.
@@ -12,11 +12,11 @@ CLASS zcl_aopi_parser DEFINITION PUBLIC.
       RETURNING VALUE(rv_name) TYPE string.
 
     METHODS parse_operations
-      RETURNING VALUE(rt_operations) TYPE zif_aopi_schema=>ty_operations.
+      RETURNING VALUE(rt_operations) TYPE zif_aopi_specification=>ty_operations.
 
     METHODS parse_parameters
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(rt_parameters) TYPE zif_aopi_schema=>ty_parameters.
+      RETURNING VALUE(rt_parameters) TYPE zif_aopi_specification=>ty_parameters.
 ENDCLASS.
 
 CLASS zcl_aopi_parser IMPLEMENTATION.
