@@ -60,14 +60,21 @@ CLASS zcl_oapi_json IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD value_string.
-    ASSERT 1 = 'todo'.
+    DATA ls_data LIKE LINE OF mt_data.
+    READ TABLE mt_data INTO ls_data WITH KEY full_name = iv_path.
+    ASSERT sy-subrc = 0.
+    rv_value = ls_data-value.
   ENDMETHOD.
 
   METHOD exists.
-    ASSERT 1 = 'todo'.
+    READ TABLE mt_data WITH KEY full_name = iv_path TRANSPORTING NO FIELDS.
+    rv_exists = boolc( sy-subrc = 0 ).
   ENDMETHOD.
 
   METHOD members.
-    ASSERT 1 = 'todo'.
+    DATA ls_data LIKE LINE OF mt_data.
+    LOOP AT mt_data INTO ls_data WHERE parent = iv_path.
+      APPEND ls_data-name TO rt_members.
+    ENDLOOP.
   ENDMETHOD.
 ENDCLASS.

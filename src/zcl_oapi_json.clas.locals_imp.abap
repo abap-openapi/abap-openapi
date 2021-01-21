@@ -1,15 +1,50 @@
 CLASS lcl_stack DEFINITION.
   PUBLIC SECTION.
-    METHODS push IMPORTING iv_name TYPE string.
+    METHODS push
+      IMPORTING
+        iv_name TYPE string
+        iv_type TYPE string.
     METHODS pop.
+    METHODS is_array RETURNING VALUE(rv_array) TYPE abap_bool.
+    METHODS get_and_increase_index RETURNING VALUE(rv_index) TYPE i.
     METHODS get RETURNING VALUE(rv_path) TYPE string.
   PRIVATE SECTION.
-    DATA mt_data TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
+    TYPES: BEGIN OF ty_data,
+             name TYPE string,
+             is_array TYPE abap_bool,
+             array_index TYPE i,
+           END OF ty_data.
+    DATA mt_data TYPE STANDARD TABLE OF ty_data WITH DEFAULT KEY.
 ENDCLASS.
 
 CLASS lcl_stack IMPLEMENTATION.
   METHOD push.
-    APPEND iv_name TO mt_data.
+    DATA ls_data LIKE LINE OF mt_data.
+    ls_data-name = iv_name.
+    ls_data-is_array = boolc( iv_type = 'array').
+    APPEND ls_data TO mt_data.
+  ENDMETHOD.
+
+  METHOD is_array.
+    DATA lv_index TYPE i.
+    DATA ls_data LIKE LINE OF mt_data.
+    lv_index = lines( mt_data ).
+    READ TABLE mt_data INTO ls_data INDEX lv_index. "#EC CI_SUBRC
+    rv_array = ls_data-is_array.
+  ENDMETHOD.
+
+  METHOD get_and_increase_index.
+
+    DATA lv_index TYPE i.
+    FIELD-SYMBOLS <ls_data> LIKE LINE OF mt_data.
+
+    lv_index = lines( mt_data ).
+    READ TABLE mt_data ASSIGNING <ls_data> INDEX lv_index.
+    IF sy-subrc = 0.
+      <ls_data>-array_index = <ls_data>-array_index + 1.
+      rv_index = <ls_data>-array_index.
+    ENDIF.
+
   ENDMETHOD.
 
   METHOD pop.
@@ -20,7 +55,10 @@ CLASS lcl_stack IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD get.
-    rv_path = concat_lines_of( mt_data ).
+    DATA ls_data LIKE LINE OF mt_data.
+    LOOP AT mt_data INTO ls_data.
+      rv_path = rv_path && ls_data-name.
+    ENDLOOP.
   ENDMETHOD.
 ENDCLASS.
 
@@ -29,6 +67,7 @@ CLASS lcl_parser DEFINITION.
     TYPES: BEGIN OF ty_data,
         parent TYPE string,
         name TYPE string,
+        full_name TYPE string,
         value TYPE string,
       END OF ty_data.
 
@@ -49,22 +88,17 @@ CLASS lcl_parser IMPLEMENTATION.
     DATA lt_attributes TYPE if_sxml_attribute=>attributes.
     DATA li_attribute TYPE REF TO if_sxml_attribute.
     DATA li_value TYPE REF TO if_sxml_value_node.
-    DATA lv_count TYPE i.
-
     DATA lv_push TYPE string.
     DATA lo_stack TYPE REF TO lcl_stack.
-    CREATE OBJECT lo_stack.
+    DATA ls_data LIKE LINE OF rt_data.
 
-    CLEAR rt_data.
+    FIELD-SYMBOLS <ls_data> LIKE LINE OF rt_data.
+
+    CREATE OBJECT lo_stack.
 
     li_reader = cl_sxml_string_reader=>create( cl_abap_codepage=>convert_to( iv_json ) ).
 
     DO.
-      IF lv_count > 20.
-        EXIT. " todo
-      ENDIF.
-      lv_count = lv_count + 1.
-
       li_node = li_reader->read_next_node( ).
       IF li_node IS INITIAL.
         EXIT.
@@ -73,27 +107,60 @@ CLASS lcl_parser IMPLEMENTATION.
       CASE li_node->type.
         WHEN if_sxml_node=>co_nt_element_open.
           li_open ?= li_node.
-          WRITE: / 'open node, type:', li_open->qname-name.
+*          WRITE: / 'open node, type:', li_open->qname-name.
 
-          lv_push = '/'.
           lt_attributes = li_open->get_attributes( ).
           LOOP AT lt_attributes INTO li_attribute.
             lv_push = li_attribute->get_value( ).
           ENDLOOP.
-          lo_stack->push( lv_push ).
+          IF lo_stack->is_array( ) = abap_true.
+            lv_push = lo_stack->get_and_increase_index( ).
+          ENDIF.
 
-          WRITE / lo_stack->get( ).
+          IF lv_push IS NOT INITIAL.
+            CLEAR ls_data.
+            ls_data-parent = lo_stack->get( ).
+            ls_data-name = lv_push.
+            ls_data-full_name = ls_data-parent && ls_data-name.
+            APPEND ls_data TO rt_data.
+
+            lo_stack->push(
+              iv_name = lv_push
+              iv_type = li_open->qname-name ).
+          ENDIF.
+
+          IF li_open->qname-name = 'object' OR li_open->qname-name = 'array'.
+            CLEAR ls_data.
+            ls_data-parent = lo_stack->get( ).
+            ls_data-name = '/'.
+            ls_data-full_name = ls_data-parent && ls_data-name.
+            APPEND ls_data TO rt_data.
+
+            lo_stack->push(
+              iv_name = '/'
+              iv_type = li_open->qname-name ).
+          ENDIF.
+
         WHEN if_sxml_node=>co_nt_element_close.
           li_close ?= li_node.
           lo_stack->pop( ).
 
         WHEN if_sxml_node=>co_nt_value.
           li_value ?= li_node.
-          WRITE: / lo_stack->get( ), 'value:', li_value->get_value( ).
+          READ TABLE rt_data ASSIGNING <ls_data> WITH KEY full_name = lo_stack->get( ).
+          IF sy-subrc = 0.
+            <ls_data>-value = li_value->get_value( ).
+          ENDIF.
 
       ENDCASE.
-
     ENDDO.
+
+    " LOOP AT rt_data INTO ls_data.
+    "   WRITE: / 'PARENT: ', ls_data-parent.
+    "   WRITE: / 'name: ', ls_data-name.
+    "   WRITE: / 'full_name: ', ls_data-full_name.
+    "   WRITE: / 'value: ', ls_data-value.
+    " ENDLOOP.
 
   ENDMETHOD.
 ENDCLASS.
