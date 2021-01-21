@@ -4,11 +4,6 @@ CLASS zcl_oapi_json DEFINITION PUBLIC.
       IMPORTING
         iv_json TYPE string.
 
-    METHODS value
-      IMPORTING
-        iv_path        TYPE string
-      RETURNING
-        VALUE(rv_value) TYPE string.
     METHODS value_boolean
       IMPORTING
         iv_path        TYPE string
@@ -50,10 +45,6 @@ CLASS zcl_oapi_json IMPLEMENTATION.
     DATA lo_parser TYPE REF TO lcl_parser.
     CREATE OBJECT lo_parser.
     mt_data = lo_parser->parse( iv_json ).
-  ENDMETHOD.
-
-  METHOD value.
-    ASSERT 1 = 'todo'.
   ENDMETHOD.
 
   METHOD value_boolean.
