@@ -1,6 +1,6 @@
 {
   "global": {
-    "files": "/src/**/*.*",
+    "files": "/result/**/*.*",
     "exclude": [],
     "skipGeneratedGatewayClasses": true,
     "skipGeneratedPersistentClasses": true,
@@ -88,7 +88,7 @@
     "keyword_case": true,
     "line_break_multiple_parameters": false,
     "line_break_style": false,
-    "line_length": false,
+    "line_length": true,
     "line_only_punc": true,
     "local_class_naming": true,
     "local_testclass_location": true,
@@ -100,7 +100,7 @@
     "method_implemented_twice": true,
     "method_length": false,
     "method_overwrites_builtin": true,
-    "method_parameter_names": true,
+    "method_parameter_names": false,
     "mix_returning": true,
     "msag_consistency": true,
     "names_no_dash": true,

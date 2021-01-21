@@ -48,7 +48,7 @@ CLASS zcl_oapi_json IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD value_boolean.
-    ASSERT 1 = 'todo'.
+    rv_value = boolc( value_string( iv_path ) = 'true' ).
   ENDMETHOD.
 
   METHOD value_integer.
@@ -62,8 +62,9 @@ CLASS zcl_oapi_json IMPLEMENTATION.
   METHOD value_string.
     DATA ls_data LIKE LINE OF mt_data.
     READ TABLE mt_data INTO ls_data WITH KEY full_name = iv_path.
-    ASSERT sy-subrc = 0.
-    rv_value = ls_data-value.
+    IF sy-subrc = 0.
+      rv_value = ls_data-value.
+    ENDIF.
   ENDMETHOD.
 
   METHOD exists.
