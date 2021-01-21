@@ -86,7 +86,7 @@
       "length": 120
     },
     "keyword_case": true,
-    "line_break_multiple_parameters": true,
+    "line_break_multiple_parameters": false,
     "line_break_style": false,
     "line_length": false,
     "line_only_punc": true,

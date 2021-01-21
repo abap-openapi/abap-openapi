@@ -145,9 +145,20 @@ CLASS zcl_aopi_main IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD operation_implementation.
+
+    DATA ls_parameter LIKE LINE OF is_operation-parameters.
+
     rv_abap =
+      |    DATA lv_uri TYPE string VALUE '{ is_operation-path }'.\n|.
+
+    LOOP AT is_operation-parameters INTO ls_parameter WHERE in = 'path'.
+      rv_abap = rv_abap &&
+        |    REPLACE ALL OCCURRENCES OF '\{{ ls_parameter-name }\}' IN lv_uri WITH { ls_parameter-abap_name }.\n|.
+    ENDLOOP.
+
+    rv_abap = rv_abap &&
       |    mi_client->request->set_method( '{ to_upper( is_operation-method ) }' ).\n| &&
-      |    mi_client->request->set_header_field( name = '~request_uri' value = '{ is_operation-path }' ).\n| &&
+      |    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).\n| &&
       |    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).\n| &&
       |    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).\n|.
   ENDMETHOD.
@@ -181,6 +192,9 @@ CLASS zcl_aopi_main IMPLEMENTATION.
     rv_name = to_lower( iv_name ).
     REPLACE ALL OCCURRENCES OF '-' IN rv_name WITH '_'.
     REPLACE ALL OCCURRENCES OF '/' IN rv_name WITH '_'.
+    IF strlen( rv_name ) > 30.
+      rv_name = rv_name(30).
+    ENDIF.
   ENDMETHOD.
 
   METHOD operations.
