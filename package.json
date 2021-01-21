@@ -5,7 +5,8 @@
   "description": "ABAP OpenAPI Client Generator",
   "main": "index.js",
   "scripts": {
-    "test": "abaplint && rm -rf output && abap_transpile && rm -rf result && mkdir result && node index.js"
+    "test": "abaplint && rm -rf output && abap_transpile && node output/index.js",
+    "petstore": "abaplint && rm -rf output && abap_transpile && rm -rf result && mkdir result && node index.js"
   },
   "repository": {
     "type": "git",
