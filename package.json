@@ -8,8 +8,9 @@
     "test": "abaplint && rm -rf output && abap_transpile && node output/index.js",
     "petstore": "abaplint && rm -rf output && abap_transpile && rm -rf result && mkdir result && node index.js https://petstore3.swagger.io/api/v3/openapi.json petstore",
     "github": "abaplint && rm -rf output && abap_transpile && rm -rf result && mkdir result && node index.js https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json github",
-    "integration_test": "npm run petstore && cp result/* test/ && abaplint abaplint_test.json && rm -rf output_test && abap_transpile ./abap_transpile_test.json && node output_test/index.js",
+    "integration_test": "npm run petstore && cp result/* test/ && npm run lint_test && rm -rf output_test && abap_transpile ./abap_transpile_test.json && node output_test/index.js",
     "lint_result": "abaplint abaplint_result.json",
+    "lint_test": "abaplint abaplint_test.json",
     "lint": "abaplint"
   },
   "repository": {
