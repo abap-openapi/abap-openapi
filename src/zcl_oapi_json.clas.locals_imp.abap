@@ -66,15 +66,6 @@ ENDCLASS.
 
 CLASS lcl_parser DEFINITION.
   PUBLIC SECTION.
-    TYPES: BEGIN OF ty_data,
-        parent TYPE string,
-        name TYPE string,
-        full_name TYPE string,
-        value TYPE string,
-      END OF ty_data.
-
-    TYPES ty_data_tt TYPE STANDARD TABLE OF ty_data WITH DEFAULT KEY.
-
     METHODS parse
       IMPORTING iv_json TYPE string
       RETURNING VALUE(rt_data) TYPE ty_data_tt.
