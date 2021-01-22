@@ -119,8 +119,8 @@ CLASS zcl_aopi_main IMPLEMENTATION.
     rv_abap = rv_abap &&
       |    mi_client->request->set_method( '{ to_upper( is_operation-method ) }' ).\n| &&
       |    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).\n| &&
-      |    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).\n| &&
-      |    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).\n|.
+      |*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).\n| &&
+      |*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).\n|.
   ENDMETHOD.
 
   METHOD parameters_to_abap.
