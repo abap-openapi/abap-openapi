@@ -33,8 +33,8 @@ async function run() {
   }
   const spec = await get(process.argv[2]);
 
-  const zcl_aopi_main = require("./output/zcl_aopi_main.clas.js").zcl_aopi_main;
-  const main = new zcl_aopi_main();
+  const zcl_oapi_main = require("./output/zcl_oapi_main.clas.js").zcl_oapi_main;
+  const main = new zcl_oapi_main();
   await main.constructor_();
 
   const input = new abap.types.Structure({class_name: new abap.types.Character({length: 30}), interface_name: new abap.types.Character({length: 30}), json: new abap.types.String()});

@@ -5,8 +5,8 @@ ENDCLASS.
 
 CLASS ltcl_test IMPLEMENTATION.
   METHOD test.
-    DATA ls_input TYPE zcl_aopi_main=>ty_input.
-    DATA lo_main TYPE REF TO zcl_aopi_main.
+    DATA ls_input TYPE zcl_oapi_main=>ty_input.
+    DATA lo_main TYPE REF TO zcl_oapi_main.
 
     ls_input-class_name = 'zcl_bar'.
     ls_input-interface_name = 'zcl_bar'.
