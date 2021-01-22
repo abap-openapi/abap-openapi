@@ -1,8 +1,8 @@
-CLASS zcl_aopi_parser DEFINITION PUBLIC.
+CLASS zcl_oapi_parser DEFINITION PUBLIC.
   PUBLIC SECTION.
     METHODS parse
       IMPORTING iv_json TYPE string
-      RETURNING VALUE(rs_schema) TYPE zif_aopi_specification=>ty_specification.
+      RETURNING VALUE(rs_schema) TYPE zif_oapi_specification=>ty_specification.
 
   PRIVATE SECTION.
     DATA mo_json TYPE REF TO zcl_oapi_json.
@@ -12,20 +12,24 @@ CLASS zcl_aopi_parser DEFINITION PUBLIC.
       RETURNING VALUE(rv_name) TYPE string.
 
     METHODS parse_operations
-      RETURNING VALUE(rt_operations) TYPE zif_aopi_specification=>ty_operations.
+      RETURNING VALUE(rt_operations) TYPE zif_oapi_specification=>ty_operations.
 
     METHODS parse_parameters
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(rt_parameters) TYPE zif_aopi_specification=>ty_parameters.
+      RETURNING VALUE(rt_parameters) TYPE zif_oapi_specification=>ty_parameters.
 ENDCLASS.
 
-CLASS zcl_aopi_parser IMPLEMENTATION.
+CLASS zcl_oapi_parser IMPLEMENTATION.
 
   METHOD parse.
 
     CREATE OBJECT mo_json EXPORTING iv_json = iv_json.
 
-    ASSERT mo_json->value_string( '/openapi' ) CP '3*'.
+    rs_schema-openapi = mo_json->value_string( '/openapi' ).
+    ASSERT rs_schema-openapi CP '3*'.
+
+    rs_schema-info-title = mo_json->value_string( '/info/title' ).
+    rs_schema-info-description = mo_json->value_string( '/info/description' ).
 
     rs_schema-operations = parse_operations( ).
 

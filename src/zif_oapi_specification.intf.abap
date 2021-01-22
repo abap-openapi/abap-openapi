@@ -1,4 +1,4 @@
-INTERFACE zif_aopi_specification PUBLIC.
+INTERFACE zif_oapi_specification PUBLIC.
 
 * OpenAPI v3 specification
 
