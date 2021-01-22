@@ -6,12 +6,12 @@ CLASS lcl_stack DEFINITION.
         iv_type TYPE string.
     METHODS pop RETURNING VALUE(rv_name) TYPE string.
     METHODS is_array RETURNING VALUE(rv_array) TYPE abap_bool.
-    METHODS get_and_increase_index RETURNING VALUE(rv_index) TYPE i.
+    METHODS get_and_increase_index RETURNING VALUE(rv_index) TYPE string.
     METHODS get_full_name RETURNING VALUE(rv_path) TYPE string.
   PRIVATE SECTION.
     TYPES: BEGIN OF ty_data,
-             name TYPE string,
-             is_array TYPE abap_bool,
+             name        TYPE string,
+             is_array    TYPE abap_bool,
              array_index TYPE i,
            END OF ty_data.
     DATA mt_data TYPE STANDARD TABLE OF ty_data WITH DEFAULT KEY.
@@ -29,7 +29,7 @@ CLASS lcl_stack IMPLEMENTATION.
     DATA lv_index TYPE i.
     DATA ls_data LIKE LINE OF mt_data.
     lv_index = lines( mt_data ).
-    READ TABLE mt_data INTO ls_data INDEX lv_index. "#EC CI_SUBRC
+    READ TABLE mt_data INTO ls_data INDEX lv_index.       "#EC CI_SUBRC
     rv_array = ls_data-is_array.
   ENDMETHOD.
 
@@ -42,6 +42,7 @@ CLASS lcl_stack IMPLEMENTATION.
     IF sy-subrc = 0.
       <ls_data>-array_index = <ls_data>-array_index + 1.
       rv_index = <ls_data>-array_index.
+      rv_index = condense( rv_index ).
     ENDIF.
   ENDMETHOD.
 
@@ -50,7 +51,7 @@ CLASS lcl_stack IMPLEMENTATION.
     DATA ls_data LIKE LINE OF mt_data.
     lv_index = lines( mt_data ).
     IF lv_index > 0.
-      READ TABLE mt_data INTO ls_data INDEX lv_index. "#EC CI_SUBRC
+      READ TABLE mt_data INTO ls_data INDEX lv_index.     "#EC CI_SUBRC
       rv_name = ls_data-name.
       DELETE mt_data INDEX lv_index.
     ENDIF.
@@ -67,7 +68,7 @@ ENDCLASS.
 CLASS lcl_parser DEFINITION.
   PUBLIC SECTION.
     METHODS parse
-      IMPORTING iv_json TYPE string
+      IMPORTING iv_json        TYPE string
       RETURNING VALUE(rt_data) TYPE ty_data_tt.
 ENDCLASS.
 
