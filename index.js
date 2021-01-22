@@ -30,6 +30,8 @@ async function get(url) {
 async function run() {
   if (process.argv[2] === undefined || process.argv[2] === "") {
     throw "supply url";
+  } else if (process.argv[3] === undefined || process.argv[3] === "") {
+    throw "supply name";
   }
   const spec = await get(process.argv[2]);
 
@@ -43,8 +45,8 @@ async function run() {
     json: new abap.types.String()}
   );
   input.get().json.set(spec);
-  input.get().class_name.set('zcl_foobar');
-  input.get().interface_name.set('zif_foobar');
+  input.get().class_name.set('zcl_' + process.argv[3]);
+  input.get().interface_name.set('zif_' + process.argv[3]);
   const result = await main.run({is_input: input});
 
   console.log(abap.console.get());

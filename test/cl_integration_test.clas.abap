@@ -1,0 +1,7 @@
+CLASS cl_integration_test DEFINITION PUBLIC.
+
+ENDCLASS.
+
+CLASS cl_integration_test IMPLEMENTATION.
+
+ENDCLASS.
