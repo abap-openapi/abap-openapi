@@ -37,7 +37,11 @@ async function run() {
   const main = new zcl_oapi_main();
   await main.constructor_();
 
-  const input = new abap.types.Structure({class_name: new abap.types.Character({length: 30}), interface_name: new abap.types.Character({length: 30}), json: new abap.types.String()});
+  const input = new abap.types.Structure({
+    class_name: new abap.types.Character({length: 30}),
+    interface_name: new abap.types.Character({length: 30}),
+    json: new abap.types.String()}
+  );
   input.get().json.set(spec);
   input.get().class_name.set('zcl_foobar');
   input.get().interface_name.set('zif_foobar');
@@ -45,8 +49,9 @@ async function run() {
 
   console.log(abap.console.get());
 
-  fs.writeFileSync(process.cwd() + path.sep + "result" + path.sep + input.get().class_name.get() + ".clas.abap", result.get().clas.get());
-  fs.writeFileSync(process.cwd() + path.sep + "result" + path.sep + input.get().interface_name.get() + ".intf.abap", result.get().intf.get());
+  const prefix = process.cwd() + path.sep + "result" + path.sep;
+  fs.writeFileSync(prefix + input.get().class_name.get() + ".clas.abap", result.get().clas.get());
+  fs.writeFileSync(prefix + input.get().interface_name.get() + ".intf.abap", result.get().intf.get());
 }
 
 run().then().catch(err => {
