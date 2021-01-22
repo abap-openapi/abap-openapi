@@ -5,10 +5,12 @@ ENDCLASS.
 
 CLASS ltcl_test IMPLEMENTATION.
   METHOD test.
-    DATA lv_json TYPE string.
+    DATA ls_input TYPE zcl_aopi_main=>ty_input.
     DATA lo_main TYPE REF TO zcl_aopi_main.
 
-    lv_json = '{' && |\n| &&
+    ls_input-class_name = 'zcl_bar'.
+    ls_input-interface_name = 'zcl_bar'.
+    ls_input-json = '{' && |\n| &&
       '  "openapi": "3.0.2",' && |\n| &&
       '  "info": {' && |\n| &&
       '    "title": "test",' && |\n| &&
@@ -29,7 +31,7 @@ CLASS ltcl_test IMPLEMENTATION.
       '}}}}}}}}}'.
 
     CREATE OBJECT lo_main.
-    lo_main->run( lv_json ).
+    lo_main->run( ls_input ).
 * todo, assertions
 
   ENDMETHOD.
