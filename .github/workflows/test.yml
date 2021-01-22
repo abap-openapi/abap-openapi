@@ -18,3 +18,4 @@ jobs:
     - run: npm test
     - run: npm run petstore
     - run: npm run lint_result
+    - run: npm run integration_test
