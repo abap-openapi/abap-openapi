@@ -22,6 +22,6 @@ CLASS ltcl_json IMPLEMENTATION.
 
     li_petstore->loginuser( ).
 
-    WRITE: / 'hello world'.
+* todo, add assertions here
   ENDMETHOD.
 ENDCLASS.
