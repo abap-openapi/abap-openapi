@@ -83,7 +83,6 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |    mi_client->send( ).\n| &&
       |    mi_client->receive( ).\n| &&
       |    mi_client->response->get_status( IMPORTING code = lv_code ).\n| &&
-      |    lv_cdata = mi_client->response->get_cdata( ).\n| &&
       |  ENDMETHOD.\n\n|.
 
     LOOP AT ms_specification-operations INTO ls_operation.
@@ -149,7 +148,8 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).\n| &&
       |*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).\n| &&
       |*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).\n| &&
-      |    send_receive( ).\n|.
+      |    send_receive( ).\n| &&
+      |    WRITE / mi_client->response->get_cdata( ).\n|.
   ENDMETHOD.
 
   METHOD parameters_to_abap.
