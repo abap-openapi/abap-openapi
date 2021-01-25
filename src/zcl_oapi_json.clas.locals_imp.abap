@@ -105,6 +105,8 @@ CLASS lcl_parser IMPLEMENTATION.
       APPEND li_node TO lt_nodes.
     ENDDO.
 
+*    WRITE '@KERNEL console.dir(lt_nodes.array().length + " nodes");'.
+
     LOOP AT lt_nodes INTO li_node.
       lv_index = sy-tabix.
 
@@ -114,10 +116,11 @@ CLASS lcl_parser IMPLEMENTATION.
 *          WRITE: / 'open node, type:', li_open->qname-name.
 
           lt_attributes = li_open->get_attributes( ).
-          LOOP AT lt_attributes INTO li_attribute.
+*          WRITE '@KERNEL console.dir(lt_attributes.array().length);'.
+          READ TABLE lt_attributes INDEX 1 INTO li_attribute.
+          IF sy-subrc = 0.
             lv_push = li_attribute->get_value( ).
-          ENDLOOP.
-          IF lo_stack->is_array( ) = abap_true.
+          ELSEIF lo_stack->is_array( ) = abap_true.
             lv_push = lo_stack->get_and_increase_index( ).
           ENDIF.
 
