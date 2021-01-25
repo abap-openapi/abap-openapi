@@ -13,13 +13,14 @@ INTERFACE zif_oapi_specification PUBLIC.
   TYPES ty_parameters TYPE STANDARD TABLE OF ty_parameter WITH DEFAULT KEY.
 
   TYPES: BEGIN OF ty_operation,
-           path         TYPE string,
-           method       TYPE string,
-           summary      TYPE string,
-           description  TYPE string,
-           operation_id TYPE string,
-           abap_name    TYPE string,
-           parameters   TYPE ty_parameters,
+           path           TYPE string,
+           method         TYPE string,
+           summary        TYPE string,
+           description    TYPE string,
+           operation_id   TYPE string,
+           abap_name      TYPE string,
+           parameters     TYPE ty_parameters,
+           parameters_ref TYPE string_table, " ? todo
          END OF ty_operation.
 
   TYPES ty_operations TYPE STANDARD TABLE OF ty_operation WITH DEFAULT KEY.
@@ -32,7 +33,15 @@ INTERFACE zif_oapi_specification PUBLIC.
   TYPES ty_schemas TYPE STANDARD TABLE OF ty_component_schema WITH DEFAULT KEY.
 
   TYPES: BEGIN OF ty_components,
-           schemas TYPE ty_schemas,
+           schemas          TYPE ty_schemas,
+           responses        TYPE string, " todo
+           parameters       TYPE ty_parameters,
+           examples         TYPE string, " todo
+           request_bodies   TYPE string, " todo
+           headers          TYPE string, " todo
+           security_schemas TYPE string, " todo
+           links            TYPE string, " todo
+           callbacks        TYPE string, " todo
          END OF ty_components.
 
   TYPES: BEGIN OF ty_info,
