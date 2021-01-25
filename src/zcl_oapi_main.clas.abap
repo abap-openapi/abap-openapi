@@ -141,7 +141,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
     LOOP AT is_operation-parameters INTO ls_parameter WHERE in = 'query'.
       rv_abap = rv_abap &&
-        |* todo, query parameter "{ ls_parameter-name }" from "{ ls_parameter-abap_name }"\n|.
+        |    mi_client->request->set_form_field( name = '{ ls_parameter-name }' value = { ls_parameter-abap_name } ).\n|.
     ENDLOOP.
 
     rv_abap = rv_abap &&
