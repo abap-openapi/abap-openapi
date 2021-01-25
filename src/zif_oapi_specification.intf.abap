@@ -40,9 +40,16 @@ INTERFACE zif_oapi_specification PUBLIC.
            description TYPE string,
          END OF ty_info.
 
+  TYPES: BEGIN OF ty_server,
+           url TYPE string,
+         END OF ty_server.
+
+  TYPES ty_servers TYPE STANDARD TABLE OF ty_server WITH DEFAULT KEY.
+
   TYPES: BEGIN OF ty_specification,
-           openapi TYPE string,
-           info TYPE ty_info,
+           openapi    TYPE string,
+           info       TYPE ty_info,
+           servers    TYPE ty_servers,
            operations TYPE ty_operations,
            components TYPE ty_components,
          END OF ty_specification.

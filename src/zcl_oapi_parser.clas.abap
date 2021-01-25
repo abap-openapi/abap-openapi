@@ -14,6 +14,9 @@ CLASS zcl_oapi_parser DEFINITION PUBLIC.
     METHODS parse_operations
       RETURNING VALUE(rt_operations) TYPE zif_oapi_specification=>ty_operations.
 
+    METHODS parse_servers
+      RETURNING VALUE(rt_servers) TYPE zif_oapi_specification=>ty_servers.
+
     METHODS parse_parameters
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(rt_parameters) TYPE zif_oapi_specification=>ty_parameters.
@@ -32,6 +35,22 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     rs_schema-info-description = mo_json->value_string( '/info/description' ).
 
     rs_schema-operations = parse_operations( ).
+    rs_schema-servers = parse_servers( ).
+
+  ENDMETHOD.
+
+  METHOD parse_servers.
+
+    DATA lt_array TYPE string_table.
+    DATA lv_index TYPE string.
+    DATA ls_server LIKE LINE OF rt_servers.
+
+    lt_array = mo_json->members( '/servers/' ).
+    LOOP AT lt_array INTO lv_index.
+      CLEAR ls_server.
+      ls_server-url = mo_json->value_string( '/servers/' && lv_index && '/url' ).
+      APPEND ls_server TO rt_servers.
+    ENDLOOP.
 
   ENDMETHOD.
 
