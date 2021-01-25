@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_OAPI_JSON</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>Description</DESCRIPT>
+    <DESCRIPT>abap-openapi-client</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>
