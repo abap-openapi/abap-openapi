@@ -20,6 +20,14 @@ CLASS zcl_oapi_parser DEFINITION PUBLIC.
     METHODS parse_parameters
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(rt_parameters) TYPE zif_oapi_specification=>ty_parameters.
+
+    METHODS parse_responses
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(rt_responses) TYPE zif_oapi_specification=>ty_responses.
+
+    METHODS parse_media_types
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(rt_media_types) TYPE zif_oapi_specification=>ty_media_types.
 ENDCLASS.
 
 CLASS zcl_oapi_parser IMPLEMENTATION.
@@ -83,6 +91,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
         ls_operation-description = mo_json->value_string( lv_prefix && '/description' ).
         ls_operation-operation_id = mo_json->value_string( lv_prefix && '/operationId' ).
         ls_operation-parameters = parse_parameters( lv_prefix && '/parameters/' ).
+        ls_operation-responses = parse_responses( lv_prefix && '/responses/' ).
         ls_operation-abap_name = to_abap_name( ls_operation-operation_id ).
         APPEND ls_operation TO rt_operations.
       ENDLOOP.
@@ -107,4 +116,34 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
       ENDIF.
     ENDLOOP.
   ENDMETHOD.
+
+  METHOD parse_responses.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA ls_response LIKE LINE OF rt_responses.
+
+    lt_members = mo_json->members( iv_prefix ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR ls_response.
+      ls_response-code = lv_member.
+      ls_response-description = mo_json->value_string( iv_prefix && lv_member && '/description' ).
+      ls_response-content = parse_media_types( iv_prefix && lv_member && '/content/' ).
+      APPEND ls_response TO rt_responses.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_media_types.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA ls_media_type LIKE LINE OF rt_media_types.
+
+    lt_members = mo_json->members( iv_prefix ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR ls_media_type.
+      ls_media_type-type = lv_member.
+      ls_media_type-schema_ref = mo_json->value_string( iv_prefix && lv_member && '/schema/$ref' ).
+      APPEND ls_media_type TO rt_media_types.
+    ENDLOOP.
+  ENDMETHOD.
+
 ENDCLASS.
