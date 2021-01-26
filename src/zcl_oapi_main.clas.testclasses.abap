@@ -58,6 +58,7 @@ CLASS ltcl_test IMPLEMENTATION.
   METHOD test.
     DATA ls_input TYPE zcl_oapi_main=>ty_input.
     DATA lo_main TYPE REF TO zcl_oapi_main.
+    DATA ls_result TYPE zcl_oapi_main=>ty_result.
 
     ls_input-class_name = 'zcl_bar'.
     ls_input-interface_name = 'zcl_bar'.
@@ -82,8 +83,10 @@ CLASS ltcl_test IMPLEMENTATION.
       '}}}}}}}}}'.
 
     CREATE OBJECT lo_main.
-    lo_main->run( ls_input ).
-* todo, assertions
+    ls_result = lo_main->run( ls_input ).
+
+    cl_abap_unit_assert=>assert_not_initial( ls_result-clas ).
+    cl_abap_unit_assert=>assert_not_initial( ls_result-intf ).
 
   ENDMETHOD.
 ENDCLASS.
