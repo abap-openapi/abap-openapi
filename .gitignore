@@ -1,4 +1,4 @@
 node_modules
 output
 output_test
-result
+test/generated
