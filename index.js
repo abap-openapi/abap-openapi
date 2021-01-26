@@ -51,7 +51,11 @@ async function run() {
 
   console.log(abap.console.get());
 
-  const prefix = process.cwd() + path.sep + "result" + path.sep;
+  const prefix = process.cwd() + path.sep + "test" + path.sep + "generated" + path.sep;
+  if (fs.existsSync(prefix) === false) {
+    fs.mkdirSync(prefix);
+  }
+
   fs.writeFileSync(prefix + input.get().class_name.get() + ".clas.abap", result.get().clas.get());
   fs.writeFileSync(prefix + input.get().interface_name.get() + ".intf.abap", result.get().intf.get());
 }

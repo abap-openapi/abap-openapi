@@ -76,6 +76,7 @@ CLASS lcl_parser IMPLEMENTATION.
   METHOD parse.
 
     DATA li_node TYPE REF TO if_sxml_node.
+    DATA li_next TYPE REF TO if_sxml_node.
     DATA li_reader TYPE REF TO if_sxml_reader.
     DATA li_close TYPE REF TO if_sxml_close_element.
     DATA li_open TYPE REF TO if_sxml_open_element.
@@ -86,6 +87,8 @@ CLASS lcl_parser IMPLEMENTATION.
     DATA lv_name TYPE string.
     DATA lo_stack TYPE REF TO lcl_stack.
     DATA ls_data LIKE LINE OF rt_data.
+    DATA lv_index TYPE i.
+    DATA lt_nodes TYPE STANDARD TABLE OF REF TO if_sxml_node WITH DEFAULT KEY.
 
     FIELD-SYMBOLS <ls_data> LIKE LINE OF rt_data.
 
@@ -99,6 +102,13 @@ CLASS lcl_parser IMPLEMENTATION.
       IF li_node IS INITIAL.
         EXIT.
       ENDIF.
+      APPEND li_node TO lt_nodes.
+    ENDDO.
+
+*    WRITE '@KERNEL console.dir(lt_nodes.array().length + " nodes");'.
+
+    LOOP AT lt_nodes INTO li_node.
+      lv_index = sy-tabix.
 
       CASE li_node->type.
         WHEN if_sxml_node=>co_nt_element_open.
@@ -106,18 +116,28 @@ CLASS lcl_parser IMPLEMENTATION.
 *          WRITE: / 'open node, type:', li_open->qname-name.
 
           lt_attributes = li_open->get_attributes( ).
-          LOOP AT lt_attributes INTO li_attribute.
+*          WRITE '@KERNEL console.dir(lt_attributes.array().length);'.
+          READ TABLE lt_attributes INDEX 1 INTO li_attribute.
+          IF sy-subrc = 0.
             lv_push = li_attribute->get_value( ).
-          ENDLOOP.
-          IF lo_stack->is_array( ) = abap_true.
+          ELSEIF lo_stack->is_array( ) = abap_true.
             lv_push = lo_stack->get_and_increase_index( ).
           ENDIF.
 
           IF lv_push IS NOT INITIAL.
+
             CLEAR ls_data.
             ls_data-parent = lo_stack->get_full_name( ).
             ls_data-name = lv_push.
             ls_data-full_name = ls_data-parent && ls_data-name.
+
+            lv_index = lv_index + 1.
+            READ TABLE lt_nodes INDEX lv_index INTO li_next.
+            IF sy-subrc = 0 AND li_next->type = if_sxml_node=>co_nt_value.
+              li_value ?= li_next.
+              ls_data-value = li_value->get_value( ).
+            ENDIF.
+
             APPEND ls_data TO rt_data.
 
             lo_stack->push(
@@ -144,17 +164,17 @@ CLASS lcl_parser IMPLEMENTATION.
             lo_stack->pop( ).
           ENDIF.
 
-        WHEN if_sxml_node=>co_nt_value.
-          li_value ?= li_node.
-          lv_name = lo_stack->get_full_name( ).
+*        WHEN if_sxml_node=>co_nt_value.
+*          li_value ?= li_node.
+*          lv_name = lo_stack->get_full_name( ).
 * todo, this can be optimized by peeking at the next node when adding to rt_data ?
-          READ TABLE rt_data ASSIGNING <ls_data> WITH KEY full_name = lv_name.
-          IF sy-subrc = 0.
-            <ls_data>-value = li_value->get_value( ).
-          ENDIF.
+*          READ TABLE rt_data ASSIGNING <ls_data> WITH KEY full_name = lv_name.
+*          IF sy-subrc = 0.
+*            <ls_data>-value = li_value->get_value( ).
+*          ENDIF.
 
       ENDCASE.
-    ENDDO.
+    ENDLOOP.
 
 *    WRITE '@KERNEL console.dir(rt_data.array().length);'.
 

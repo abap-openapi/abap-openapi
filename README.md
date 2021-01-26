@@ -15,3 +15,5 @@ setup `npm install`
 `npm test` = run unit tests
 
 `npm run petstore` = run logic and generate petstore files in `./result/`
+
+`npm run integration_test` = run integration tests

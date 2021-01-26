@@ -1,6 +1,6 @@
 {
   "global": {
-    "files": "/src/**/*.*",
+    "files": "/{src,test}/**/*.*",
     "exclude": [],
     "skipGeneratedGatewayClasses": true,
     "skipGeneratedPersistentClasses": true,
@@ -88,7 +88,17 @@
     "method_implemented_twice": true,
     "method_length": false,
     "method_overwrites_builtin": true,
-    "method_parameter_names": true,
+    "method_parameter_names": {
+      "exclude": ["test/"],
+      "patternKind": "required",
+      "ignoreNames": [],
+      "ignorePatterns": [],
+      "ignoreExceptions": true,
+      "importing": "^I._.+$",
+      "returning": "^R._.+$",
+      "changing": "^C._.+$",
+      "exporting": "^E._.+$"
+    },
     "mix_returning": true,
     "msag_consistency": true,
     "names_no_dash": true,
@@ -96,6 +106,7 @@
     "newline_between_methods": true,
     "no_public_attributes": true,
     "object_naming": {
+      "exclude": ["test/"],
       "patternKind": "required",
       "ignoreNames": [],
       "ignorePatterns": [],
@@ -160,7 +171,9 @@
     "use_line_exists": true,
     "use_new": true,
     "when_others_last": true,
-    "whitespace_end": true,
+    "whitespace_end": {
+      "exclude": ["test/"]
+    },
     "xml_consistency": true
   }
 }
