@@ -7,10 +7,6 @@ CLASS zcl_oapi_parser DEFINITION PUBLIC.
   PRIVATE SECTION.
     DATA mo_json TYPE REF TO zcl_oapi_json.
 
-    METHODS to_abap_name
-      IMPORTING iv_name TYPE string
-      RETURNING VALUE(rv_name) TYPE string.
-
     METHODS parse_operations
       RETURNING VALUE(rt_operations) TYPE zif_oapi_specification=>ty_operations.
 
@@ -28,6 +24,7 @@ CLASS zcl_oapi_parser DEFINITION PUBLIC.
     METHODS parse_media_types
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(rt_media_types) TYPE zif_oapi_specification=>ty_media_types.
+
 ENDCLASS.
 
 CLASS zcl_oapi_parser IMPLEMENTATION.
@@ -62,15 +59,6 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
 
   ENDMETHOD.
 
-  METHOD to_abap_name.
-    rv_name = to_lower( iv_name ).
-    REPLACE ALL OCCURRENCES OF '-' IN rv_name WITH '_'.
-    REPLACE ALL OCCURRENCES OF '/' IN rv_name WITH '_'.
-    IF strlen( rv_name ) > 30.
-      rv_name = rv_name(30).
-    ENDIF.
-  ENDMETHOD.
-
   METHOD parse_operations.
     DATA lt_paths TYPE string_table.
     DATA lv_path LIKE LINE OF lt_paths.
@@ -78,6 +66,8 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     DATA lv_method LIKE LINE OF lt_methods.
     DATA lv_prefix TYPE string.
     DATA ls_operation LIKE LINE OF rt_operations.
+    DATA lo_names TYPE REF TO lcl_abap_name.
+    CREATE OBJECT lo_names.
 
     lt_paths = mo_json->members( '/paths/' ).
     LOOP AT lt_paths INTO lv_path.
@@ -92,7 +82,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
         ls_operation-operation_id = mo_json->value_string( lv_prefix && '/operationId' ).
         ls_operation-parameters = parse_parameters( lv_prefix && '/parameters/' ).
         ls_operation-responses = parse_responses( lv_prefix && '/responses/' ).
-        ls_operation-abap_name = to_abap_name( ls_operation-operation_id ).
+        ls_operation-abap_name = lo_names->to_abap_name( ls_operation-operation_id ).
         APPEND ls_operation TO rt_operations.
       ENDLOOP.
     ENDLOOP.
@@ -102,6 +92,8 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     DATA lt_members TYPE string_table.
     DATA lv_member LIKE LINE OF lt_members.
     DATA ls_parameter LIKE LINE OF rt_parameters.
+    DATA lo_names TYPE REF TO lcl_abap_name.
+    CREATE OBJECT lo_names.
 
     lt_members = mo_json->members( iv_prefix ).
     LOOP AT lt_members INTO lv_member.
@@ -110,7 +102,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
       ls_parameter-in = mo_json->value_string( iv_prefix && lv_member && '/in' ).
       ls_parameter-description = mo_json->value_string( iv_prefix && lv_member && '/description' ).
       ls_parameter-required = mo_json->value_boolean( iv_prefix && lv_member && '/required' ).
-      ls_parameter-abap_name = to_abap_name( ls_parameter-name ).
+      ls_parameter-abap_name = lo_names->to_abap_name( ls_parameter-name ).
       IF ls_parameter-name IS NOT INITIAL. " it might be a #ref
         APPEND ls_parameter TO rt_parameters.
       ENDIF.

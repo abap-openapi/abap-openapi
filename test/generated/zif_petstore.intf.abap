@@ -19,7 +19,7 @@ INTERFACE zif_petstore.
   METHODS addpet
     RAISING cx_static_check.
 * GET - "Finds Pets by status"
-* Parameter: status, , "Status values that need to be considered for filter", query
+* Parameter: status, optional, query
 * Response: 200, successful operation
 *     application/xml, 
 *     application/json, 
@@ -29,7 +29,7 @@ INTERFACE zif_petstore.
       status TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Finds Pets by tags"
-* Parameter: tags, , "Tags to filter by", query
+* Parameter: tags, optional, query
 * Response: 200, successful operation
 *     application/xml, 
 *     application/json, 
@@ -39,7 +39,7 @@ INTERFACE zif_petstore.
       tags TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Find pet by ID"
-* Parameter: petId, X, "ID of pet to return", path
+* Parameter: petId, required, path
 * Response: 200, successful operation
 *     application/xml, #/components/schemas/Pet
 *     application/json, #/components/schemas/Pet
@@ -50,9 +50,9 @@ INTERFACE zif_petstore.
       petid TYPE string
     RAISING cx_static_check.
 * POST - "Updates a pet in the store with form data"
-* Parameter: petId, X, "ID of pet that needs to be updated", path
-* Parameter: name, , "Name of pet that needs to be updated", query
-* Parameter: status, , "Status of pet that needs to be updated", query
+* Parameter: petId, required, path
+* Parameter: name, optional, query
+* Parameter: status, optional, query
 * Response: 405, Invalid input
   METHODS updatepetwithform
     IMPORTING
@@ -61,8 +61,8 @@ INTERFACE zif_petstore.
       status TYPE string OPTIONAL
     RAISING cx_static_check.
 * DELETE - "Deletes a pet"
-* Parameter: api_key, , "", header
-* Parameter: petId, X, "Pet id to delete", path
+* Parameter: api_key, optional, header
+* Parameter: petId, required, path
 * Response: 400, Invalid pet value
   METHODS deletepet
     IMPORTING
@@ -70,8 +70,8 @@ INTERFACE zif_petstore.
       petid TYPE string
     RAISING cx_static_check.
 * POST - "uploads an image"
-* Parameter: petId, X, "ID of pet to update", path
-* Parameter: additionalMetadata, , "Additional Metadata", query
+* Parameter: petId, required, path
+* Parameter: additionalMetadata, optional, query
 * Response: 200, successful operation
 *     application/json, #/components/schemas/ApiResponse
   METHODS uploadfile
@@ -91,7 +91,7 @@ INTERFACE zif_petstore.
   METHODS placeorder
     RAISING cx_static_check.
 * GET - "Find purchase order by ID"
-* Parameter: orderId, X, "ID of order that needs to be fetched", path
+* Parameter: orderId, required, path
 * Response: 200, successful operation
 *     application/xml, #/components/schemas/Order
 *     application/json, #/components/schemas/Order
@@ -102,7 +102,7 @@ INTERFACE zif_petstore.
       orderid TYPE string
     RAISING cx_static_check.
 * DELETE - "Delete purchase order by ID"
-* Parameter: orderId, X, "ID of the order that needs to be deleted", path
+* Parameter: orderId, required, path
 * Response: 400, Invalid ID supplied
 * Response: 404, Order not found
   METHODS deleteorder
@@ -123,8 +123,8 @@ INTERFACE zif_petstore.
   METHODS createuserswithlistinput
     RAISING cx_static_check.
 * GET - "Logs user into the system"
-* Parameter: username, , "The user name for login", query
-* Parameter: password, , "The password for login in clear text", query
+* Parameter: username, optional, query
+* Parameter: password, optional, query
 * Response: 200, successful operation
 *     application/xml, 
 *     application/json, 
@@ -139,7 +139,7 @@ INTERFACE zif_petstore.
   METHODS logoutuser
     RAISING cx_static_check.
 * GET - "Get user by user name"
-* Parameter: username, X, "The name that needs to be fetched. Use user1 for testing. ", path
+* Parameter: username, required, path
 * Response: 200, successful operation
 *     application/xml, #/components/schemas/User
 *     application/json, #/components/schemas/User
@@ -150,14 +150,14 @@ INTERFACE zif_petstore.
       username TYPE string
     RAISING cx_static_check.
 * PUT - "Update user"
-* Parameter: username, X, "name that need to be deleted", path
+* Parameter: username, required, path
 * Response: default, successful operation
   METHODS updateuser
     IMPORTING
       username TYPE string
     RAISING cx_static_check.
 * DELETE - "Delete user"
-* Parameter: username, X, "The name that needs to be deleted", path
+* Parameter: username, required, path
 * Response: 400, Invalid username supplied
 * Response: 404, User not found
   METHODS deleteuser
