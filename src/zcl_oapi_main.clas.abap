@@ -34,6 +34,7 @@ CLASS zcl_oapi_main DEFINITION PUBLIC.
       RETURNING VALUE(rv_abap) TYPE string.
 
     METHODS find_uri_prefix
+      IMPORTING is_servers LIKE ms_specification-servers
       RETURNING VALUE(rv_prefix) TYPE string.
 
 ENDCLASS.
@@ -120,9 +121,12 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
   METHOD find_uri_prefix.
     DATA ls_server LIKE LINE OF ms_specification-servers.
-    READ TABLE ms_specification-servers INDEX 1 INTO ls_server.
+    READ TABLE is_servers INDEX 1 INTO ls_server.
     IF sy-subrc = 0.
       rv_prefix = ls_server-url.
+      IF rv_prefix CP 'http*'.
+        FIND REGEX '\w(\/[\w\d\.\-\/]+)' IN ls_server-url SUBMATCHES rv_prefix.
+      ENDIF.
     ENDIF.
   ENDMETHOD.
 
@@ -131,7 +135,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     DATA ls_parameter LIKE LINE OF is_operation-parameters.
 
     rv_abap =
-      |    DATA lv_uri TYPE string VALUE '{ find_uri_prefix( ) }{ is_operation-path }'.\n|.
+      |    DATA lv_uri TYPE string VALUE '{ find_uri_prefix( ms_specification-servers ) }{ is_operation-path }'.\n|.
 
     LOOP AT is_operation-parameters INTO ls_parameter WHERE in = 'path'.
       rv_abap = rv_abap &&
