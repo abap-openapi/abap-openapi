@@ -73,7 +73,7 @@ INTERFACE zif_petstore.
 * Response: 405
   METHODS updatepetwithform
     IMPORTING
-      petid TYPE string
+      petid TYPE i
       name TYPE string OPTIONAL
       status TYPE string OPTIONAL
     RAISING cx_static_check.
@@ -83,7 +83,7 @@ INTERFACE zif_petstore.
 * Response: 400
   METHODS deletepet
     IMPORTING
-      api_key TYPE i OPTIONAL
+      api_key TYPE string OPTIONAL
       petid TYPE i
     RAISING cx_static_check.
 * POST - "uploads an image"
@@ -93,7 +93,7 @@ INTERFACE zif_petstore.
 *     application/json
   METHODS uploadfile
     IMPORTING
-      petid TYPE string
+      petid TYPE i
       additionalmetadata TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Returns pet inventories by status"
