@@ -16,7 +16,7 @@ CLASS ltcl_find_prefix IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD none_specified.
-    DATA lt_servers TYPE zif_oapi_specification=>ty_servers.
+    DATA lt_servers TYPE zif_oapi_specification_v3=>ty_servers.
     DATA lv_act TYPE string.
     lv_act = mo_cut->find_uri_prefix( lt_servers ).
     cl_abap_unit_assert=>assert_equals(
@@ -25,7 +25,7 @@ CLASS ltcl_find_prefix IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD relative.
-    DATA lt_servers TYPE zif_oapi_specification=>ty_servers.
+    DATA lt_servers TYPE zif_oapi_specification_v3=>ty_servers.
     DATA ls_server LIKE LINE OF lt_servers.
     DATA lv_act TYPE string.
     ls_server-url = '/api/v3'.
@@ -37,7 +37,7 @@ CLASS ltcl_find_prefix IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD host_only.
-    DATA lt_servers TYPE zif_oapi_specification=>ty_servers.
+    DATA lt_servers TYPE zif_oapi_specification_v3=>ty_servers.
     DATA ls_server LIKE LINE OF lt_servers.
     DATA lv_act TYPE string.
     ls_server-url = 'https://api.foobar.com'.

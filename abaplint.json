@@ -39,7 +39,7 @@
     "check_syntax": true,
     "check_text_elements": true,
     "check_transformation_exists": true,
-    "class_attribute_names": true,
+    "class_attribute_names": false,
     "cloud_types": true,
     "colon_missing_space": true,
     "commented_code": false,
@@ -49,7 +49,7 @@
     "definitions_top": true,
     "description_empty": false,
     "double_space": true,
-    "downport": true,
+    "downport": false,
     "empty_line_in_statement": true,
     "empty_statement": true,
     "empty_structure": true,
@@ -104,7 +104,7 @@
     "names_no_dash": true,
     "nesting": true,
     "newline_between_methods": true,
-    "no_public_attributes": true,
+    "no_public_attributes": false,
     "object_naming": {
       "exclude": ["test/"],
       "patternKind": "required",
@@ -159,12 +159,18 @@
     "tabl_enhancement_category": true,
     "try_without_catch": true,
     "type_form_parameters": true,
-    "types_naming": true,
-    "uncaught_exception": true,
+    "types_naming": {
+      "exclude": ["test/"],
+      "pattern": "^TY_.+$"
+    },
+    "uncaught_exception": false,
     "unknown_types": true,
     "unreachable_code": true,
     "unused_methods": true,
-    "unused_types": true,
+    "unused_types": {
+      "exclude": ["test/"],
+      "skipNames": []
+    },
     "unused_variables": false,
     "use_bool_expression": true,
     "use_class_based_exceptions": true,

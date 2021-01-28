@@ -1,0 +1,8 @@
+CLASS zcl_oapi_schema DEFINITION PUBLIC.
+  PUBLIC SECTION.
+    INTERFACES zif_oapi_schema.
+ENDCLASS.
+
+CLASS zcl_oapi_schema IMPLEMENTATION.
+
+ENDCLASS.
