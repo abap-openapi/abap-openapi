@@ -5,8 +5,9 @@ CLASS zcl_oapi_abap_name DEFINITION PUBLIC.
       RETURNING VALUE(rv_name) TYPE string.
     METHODS add_used IMPORTING iv_name TYPE string.
   PRIVATE SECTION.
+    TYPES ty_name TYPE c LENGTH 30.
     DATA mt_used TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
-    METHODS numbering IMPORTING iv_name TYPE string RETURNING VALUE(rv_name) TYPE string.
+    METHODS numbering IMPORTING iv_name TYPE string RETURNING VALUE(rv_name) TYPE ty_name.
 ENDCLASS.
 
 CLASS zcl_oapi_abap_name IMPLEMENTATION.
