@@ -8169,9 +8169,7 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~search_code.
     DATA lv_uri TYPE string VALUE '/search/code'.
-    IF q IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'q' value = q ).
-    ENDIF.
+    mi_client->request->set_form_field( name = 'q' value = q ).
     IF sort IS SUPPLIED.
       mi_client->request->set_form_field( name = 'sort' value = sort ).
     ENDIF.
@@ -8194,9 +8192,7 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~search_commits.
     DATA lv_uri TYPE string VALUE '/search/commits'.
-    IF q IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'q' value = q ).
-    ENDIF.
+    mi_client->request->set_form_field( name = 'q' value = q ).
     IF sort IS SUPPLIED.
       mi_client->request->set_form_field( name = 'sort' value = sort ).
     ENDIF.
@@ -8219,9 +8215,7 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~search_issues_and_pull_request.
     DATA lv_uri TYPE string VALUE '/search/issues'.
-    IF q IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'q' value = q ).
-    ENDIF.
+    mi_client->request->set_form_field( name = 'q' value = q ).
     IF sort IS SUPPLIED.
       mi_client->request->set_form_field( name = 'sort' value = sort ).
     ENDIF.
@@ -8244,12 +8238,8 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~search_labels.
     DATA lv_uri TYPE string VALUE '/search/labels'.
-    IF repository_id IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'repository_id' value = repository_id ).
-    ENDIF.
-    IF q IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'q' value = q ).
-    ENDIF.
+    mi_client->request->set_form_field( name = 'repository_id' value = repository_id ).
+    mi_client->request->set_form_field( name = 'q' value = q ).
     IF sort IS SUPPLIED.
       mi_client->request->set_form_field( name = 'sort' value = sort ).
     ENDIF.
@@ -8266,9 +8256,7 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~search_repos.
     DATA lv_uri TYPE string VALUE '/search/repositories'.
-    IF q IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'q' value = q ).
-    ENDIF.
+    mi_client->request->set_form_field( name = 'q' value = q ).
     IF sort IS SUPPLIED.
       mi_client->request->set_form_field( name = 'sort' value = sort ).
     ENDIF.
@@ -8291,9 +8279,7 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~search_topics.
     DATA lv_uri TYPE string VALUE '/search/topics'.
-    IF q IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'q' value = q ).
-    ENDIF.
+    mi_client->request->set_form_field( name = 'q' value = q ).
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8304,9 +8290,7 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~search_users.
     DATA lv_uri TYPE string VALUE '/search/users'.
-    IF q IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'q' value = q ).
-    ENDIF.
+    mi_client->request->set_form_field( name = 'q' value = q ).
     IF sort IS SUPPLIED.
       mi_client->request->set_form_field( name = 'sort' value = sort ).
     ENDIF.
