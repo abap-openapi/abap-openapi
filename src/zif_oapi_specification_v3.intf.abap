@@ -51,6 +51,7 @@ INTERFACE zif_oapi_specification_v3 PUBLIC.
   TYPES: BEGIN OF ty_component_schema,
            name      TYPE string,
            abap_name TYPE string,
+           schema    TYPE ty_schema,
          END OF ty_component_schema.
 
   TYPES ty_schemas TYPE STANDARD TABLE OF ty_component_schema WITH DEFAULT KEY.
