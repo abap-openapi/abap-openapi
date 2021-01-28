@@ -42,8 +42,8 @@ INTERFACE zif_github.
   METHODS apps_list_installations
     IMPORTING
       outdated TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
       since TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Get an installation for the authenticated app"
@@ -54,7 +54,7 @@ INTERFACE zif_github.
 * Response: 415,
   METHODS apps_get_installation
     IMPORTING
-      installation_id TYPE string
+      installation_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete an installation for the authenticated app"
 * Parameter: installation_id, required, path
@@ -62,7 +62,7 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS apps_delete_installation
     IMPORTING
-      installation_id TYPE string
+      installation_id TYPE i
     RAISING cx_static_check.
 * POST - "Create an installation access token for an app"
 * Parameter: installation_id, required, path
@@ -75,7 +75,7 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS apps_create_installation_acces
     IMPORTING
-      installation_id TYPE string
+      installation_id TYPE i
     RAISING cx_static_check.
 * PUT - "Suspend an app installation"
 * Parameter: installation_id, required, path
@@ -83,7 +83,7 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS apps_suspend_installation
     IMPORTING
-      installation_id TYPE string
+      installation_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Unsuspend an app installation"
 * Parameter: installation_id, required, path
@@ -91,7 +91,7 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS apps_unsuspend_installation
     IMPORTING
-      installation_id TYPE string
+      installation_id TYPE i
     RAISING cx_static_check.
 * GET - "List your grants"
 * Parameter: per_page, optional, query
@@ -104,8 +104,8 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS oauth_authorizations_list_gran
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a single grant"
 * Parameter: grant_id, required, path
@@ -116,7 +116,7 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS oauth_authorizations_get_grant
     IMPORTING
-      grant_id TYPE string
+      grant_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a grant"
 * Parameter: grant_id, required, path
@@ -126,7 +126,7 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS oauth_authorizations_delete_gr
     IMPORTING
-      grant_id TYPE string
+      grant_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete an app authorization"
 * Response: 204, Empty response
@@ -201,8 +201,8 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS oauth_authorizations_list_auth
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a new authorization"
 * Response: 201, response
@@ -245,7 +245,7 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS oauth_authorizations_get_autho
     IMPORTING
-      authorization_id TYPE string
+      authorization_id TYPE i
     RAISING cx_static_check.
 * PATCH - "Update an existing authorization"
 * Parameter: authorization_id, required, path
@@ -254,7 +254,7 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS oauth_authorizations_update_au
     IMPORTING
-      authorization_id TYPE string
+      authorization_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete an authorization"
 * Parameter: authorization_id, required, path
@@ -264,7 +264,7 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS oauth_authorizations_delete_au
     IMPORTING
-      authorization_id TYPE string
+      authorization_id TYPE i
     RAISING cx_static_check.
 * GET - "Get all codes of conduct"
 * Response: 200, response
@@ -296,7 +296,7 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS apps_create_content_attachment
     IMPORTING
-      content_reference_id TYPE string
+      content_reference_id TYPE i
     RAISING cx_static_check.
 * GET - "Get emojis"
 * Response: 200, response
@@ -328,8 +328,8 @@ INTERFACE zif_github.
   METHODS enterprise_admin_list_selected
     IMPORTING
       enterprise TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * PUT - "Set selected organizations enabled for GitHub Actions in an enterprise"
 * Parameter: enterprise, required, path
@@ -345,7 +345,7 @@ INTERFACE zif_github.
   METHODS enterprise_admin_enable_select
     IMPORTING
       enterprise TYPE string
-      org_id TYPE string
+      org_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Disable a selected organization for GitHub Actions in an enterprise"
 * Parameter: enterprise, required, path
@@ -354,7 +354,7 @@ INTERFACE zif_github.
   METHODS enterprise_admin_disable_selec
     IMPORTING
       enterprise TYPE string
-      org_id TYPE string
+      org_id TYPE i
     RAISING cx_static_check.
 * GET - "Get allowed actions for an enterprise"
 * Parameter: enterprise, required, path
@@ -380,8 +380,8 @@ INTERFACE zif_github.
   METHODS enterprise_admin_list_self_hos
     IMPORTING
       enterprise TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a self-hosted runner group for an enterprise"
 * Parameter: enterprise, required, path
@@ -399,7 +399,7 @@ INTERFACE zif_github.
   METHODS enterprise_admin_get_self_host
     IMPORTING
       enterprise TYPE string
-      runner_group_id TYPE string
+      runner_group_id TYPE i
     RAISING cx_static_check.
 * PATCH - "Update a self-hosted runner group for an enterprise"
 * Parameter: enterprise, required, path
@@ -409,7 +409,7 @@ INTERFACE zif_github.
   METHODS enterprise_admin_update_self_h
     IMPORTING
       enterprise TYPE string
-      runner_group_id TYPE string
+      runner_group_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a self-hosted runner group from an enterprise"
 * Parameter: enterprise, required, path
@@ -418,7 +418,7 @@ INTERFACE zif_github.
   METHODS enterprise_admin_delete_self_h
     IMPORTING
       enterprise TYPE string
-      runner_group_id TYPE string
+      runner_group_id TYPE i
     RAISING cx_static_check.
 * GET - "List organization access to a self-hosted runner group in an enterprise"
 * Parameter: enterprise, required, path
@@ -430,9 +430,9 @@ INTERFACE zif_github.
   METHODS enterprise_admin_list_org_acce
     IMPORTING
       enterprise TYPE string
-      runner_group_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      runner_group_id TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * PUT - "Set organization access for a self-hosted runner group in an enterprise"
 * Parameter: enterprise, required, path
@@ -441,7 +441,7 @@ INTERFACE zif_github.
   METHODS enterprise_admin_set_org_acces
     IMPORTING
       enterprise TYPE string
-      runner_group_id TYPE string
+      runner_group_id TYPE i
     RAISING cx_static_check.
 * PUT - "Add organization access to a self-hosted runner group in an enterprise"
 * Parameter: enterprise, required, path
@@ -451,8 +451,8 @@ INTERFACE zif_github.
   METHODS enterprise_admin_add_org_acces
     IMPORTING
       enterprise TYPE string
-      runner_group_id TYPE string
-      org_id TYPE string
+      runner_group_id TYPE i
+      org_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Remove organization access to a self-hosted runner group in an enterprise"
 * Parameter: enterprise, required, path
@@ -462,8 +462,8 @@ INTERFACE zif_github.
   METHODS enterprise_admin_remove_org_ac
     IMPORTING
       enterprise TYPE string
-      runner_group_id TYPE string
-      org_id TYPE string
+      runner_group_id TYPE i
+      org_id TYPE i
     RAISING cx_static_check.
 * GET - "List self-hosted runners in a group for an enterprise"
 * Parameter: enterprise, required, path
@@ -475,9 +475,9 @@ INTERFACE zif_github.
   METHODS enterprise_admin_list_self_h01
     IMPORTING
       enterprise TYPE string
-      runner_group_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      runner_group_id TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * PUT - "Set self-hosted runners in a group for an enterprise"
 * Parameter: enterprise, required, path
@@ -486,7 +486,7 @@ INTERFACE zif_github.
   METHODS enterprise_admin_set_self_host
     IMPORTING
       enterprise TYPE string
-      runner_group_id TYPE string
+      runner_group_id TYPE i
     RAISING cx_static_check.
 * PUT - "Add a self-hosted runner to a group for an enterprise"
 * Parameter: enterprise, required, path
@@ -496,8 +496,8 @@ INTERFACE zif_github.
   METHODS enterprise_admin_add_self_host
     IMPORTING
       enterprise TYPE string
-      runner_group_id TYPE string
-      runner_id TYPE string
+      runner_group_id TYPE i
+      runner_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Remove a self-hosted runner from a group for an enterprise"
 * Parameter: enterprise, required, path
@@ -507,8 +507,8 @@ INTERFACE zif_github.
   METHODS enterprise_admin_remove_self_h
     IMPORTING
       enterprise TYPE string
-      runner_group_id TYPE string
-      runner_id TYPE string
+      runner_group_id TYPE i
+      runner_id TYPE i
     RAISING cx_static_check.
 * GET - "List self-hosted runners for an enterprise"
 * Parameter: enterprise, required, path
@@ -519,8 +519,8 @@ INTERFACE zif_github.
   METHODS enterprise_admin_list_self_h02
     IMPORTING
       enterprise TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List runner applications for an enterprise"
 * Parameter: enterprise, required, path
@@ -554,7 +554,7 @@ INTERFACE zif_github.
   METHODS enterprise_admin_get_self_ho01
     IMPORTING
       enterprise TYPE string
-      runner_id TYPE string
+      runner_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a self-hosted runner from an enterprise"
 * Parameter: enterprise, required, path
@@ -563,7 +563,7 @@ INTERFACE zif_github.
   METHODS enterprise_admin_delete_self01
     IMPORTING
       enterprise TYPE string
-      runner_id TYPE string
+      runner_id TYPE i
     RAISING cx_static_check.
 * GET - "Get the audit log for an enterprise"
 * Parameter: enterprise, required, path
@@ -573,7 +573,7 @@ INTERFACE zif_github.
   METHODS audit_log_get_audit_log
     IMPORTING
       enterprise TYPE string
-      per_page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get GitHub Actions billing for an enterprise"
 * Parameter: enterprise, required, path
@@ -609,8 +609,8 @@ INTERFACE zif_github.
 * Response: 503,
   METHODS activity_list_public_events
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get feeds"
 * Response: 200, response
@@ -628,8 +628,8 @@ INTERFACE zif_github.
   METHODS gists_list
     IMPORTING
       since TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a gist"
 * Response: 201, response
@@ -652,8 +652,8 @@ INTERFACE zif_github.
   METHODS gists_list_public
     IMPORTING
       since TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List starred gists"
 * Parameter: since, optional, query
@@ -667,8 +667,8 @@ INTERFACE zif_github.
   METHODS gists_list_starred
     IMPORTING
       since TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a gist"
 * Parameter: gist_id, required, path
@@ -713,8 +713,8 @@ INTERFACE zif_github.
   METHODS gists_list_comments
     IMPORTING
       gist_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a gist comment"
 * Parameter: gist_id, required, path
@@ -738,7 +738,7 @@ INTERFACE zif_github.
   METHODS gists_get_comment
     IMPORTING
       gist_id TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * PATCH - "Update a gist comment"
 * Parameter: gist_id, required, path
@@ -749,7 +749,7 @@ INTERFACE zif_github.
   METHODS gists_update_comment
     IMPORTING
       gist_id TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a gist comment"
 * Parameter: gist_id, required, path
@@ -761,7 +761,7 @@ INTERFACE zif_github.
   METHODS gists_delete_comment
     IMPORTING
       gist_id TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * GET - "List gist commits"
 * Parameter: gist_id, required, path
@@ -775,8 +775,8 @@ INTERFACE zif_github.
   METHODS gists_list_commits
     IMPORTING
       gist_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List gist forks"
 * Parameter: gist_id, required, path
@@ -790,8 +790,8 @@ INTERFACE zif_github.
   METHODS gists_list_forks
     IMPORTING
       gist_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Fork a gist"
 * Parameter: gist_id, required, path
@@ -874,8 +874,8 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS apps_list_repos_accessible_to_
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * DELETE - "Revoke an installation access token"
 * Response: 204, Empty response
@@ -901,18 +901,18 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS issues_list
     IMPORTING
-      filter TYPE string OPTIONAL
-      state TYPE string OPTIONAL
-      sort TYPE string OPTIONAL
-      collab TYPE string OPTIONAL
-      orgs TYPE string OPTIONAL
-      owned TYPE string OPTIONAL
-      pulls TYPE string OPTIONAL
+      filter TYPE string DEFAULT 'assigned' OPTIONAL
+      state TYPE string DEFAULT 'open' OPTIONAL
+      sort TYPE string DEFAULT 'created' OPTIONAL
+      collab TYPE abap_bool OPTIONAL
+      orgs TYPE abap_bool OPTIONAL
+      owned TYPE abap_bool OPTIONAL
+      pulls TYPE abap_bool OPTIONAL
       labels TYPE string OPTIONAL
-      direction TYPE string OPTIONAL
+      direction TYPE string DEFAULT 'desc' OPTIONAL
       since TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get all commonly used licenses"
 * Parameter: featured, optional, query
@@ -922,8 +922,8 @@ INTERFACE zif_github.
 * Response: 304,
   METHODS licenses_get_all_commonly_used
     IMPORTING
-      featured TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
+      featured TYPE abap_bool OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a license"
 * Parameter: license, required, path
@@ -956,7 +956,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/basic-error
   METHODS apps_get_subscription_plan_for
     IMPORTING
-      account_id TYPE string
+      account_id TYPE i
     RAISING cx_static_check.
 * GET - "List plans"
 * Parameter: per_page, optional, query
@@ -967,8 +967,8 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS apps_list_plans
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List accounts for a plan"
 * Parameter: direction, optional, query
@@ -984,10 +984,10 @@ INTERFACE zif_github.
   METHODS apps_list_accounts_for_plan
     IMPORTING
       direction TYPE string OPTIONAL
-      plan_id TYPE string
-      sort TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      plan_id TYPE i
+      sort TYPE string DEFAULT 'created' OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a subscription plan for an account (stubbed)"
 * Parameter: account_id, required, path
@@ -997,7 +997,7 @@ INTERFACE zif_github.
 * Response: 404, Response when the account has not purchased the listing
   METHODS apps_get_subscription_plan_f01
     IMPORTING
-      account_id TYPE string
+      account_id TYPE i
     RAISING cx_static_check.
 * GET - "List plans (stubbed)"
 * Parameter: per_page, optional, query
@@ -1007,8 +1007,8 @@ INTERFACE zif_github.
 * Response: 401,
   METHODS apps_list_plans_stubbed
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List accounts for a plan (stubbed)"
 * Parameter: direction, optional, query
@@ -1022,10 +1022,10 @@ INTERFACE zif_github.
   METHODS apps_list_accounts_for_plan_st
     IMPORTING
       direction TYPE string OPTIONAL
-      plan_id TYPE string
-      sort TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      plan_id TYPE i
+      sort TYPE string DEFAULT 'created' OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get GitHub meta information"
 * Response: 200, response
@@ -1048,8 +1048,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List notifications for the authenticated user"
 * Parameter: all, optional, query
@@ -1066,12 +1066,12 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS activity_list_notifications_fo
     IMPORTING
-      all TYPE string OPTIONAL
-      participating TYPE string OPTIONAL
+      all TYPE abap_bool DEFAULT 'false' OPTIONAL
+      participating TYPE abap_bool DEFAULT 'false' OPTIONAL
       since TYPE string OPTIONAL
       before TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * PUT - "Mark notifications as read"
 * Response: 202, response
@@ -1091,7 +1091,7 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS activity_get_thread
     IMPORTING
-      thread_id TYPE string
+      thread_id TYPE i
     RAISING cx_static_check.
 * PATCH - "Mark a thread as read"
 * Parameter: thread_id, required, path
@@ -1100,7 +1100,7 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS activity_mark_thread_as_read
     IMPORTING
-      thread_id TYPE string
+      thread_id TYPE i
     RAISING cx_static_check.
 * GET - "Get a thread subscription for the authenticated user"
 * Parameter: thread_id, required, path
@@ -1111,7 +1111,7 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS activity_get_thread_subscripti
     IMPORTING
-      thread_id TYPE string
+      thread_id TYPE i
     RAISING cx_static_check.
 * PUT - "Set a thread subscription"
 * Parameter: thread_id, required, path
@@ -1122,7 +1122,7 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS activity_set_thread_subscripti
     IMPORTING
-      thread_id TYPE string
+      thread_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a thread subscription"
 * Parameter: thread_id, required, path
@@ -1132,7 +1132,7 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS activity_delete_thread_subscri
     IMPORTING
-      thread_id TYPE string
+      thread_id TYPE i
     RAISING cx_static_check.
 * GET - "Get Octocat"
 * Parameter: s, optional, query
@@ -1149,7 +1149,7 @@ INTERFACE zif_github.
 * Response: 304,
   METHODS orgs_list
     IMPORTING
-      per_page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get an organization"
 * Parameter: org, required, path
@@ -1196,8 +1196,8 @@ INTERFACE zif_github.
   METHODS actions_list_selected_reposito
     IMPORTING
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * PUT - "Set selected repositories enabled for GitHub Actions in an organization"
 * Parameter: org, required, path
@@ -1213,7 +1213,7 @@ INTERFACE zif_github.
   METHODS actions_enable_selected_reposi
     IMPORTING
       org TYPE string
-      repository_id TYPE string
+      repository_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Disable a selected repository for GitHub Actions in an organization"
 * Parameter: org, required, path
@@ -1222,7 +1222,7 @@ INTERFACE zif_github.
   METHODS actions_disable_selected_repos
     IMPORTING
       org TYPE string
-      repository_id TYPE string
+      repository_id TYPE i
     RAISING cx_static_check.
 * GET - "Get allowed actions for an organization"
 * Parameter: org, required, path
@@ -1248,8 +1248,8 @@ INTERFACE zif_github.
   METHODS actions_list_self_hosted_runne
     IMPORTING
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a self-hosted runner group for an organization"
 * Parameter: org, required, path
@@ -1267,7 +1267,7 @@ INTERFACE zif_github.
   METHODS actions_get_self_hosted_runner
     IMPORTING
       org TYPE string
-      runner_group_id TYPE string
+      runner_group_id TYPE i
     RAISING cx_static_check.
 * PATCH - "Update a self-hosted runner group for an organization"
 * Parameter: org, required, path
@@ -1277,7 +1277,7 @@ INTERFACE zif_github.
   METHODS actions_update_self_hosted_run
     IMPORTING
       org TYPE string
-      runner_group_id TYPE string
+      runner_group_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a self-hosted runner group from an organization"
 * Parameter: org, required, path
@@ -1286,7 +1286,7 @@ INTERFACE zif_github.
   METHODS actions_delete_self_hosted_run
     IMPORTING
       org TYPE string
-      runner_group_id TYPE string
+      runner_group_id TYPE i
     RAISING cx_static_check.
 * GET - "List repository access to a self-hosted runner group in an organization"
 * Parameter: org, required, path
@@ -1296,7 +1296,7 @@ INTERFACE zif_github.
   METHODS actions_list_repo_access_to_se
     IMPORTING
       org TYPE string
-      runner_group_id TYPE string
+      runner_group_id TYPE i
     RAISING cx_static_check.
 * PUT - "Set repository access for a self-hosted runner group in an organization"
 * Parameter: org, required, path
@@ -1305,7 +1305,7 @@ INTERFACE zif_github.
   METHODS actions_set_repo_access_to_sel
     IMPORTING
       org TYPE string
-      runner_group_id TYPE string
+      runner_group_id TYPE i
     RAISING cx_static_check.
 * PUT - "Add repository access to a self-hosted runner group in an organization"
 * Parameter: org, required, path
@@ -1315,8 +1315,8 @@ INTERFACE zif_github.
   METHODS actions_add_repo_access_to_sel
     IMPORTING
       org TYPE string
-      runner_group_id TYPE string
-      repository_id TYPE string
+      runner_group_id TYPE i
+      repository_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Remove repository access to a self-hosted runner group in an organization"
 * Parameter: org, required, path
@@ -1326,8 +1326,8 @@ INTERFACE zif_github.
   METHODS actions_remove_repo_access_to_
     IMPORTING
       org TYPE string
-      runner_group_id TYPE string
-      repository_id TYPE string
+      runner_group_id TYPE i
+      repository_id TYPE i
     RAISING cx_static_check.
 * GET - "List self-hosted runners in a group for an organization"
 * Parameter: org, required, path
@@ -1339,9 +1339,9 @@ INTERFACE zif_github.
   METHODS actions_list_self_hosted_run01
     IMPORTING
       org TYPE string
-      runner_group_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      runner_group_id TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * PUT - "Set self-hosted runners in a group for an organization"
 * Parameter: org, required, path
@@ -1350,7 +1350,7 @@ INTERFACE zif_github.
   METHODS actions_set_self_hosted_runner
     IMPORTING
       org TYPE string
-      runner_group_id TYPE string
+      runner_group_id TYPE i
     RAISING cx_static_check.
 * PUT - "Add a self-hosted runner to a group for an organization"
 * Parameter: org, required, path
@@ -1360,8 +1360,8 @@ INTERFACE zif_github.
   METHODS actions_add_self_hosted_runner
     IMPORTING
       org TYPE string
-      runner_group_id TYPE string
-      runner_id TYPE string
+      runner_group_id TYPE i
+      runner_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Remove a self-hosted runner from a group for an organization"
 * Parameter: org, required, path
@@ -1371,8 +1371,8 @@ INTERFACE zif_github.
   METHODS actions_remove_self_hosted_run
     IMPORTING
       org TYPE string
-      runner_group_id TYPE string
-      runner_id TYPE string
+      runner_group_id TYPE i
+      runner_id TYPE i
     RAISING cx_static_check.
 * GET - "List self-hosted runners for an organization"
 * Parameter: org, required, path
@@ -1383,8 +1383,8 @@ INTERFACE zif_github.
   METHODS actions_list_self_hosted_run02
     IMPORTING
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List runner applications for an organization"
 * Parameter: org, required, path
@@ -1418,7 +1418,7 @@ INTERFACE zif_github.
   METHODS actions_get_self_hosted_runn01
     IMPORTING
       org TYPE string
-      runner_id TYPE string
+      runner_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a self-hosted runner from an organization"
 * Parameter: org, required, path
@@ -1427,7 +1427,7 @@ INTERFACE zif_github.
   METHODS actions_delete_self_hosted_r01
     IMPORTING
       org TYPE string
-      runner_id TYPE string
+      runner_id TYPE i
     RAISING cx_static_check.
 * GET - "List organization secrets"
 * Parameter: org, required, path
@@ -1438,8 +1438,8 @@ INTERFACE zif_github.
   METHODS actions_list_org_secrets
     IMPORTING
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get an organization public key"
 * Parameter: org, required, path
@@ -1505,7 +1505,7 @@ INTERFACE zif_github.
 * Response: 409, Response when visibility type is not set to selected
   METHODS actions_add_selected_repo_to_o
     IMPORTING
-      repository_id TYPE string
+      repository_id TYPE i
       org TYPE string
       secret_name TYPE string
     RAISING cx_static_check.
@@ -1517,7 +1517,7 @@ INTERFACE zif_github.
 * Response: 409, Response when visibility type not set to selected
   METHODS actions_remove_selected_repo_f
     IMPORTING
-      repository_id TYPE string
+      repository_id TYPE i
       org TYPE string
       secret_name TYPE string
     RAISING cx_static_check.
@@ -1529,7 +1529,7 @@ INTERFACE zif_github.
   METHODS orgs_get_audit_log
     IMPORTING
       org TYPE string
-      per_page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
     RAISING cx_static_check.
 * GET - "List users blocked by an organization"
 * Parameter: org, required, path
@@ -1585,7 +1585,7 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS orgs_remove_saml_sso_authoriza
     IMPORTING
-      credential_id TYPE string
+      credential_id TYPE i
       org TYPE string
     RAISING cx_static_check.
 * GET - "List public organization events"
@@ -1597,8 +1597,8 @@ INTERFACE zif_github.
   METHODS activity_list_public_org_event
     IMPORTING
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List failed organization invitations"
 * Parameter: org, required, path
@@ -1610,8 +1610,8 @@ INTERFACE zif_github.
   METHODS orgs_list_failed_invitations
     IMPORTING
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List organization webhooks"
 * Parameter: org, required, path
@@ -1623,8 +1623,8 @@ INTERFACE zif_github.
   METHODS orgs_list_webhooks
     IMPORTING
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create an organization webhook"
 * Parameter: org, required, path
@@ -1704,8 +1704,8 @@ INTERFACE zif_github.
   METHODS orgs_list_app_installations
     IMPORTING
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get interaction restrictions for an organization"
 * Parameter: org, required, path
@@ -1741,8 +1741,8 @@ INTERFACE zif_github.
   METHODS orgs_list_pending_invitations
     IMPORTING
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create an organization invitation"
 * Parameter: org, required, path
@@ -1763,7 +1763,7 @@ INTERFACE zif_github.
   METHODS orgs_cancel_invitation
     IMPORTING
       org TYPE string
-      invitation_id TYPE string
+      invitation_id TYPE i
     RAISING cx_static_check.
 * GET - "List organization invitation teams"
 * Parameter: org, required, path
@@ -1776,9 +1776,9 @@ INTERFACE zif_github.
   METHODS orgs_list_invitation_teams
     IMPORTING
       org TYPE string
-      invitation_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      invitation_id TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List organization issues assigned to the authenticated user"
 * Parameter: filter, optional, query
@@ -1795,15 +1795,15 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS issues_list_for_org
     IMPORTING
-      filter TYPE string OPTIONAL
-      state TYPE string OPTIONAL
-      sort TYPE string OPTIONAL
+      filter TYPE string DEFAULT 'assigned' OPTIONAL
+      state TYPE string DEFAULT 'open' OPTIONAL
+      sort TYPE string DEFAULT 'created' OPTIONAL
       org TYPE string
       labels TYPE string OPTIONAL
-      direction TYPE string OPTIONAL
+      direction TYPE string DEFAULT 'desc' OPTIONAL
       since TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List organization members"
 * Parameter: filter, optional, query
@@ -1817,11 +1817,11 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS orgs_list_members
     IMPORTING
-      filter TYPE string OPTIONAL
-      role TYPE string OPTIONAL
+      filter TYPE string DEFAULT 'all' OPTIONAL
+      role TYPE string DEFAULT 'all' OPTIONAL
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Check organization membership for a user"
 * Parameter: org, required, path
@@ -1888,8 +1888,8 @@ INTERFACE zif_github.
   METHODS migrations_list_for_org
     IMPORTING
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Start an organization migration"
 * Parameter: org, required, path
@@ -1910,7 +1910,7 @@ INTERFACE zif_github.
   METHODS migrations_get_status_for_org
     IMPORTING
       org TYPE string
-      migration_id TYPE string
+      migration_id TYPE i
     RAISING cx_static_check.
 * GET - "Download an organization migration archive"
 * Parameter: org, required, path
@@ -1920,7 +1920,7 @@ INTERFACE zif_github.
   METHODS migrations_download_archive_fo
     IMPORTING
       org TYPE string
-      migration_id TYPE string
+      migration_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete an organization migration archive"
 * Parameter: org, required, path
@@ -1930,7 +1930,7 @@ INTERFACE zif_github.
   METHODS migrations_delete_archive_for_
     IMPORTING
       org TYPE string
-      migration_id TYPE string
+      migration_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Unlock an organization repository"
 * Parameter: org, required, path
@@ -1941,7 +1941,7 @@ INTERFACE zif_github.
   METHODS migrations_unlock_repo_for_org
     IMPORTING
       org TYPE string
-      migration_id TYPE string
+      migration_id TYPE i
       repo_name TYPE string
     RAISING cx_static_check.
 * GET - "List repositories in an organization migration"
@@ -1955,9 +1955,9 @@ INTERFACE zif_github.
   METHODS migrations_list_repos_for_org
     IMPORTING
       org TYPE string
-      migration_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      migration_id TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List outside collaborators for an organization"
 * Parameter: filter, optional, query
@@ -1968,10 +1968,10 @@ INTERFACE zif_github.
 *     application/json,
   METHODS orgs_list_outside_collaborator
     IMPORTING
-      filter TYPE string OPTIONAL
+      filter TYPE string DEFAULT 'all' OPTIONAL
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * PUT - "Convert an organization member to outside collaborator"
 * Parameter: org, required, path
@@ -2007,10 +2007,10 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS projects_list_for_org
     IMPORTING
-      state TYPE string OPTIONAL
+      state TYPE string DEFAULT 'open' OPTIONAL
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create an organization project"
 * Parameter: org, required, path
@@ -2034,8 +2034,8 @@ INTERFACE zif_github.
   METHODS orgs_list_public_members
     IMPORTING
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Check public organization membership for a user"
 * Parameter: org, required, path
@@ -2078,11 +2078,11 @@ INTERFACE zif_github.
   METHODS repos_list_for_org
     IMPORTING
       type TYPE string OPTIONAL
-      sort TYPE string OPTIONAL
+      sort TYPE string DEFAULT 'created' OPTIONAL
       direction TYPE string OPTIONAL
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create an organization repository"
 * Parameter: org, required, path
@@ -2127,8 +2127,8 @@ INTERFACE zif_github.
   METHODS teams_list_idp_groups_for_org
     IMPORTING
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List teams"
 * Parameter: org, required, path
@@ -2140,8 +2140,8 @@ INTERFACE zif_github.
   METHODS teams_list
     IMPORTING
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a team"
 * Parameter: org, required, path
@@ -2195,9 +2195,9 @@ INTERFACE zif_github.
     IMPORTING
       org TYPE string
       team_slug TYPE string
-      direction TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      direction TYPE string DEFAULT 'desc' OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a discussion"
 * Parameter: org, required, path
@@ -2250,9 +2250,9 @@ INTERFACE zif_github.
     IMPORTING
       org TYPE string
       team_slug TYPE string
-      direction TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      direction TYPE string DEFAULT 'desc' OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a discussion comment"
 * Parameter: org, required, path
@@ -2306,8 +2306,8 @@ INTERFACE zif_github.
       content TYPE string OPTIONAL
       org TYPE string
       team_slug TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create reaction for a team discussion comment"
 * Parameter: org, required, path
@@ -2341,8 +2341,8 @@ INTERFACE zif_github.
       content TYPE string OPTIONAL
       org TYPE string
       team_slug TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create reaction for a team discussion"
 * Parameter: org, required, path
@@ -2374,8 +2374,8 @@ INTERFACE zif_github.
     IMPORTING
       org TYPE string
       team_slug TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List team members"
 * Parameter: role, optional, query
@@ -2387,11 +2387,11 @@ INTERFACE zif_github.
 *     application/json,
   METHODS teams_list_members_in_org
     IMPORTING
-      role TYPE string OPTIONAL
+      role TYPE string DEFAULT 'all' OPTIONAL
       org TYPE string
       team_slug TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get team membership for a user"
 * Parameter: org, required, path
@@ -2444,8 +2444,8 @@ INTERFACE zif_github.
     IMPORTING
       org TYPE string
       team_slug TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Check team permissions for a project"
 * Parameter: org, required, path
@@ -2489,8 +2489,8 @@ INTERFACE zif_github.
     IMPORTING
       org TYPE string
       team_slug TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Check team permissions for a repository"
 * Parameter: org, required, path
@@ -2565,8 +2565,8 @@ INTERFACE zif_github.
     IMPORTING
       org TYPE string
       team_slug TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a project card"
 * Parameter: card_id, required, path
@@ -2578,7 +2578,7 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS projects_get_card
     IMPORTING
-      card_id TYPE string
+      card_id TYPE i
     RAISING cx_static_check.
 * PATCH - "Update an existing project card"
 * Parameter: card_id, required, path
@@ -2591,7 +2591,7 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS projects_update_card
     IMPORTING
-      card_id TYPE string
+      card_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a project card"
 * Parameter: card_id, required, path
@@ -2603,7 +2603,7 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS projects_delete_card
     IMPORTING
-      card_id TYPE string
+      card_id TYPE i
     RAISING cx_static_check.
 * POST - "Move a project card"
 * Parameter: card_id, required, path
@@ -2618,7 +2618,7 @@ INTERFACE zif_github.
 *     application/json,
   METHODS projects_move_card
     IMPORTING
-      card_id TYPE string
+      card_id TYPE i
     RAISING cx_static_check.
 * GET - "Get a project column"
 * Parameter: column_id, required, path
@@ -2630,7 +2630,7 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS projects_get_column
     IMPORTING
-      column_id TYPE string
+      column_id TYPE i
     RAISING cx_static_check.
 * PATCH - "Update an existing project column"
 * Parameter: column_id, required, path
@@ -2641,7 +2641,7 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS projects_update_column
     IMPORTING
-      column_id TYPE string
+      column_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a project column"
 * Parameter: column_id, required, path
@@ -2651,7 +2651,7 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS projects_delete_column
     IMPORTING
-      column_id TYPE string
+      column_id TYPE i
     RAISING cx_static_check.
 * GET - "List project cards"
 * Parameter: archived_state, optional, query
@@ -2665,10 +2665,10 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS projects_list_cards
     IMPORTING
-      archived_state TYPE string OPTIONAL
-      column_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      archived_state TYPE string DEFAULT 'not_archived' OPTIONAL
+      column_id TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a project card"
 * Parameter: column_id, required, path
@@ -2683,7 +2683,7 @@ INTERFACE zif_github.
 *     application/json,
   METHODS projects_create_card
     IMPORTING
-      column_id TYPE string
+      column_id TYPE i
     RAISING cx_static_check.
 * POST - "Move a project column"
 * Parameter: column_id, required, path
@@ -2695,7 +2695,7 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS projects_move_column
     IMPORTING
-      column_id TYPE string
+      column_id TYPE i
     RAISING cx_static_check.
 * GET - "Get a project"
 * Response: 200, response
@@ -2741,9 +2741,9 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS projects_list_collaborators
     IMPORTING
-      affiliation TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      affiliation TYPE string DEFAULT 'all' OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * PUT - "Add project collaborator"
 * Parameter: username, required, path
@@ -2795,8 +2795,8 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS projects_list_columns
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a project column"
 * Response: 201, response
@@ -2872,8 +2872,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get an artifact"
 * Parameter: owner, required, path
@@ -2885,7 +2885,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      artifact_id TYPE string
+      artifact_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete an artifact"
 * Parameter: owner, required, path
@@ -2896,7 +2896,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      artifact_id TYPE string
+      artifact_id TYPE i
     RAISING cx_static_check.
 * GET - "Download an artifact"
 * Parameter: archive_format, required, path
@@ -2909,7 +2909,7 @@ INTERFACE zif_github.
       archive_format TYPE string
       owner TYPE string
       repo TYPE string
-      artifact_id TYPE string
+      artifact_id TYPE i
     RAISING cx_static_check.
 * GET - "Get a job for a workflow run"
 * Parameter: owner, required, path
@@ -2921,7 +2921,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      job_id TYPE string
+      job_id TYPE i
     RAISING cx_static_check.
 * GET - "Download job logs for a workflow run"
 * Parameter: owner, required, path
@@ -2932,7 +2932,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      job_id TYPE string
+      job_id TYPE i
     RAISING cx_static_check.
 * GET - "Get GitHub Actions permissions for a repository"
 * Parameter: owner, required, path
@@ -2983,8 +2983,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List runner applications for a repository"
 * Parameter: owner, required, path
@@ -3026,7 +3026,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      runner_id TYPE string
+      runner_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a self-hosted runner from a repository"
 * Parameter: owner, required, path
@@ -3037,7 +3037,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      runner_id TYPE string
+      runner_id TYPE i
     RAISING cx_static_check.
 * GET - "List workflow runs for a repository"
 * Parameter: owner, required, path
@@ -3054,8 +3054,8 @@ INTERFACE zif_github.
       repo TYPE string
       actor TYPE string OPTIONAL
       event TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a workflow run"
 * Parameter: owner, required, path
@@ -3087,8 +3087,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Cancel a workflow run"
 * Parameter: owner, required, path
@@ -3109,11 +3109,11 @@ INTERFACE zif_github.
 *     application/json,
   METHODS actions_list_jobs_for_workflow
     IMPORTING
-      filter TYPE string OPTIONAL
+      filter TYPE string DEFAULT 'latest' OPTIONAL
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Download workflow run logs"
 * Parameter: owner, required, path
@@ -3163,8 +3163,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a repository public key"
 * Parameter: owner, required, path
@@ -3222,8 +3222,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a workflow"
 * Parameter: owner, required, path
@@ -3277,8 +3277,8 @@ INTERFACE zif_github.
       repo TYPE string
       actor TYPE string OPTIONAL
       event TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get workflow usage"
 * Parameter: owner, required, path
@@ -3302,8 +3302,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Check if a user can be assigned"
 * Parameter: assignee, required, path
@@ -3347,11 +3347,11 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS repos_list_branches
     IMPORTING
-      protected TYPE string OPTIONAL
+      protected TYPE abap_bool OPTIONAL
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a branch"
 * Parameter: owner, required, path
@@ -3828,7 +3828,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      check_run_id TYPE string
+      check_run_id TYPE i
     RAISING cx_static_check.
 * PATCH - "Update a check run"
 * Parameter: owner, required, path
@@ -3840,7 +3840,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      check_run_id TYPE string
+      check_run_id TYPE i
     RAISING cx_static_check.
 * GET - "List check run annotations"
 * Parameter: owner, required, path
@@ -3854,9 +3854,9 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      check_run_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      check_run_id TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a check suite"
 * Parameter: owner, required, path
@@ -3888,7 +3888,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      check_suite_id TYPE string
+      check_suite_id TYPE i
     RAISING cx_static_check.
 * GET - "List check runs in a check suite"
 * Parameter: filter, optional, query
@@ -3903,14 +3903,14 @@ INTERFACE zif_github.
 *     application/json,
   METHODS checks_list_for_suite
     IMPORTING
-      filter TYPE string OPTIONAL
+      filter TYPE string DEFAULT 'latest' OPTIONAL
       owner TYPE string
       repo TYPE string
-      check_suite_id TYPE string
+      check_suite_id TYPE i
       check_name TYPE string OPTIONAL
       status TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Rerequest a check suite"
 * Parameter: owner, required, path
@@ -3921,7 +3921,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      check_suite_id TYPE string
+      check_suite_id TYPE i
     RAISING cx_static_check.
 * GET - "List code scanning alerts for a repository"
 * Parameter: state, optional, query
@@ -3951,7 +3951,7 @@ INTERFACE zif_github.
 * Response: 503,
   METHODS code_scanning_get_alert
     IMPORTING
-      alert_number TYPE string
+      alert_number TYPE i
       owner TYPE string
       repo TYPE string
     RAISING cx_static_check.
@@ -4008,11 +4008,11 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS repos_list_collaborators
     IMPORTING
-      affiliation TYPE string OPTIONAL
+      affiliation TYPE string DEFAULT 'all' OPTIONAL
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Check if a user is a repository collaborator"
 * Parameter: owner, required, path
@@ -4076,8 +4076,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a commit comment"
 * Parameter: owner, required, path
@@ -4090,7 +4090,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * PATCH - "Update a commit comment"
 * Parameter: owner, required, path
@@ -4103,7 +4103,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a commit comment"
 * Parameter: owner, required, path
@@ -4115,7 +4115,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * GET - "List reactions for a commit comment"
 * Parameter: content, optional, query
@@ -4133,9 +4133,9 @@ INTERFACE zif_github.
       content TYPE string OPTIONAL
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      comment_id TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create reaction for a commit comment"
 * Parameter: owner, required, path
@@ -4151,7 +4151,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a commit comment reaction"
 * Parameter: owner, required, path
@@ -4162,7 +4162,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * GET - "List commits"
 * Parameter: sha, optional, query
@@ -4189,8 +4189,8 @@ INTERFACE zif_github.
       owner TYPE string
       repo TYPE string
       since TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List branches for HEAD commit"
 * Parameter: owner, required, path
@@ -4219,8 +4219,8 @@ INTERFACE zif_github.
       owner TYPE string
       repo TYPE string
       commit_sha TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a commit comment"
 * Parameter: owner, required, path
@@ -4250,8 +4250,8 @@ INTERFACE zif_github.
       owner TYPE string
       repo TYPE string
       commit_sha TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a commit"
 * Parameter: ref, required, path
@@ -4282,13 +4282,13 @@ INTERFACE zif_github.
   METHODS checks_list_for_ref
     IMPORTING
       ref TYPE string
-      filter TYPE string OPTIONAL
+      filter TYPE string DEFAULT 'latest' OPTIONAL
       owner TYPE string
       repo TYPE string
       check_name TYPE string OPTIONAL
       status TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List check suites for a Git reference"
 * Parameter: ref, required, path
@@ -4303,12 +4303,12 @@ INTERFACE zif_github.
   METHODS checks_list_suites_for_ref
     IMPORTING
       ref TYPE string
-      app_id TYPE string OPTIONAL
+      app_id TYPE i OPTIONAL
       owner TYPE string
       repo TYPE string
       check_name TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get the combined status for a specific reference"
 * Parameter: ref, required, path
@@ -4337,8 +4337,8 @@ INTERFACE zif_github.
       ref TYPE string
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get the code of conduct for a repository"
 * Parameter: owner, required, path
@@ -4443,8 +4443,8 @@ INTERFACE zif_github.
       anon TYPE string OPTIONAL
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List deployments"
 * Parameter: sha, optional, query
@@ -4459,14 +4459,14 @@ INTERFACE zif_github.
 *     application/json,
   METHODS repos_list_deployments
     IMPORTING
-      sha TYPE string OPTIONAL
-      ref TYPE string OPTIONAL
-      task TYPE string OPTIONAL
-      environment TYPE string OPTIONAL
+      sha TYPE string DEFAULT 'none' OPTIONAL
+      ref TYPE string DEFAULT 'none' OPTIONAL
+      task TYPE string DEFAULT 'none' OPTIONAL
+      environment TYPE string DEFAULT 'none' OPTIONAL
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a deployment"
 * Parameter: owner, required, path
@@ -4494,7 +4494,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      deployment_id TYPE string
+      deployment_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a deployment"
 * Parameter: owner, required, path
@@ -4507,7 +4507,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      deployment_id TYPE string
+      deployment_id TYPE i
     RAISING cx_static_check.
 * GET - "List deployment statuses"
 * Parameter: owner, required, path
@@ -4522,9 +4522,9 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      deployment_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      deployment_id TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a deployment status"
 * Parameter: owner, required, path
@@ -4537,7 +4537,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      deployment_id TYPE string
+      deployment_id TYPE i
     RAISING cx_static_check.
 * GET - "Get a deployment status"
 * Parameter: status_id, required, path
@@ -4550,10 +4550,10 @@ INTERFACE zif_github.
 * Response: 415,
   METHODS repos_get_deployment_status
     IMPORTING
-      status_id TYPE string
+      status_id TYPE i
       owner TYPE string
       repo TYPE string
-      deployment_id TYPE string
+      deployment_id TYPE i
     RAISING cx_static_check.
 * POST - "Create a repository dispatch event"
 * Parameter: owner, required, path
@@ -4576,8 +4576,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List forks"
 * Parameter: sort, optional, query
@@ -4590,11 +4590,11 @@ INTERFACE zif_github.
 * Response: 400,
   METHODS repos_list_forks
     IMPORTING
-      sort TYPE string OPTIONAL
+      sort TYPE string DEFAULT 'newest' OPTIONAL
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a fork"
 * Parameter: owner, required, path
@@ -4677,8 +4677,8 @@ INTERFACE zif_github.
       ref TYPE string
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a reference"
 * Parameter: ref, required, path
@@ -4794,8 +4794,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a repository webhook"
 * Parameter: owner, required, path
@@ -4946,7 +4946,7 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS migrations_map_commit_author
     IMPORTING
-      author_id TYPE string
+      author_id TYPE i
       owner TYPE string
       repo TYPE string
     RAISING cx_static_check.
@@ -5025,8 +5025,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * PATCH - "Update a repository invitation"
 * Parameter: owner, required, path
@@ -5038,7 +5038,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      invitation_id TYPE string
+      invitation_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a repository invitation"
 * Parameter: owner, required, path
@@ -5049,7 +5049,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      invitation_id TYPE string
+      invitation_id TYPE i
     RAISING cx_static_check.
 * GET - "List repository issues"
 * Parameter: milestone, optional, query
@@ -5073,18 +5073,18 @@ INTERFACE zif_github.
   METHODS issues_list_for_repo
     IMPORTING
       milestone TYPE string OPTIONAL
-      state TYPE string OPTIONAL
+      state TYPE string DEFAULT 'open' OPTIONAL
       assignee TYPE string OPTIONAL
       creator TYPE string OPTIONAL
       mentioned TYPE string OPTIONAL
-      sort TYPE string OPTIONAL
+      sort TYPE string DEFAULT 'created' OPTIONAL
       owner TYPE string
       repo TYPE string
       labels TYPE string OPTIONAL
-      direction TYPE string OPTIONAL
+      direction TYPE string DEFAULT 'desc' OPTIONAL
       since TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create an issue"
 * Parameter: owner, required, path
@@ -5118,10 +5118,10 @@ INTERFACE zif_github.
       direction TYPE string OPTIONAL
       owner TYPE string
       repo TYPE string
-      sort TYPE string OPTIONAL
+      sort TYPE string DEFAULT 'created' OPTIONAL
       since TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get an issue comment"
 * Parameter: owner, required, path
@@ -5134,7 +5134,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * PATCH - "Update an issue comment"
 * Parameter: owner, required, path
@@ -5147,7 +5147,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete an issue comment"
 * Parameter: owner, required, path
@@ -5158,7 +5158,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * GET - "List reactions for an issue comment"
 * Parameter: content, optional, query
@@ -5176,9 +5176,9 @@ INTERFACE zif_github.
       content TYPE string OPTIONAL
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      comment_id TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create reaction for an issue comment"
 * Parameter: owner, required, path
@@ -5194,7 +5194,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete an issue comment reaction"
 * Parameter: owner, required, path
@@ -5205,7 +5205,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * GET - "List issue events for a repository"
 * Parameter: owner, required, path
@@ -5219,8 +5219,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get an issue event"
 * Parameter: event_id, required, path
@@ -5233,7 +5233,7 @@ INTERFACE zif_github.
 * Response: 410,
   METHODS issues_get_event
     IMPORTING
-      event_id TYPE string
+      event_id TYPE i
       owner TYPE string
       repo TYPE string
     RAISING cx_static_check.
@@ -5251,7 +5251,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
+      issue_number TYPE i
     RAISING cx_static_check.
 * PATCH - "Update an issue"
 * Parameter: owner, required, path
@@ -5269,7 +5269,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
+      issue_number TYPE i
     RAISING cx_static_check.
 * POST - "Add assignees to an issue"
 * Parameter: owner, required, path
@@ -5281,7 +5281,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
+      issue_number TYPE i
     RAISING cx_static_check.
 * DELETE - "Remove assignees from an issue"
 * Parameter: owner, required, path
@@ -5293,7 +5293,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
+      issue_number TYPE i
     RAISING cx_static_check.
 * GET - "List issue comments"
 * Parameter: owner, required, path
@@ -5310,10 +5310,10 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
+      issue_number TYPE i
       since TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create an issue comment"
 * Parameter: owner, required, path
@@ -5329,7 +5329,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
+      issue_number TYPE i
     RAISING cx_static_check.
 * GET - "List issue events"
 * Parameter: owner, required, path
@@ -5344,9 +5344,9 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      issue_number TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List labels for an issue"
 * Parameter: owner, required, path
@@ -5361,9 +5361,9 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      issue_number TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Add labels to an issue"
 * Parameter: owner, required, path
@@ -5377,7 +5377,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
+      issue_number TYPE i
     RAISING cx_static_check.
 * PUT - "Set labels for an issue"
 * Parameter: owner, required, path
@@ -5391,7 +5391,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
+      issue_number TYPE i
     RAISING cx_static_check.
 * DELETE - "Remove all labels from an issue"
 * Parameter: owner, required, path
@@ -5403,7 +5403,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
+      issue_number TYPE i
     RAISING cx_static_check.
 * DELETE - "Remove a label from an issue"
 * Parameter: name, required, path
@@ -5419,7 +5419,7 @@ INTERFACE zif_github.
       name TYPE string
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
+      issue_number TYPE i
     RAISING cx_static_check.
 * PUT - "Lock an issue"
 * Parameter: owner, required, path
@@ -5434,7 +5434,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
+      issue_number TYPE i
     RAISING cx_static_check.
 * DELETE - "Unlock an issue"
 * Parameter: owner, required, path
@@ -5447,7 +5447,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
+      issue_number TYPE i
     RAISING cx_static_check.
 * GET - "List reactions for an issue"
 * Parameter: content, optional, query
@@ -5466,9 +5466,9 @@ INTERFACE zif_github.
       content TYPE string OPTIONAL
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      issue_number TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create reaction for an issue"
 * Parameter: owner, required, path
@@ -5482,7 +5482,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
+      issue_number TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete an issue reaction"
 * Parameter: owner, required, path
@@ -5493,7 +5493,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
+      issue_number TYPE i
     RAISING cx_static_check.
 * GET - "List timeline events for an issue"
 * Parameter: owner, required, path
@@ -5510,9 +5510,9 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      issue_number TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      issue_number TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List deploy keys"
 * Parameter: owner, required, path
@@ -5525,8 +5525,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a deploy key"
 * Parameter: owner, required, path
@@ -5550,7 +5550,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      key_id TYPE string
+      key_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a deploy key"
 * Parameter: owner, required, path
@@ -5561,7 +5561,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      key_id TYPE string
+      key_id TYPE i
     RAISING cx_static_check.
 * GET - "List labels for a repository"
 * Parameter: owner, required, path
@@ -5575,8 +5575,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a label"
 * Parameter: owner, required, path
@@ -5675,13 +5675,13 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS issues_list_milestones
     IMPORTING
-      state TYPE string OPTIONAL
-      sort TYPE string OPTIONAL
-      direction TYPE string OPTIONAL
+      state TYPE string DEFAULT 'open' OPTIONAL
+      sort TYPE string DEFAULT 'due_on' OPTIONAL
+      direction TYPE string DEFAULT 'asc' OPTIONAL
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a milestone"
 * Parameter: owner, required, path
@@ -5706,7 +5706,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      milestone_number TYPE string
+      milestone_number TYPE i
     RAISING cx_static_check.
 * PATCH - "Update a milestone"
 * Parameter: owner, required, path
@@ -5718,7 +5718,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      milestone_number TYPE string
+      milestone_number TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a milestone"
 * Parameter: owner, required, path
@@ -5730,7 +5730,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      milestone_number TYPE string
+      milestone_number TYPE i
     RAISING cx_static_check.
 * GET - "List labels for issues in a milestone"
 * Parameter: owner, required, path
@@ -5744,9 +5744,9 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      milestone_number TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      milestone_number TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List repository notifications for the authenticated user"
 * Parameter: owner, required, path
@@ -5763,12 +5763,12 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      all TYPE string OPTIONAL
-      participating TYPE string OPTIONAL
+      all TYPE abap_bool DEFAULT 'false' OPTIONAL
+      participating TYPE abap_bool DEFAULT 'false' OPTIONAL
       since TYPE string OPTIONAL
       before TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * PUT - "Mark repository notifications as read"
 * Parameter: owner, required, path
@@ -5837,8 +5837,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Request a GitHub Pages build"
 * Parameter: owner, required, path
@@ -5868,7 +5868,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/page-build
   METHODS repos_get_pages_build
     IMPORTING
-      build_id TYPE string
+      build_id TYPE i
       owner TYPE string
       repo TYPE string
     RAISING cx_static_check.
@@ -5887,11 +5887,11 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS projects_list_for_repo
     IMPORTING
-      state TYPE string OPTIONAL
+      state TYPE string DEFAULT 'open' OPTIONAL
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a repository project"
 * Parameter: owner, required, path
@@ -5924,15 +5924,15 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS pulls_list
     IMPORTING
-      state TYPE string OPTIONAL
+      state TYPE string DEFAULT 'open' OPTIONAL
       head TYPE string OPTIONAL
       base TYPE string OPTIONAL
-      sort TYPE string OPTIONAL
+      sort TYPE string DEFAULT 'created' OPTIONAL
       direction TYPE string OPTIONAL
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a pull request"
 * Parameter: owner, required, path
@@ -5961,10 +5961,10 @@ INTERFACE zif_github.
       direction TYPE string OPTIONAL
       owner TYPE string
       repo TYPE string
-      sort TYPE string OPTIONAL
+      sort TYPE string DEFAULT 'created' OPTIONAL
       since TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a review comment for a pull request"
 * Parameter: owner, required, path
@@ -5977,7 +5977,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * PATCH - "Update a review comment for a pull request"
 * Parameter: owner, required, path
@@ -5989,7 +5989,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a review comment for a pull request"
 * Parameter: owner, required, path
@@ -6001,7 +6001,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * GET - "List reactions for a pull request review comment"
 * Parameter: content, optional, query
@@ -6019,9 +6019,9 @@ INTERFACE zif_github.
       content TYPE string OPTIONAL
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      comment_id TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create reaction for a pull request review comment"
 * Parameter: owner, required, path
@@ -6037,7 +6037,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a pull request comment reaction"
 * Parameter: owner, required, path
@@ -6048,7 +6048,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * GET - "Get a pull request"
 * Parameter: owner, required, path
@@ -6090,10 +6090,10 @@ INTERFACE zif_github.
       direction TYPE string OPTIONAL
       owner TYPE string
       repo TYPE string
-      sort TYPE string OPTIONAL
+      sort TYPE string DEFAULT 'created' OPTIONAL
       since TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a review comment for a pull request"
 * Parameter: owner, required, path
@@ -6118,7 +6118,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      comment_id TYPE string
+      comment_id TYPE i
     RAISING cx_static_check.
 * GET - "List commits on a pull request"
 * Parameter: owner, required, path
@@ -6131,8 +6131,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List pull requests files"
 * Parameter: owner, required, path
@@ -6147,8 +6147,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Check if a pull request has been merged"
 * Parameter: owner, required, path
@@ -6188,8 +6188,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Request reviewers for a pull request"
 * Parameter: owner, required, path
@@ -6224,8 +6224,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a review for a pull request"
 * Parameter: owner, required, path
@@ -6250,7 +6250,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      review_id TYPE string
+      review_id TYPE i
     RAISING cx_static_check.
 * PUT - "Update a review for a pull request"
 * Parameter: owner, required, path
@@ -6263,7 +6263,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      review_id TYPE string
+      review_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a pending review for a pull request"
 * Parameter: owner, required, path
@@ -6277,7 +6277,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      review_id TYPE string
+      review_id TYPE i
     RAISING cx_static_check.
 * GET - "List comments for a pull request review"
 * Parameter: owner, required, path
@@ -6292,9 +6292,9 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      review_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      review_id TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * PUT - "Dismiss a review for a pull request"
 * Parameter: owner, required, path
@@ -6308,7 +6308,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      review_id TYPE string
+      review_id TYPE i
     RAISING cx_static_check.
 * POST - "Submit a review for a pull request"
 * Parameter: owner, required, path
@@ -6323,7 +6323,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      review_id TYPE string
+      review_id TYPE i
     RAISING cx_static_check.
 * PUT - "Update a pull request branch"
 * Parameter: owner, required, path
@@ -6364,8 +6364,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a release"
 * Parameter: owner, required, path
@@ -6391,7 +6391,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      asset_id TYPE string
+      asset_id TYPE i
     RAISING cx_static_check.
 * PATCH - "Update a release asset"
 * Parameter: owner, required, path
@@ -6403,7 +6403,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      asset_id TYPE string
+      asset_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a release asset"
 * Parameter: owner, required, path
@@ -6414,7 +6414,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      asset_id TYPE string
+      asset_id TYPE i
     RAISING cx_static_check.
 * GET - "Get the latest release"
 * Parameter: owner, required, path
@@ -6450,7 +6450,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      release_id TYPE string
+      release_id TYPE i
     RAISING cx_static_check.
 * PATCH - "Update a release"
 * Parameter: owner, required, path
@@ -6462,7 +6462,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      release_id TYPE string
+      release_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a release"
 * Parameter: owner, required, path
@@ -6473,7 +6473,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      release_id TYPE string
+      release_id TYPE i
     RAISING cx_static_check.
 * GET - "List release assets"
 * Parameter: owner, required, path
@@ -6487,9 +6487,9 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      release_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      release_id TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Upload a release asset"
 * Parameter: name, optional, query
@@ -6505,7 +6505,7 @@ INTERFACE zif_github.
       label TYPE string OPTIONAL
       owner TYPE string
       repo TYPE string
-      release_id TYPE string
+      release_id TYPE i
     RAISING cx_static_check.
 * GET - "List secret scanning alerts for a repository"
 * Parameter: state, optional, query
@@ -6522,8 +6522,8 @@ INTERFACE zif_github.
       state TYPE string OPTIONAL
       owner TYPE string
       repo TYPE string
-      page TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a secret scanning alert"
 * Parameter: owner, required, path
@@ -6567,8 +6567,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get the weekly commit activity"
 * Parameter: owner, required, path
@@ -6644,8 +6644,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a repository subscription"
 * Parameter: owner, required, path
@@ -6689,8 +6689,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Download a repository archive (tar)"
 * Parameter: ref, required, path
@@ -6714,8 +6714,8 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get all repository topics"
 * Parameter: owner, required, path
@@ -6753,7 +6753,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per TYPE string OPTIONAL
+      per TYPE string DEFAULT 'day' OPTIONAL
     RAISING cx_static_check.
 * GET - "Get top referral paths"
 * Parameter: owner, required, path
@@ -6788,7 +6788,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      per TYPE string OPTIONAL
+      per TYPE string DEFAULT 'day' OPTIONAL
     RAISING cx_static_check.
 * POST - "Transfer a repository"
 * Parameter: owner, required, path
@@ -6864,7 +6864,7 @@ INTERFACE zif_github.
   METHODS enterprise_admin_list_provisio
     IMPORTING
       enterprise TYPE string
-      count TYPE string OPTIONAL
+      count TYPE i OPTIONAL
     RAISING cx_static_check.
 * POST - "Provision a SCIM enterprise group and invite users"
 * Parameter: enterprise, required, path
@@ -6921,7 +6921,7 @@ INTERFACE zif_github.
   METHODS enterprise_admin_list_provis01
     IMPORTING
       enterprise TYPE string
-      count TYPE string OPTIONAL
+      count TYPE i OPTIONAL
     RAISING cx_static_check.
 * POST - "Provision and invite a SCIM enterprise user"
 * Parameter: enterprise, required, path
@@ -6983,8 +6983,8 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS scim_list_provisioned_identiti
     IMPORTING
-      startindex TYPE string OPTIONAL
-      count TYPE string OPTIONAL
+      startindex TYPE i OPTIONAL
+      count TYPE i OPTIONAL
       filter TYPE string OPTIONAL
       org TYPE string
     RAISING cx_static_check.
@@ -7072,9 +7072,9 @@ INTERFACE zif_github.
     IMPORTING
       q TYPE string
       sort TYPE string OPTIONAL
-      order TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      order TYPE string DEFAULT 'desc' OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Search commits"
 * Parameter: q, required, query
@@ -7090,9 +7090,9 @@ INTERFACE zif_github.
     IMPORTING
       q TYPE string
       sort TYPE string OPTIONAL
-      order TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      order TYPE string DEFAULT 'desc' OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Search issues and pull requests"
 * Parameter: q, required, query
@@ -7110,9 +7110,9 @@ INTERFACE zif_github.
     IMPORTING
       q TYPE string
       sort TYPE string OPTIONAL
-      order TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      order TYPE string DEFAULT 'desc' OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Search labels"
 * Parameter: repository_id, required, query
@@ -7127,10 +7127,10 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS search_labels
     IMPORTING
-      repository_id TYPE string
+      repository_id TYPE i
       q TYPE string
       sort TYPE string OPTIONAL
-      order TYPE string OPTIONAL
+      order TYPE string DEFAULT 'desc' OPTIONAL
     RAISING cx_static_check.
 * GET - "Search repositories"
 * Parameter: q, required, query
@@ -7147,9 +7147,9 @@ INTERFACE zif_github.
     IMPORTING
       q TYPE string
       sort TYPE string OPTIONAL
-      order TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      order TYPE string DEFAULT 'desc' OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Search topics"
 * Parameter: q, required, query
@@ -7176,9 +7176,9 @@ INTERFACE zif_github.
     IMPORTING
       q TYPE string
       sort TYPE string OPTIONAL
-      order TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      order TYPE string DEFAULT 'desc' OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a team (Legacy)"
 * Response: 200, response
@@ -7208,9 +7208,9 @@ INTERFACE zif_github.
 *     application/json,
   METHODS teams_list_discussions_legacy
     IMPORTING
-      direction TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      direction TYPE string DEFAULT 'desc' OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a discussion (Legacy)"
 * Response: 201, response
@@ -7239,9 +7239,9 @@ INTERFACE zif_github.
 *     application/json,
   METHODS teams_list_discussion_commen01
     IMPORTING
-      direction TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      direction TYPE string DEFAULT 'desc' OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a discussion comment (Legacy)"
 * Response: 201, response
@@ -7271,8 +7271,8 @@ INTERFACE zif_github.
   METHODS reactions_list_for_team_disc02
     IMPORTING
       content TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create reaction for a team discussion comment (Legacy)"
 * Response: 201, response
@@ -7288,8 +7288,8 @@ INTERFACE zif_github.
   METHODS reactions_list_for_team_disc03
     IMPORTING
       content TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create reaction for a team discussion (Legacy)"
 * Response: 201, response
@@ -7303,8 +7303,8 @@ INTERFACE zif_github.
 *     application/json,
   METHODS teams_list_pending_invitatio01
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List team members (Legacy)"
 * Parameter: role, optional, query
@@ -7315,9 +7315,9 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS teams_list_members_legacy
     IMPORTING
-      role TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      role TYPE string DEFAULT 'all' OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get team member (Legacy)"
 * Parameter: username, required, path
@@ -7384,8 +7384,8 @@ INTERFACE zif_github.
 * Response: 415,
   METHODS teams_list_projects_legacy
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Check team permissions for a project (Legacy)"
 * Response: 200, response
@@ -7418,8 +7418,8 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS teams_list_repos_legacy
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Check team permissions for a repository (Legacy)"
 * Parameter: owner, required, path
@@ -7477,8 +7477,8 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS teams_list_child_legacy
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get the authenticated user"
 * Response: 200, response
@@ -7564,8 +7564,8 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS users_list_emails_for_authenti
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Add an email address for the authenticated user"
 * Response: 201, response
@@ -7596,8 +7596,8 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS users_list_followers_for_authe
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List the people the authenticated user follows"
 * Parameter: per_page, optional, query
@@ -7609,8 +7609,8 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS users_list_followed_by_authent
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Check if a person is followed by the authenticated user"
 * Parameter: username, required, path
@@ -7657,8 +7657,8 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS users_list_gpg_keys_for_authen
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a GPG key for the authenticated user"
 * Response: 201, response
@@ -7680,7 +7680,7 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS users_get_gpg_key_for_authenti
     IMPORTING
-      gpg_key_id TYPE string
+      gpg_key_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a GPG key for the authenticated user"
 * Parameter: gpg_key_id, required, path
@@ -7692,7 +7692,7 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS users_delete_gpg_key_for_authe
     IMPORTING
-      gpg_key_id TYPE string
+      gpg_key_id TYPE i
     RAISING cx_static_check.
 * GET - "List app installations accessible to the user access token"
 * Parameter: per_page, optional, query
@@ -7705,8 +7705,8 @@ INTERFACE zif_github.
 * Response: 415,
   METHODS apps_list_installations_for_au
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List repositories accessible to the user access token"
 * Parameter: installation_id, required, path
@@ -7719,9 +7719,9 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS apps_list_installation_repos_f
     IMPORTING
-      installation_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      installation_id TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * PUT - "Add a repository to an app installation"
 * Parameter: installation_id, required, path
@@ -7732,8 +7732,8 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS apps_add_repo_to_installation
     IMPORTING
-      installation_id TYPE string
-      repository_id TYPE string
+      installation_id TYPE i
+      repository_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Remove a repository from an app installation"
 * Parameter: installation_id, required, path
@@ -7744,8 +7744,8 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS apps_remove_repo_from_installa
     IMPORTING
-      installation_id TYPE string
-      repository_id TYPE string
+      installation_id TYPE i
+      repository_id TYPE i
     RAISING cx_static_check.
 * GET - "Get interaction restrictions for your public repositories"
 * Response: 200, response
@@ -7777,14 +7777,14 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS issues_list_for_authenticated_
     IMPORTING
-      filter TYPE string OPTIONAL
-      state TYPE string OPTIONAL
-      sort TYPE string OPTIONAL
+      filter TYPE string DEFAULT 'assigned' OPTIONAL
+      state TYPE string DEFAULT 'open' OPTIONAL
+      sort TYPE string DEFAULT 'created' OPTIONAL
       labels TYPE string OPTIONAL
-      direction TYPE string OPTIONAL
+      direction TYPE string DEFAULT 'desc' OPTIONAL
       since TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List public SSH keys for the authenticated user"
 * Parameter: per_page, optional, query
@@ -7797,8 +7797,8 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS users_list_public_ssh_keys_for
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a public SSH key for the authenticated user"
 * Response: 201, response
@@ -7820,7 +7820,7 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS users_get_public_ssh_key_for_a
     IMPORTING
-      key_id TYPE string
+      key_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a public SSH key for the authenticated user"
 * Parameter: key_id, required, path
@@ -7831,7 +7831,7 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS users_delete_public_ssh_key_fo
     IMPORTING
-      key_id TYPE string
+      key_id TYPE i
     RAISING cx_static_check.
 * GET - "List subscriptions for the authenticated user"
 * Parameter: per_page, optional, query
@@ -7843,8 +7843,8 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS apps_list_subscriptions_for_au
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List subscriptions for the authenticated user (stubbed)"
 * Parameter: per_page, optional, query
@@ -7855,8 +7855,8 @@ INTERFACE zif_github.
 * Response: 401,
   METHODS apps_list_subscriptions_for_01
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List organization memberships for the authenticated user"
 * Parameter: state, optional, query
@@ -7871,8 +7871,8 @@ INTERFACE zif_github.
   METHODS orgs_list_memberships_for_auth
     IMPORTING
       state TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get an organization membership for the authenticated user"
 * Parameter: org, required, path
@@ -7905,8 +7905,8 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS migrations_list_for_authentica
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Start a user migration"
 * Response: 201, response
@@ -7929,7 +7929,7 @@ INTERFACE zif_github.
   METHODS migrations_get_status_for_auth
     IMPORTING
       exclude TYPE string OPTIONAL
-      migration_id TYPE string
+      migration_id TYPE i
     RAISING cx_static_check.
 * GET - "Download a user migration archive"
 * Parameter: migration_id, required, path
@@ -7939,7 +7939,7 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS migrations_get_archive_for_aut
     IMPORTING
-      migration_id TYPE string
+      migration_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete a user migration archive"
 * Parameter: migration_id, required, path
@@ -7950,7 +7950,7 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS migrations_delete_archive_fo01
     IMPORTING
-      migration_id TYPE string
+      migration_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Unlock a user repository"
 * Parameter: migration_id, required, path
@@ -7962,7 +7962,7 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS migrations_unlock_repo_for_aut
     IMPORTING
-      migration_id TYPE string
+      migration_id TYPE i
       repo_name TYPE string
     RAISING cx_static_check.
 * GET - "List repositories for a user migration"
@@ -7974,9 +7974,9 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS migrations_list_repos_for_user
     IMPORTING
-      migration_id TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      migration_id TYPE i
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List organizations for the authenticated user"
 * Parameter: per_page, optional, query
@@ -7988,8 +7988,8 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS orgs_list_for_authenticated_us
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a user project"
 * Response: 201, response
@@ -8012,8 +8012,8 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS users_list_public_emails_for_a
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List repositories for the authenticated user"
 * Parameter: visibility, optional, query
@@ -8033,13 +8033,13 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS repos_list_for_authenticated_u
     IMPORTING
-      visibility TYPE string OPTIONAL
-      affiliation TYPE string OPTIONAL
-      type TYPE string OPTIONAL
-      sort TYPE string OPTIONAL
+      visibility TYPE string DEFAULT 'all' OPTIONAL
+      affiliation TYPE string DEFAULT 'owner,collaborator,organization_member' OPTIONAL
+      type TYPE string DEFAULT 'all' OPTIONAL
+      sort TYPE string DEFAULT 'full_name' OPTIONAL
       direction TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
       since TYPE string OPTIONAL
       before TYPE string OPTIONAL
     RAISING cx_static_check.
@@ -8065,8 +8065,8 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS repos_list_invitations_for_aut
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * PATCH - "Accept a repository invitation"
 * Parameter: invitation_id, required, path
@@ -8077,7 +8077,7 @@ INTERFACE zif_github.
 * Response: 409,
   METHODS repos_accept_invitation
     IMPORTING
-      invitation_id TYPE string
+      invitation_id TYPE i
     RAISING cx_static_check.
 * DELETE - "Decline a repository invitation"
 * Parameter: invitation_id, required, path
@@ -8088,7 +8088,7 @@ INTERFACE zif_github.
 * Response: 409,
   METHODS repos_decline_invitation
     IMPORTING
-      invitation_id TYPE string
+      invitation_id TYPE i
     RAISING cx_static_check.
 * GET - "List repositories starred by the authenticated user"
 * Parameter: sort, optional, query
@@ -8103,10 +8103,10 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS activity_list_repos_starred_by
     IMPORTING
-      sort TYPE string OPTIONAL
-      direction TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      sort TYPE string DEFAULT 'created' OPTIONAL
+      direction TYPE string DEFAULT 'desc' OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Check if a repository is starred by the authenticated user"
 * Parameter: owner, required, path
@@ -8158,8 +8158,8 @@ INTERFACE zif_github.
 * Response: 403,
   METHODS activity_list_watched_repos_fo
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List teams for the authenticated user"
 * Parameter: per_page, optional, query
@@ -8171,8 +8171,8 @@ INTERFACE zif_github.
 * Response: 404,
   METHODS teams_list_for_authenticated_u
     IMPORTING
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List users"
 * Parameter: per_page, optional, query
@@ -8181,7 +8181,7 @@ INTERFACE zif_github.
 * Response: 304,
   METHODS users_list
     IMPORTING
-      per_page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a user"
 * Parameter: username, required, path
@@ -8201,8 +8201,8 @@ INTERFACE zif_github.
   METHODS activity_list_events_for_authe
     IMPORTING
       username TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List organization events for the authenticated user"
 * Parameter: username, required, path
@@ -8215,8 +8215,8 @@ INTERFACE zif_github.
     IMPORTING
       username TYPE string
       org TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List public events for a user"
 * Parameter: username, required, path
@@ -8227,8 +8227,8 @@ INTERFACE zif_github.
   METHODS activity_list_public_events_01
     IMPORTING
       username TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List followers of a user"
 * Parameter: username, required, path
@@ -8239,8 +8239,8 @@ INTERFACE zif_github.
   METHODS users_list_followers_for_user
     IMPORTING
       username TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List the people a user follows"
 * Parameter: username, required, path
@@ -8251,8 +8251,8 @@ INTERFACE zif_github.
   METHODS users_list_following_for_user
     IMPORTING
       username TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Check if a user follows another user"
 * Parameter: target_user, required, path
@@ -8276,8 +8276,8 @@ INTERFACE zif_github.
     IMPORTING
       username TYPE string
       since TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List GPG keys for a user"
 * Parameter: username, required, path
@@ -8288,8 +8288,8 @@ INTERFACE zif_github.
   METHODS users_list_gpg_keys_for_user
     IMPORTING
       username TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get contextual information for a user"
 * Parameter: subject_type, optional, query
@@ -8322,8 +8322,8 @@ INTERFACE zif_github.
   METHODS users_list_public_keys_for_use
     IMPORTING
       username TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List organizations for a user"
 * Parameter: username, required, path
@@ -8334,8 +8334,8 @@ INTERFACE zif_github.
   METHODS orgs_list_for_user
     IMPORTING
       username TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List user projects"
 * Parameter: state, optional, query
@@ -8348,10 +8348,10 @@ INTERFACE zif_github.
 * Response: 422,
   METHODS projects_list_for_user
     IMPORTING
-      state TYPE string OPTIONAL
+      state TYPE string DEFAULT 'open' OPTIONAL
       username TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List events received by the authenticated user"
 * Parameter: username, required, path
@@ -8362,8 +8362,8 @@ INTERFACE zif_github.
   METHODS activity_list_received_events_
     IMPORTING
       username TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List public events received by a user"
 * Parameter: username, required, path
@@ -8374,8 +8374,8 @@ INTERFACE zif_github.
   METHODS activity_list_received_public_
     IMPORTING
       username TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List repositories for a user"
 * Parameter: type, optional, query
@@ -8388,12 +8388,12 @@ INTERFACE zif_github.
 *     application/json,
   METHODS repos_list_for_user
     IMPORTING
-      type TYPE string OPTIONAL
-      sort TYPE string OPTIONAL
+      type TYPE string DEFAULT 'owner' OPTIONAL
+      sort TYPE string DEFAULT 'full_name' OPTIONAL
       direction TYPE string OPTIONAL
       username TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get GitHub Actions billing for a user"
 * Parameter: username, required, path
@@ -8431,10 +8431,10 @@ INTERFACE zif_github.
   METHODS activity_list_repos_starred_01
     IMPORTING
       username TYPE string
-      sort TYPE string OPTIONAL
-      direction TYPE string OPTIONAL
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      sort TYPE string DEFAULT 'created' OPTIONAL
+      direction TYPE string DEFAULT 'desc' OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "List repositories watched by a user"
 * Parameter: username, required, path
@@ -8445,8 +8445,8 @@ INTERFACE zif_github.
   METHODS activity_list_repos_watched_by
     IMPORTING
       username TYPE string
-      per_page TYPE string OPTIONAL
-      page TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30 OPTIONAL
+      page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 * GET - "Get the Zen of GitHub"
 * Response: 200, response

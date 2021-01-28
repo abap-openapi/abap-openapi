@@ -124,10 +124,6 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         rv_abap = rv_abap &&
           |* Parameter: { ls_parameter-name }, { lv_required }, { ls_parameter-in }\n|.
       ENDLOOP.
-      LOOP AT ls_operation-parameters_ref INTO lv_ref.
-        rv_abap = rv_abap &&
-          |* Parameter: { lv_ref }\n|.
-      ENDLOOP.
       LOOP AT ls_operation-responses INTO ls_response.
         rv_abap = rv_abap &&
           |* Response: { ls_response-code }, { ls_response-description }\n|.
@@ -167,8 +163,15 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     ENDLOOP.
 
     LOOP AT is_operation-parameters INTO ls_parameter WHERE in = 'query'.
-      rv_abap = rv_abap &&
-        |    mi_client->request->set_form_field( name = '{ ls_parameter-name }' value = { ls_parameter-abap_name } ).\n|.
+      IF ls_parameter-required = abap_false.
+        rv_abap = rv_abap &&
+          |    IF { ls_parameter-abap_name } IS SUPPLIED.\n| &&
+          |      mi_client->request->set_form_field( name = '{ ls_parameter-name }' value = { ls_parameter-abap_name } ).\n| &&
+          |    ENDIF.\n|.
+      ELSE.
+        rv_abap = rv_abap &&
+          |    mi_client->request->set_form_field( name = '{ ls_parameter-name }' value = { ls_parameter-abap_name } ).\n|.
+      ENDIF.
     ENDLOOP.
 
     rv_abap = rv_abap &&
@@ -184,13 +187,34 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
     DATA ls_parameter LIKE LINE OF it_parameters.
     DATA lt_tab TYPE string_table.
+    DATA lv_type TYPE string.
     DATA lv_text TYPE string.
+    DATA lv_default TYPE string.
 
     IF lines( it_parameters ) > 0.
       rv_abap = |\n    IMPORTING\n|.
 
       LOOP AT it_parameters INTO ls_parameter.
-        lv_text = |      | && ls_parameter-abap_name && | TYPE string|.
+        lv_type = ls_parameter-schema-type.
+        CASE lv_type.
+          WHEN 'array'.
+            lv_type = 'string'.
+          WHEN 'integer'.
+            lv_type = 'i'.
+          WHEN 'boolean'.
+            lv_type = 'abap_bool'.
+          WHEN ''.
+            lv_type = 'string'.
+        ENDCASE.
+        CLEAR lv_default.
+        IF ls_parameter-schema-default IS NOT INITIAL.
+          IF ls_parameter-schema-default CO '0123456789'.
+            lv_default = | DEFAULT { ls_parameter-schema-default }|.
+          ELSE.
+            lv_default = | DEFAULT '{ ls_parameter-schema-default }'|.
+          ENDIF.
+        ENDIF.
+        lv_text = |      | && ls_parameter-abap_name && | TYPE | && lv_type && lv_default.
         IF ls_parameter-required = abap_false.
           lv_text = lv_text && | OPTIONAL|.
         ENDIF.

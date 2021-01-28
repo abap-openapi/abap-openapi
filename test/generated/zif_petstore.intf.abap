@@ -26,7 +26,7 @@ INTERFACE zif_petstore.
 * Response: 400, Invalid status value
   METHODS findpetsbystatus
     IMPORTING
-      status TYPE string OPTIONAL
+      status TYPE string DEFAULT 'available' OPTIONAL
     RAISING cx_static_check.
 * GET - "Finds Pets by tags"
 * Parameter: tags, optional, query
@@ -47,7 +47,7 @@ INTERFACE zif_petstore.
 * Response: 404, Pet not found
   METHODS getpetbyid
     IMPORTING
-      petid TYPE string
+      petid TYPE i
     RAISING cx_static_check.
 * POST - "Updates a pet in the store with form data"
 * Parameter: petId, required, path
@@ -56,7 +56,7 @@ INTERFACE zif_petstore.
 * Response: 405, Invalid input
   METHODS updatepetwithform
     IMPORTING
-      petid TYPE string
+      petid TYPE i
       name TYPE string OPTIONAL
       status TYPE string OPTIONAL
     RAISING cx_static_check.
@@ -67,7 +67,7 @@ INTERFACE zif_petstore.
   METHODS deletepet
     IMPORTING
       api_key TYPE string OPTIONAL
-      petid TYPE string
+      petid TYPE i
     RAISING cx_static_check.
 * POST - "uploads an image"
 * Parameter: petId, required, path
@@ -76,7 +76,7 @@ INTERFACE zif_petstore.
 *     application/json, #/components/schemas/ApiResponse
   METHODS uploadfile
     IMPORTING
-      petid TYPE string
+      petid TYPE i
       additionalmetadata TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Returns pet inventories by status"
@@ -99,7 +99,7 @@ INTERFACE zif_petstore.
 * Response: 404, Order not found
   METHODS getorderbyid
     IMPORTING
-      orderid TYPE string
+      orderid TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete purchase order by ID"
 * Parameter: orderId, required, path
@@ -107,7 +107,7 @@ INTERFACE zif_petstore.
 * Response: 404, Order not found
   METHODS deleteorder
     IMPORTING
-      orderid TYPE string
+      orderid TYPE i
     RAISING cx_static_check.
 * POST - "Create user"
 * Response: default, successful operation

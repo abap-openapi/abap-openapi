@@ -32,6 +32,10 @@ CLASS zcl_oapi_parser DEFINITION PUBLIC.
     METHODS parse_components
       RETURNING VALUE(rs_components) TYPE zif_oapi_specification_v3=>ty_components.
 
+    METHODS parse_schema
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(rs_schema) TYPE zif_oapi_specification_v3=>ty_schema.
+
 ENDCLASS.
 
 CLASS zcl_oapi_parser IMPLEMENTATION.
@@ -50,6 +54,11 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     rs_schema-servers = parse_servers( ).
     rs_schema-components = parse_components( ).
 
+  ENDMETHOD.
+
+  METHOD parse_schema.
+    rs_schema-type = mo_json->value_string( iv_prefix && '/type' ).
+    rs_schema-default = mo_json->value_string( iv_prefix && '/default' ).
   ENDMETHOD.
 
   METHOD parse_components.
@@ -117,6 +126,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
         ls_parameter-description = mo_json->value_string( iv_prefix && lv_member && '/description' ).
         ls_parameter-required = mo_json->value_boolean( iv_prefix && lv_member && '/required' ).
         ls_parameter-abap_name = lo_names->to_abap_name( ls_parameter-name ).
+        ls_parameter-schema = parse_schema( iv_prefix && lv_member && '/schema' ).
         APPEND ls_parameter TO rt_parameters.
       ENDIF.
     ENDLOOP.

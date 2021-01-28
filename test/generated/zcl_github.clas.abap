@@ -75,10 +75,18 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~apps_list_installations.
     DATA lv_uri TYPE string VALUE '/app/installations'.
-    mi_client->request->set_form_field( name = 'outdated' value = outdated ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
-    mi_client->request->set_form_field( name = 'since' value = since ).
+    IF outdated IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'outdated' value = outdated ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -144,8 +152,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~oauth_authorizations_list_gran.
     DATA lv_uri TYPE string VALUE '/applications/grants'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -279,8 +291,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~oauth_authorizations_list_auth.
     DATA lv_uri TYPE string VALUE '/authorizations'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -420,8 +436,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~enterprise_admin_list_selected.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/permissions/organizations'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -490,8 +510,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~enterprise_admin_list_self_hos.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runner-groups'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -551,8 +575,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -603,8 +631,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -654,8 +686,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~enterprise_admin_list_self_h02.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runners'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -724,7 +760,9 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~audit_log_get_audit_log.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/audit-log'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -768,8 +806,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~activity_list_public_events.
     DATA lv_uri TYPE string VALUE '/events'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -790,9 +832,15 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~gists_list.
     DATA lv_uri TYPE string VALUE '/gists'.
-    mi_client->request->set_form_field( name = 'since' value = since ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -813,9 +861,15 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~gists_list_public.
     DATA lv_uri TYPE string VALUE '/gists/public'.
-    mi_client->request->set_form_field( name = 'since' value = since ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -826,9 +880,15 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~gists_list_starred.
     DATA lv_uri TYPE string VALUE '/gists/starred'.
-    mi_client->request->set_form_field( name = 'since' value = since ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -873,8 +933,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~gists_list_comments.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/comments'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -933,8 +997,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~gists_list_commits.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/commits'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -946,8 +1014,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~gists_list_forks.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/forks'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1035,8 +1107,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~apps_list_repos_accessible_to_.
     DATA lv_uri TYPE string VALUE '/installation/repositories'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1057,18 +1133,42 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~issues_list.
     DATA lv_uri TYPE string VALUE '/issues'.
-    mi_client->request->set_form_field( name = 'filter' value = filter ).
-    mi_client->request->set_form_field( name = 'state' value = state ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'collab' value = collab ).
-    mi_client->request->set_form_field( name = 'orgs' value = orgs ).
-    mi_client->request->set_form_field( name = 'owned' value = owned ).
-    mi_client->request->set_form_field( name = 'pulls' value = pulls ).
-    mi_client->request->set_form_field( name = 'labels' value = labels ).
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'since' value = since ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF filter IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'filter' value = filter ).
+    ENDIF.
+    IF state IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'state' value = state ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF collab IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'collab' value = collab ).
+    ENDIF.
+    IF orgs IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'orgs' value = orgs ).
+    ENDIF.
+    IF owned IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'owned' value = owned ).
+    ENDIF.
+    IF pulls IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'pulls' value = pulls ).
+    ENDIF.
+    IF labels IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'labels' value = labels ).
+    ENDIF.
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1079,8 +1179,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~licenses_get_all_commonly_used.
     DATA lv_uri TYPE string VALUE '/licenses'.
-    mi_client->request->set_form_field( name = 'featured' value = featured ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    IF featured IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'featured' value = featured ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1133,8 +1237,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~apps_list_plans.
     DATA lv_uri TYPE string VALUE '/marketplace_listing/plans'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1146,10 +1254,18 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~apps_list_accounts_for_plan.
     DATA lv_uri TYPE string VALUE '/marketplace_listing/plans/{plan_id}/accounts'.
     REPLACE ALL OCCURRENCES OF '{plan_id}' IN lv_uri WITH plan_id.
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1171,8 +1287,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~apps_list_plans_stubbed.
     DATA lv_uri TYPE string VALUE '/marketplace_listing/stubbed/plans'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1184,10 +1304,18 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~apps_list_accounts_for_plan_st.
     DATA lv_uri TYPE string VALUE '/marketplace_listing/stubbed/plans/{plan_id}/accounts'.
     REPLACE ALL OCCURRENCES OF '{plan_id}' IN lv_uri WITH plan_id.
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1210,8 +1338,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/networks/{owner}/{repo}/events'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1222,12 +1354,24 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~activity_list_notifications_fo.
     DATA lv_uri TYPE string VALUE '/notifications'.
-    mi_client->request->set_form_field( name = 'all' value = all ).
-    mi_client->request->set_form_field( name = 'participating' value = participating ).
-    mi_client->request->set_form_field( name = 'since' value = since ).
-    mi_client->request->set_form_field( name = 'before' value = before ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF all IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'all' value = all ).
+    ENDIF.
+    IF participating IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'participating' value = participating ).
+    ENDIF.
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
+    IF before IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'before' value = before ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1303,7 +1447,9 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~meta_get_octocat.
     DATA lv_uri TYPE string VALUE '/octocat'.
-    mi_client->request->set_form_field( name = 's' value = s ).
+    IF s IS SUPPLIED.
+      mi_client->request->set_form_field( name = 's' value = s ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1314,7 +1460,9 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~orgs_list.
     DATA lv_uri TYPE string VALUE '/organizations'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1370,8 +1518,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~actions_list_selected_reposito.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/permissions/repositories'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1440,8 +1592,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~actions_list_self_hosted_runne.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runner-groups'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1551,8 +1707,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runner-groups/{runner_group_id}/runners'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1602,8 +1762,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~actions_list_self_hosted_run02.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runners'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1672,8 +1836,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~actions_list_org_secrets.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/secrets'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1782,7 +1950,9 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~orgs_get_audit_log.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/audit-log'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1864,8 +2034,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~activity_list_public_org_event.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/events'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1877,8 +2051,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~orgs_list_failed_invitations.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/failed_invitations'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1890,8 +2068,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~orgs_list_webhooks.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/hooks'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -1991,8 +2173,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~orgs_list_app_installations.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/installations'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2037,8 +2223,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~orgs_list_pending_invitations.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/invitations'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2074,8 +2264,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/invitations/{invitation_id}/teams'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{invitation_id}' IN lv_uri WITH invitation_id.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2087,14 +2281,30 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~issues_list_for_org.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/issues'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'filter' value = filter ).
-    mi_client->request->set_form_field( name = 'state' value = state ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'labels' value = labels ).
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'since' value = since ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF filter IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'filter' value = filter ).
+    ENDIF.
+    IF state IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'state' value = state ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF labels IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'labels' value = labels ).
+    ENDIF.
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2106,10 +2316,18 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~orgs_list_members.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/members'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'filter' value = filter ).
-    mi_client->request->set_form_field( name = 'role' value = role ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF filter IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'filter' value = filter ).
+    ENDIF.
+    IF role IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'role' value = role ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2181,8 +2399,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~migrations_list_for_org.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/migrations'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2255,8 +2477,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/migrations/{migration_id}/repositories'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{migration_id}' IN lv_uri WITH migration_id.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2268,9 +2494,15 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~orgs_list_outside_collaborator.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/outside_collaborators'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'filter' value = filter ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF filter IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'filter' value = filter ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2306,9 +2538,15 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~projects_list_for_org.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/projects'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'state' value = state ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF state IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'state' value = state ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2331,8 +2569,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~orgs_list_public_members.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/public_members'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2380,11 +2622,21 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~repos_list_for_org.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/repos'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'type' value = type ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF type IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'type' value = type ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2440,8 +2692,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_list_idp_groups_for_org.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/team-sync/groups'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2453,8 +2709,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_list.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2514,9 +2774,15 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2577,9 +2843,15 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2640,9 +2912,15 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
-    mi_client->request->set_form_field( name = 'content' value = content ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF content IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'content' value = content ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2679,9 +2957,15 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
-    mi_client->request->set_form_field( name = 'content' value = content ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF content IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'content' value = content ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2718,8 +3002,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/invitations'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2732,9 +3020,15 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/members'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
-    mi_client->request->set_form_field( name = 'role' value = role ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF role IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'role' value = role ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2786,8 +3080,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/projects'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2836,8 +3134,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/repos'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -2916,8 +3218,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/teams'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3006,9 +3312,15 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~projects_list_cards.
     DATA lv_uri TYPE string VALUE '/projects/columns/{column_id}/cards'.
     REPLACE ALL OCCURRENCES OF '{column_id}' IN lv_uri WITH column_id.
-    mi_client->request->set_form_field( name = 'archived_state' value = archived_state ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF archived_state IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'archived_state' value = archived_state ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3071,9 +3383,15 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~projects_list_collaborators.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}/collaborators'.
-    mi_client->request->set_form_field( name = 'affiliation' value = affiliation ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF affiliation IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'affiliation' value = affiliation ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3117,8 +3435,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~projects_list_columns.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}/columns'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3197,8 +3519,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/artifacts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3325,8 +3651,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runners'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3401,10 +3731,18 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'actor' value = actor ).
-    mi_client->request->set_form_field( name = 'event' value = event ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF actor IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'actor' value = actor ).
+    ENDIF.
+    IF event IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'event' value = event ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3441,8 +3779,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}/artifacts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3467,9 +3809,15 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}/jobs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'filter' value = filter ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF filter IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'filter' value = filter ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3530,8 +3878,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/secrets'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3595,8 +3947,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3657,10 +4013,18 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'actor' value = actor ).
-    mi_client->request->set_form_field( name = 'event' value = event ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF actor IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'actor' value = actor ).
+    ENDIF.
+    IF event IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'event' value = event ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3685,8 +4049,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/assignees'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3736,9 +4104,15 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'protected' value = protected ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF protected IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'protected' value = protected ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3751,7 +4125,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3764,7 +4140,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3777,7 +4155,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3790,7 +4170,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3803,7 +4185,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3816,7 +4200,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3829,7 +4215,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3842,7 +4230,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3855,7 +4245,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3868,7 +4260,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3881,7 +4275,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3894,7 +4290,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3907,7 +4305,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3920,7 +4320,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3933,7 +4335,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3946,7 +4350,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3959,7 +4365,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3972,7 +4380,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3985,7 +4395,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -3998,7 +4410,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4011,7 +4425,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4024,7 +4440,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4037,7 +4455,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4050,7 +4470,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4063,7 +4485,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4076,7 +4500,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4089,7 +4515,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4102,7 +4530,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4115,7 +4545,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4128,7 +4560,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4141,7 +4575,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4154,7 +4590,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4167,7 +4605,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4180,7 +4620,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4193,7 +4635,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/rename'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'branch' value = branch ).
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4245,8 +4689,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{check_run_id}' IN lv_uri WITH check_run_id.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4297,11 +4745,21 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{check_suite_id}' IN lv_uri WITH check_suite_id.
-    mi_client->request->set_form_field( name = 'filter' value = filter ).
-    mi_client->request->set_form_field( name = 'check_name' value = check_name ).
-    mi_client->request->set_form_field( name = 'status' value = status ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF filter IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'filter' value = filter ).
+    ENDIF.
+    IF check_name IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'check_name' value = check_name ).
+    ENDIF.
+    IF status IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'status' value = status ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4327,8 +4785,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/code-scanning/alerts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'state' value = state ).
-    mi_client->request->set_form_field( name = 'ref' value = ref ).
+    IF state IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'state' value = state ).
+    ENDIF.
+    IF ref IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'ref' value = ref ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4367,8 +4829,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/code-scanning/analyses'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'ref' value = ref ).
-    mi_client->request->set_form_field( name = 'tool_name' value = tool_name ).
+    IF ref IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'ref' value = ref ).
+    ENDIF.
+    IF tool_name IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'tool_name' value = tool_name ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4393,9 +4859,15 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/collaborators'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'affiliation' value = affiliation ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF affiliation IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'affiliation' value = affiliation ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4460,8 +4932,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/comments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4514,9 +4990,15 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
-    mi_client->request->set_form_field( name = 'content' value = content ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF content IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'content' value = content ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4555,13 +5037,27 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/commits'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'sha' value = sha ).
-    mi_client->request->set_form_field( name = 'path' value = path ).
-    mi_client->request->set_form_field( name = 'author' value = author ).
-    mi_client->request->set_form_field( name = 'until' value = until ).
-    mi_client->request->set_form_field( name = 'since' value = since ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF sha IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sha' value = sha ).
+    ENDIF.
+    IF path IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'path' value = path ).
+    ENDIF.
+    IF author IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'author' value = author ).
+    ENDIF.
+    IF until IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'until' value = until ).
+    ENDIF.
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4588,8 +5084,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{commit_sha}' IN lv_uri WITH commit_sha.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4616,8 +5116,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{commit_sha}' IN lv_uri WITH commit_sha.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4644,11 +5148,21 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{ref}' IN lv_uri WITH ref.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'filter' value = filter ).
-    mi_client->request->set_form_field( name = 'check_name' value = check_name ).
-    mi_client->request->set_form_field( name = 'status' value = status ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF filter IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'filter' value = filter ).
+    ENDIF.
+    IF check_name IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'check_name' value = check_name ).
+    ENDIF.
+    IF status IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'status' value = status ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4662,10 +5176,18 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{ref}' IN lv_uri WITH ref.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'app_id' value = app_id ).
-    mi_client->request->set_form_field( name = 'check_name' value = check_name ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF app_id IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'app_id' value = app_id ).
+    ENDIF.
+    IF check_name IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'check_name' value = check_name ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4692,8 +5214,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{ref}' IN lv_uri WITH ref.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4745,7 +5271,9 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{path}' IN lv_uri WITH path.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'ref' value = ref ).
+    IF ref IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'ref' value = ref ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4784,9 +5312,15 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/contributors'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'anon' value = anon ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF anon IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'anon' value = anon ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4799,12 +5333,24 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/deployments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'sha' value = sha ).
-    mi_client->request->set_form_field( name = 'ref' value = ref ).
-    mi_client->request->set_form_field( name = 'task' value = task ).
-    mi_client->request->set_form_field( name = 'environment' value = environment ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF sha IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sha' value = sha ).
+    ENDIF.
+    IF ref IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'ref' value = ref ).
+    ENDIF.
+    IF task IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'task' value = task ).
+    ENDIF.
+    IF environment IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'environment' value = environment ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4856,8 +5402,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{deployment_id}' IN lv_uri WITH deployment_id.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4909,8 +5459,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/events'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -4923,9 +5477,15 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/forks'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -5001,8 +5561,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{ref}' IN lv_uri WITH ref.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -5104,7 +5668,9 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{tree_sha}' IN lv_uri WITH tree_sha.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'recursive' value = recursive ).
+    IF recursive IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'recursive' value = recursive ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -5117,8 +5683,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/hooks'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -5372,8 +5942,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/invitations'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -5412,17 +5986,39 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'milestone' value = milestone ).
-    mi_client->request->set_form_field( name = 'state' value = state ).
-    mi_client->request->set_form_field( name = 'assignee' value = assignee ).
-    mi_client->request->set_form_field( name = 'creator' value = creator ).
-    mi_client->request->set_form_field( name = 'mentioned' value = mentioned ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'labels' value = labels ).
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'since' value = since ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF milestone IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'milestone' value = milestone ).
+    ENDIF.
+    IF state IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'state' value = state ).
+    ENDIF.
+    IF assignee IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'assignee' value = assignee ).
+    ENDIF.
+    IF creator IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'creator' value = creator ).
+    ENDIF.
+    IF mentioned IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'mentioned' value = mentioned ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF labels IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'labels' value = labels ).
+    ENDIF.
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -5447,11 +6043,21 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/comments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'since' value = since ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -5504,9 +6110,15 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
-    mi_client->request->set_form_field( name = 'content' value = content ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF content IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'content' value = content ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -5545,8 +6157,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/events'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -5625,9 +6241,15 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
-    mi_client->request->set_form_field( name = 'since' value = since ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -5654,8 +6276,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -5669,8 +6295,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -5763,9 +6393,15 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
-    mi_client->request->set_form_field( name = 'content' value = content ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF content IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'content' value = content ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -5805,8 +6441,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -5819,8 +6459,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/keys'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -5871,8 +6515,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/labels'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -5972,11 +6620,21 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/milestones'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'state' value = state ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF state IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'state' value = state ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6041,8 +6699,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{milestone_number}' IN lv_uri WITH milestone_number.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6055,12 +6717,24 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/notifications'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'all' value = all ).
-    mi_client->request->set_form_field( name = 'participating' value = participating ).
-    mi_client->request->set_form_field( name = 'since' value = since ).
-    mi_client->request->set_form_field( name = 'before' value = before ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF all IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'all' value = all ).
+    ENDIF.
+    IF participating IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'participating' value = participating ).
+    ENDIF.
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
+    IF before IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'before' value = before ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6133,8 +6807,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pages/builds'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6184,9 +6862,15 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/projects'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'state' value = state ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF state IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'state' value = state ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6211,13 +6895,27 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'state' value = state ).
-    mi_client->request->set_form_field( name = 'head' value = head ).
-    mi_client->request->set_form_field( name = 'base' value = base ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF state IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'state' value = state ).
+    ENDIF.
+    IF head IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'head' value = head ).
+    ENDIF.
+    IF base IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'base' value = base ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6242,11 +6940,21 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/comments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'since' value = since ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6299,9 +7007,15 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
-    mi_client->request->set_form_field( name = 'content' value = content ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF content IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'content' value = content ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6364,11 +7078,21 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/comments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'since' value = since ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6406,8 +7130,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/commits'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6420,8 +7148,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/files'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6458,8 +7190,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6496,8 +7232,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/reviews'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6562,8 +7302,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{review_id}' IN lv_uri WITH review_id.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6614,7 +7358,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/readme'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'ref' value = ref ).
+    IF ref IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'ref' value = ref ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6627,8 +7373,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/releases'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6757,8 +7507,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{release_id}' IN lv_uri WITH release_id.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6772,8 +7526,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{release_id}' IN lv_uri WITH release_id.
-    mi_client->request->set_form_field( name = 'name' value = name ).
-    mi_client->request->set_form_field( name = 'label' value = label ).
+    IF name IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'name' value = name ).
+    ENDIF.
+    IF label IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'label' value = label ).
+    ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6786,9 +7544,15 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/secret-scanning/alerts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'state' value = state ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    IF state IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'state' value = state ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6827,8 +7591,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/stargazers'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6914,8 +7682,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/subscribers'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6964,8 +7736,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/tags'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -6991,8 +7767,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/teams'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7029,7 +7809,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/traffic/clones'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per' value = per ).
+    IF per IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per' value = per ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7066,7 +7848,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/traffic/views'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_form_field( name = 'per' value = per ).
+    IF per IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per' value = per ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7161,7 +7945,9 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~enterprise_admin_list_provisio.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Groups'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
-    mi_client->request->set_form_field( name = 'count' value = count ).
+    IF count IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'count' value = count ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7232,7 +8018,9 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~enterprise_admin_list_provis01.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Users'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
-    mi_client->request->set_form_field( name = 'count' value = count ).
+    IF count IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'count' value = count ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7303,9 +8091,15 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~scim_list_provisioned_identiti.
     DATA lv_uri TYPE string VALUE '/scim/v2/organizations/{org}/Users'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'startIndex' value = startindex ).
-    mi_client->request->set_form_field( name = 'count' value = count ).
-    mi_client->request->set_form_field( name = 'filter' value = filter ).
+    IF startindex IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'startIndex' value = startindex ).
+    ENDIF.
+    IF count IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'count' value = count ).
+    ENDIF.
+    IF filter IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'filter' value = filter ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7375,11 +8169,21 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~search_code.
     DATA lv_uri TYPE string VALUE '/search/code'.
-    mi_client->request->set_form_field( name = 'q' value = q ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'order' value = order ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF q IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'q' value = q ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF order IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'order' value = order ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7390,11 +8194,21 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~search_commits.
     DATA lv_uri TYPE string VALUE '/search/commits'.
-    mi_client->request->set_form_field( name = 'q' value = q ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'order' value = order ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF q IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'q' value = q ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF order IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'order' value = order ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7405,11 +8219,21 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~search_issues_and_pull_request.
     DATA lv_uri TYPE string VALUE '/search/issues'.
-    mi_client->request->set_form_field( name = 'q' value = q ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'order' value = order ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF q IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'q' value = q ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF order IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'order' value = order ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7420,10 +8244,18 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~search_labels.
     DATA lv_uri TYPE string VALUE '/search/labels'.
-    mi_client->request->set_form_field( name = 'repository_id' value = repository_id ).
-    mi_client->request->set_form_field( name = 'q' value = q ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'order' value = order ).
+    IF repository_id IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'repository_id' value = repository_id ).
+    ENDIF.
+    IF q IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'q' value = q ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF order IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'order' value = order ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7434,11 +8266,21 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~search_repos.
     DATA lv_uri TYPE string VALUE '/search/repositories'.
-    mi_client->request->set_form_field( name = 'q' value = q ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'order' value = order ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF q IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'q' value = q ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF order IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'order' value = order ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7449,7 +8291,9 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~search_topics.
     DATA lv_uri TYPE string VALUE '/search/topics'.
-    mi_client->request->set_form_field( name = 'q' value = q ).
+    IF q IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'q' value = q ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7460,11 +8304,21 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~search_users.
     DATA lv_uri TYPE string VALUE '/search/users'.
-    mi_client->request->set_form_field( name = 'q' value = q ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'order' value = order ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF q IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'q' value = q ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF order IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'order' value = order ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7505,9 +8359,15 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~teams_list_discussions_legacy.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions'.
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7558,9 +8418,15 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~teams_list_discussion_commen01.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments'.
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7611,9 +8477,15 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~reactions_list_for_team_disc02.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions'.
-    mi_client->request->set_form_field( name = 'content' value = content ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF content IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'content' value = content ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7634,9 +8506,15 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~reactions_list_for_team_disc03.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/reactions'.
-    mi_client->request->set_form_field( name = 'content' value = content ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF content IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'content' value = content ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7657,8 +8535,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~teams_list_pending_invitatio01.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/invitations'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7669,9 +8551,15 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~teams_list_members_legacy.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/members'.
-    mi_client->request->set_form_field( name = 'role' value = role ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF role IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'role' value = role ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7748,8 +8636,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~teams_list_projects_legacy.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/projects'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7790,8 +8682,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~teams_list_repos_legacy.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/repos'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7858,8 +8754,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~teams_list_child_legacy.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/teams'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7943,8 +8843,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~users_list_emails_for_authenti.
     DATA lv_uri TYPE string VALUE '/user/emails'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7975,8 +8879,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~users_list_followers_for_authe.
     DATA lv_uri TYPE string VALUE '/user/followers'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -7987,8 +8895,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~users_list_followed_by_authent.
     DATA lv_uri TYPE string VALUE '/user/following'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8032,8 +8944,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~users_list_gpg_keys_for_authen.
     DATA lv_uri TYPE string VALUE '/user/gpg_keys'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8076,8 +8992,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~apps_list_installations_for_au.
     DATA lv_uri TYPE string VALUE '/user/installations'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8089,8 +9009,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~apps_list_installation_repos_f.
     DATA lv_uri TYPE string VALUE '/user/installations/{installation_id}/repositories'.
     REPLACE ALL OCCURRENCES OF '{installation_id}' IN lv_uri WITH installation_id.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8155,14 +9079,30 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~issues_list_for_authenticated_.
     DATA lv_uri TYPE string VALUE '/user/issues'.
-    mi_client->request->set_form_field( name = 'filter' value = filter ).
-    mi_client->request->set_form_field( name = 'state' value = state ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'labels' value = labels ).
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'since' value = since ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF filter IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'filter' value = filter ).
+    ENDIF.
+    IF state IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'state' value = state ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF labels IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'labels' value = labels ).
+    ENDIF.
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8173,8 +9113,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~users_list_public_ssh_keys_for.
     DATA lv_uri TYPE string VALUE '/user/keys'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8217,8 +9161,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~apps_list_subscriptions_for_au.
     DATA lv_uri TYPE string VALUE '/user/marketplace_purchases'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8229,8 +9177,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~apps_list_subscriptions_for_01.
     DATA lv_uri TYPE string VALUE '/user/marketplace_purchases/stubbed'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8241,9 +9193,15 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~orgs_list_memberships_for_auth.
     DATA lv_uri TYPE string VALUE '/user/memberships/orgs'.
-    mi_client->request->set_form_field( name = 'state' value = state ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF state IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'state' value = state ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8276,8 +9234,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~migrations_list_for_authentica.
     DATA lv_uri TYPE string VALUE '/user/migrations'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8299,7 +9261,9 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~migrations_get_status_for_auth.
     DATA lv_uri TYPE string VALUE '/user/migrations/{migration_id}'.
     REPLACE ALL OCCURRENCES OF '{migration_id}' IN lv_uri WITH migration_id.
-    mi_client->request->set_form_field( name = 'exclude' value = exclude ).
+    IF exclude IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'exclude' value = exclude ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8345,8 +9309,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~migrations_list_repos_for_user.
     DATA lv_uri TYPE string VALUE '/user/migrations/{migration_id}/repositories'.
     REPLACE ALL OCCURRENCES OF '{migration_id}' IN lv_uri WITH migration_id.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8357,8 +9325,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~orgs_list_for_authenticated_us.
     DATA lv_uri TYPE string VALUE '/user/orgs'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8379,8 +9351,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~users_list_public_emails_for_a.
     DATA lv_uri TYPE string VALUE '/user/public_emails'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8391,15 +9367,33 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~repos_list_for_authenticated_u.
     DATA lv_uri TYPE string VALUE '/user/repos'.
-    mi_client->request->set_form_field( name = 'visibility' value = visibility ).
-    mi_client->request->set_form_field( name = 'affiliation' value = affiliation ).
-    mi_client->request->set_form_field( name = 'type' value = type ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
-    mi_client->request->set_form_field( name = 'since' value = since ).
-    mi_client->request->set_form_field( name = 'before' value = before ).
+    IF visibility IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'visibility' value = visibility ).
+    ENDIF.
+    IF affiliation IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'affiliation' value = affiliation ).
+    ENDIF.
+    IF type IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'type' value = type ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
+    IF before IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'before' value = before ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8420,8 +9414,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~repos_list_invitations_for_aut.
     DATA lv_uri TYPE string VALUE '/user/repository_invitations'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8454,10 +9452,18 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~activity_list_repos_starred_by.
     DATA lv_uri TYPE string VALUE '/user/starred'.
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8504,8 +9510,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~activity_list_watched_repos_fo.
     DATA lv_uri TYPE string VALUE '/user/subscriptions'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8516,8 +9526,12 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~teams_list_for_authenticated_u.
     DATA lv_uri TYPE string VALUE '/user/teams'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8528,7 +9542,9 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD zif_github~users_list.
     DATA lv_uri TYPE string VALUE '/users'.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8551,8 +9567,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~activity_list_events_for_authe.
     DATA lv_uri TYPE string VALUE '/users/{username}/events'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8565,8 +9585,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/users/{username}/events/orgs/{org}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8578,8 +9602,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~activity_list_public_events_01.
     DATA lv_uri TYPE string VALUE '/users/{username}/events/public'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8591,8 +9619,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~users_list_followers_for_user.
     DATA lv_uri TYPE string VALUE '/users/{username}/followers'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8604,8 +9636,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~users_list_following_for_user.
     DATA lv_uri TYPE string VALUE '/users/{username}/following'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8629,9 +9665,15 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~gists_list_for_user.
     DATA lv_uri TYPE string VALUE '/users/{username}/gists'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_form_field( name = 'since' value = since ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8643,8 +9685,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~users_list_gpg_keys_for_user.
     DATA lv_uri TYPE string VALUE '/users/{username}/gpg_keys'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8656,8 +9702,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~users_get_context_for_user.
     DATA lv_uri TYPE string VALUE '/users/{username}/hovercard'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_form_field( name = 'subject_type' value = subject_type ).
-    mi_client->request->set_form_field( name = 'subject_id' value = subject_id ).
+    IF subject_type IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'subject_type' value = subject_type ).
+    ENDIF.
+    IF subject_id IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'subject_id' value = subject_id ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8680,8 +9730,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~users_list_public_keys_for_use.
     DATA lv_uri TYPE string VALUE '/users/{username}/keys'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8693,8 +9747,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~orgs_list_for_user.
     DATA lv_uri TYPE string VALUE '/users/{username}/orgs'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8706,9 +9764,15 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~projects_list_for_user.
     DATA lv_uri TYPE string VALUE '/users/{username}/projects'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_form_field( name = 'state' value = state ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF state IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'state' value = state ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8720,8 +9784,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~activity_list_received_events_.
     DATA lv_uri TYPE string VALUE '/users/{username}/received_events'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8733,8 +9801,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~activity_list_received_public_.
     DATA lv_uri TYPE string VALUE '/users/{username}/received_events/public'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8746,11 +9818,21 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~repos_list_for_user.
     DATA lv_uri TYPE string VALUE '/users/{username}/repos'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_form_field( name = 'type' value = type ).
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF type IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'type' value = type ).
+    ENDIF.
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8795,10 +9877,18 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~activity_list_repos_starred_01.
     DATA lv_uri TYPE string VALUE '/users/{username}/starred'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_form_field( name = 'sort' value = sort ).
-    mi_client->request->set_form_field( name = 'direction' value = direction ).
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF sort IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'sort' value = sort ).
+    ENDIF.
+    IF direction IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'direction' value = direction ).
+    ENDIF.
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -8810,8 +9900,12 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~activity_list_repos_watched_by.
     DATA lv_uri TYPE string VALUE '/users/{username}/subscriptions'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_form_field( name = 'per_page' value = per_page ).
-    mi_client->request->set_form_field( name = 'page' value = page ).
+    IF per_page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'per_page' value = per_page ).
+    ENDIF.
+    IF page IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'page' value = page ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).

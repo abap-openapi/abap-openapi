@@ -44,7 +44,9 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~findpetsbystatus.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/findByStatus'.
-    mi_client->request->set_form_field( name = 'status' value = status ).
+    IF status IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'status' value = status ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -55,7 +57,9 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~findpetsbytags.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/findByTags'.
-    mi_client->request->set_form_field( name = 'tags' value = tags ).
+    IF tags IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'tags' value = tags ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -78,8 +82,12 @@ CLASS zcl_petstore IMPLEMENTATION.
   METHOD zif_petstore~updatepetwithform.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/{petId}'.
     REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH petid.
-    mi_client->request->set_form_field( name = 'name' value = name ).
-    mi_client->request->set_form_field( name = 'status' value = status ).
+    IF name IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'name' value = name ).
+    ENDIF.
+    IF status IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'status' value = status ).
+    ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -102,7 +110,9 @@ CLASS zcl_petstore IMPLEMENTATION.
   METHOD zif_petstore~uploadfile.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/{petId}/uploadImage'.
     REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH petid.
-    mi_client->request->set_form_field( name = 'additionalMetadata' value = additionalmetadata ).
+    IF additionalmetadata IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'additionalMetadata' value = additionalmetadata ).
+    ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
@@ -175,8 +185,12 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~loginuser.
     DATA lv_uri TYPE string VALUE '/api/v3/user/login'.
-    mi_client->request->set_form_field( name = 'username' value = username ).
-    mi_client->request->set_form_field( name = 'password' value = password ).
+    IF username IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'username' value = username ).
+    ENDIF.
+    IF password IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'password' value = password ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 *    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
