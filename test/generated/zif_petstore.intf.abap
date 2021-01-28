@@ -3,20 +3,28 @@ INTERFACE zif_petstore.
 * Swagger Petstore - OpenAPI 3.0
 
 * Component schema: Order, object
+*   Properties: 6
   TYPES order TYPE string.
 * Component schema: Customer, object
+*   Properties: 3
   TYPES customer TYPE string.
 * Component schema: Address, object
+*   Properties: 4
   TYPES address TYPE string.
 * Component schema: Category, object
+*   Properties: 2
   TYPES category TYPE string.
 * Component schema: User, object
+*   Properties: 8
   TYPES user TYPE string.
 * Component schema: Tag, object
+*   Properties: 2
   TYPES tag TYPE string.
 * Component schema: Pet, object
+*   Properties: 6
   TYPES pet TYPE string.
 * Component schema: ApiResponse, object
+*   Properties: 3
   TYPES apiresponse TYPE string.
 
 * PUT - "Update an existing pet"

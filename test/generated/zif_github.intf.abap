@@ -3,12 +3,16 @@ INTERFACE zif_github.
 * GitHub v3 REST API
 
 * Component schema: simple-user, object
+*   Properties: 19
   TYPES simple_user TYPE string.
 * Component schema: integration, object
+*   Properties: 17
   TYPES integration TYPE string.
 * Component schema: basic-error, object
+*   Properties: 2
   TYPES basic_error TYPE string.
 * Component schema: validation-error-simple, object
+*   Properties: 3
   TYPES validation_error_simple TYPE string.
 * Component schema: webhook-config-url, string
   TYPES webhook_config_url TYPE string.
@@ -19,30 +23,43 @@ INTERFACE zif_github.
 * Component schema: webhook-config-insecure-ssl, string
   TYPES webhook_config_insecure_ssl TYPE string.
 * Component schema: webhook-config, object
+*   Properties: 4
   TYPES webhook_config TYPE string.
 * Component schema: enterprise, object
+*   Properties: 10
   TYPES enterprise TYPE string.
 * Component schema: installation, object
+*   Properties: 20
   TYPES installation TYPE string.
 * Component schema: app-permissions, object
+*   Properties: 30
   TYPES app_permissions TYPE string.
 * Component schema: license-simple, object
+*   Properties: 6
   TYPES license_simple TYPE string.
 * Component schema: repository, object
+*   Properties: 87
   TYPES repository TYPE string.
 * Component schema: installation-token, object
+*   Properties: 8
   TYPES installation_token TYPE string.
 * Component schema: validation-error, object
+*   Properties: 3
   TYPES validation_error TYPE string.
 * Component schema: application-grant, object
+*   Properties: 7
   TYPES application_grant TYPE string.
 * Component schema: scoped-installation, object
+*   Properties: 7
   TYPES scoped_installation TYPE string.
 * Component schema: authorization, object
+*   Properties: 14
   TYPES authorization TYPE string.
 * Component schema: code-of-conduct, object
+*   Properties: 5
   TYPES code_of_conduct TYPE string.
 * Component schema: content-reference-attachment, object
+*   Properties: 4
   TYPES content_reference_attachment TYPE string.
 * Component schema: enabled-organizations, string
   TYPES enabled_organizations TYPE string.
@@ -51,188 +68,275 @@ INTERFACE zif_github.
 * Component schema: selected-actions-url, string
   TYPES selected_actions_url TYPE string.
 * Component schema: actions-enterprise-permissions, object
+*   Properties: 4
   TYPES actions_enterprise_permissions TYPE string.
 * Component schema: organization-simple, object
+*   Properties: 12
   TYPES organization_simple TYPE string.
 * Component schema: selected-actions, object
+*   Properties: 3
   TYPES selected_actions TYPE string.
 * Component schema: runner-groups-enterprise, object
+*   Properties: 7
   TYPES runner_groups_enterprise TYPE string.
 * Component schema: runner, object
+*   Properties: 6
   TYPES runner TYPE string.
 * Component schema: runner-application, object
+*   Properties: 4
   TYPES runner_application TYPE string.
 * Component schema: authentication-token, object
+*   Properties: 6
   TYPES authentication_token TYPE string.
 * Component schema: audit-log-event, object
+*   Properties: 35
   TYPES audit_log_event TYPE string.
 * Component schema: actions-billing-usage, object
+*   Properties: 4
   TYPES actions_billing_usage TYPE string.
 * Component schema: packages-billing-usage, object
+*   Properties: 3
   TYPES packages_billing_usage TYPE string.
 * Component schema: combined-billing-usage, object
+*   Properties: 3
   TYPES combined_billing_usage TYPE string.
 * Component schema: actor, object
+*   Properties: 6
   TYPES actor TYPE string.
 * Component schema: label, object
+*   Properties: 7
   TYPES label TYPE string.
 * Component schema: milestone, object
+*   Properties: 16
   TYPES milestone TYPE string.
 * Component schema: author_association, string
   TYPES author_association TYPE string.
 * Component schema: issue-simple, object
+*   Properties: 30
   TYPES issue_simple TYPE string.
 * Component schema: reaction-rollup, object
+*   Properties: 10
   TYPES reaction_rollup TYPE string.
 * Component schema: issue-comment, object
+*   Properties: 14
   TYPES issue_comment TYPE string.
 * Component schema: event, object
+*   Properties: 8
   TYPES event TYPE string.
 * Component schema: link-with-type, object
+*   Properties: 2
   TYPES link_with_type TYPE string.
 * Component schema: feed, object
+*   Properties: 9
   TYPES feed TYPE string.
 * Component schema: base-gist, object
+*   Properties: 20
   TYPES base_gist TYPE string.
 * Component schema: gist-simple, object
+*   Properties: 18
   TYPES gist_simple TYPE string.
 * Component schema: gist-comment, object
+*   Properties: 8
   TYPES gist_comment TYPE string.
 * Component schema: gist-commit, object
+*   Properties: 5
   TYPES gist_commit TYPE string.
 * Component schema: gitignore-template, object
+*   Properties: 2
   TYPES gitignore_template TYPE string.
 * Component schema: issue, object
+*   Properties: 32
   TYPES issue TYPE string.
 * Component schema: license, object
+*   Properties: 13
   TYPES license TYPE string.
 * Component schema: marketplace-listing-plan, object
+*   Properties: 13
   TYPES marketplace_listing_plan TYPE string.
 * Component schema: marketplace-purchase, object
+*   Properties: 7
   TYPES marketplace_purchase TYPE string.
 * Component schema: api-overview, object
+*   Properties: 9
   TYPES api_overview TYPE string.
 * Component schema: minimal-repository, object
+*   Properties: 82
   TYPES minimal_repository TYPE string.
 * Component schema: thread, object
+*   Properties: 9
   TYPES thread TYPE string.
 * Component schema: thread-subscription, object
+*   Properties: 7
   TYPES thread_subscription TYPE string.
 * Component schema: organization-full, object
+*   Properties: 44
   TYPES organization_full TYPE string.
 * Component schema: enabled-repositories, string
   TYPES enabled_repositories TYPE string.
 * Component schema: actions-organization-permissions, object
+*   Properties: 4
   TYPES actions_organization_permissio TYPE string.
 * Component schema: runner-groups-org, object
+*   Properties: 9
   TYPES runner_groups_org TYPE string.
 * Component schema: organization-actions-secret, object
+*   Properties: 5
   TYPES organization_actions_secret TYPE string.
 * Component schema: actions-public-key, object
+*   Properties: 6
   TYPES actions_public_key TYPE string.
 * Component schema: credential-authorization, object
+*   Properties: 11
   TYPES credential_authorization TYPE string.
 * Component schema: organization-invitation, object
+*   Properties: 12
   TYPES organization_invitation TYPE string.
 * Component schema: org-hook, object
+*   Properties: 10
   TYPES org_hook TYPE string.
 * Component schema: interaction-group, string
   TYPES interaction_group TYPE string.
 * Component schema: interaction-limit-response, object
+*   Properties: 3
   TYPES interaction_limit_response TYPE string.
 * Component schema: interaction-expiry, string
   TYPES interaction_expiry TYPE string.
 * Component schema: interaction-limit, object
+*   Properties: 2
   TYPES interaction_limit TYPE string.
 * Component schema: team-simple, object
+*   Properties: 12
   TYPES team_simple TYPE string.
 * Component schema: team, object
+*   Properties: 12
   TYPES team TYPE string.
 * Component schema: org-membership, object
+*   Properties: 7
   TYPES org_membership TYPE string.
 * Component schema: migration, object
+*   Properties: 13
   TYPES migration TYPE string.
 * Component schema: project, object
+*   Properties: 15
   TYPES project TYPE string.
 * Component schema: group-mapping, object
+*   Properties: 6
   TYPES group_mapping TYPE string.
 * Component schema: team-full, object
+*   Properties: 18
   TYPES team_full TYPE string.
 * Component schema: team-discussion, object
+*   Properties: 18
   TYPES team_discussion TYPE string.
 * Component schema: team-discussion-comment, object
+*   Properties: 13
   TYPES team_discussion_comment TYPE string.
 * Component schema: reaction, object
+*   Properties: 5
   TYPES reaction TYPE string.
 * Component schema: team-membership, object
+*   Properties: 3
   TYPES team_membership TYPE string.
 * Component schema: team-project, object
+*   Properties: 16
   TYPES team_project TYPE string.
 * Component schema: team-repository, object
+*   Properties: 86
   TYPES team_repository TYPE string.
 * Component schema: project-card, object
+*   Properties: 11
   TYPES project_card TYPE string.
 * Component schema: project-column, object
+*   Properties: 8
   TYPES project_column TYPE string.
 * Component schema: repository-collaborator-permission, object
+*   Properties: 2
   TYPES repository_collaborator_permis TYPE string.
 * Component schema: rate-limit, object
+*   Properties: 3
   TYPES rate_limit TYPE string.
 * Component schema: rate-limit-overview, object
+*   Properties: 2
   TYPES rate_limit_overview TYPE string.
 * Component schema: full-repository, object
+*   Properties: 90
   TYPES full_repository TYPE string.
 * Component schema: artifact, object
+*   Properties: 10
   TYPES artifact TYPE string.
 * Component schema: job, object
+*   Properties: 14
   TYPES job TYPE string.
 * Component schema: actions-enabled, boolean
   TYPES actions_enabled TYPE string.
 * Component schema: actions-repository-permissions, object
+*   Properties: 3
   TYPES actions_repository_permissions TYPE string.
 * Component schema: pull-request-minimal, object
+*   Properties: 5
   TYPES pull_request_minimal TYPE string.
 * Component schema: simple-commit, object
+*   Properties: 6
   TYPES simple_commit TYPE string.
 * Component schema: workflow-run, object
+*   Properties: 26
   TYPES workflow_run TYPE string.
 * Component schema: workflow-run-usage, object
+*   Properties: 2
   TYPES workflow_run_usage TYPE string.
 * Component schema: actions-secret, object
+*   Properties: 3
   TYPES actions_secret TYPE string.
 * Component schema: workflow, object
+*   Properties: 11
   TYPES workflow TYPE string.
 * Component schema: workflow-usage, object
+*   Properties: 1
   TYPES workflow_usage TYPE string.
 * Component schema: protected-branch-admin-enforced, object
+*   Properties: 2
   TYPES protected_branch_admin_enforce TYPE string.
 * Component schema: protected-branch-pull-request-review, object
+*   Properties: 5
   TYPES protected_branch_pull_request_ TYPE string.
 * Component schema: branch-restriction-policy, object
+*   Properties: 7
   TYPES branch_restriction_policy TYPE string.
 * Component schema: branch-protection, object
+*   Properties: 11
   TYPES branch_protection TYPE string.
 * Component schema: short-branch, object
+*   Properties: 5
   TYPES short_branch TYPE string.
 * Component schema: git-user, object
+*   Properties: 3
   TYPES git_user TYPE string.
 * Component schema: verification, object
+*   Properties: 4
   TYPES verification TYPE string.
 * Component schema: commit, object
+*   Properties: 11
   TYPES commit TYPE string.
 * Component schema: branch-with-protection, object
+*   Properties: 8
   TYPES branch_with_protection TYPE string.
 * Component schema: status-check-policy, object
+*   Properties: 4
   TYPES status_check_policy TYPE string.
 * Component schema: protected-branch, object
+*   Properties: 9
   TYPES protected_branch TYPE string.
 * Component schema: check-run, object
+*   Properties: 16
   TYPES check_run TYPE string.
 * Component schema: check-annotation, object
+*   Properties: 10
   TYPES check_annotation TYPE string.
 * Component schema: check-suite, object
+*   Properties: 17
   TYPES check_suite TYPE string.
 * Component schema: check-suite-preference, object
+*   Properties: 2
   TYPES check_suite_preference TYPE string.
 * Component schema: code-scanning-alert-state, string
   TYPES code_scanning_alert_state TYPE string.
@@ -251,12 +355,15 @@ INTERFACE zif_github.
 * Component schema: code-scanning-alert-dismissed-reason, string
   TYPES code_scanning_alert_dismisse01 TYPE string.
 * Component schema: code-scanning-alert-rule, object
+*   Properties: 3
   TYPES code_scanning_alert_rule TYPE string.
 * Component schema: code-scanning-analysis-tool-name, string
   TYPES code_scanning_analysis_tool_na TYPE string.
 * Component schema: code-scanning-analysis-tool, object
+*   Properties: 2
   TYPES code_scanning_analysis_tool TYPE string.
 * Component schema: code-scanning-alert-code-scanning-alert-items, object
+*   Properties: 10
   TYPES code_scanning_alert_code_scann TYPE string.
 * Component schema: code-scanning-analysis-analysis-key, string
   TYPES code_scanning_analysis_analysi TYPE string.
@@ -265,6 +372,7 @@ INTERFACE zif_github.
 * Component schema: code-scanning-alert-instances, array
   TYPES code_scanning_alert_instances TYPE string.
 * Component schema: code-scanning-alert-code-scanning-alert, object
+*   Properties: 11
   TYPES code_scanning_alert_code_sca01 TYPE string.
 * Component schema: code-scanning-alert-set-state, string
   TYPES code_scanning_alert_set_state TYPE string.
@@ -277,202 +385,294 @@ INTERFACE zif_github.
 * Component schema: code-scanning-analysis-environment, string
   TYPES code_scanning_analysis_environ TYPE string.
 * Component schema: code-scanning-analysis-code-scanning-analysis, object
+*   Properties: 7
   TYPES code_scanning_analysis_code_sc TYPE string.
 * Component schema: code-scanning-analysis-sarif-file, string
   TYPES code_scanning_analysis_sarif_f TYPE string.
 * Component schema: collaborator, object
+*   Properties: 19
   TYPES collaborator TYPE string.
 * Component schema: repository-invitation, object
+*   Properties: 10
   TYPES repository_invitation TYPE string.
 * Component schema: commit-comment, object
+*   Properties: 14
   TYPES commit_comment TYPE string.
 * Component schema: scim-error, object
+*   Properties: 6
   TYPES scim_error TYPE string.
 * Component schema: branch-short, object
+*   Properties: 3
   TYPES branch_short TYPE string.
 * Component schema: link, object
+*   Properties: 1
   TYPES link TYPE string.
 * Component schema: pull-request-simple, object
+*   Properties: 35
   TYPES pull_request_simple TYPE string.
 * Component schema: simple-commit-status, object
+*   Properties: 11
   TYPES simple_commit_status TYPE string.
 * Component schema: combined-commit-status, object
+*   Properties: 7
   TYPES combined_commit_status TYPE string.
 * Component schema: status, object
+*   Properties: 11
   TYPES status TYPE string.
 * Component schema: code-of-conduct-simple, object
+*   Properties: 4
   TYPES code_of_conduct_simple TYPE string.
 * Component schema: community-health-file, object
+*   Properties: 2
   TYPES community_health_file TYPE string.
 * Component schema: community-profile, object
+*   Properties: 6
   TYPES community_profile TYPE string.
 * Component schema: diff-entry, object
+*   Properties: 11
   TYPES diff_entry TYPE string.
 * Component schema: commit-comparison, object
+*   Properties: 13
   TYPES commit_comparison TYPE string.
 * Component schema: content-tree, object
+*   Properties: 11
   TYPES content_tree TYPE string.
 * Component schema: content-directory, array
   TYPES content_directory TYPE string.
 * Component schema: content-file, object
+*   Properties: 14
   TYPES content_file TYPE string.
 * Component schema: content-symlink, object
+*   Properties: 11
   TYPES content_symlink TYPE string.
 * Component schema: content-submodule, object
+*   Properties: 11
   TYPES content_submodule TYPE string.
 * Component schema: file-commit, object
+*   Properties: 2
   TYPES file_commit TYPE string.
 * Component schema: contributor, object
+*   Properties: 21
   TYPES contributor TYPE string.
 * Component schema: deployment, object
+*   Properties: 18
   TYPES deployment TYPE string.
 * Component schema: deployment-status, object
+*   Properties: 15
   TYPES deployment_status TYPE string.
 * Component schema: short-blob, object
+*   Properties: 2
   TYPES short_blob TYPE string.
 * Component schema: blob, object
+*   Properties: 7
   TYPES blob TYPE string.
 * Component schema: git-commit, object
+*   Properties: 10
   TYPES git_commit TYPE string.
 * Component schema: git-ref, object
+*   Properties: 4
   TYPES git_ref TYPE string.
 * Component schema: git-tag, object
+*   Properties: 8
   TYPES git_tag TYPE string.
 * Component schema: git-tree, object
+*   Properties: 4
   TYPES git_tree TYPE string.
 * Component schema: hook-response, object
+*   Properties: 3
   TYPES hook_response TYPE string.
 * Component schema: hook, object
+*   Properties: 12
   TYPES hook TYPE string.
 * Component schema: import, object
+*   Properties: 23
   TYPES import TYPE string.
 * Component schema: porter-author, object
+*   Properties: 7
   TYPES porter_author TYPE string.
 * Component schema: porter-large-file, object
+*   Properties: 4
   TYPES porter_large_file TYPE string.
 * Component schema: issue-event-label, object
+*   Properties: 2
   TYPES issue_event_label TYPE string.
 * Component schema: issue-event-dismissed-review, object
+*   Properties: 4
   TYPES issue_event_dismissed_review TYPE string.
 * Component schema: issue-event-milestone, object
+*   Properties: 1
   TYPES issue_event_milestone TYPE string.
 * Component schema: issue-event-project-card, object
+*   Properties: 6
   TYPES issue_event_project_card TYPE string.
 * Component schema: issue-event-rename, object
+*   Properties: 2
   TYPES issue_event_rename TYPE string.
 * Component schema: issue-event, object
+*   Properties: 21
   TYPES issue_event TYPE string.
 * Component schema: issue-event-for-issue, object
+*   Properties: 21
   TYPES issue_event_for_issue TYPE string.
 * Component schema: deploy-key, object
+*   Properties: 7
   TYPES deploy_key TYPE string.
 * Component schema: language, object
+*   Properties: 0
   TYPES language TYPE string.
 * Component schema: license-content, object
+*   Properties: 13
   TYPES license_content TYPE string.
 * Component schema: pages-source-hash, object
+*   Properties: 2
   TYPES pages_source_hash TYPE string.
 * Component schema: page, object
+*   Properties: 7
   TYPES page TYPE string.
 * Component schema: page-build, object
+*   Properties: 8
   TYPES page_build TYPE string.
 * Component schema: page-build-status, object
+*   Properties: 2
   TYPES page_build_status TYPE string.
 * Component schema: pull-request, object
+*   Properties: 47
   TYPES pull_request TYPE string.
 * Component schema: pull-request-review-comment, object
+*   Properties: 28
   TYPES pull_request_review_comment TYPE string.
 * Component schema: pull-request-merge-result, object
+*   Properties: 3
   TYPES pull_request_merge_result TYPE string.
 * Component schema: pull-request-review-request, object
+*   Properties: 2
   TYPES pull_request_review_request TYPE string.
 * Component schema: pull-request-review, object
+*   Properties: 13
   TYPES pull_request_review TYPE string.
 * Component schema: review-comment, object
+*   Properties: 27
   TYPES review_comment TYPE string.
 * Component schema: release-asset, object
+*   Properties: 13
   TYPES release_asset TYPE string.
 * Component schema: release, object
+*   Properties: 20
   TYPES release TYPE string.
 * Component schema: secret-scanning-alert-state, string
   TYPES secret_scanning_alert_state TYPE string.
 * Component schema: secret-scanning-alert-resolution, string
   TYPES secret_scanning_alert_resoluti TYPE string.
 * Component schema: secret-scanning-alert, object
+*   Properties: 10
   TYPES secret_scanning_alert TYPE string.
 * Component schema: stargazer, object
+*   Properties: 2
   TYPES stargazer TYPE string.
 * Component schema: code-frequency-stat, array
   TYPES code_frequency_stat TYPE string.
 * Component schema: commit-activity, object
+*   Properties: 3
   TYPES commit_activity TYPE string.
 * Component schema: contributor-activity, object
+*   Properties: 3
   TYPES contributor_activity TYPE string.
 * Component schema: participation-stats, object
+*   Properties: 2
   TYPES participation_stats TYPE string.
 * Component schema: repository-subscription, object
+*   Properties: 6
   TYPES repository_subscription TYPE string.
 * Component schema: tag, object
+*   Properties: 5
   TYPES tag TYPE string.
 * Component schema: topic, object
+*   Properties: 1
   TYPES topic TYPE string.
 * Component schema: traffic, object
+*   Properties: 3
   TYPES traffic TYPE string.
 * Component schema: clone-traffic, object
+*   Properties: 3
   TYPES clone_traffic TYPE string.
 * Component schema: content-traffic, object
+*   Properties: 4
   TYPES content_traffic TYPE string.
 * Component schema: referrer-traffic, object
+*   Properties: 3
   TYPES referrer_traffic TYPE string.
 * Component schema: view-traffic, object
+*   Properties: 3
   TYPES view_traffic TYPE string.
 * Component schema: scim-group-list-enterprise, object
+*   Properties: 5
   TYPES scim_group_list_enterprise TYPE string.
 * Component schema: scim-enterprise-group, object
+*   Properties: 6
   TYPES scim_enterprise_group TYPE string.
 * Component schema: scim-user-list-enterprise, object
+*   Properties: 5
   TYPES scim_user_list_enterprise TYPE string.
 * Component schema: scim-enterprise-user, object
+*   Properties: 9
   TYPES scim_enterprise_user TYPE string.
 * Component schema: scim-user, object
+*   Properties: 12
   TYPES scim_user TYPE string.
 * Component schema: scim-user-list, object
+*   Properties: 5
   TYPES scim_user_list TYPE string.
 * Component schema: search-result-text-matches, array
   TYPES search_result_text_matches TYPE string.
 * Component schema: code-search-result-item, object
+*   Properties: 13
   TYPES code_search_result_item TYPE string.
 * Component schema: commit-search-result-item, object
+*   Properties: 12
   TYPES commit_search_result_item TYPE string.
 * Component schema: issue-search-result-item, object
+*   Properties: 33
   TYPES issue_search_result_item TYPE string.
 * Component schema: label-search-result-item, object
+*   Properties: 9
   TYPES label_search_result_item TYPE string.
 * Component schema: repo-search-result-item, object
+*   Properties: 83
   TYPES repo_search_result_item TYPE string.
 * Component schema: topic-search-result-item, object
+*   Properties: 16
   TYPES topic_search_result_item TYPE string.
 * Component schema: user-search-result-item, object
+*   Properties: 34
   TYPES user_search_result_item TYPE string.
 * Component schema: private-user, object
+*   Properties: 42
   TYPES private_user TYPE string.
 * Component schema: public-user, object
+*   Properties: 39
   TYPES public_user TYPE string.
 * Component schema: email, 
   TYPES email TYPE string.
 * Component schema: gpg-key, object
+*   Properties: 13
   TYPES gpg_key TYPE string.
 * Component schema: key, object
+*   Properties: 8
   TYPES key TYPE string.
 * Component schema: marketplace-account, object
+*   Properties: 7
   TYPES marketplace_account TYPE string.
 * Component schema: user-marketplace-purchase, object
+*   Properties: 8
   TYPES user_marketplace_purchase TYPE string.
 * Component schema: starred-repository, object
+*   Properties: 2
   TYPES starred_repository TYPE string.
 * Component schema: hovercard, object
+*   Properties: 1
   TYPES hovercard TYPE string.
 * Component schema: key-simple, object
+*   Properties: 2
   TYPES key_simple TYPE string.
 
 * GET - "GitHub API Root"
