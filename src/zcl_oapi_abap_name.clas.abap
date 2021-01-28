@@ -1,4 +1,4 @@
-CLASS lcl_abap_name DEFINITION.
+CLASS zcl_oapi_abap_name DEFINITION PUBLIC.
   PUBLIC SECTION.
     METHODS to_abap_name
       IMPORTING iv_name TYPE string
@@ -8,7 +8,7 @@ CLASS lcl_abap_name DEFINITION.
     METHODS numbering IMPORTING iv_name TYPE string RETURNING VALUE(rv_name) TYPE string.
 ENDCLASS.
 
-CLASS lcl_abap_name IMPLEMENTATION.
+CLASS zcl_oapi_abap_name IMPLEMENTATION.
   METHOD to_abap_name.
     IF iv_name IS INITIAL.
       RETURN.
@@ -37,7 +37,6 @@ CLASS lcl_abap_name IMPLEMENTATION.
       lv_number = sy-index.
       rv_name = iv_name.
       rv_name+lv_offset = lv_number.
-      WRITE / rv_name.
       READ TABLE mt_used WITH KEY table_line = rv_name TRANSPORTING NO FIELDS.
       IF sy-subrc <> 0.
         RETURN.

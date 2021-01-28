@@ -2,28 +2,35 @@ CLASS zcl_oapi_parser DEFINITION PUBLIC.
   PUBLIC SECTION.
     METHODS parse
       IMPORTING iv_json TYPE string
-      RETURNING VALUE(rs_schema) TYPE zif_oapi_specification=>ty_specification.
+      RETURNING VALUE(rs_schema) TYPE zif_oapi_specification_v3=>ty_specification.
 
   PRIVATE SECTION.
     DATA mo_json TYPE REF TO zcl_oapi_json.
 
     METHODS parse_operations
-      RETURNING VALUE(rt_operations) TYPE zif_oapi_specification=>ty_operations.
+      RETURNING VALUE(rt_operations) TYPE zif_oapi_specification_v3=>ty_operations.
 
     METHODS parse_servers
-      RETURNING VALUE(rt_servers) TYPE zif_oapi_specification=>ty_servers.
+      RETURNING VALUE(rt_servers) TYPE zif_oapi_specification_v3=>ty_servers.
 
     METHODS parse_parameters
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(rt_parameters) TYPE zif_oapi_specification=>ty_parameters.
+      RETURNING VALUE(rt_parameters) TYPE zif_oapi_specification_v3=>ty_parameters.
+
+    METHODS parse_parameters_ref
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(rt_parameters) TYPE string_table.
 
     METHODS parse_responses
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(rt_responses) TYPE zif_oapi_specification=>ty_responses.
+      RETURNING VALUE(rt_responses) TYPE zif_oapi_specification_v3=>ty_responses.
 
     METHODS parse_media_types
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(rt_media_types) TYPE zif_oapi_specification=>ty_media_types.
+      RETURNING VALUE(rt_media_types) TYPE zif_oapi_specification_v3=>ty_media_types.
+
+    METHODS parse_components
+      RETURNING VALUE(rs_components) TYPE zif_oapi_specification_v3=>ty_components.
 
 ENDCLASS.
 
@@ -41,7 +48,12 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
 
     rs_schema-operations = parse_operations( ).
     rs_schema-servers = parse_servers( ).
+    rs_schema-components = parse_components( ).
 
+  ENDMETHOD.
+
+  METHOD parse_components.
+    rs_components-parameters = parse_parameters( '/components/parameters/' ).
   ENDMETHOD.
 
   METHOD parse_servers.
@@ -66,7 +78,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     DATA lv_method LIKE LINE OF lt_methods.
     DATA lv_prefix TYPE string.
     DATA ls_operation LIKE LINE OF rt_operations.
-    DATA lo_names TYPE REF TO lcl_abap_name.
+    DATA lo_names TYPE REF TO zcl_oapi_abap_name.
     CREATE OBJECT lo_names.
 
     lt_paths = mo_json->members( '/paths/' ).
@@ -81,6 +93,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
         ls_operation-description = mo_json->value_string( lv_prefix && '/description' ).
         ls_operation-operation_id = mo_json->value_string( lv_prefix && '/operationId' ).
         ls_operation-parameters = parse_parameters( lv_prefix && '/parameters/' ).
+        ls_operation-parameters_ref = parse_parameters_ref( lv_prefix && '/parameters/' ).
         ls_operation-responses = parse_responses( lv_prefix && '/responses/' ).
         ls_operation-abap_name = lo_names->to_abap_name( ls_operation-operation_id ).
         APPEND ls_operation TO rt_operations.
@@ -92,19 +105,33 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     DATA lt_members TYPE string_table.
     DATA lv_member LIKE LINE OF lt_members.
     DATA ls_parameter LIKE LINE OF rt_parameters.
-    DATA lo_names TYPE REF TO lcl_abap_name.
+    DATA lo_names TYPE REF TO zcl_oapi_abap_name.
     CREATE OBJECT lo_names.
 
     lt_members = mo_json->members( iv_prefix ).
     LOOP AT lt_members INTO lv_member.
       CLEAR ls_parameter.
       ls_parameter-name = mo_json->value_string( iv_prefix && lv_member && '/name' ).
-      ls_parameter-in = mo_json->value_string( iv_prefix && lv_member && '/in' ).
-      ls_parameter-description = mo_json->value_string( iv_prefix && lv_member && '/description' ).
-      ls_parameter-required = mo_json->value_boolean( iv_prefix && lv_member && '/required' ).
-      ls_parameter-abap_name = lo_names->to_abap_name( ls_parameter-name ).
-      IF ls_parameter-name IS NOT INITIAL. " it might be a #ref
+      IF ls_parameter-name IS NOT INITIAL.
+        ls_parameter-in = mo_json->value_string( iv_prefix && lv_member && '/in' ).
+        ls_parameter-description = mo_json->value_string( iv_prefix && lv_member && '/description' ).
+        ls_parameter-required = mo_json->value_boolean( iv_prefix && lv_member && '/required' ).
+        ls_parameter-abap_name = lo_names->to_abap_name( ls_parameter-name ).
         APPEND ls_parameter TO rt_parameters.
+      ENDIF.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_parameters_ref.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA lv_ref TYPE string.
+
+    lt_members = mo_json->members( iv_prefix ).
+    LOOP AT lt_members INTO lv_member.
+      lv_ref = mo_json->value_string( iv_prefix && lv_member && '/$ref' ).
+      IF lv_ref IS NOT INITIAL.
+        APPEND lv_ref TO rt_parameters.
       ENDIF.
     ENDLOOP.
   ENDMETHOD.

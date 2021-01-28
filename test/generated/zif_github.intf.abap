@@ -34,6 +34,9 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List installations for the authenticated app"
 * Parameter: outdated, optional, query
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
+* Parameter: #/components/parameters/since
 * Response: 200, The permissions the installation has are included under the `permissions` key.
 *     application/json, 
   METHODS apps_list_installations
@@ -41,6 +44,7 @@ INTERFACE zif_github.
       outdated TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Get an installation for the authenticated app"
+* Parameter: #/components/parameters/installation_id
 * Response: 200, response
 *     application/json, #/components/schemas/installation
 * Response: 404, 
@@ -48,11 +52,13 @@ INTERFACE zif_github.
   METHODS apps_get_installation
     RAISING cx_static_check.
 * DELETE - "Delete an installation for the authenticated app"
+* Parameter: #/components/parameters/installation_id
 * Response: 204, Empty response
 * Response: 404, 
   METHODS apps_delete_installation
     RAISING cx_static_check.
 * POST - "Create an installation access token for an app"
+* Parameter: #/components/parameters/installation_id
 * Response: 201, response
 *     application/json, #/components/schemas/installation-token
 * Response: 401, 
@@ -63,16 +69,20 @@ INTERFACE zif_github.
   METHODS apps_create_installation_acces
     RAISING cx_static_check.
 * PUT - "Suspend an app installation"
+* Parameter: #/components/parameters/installation_id
 * Response: 204, Empty response
 * Response: 404, 
   METHODS apps_suspend_installation
     RAISING cx_static_check.
 * DELETE - "Unsuspend an app installation"
+* Parameter: #/components/parameters/installation_id
 * Response: 204, Empty response
 * Response: 404, 
   METHODS apps_unsuspend_installation
     RAISING cx_static_check.
 * GET - "List your grants"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -82,6 +92,7 @@ INTERFACE zif_github.
   METHODS oauth_authorizations_list_gran
     RAISING cx_static_check.
 * GET - "Get a single grant"
+* Parameter: #/components/parameters/grant_id
 * Response: 200, response
 *     application/json, #/components/schemas/application-grant
 * Response: 304, 
@@ -90,6 +101,7 @@ INTERFACE zif_github.
   METHODS oauth_authorizations_get_grant
     RAISING cx_static_check.
 * DELETE - "Delete a grant"
+* Parameter: #/components/parameters/grant_id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -97,15 +109,19 @@ INTERFACE zif_github.
   METHODS oauth_authorizations_delete_gr
     RAISING cx_static_check.
 * DELETE - "Delete an app authorization"
+* Parameter: #/components/parameters/client-id
 * Response: 204, Empty response
 * Response: 422, 
   METHODS apps_delete_authorization
     RAISING cx_static_check.
 * DELETE - "Revoke a grant for an application"
+* Parameter: #/components/parameters/client-id
+* Parameter: #/components/parameters/access-token
 * Response: 204, Empty response
   METHODS apps_revoke_grant_for_applicat
     RAISING cx_static_check.
 * POST - "Check a token"
+* Parameter: #/components/parameters/client-id
 * Response: 200, response
 *     application/json, #/components/schemas/authorization
 * Response: 404, 
@@ -113,17 +129,20 @@ INTERFACE zif_github.
   METHODS apps_check_token
     RAISING cx_static_check.
 * PATCH - "Reset a token"
+* Parameter: #/components/parameters/client-id
 * Response: 200, response
 *     application/json, #/components/schemas/authorization
 * Response: 422, 
   METHODS apps_reset_token
     RAISING cx_static_check.
 * DELETE - "Delete an app token"
+* Parameter: #/components/parameters/client-id
 * Response: 204, Empty response
 * Response: 422, 
   METHODS apps_delete_token
     RAISING cx_static_check.
 * POST - "Create a scoped access token"
+* Parameter: #/components/parameters/client-id
 * Response: 200, response
 *     application/json, #/components/schemas/authorization
 * Response: 401, 
@@ -133,21 +152,28 @@ INTERFACE zif_github.
   METHODS apps_scope_token
     RAISING cx_static_check.
 * GET - "Check an authorization"
+* Parameter: #/components/parameters/client-id
+* Parameter: #/components/parameters/access-token
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
   METHODS apps_check_authorization
     RAISING cx_static_check.
 * POST - "Reset an authorization"
+* Parameter: #/components/parameters/client-id
+* Parameter: #/components/parameters/access-token
 * Response: 200, response
 *     application/json, #/components/schemas/authorization
   METHODS apps_reset_authorization
     RAISING cx_static_check.
 * DELETE - "Revoke an authorization for an application"
+* Parameter: #/components/parameters/client-id
+* Parameter: #/components/parameters/access-token
 * Response: 204, Empty response
   METHODS apps_revoke_authorization_for_
     RAISING cx_static_check.
 * GET - "Get an app"
+* Parameter: #/components/parameters/app_slug
 * Response: 200, response
 *     application/json, #/components/schemas/integration
 * Response: 403, 
@@ -156,6 +182,8 @@ INTERFACE zif_github.
   METHODS apps_get_by_slug
     RAISING cx_static_check.
 * GET - "List your authorizations"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -175,6 +203,7 @@ INTERFACE zif_github.
   METHODS oauth_authorizations_create_au
     RAISING cx_static_check.
 * PUT - "Get-or-create an authorization for a specific app"
+* Parameter: #/components/parameters/client-id
 * Response: 200, Response if returning an existing token
 *     application/json, #/components/schemas/authorization
 * Response: 201, **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
@@ -187,6 +216,7 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * PUT - "Get-or-create an authorization for a specific app and fingerprint"
 * Parameter: fingerprint, required, path
+* Parameter: #/components/parameters/client-id
 * Response: 200, Response if returning an existing token
 *     application/json, #/components/schemas/authorization
 * Response: 201, Response if returning a new token
@@ -197,6 +227,7 @@ INTERFACE zif_github.
       fingerprint TYPE string
     RAISING cx_static_check.
 * GET - "Get a single authorization"
+* Parameter: #/components/parameters/authorization_id
 * Response: 200, response
 *     application/json, #/components/schemas/authorization
 * Response: 304, 
@@ -205,12 +236,14 @@ INTERFACE zif_github.
   METHODS oauth_authorizations_get_autho
     RAISING cx_static_check.
 * PATCH - "Update an existing authorization"
+* Parameter: #/components/parameters/authorization_id
 * Response: 200, response
 *     application/json, #/components/schemas/authorization
 * Response: 422, 
   METHODS oauth_authorizations_update_au
     RAISING cx_static_check.
 * DELETE - "Delete an authorization"
+* Parameter: #/components/parameters/authorization_id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -256,148 +289,215 @@ INTERFACE zif_github.
   METHODS emojis_get
     RAISING cx_static_check.
 * GET - "Get GitHub Actions permissions for an enterprise"
+* Parameter: #/components/parameters/enterprise
 * Response: 200, response
 *     application/json, #/components/schemas/actions-enterprise-permissions
   METHODS enterprise_admin_get_github_ac
     RAISING cx_static_check.
 * PUT - "Set GitHub Actions permissions for an enterprise"
+* Parameter: #/components/parameters/enterprise
 * Response: 204, Empty response
   METHODS enterprise_admin_set_github_ac
     RAISING cx_static_check.
 * GET - "List selected organizations enabled for GitHub Actions in an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS enterprise_admin_list_selected
     RAISING cx_static_check.
 * PUT - "Set selected organizations enabled for GitHub Actions in an enterprise"
+* Parameter: #/components/parameters/enterprise
 * Response: 204, Empty response
   METHODS enterprise_admin_set_selected_
     RAISING cx_static_check.
 * PUT - "Enable a selected organization for GitHub Actions in an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/org_id
 * Response: 204, Empty response
   METHODS enterprise_admin_enable_select
     RAISING cx_static_check.
 * DELETE - "Disable a selected organization for GitHub Actions in an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/org_id
 * Response: 204, Empty response
   METHODS enterprise_admin_disable_selec
     RAISING cx_static_check.
 * GET - "Get allowed actions for an enterprise"
+* Parameter: #/components/parameters/enterprise
 * Response: 200, response
 *     application/json, #/components/schemas/selected-actions
   METHODS enterprise_admin_get_allowed_a
     RAISING cx_static_check.
 * PUT - "Set allowed actions for an enterprise"
+* Parameter: #/components/parameters/enterprise
 * Response: 204, Empty response
   METHODS enterprise_admin_set_allowed_a
     RAISING cx_static_check.
 * GET - "List self-hosted runner groups for an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS enterprise_admin_list_self_hos
     RAISING cx_static_check.
 * POST - "Create a self-hosted runner group for an enterprise"
+* Parameter: #/components/parameters/enterprise
 * Response: 201, response
 *     application/json, #/components/schemas/runner-groups-enterprise
   METHODS enterprise_admin_create_self_h
     RAISING cx_static_check.
 * GET - "Get a self-hosted runner group for an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/runner_group_id
 * Response: 200, response
 *     application/json, #/components/schemas/runner-groups-enterprise
   METHODS enterprise_admin_get_self_host
     RAISING cx_static_check.
 * PATCH - "Update a self-hosted runner group for an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/runner_group_id
 * Response: 200, response
 *     application/json, #/components/schemas/runner-groups-enterprise
   METHODS enterprise_admin_update_self_h
     RAISING cx_static_check.
 * DELETE - "Delete a self-hosted runner group from an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/runner_group_id
 * Response: 204, Empty response
   METHODS enterprise_admin_delete_self_h
     RAISING cx_static_check.
 * GET - "List organization access to a self-hosted runner group in an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/runner_group_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS enterprise_admin_list_org_acce
     RAISING cx_static_check.
 * PUT - "Set organization access for a self-hosted runner group in an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/runner_group_id
 * Response: 204, Empty response
   METHODS enterprise_admin_set_org_acces
     RAISING cx_static_check.
 * PUT - "Add organization access to a self-hosted runner group in an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/runner_group_id
+* Parameter: #/components/parameters/org_id
 * Response: 204, Empty response
   METHODS enterprise_admin_add_org_acces
     RAISING cx_static_check.
 * DELETE - "Remove organization access to a self-hosted runner group in an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/runner_group_id
+* Parameter: #/components/parameters/org_id
 * Response: 204, Empty response
   METHODS enterprise_admin_remove_org_ac
     RAISING cx_static_check.
 * GET - "List self-hosted runners in a group for an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/runner_group_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS enterprise_admin_list_self_h01
     RAISING cx_static_check.
 * PUT - "Set self-hosted runners in a group for an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/runner_group_id
 * Response: 204, Empty response
   METHODS enterprise_admin_set_self_host
     RAISING cx_static_check.
 * PUT - "Add a self-hosted runner to a group for an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/runner_group_id
+* Parameter: #/components/parameters/runner_id
 * Response: 204, Empty response
   METHODS enterprise_admin_add_self_host
     RAISING cx_static_check.
 * DELETE - "Remove a self-hosted runner from a group for an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/runner_group_id
+* Parameter: #/components/parameters/runner_id
 * Response: 204, Empty response
   METHODS enterprise_admin_remove_self_h
     RAISING cx_static_check.
 * GET - "List self-hosted runners for an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS enterprise_admin_list_self_h02
     RAISING cx_static_check.
 * GET - "List runner applications for an enterprise"
+* Parameter: #/components/parameters/enterprise
 * Response: 200, response
 *     application/json, 
   METHODS enterprise_admin_list_runner_a
     RAISING cx_static_check.
 * POST - "Create a registration token for an enterprise"
+* Parameter: #/components/parameters/enterprise
 * Response: 201, response
 *     application/json, #/components/schemas/authentication-token
   METHODS enterprise_admin_create_regist
     RAISING cx_static_check.
 * POST - "Create a remove token for an enterprise"
+* Parameter: #/components/parameters/enterprise
 * Response: 201, response
 *     application/json, #/components/schemas/authentication-token
   METHODS enterprise_admin_create_remove
     RAISING cx_static_check.
 * GET - "Get a self-hosted runner for an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/runner_id
 * Response: 200, response
 *     application/json, #/components/schemas/runner
   METHODS enterprise_admin_get_self_ho01
     RAISING cx_static_check.
 * DELETE - "Delete a self-hosted runner from an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/runner_id
 * Response: 204, Empty response
   METHODS enterprise_admin_delete_self01
     RAISING cx_static_check.
 * GET - "Get the audit log for an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/audit-log-phrase
+* Parameter: #/components/parameters/audit-log-include
+* Parameter: #/components/parameters/audit-log-after
+* Parameter: #/components/parameters/audit-log-before
+* Parameter: #/components/parameters/per_page
 * Response: 200, Response
 *     application/json, 
   METHODS audit_log_get_audit_log
     RAISING cx_static_check.
 * GET - "Get GitHub Actions billing for an enterprise"
+* Parameter: #/components/parameters/enterprise
 * Response: 200, response
 *     application/json, #/components/schemas/actions-billing-usage
   METHODS billing_get_github_actions_bil
     RAISING cx_static_check.
 * GET - "Get GitHub Packages billing for an enterprise"
+* Parameter: #/components/parameters/enterprise
 * Response: 200, response
 *     application/json, #/components/schemas/packages-billing-usage
   METHODS billing_get_github_packages_bi
     RAISING cx_static_check.
 * GET - "Get shared storage billing for an enterprise"
+* Parameter: #/components/parameters/enterprise
 * Response: 200, response
 *     application/json, #/components/schemas/combined-billing-usage
   METHODS billing_get_shared_storage_bil
     RAISING cx_static_check.
 * GET - "List public events"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -411,6 +511,9 @@ INTERFACE zif_github.
   METHODS activity_get_feeds
     RAISING cx_static_check.
 * GET - "List gists for the authenticated user"
+* Parameter: #/components/parameters/since
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -427,6 +530,9 @@ INTERFACE zif_github.
   METHODS gists_create
     RAISING cx_static_check.
 * GET - "List public gists"
+* Parameter: #/components/parameters/since
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -435,6 +541,9 @@ INTERFACE zif_github.
   METHODS gists_list_public
     RAISING cx_static_check.
 * GET - "List starred gists"
+* Parameter: #/components/parameters/since
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -443,6 +552,7 @@ INTERFACE zif_github.
   METHODS gists_list_starred
     RAISING cx_static_check.
 * GET - "Get a gist"
+* Parameter: #/components/parameters/gist_id
 * Response: 200, response
 *     application/json, #/components/schemas/gist-simple
 * Response: 304, 
@@ -451,6 +561,7 @@ INTERFACE zif_github.
   METHODS gists_get
     RAISING cx_static_check.
 * PATCH - "Update a gist"
+* Parameter: #/components/parameters/gist_id
 * Response: 200, response
 *     application/json, #/components/schemas/gist-simple
 * Response: 404, 
@@ -458,6 +569,7 @@ INTERFACE zif_github.
   METHODS gists_update
     RAISING cx_static_check.
 * DELETE - "Delete a gist"
+* Parameter: #/components/parameters/gist_id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 403, 
@@ -465,6 +577,9 @@ INTERFACE zif_github.
   METHODS gists_delete
     RAISING cx_static_check.
 * GET - "List gist comments"
+* Parameter: #/components/parameters/gist_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -473,6 +588,7 @@ INTERFACE zif_github.
   METHODS gists_list_comments
     RAISING cx_static_check.
 * POST - "Create a gist comment"
+* Parameter: #/components/parameters/gist_id
 * Response: 201, response
 *     application/json, #/components/schemas/gist-comment
 * Response: 304, 
@@ -481,6 +597,8 @@ INTERFACE zif_github.
   METHODS gists_create_comment
     RAISING cx_static_check.
 * GET - "Get a gist comment"
+* Parameter: #/components/parameters/gist_id
+* Parameter: #/components/parameters/comment_id
 * Response: 200, response
 *     application/json, #/components/schemas/gist-comment
 * Response: 304, 
@@ -489,12 +607,16 @@ INTERFACE zif_github.
   METHODS gists_get_comment
     RAISING cx_static_check.
 * PATCH - "Update a gist comment"
+* Parameter: #/components/parameters/gist_id
+* Parameter: #/components/parameters/comment_id
 * Response: 200, response
 *     application/json, #/components/schemas/gist-comment
 * Response: 404, 
   METHODS gists_update_comment
     RAISING cx_static_check.
 * DELETE - "Delete a gist comment"
+* Parameter: #/components/parameters/gist_id
+* Parameter: #/components/parameters/comment_id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 403, 
@@ -502,6 +624,9 @@ INTERFACE zif_github.
   METHODS gists_delete_comment
     RAISING cx_static_check.
 * GET - "List gist commits"
+* Parameter: #/components/parameters/gist_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -510,6 +635,9 @@ INTERFACE zif_github.
   METHODS gists_list_commits
     RAISING cx_static_check.
 * GET - "List gist forks"
+* Parameter: #/components/parameters/gist_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -518,6 +646,7 @@ INTERFACE zif_github.
   METHODS gists_list_forks
     RAISING cx_static_check.
 * POST - "Fork a gist"
+* Parameter: #/components/parameters/gist_id
 * Response: 201, response
 *     application/json, #/components/schemas/base-gist
 * Response: 304, 
@@ -527,6 +656,7 @@ INTERFACE zif_github.
   METHODS gists_fork
     RAISING cx_static_check.
 * GET - "Check if a gist is starred"
+* Parameter: #/components/parameters/gist_id
 * Response: 204, Response if gist is starred
 * Response: 304, 
 * Response: 403, 
@@ -535,6 +665,7 @@ INTERFACE zif_github.
   METHODS gists_check_is_starred
     RAISING cx_static_check.
 * PUT - "Star a gist"
+* Parameter: #/components/parameters/gist_id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 403, 
@@ -542,6 +673,7 @@ INTERFACE zif_github.
   METHODS gists_star
     RAISING cx_static_check.
 * DELETE - "Unstar a gist"
+* Parameter: #/components/parameters/gist_id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 403, 
@@ -550,6 +682,7 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "Get a gist revision"
 * Parameter: sha, required, path
+* Parameter: #/components/parameters/gist_id
 * Response: 200, response
 *     application/json, #/components/schemas/gist-simple
 * Response: 403, 
@@ -575,6 +708,8 @@ INTERFACE zif_github.
       name TYPE string
     RAISING cx_static_check.
 * GET - "List repositories accessible to the app installation"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -594,6 +729,11 @@ INTERFACE zif_github.
 * Parameter: orgs, optional, query
 * Parameter: owned, optional, query
 * Parameter: pulls, optional, query
+* Parameter: #/components/parameters/labels
+* Parameter: #/components/parameters/direction
+* Parameter: #/components/parameters/since
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -611,6 +751,7 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "Get all commonly used licenses"
 * Parameter: featured, optional, query
+* Parameter: #/components/parameters/per_page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -641,6 +782,7 @@ INTERFACE zif_github.
   METHODS markdown_render_raw
     RAISING cx_static_check.
 * GET - "Get a subscription plan for an account"
+* Parameter: #/components/parameters/account_id
 * Response: 200, response
 *     application/json, #/components/schemas/marketplace-purchase
 * Response: 401, 
@@ -649,6 +791,8 @@ INTERFACE zif_github.
   METHODS apps_get_subscription_plan_for
     RAISING cx_static_check.
 * GET - "List plans"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 401, 
@@ -657,6 +801,10 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List accounts for a plan"
 * Parameter: direction, optional, query
+* Parameter: #/components/parameters/plan_id
+* Parameter: #/components/parameters/sort
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 401, 
@@ -667,6 +815,7 @@ INTERFACE zif_github.
       direction TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a subscription plan for an account (stubbed)"
+* Parameter: #/components/parameters/account_id
 * Response: 200, response
 *     application/json, #/components/schemas/marketplace-purchase
 * Response: 401, 
@@ -674,6 +823,8 @@ INTERFACE zif_github.
   METHODS apps_get_subscription_plan_f01
     RAISING cx_static_check.
 * GET - "List plans (stubbed)"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 401, 
@@ -681,6 +832,10 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List accounts for a plan (stubbed)"
 * Parameter: direction, optional, query
+* Parameter: #/components/parameters/plan_id
+* Parameter: #/components/parameters/sort
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 401, 
@@ -695,6 +850,10 @@ INTERFACE zif_github.
   METHODS meta_get
     RAISING cx_static_check.
 * GET - "List public events for a network of repositories"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 301, 
@@ -704,6 +863,12 @@ INTERFACE zif_github.
   METHODS activity_list_public_events_fo
     RAISING cx_static_check.
 * GET - "List notifications for the authenticated user"
+* Parameter: #/components/parameters/all
+* Parameter: #/components/parameters/participating
+* Parameter: #/components/parameters/since
+* Parameter: #/components/parameters/before
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -722,6 +887,7 @@ INTERFACE zif_github.
   METHODS activity_mark_notifications_as
     RAISING cx_static_check.
 * GET - "Get a thread"
+* Parameter: #/components/parameters/thread_id
 * Response: 200, response
 *     application/json, #/components/schemas/thread
 * Response: 304, 
@@ -730,12 +896,14 @@ INTERFACE zif_github.
   METHODS activity_get_thread
     RAISING cx_static_check.
 * PATCH - "Mark a thread as read"
+* Parameter: #/components/parameters/thread_id
 * Response: 205, response
 * Response: 304, 
 * Response: 403, 
   METHODS activity_mark_thread_as_read
     RAISING cx_static_check.
 * GET - "Get a thread subscription for the authenticated user"
+* Parameter: #/components/parameters/thread_id
 * Response: 200, response
 *     application/json, #/components/schemas/thread-subscription
 * Response: 304, 
@@ -744,6 +912,7 @@ INTERFACE zif_github.
   METHODS activity_get_thread_subscripti
     RAISING cx_static_check.
 * PUT - "Set a thread subscription"
+* Parameter: #/components/parameters/thread_id
 * Response: 200, response
 *     application/json, #/components/schemas/thread-subscription
 * Response: 304, 
@@ -752,6 +921,7 @@ INTERFACE zif_github.
   METHODS activity_set_thread_subscripti
     RAISING cx_static_check.
 * DELETE - "Delete a thread subscription"
+* Parameter: #/components/parameters/thread_id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -767,18 +937,22 @@ INTERFACE zif_github.
       s TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "List organizations"
+* Parameter: #/components/parameters/since-org
+* Parameter: #/components/parameters/per_page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
   METHODS orgs_list
     RAISING cx_static_check.
 * GET - "Get an organization"
+* Parameter: #/components/parameters/org
 * Response: 200, response
 *     application/json, #/components/schemas/organization-full
 * Response: 404, 
   METHODS orgs_get
     RAISING cx_static_check.
 * PATCH - "Update an organization"
+* Parameter: #/components/parameters/org
 * Response: 200, response
 *     application/json, #/components/schemas/organization-full
 * Response: 409, 
@@ -788,162 +962,232 @@ INTERFACE zif_github.
   METHODS orgs_update
     RAISING cx_static_check.
 * GET - "Get GitHub Actions permissions for an organization"
+* Parameter: #/components/parameters/org
 * Response: 200, response
 *     application/json, #/components/schemas/actions-organization-permissions
   METHODS actions_get_github_actions_per
     RAISING cx_static_check.
 * PUT - "Set GitHub Actions permissions for an organization"
+* Parameter: #/components/parameters/org
 * Response: 204, Empty response
   METHODS actions_set_github_actions_per
     RAISING cx_static_check.
 * GET - "List selected repositories enabled for GitHub Actions in an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS actions_list_selected_reposito
     RAISING cx_static_check.
 * PUT - "Set selected repositories enabled for GitHub Actions in an organization"
+* Parameter: #/components/parameters/org
 * Response: 204, Empty response
   METHODS actions_set_selected_repositor
     RAISING cx_static_check.
 * PUT - "Enable a selected repository for GitHub Actions in an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/repository_id
 * Response: 204, Empty response
   METHODS actions_enable_selected_reposi
     RAISING cx_static_check.
 * DELETE - "Disable a selected repository for GitHub Actions in an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/repository_id
 * Response: 204, Empty response
   METHODS actions_disable_selected_repos
     RAISING cx_static_check.
 * GET - "Get allowed actions for an organization"
+* Parameter: #/components/parameters/org
 * Response: 200, response
 *     application/json, #/components/schemas/selected-actions
   METHODS actions_get_allowed_actions_or
     RAISING cx_static_check.
 * PUT - "Set allowed actions for an organization"
+* Parameter: #/components/parameters/org
 * Response: 204, Empty response
   METHODS actions_set_allowed_actions_or
     RAISING cx_static_check.
 * GET - "List self-hosted runner groups for an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS actions_list_self_hosted_runne
     RAISING cx_static_check.
 * POST - "Create a self-hosted runner group for an organization"
+* Parameter: #/components/parameters/org
 * Response: 201, response
 *     application/json, #/components/schemas/runner-groups-org
   METHODS actions_create_self_hosted_run
     RAISING cx_static_check.
 * GET - "Get a self-hosted runner group for an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/runner_group_id
 * Response: 200, response
 *     application/json, #/components/schemas/runner-groups-org
   METHODS actions_get_self_hosted_runner
     RAISING cx_static_check.
 * PATCH - "Update a self-hosted runner group for an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/runner_group_id
 * Response: 200, response
 *     application/json, #/components/schemas/runner-groups-org
   METHODS actions_update_self_hosted_run
     RAISING cx_static_check.
 * DELETE - "Delete a self-hosted runner group from an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/runner_group_id
 * Response: 204, Empty response
   METHODS actions_delete_self_hosted_run
     RAISING cx_static_check.
 * GET - "List repository access to a self-hosted runner group in an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/runner_group_id
 * Response: 200, response
 *     application/json, 
   METHODS actions_list_repo_access_to_se
     RAISING cx_static_check.
 * PUT - "Set repository access for a self-hosted runner group in an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/runner_group_id
 * Response: 204, Empty response
   METHODS actions_set_repo_access_to_sel
     RAISING cx_static_check.
 * PUT - "Add repository access to a self-hosted runner group in an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/runner_group_id
+* Parameter: #/components/parameters/repository_id
 * Response: 204, Empty response
   METHODS actions_add_repo_access_to_sel
     RAISING cx_static_check.
 * DELETE - "Remove repository access to a self-hosted runner group in an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/runner_group_id
+* Parameter: #/components/parameters/repository_id
 * Response: 204, Empty response
   METHODS actions_remove_repo_access_to_
     RAISING cx_static_check.
 * GET - "List self-hosted runners in a group for an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/runner_group_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS actions_list_self_hosted_run01
     RAISING cx_static_check.
 * PUT - "Set self-hosted runners in a group for an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/runner_group_id
 * Response: 204, Empty response
   METHODS actions_set_self_hosted_runner
     RAISING cx_static_check.
 * PUT - "Add a self-hosted runner to a group for an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/runner_group_id
+* Parameter: #/components/parameters/runner_id
 * Response: 204, Empty response
   METHODS actions_add_self_hosted_runner
     RAISING cx_static_check.
 * DELETE - "Remove a self-hosted runner from a group for an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/runner_group_id
+* Parameter: #/components/parameters/runner_id
 * Response: 204, Empty response
   METHODS actions_remove_self_hosted_run
     RAISING cx_static_check.
 * GET - "List self-hosted runners for an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS actions_list_self_hosted_run02
     RAISING cx_static_check.
 * GET - "List runner applications for an organization"
+* Parameter: #/components/parameters/org
 * Response: 200, response
 *     application/json, 
   METHODS actions_list_runner_applicatio
     RAISING cx_static_check.
 * POST - "Create a registration token for an organization"
+* Parameter: #/components/parameters/org
 * Response: 201, response
 *     application/json, #/components/schemas/authentication-token
   METHODS actions_create_registration_to
     RAISING cx_static_check.
 * POST - "Create a remove token for an organization"
+* Parameter: #/components/parameters/org
 * Response: 201, response
 *     application/json, #/components/schemas/authentication-token
   METHODS actions_create_remove_token_fo
     RAISING cx_static_check.
 * GET - "Get a self-hosted runner for an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/runner_id
 * Response: 200, response
 *     application/json, #/components/schemas/runner
   METHODS actions_get_self_hosted_runn01
     RAISING cx_static_check.
 * DELETE - "Delete a self-hosted runner from an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/runner_id
 * Response: 204, Empty response
   METHODS actions_delete_self_hosted_r01
     RAISING cx_static_check.
 * GET - "List organization secrets"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS actions_list_org_secrets
     RAISING cx_static_check.
 * GET - "Get an organization public key"
+* Parameter: #/components/parameters/org
 * Response: 200, response
 *     application/json, #/components/schemas/actions-public-key
   METHODS actions_get_org_public_key
     RAISING cx_static_check.
 * GET - "Get an organization secret"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/secret_name
 * Response: 200, response
 *     application/json, #/components/schemas/organization-actions-secret
   METHODS actions_get_org_secret
     RAISING cx_static_check.
 * PUT - "Create or update an organization secret"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/secret_name
 * Response: 201, Response when creating a secret
 * Response: 204, Response when updating a secret
   METHODS actions_create_or_update_org_s
     RAISING cx_static_check.
 * DELETE - "Delete an organization secret"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/secret_name
 * Response: 204, Empty response
   METHODS actions_delete_org_secret
     RAISING cx_static_check.
 * GET - "List selected repositories for an organization secret"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/secret_name
 * Response: 200, response
 *     application/json, 
   METHODS actions_list_selected_repos_fo
     RAISING cx_static_check.
 * PUT - "Set selected repositories for an organization secret"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/secret_name
 * Response: 204, Empty response
   METHODS actions_set_selected_repos_for
     RAISING cx_static_check.
 * PUT - "Add selected repository to an organization secret"
 * Parameter: repository_id, required, path
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/secret_name
 * Response: 204, Response when repository was added to the selected list
 * Response: 409, Response when visibility type is not set to selected
   METHODS actions_add_selected_repo_to_o
@@ -952,6 +1196,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * DELETE - "Remove selected repository from an organization secret"
 * Parameter: repository_id, required, path
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/secret_name
 * Response: 204, Response when repository was removed from the selected list
 * Response: 409, Response when visibility type not set to selected
   METHODS actions_remove_selected_repo_f
@@ -959,38 +1205,53 @@ INTERFACE zif_github.
       repository_id TYPE string
     RAISING cx_static_check.
 * GET - "Get the audit log for an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/audit-log-phrase
+* Parameter: #/components/parameters/audit-log-include
+* Parameter: #/components/parameters/audit-log-after
+* Parameter: #/components/parameters/audit-log-before
+* Parameter: #/components/parameters/per_page
 * Response: 200, Response
 *     application/json, 
   METHODS orgs_get_audit_log
     RAISING cx_static_check.
 * GET - "List users blocked by an organization"
+* Parameter: #/components/parameters/org
 * Response: 200, response
 *     application/json, 
 * Response: 415, 
   METHODS orgs_list_blocked_users
     RAISING cx_static_check.
 * GET - "Check if a user is blocked by an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/username
 * Response: 204, If the user is blocked:
 * Response: 404, If the user is not blocked:
 *     application/json, #/components/schemas/basic-error
   METHODS orgs_check_blocked_user
     RAISING cx_static_check.
 * PUT - "Block a user from an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
 * Response: 422, 
   METHODS orgs_block_user
     RAISING cx_static_check.
 * DELETE - "Unblock a user from an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
   METHODS orgs_unblock_user
     RAISING cx_static_check.
 * GET - "List SAML SSO authorizations for an organization"
+* Parameter: #/components/parameters/org
 * Response: 200, response
 *     application/json, 
   METHODS orgs_list_saml_sso_authorizati
     RAISING cx_static_check.
 * DELETE - "Remove a SAML SSO authorization for an organization"
 * Parameter: credential_id, required, path
+* Parameter: #/components/parameters/org
 * Response: 204, Empty response
 * Response: 404, 
   METHODS orgs_remove_saml_sso_authoriza
@@ -998,23 +1259,33 @@ INTERFACE zif_github.
       credential_id TYPE string
     RAISING cx_static_check.
 * GET - "List public organization events"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS activity_list_public_org_event
     RAISING cx_static_check.
 * GET - "List failed organization invitations"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
   METHODS orgs_list_failed_invitations
     RAISING cx_static_check.
 * GET - "List organization webhooks"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
   METHODS orgs_list_webhooks
     RAISING cx_static_check.
 * POST - "Create an organization webhook"
+* Parameter: #/components/parameters/org
 * Response: 201, response
 *     application/json, #/components/schemas/org-hook
 * Response: 404, 
@@ -1022,12 +1293,16 @@ INTERFACE zif_github.
   METHODS orgs_create_webhook
     RAISING cx_static_check.
 * GET - "Get an organization webhook"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/hook-id
 * Response: 200, response
 *     application/json, #/components/schemas/org-hook
 * Response: 404, 
   METHODS orgs_get_webhook
     RAISING cx_static_check.
 * PATCH - "Update an organization webhook"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/hook-id
 * Response: 200, response
 *     application/json, #/components/schemas/org-hook
 * Response: 404, 
@@ -1035,57 +1310,76 @@ INTERFACE zif_github.
   METHODS orgs_update_webhook
     RAISING cx_static_check.
 * DELETE - "Delete an organization webhook"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/hook-id
 * Response: 204, Empty response
 * Response: 404, 
   METHODS orgs_delete_webhook
     RAISING cx_static_check.
 * GET - "Get a webhook configuration for an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/hook-id
 * Response: 200, Default response
 *     application/json, #/components/schemas/webhook-config
   METHODS orgs_get_webhook_config_for_or
     RAISING cx_static_check.
 * PATCH - "Update a webhook configuration for an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/hook-id
 * Response: 200, Default response
 *     application/json, #/components/schemas/webhook-config
   METHODS orgs_update_webhook_config_for
     RAISING cx_static_check.
 * POST - "Ping an organization webhook"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/hook-id
 * Response: 204, Empty response
 * Response: 404, 
   METHODS orgs_ping_webhook
     RAISING cx_static_check.
 * GET - "Get an organization installation for the authenticated app"
+* Parameter: #/components/parameters/org
 * Response: 200, response
 *     application/json, #/components/schemas/installation
   METHODS apps_get_org_installation
     RAISING cx_static_check.
 * GET - "List app installations for an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS orgs_list_app_installations
     RAISING cx_static_check.
 * GET - "Get interaction restrictions for an organization"
+* Parameter: #/components/parameters/org
 * Response: 200, response
 *     application/json, #/components/schemas/interaction-limit-response
   METHODS interactions_get_restrictions_
     RAISING cx_static_check.
 * PUT - "Set interaction restrictions for an organization"
+* Parameter: #/components/parameters/org
 * Response: 200, response
 *     application/json, #/components/schemas/interaction-limit-response
 * Response: 422, 
   METHODS interactions_set_restrictions_
     RAISING cx_static_check.
 * DELETE - "Remove interaction restrictions for an organization"
+* Parameter: #/components/parameters/org
 * Response: 204, Empty response
   METHODS interactions_remove_restrictio
     RAISING cx_static_check.
 * GET - "List pending organization invitations"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
   METHODS orgs_list_pending_invitations
     RAISING cx_static_check.
 * POST - "Create an organization invitation"
+* Parameter: #/components/parameters/org
 * Response: 201, response
 *     application/json, #/components/schemas/organization-invitation
 * Response: 404, 
@@ -1093,12 +1387,18 @@ INTERFACE zif_github.
   METHODS orgs_create_invitation
     RAISING cx_static_check.
 * DELETE - "Cancel an organization invitation"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/invitation_id
 * Response: 204, Empty response
 * Response: 404, 
 * Response: 422, 
   METHODS orgs_cancel_invitation
     RAISING cx_static_check.
 * GET - "List organization invitation teams"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/invitation_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -1108,6 +1408,12 @@ INTERFACE zif_github.
 * Parameter: filter, optional, query
 * Parameter: state, optional, query
 * Parameter: sort, optional, query
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/labels
+* Parameter: #/components/parameters/direction
+* Parameter: #/components/parameters/since
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -1120,6 +1426,9 @@ INTERFACE zif_github.
 * GET - "List organization members"
 * Parameter: filter, optional, query
 * Parameter: role, optional, query
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 302, Response if requester is not an organization member
@@ -1130,17 +1439,23 @@ INTERFACE zif_github.
       role TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Check organization membership for a user"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/username
 * Response: 204, Response if requester is an organization member and user is a member
 * Response: 302, Response if requester is not an organization member
 * Response: 404, Response if requester is an organization member and user is not a member
   METHODS orgs_check_membership_for_user
     RAISING cx_static_check.
 * DELETE - "Remove an organization member"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
 * Response: 403, 
   METHODS orgs_remove_member
     RAISING cx_static_check.
 * GET - "Get organization membership for a user"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/username
 * Response: 200, response
 *     application/json, #/components/schemas/org-membership
 * Response: 403, 
@@ -1148,6 +1463,8 @@ INTERFACE zif_github.
   METHODS orgs_get_membership_for_user
     RAISING cx_static_check.
 * PUT - "Set organization membership for a user"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/username
 * Response: 200, response
 *     application/json, #/components/schemas/org-membership
 * Response: 403, 
@@ -1155,17 +1472,23 @@ INTERFACE zif_github.
   METHODS orgs_set_membership_for_user
     RAISING cx_static_check.
 * DELETE - "Remove organization membership for a user"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
 * Response: 403, 
 * Response: 404, 
   METHODS orgs_remove_membership_for_use
     RAISING cx_static_check.
 * GET - "List organization migrations"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS migrations_list_for_org
     RAISING cx_static_check.
 * POST - "Start an organization migration"
+* Parameter: #/components/parameters/org
 * Response: 201, response
 *     application/json, #/components/schemas/migration
 * Response: 404, 
@@ -1173,27 +1496,40 @@ INTERFACE zif_github.
   METHODS migrations_start_for_org
     RAISING cx_static_check.
 * GET - "Get an organization migration status"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/migration_id
 * Response: 200, *   `pending`, which means the migration hasn't started yet.\n*   `exporting`, which means the migration is in progress.\n*   `exported`, which means the migration finished successfully.\n*   `failed`, which means the migration failed.
 *     application/json, #/components/schemas/migration
 * Response: 404, 
   METHODS migrations_get_status_for_org
     RAISING cx_static_check.
 * GET - "Download an organization migration archive"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/migration_id
 * Response: 302, response
 * Response: 404, 
   METHODS migrations_download_archive_fo
     RAISING cx_static_check.
 * DELETE - "Delete an organization migration archive"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/migration_id
 * Response: 204, Empty response
 * Response: 404, 
   METHODS migrations_delete_archive_for_
     RAISING cx_static_check.
 * DELETE - "Unlock an organization repository"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/migration_id
+* Parameter: #/components/parameters/repo_name
 * Response: 204, Empty response
 * Response: 404, 
   METHODS migrations_unlock_repo_for_org
     RAISING cx_static_check.
 * GET - "List repositories in an organization migration"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/migration_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -1201,6 +1537,9 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List outside collaborators for an organization"
 * Parameter: filter, optional, query
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS orgs_list_outside_collaborator
@@ -1208,6 +1547,8 @@ INTERFACE zif_github.
       filter TYPE string OPTIONAL
     RAISING cx_static_check.
 * PUT - "Convert an organization member to outside collaborator"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/username
 * Response: 202, User is getting converted asynchronously
 * Response: 204, User was converted
 * Response: 403, response
@@ -1216,6 +1557,8 @@ INTERFACE zif_github.
   METHODS orgs_convert_member_to_outside
     RAISING cx_static_check.
 * DELETE - "Remove outside collaborator from an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
 * Response: 422, Response if user is a member of the organization
 *     application/json, 
@@ -1223,6 +1566,9 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List organization projects"
 * Parameter: state, optional, query
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 422, 
@@ -1231,6 +1577,7 @@ INTERFACE zif_github.
       state TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create an organization project"
+* Parameter: #/components/parameters/org
 * Response: 201, response
 *     application/json, #/components/schemas/project
 * Response: 401, 
@@ -1241,21 +1588,30 @@ INTERFACE zif_github.
   METHODS projects_create_for_org
     RAISING cx_static_check.
 * GET - "List public organization members"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS orgs_list_public_members
     RAISING cx_static_check.
 * GET - "Check public organization membership for a user"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/username
 * Response: 204, Response if user is a public member
 * Response: 404, Response if user is not a public member
   METHODS orgs_check_public_membership_f
     RAISING cx_static_check.
 * PUT - "Set public organization membership for the authenticated user"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
 * Response: 403, 
   METHODS orgs_set_public_membership_for
     RAISING cx_static_check.
 * DELETE - "Remove public organization membership for the authenticated user"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
   METHODS orgs_remove_public_membership_
     RAISING cx_static_check.
@@ -1263,6 +1619,9 @@ INTERFACE zif_github.
 * Parameter: type, optional, query
 * Parameter: sort, optional, query
 * Parameter: direction, optional, query
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS repos_list_for_org
@@ -1272,6 +1631,7 @@ INTERFACE zif_github.
       direction TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create an organization repository"
+* Parameter: #/components/parameters/org
 * Response: 201, response
 *     application/json, #/components/schemas/repository
 * Response: 403, 
@@ -1279,32 +1639,42 @@ INTERFACE zif_github.
   METHODS repos_create_in_org
     RAISING cx_static_check.
 * GET - "Get GitHub Actions billing for an organization"
+* Parameter: #/components/parameters/org
 * Response: 200, response
 *     application/json, #/components/schemas/actions-billing-usage
   METHODS billing_get_github_actions_b01
     RAISING cx_static_check.
 * GET - "Get GitHub Packages billing for an organization"
+* Parameter: #/components/parameters/org
 * Response: 200, response
 *     application/json, #/components/schemas/packages-billing-usage
   METHODS billing_get_github_packages_01
     RAISING cx_static_check.
 * GET - "Get shared storage billing for an organization"
+* Parameter: #/components/parameters/org
 * Response: 200, response
 *     application/json, #/components/schemas/combined-billing-usage
   METHODS billing_get_shared_storage_b01
     RAISING cx_static_check.
 * GET - "List IdP groups for an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, #/components/schemas/group-mapping
   METHODS teams_list_idp_groups_for_org
     RAISING cx_static_check.
 * GET - "List teams"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 403, 
   METHODS teams_list
     RAISING cx_static_check.
 * POST - "Create a team"
+* Parameter: #/components/parameters/org
 * Response: 201, response
 *     application/json, #/components/schemas/team-full
 * Response: 403, 
@@ -1312,70 +1682,119 @@ INTERFACE zif_github.
   METHODS teams_create
     RAISING cx_static_check.
 * GET - "Get a team by name"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
 * Response: 200, response
 *     application/json, #/components/schemas/team-full
 * Response: 404, 
   METHODS teams_get_by_name
     RAISING cx_static_check.
 * PATCH - "Update a team"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
 * Response: 201, response
 *     application/json, #/components/schemas/team-full
   METHODS teams_update_in_org
     RAISING cx_static_check.
 * DELETE - "Delete a team"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
 * Response: 204, Empty response
   METHODS teams_delete_in_org
     RAISING cx_static_check.
 * GET - "List discussions"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/direction
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS teams_list_discussions_in_org
     RAISING cx_static_check.
 * POST - "Create a discussion"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
 * Response: 201, response
 *     application/json, #/components/schemas/team-discussion
   METHODS teams_create_discussion_in_org
     RAISING cx_static_check.
 * GET - "Get a discussion"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/discussion-number
 * Response: 200, response
 *     application/json, #/components/schemas/team-discussion
   METHODS teams_get_discussion_in_org
     RAISING cx_static_check.
 * PATCH - "Update a discussion"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/discussion-number
 * Response: 200, response
 *     application/json, #/components/schemas/team-discussion
   METHODS teams_update_discussion_in_org
     RAISING cx_static_check.
 * DELETE - "Delete a discussion"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/discussion-number
 * Response: 204, Empty response
   METHODS teams_delete_discussion_in_org
     RAISING cx_static_check.
 * GET - "List discussion comments"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/discussion-number
+* Parameter: #/components/parameters/direction
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS teams_list_discussion_comments
     RAISING cx_static_check.
 * POST - "Create a discussion comment"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/discussion-number
 * Response: 201, response
 *     application/json, #/components/schemas/team-discussion-comment
   METHODS teams_create_discussion_commen
     RAISING cx_static_check.
 * GET - "Get a discussion comment"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/discussion-number
+* Parameter: #/components/parameters/comment-number
 * Response: 200, response
 *     application/json, #/components/schemas/team-discussion-comment
   METHODS teams_get_discussion_comment_i
     RAISING cx_static_check.
 * PATCH - "Update a discussion comment"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/discussion-number
+* Parameter: #/components/parameters/comment-number
 * Response: 200, response
 *     application/json, #/components/schemas/team-discussion-comment
   METHODS teams_update_discussion_commen
     RAISING cx_static_check.
 * DELETE - "Delete a discussion comment"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/discussion-number
+* Parameter: #/components/parameters/comment-number
 * Response: 204, Empty response
   METHODS teams_delete_discussion_commen
     RAISING cx_static_check.
 * GET - "List reactions for a team discussion comment"
 * Parameter: content, optional, query
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/discussion-number
+* Parameter: #/components/parameters/comment-number
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS reactions_list_for_team_discus
@@ -1383,16 +1802,30 @@ INTERFACE zif_github.
       content TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create reaction for a team discussion comment"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/discussion-number
+* Parameter: #/components/parameters/comment-number
 * Response: 201, response
 *     application/json, #/components/schemas/reaction
   METHODS reactions_create_for_team_disc
     RAISING cx_static_check.
 * DELETE - "Delete team discussion comment reaction"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/discussion-number
+* Parameter: #/components/parameters/comment-number
+* Parameter: #/components/parameters/reaction-id
 * Response: 204, Empty response
   METHODS reactions_delete_for_team_disc
     RAISING cx_static_check.
 * GET - "List reactions for a team discussion"
 * Parameter: content, optional, query
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/discussion-number
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS reactions_list_for_team_disc01
@@ -1400,21 +1833,36 @@ INTERFACE zif_github.
       content TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create reaction for a team discussion"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/discussion-number
 * Response: 201, response
 *     application/json, #/components/schemas/reaction
   METHODS reactions_create_for_team_di01
     RAISING cx_static_check.
 * DELETE - "Delete team discussion reaction"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/discussion-number
+* Parameter: #/components/parameters/reaction-id
 * Response: 204, Empty response
   METHODS reactions_delete_for_team_di01
     RAISING cx_static_check.
 * GET - "List pending team invitations"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS teams_list_pending_invitations
     RAISING cx_static_check.
 * GET - "List team members"
 * Parameter: role, optional, query
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS teams_list_members_in_org
@@ -1422,12 +1870,18 @@ INTERFACE zif_github.
       role TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Get team membership for a user"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/username
 * Response: 200, response
 *     application/json, #/components/schemas/team-membership
 * Response: 404, Response if user has no team membership
   METHODS teams_get_membership_for_user_
     RAISING cx_static_check.
 * PUT - "Add or update team membership for a user"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/username
 * Response: 200, response
 *     application/json, #/components/schemas/team-membership
 * Response: 403, Response if team synchronization is set up
@@ -1436,37 +1890,61 @@ INTERFACE zif_github.
   METHODS teams_add_or_update_membership
     RAISING cx_static_check.
 * DELETE - "Remove team membership for a user"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
 * Response: 403, Response if team synchronization is set up
   METHODS teams_remove_membership_for_us
     RAISING cx_static_check.
 * GET - "List team projects"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS teams_list_projects_in_org
     RAISING cx_static_check.
 * GET - "Check team permissions for a project"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/project-id
 * Response: 200, response
 *     application/json, #/components/schemas/team-project
 * Response: 404, Response if project is not managed by this team
   METHODS teams_check_permissions_for_pr
     RAISING cx_static_check.
 * PUT - "Add or update team project permissions"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/project-id
 * Response: 204, Empty response
 * Response: 403, Response if the project is not owned by the organization
 *     application/json, 
   METHODS teams_add_or_update_project_pe
     RAISING cx_static_check.
 * DELETE - "Remove a project from a team"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/project-id
 * Response: 204, Empty response
   METHODS teams_remove_project_in_org
     RAISING cx_static_check.
 * GET - "List team repositories"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS teams_list_repos_in_org
     RAISING cx_static_check.
 * GET - "Check team permissions for a repository"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, Alternative response with repository permissions
 *     application/vnd.github.v3.repository+json, #/components/schemas/team-repository
 * Response: 204, Response if team has permission for the repository
@@ -1474,29 +1952,46 @@ INTERFACE zif_github.
   METHODS teams_check_permissions_for_re
     RAISING cx_static_check.
 * PUT - "Add or update team repository permissions"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
   METHODS teams_add_or_update_repo_permi
     RAISING cx_static_check.
 * DELETE - "Remove a repository from a team"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
   METHODS teams_remove_repo_in_org
     RAISING cx_static_check.
 * GET - "List IdP groups for a team"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
 * Response: 200, response
 *     application/json, #/components/schemas/group-mapping
   METHODS teams_list_idp_groups_in_org
     RAISING cx_static_check.
 * PATCH - "Create or update IdP group connections"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
 * Response: 200, response
 *     application/json, #/components/schemas/group-mapping
   METHODS teams_create_or_update_idp_gro
     RAISING cx_static_check.
 * GET - "List child teams"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/team_slug
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, Response if child teams exist
 *     application/json, 
   METHODS teams_list_child_in_org
     RAISING cx_static_check.
 * GET - "Get a project card"
+* Parameter: #/components/parameters/card_id
 * Response: 200, response
 *     application/json, #/components/schemas/project-card
 * Response: 304, 
@@ -1506,6 +2001,7 @@ INTERFACE zif_github.
   METHODS projects_get_card
     RAISING cx_static_check.
 * PATCH - "Update an existing project card"
+* Parameter: #/components/parameters/card_id
 * Response: 200, response
 *     application/json, #/components/schemas/project-card
 * Response: 304, 
@@ -1516,6 +2012,7 @@ INTERFACE zif_github.
   METHODS projects_update_card
     RAISING cx_static_check.
 * DELETE - "Delete a project card"
+* Parameter: #/components/parameters/card_id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -1525,6 +2022,7 @@ INTERFACE zif_github.
   METHODS projects_delete_card
     RAISING cx_static_check.
 * POST - "Move a project card"
+* Parameter: #/components/parameters/card_id
 * Response: 201, response
 *     application/json, 
 * Response: 304, 
@@ -1537,6 +2035,7 @@ INTERFACE zif_github.
   METHODS projects_move_card
     RAISING cx_static_check.
 * GET - "Get a project column"
+* Parameter: #/components/parameters/column_id
 * Response: 200, response
 *     application/json, #/components/schemas/project-column
 * Response: 304, 
@@ -1546,6 +2045,7 @@ INTERFACE zif_github.
   METHODS projects_get_column
     RAISING cx_static_check.
 * PATCH - "Update an existing project column"
+* Parameter: #/components/parameters/column_id
 * Response: 200, response
 *     application/json, #/components/schemas/project-column
 * Response: 304, 
@@ -1554,6 +2054,7 @@ INTERFACE zif_github.
   METHODS projects_update_column
     RAISING cx_static_check.
 * DELETE - "Delete a project column"
+* Parameter: #/components/parameters/column_id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -1562,6 +2063,9 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List project cards"
 * Parameter: archived_state, optional, query
+* Parameter: #/components/parameters/column_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -1572,6 +2076,7 @@ INTERFACE zif_github.
       archived_state TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a project card"
+* Parameter: #/components/parameters/column_id
 * Response: 201, response
 *     application/json, #/components/schemas/project-card
 * Response: 304, 
@@ -1584,6 +2089,7 @@ INTERFACE zif_github.
   METHODS projects_create_card
     RAISING cx_static_check.
 * POST - "Move a project column"
+* Parameter: #/components/parameters/column_id
 * Response: 201, response
 *     application/json, 
 * Response: 304, 
@@ -1593,6 +2099,7 @@ INTERFACE zif_github.
   METHODS projects_move_column
     RAISING cx_static_check.
 * GET - "Get a project"
+* Parameter: #/components/parameters/project-id
 * Response: 200, response
 *     application/json, #/components/schemas/project
 * Response: 304, 
@@ -1601,6 +2108,7 @@ INTERFACE zif_github.
   METHODS projects_get
     RAISING cx_static_check.
 * PATCH - "Update a project"
+* Parameter: #/components/parameters/project-id
 * Response: 200, response
 *     application/json, #/components/schemas/project
 * Response: 304, 
@@ -1613,6 +2121,7 @@ INTERFACE zif_github.
   METHODS projects_update
     RAISING cx_static_check.
 * DELETE - "Delete a project"
+* Parameter: #/components/parameters/project-id
 * Response: 204, Delete Success
 * Response: 304, 
 * Response: 401, 
@@ -1624,6 +2133,9 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List project collaborators"
 * Parameter: affiliation, optional, query
+* Parameter: #/components/parameters/project-id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -1637,6 +2149,8 @@ INTERFACE zif_github.
       affiliation TYPE string OPTIONAL
     RAISING cx_static_check.
 * PUT - "Add project collaborator"
+* Parameter: #/components/parameters/project-id
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -1647,6 +2161,8 @@ INTERFACE zif_github.
   METHODS projects_add_collaborator
     RAISING cx_static_check.
 * DELETE - "Remove user as a collaborator"
+* Parameter: #/components/parameters/project-id
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -1657,6 +2173,8 @@ INTERFACE zif_github.
   METHODS projects_remove_collaborator
     RAISING cx_static_check.
 * GET - "Get project permission for a user"
+* Parameter: #/components/parameters/project-id
+* Parameter: #/components/parameters/username
 * Response: 200, response
 *     application/json, #/components/schemas/repository-collaborator-permission
 * Response: 304, 
@@ -1668,6 +2186,9 @@ INTERFACE zif_github.
   METHODS projects_get_permission_for_us
     RAISING cx_static_check.
 * GET - "List project columns"
+* Parameter: #/components/parameters/project-id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -1676,6 +2197,7 @@ INTERFACE zif_github.
   METHODS projects_list_columns
     RAISING cx_static_check.
 * POST - "Create a project column"
+* Parameter: #/components/parameters/project-id
 * Response: 201, response
 *     application/json, #/components/schemas/project-column
 * Response: 304, 
@@ -1692,6 +2214,7 @@ INTERFACE zif_github.
   METHODS rate_limit_get
     RAISING cx_static_check.
 * DELETE - "Delete a reaction (Legacy)"
+* Parameter: #/components/parameters/reaction-id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -1701,6 +2224,8 @@ INTERFACE zif_github.
   METHODS reactions_delete_legacy
     RAISING cx_static_check.
 * GET - "Get a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/full-repository
 * Response: 301, 
@@ -1709,6 +2234,8 @@ INTERFACE zif_github.
   METHODS repos_get
     RAISING cx_static_check.
 * PATCH - "Update a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/full-repository
 * Response: 403, 
@@ -1717,6 +2244,8 @@ INTERFACE zif_github.
   METHODS repos_update
     RAISING cx_static_check.
 * DELETE - "Delete a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
 * Response: 403, If an organization owner has configured the organization to prevent members from deleting organization-owned repositories, a member will get this response:
 *     application/json, 
@@ -1724,107 +2253,177 @@ INTERFACE zif_github.
   METHODS repos_delete
     RAISING cx_static_check.
 * GET - "List artifacts for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS actions_list_artifacts_for_rep
     RAISING cx_static_check.
 * GET - "Get an artifact"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/artifact_id
 * Response: 200, response
 *     application/json, #/components/schemas/artifact
   METHODS actions_get_artifact
     RAISING cx_static_check.
 * DELETE - "Delete an artifact"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/artifact_id
 * Response: 204, Empty response
   METHODS actions_delete_artifact
     RAISING cx_static_check.
 * GET - "Download an artifact"
 * Parameter: archive_format, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/artifact_id
 * Response: 302, response
   METHODS actions_download_artifact
     IMPORTING
       archive_format TYPE string
     RAISING cx_static_check.
 * GET - "Get a job for a workflow run"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/job_id
 * Response: 202, response
 *     application/json, #/components/schemas/job
   METHODS actions_get_job_for_workflow_r
     RAISING cx_static_check.
 * GET - "Download job logs for a workflow run"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/job_id
 * Response: 302, response
   METHODS actions_download_job_logs_for_
     RAISING cx_static_check.
 * GET - "Get GitHub Actions permissions for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/actions-repository-permissions
   METHODS actions_get_github_actions_p01
     RAISING cx_static_check.
 * PUT - "Set GitHub Actions permissions for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
   METHODS actions_set_github_actions_p01
     RAISING cx_static_check.
 * GET - "Get allowed actions for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/selected-actions
   METHODS actions_get_allowed_actions_re
     RAISING cx_static_check.
 * PUT - "Set allowed actions for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
   METHODS actions_set_allowed_actions_re
     RAISING cx_static_check.
 * GET - "List self-hosted runners for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS actions_list_self_hosted_run03
     RAISING cx_static_check.
 * GET - "List runner applications for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, 
   METHODS actions_list_runner_applicat01
     RAISING cx_static_check.
 * POST - "Create a registration token for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/authentication-token
   METHODS actions_create_registration_01
     RAISING cx_static_check.
 * POST - "Create a remove token for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/authentication-token
   METHODS actions_create_remove_token_01
     RAISING cx_static_check.
 * GET - "Get a self-hosted runner for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/runner_id
 * Response: 200, response
 *     application/json, #/components/schemas/runner
   METHODS actions_get_self_hosted_runn02
     RAISING cx_static_check.
 * DELETE - "Delete a self-hosted runner from a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/runner_id
 * Response: 204, Empty response
   METHODS actions_delete_self_hosted_r02
     RAISING cx_static_check.
 * GET - "List workflow runs for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/actor
+* Parameter: #/components/parameters/workflow-run-branch
+* Parameter: #/components/parameters/event
+* Parameter: #/components/parameters/workflow-run-status
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS actions_list_workflow_runs_for
     RAISING cx_static_check.
 * GET - "Get a workflow run"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/run-id
 * Response: 200, response
 *     application/json, #/components/schemas/workflow-run
   METHODS actions_get_workflow_run
     RAISING cx_static_check.
 * DELETE - "Delete a workflow run"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/run-id
 * Response: 204, Empty response
   METHODS actions_delete_workflow_run
     RAISING cx_static_check.
 * GET - "List workflow run artifacts"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/run-id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS actions_list_workflow_run_arti
     RAISING cx_static_check.
 * POST - "Cancel a workflow run"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/run-id
 * Response: 202, response
   METHODS actions_cancel_workflow_run
     RAISING cx_static_check.
 * GET - "List jobs for a workflow run"
 * Parameter: filter, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/run-id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS actions_list_jobs_for_workflow
@@ -1832,79 +2431,138 @@ INTERFACE zif_github.
       filter TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Download workflow run logs"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/run-id
 * Response: 302, response
   METHODS actions_download_workflow_run_
     RAISING cx_static_check.
 * DELETE - "Delete workflow run logs"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/run-id
 * Response: 204, Empty response
   METHODS actions_delete_workflow_run_lo
     RAISING cx_static_check.
 * POST - "Re-run a workflow"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/run-id
 * Response: 201, response
   METHODS actions_re_run_workflow
     RAISING cx_static_check.
 * GET - "Get workflow run usage"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/run-id
 * Response: 200, response
 *     application/json, #/components/schemas/workflow-run-usage
   METHODS actions_get_workflow_run_usage
     RAISING cx_static_check.
 * GET - "List repository secrets"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS actions_list_repo_secrets
     RAISING cx_static_check.
 * GET - "Get a repository public key"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/actions-public-key
   METHODS actions_get_repo_public_key
     RAISING cx_static_check.
 * GET - "Get a repository secret"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/secret_name
 * Response: 200, response
 *     application/json, #/components/schemas/actions-secret
   METHODS actions_get_repo_secret
     RAISING cx_static_check.
 * PUT - "Create or update a repository secret"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/secret_name
 * Response: 201, Response when creating a secret
 * Response: 204, Response when updating a secret
   METHODS actions_create_or_update_repo_
     RAISING cx_static_check.
 * DELETE - "Delete a repository secret"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/secret_name
 * Response: 204, Empty response
   METHODS actions_delete_repo_secret
     RAISING cx_static_check.
 * GET - "List repository workflows"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS actions_list_repo_workflows
     RAISING cx_static_check.
 * GET - "Get a workflow"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/workflow-id
 * Response: 200, response
 *     application/json, #/components/schemas/workflow
   METHODS actions_get_workflow
     RAISING cx_static_check.
 * PUT - "Disable a workflow"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/workflow-id
 * Response: 204, Empty response
   METHODS actions_disable_workflow
     RAISING cx_static_check.
 * POST - "Create a workflow dispatch event"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/workflow-id
 * Response: 204, Empty response
   METHODS actions_create_workflow_dispat
     RAISING cx_static_check.
 * PUT - "Enable a workflow"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/workflow-id
 * Response: 204, Empty response
   METHODS actions_enable_workflow
     RAISING cx_static_check.
 * GET - "List workflow runs"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/workflow-id
+* Parameter: #/components/parameters/actor
+* Parameter: #/components/parameters/workflow-run-branch
+* Parameter: #/components/parameters/event
+* Parameter: #/components/parameters/workflow-run-status
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS actions_list_workflow_runs
     RAISING cx_static_check.
 * GET - "Get workflow usage"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/workflow-id
 * Response: 200, response
 *     application/json, #/components/schemas/workflow-usage
   METHODS actions_get_workflow_usage
     RAISING cx_static_check.
 * GET - "List assignees"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -1912,6 +2570,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "Check if a user can be assigned"
 * Parameter: assignee, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, If the `assignee` can be assigned to issues in the repository, a `204` header with no content is returned.
 * Response: 404, Otherwise a `404` status code is returned.
 *     application/json, #/components/schemas/basic-error
@@ -1920,15 +2580,23 @@ INTERFACE zif_github.
       assignee TYPE string
     RAISING cx_static_check.
 * PUT - "Enable automated security fixes"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
   METHODS repos_enable_automated_securit
     RAISING cx_static_check.
 * DELETE - "Disable automated security fixes"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
   METHODS repos_disable_automated_securi
     RAISING cx_static_check.
 * GET - "List branches"
 * Parameter: protected, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -1937,6 +2605,9 @@ INTERFACE zif_github.
       protected TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a branch"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, #/components/schemas/branch-with-protection
 * Response: 404, 
@@ -1944,12 +2615,18 @@ INTERFACE zif_github.
   METHODS repos_get_branch
     RAISING cx_static_check.
 * GET - "Get branch protection"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, #/components/schemas/branch-protection
 * Response: 404, 
   METHODS repos_get_branch_protection
     RAISING cx_static_check.
 * PUT - "Update branch protection"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, #/components/schemas/protected-branch
 * Response: 403, 
@@ -1959,65 +2636,101 @@ INTERFACE zif_github.
   METHODS repos_update_branch_protection
     RAISING cx_static_check.
 * DELETE - "Delete branch protection"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 204, Empty response
 * Response: 403, 
   METHODS repos_delete_branch_protection
     RAISING cx_static_check.
 * GET - "Get admin branch protection"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, #/components/schemas/protected-branch-admin-enforced
   METHODS repos_get_admin_branch_protect
     RAISING cx_static_check.
 * POST - "Set admin branch protection"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, #/components/schemas/protected-branch-admin-enforced
   METHODS repos_set_admin_branch_protect
     RAISING cx_static_check.
 * DELETE - "Delete admin branch protection"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 204, No Content
 * Response: 404, 
   METHODS repos_delete_admin_branch_prot
     RAISING cx_static_check.
 * GET - "Get pull request review protection"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/vnd.github.luke-cage-preview+json, #/components/schemas/protected-branch-pull-request-review
   METHODS repos_get_pull_request_review_
     RAISING cx_static_check.
 * PATCH - "Update pull request review protection"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, #/components/schemas/protected-branch-pull-request-review
 * Response: 422, 
   METHODS repos_update_pull_request_revi
     RAISING cx_static_check.
 * DELETE - "Delete pull request review protection"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 204, No Content
 * Response: 404, 
   METHODS repos_delete_pull_request_revi
     RAISING cx_static_check.
 * GET - "Get commit signature protection"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, #/components/schemas/protected-branch-admin-enforced
 * Response: 404, 
   METHODS repos_get_commit_signature_pro
     RAISING cx_static_check.
 * POST - "Create commit signature protection"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, #/components/schemas/protected-branch-admin-enforced
 * Response: 404, 
   METHODS repos_create_commit_signature_
     RAISING cx_static_check.
 * DELETE - "Delete commit signature protection"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 204, No Content
 * Response: 404, 
   METHODS repos_delete_commit_signature_
     RAISING cx_static_check.
 * GET - "Get status checks protection"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, #/components/schemas/status-check-policy
 * Response: 404, 
   METHODS repos_get_status_checks_protec
     RAISING cx_static_check.
 * PATCH - "Update status check protection"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, #/components/schemas/status-check-policy
 * Response: 404, 
@@ -2025,16 +2738,25 @@ INTERFACE zif_github.
   METHODS repos_update_status_check_prot
     RAISING cx_static_check.
 * DELETE - "Remove status check protection"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 204, No Content
   METHODS repos_remove_status_check_prot
     RAISING cx_static_check.
 * GET - "Get all status check contexts"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
   METHODS repos_get_all_status_check_con
     RAISING cx_static_check.
 * POST - "Add status check contexts"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, 
 * Response: 403, 
@@ -2043,6 +2765,9 @@ INTERFACE zif_github.
   METHODS repos_add_status_check_context
     RAISING cx_static_check.
 * PUT - "Set status check contexts"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -2050,6 +2775,9 @@ INTERFACE zif_github.
   METHODS repos_set_status_check_context
     RAISING cx_static_check.
 * DELETE - "Remove status check contexts"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -2057,88 +2785,133 @@ INTERFACE zif_github.
   METHODS repos_remove_status_check_cont
     RAISING cx_static_check.
 * GET - "Get access restrictions"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, #/components/schemas/branch-restriction-policy
 * Response: 404, 
   METHODS repos_get_access_restrictions
     RAISING cx_static_check.
 * DELETE - "Delete access restrictions"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 204, No Content
   METHODS repos_delete_access_restrictio
     RAISING cx_static_check.
 * GET - "Get apps with access to the protected branch"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
   METHODS repos_get_apps_with_access_to_
     RAISING cx_static_check.
 * POST - "Add app access restrictions"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, 
 * Response: 422, 
   METHODS repos_add_app_access_restricti
     RAISING cx_static_check.
 * PUT - "Set app access restrictions"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, 
 * Response: 422, 
   METHODS repos_set_app_access_restricti
     RAISING cx_static_check.
 * DELETE - "Remove app access restrictions"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, 
 * Response: 422, 
   METHODS repos_remove_app_access_restri
     RAISING cx_static_check.
 * GET - "Get teams with access to the protected branch"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
   METHODS repos_get_teams_with_access_to
     RAISING cx_static_check.
 * POST - "Add team access restrictions"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, 
 * Response: 422, 
   METHODS repos_add_team_access_restrict
     RAISING cx_static_check.
 * PUT - "Set team access restrictions"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, 
 * Response: 422, 
   METHODS repos_set_team_access_restrict
     RAISING cx_static_check.
 * DELETE - "Remove team access restrictions"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, 
 * Response: 422, 
   METHODS repos_remove_team_access_restr
     RAISING cx_static_check.
 * GET - "Get users with access to the protected branch"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
   METHODS repos_get_users_with_access_to
     RAISING cx_static_check.
 * POST - "Add user access restrictions"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, 
 * Response: 422, 
   METHODS repos_add_user_access_restrict
     RAISING cx_static_check.
 * PUT - "Set user access restrictions"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, 
 * Response: 422, 
   METHODS repos_set_user_access_restrict
     RAISING cx_static_check.
 * DELETE - "Remove user access restrictions"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 200, response
 *     application/json, 
 * Response: 422, 
   METHODS repos_remove_user_access_restr
     RAISING cx_static_check.
 * POST - "Rename a branch"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/branch
 * Response: 201, response
 *     application/json, #/components/schemas/branch-with-protection
 * Response: 403, 
@@ -2147,42 +2920,69 @@ INTERFACE zif_github.
   METHODS repos_rename_branch
     RAISING cx_static_check.
 * POST - "Create a check run"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/check-run
   METHODS checks_create
     RAISING cx_static_check.
 * GET - "Get a check run"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/check_run_id
 * Response: 200, response
 *     application/json, #/components/schemas/check-run
   METHODS checks_get
     RAISING cx_static_check.
 * PATCH - "Update a check run"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/check_run_id
 * Response: 200, response
 *     application/json, #/components/schemas/check-run
   METHODS checks_update
     RAISING cx_static_check.
 * GET - "List check run annotations"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/check_run_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS checks_list_annotations
     RAISING cx_static_check.
 * POST - "Create a check suite"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/check-suite
   METHODS checks_create_suite
     RAISING cx_static_check.
 * PATCH - "Update repository preferences for check suites"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/check-suite-preference
   METHODS checks_set_suites_preferences
     RAISING cx_static_check.
 * GET - "Get a check suite"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/check_suite_id
 * Response: 200, response
 *     application/json, #/components/schemas/check-suite
   METHODS checks_get_suite
     RAISING cx_static_check.
 * GET - "List check runs in a check suite"
 * Parameter: filter, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/check_suite_id
+* Parameter: #/components/parameters/check_name
+* Parameter: #/components/parameters/status
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS checks_list_for_suite
@@ -2190,12 +2990,17 @@ INTERFACE zif_github.
       filter TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Rerequest a check suite"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/check_suite_id
 * Response: 201, response
   METHODS checks_rerequest_suite
     RAISING cx_static_check.
 * GET - "List code scanning alerts for a repository"
 * Parameter: state, optional, query
 * Parameter: ref, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, 
 * Response: 403, Response if github advanced security is not enabled for this repository
@@ -2208,6 +3013,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "Get a code scanning alert"
 * Parameter: alert_number, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/code-scanning-alert-code-scanning-alert
 * Response: 403, Response if github advanced security is not enabled for this repository
@@ -2218,6 +3025,9 @@ INTERFACE zif_github.
       alert_number TYPE string
     RAISING cx_static_check.
 * PATCH - "Update a code scanning alert"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/alert_number
 * Response: 200, response
 *     application/json, #/components/schemas/code-scanning-alert-code-scanning-alert
 * Response: 403, Response if the repository is archived, or if github advanced security is not enabled for this repository
@@ -2227,6 +3037,8 @@ INTERFACE zif_github.
 * GET - "List recent code scanning analyses for a repository"
 * Parameter: ref, optional, query
 * Parameter: tool_name, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, 
 * Response: 403, Response if github advanced security is not enabled for this repository
@@ -2236,6 +3048,8 @@ INTERFACE zif_github.
       tool_name TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Upload a SARIF file"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 202, response
 * Response: 400, Response if the `sarif` field is invalid
 * Response: 403, Response if the repository is archived, or if github advanced security is not enabled for this repository
@@ -2245,6 +3059,10 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List repository collaborators"
 * Parameter: affiliation, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -2253,11 +3071,17 @@ INTERFACE zif_github.
       affiliation TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Check if a user is a repository collaborator"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/username
 * Response: 204, Response if user is a collaborator
 * Response: 404, Response if user is not a collaborator
   METHODS repos_check_collaborator
     RAISING cx_static_check.
 * PUT - "Add a repository collaborator"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/username
 * Response: 201, Response when a new invitation is created
 *     application/json, #/components/schemas/repository-invitation
 * Response: 204, Response when person is already a collaborator
@@ -2266,39 +3090,63 @@ INTERFACE zif_github.
   METHODS repos_add_collaborator
     RAISING cx_static_check.
 * DELETE - "Remove a repository collaborator"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
   METHODS repos_remove_collaborator
     RAISING cx_static_check.
 * GET - "Get repository permissions for a user"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/username
 * Response: 200, Response if user has admin permissions
 *     application/json, #/components/schemas/repository-collaborator-permission
 * Response: 404, 
   METHODS repos_get_collaborator_permiss
     RAISING cx_static_check.
 * GET - "List commit comments for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS repos_list_commit_comments_for
     RAISING cx_static_check.
 * GET - "Get a commit comment"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
 * Response: 200, response
 *     application/json, #/components/schemas/commit-comment
 * Response: 404, 
   METHODS repos_get_commit_comment
     RAISING cx_static_check.
 * PATCH - "Update a commit comment"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
 * Response: 200, response
 *     application/json, #/components/schemas/commit-comment
 * Response: 404, 
   METHODS repos_update_commit_comment
     RAISING cx_static_check.
 * DELETE - "Delete a commit comment"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
 * Response: 204, Empty response
 * Response: 404, 
   METHODS repos_delete_commit_comment
     RAISING cx_static_check.
 * GET - "List reactions for a commit comment"
 * Parameter: content, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -2308,6 +3156,9 @@ INTERFACE zif_github.
       content TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create reaction for a commit comment"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
 * Response: 200, Reaction exists
 *     application/json, #/components/schemas/reaction
 * Response: 201, Reaction created
@@ -2317,6 +3168,10 @@ INTERFACE zif_github.
   METHODS reactions_create_for_commit_co
     RAISING cx_static_check.
 * DELETE - "Delete a commit comment reaction"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
+* Parameter: #/components/parameters/reaction-id
 * Response: 204, Empty response
   METHODS reactions_delete_for_commit_co
     RAISING cx_static_check.
@@ -2325,6 +3180,11 @@ INTERFACE zif_github.
 * Parameter: path, optional, query
 * Parameter: author, optional, query
 * Parameter: until, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/since
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 400, 
@@ -2339,6 +3199,9 @@ INTERFACE zif_github.
       until TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "List branches for HEAD commit"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/commit_sha
 * Response: 200, response
 *     application/json, 
 * Response: 415, 
@@ -2346,11 +3209,19 @@ INTERFACE zif_github.
   METHODS repos_list_branches_for_head_c
     RAISING cx_static_check.
 * GET - "List commit comments"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/commit_sha
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS repos_list_comments_for_commit
     RAISING cx_static_check.
 * POST - "Create a commit comment"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/commit_sha
 * Response: 201, response
 *     application/json, #/components/schemas/commit-comment
 * Response: 403, 
@@ -2358,6 +3229,11 @@ INTERFACE zif_github.
   METHODS repos_create_commit_comment
     RAISING cx_static_check.
 * GET - "List pull requests associated with a commit"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/commit_sha
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 415, 
@@ -2365,6 +3241,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "Get a commit"
 * Parameter: ref, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/commit
 * Response: 404, 
@@ -2377,6 +3255,12 @@ INTERFACE zif_github.
 * GET - "List check runs for a Git reference"
 * Parameter: ref, required, path
 * Parameter: filter, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/check_name
+* Parameter: #/components/parameters/status
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS checks_list_for_ref
@@ -2387,6 +3271,11 @@ INTERFACE zif_github.
 * GET - "List check suites for a Git reference"
 * Parameter: ref, required, path
 * Parameter: app_id, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/check_name
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS checks_list_suites_for_ref
@@ -2396,6 +3285,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "Get the combined status for a specific reference"
 * Parameter: ref, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/combined-commit-status
 * Response: 404, 
@@ -2405,6 +3296,10 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List commit statuses for a reference"
 * Parameter: ref, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 301, 
@@ -2413,11 +3308,15 @@ INTERFACE zif_github.
       ref TYPE string
     RAISING cx_static_check.
 * GET - "Get the code of conduct for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/code-of-conduct
   METHODS codes_of_conduct_get_for_repo
     RAISING cx_static_check.
 * GET - "Get community profile metrics"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/community-profile
   METHODS repos_get_community_profile_me
@@ -2425,6 +3324,8 @@ INTERFACE zif_github.
 * GET - "Compare two commits"
 * Parameter: base, required, path
 * Parameter: head, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/commit-comparison
 * Response: 404, 
@@ -2437,6 +3338,8 @@ INTERFACE zif_github.
 * GET - "Get repository content"
 * Parameter: path, required, path
 * Parameter: ref, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/vnd.github.v3.object, #/components/schemas/content-tree
 *     application/json, 
@@ -2450,6 +3353,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * PUT - "Create or update file contents"
 * Parameter: path, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/file-commit
 * Response: 201, response
@@ -2463,6 +3368,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * DELETE - "Delete a file"
 * Parameter: path, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/file-commit
 * Response: 404, 
@@ -2475,6 +3382,10 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List repository contributors"
 * Parameter: anon, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, Response if repository contains content
 *     application/json, 
 * Response: 204, Response if repository is empty
@@ -2489,6 +3400,10 @@ INTERFACE zif_github.
 * Parameter: ref, optional, query
 * Parameter: task, optional, query
 * Parameter: environment, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS repos_list_deployments
@@ -2499,6 +3414,8 @@ INTERFACE zif_github.
       environment TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a deployment"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/deployment
 * Response: 202, Merged branch response
@@ -2509,24 +3426,38 @@ INTERFACE zif_github.
   METHODS repos_create_deployment
     RAISING cx_static_check.
 * GET - "Get a deployment"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/deployment_id
 * Response: 200, response
 *     application/json, #/components/schemas/deployment
 * Response: 404, 
   METHODS repos_get_deployment
     RAISING cx_static_check.
 * DELETE - "Delete a deployment"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/deployment_id
 * Response: 204, Empty response
 * Response: 404, 
 * Response: 422, 
   METHODS repos_delete_deployment
     RAISING cx_static_check.
 * GET - "List deployment statuses"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/deployment_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
   METHODS repos_list_deployment_statuses
     RAISING cx_static_check.
 * POST - "Create a deployment status"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/deployment_id
 * Response: 201, response
 *     application/json, #/components/schemas/deployment-status
 * Response: 422, 
@@ -2534,6 +3465,9 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "Get a deployment status"
 * Parameter: status_id, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/deployment_id
 * Response: 200, response
 *     application/json, #/components/schemas/deployment-status
 * Response: 404, 
@@ -2543,17 +3477,27 @@ INTERFACE zif_github.
       status_id TYPE string
     RAISING cx_static_check.
 * POST - "Create a repository dispatch event"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
 * Response: 422, 
   METHODS repos_create_dispatch_event
     RAISING cx_static_check.
 * GET - "List repository events"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS activity_list_repo_events
     RAISING cx_static_check.
 * GET - "List forks"
 * Parameter: sort, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 400, 
@@ -2562,6 +3506,8 @@ INTERFACE zif_github.
       sort TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a fork"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 202, response
 *     application/json, #/components/schemas/repository
 * Response: 400, 
@@ -2571,6 +3517,8 @@ INTERFACE zif_github.
   METHODS repos_create_fork
     RAISING cx_static_check.
 * POST - "Create a blob"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/short-blob
 * Response: 403, 
@@ -2581,6 +3529,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "Get a blob"
 * Parameter: file_sha, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/blob
 * Response: 403, 
@@ -2591,6 +3541,8 @@ INTERFACE zif_github.
       file_sha TYPE string
     RAISING cx_static_check.
 * POST - "Create a commit"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/git-commit
 * Response: 404, 
@@ -2598,6 +3550,9 @@ INTERFACE zif_github.
   METHODS git_create_commit
     RAISING cx_static_check.
 * GET - "Get a commit"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/commit_sha
 * Response: 200, response
 *     application/json, #/components/schemas/git-commit
 * Response: 404, 
@@ -2605,6 +3560,10 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List matching references"
 * Parameter: ref, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS git_list_matching_refs
@@ -2613,6 +3572,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "Get a reference"
 * Parameter: ref, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/git-ref
 * Response: 404, 
@@ -2621,6 +3582,8 @@ INTERFACE zif_github.
       ref TYPE string
     RAISING cx_static_check.
 * POST - "Create a reference"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/git-ref
 * Response: 422, 
@@ -2628,6 +3591,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * PATCH - "Update a reference"
 * Parameter: ref, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/git-ref
 * Response: 422, 
@@ -2637,6 +3602,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * DELETE - "Delete a reference"
 * Parameter: ref, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
 * Response: 422, 
   METHODS git_delete_ref
@@ -2644,6 +3611,8 @@ INTERFACE zif_github.
       ref TYPE string
     RAISING cx_static_check.
 * POST - "Create a tag object"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/git-tag
 * Response: 422, 
@@ -2651,6 +3620,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "Get a tag"
 * Parameter: tag_sha, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/git-tag
 * Response: 404, 
@@ -2659,6 +3630,8 @@ INTERFACE zif_github.
       tag_sha TYPE string
     RAISING cx_static_check.
 * POST - "Create a tree"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/git-tree
 * Response: 403, 
@@ -2669,6 +3642,8 @@ INTERFACE zif_github.
 * GET - "Get a tree"
 * Parameter: tree_sha, required, path
 * Parameter: recursive, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/git-tree
 * Response: 404, 
@@ -2679,12 +3654,18 @@ INTERFACE zif_github.
       recursive TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "List repository webhooks"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
   METHODS repos_list_webhooks
     RAISING cx_static_check.
 * POST - "Create a repository webhook"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/hook
 * Response: 403, 
@@ -2693,12 +3674,18 @@ INTERFACE zif_github.
   METHODS repos_create_webhook
     RAISING cx_static_check.
 * GET - "Get a repository webhook"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/hook-id
 * Response: 200, response
 *     application/json, #/components/schemas/hook
 * Response: 404, 
   METHODS repos_get_webhook
     RAISING cx_static_check.
 * PATCH - "Update a repository webhook"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/hook-id
 * Response: 200, response
 *     application/json, #/components/schemas/hook
 * Response: 404, 
@@ -2706,37 +3693,56 @@ INTERFACE zif_github.
   METHODS repos_update_webhook
     RAISING cx_static_check.
 * DELETE - "Delete a repository webhook"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/hook-id
 * Response: 204, Empty response
 * Response: 404, 
   METHODS repos_delete_webhook
     RAISING cx_static_check.
 * GET - "Get a webhook configuration for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/hook-id
 * Response: 200, Default response
 *     application/json, #/components/schemas/webhook-config
   METHODS repos_get_webhook_config_for_r
     RAISING cx_static_check.
 * PATCH - "Update a webhook configuration for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/hook-id
 * Response: 200, Default response
 *     application/json, #/components/schemas/webhook-config
   METHODS repos_update_webhook_config_fo
     RAISING cx_static_check.
 * POST - "Ping a repository webhook"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/hook-id
 * Response: 204, Empty response
 * Response: 404, 
   METHODS repos_ping_webhook
     RAISING cx_static_check.
 * POST - "Test the push repository webhook"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/hook-id
 * Response: 204, Empty response
 * Response: 404, 
   METHODS repos_test_push_webhook
     RAISING cx_static_check.
 * GET - "Get an import status"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/import
 * Response: 404, 
   METHODS migrations_get_import_status
     RAISING cx_static_check.
 * PUT - "Start an import"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/import
 * Response: 404, 
@@ -2744,15 +3750,22 @@ INTERFACE zif_github.
   METHODS migrations_start_import
     RAISING cx_static_check.
 * PATCH - "Update an import"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/import
   METHODS migrations_update_import
     RAISING cx_static_check.
 * DELETE - "Cancel an import"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
   METHODS migrations_cancel_import
     RAISING cx_static_check.
 * GET - "Get commit authors"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/since-user
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -2760,6 +3773,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * PATCH - "Map a commit author"
 * Parameter: author_id, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/porter-author
 * Response: 404, 
@@ -2769,17 +3784,23 @@ INTERFACE zif_github.
       author_id TYPE string
     RAISING cx_static_check.
 * GET - "Get large files"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, 
   METHODS migrations_get_large_files
     RAISING cx_static_check.
 * PATCH - "Update Git LFS preference"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/import
 * Response: 422, 
   METHODS migrations_set_lfs_preference
     RAISING cx_static_check.
 * GET - "Get a repository installation for the authenticated app"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/installation
 * Response: 301, 
@@ -2787,32 +3808,48 @@ INTERFACE zif_github.
   METHODS apps_get_repo_installation
     RAISING cx_static_check.
 * GET - "Get interaction restrictions for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/interaction-limit-response
   METHODS interactions_get_restriction01
     RAISING cx_static_check.
 * PUT - "Set interaction restrictions for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/interaction-limit-response
 * Response: 409, Conflict
   METHODS interactions_set_restriction01
     RAISING cx_static_check.
 * DELETE - "Remove interaction restrictions for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
 * Response: 409, Conflict
   METHODS interactions_remove_restrict01
     RAISING cx_static_check.
 * GET - "List repository invitations"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS repos_list_invitations
     RAISING cx_static_check.
 * PATCH - "Update a repository invitation"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/invitation_id
 * Response: 200, response
 *     application/json, #/components/schemas/repository-invitation
   METHODS repos_update_invitation
     RAISING cx_static_check.
 * DELETE - "Delete a repository invitation"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/invitation_id
 * Response: 204, Empty response
   METHODS repos_delete_invitation
     RAISING cx_static_check.
@@ -2823,6 +3860,13 @@ INTERFACE zif_github.
 * Parameter: creator, optional, query
 * Parameter: mentioned, optional, query
 * Parameter: sort, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/labels
+* Parameter: #/components/parameters/direction
+* Parameter: #/components/parameters/since
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 301, 
@@ -2838,6 +3882,8 @@ INTERFACE zif_github.
       sort TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create an issue"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/issue
 * Response: 403, 
@@ -2849,6 +3895,12 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List issue comments for a repository"
 * Parameter: direction, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/sort
+* Parameter: #/components/parameters/since
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -2858,23 +3910,37 @@ INTERFACE zif_github.
       direction TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Get an issue comment"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
 * Response: 200, response
 *     application/json, #/components/schemas/issue-comment
 * Response: 404, 
   METHODS issues_get_comment
     RAISING cx_static_check.
 * PATCH - "Update an issue comment"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
 * Response: 200, response
 *     application/json, #/components/schemas/issue-comment
 * Response: 422, 
   METHODS issues_update_comment
     RAISING cx_static_check.
 * DELETE - "Delete an issue comment"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
 * Response: 204, Empty response
   METHODS issues_delete_comment
     RAISING cx_static_check.
 * GET - "List reactions for an issue comment"
 * Parameter: content, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -2884,6 +3950,9 @@ INTERFACE zif_github.
       content TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create reaction for an issue comment"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
 * Response: 200, Reaction exists
 *     application/json, #/components/schemas/reaction
 * Response: 201, Reaction created
@@ -2893,10 +3962,18 @@ INTERFACE zif_github.
   METHODS reactions_create_for_issue_com
     RAISING cx_static_check.
 * DELETE - "Delete an issue comment reaction"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
+* Parameter: #/components/parameters/reaction-id
 * Response: 204, Empty response
   METHODS reactions_delete_for_issue_com
     RAISING cx_static_check.
 * GET - "List issue events for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 422, 
@@ -2904,6 +3981,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "Get an issue event"
 * Parameter: event_id, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/issue-event
 * Response: 403, 
@@ -2914,6 +3993,9 @@ INTERFACE zif_github.
       event_id TYPE string
     RAISING cx_static_check.
 * GET - "Get an issue"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
 * Response: 200, response
 *     application/json, #/components/schemas/issue
 * Response: 301, 
@@ -2923,6 +4005,9 @@ INTERFACE zif_github.
   METHODS issues_get
     RAISING cx_static_check.
 * PATCH - "Update an issue"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
 * Response: 200, response
 *     application/json, #/components/schemas/issue
 * Response: 301, 
@@ -2934,16 +4019,28 @@ INTERFACE zif_github.
   METHODS issues_update
     RAISING cx_static_check.
 * POST - "Add assignees to an issue"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
 * Response: 201, response
 *     application/json, #/components/schemas/issue-simple
   METHODS issues_add_assignees
     RAISING cx_static_check.
 * DELETE - "Remove assignees from an issue"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
 * Response: 200, response
 *     application/json, #/components/schemas/issue-simple
   METHODS issues_remove_assignees
     RAISING cx_static_check.
 * GET - "List issue comments"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
+* Parameter: #/components/parameters/since
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -2951,6 +4048,9 @@ INTERFACE zif_github.
   METHODS issues_list_comments
     RAISING cx_static_check.
 * POST - "Create an issue comment"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
 * Response: 201, response
 *     application/json, #/components/schemas/issue-comment
 * Response: 403, 
@@ -2960,18 +4060,31 @@ INTERFACE zif_github.
   METHODS issues_create_comment
     RAISING cx_static_check.
 * GET - "List issue events"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 410, 
   METHODS issues_list_events
     RAISING cx_static_check.
 * GET - "List labels for an issue"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 410, 
   METHODS issues_list_labels_on_issue
     RAISING cx_static_check.
 * POST - "Add labels to an issue"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
 * Response: 200, response
 *     application/json, 
 * Response: 410, 
@@ -2979,6 +4092,9 @@ INTERFACE zif_github.
   METHODS issues_add_labels
     RAISING cx_static_check.
 * PUT - "Set labels for an issue"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
 * Response: 200, response
 *     application/json, 
 * Response: 410, 
@@ -2986,12 +4102,18 @@ INTERFACE zif_github.
   METHODS issues_set_labels
     RAISING cx_static_check.
 * DELETE - "Remove all labels from an issue"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
 * Response: 204, Empty response
 * Response: 410, 
   METHODS issues_remove_all_labels
     RAISING cx_static_check.
 * DELETE - "Remove a label from an issue"
 * Parameter: name, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -3001,6 +4123,9 @@ INTERFACE zif_github.
       name TYPE string
     RAISING cx_static_check.
 * PUT - "Lock an issue"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
 * Response: 204, Empty response
 * Response: 403, 
 * Response: 404, 
@@ -3009,6 +4134,9 @@ INTERFACE zif_github.
   METHODS issues_lock
     RAISING cx_static_check.
 * DELETE - "Unlock an issue"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
 * Response: 204, Empty response
 * Response: 403, 
 * Response: 404, 
@@ -3016,6 +4144,11 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List reactions for an issue"
 * Parameter: content, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -3026,6 +4159,9 @@ INTERFACE zif_github.
       content TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create reaction for an issue"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
 * Response: 201, response
 *     application/json, #/components/schemas/reaction
 * Response: 415, 
@@ -3033,10 +4169,19 @@ INTERFACE zif_github.
   METHODS reactions_create_for_issue
     RAISING cx_static_check.
 * DELETE - "Delete an issue reaction"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
+* Parameter: #/components/parameters/reaction-id
 * Response: 204, Empty response
   METHODS reactions_delete_for_issue
     RAISING cx_static_check.
 * GET - "List timeline events for an issue"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/issue_number
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -3045,33 +4190,51 @@ INTERFACE zif_github.
   METHODS issues_list_events_for_timelin
     RAISING cx_static_check.
 * GET - "List deploy keys"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS repos_list_deploy_keys
     RAISING cx_static_check.
 * POST - "Create a deploy key"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/deploy-key
 * Response: 422, 
   METHODS repos_create_deploy_key
     RAISING cx_static_check.
 * GET - "Get a deploy key"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/key_id
 * Response: 200, response
 *     application/json, #/components/schemas/deploy-key
 * Response: 404, 
   METHODS repos_get_deploy_key
     RAISING cx_static_check.
 * DELETE - "Delete a deploy key"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/key_id
 * Response: 204, Empty response
   METHODS repos_delete_deploy_key
     RAISING cx_static_check.
 * GET - "List labels for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
   METHODS issues_list_labels_for_repo
     RAISING cx_static_check.
 * POST - "Create a label"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/label
 * Response: 404, 
@@ -3080,6 +4243,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "Get a label"
 * Parameter: name, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/label
 * Response: 404, 
@@ -3089,6 +4254,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * PATCH - "Update a label"
 * Parameter: name, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/label
   METHODS issues_update_label
@@ -3097,22 +4264,30 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * DELETE - "Delete a label"
 * Parameter: name, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
   METHODS issues_delete_label
     IMPORTING
       name TYPE string
     RAISING cx_static_check.
 * GET - "List repository languages"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/language
   METHODS repos_list_languages
     RAISING cx_static_check.
 * GET - "Get the license for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/license-content
   METHODS licenses_get_for_repo
     RAISING cx_static_check.
 * POST - "Merge a branch"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, Successful Response (The resulting merge commit)
 *     application/json, #/components/schemas/commit
 * Response: 403, 
@@ -3127,6 +4302,10 @@ INTERFACE zif_github.
 * Parameter: state, optional, query
 * Parameter: sort, optional, query
 * Parameter: direction, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -3137,6 +4316,8 @@ INTERFACE zif_github.
       direction TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a milestone"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/milestone
 * Response: 404, 
@@ -3144,42 +4325,70 @@ INTERFACE zif_github.
   METHODS issues_create_milestone
     RAISING cx_static_check.
 * GET - "Get a milestone"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/milestone_number
 * Response: 200, response
 *     application/json, #/components/schemas/milestone
 * Response: 404, 
   METHODS issues_get_milestone
     RAISING cx_static_check.
 * PATCH - "Update a milestone"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/milestone_number
 * Response: 200, response
 *     application/json, #/components/schemas/milestone
   METHODS issues_update_milestone
     RAISING cx_static_check.
 * DELETE - "Delete a milestone"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/milestone_number
 * Response: 204, Empty response
 * Response: 404, 
   METHODS issues_delete_milestone
     RAISING cx_static_check.
 * GET - "List labels for issues in a milestone"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/milestone_number
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS issues_list_labels_for_milesto
     RAISING cx_static_check.
 * GET - "List repository notifications for the authenticated user"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/all
+* Parameter: #/components/parameters/participating
+* Parameter: #/components/parameters/since
+* Parameter: #/components/parameters/before
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS activity_list_repo_notificatio
     RAISING cx_static_check.
 * PUT - "Mark repository notifications as read"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 202, response
   METHODS activity_mark_repo_notificatio
     RAISING cx_static_check.
 * GET - "Get a GitHub Pages site"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/page
 * Response: 404, 
   METHODS repos_get_pages
     RAISING cx_static_check.
 * POST - "Create a GitHub Pages site"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/page
 * Response: 409, 
@@ -3188,12 +4397,16 @@ INTERFACE zif_github.
   METHODS repos_create_pages_site
     RAISING cx_static_check.
 * PUT - "Update information about a GitHub Pages site"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
 * Response: 400, 
 * Response: 422, 
   METHODS repos_update_information_about
     RAISING cx_static_check.
 * DELETE - "Delete a GitHub Pages site"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
 * Response: 404, 
 * Response: 415, 
@@ -3201,22 +4414,32 @@ INTERFACE zif_github.
   METHODS repos_delete_pages_site
     RAISING cx_static_check.
 * GET - "List GitHub Pages builds"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS repos_list_pages_builds
     RAISING cx_static_check.
 * POST - "Request a GitHub Pages build"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/page-build-status
   METHODS repos_request_pages_build
     RAISING cx_static_check.
 * GET - "Get latest Pages build"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/page-build
   METHODS repos_get_latest_pages_build
     RAISING cx_static_check.
 * GET - "Get GitHub Pages build"
 * Parameter: build_id, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/page-build
   METHODS repos_get_pages_build
@@ -3225,6 +4448,10 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List repository projects"
 * Parameter: state, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 401, 
@@ -3237,6 +4464,8 @@ INTERFACE zif_github.
       state TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a repository project"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/project
 * Response: 401, 
@@ -3252,6 +4481,10 @@ INTERFACE zif_github.
 * Parameter: base, optional, query
 * Parameter: sort, optional, query
 * Parameter: direction, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -3265,6 +4498,8 @@ INTERFACE zif_github.
       direction TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/pull-request
 * Response: 403, 
@@ -3273,6 +4508,12 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List review comments in a repository"
 * Parameter: direction, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/sort
+* Parameter: #/components/parameters/since
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS pulls_list_review_comments_for
@@ -3280,23 +4521,37 @@ INTERFACE zif_github.
       direction TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a review comment for a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
 * Response: 200, response
 *     application/json, #/components/schemas/pull-request-review-comment
 * Response: 404, 
   METHODS pulls_get_review_comment
     RAISING cx_static_check.
 * PATCH - "Update a review comment for a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
 * Response: 200, response
 *     application/json, #/components/schemas/pull-request-review-comment
   METHODS pulls_update_review_comment
     RAISING cx_static_check.
 * DELETE - "Delete a review comment for a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
 * Response: 204, Empty response
 * Response: 404, 
   METHODS pulls_delete_review_comment
     RAISING cx_static_check.
 * GET - "List reactions for a pull request review comment"
 * Parameter: content, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -3306,6 +4561,9 @@ INTERFACE zif_github.
       content TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create reaction for a pull request review comment"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
 * Response: 200, Reaction exists
 *     application/json, #/components/schemas/reaction
 * Response: 201, Reaction created
@@ -3315,10 +4573,17 @@ INTERFACE zif_github.
   METHODS reactions_create_for_pull_requ
     RAISING cx_static_check.
 * DELETE - "Delete a pull request comment reaction"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/comment_id
+* Parameter: #/components/parameters/reaction-id
 * Response: 204, Empty response
   METHODS reactions_delete_for_pull_requ
     RAISING cx_static_check.
 * GET - "Get a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
 * Response: 200, Pass the appropriate [media type](https://docs.github.com/rest/overview/media-types/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.
 *     application/json, #/components/schemas/pull-request
 * Response: 304, 
@@ -3327,6 +4592,9 @@ INTERFACE zif_github.
   METHODS pulls_get
     RAISING cx_static_check.
 * PATCH - "Update a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
 * Response: 200, response
 *     application/json, #/components/schemas/pull-request
 * Response: 403, 
@@ -3335,6 +4603,13 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List review comments on a pull request"
 * Parameter: direction, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
+* Parameter: #/components/parameters/sort
+* Parameter: #/components/parameters/since
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS pulls_list_review_comments
@@ -3342,6 +4617,9 @@ INTERFACE zif_github.
       direction TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create a review comment for a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
 * Response: 201, response
 *     application/json, #/components/schemas/pull-request-review-comment
 * Response: 403, 
@@ -3349,17 +4627,31 @@ INTERFACE zif_github.
   METHODS pulls_create_review_comment
     RAISING cx_static_check.
 * POST - "Create a reply for a review comment"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
+* Parameter: #/components/parameters/comment_id
 * Response: 201, response
 *     application/json, #/components/schemas/pull-request-review-comment
 * Response: 404, 
   METHODS pulls_create_reply_for_review_
     RAISING cx_static_check.
 * GET - "List commits on a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS pulls_list_commits
     RAISING cx_static_check.
 * GET - "List pull requests files"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 422, 
@@ -3367,11 +4659,17 @@ INTERFACE zif_github.
   METHODS pulls_list_files
     RAISING cx_static_check.
 * GET - "Check if a pull request has been merged"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
 * Response: 204, Response if pull request has been merged
 * Response: 404, Response if pull request has not been merged
   METHODS pulls_check_if_merged
     RAISING cx_static_check.
 * PUT - "Merge a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
 * Response: 200, Response if merge was successful
 *     application/json, #/components/schemas/pull-request-merge-result
 * Response: 403, 
@@ -3384,11 +4682,19 @@ INTERFACE zif_github.
   METHODS pulls_merge
     RAISING cx_static_check.
 * GET - "List requested reviewers for a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, #/components/schemas/pull-request-review-request
   METHODS pulls_list_requested_reviewers
     RAISING cx_static_check.
 * POST - "Request reviewers for a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
 * Response: 201, response
 *     application/json, #/components/schemas/pull-request-simple
 * Response: 403, 
@@ -3396,16 +4702,27 @@ INTERFACE zif_github.
   METHODS pulls_request_reviewers
     RAISING cx_static_check.
 * DELETE - "Remove requested reviewers from a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
 * Response: 200, response
 * Response: 422, 
   METHODS pulls_remove_requested_reviewe
     RAISING cx_static_check.
 * GET - "List reviews for a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, The list of reviews returns in chronological order.
 *     application/json, 
   METHODS pulls_list_reviews
     RAISING cx_static_check.
 * POST - "Create a review for a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
 * Response: 200, response
 *     application/json, #/components/schemas/pull-request-review
 * Response: 403, 
@@ -3413,18 +4730,30 @@ INTERFACE zif_github.
   METHODS pulls_create_review
     RAISING cx_static_check.
 * GET - "Get a review for a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
+* Parameter: #/components/parameters/review_id
 * Response: 200, response
 *     application/json, #/components/schemas/pull-request-review
 * Response: 404, 
   METHODS pulls_get_review
     RAISING cx_static_check.
 * PUT - "Update a review for a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
+* Parameter: #/components/parameters/review_id
 * Response: 200, response
 *     application/json, #/components/schemas/pull-request-review
 * Response: 422, 
   METHODS pulls_update_review
     RAISING cx_static_check.
 * DELETE - "Delete a pending review for a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
+* Parameter: #/components/parameters/review_id
 * Response: 200, response
 *     application/json, #/components/schemas/pull-request-review
 * Response: 404, 
@@ -3432,12 +4761,22 @@ INTERFACE zif_github.
   METHODS pulls_delete_pending_review
     RAISING cx_static_check.
 * GET - "List comments for a pull request review"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
+* Parameter: #/components/parameters/review_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
   METHODS pulls_list_comments_for_review
     RAISING cx_static_check.
 * PUT - "Dismiss a review for a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
+* Parameter: #/components/parameters/review_id
 * Response: 200, response
 *     application/json, #/components/schemas/pull-request-review
 * Response: 404, 
@@ -3445,6 +4784,10 @@ INTERFACE zif_github.
   METHODS pulls_dismiss_review
     RAISING cx_static_check.
 * POST - "Submit a review for a pull request"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
+* Parameter: #/components/parameters/review_id
 * Response: 200, response
 *     application/json, #/components/schemas/pull-request-review
 * Response: 403, 
@@ -3453,6 +4796,9 @@ INTERFACE zif_github.
   METHODS pulls_submit_review
     RAISING cx_static_check.
 * PUT - "Update a pull request branch"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/pull-number
 * Response: 202, response
 *     application/json, 
 * Response: 403, 
@@ -3462,6 +4808,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "Get a repository README"
 * Parameter: ref, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/content-file
 * Response: 404, 
@@ -3471,18 +4819,27 @@ INTERFACE zif_github.
       ref TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "List releases"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
   METHODS repos_list_releases
     RAISING cx_static_check.
 * POST - "Create a release"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/release
 * Response: 422, 
   METHODS repos_create_release
     RAISING cx_static_check.
 * GET - "Get a release asset"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/asset_id
 * Response: 200, To download the asset's binary content, set the `Accept` header of the request to [`application/octet-stream`](https://docs.github.com/rest/overview/media-types). The API will either redirect the client to the location, or stream it directly if possible. API clients should handle both a `200` or `302` response.
 *     application/json, #/components/schemas/release-asset
 * Response: 302, 
@@ -3491,21 +4848,31 @@ INTERFACE zif_github.
   METHODS repos_get_release_asset
     RAISING cx_static_check.
 * PATCH - "Update a release asset"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/asset_id
 * Response: 200, response
 *     application/json, #/components/schemas/release-asset
   METHODS repos_update_release_asset
     RAISING cx_static_check.
 * DELETE - "Delete a release asset"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/asset_id
 * Response: 204, Empty response
   METHODS repos_delete_release_asset
     RAISING cx_static_check.
 * GET - "Get the latest release"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/release
   METHODS repos_get_latest_release
     RAISING cx_static_check.
 * GET - "Get a release by tag name"
 * Parameter: tag, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/release
 * Response: 404, 
@@ -3514,21 +4881,35 @@ INTERFACE zif_github.
       tag TYPE string
     RAISING cx_static_check.
 * GET - "Get a release"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/release_id
 * Response: 200, **Note:** This returns an `upload_url` key corresponding to the endpoint for uploading release assets. This key is a [hypermedia resource](https://docs.github.com/rest/overview/resources-in-the-rest-api#hypermedia).
 *     application/json, #/components/schemas/release
 * Response: 404, 
   METHODS repos_get_release
     RAISING cx_static_check.
 * PATCH - "Update a release"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/release_id
 * Response: 200, response
 *     application/json, #/components/schemas/release
   METHODS repos_update_release
     RAISING cx_static_check.
 * DELETE - "Delete a release"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/release_id
 * Response: 204, Empty response
   METHODS repos_delete_release
     RAISING cx_static_check.
 * GET - "List release assets"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/release_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS repos_list_release_assets
@@ -3536,6 +4917,9 @@ INTERFACE zif_github.
 * POST - "Upload a release asset"
 * Parameter: name, optional, query
 * Parameter: label, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/release_id
 * Response: 201, Response for successful upload
 *     application/json, #/components/schemas/release-asset
   METHODS repos_upload_release_asset
@@ -3545,6 +4929,10 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List secret scanning alerts for a repository"
 * Parameter: state, optional, query
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/page
+* Parameter: #/components/parameters/per_page
 * Response: 200, Response
 *     application/json, 
 * Response: 404, Repository is public or secret scanning is disabled for the repository
@@ -3554,6 +4942,9 @@ INTERFACE zif_github.
       state TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a secret scanning alert"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/alert_number
 * Response: 200, Default response
 *     application/json, #/components/schemas/secret-scanning-alert
 * Response: 404, Repository is public, or secret scanning is disabled for the repository, or the resource is not found
@@ -3561,6 +4952,9 @@ INTERFACE zif_github.
   METHODS secret_scanning_get_alert
     RAISING cx_static_check.
 * PATCH - "Update a secret scanning alert"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/alert_number
 * Response: 200, Default response
 *     application/json, #/components/schemas/secret-scanning-alert
 * Response: 404, Repository is public, or secret scanning is disabled for the repository, or the resource is not found
@@ -3569,6 +4963,10 @@ INTERFACE zif_github.
   METHODS secret_scanning_update_alert
     RAISING cx_static_check.
 * GET - "List stargazers"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 *     application/vnd.github.v3.star+json, 
@@ -3576,33 +4974,45 @@ INTERFACE zif_github.
   METHODS activity_list_stargazers_for_r
     RAISING cx_static_check.
 * GET - "Get the weekly commit activity"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, Returns a weekly aggregate of the number of additions and deletions pushed to a repository.
 *     application/json, 
   METHODS repos_get_code_frequency_stats
     RAISING cx_static_check.
 * GET - "Get the last year of commit activity"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, 
   METHODS repos_get_commit_activity_stat
     RAISING cx_static_check.
 * GET - "Get all contributor commit activity"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, *   `w` - Start of the week, given as a [Unix timestamp](http://en.wikipedia.org/wiki/Unix_time).\n*   `a` - Number of additions\n*   `d` - Number of deletions\n*   `c` - Number of commits
 *     application/json, 
   METHODS repos_get_contributors_stats
     RAISING cx_static_check.
 * GET - "Get the weekly commit count"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, The array order is oldest week (index 0) to most recent week.
 *     application/json, #/components/schemas/participation-stats
 * Response: 404, 
   METHODS repos_get_participation_stats
     RAISING cx_static_check.
 * GET - "Get the hourly commit count for each day"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, For example, `[2, 14, 25]` indicates that there were 25 total commits, during the 2:00pm hour on Tuesdays. All times are based on the time zone of individual commits.
 *     application/json, 
   METHODS repos_get_punch_card_stats
     RAISING cx_static_check.
 * POST - "Create a commit status"
 * Parameter: sha, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 201, response
 *     application/json, #/components/schemas/status
   METHODS repos_create_commit_status
@@ -3610,11 +5020,17 @@ INTERFACE zif_github.
       sha TYPE string
     RAISING cx_static_check.
 * GET - "List watchers"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS activity_list_watchers_for_rep
     RAISING cx_static_check.
 * GET - "Get a repository subscription"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, Response if you subscribe to the repository
 *     application/json, #/components/schemas/repository-subscription
 * Response: 403, 
@@ -3622,32 +5038,48 @@ INTERFACE zif_github.
   METHODS activity_get_repo_subscription
     RAISING cx_static_check.
 * PUT - "Set a repository subscription"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/repository-subscription
   METHODS activity_set_repo_subscription
     RAISING cx_static_check.
 * DELETE - "Delete a repository subscription"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
   METHODS activity_delete_repo_subscript
     RAISING cx_static_check.
 * GET - "List repository tags"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS repos_list_tags
     RAISING cx_static_check.
 * GET - "Download a repository archive (tar)"
 * Parameter: ref, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 302, response
   METHODS repos_download_tarball_archive
     IMPORTING
       ref TYPE string
     RAISING cx_static_check.
 * GET - "List repository teams"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS repos_list_teams
     RAISING cx_static_check.
 * GET - "Get all repository topics"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/topic
 * Response: 404, 
@@ -3655,6 +5087,8 @@ INTERFACE zif_github.
   METHODS repos_get_all_topics
     RAISING cx_static_check.
 * PUT - "Replace all repository topics"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, #/components/schemas/topic
 * Response: 404, 
@@ -3663,49 +5097,69 @@ INTERFACE zif_github.
   METHODS repos_replace_all_topics
     RAISING cx_static_check.
 * GET - "Get repository clones"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per
 * Response: 200, response
 *     application/json, #/components/schemas/clone-traffic
 * Response: 403, 
   METHODS repos_get_clones
     RAISING cx_static_check.
 * GET - "Get top referral paths"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, 
 * Response: 403, 
   METHODS repos_get_top_paths
     RAISING cx_static_check.
 * GET - "Get top referral sources"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, response
 *     application/json, 
 * Response: 403, 
   METHODS repos_get_top_referrers
     RAISING cx_static_check.
 * GET - "Get page views"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
+* Parameter: #/components/parameters/per
 * Response: 200, response
 *     application/json, #/components/schemas/view-traffic
 * Response: 403, 
   METHODS repos_get_views
     RAISING cx_static_check.
 * POST - "Transfer a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 202, response
 *     application/json, #/components/schemas/repository
   METHODS repos_transfer
     RAISING cx_static_check.
 * GET - "Check if vulnerability alerts are enabled for a repository"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Response if repository is enabled with vulnerability alerts
 * Response: 404, Response if repository is not enabled with vulnerability alerts
   METHODS repos_check_vulnerability_aler
     RAISING cx_static_check.
 * PUT - "Enable vulnerability alerts"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
   METHODS repos_enable_vulnerability_ale
     RAISING cx_static_check.
 * DELETE - "Disable vulnerability alerts"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
   METHODS repos_disable_vulnerability_al
     RAISING cx_static_check.
 * GET - "Download a repository archive (zip)"
 * Parameter: ref, required, path
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 302, response
   METHODS repos_download_zipball_archive
     IMPORTING
@@ -3722,6 +5176,7 @@ INTERFACE zif_github.
       template_repo TYPE string
     RAISING cx_static_check.
 * GET - "List public repositories"
+* Parameter: #/components/parameters/since-repo
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -3729,60 +5184,84 @@ INTERFACE zif_github.
   METHODS repos_list_public
     RAISING cx_static_check.
 * GET - "List provisioned SCIM groups for an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/start_index
+* Parameter: #/components/parameters/count
 * Response: 200, response
 *     application/json, #/components/schemas/scim-group-list-enterprise
   METHODS enterprise_admin_list_provisio
     RAISING cx_static_check.
 * POST - "Provision a SCIM enterprise group and invite users"
+* Parameter: #/components/parameters/enterprise
 * Response: 201, response
 *     application/json, #/components/schemas/scim-enterprise-group
   METHODS enterprise_admin_provision_and
     RAISING cx_static_check.
 * GET - "Get SCIM provisioning information for an enterprise group"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/scim_group_id
 * Response: 200, response
 *     application/json, #/components/schemas/scim-enterprise-group
   METHODS enterprise_admin_get_provision
     RAISING cx_static_check.
 * PUT - "Set SCIM information for a provisioned enterprise group"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/scim_group_id
 * Response: 200, response
 *     application/json, #/components/schemas/scim-enterprise-group
   METHODS enterprise_admin_set_informati
     RAISING cx_static_check.
 * PATCH - "Update an attribute for a SCIM enterprise group"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/scim_group_id
 * Response: 200, response
 *     application/json, #/components/schemas/scim-enterprise-group
   METHODS enterprise_admin_update_attrib
     RAISING cx_static_check.
 * DELETE - "Delete a SCIM group from an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/scim_group_id
 * Response: 204, Empty response
   METHODS enterprise_admin_delete_scim_g
     RAISING cx_static_check.
 * GET - "List SCIM provisioned identities for an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/start_index
+* Parameter: #/components/parameters/count
 * Response: 200, response
 *     application/json, #/components/schemas/scim-user-list-enterprise
   METHODS enterprise_admin_list_provis01
     RAISING cx_static_check.
 * POST - "Provision and invite a SCIM enterprise user"
+* Parameter: #/components/parameters/enterprise
 * Response: 201, response
 *     application/json, #/components/schemas/scim-enterprise-user
   METHODS enterprise_admin_provision_a01
     RAISING cx_static_check.
 * GET - "Get SCIM provisioning information for an enterprise user"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/scim_user_id
 * Response: 200, response
 *     application/json, #/components/schemas/scim-enterprise-user
   METHODS enterprise_admin_get_provisi01
     RAISING cx_static_check.
 * PUT - "Set SCIM information for a provisioned enterprise user"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/scim_user_id
 * Response: 200, response
 *     application/json, #/components/schemas/scim-enterprise-user
   METHODS enterprise_admin_set_informa01
     RAISING cx_static_check.
 * PATCH - "Update an attribute for a SCIM enterprise user"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/scim_user_id
 * Response: 200, response
 *     application/json, #/components/schemas/scim-enterprise-user
   METHODS enterprise_admin_update_attr01
     RAISING cx_static_check.
 * DELETE - "Delete a SCIM user from an enterprise"
+* Parameter: #/components/parameters/enterprise
+* Parameter: #/components/parameters/scim_user_id
 * Response: 204, Empty response
   METHODS enterprise_admin_delete_user_f
     RAISING cx_static_check.
@@ -3790,6 +5269,7 @@ INTERFACE zif_github.
 * Parameter: startIndex, optional, query
 * Parameter: count, optional, query
 * Parameter: filter, optional, query
+* Parameter: #/components/parameters/org
 * Response: 200, response
 *     application/scim+json, #/components/schemas/scim-user-list
 * Response: 304, 
@@ -3803,6 +5283,7 @@ INTERFACE zif_github.
       filter TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Provision and invite a SCIM user"
+* Parameter: #/components/parameters/org
 * Response: 201, response
 *     application/scim+json, #/components/schemas/scim-user
 * Response: 304, 
@@ -3814,6 +5295,8 @@ INTERFACE zif_github.
   METHODS scim_provision_and_invite_user
     RAISING cx_static_check.
 * GET - "Get SCIM provisioning information for a user"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/scim_user_id
 * Response: 200, response
 *     application/scim+json, #/components/schemas/scim-user
 * Response: 304, 
@@ -3822,6 +5305,8 @@ INTERFACE zif_github.
   METHODS scim_get_provisioning_informat
     RAISING cx_static_check.
 * PUT - "Update a provisioned organization membership"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/scim_user_id
 * Response: 200, response
 *     application/scim+json, #/components/schemas/scim-user
 * Response: 304, 
@@ -3830,6 +5315,8 @@ INTERFACE zif_github.
   METHODS scim_set_information_for_provi
     RAISING cx_static_check.
 * PATCH - "Update an attribute for a SCIM user"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/scim_user_id
 * Response: 200, response
 *     application/scim+json, #/components/schemas/scim-user
 * Response: 304, 
@@ -3841,6 +5328,8 @@ INTERFACE zif_github.
   METHODS scim_update_attribute_for_user
     RAISING cx_static_check.
 * DELETE - "Delete a SCIM user from an organization"
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/scim_user_id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 403, 
@@ -3850,6 +5339,9 @@ INTERFACE zif_github.
 * GET - "Search code"
 * Parameter: q, required, query
 * Parameter: sort, optional, query
+* Parameter: #/components/parameters/order
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -3864,6 +5356,9 @@ INTERFACE zif_github.
 * GET - "Search commits"
 * Parameter: q, required, query
 * Parameter: sort, optional, query
+* Parameter: #/components/parameters/order
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -3876,6 +5371,9 @@ INTERFACE zif_github.
 * GET - "Search issues and pull requests"
 * Parameter: q, required, query
 * Parameter: sort, optional, query
+* Parameter: #/components/parameters/order
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -3891,6 +5389,7 @@ INTERFACE zif_github.
 * Parameter: repository_id, required, query
 * Parameter: q, required, query
 * Parameter: sort, optional, query
+* Parameter: #/components/parameters/order
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -3906,6 +5405,9 @@ INTERFACE zif_github.
 * GET - "Search repositories"
 * Parameter: q, required, query
 * Parameter: sort, optional, query
+* Parameter: #/components/parameters/order
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -3929,6 +5431,9 @@ INTERFACE zif_github.
 * GET - "Search users"
 * Parameter: q, required, query
 * Parameter: sort, optional, query
+* Parameter: #/components/parameters/order
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -3940,12 +5445,14 @@ INTERFACE zif_github.
       sort TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a team (Legacy)"
+* Parameter: #/components/parameters/team-id
 * Response: 200, response
 *     application/json, #/components/schemas/team-full
 * Response: 404, 
   METHODS teams_get_legacy
     RAISING cx_static_check.
 * PATCH - "Update a team (Legacy)"
+* Parameter: #/components/parameters/team-id
 * Response: 201, response
 *     application/json, #/components/schemas/team-full
 * Response: 403, 
@@ -3954,61 +5461,94 @@ INTERFACE zif_github.
   METHODS teams_update_legacy
     RAISING cx_static_check.
 * DELETE - "Delete a team (Legacy)"
+* Parameter: #/components/parameters/team-id
 * Response: 204, Empty response
 * Response: 404, 
 * Response: 422, 
   METHODS teams_delete_legacy
     RAISING cx_static_check.
 * GET - "List discussions (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/direction
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS teams_list_discussions_legacy
     RAISING cx_static_check.
 * POST - "Create a discussion (Legacy)"
+* Parameter: #/components/parameters/team-id
 * Response: 201, response
 *     application/json, #/components/schemas/team-discussion
   METHODS teams_create_discussion_legacy
     RAISING cx_static_check.
 * GET - "Get a discussion (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/discussion-number
 * Response: 200, response
 *     application/json, #/components/schemas/team-discussion
   METHODS teams_get_discussion_legacy
     RAISING cx_static_check.
 * PATCH - "Update a discussion (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/discussion-number
 * Response: 200, response
 *     application/json, #/components/schemas/team-discussion
   METHODS teams_update_discussion_legacy
     RAISING cx_static_check.
 * DELETE - "Delete a discussion (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/discussion-number
 * Response: 204, Empty response
   METHODS teams_delete_discussion_legacy
     RAISING cx_static_check.
 * GET - "List discussion comments (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/discussion-number
+* Parameter: #/components/parameters/direction
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS teams_list_discussion_commen01
     RAISING cx_static_check.
 * POST - "Create a discussion comment (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/discussion-number
 * Response: 201, response
 *     application/json, #/components/schemas/team-discussion-comment
   METHODS teams_create_discussion_comm01
     RAISING cx_static_check.
 * GET - "Get a discussion comment (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/discussion-number
+* Parameter: #/components/parameters/comment-number
 * Response: 200, response
 *     application/json, #/components/schemas/team-discussion-comment
   METHODS teams_get_discussion_comment_l
     RAISING cx_static_check.
 * PATCH - "Update a discussion comment (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/discussion-number
+* Parameter: #/components/parameters/comment-number
 * Response: 200, response
 *     application/json, #/components/schemas/team-discussion-comment
   METHODS teams_update_discussion_comm01
     RAISING cx_static_check.
 * DELETE - "Delete a discussion comment (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/discussion-number
+* Parameter: #/components/parameters/comment-number
 * Response: 204, Empty response
   METHODS teams_delete_discussion_comm01
     RAISING cx_static_check.
 * GET - "List reactions for a team discussion comment (Legacy)"
 * Parameter: content, optional, query
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/discussion-number
+* Parameter: #/components/parameters/comment-number
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS reactions_list_for_team_disc02
@@ -4016,12 +5556,19 @@ INTERFACE zif_github.
       content TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create reaction for a team discussion comment (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/discussion-number
+* Parameter: #/components/parameters/comment-number
 * Response: 201, response
 *     application/json, #/components/schemas/reaction
   METHODS reactions_create_for_team_di02
     RAISING cx_static_check.
 * GET - "List reactions for a team discussion (Legacy)"
 * Parameter: content, optional, query
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/discussion-number
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS reactions_list_for_team_disc03
@@ -4029,17 +5576,25 @@ INTERFACE zif_github.
       content TYPE string OPTIONAL
     RAISING cx_static_check.
 * POST - "Create reaction for a team discussion (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/discussion-number
 * Response: 201, response
 *     application/json, #/components/schemas/reaction
   METHODS reactions_create_for_team_di03
     RAISING cx_static_check.
 * GET - "List pending team invitations (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS teams_list_pending_invitatio01
     RAISING cx_static_check.
 * GET - "List team members (Legacy)"
 * Parameter: role, optional, query
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -4048,11 +5603,15 @@ INTERFACE zif_github.
       role TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Get team member (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/username
 * Response: 204, Response if user is a member
 * Response: 404, Response if user is not a member
   METHODS teams_get_member_legacy
     RAISING cx_static_check.
 * PUT - "Add team member (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
 * Response: 403, 
 * Response: 404, Response if team synchronization is set up
@@ -4061,17 +5620,23 @@ INTERFACE zif_github.
   METHODS teams_add_member_legacy
     RAISING cx_static_check.
 * DELETE - "Remove team member (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
 * Response: 404, Response if team synchronization is setup
   METHODS teams_remove_member_legacy
     RAISING cx_static_check.
 * GET - "Get team membership for a user (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/username
 * Response: 200, response
 *     application/json, #/components/schemas/team-membership
 * Response: 404, 
   METHODS teams_get_membership_for_use01
     RAISING cx_static_check.
 * PUT - "Add or update team membership for a user (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/username
 * Response: 200, response
 *     application/json, #/components/schemas/team-membership
 * Response: 403, Response if team synchronization is set up
@@ -4081,11 +5646,16 @@ INTERFACE zif_github.
   METHODS teams_add_or_update_membersh01
     RAISING cx_static_check.
 * DELETE - "Remove team membership for a user (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
 * Response: 403, Response if team synchronization is set up
   METHODS teams_remove_membership_for_01
     RAISING cx_static_check.
 * GET - "List team projects (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
@@ -4093,6 +5663,8 @@ INTERFACE zif_github.
   METHODS teams_list_projects_legacy
     RAISING cx_static_check.
 * GET - "Check team permissions for a project (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/project-id
 * Response: 200, response
 *     application/json, #/components/schemas/team-project
 * Response: 404, Response if project is not managed by this team
@@ -4100,6 +5672,8 @@ INTERFACE zif_github.
   METHODS teams_check_permissions_for_01
     RAISING cx_static_check.
 * PUT - "Add or update team project permissions (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/project-id
 * Response: 204, Empty response
 * Response: 403, Response if the project is not owned by the organization
 *     application/json, 
@@ -4109,6 +5683,8 @@ INTERFACE zif_github.
   METHODS teams_add_or_update_project_01
     RAISING cx_static_check.
 * DELETE - "Remove a project from a team (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/project-id
 * Response: 204, Empty response
 * Response: 404, 
 * Response: 415, 
@@ -4116,12 +5692,18 @@ INTERFACE zif_github.
   METHODS teams_remove_project_legacy
     RAISING cx_static_check.
 * GET - "List team repositories (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
   METHODS teams_list_repos_legacy
     RAISING cx_static_check.
 * GET - "Check team permissions for a repository (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 200, Alternative response with extra repository information
 *     application/vnd.github.v3.repository+json, #/components/schemas/team-repository
 * Response: 204, Response if repository is managed by this team
@@ -4129,16 +5711,23 @@ INTERFACE zif_github.
   METHODS teams_check_permissions_for_02
     RAISING cx_static_check.
 * PUT - "Add or update team repository permissions (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
 * Response: 403, 
 * Response: 422, 
   METHODS teams_add_or_update_repo_per01
     RAISING cx_static_check.
 * DELETE - "Remove a repository from a team (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
   METHODS teams_remove_repo_legacy
     RAISING cx_static_check.
 * GET - "List IdP groups for a team (Legacy)"
+* Parameter: #/components/parameters/team-id
 * Response: 200, response
 *     application/json, #/components/schemas/group-mapping
 * Response: 403, 
@@ -4146,6 +5735,7 @@ INTERFACE zif_github.
   METHODS teams_list_idp_groups_for_lega
     RAISING cx_static_check.
 * PATCH - "Create or update IdP group connections (Legacy)"
+* Parameter: #/components/parameters/team-id
 * Response: 200, response
 *     application/json, #/components/schemas/group-mapping
 * Response: 403, 
@@ -4153,6 +5743,9 @@ INTERFACE zif_github.
   METHODS teams_create_or_update_idp_g01
     RAISING cx_static_check.
 * GET - "List child teams (Legacy)"
+* Parameter: #/components/parameters/team-id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, Response if child teams exist
 *     application/json, 
 * Response: 403, 
@@ -4189,6 +5782,7 @@ INTERFACE zif_github.
   METHODS users_list_blocked_by_authenti
     RAISING cx_static_check.
 * GET - "Check if a user is blocked by the authenticated user"
+* Parameter: #/components/parameters/username
 * Response: 204, If the user is blocked:
 * Response: 304, 
 * Response: 401, 
@@ -4198,6 +5792,7 @@ INTERFACE zif_github.
   METHODS users_check_blocked
     RAISING cx_static_check.
 * PUT - "Block a user"
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -4207,6 +5802,7 @@ INTERFACE zif_github.
   METHODS users_block
     RAISING cx_static_check.
 * DELETE - "Unblock a user"
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -4225,6 +5821,8 @@ INTERFACE zif_github.
   METHODS users_set_primary_email_visibi
     RAISING cx_static_check.
 * GET - "List email addresses for the authenticated user"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -4253,6 +5851,8 @@ INTERFACE zif_github.
   METHODS users_delete_email_for_authent
     RAISING cx_static_check.
 * GET - "List followers of the authenticated user"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -4261,6 +5861,8 @@ INTERFACE zif_github.
   METHODS users_list_followers_for_authe
     RAISING cx_static_check.
 * GET - "List the people the authenticated user follows"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -4269,6 +5871,7 @@ INTERFACE zif_github.
   METHODS users_list_followed_by_authent
     RAISING cx_static_check.
 * GET - "Check if a person is followed by the authenticated user"
+* Parameter: #/components/parameters/username
 * Response: 204, Response if the person is followed by the authenticated user
 * Response: 304, 
 * Response: 401, 
@@ -4278,6 +5881,7 @@ INTERFACE zif_github.
   METHODS users_check_person_is_followed
     RAISING cx_static_check.
 * PUT - "Follow a user"
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -4286,6 +5890,7 @@ INTERFACE zif_github.
   METHODS users_follow
     RAISING cx_static_check.
 * DELETE - "Unfollow a user"
+* Parameter: #/components/parameters/username
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -4294,6 +5899,8 @@ INTERFACE zif_github.
   METHODS users_unfollow
     RAISING cx_static_check.
 * GET - "List GPG keys for the authenticated user"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -4313,6 +5920,7 @@ INTERFACE zif_github.
   METHODS users_create_gpg_key_for_authe
     RAISING cx_static_check.
 * GET - "Get a GPG key for the authenticated user"
+* Parameter: #/components/parameters/gpg_key_id
 * Response: 200, response
 *     application/json, #/components/schemas/gpg-key
 * Response: 304, 
@@ -4322,6 +5930,7 @@ INTERFACE zif_github.
   METHODS users_get_gpg_key_for_authenti
     RAISING cx_static_check.
 * DELETE - "Delete a GPG key for the authenticated user"
+* Parameter: #/components/parameters/gpg_key_id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -4331,6 +5940,8 @@ INTERFACE zif_github.
   METHODS users_delete_gpg_key_for_authe
     RAISING cx_static_check.
 * GET - "List app installations accessible to the user access token"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, You can find the permissions for the installation under the `permissions` key.
 *     application/json, 
 * Response: 304, 
@@ -4340,6 +5951,9 @@ INTERFACE zif_github.
   METHODS apps_list_installations_for_au
     RAISING cx_static_check.
 * GET - "List repositories accessible to the user access token"
+* Parameter: #/components/parameters/installation_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, The access the user has to each repository is included in the hash under the `permissions` key.
 *     application/json, 
 * Response: 304, 
@@ -4348,6 +5962,8 @@ INTERFACE zif_github.
   METHODS apps_list_installation_repos_f
     RAISING cx_static_check.
 * PUT - "Add a repository to an app installation"
+* Parameter: #/components/parameters/installation_id
+* Parameter: #/components/parameters/repository_id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 403, 
@@ -4355,6 +5971,8 @@ INTERFACE zif_github.
   METHODS apps_add_repo_to_installation
     RAISING cx_static_check.
 * DELETE - "Remove a repository from an app installation"
+* Parameter: #/components/parameters/installation_id
+* Parameter: #/components/parameters/repository_id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 403, 
@@ -4380,6 +5998,11 @@ INTERFACE zif_github.
 * Parameter: filter, optional, query
 * Parameter: state, optional, query
 * Parameter: sort, optional, query
+* Parameter: #/components/parameters/labels
+* Parameter: #/components/parameters/direction
+* Parameter: #/components/parameters/since
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -4391,6 +6014,8 @@ INTERFACE zif_github.
       sort TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "List public SSH keys for the authenticated user"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -4410,6 +6035,7 @@ INTERFACE zif_github.
   METHODS users_create_public_ssh_key_fo
     RAISING cx_static_check.
 * GET - "Get a public SSH key for the authenticated user"
+* Parameter: #/components/parameters/key_id
 * Response: 200, response
 *     application/json, #/components/schemas/key
 * Response: 304, 
@@ -4419,6 +6045,7 @@ INTERFACE zif_github.
   METHODS users_get_public_ssh_key_for_a
     RAISING cx_static_check.
 * DELETE - "Delete a public SSH key for the authenticated user"
+* Parameter: #/components/parameters/key_id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -4427,6 +6054,8 @@ INTERFACE zif_github.
   METHODS users_delete_public_ssh_key_fo
     RAISING cx_static_check.
 * GET - "List subscriptions for the authenticated user"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -4435,6 +6064,8 @@ INTERFACE zif_github.
   METHODS apps_list_subscriptions_for_au
     RAISING cx_static_check.
 * GET - "List subscriptions for the authenticated user (stubbed)"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -4443,6 +6074,8 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "List organization memberships for the authenticated user"
 * Parameter: state, optional, query
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -4454,6 +6087,7 @@ INTERFACE zif_github.
       state TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Get an organization membership for the authenticated user"
+* Parameter: #/components/parameters/org
 * Response: 200, response
 *     application/json, #/components/schemas/org-membership
 * Response: 403, 
@@ -4461,6 +6095,7 @@ INTERFACE zif_github.
   METHODS orgs_get_membership_for_authen
     RAISING cx_static_check.
 * PATCH - "Update an organization membership for the authenticated user"
+* Parameter: #/components/parameters/org
 * Response: 200, response
 *     application/json, #/components/schemas/org-membership
 * Response: 403, 
@@ -4469,6 +6104,8 @@ INTERFACE zif_github.
   METHODS orgs_update_membership_for_aut
     RAISING cx_static_check.
 * GET - "List user migrations"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -4487,6 +6124,7 @@ INTERFACE zif_github.
     RAISING cx_static_check.
 * GET - "Get a user migration status"
 * Parameter: exclude, optional, query
+* Parameter: #/components/parameters/migration_id
 * Response: 200, response
 *     application/json, #/components/schemas/migration
 * Response: 304, 
@@ -4498,6 +6136,7 @@ INTERFACE zif_github.
       exclude TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Download a user migration archive"
+* Parameter: #/components/parameters/migration_id
 * Response: 302, response
 * Response: 304, 
 * Response: 401, 
@@ -4505,6 +6144,7 @@ INTERFACE zif_github.
   METHODS migrations_get_archive_for_aut
     RAISING cx_static_check.
 * DELETE - "Delete a user migration archive"
+* Parameter: #/components/parameters/migration_id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -4513,6 +6153,8 @@ INTERFACE zif_github.
   METHODS migrations_delete_archive_fo01
     RAISING cx_static_check.
 * DELETE - "Unlock a user repository"
+* Parameter: #/components/parameters/migration_id
+* Parameter: #/components/parameters/repo_name
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -4521,12 +6163,17 @@ INTERFACE zif_github.
   METHODS migrations_unlock_repo_for_aut
     RAISING cx_static_check.
 * GET - "List repositories for a user migration"
+* Parameter: #/components/parameters/migration_id
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
   METHODS migrations_list_repos_for_user
     RAISING cx_static_check.
 * GET - "List organizations for the authenticated user"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -4545,6 +6192,8 @@ INTERFACE zif_github.
   METHODS projects_create_for_authentica
     RAISING cx_static_check.
 * GET - "List public email addresses for the authenticated user"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -4559,6 +6208,10 @@ INTERFACE zif_github.
 * Parameter: type, optional, query
 * Parameter: sort, optional, query
 * Parameter: direction, optional, query
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
+* Parameter: #/components/parameters/since
+* Parameter: #/components/parameters/before
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -4585,6 +6238,8 @@ INTERFACE zif_github.
   METHODS repos_create_for_authenticated
     RAISING cx_static_check.
 * GET - "List repository invitations for the authenticated user"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -4594,6 +6249,7 @@ INTERFACE zif_github.
   METHODS repos_list_invitations_for_aut
     RAISING cx_static_check.
 * PATCH - "Accept a repository invitation"
+* Parameter: #/components/parameters/invitation_id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 403, 
@@ -4602,6 +6258,7 @@ INTERFACE zif_github.
   METHODS repos_accept_invitation
     RAISING cx_static_check.
 * DELETE - "Decline a repository invitation"
+* Parameter: #/components/parameters/invitation_id
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 403, 
@@ -4610,6 +6267,10 @@ INTERFACE zif_github.
   METHODS repos_decline_invitation
     RAISING cx_static_check.
 * GET - "List repositories starred by the authenticated user"
+* Parameter: #/components/parameters/sort
+* Parameter: #/components/parameters/direction
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 *     application/vnd.github.v3.star+json, 
@@ -4619,6 +6280,8 @@ INTERFACE zif_github.
   METHODS activity_list_repos_starred_by
     RAISING cx_static_check.
 * GET - "Check if a repository is starred by the authenticated user"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Response if this repository is starred by you
 * Response: 304, 
 * Response: 401, 
@@ -4628,6 +6291,8 @@ INTERFACE zif_github.
   METHODS activity_check_repo_is_starred
     RAISING cx_static_check.
 * PUT - "Star a repository for the authenticated user"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -4636,6 +6301,8 @@ INTERFACE zif_github.
   METHODS activity_star_repo_for_authent
     RAISING cx_static_check.
 * DELETE - "Unstar a repository for the authenticated user"
+* Parameter: #/components/parameters/owner
+* Parameter: #/components/parameters/repo
 * Response: 204, Empty response
 * Response: 304, 
 * Response: 401, 
@@ -4644,6 +6311,8 @@ INTERFACE zif_github.
   METHODS activity_unstar_repo_for_authe
     RAISING cx_static_check.
 * GET - "List repositories watched by the authenticated user"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -4652,6 +6321,8 @@ INTERFACE zif_github.
   METHODS activity_list_watched_repos_fo
     RAISING cx_static_check.
 * GET - "List teams for the authenticated user"
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
@@ -4660,44 +6331,64 @@ INTERFACE zif_github.
   METHODS teams_list_for_authenticated_u
     RAISING cx_static_check.
 * GET - "List users"
+* Parameter: #/components/parameters/since-user
+* Parameter: #/components/parameters/per_page
 * Response: 200, response
 *     application/json, 
 * Response: 304, 
   METHODS users_list
     RAISING cx_static_check.
 * GET - "Get a user"
+* Parameter: #/components/parameters/username
 * Response: 200, response
 *     application/json, 
 * Response: 404, 
   METHODS users_get_by_username
     RAISING cx_static_check.
 * GET - "List events for the authenticated user"
+* Parameter: #/components/parameters/username
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS activity_list_events_for_authe
     RAISING cx_static_check.
 * GET - "List organization events for the authenticated user"
+* Parameter: #/components/parameters/username
+* Parameter: #/components/parameters/org
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS activity_list_org_events_for_a
     RAISING cx_static_check.
 * GET - "List public events for a user"
+* Parameter: #/components/parameters/username
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS activity_list_public_events_01
     RAISING cx_static_check.
 * GET - "List followers of a user"
+* Parameter: #/components/parameters/username
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS users_list_followers_for_user
     RAISING cx_static_check.
 * GET - "List the people a user follows"
+* Parameter: #/components/parameters/username
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS users_list_following_for_user
     RAISING cx_static_check.
 * GET - "Check if a user follows another user"
 * Parameter: target_user, required, path
+* Parameter: #/components/parameters/username
 * Response: 204, Response if the user follows the target user
 * Response: 404, Response if the user does not follow the target user
   METHODS users_check_following_for_user
@@ -4705,12 +6396,19 @@ INTERFACE zif_github.
       target_user TYPE string
     RAISING cx_static_check.
 * GET - "List gists for a user"
+* Parameter: #/components/parameters/username
+* Parameter: #/components/parameters/since
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 422, 
   METHODS gists_list_for_user
     RAISING cx_static_check.
 * GET - "List GPG keys for a user"
+* Parameter: #/components/parameters/username
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS users_list_gpg_keys_for_user
@@ -4718,6 +6416,7 @@ INTERFACE zif_github.
 * GET - "Get contextual information for a user"
 * Parameter: subject_type, optional, query
 * Parameter: subject_id, optional, query
+* Parameter: #/components/parameters/username
 * Response: 200, response
 *     application/json, #/components/schemas/hovercard
 * Response: 404, 
@@ -4728,22 +6427,32 @@ INTERFACE zif_github.
       subject_id TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Get a user installation for the authenticated app"
+* Parameter: #/components/parameters/username
 * Response: 200, response
 *     application/json, #/components/schemas/installation
   METHODS apps_get_user_installation
     RAISING cx_static_check.
 * GET - "List public keys for a user"
+* Parameter: #/components/parameters/username
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS users_list_public_keys_for_use
     RAISING cx_static_check.
 * GET - "List organizations for a user"
+* Parameter: #/components/parameters/username
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS orgs_list_for_user
     RAISING cx_static_check.
 * GET - "List user projects"
 * Parameter: state, optional, query
+* Parameter: #/components/parameters/username
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 * Response: 415, 
@@ -4753,11 +6462,17 @@ INTERFACE zif_github.
       state TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "List events received by the authenticated user"
+* Parameter: #/components/parameters/username
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS activity_list_received_events_
     RAISING cx_static_check.
 * GET - "List public events received by a user"
+* Parameter: #/components/parameters/username
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS activity_list_received_public_
@@ -4766,6 +6481,9 @@ INTERFACE zif_github.
 * Parameter: type, optional, query
 * Parameter: sort, optional, query
 * Parameter: direction, optional, query
+* Parameter: #/components/parameters/username
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS repos_list_for_user
@@ -4775,27 +6493,38 @@ INTERFACE zif_github.
       direction TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Get GitHub Actions billing for a user"
+* Parameter: #/components/parameters/username
 * Response: 200, response
 *     application/json, #/components/schemas/actions-billing-usage
   METHODS billing_get_github_actions_b02
     RAISING cx_static_check.
 * GET - "Get GitHub Packages billing for a user"
+* Parameter: #/components/parameters/username
 * Response: 200, response
 *     application/json, #/components/schemas/packages-billing-usage
   METHODS billing_get_github_packages_02
     RAISING cx_static_check.
 * GET - "Get shared storage billing for a user"
+* Parameter: #/components/parameters/username
 * Response: 200, response
 *     application/json, #/components/schemas/combined-billing-usage
   METHODS billing_get_shared_storage_b02
     RAISING cx_static_check.
 * GET - "List repositories starred by a user"
+* Parameter: #/components/parameters/username
+* Parameter: #/components/parameters/sort
+* Parameter: #/components/parameters/direction
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
 *     application/vnd.github.v3.star+json, 
   METHODS activity_list_repos_starred_01
     RAISING cx_static_check.
 * GET - "List repositories watched by a user"
+* Parameter: #/components/parameters/username
+* Parameter: #/components/parameters/per_page
+* Parameter: #/components/parameters/page
 * Response: 200, response
 *     application/json, 
   METHODS activity_list_repos_watched_by
