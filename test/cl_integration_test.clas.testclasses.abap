@@ -1,10 +1,10 @@
 CLASS ltcl_json DEFINITION FOR TESTING RISK LEVEL HARMLESS DURATION SHORT FINAL.
   PRIVATE SECTION.
-    METHODS test FOR TESTING RAISING cx_static_check.
+    METHODS petstore_loginuser FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 CLASS ltcl_json IMPLEMENTATION.
-  METHOD test.
+  METHOD petstore_loginuser.
 
     DATA li_client TYPE REF TO if_http_client.
     DATA li_petstore TYPE REF TO zif_petstore.

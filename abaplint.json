@@ -49,7 +49,7 @@
     "definitions_top": true,
     "description_empty": false,
     "double_space": true,
-    "downport": true,
+    "downport": false,
     "empty_line_in_statement": true,
     "empty_statement": true,
     "empty_structure": true,
