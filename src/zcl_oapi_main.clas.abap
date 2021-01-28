@@ -115,7 +115,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |* { ms_specification-info-title }\n\n|.
 
     LOOP AT ms_specification-components-schemas INTO ls_schema.
-      rv_abap = rv_abap && |* Component schema: { ls_schema-name }\n| &&
+      rv_abap = rv_abap && |* Component schema: { ls_schema-name }, { ls_schema-schema-type }\n| &&
         |  TYPES { ls_schema-abap_name } TYPE string.\n|.
     ENDLOOP.
     IF lines( ms_specification-components-schemas ) > 0.
