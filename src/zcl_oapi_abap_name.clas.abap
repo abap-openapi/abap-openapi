@@ -3,12 +3,19 @@ CLASS zcl_oapi_abap_name DEFINITION PUBLIC.
     METHODS to_abap_name
       IMPORTING iv_name TYPE string
       RETURNING VALUE(rv_name) TYPE string.
+    METHODS add_used IMPORTING iv_name TYPE string.
   PRIVATE SECTION.
     DATA mt_used TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
     METHODS numbering IMPORTING iv_name TYPE string RETURNING VALUE(rv_name) TYPE string.
 ENDCLASS.
 
 CLASS zcl_oapi_abap_name IMPLEMENTATION.
+  METHOD add_used.
+    READ TABLE mt_used WITH KEY table_line = iv_name TRANSPORTING NO FIELDS.
+    ASSERT sy-subrc <> 0.
+    APPEND iv_name TO mt_used.
+  ENDMETHOD.
+
   METHOD to_abap_name.
     IF iv_name IS INITIAL.
       RETURN.

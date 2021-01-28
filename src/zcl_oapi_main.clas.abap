@@ -43,6 +43,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
   METHOD run.
     DATA lo_parser TYPE REF TO zcl_oapi_parser.
+    DATA lo_dereference TYPE REF TO zcl_oapi_dereference.
 
     ASSERT is_input-class_name IS NOT INITIAL.
     ASSERT is_input-interface_name IS NOT INITIAL.
@@ -52,8 +53,10 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     CREATE OBJECT lo_parser.
     ms_specification = lo_parser->parse( is_input-json ).
 
-    rs_result-clas = build_class( ).
+    CREATE OBJECT lo_dereference.
+    ms_specification = lo_dereference->dereference( ms_specification ).
 
+    rs_result-clas = build_class( ).
     rs_result-intf = build_interface( ).
 
   ENDMETHOD.
