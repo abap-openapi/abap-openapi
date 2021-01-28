@@ -2,24 +2,13 @@ INTERFACE zif_oapi_specification_v3 PUBLIC.
 
 * OpenAPI v3 specification
 
-  TYPES: BEGIN OF ty_properties,
-           name        TYPE string,
-           abap_name   TYPE string,
-         END OF ty_properties.
-
-  TYPES: BEGIN OF ty_schema,
-           type       TYPE string,
-           default    TYPE string,
-           properties TYPE ty_properties,
-         END OF ty_schema.
-
   TYPES: BEGIN OF ty_parameter,
            name        TYPE string,
            abap_name   TYPE string,
            in          TYPE string,
            description TYPE string,
            required    TYPE abap_bool,
-           schema      TYPE ty_schema,
+           schema      TYPE REF TO zif_oapi_schema,
          END OF ty_parameter.
 
   TYPES ty_parameters TYPE STANDARD TABLE OF ty_parameter WITH DEFAULT KEY.
@@ -57,7 +46,7 @@ INTERFACE zif_oapi_specification_v3 PUBLIC.
   TYPES: BEGIN OF ty_component_schema,
            name      TYPE string,
            abap_name TYPE string,
-           schema    TYPE ty_schema,
+           schema    TYPE REF TO zif_oapi_schema,
          END OF ty_component_schema.
 
   TYPES ty_schemas TYPE STANDARD TABLE OF ty_component_schema WITH DEFAULT KEY.

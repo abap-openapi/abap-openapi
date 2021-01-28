@@ -115,7 +115,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |* { ms_specification-info-title }\n\n|.
 
     LOOP AT ms_specification-components-schemas INTO ls_schema.
-      rv_abap = rv_abap && |* Component schema: { ls_schema-name }, { ls_schema-schema-type }\n| &&
+      rv_abap = rv_abap && |* Component schema: { ls_schema-name }, { ls_schema-schema->type }\n| &&
         |  TYPES { ls_schema-abap_name } TYPE string.\n|.
     ENDLOOP.
     IF lines( ms_specification-components-schemas ) > 0.
@@ -205,7 +205,11 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       rv_abap = |\n    IMPORTING\n|.
 
       LOOP AT it_parameters INTO ls_parameter.
-        lv_type = ls_parameter-schema-type.
+
+        CLEAR lv_type.
+        IF ls_parameter-schema IS NOT INITIAL.
+          lv_type = ls_parameter-schema->type.
+        ENDIF.
         CASE lv_type.
           WHEN 'array'.
             lv_type = 'string'.
@@ -216,14 +220,16 @@ CLASS zcl_oapi_main IMPLEMENTATION.
           WHEN ''.
             lv_type = 'string'.
         ENDCASE.
+
         CLEAR lv_default.
-        IF ls_parameter-schema-default IS NOT INITIAL.
-          IF ls_parameter-schema-default CO '0123456789'.
-            lv_default = | DEFAULT { ls_parameter-schema-default }|.
+        IF ls_parameter-schema IS NOT INITIAL AND ls_parameter-schema->default IS NOT INITIAL.
+          IF ls_parameter-schema->default CO '0123456789'.
+            lv_default = | DEFAULT { ls_parameter-schema->default }|.
           ELSE.
-            lv_default = | DEFAULT '{ ls_parameter-schema-default }'|.
+            lv_default = | DEFAULT '{ ls_parameter-schema->default }'|.
           ENDIF.
         ENDIF.
+
         lv_text = |      | && ls_parameter-abap_name && | TYPE | && lv_type && lv_default.
         IF ls_parameter-required = abap_false.
           lv_text = lv_text && | OPTIONAL|.

@@ -39,7 +39,7 @@
     "check_syntax": true,
     "check_text_elements": true,
     "check_transformation_exists": true,
-    "class_attribute_names": true,
+    "class_attribute_names": false,
     "cloud_types": true,
     "colon_missing_space": true,
     "commented_code": false,
@@ -104,7 +104,7 @@
     "names_no_dash": true,
     "nesting": true,
     "newline_between_methods": true,
-    "no_public_attributes": true,
+    "no_public_attributes": false,
     "object_naming": {
       "exclude": ["test/"],
       "patternKind": "required",

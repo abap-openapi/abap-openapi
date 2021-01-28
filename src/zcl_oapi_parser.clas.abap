@@ -34,7 +34,7 @@ CLASS zcl_oapi_parser DEFINITION PUBLIC.
 
     METHODS parse_schema
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(rs_schema) TYPE zif_oapi_specification_v3=>ty_schema.
+      RETURNING VALUE(ri_schema) TYPE REF TO zif_oapi_schema.
 
     METHODS parse_schemas
       IMPORTING iv_prefix TYPE string
@@ -61,8 +61,9 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_schema.
-    rs_schema-type = mo_json->value_string( iv_prefix && '/type' ).
-    rs_schema-default = mo_json->value_string( iv_prefix && '/default' ).
+    CREATE OBJECT ri_schema TYPE zcl_oapi_schema.
+    ri_schema->type = mo_json->value_string( iv_prefix && '/type' ).
+    ri_schema->default = mo_json->value_string( iv_prefix && '/default' ).
   ENDMETHOD.
 
   METHOD parse_components.
