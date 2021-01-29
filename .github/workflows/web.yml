@@ -1,0 +1,23 @@
+name: Web
+
+on: [push, pull_request]
+
+jobs:
+  transpiler:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '12'
+    - name: npm install
+      run: |
+        npm install
+        npm test
+        cd web
+        npm install
+        npm run build
+    - name: deploy transpiler.abaplint.org
+      if: github.ref == 'refs/heads/master' && github.repository == 'abaplint/transpiler'
+      run: |
+        echo hello
