@@ -3,7 +3,7 @@ name: Web
 on: [push, pull_request]
 
 jobs:
-  transpiler:
+  web:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
