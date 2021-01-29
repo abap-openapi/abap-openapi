@@ -5,11 +5,44 @@ import {ABAP} from "@abaplint/runtime";
 import * as abapMonaco from "@abaplint/monaco";
 import Split from "split-grid";
 
+global.abap = new ABAP();
+
+const spec = `{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "title",
+    "description": "description",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/zen": {
+      "get": {
+        "summary": "Get",
+        "operationId": "get",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}`;
+
 // @ts-ignore
 self.MonacoEnvironment = {
   getWorkerUrl: function(_moduleId, label) {
     if (label === "typescript" || label === "javascript") {
       return "./ts.worker.bundle.js";
+    } else if (label === "json") {
+      return "./json.worker.bundle.js";
     }
     return "./editor.worker.bundle.js";
   },
@@ -20,7 +53,7 @@ abapMonaco.registerABAP(reg);
 
 const filename = "file:///spec.json";
 const model1 = monaco.editor.createModel(
-  `{"hello": "world"}`,
+  spec,
   "json",
   monaco.Uri.parse(filename),
 );
@@ -89,15 +122,30 @@ observer.observe(document.getElementById("horizon"), {
 
 window.addEventListener("resize", updateEditorLayouts);
 
-// see https://github.com/SimulatedGREG/electron-vue/issues/777
-// see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction
-const AsyncFunction = new Function(`return Object.getPrototypeOf(async function(){}).constructor`)();
-
 async function jsonChanged() {
-  console.dir("run, todo");
+  const zcl_oapi_main = require("../../output/zcl_oapi_main.clas.js").zcl_oapi_main;
+  const main = new zcl_oapi_main();
+  await main.constructor_();
+
+  const input = new abap.types.Structure({
+    class_name: new abap.types.Character({length: 30}),
+    interface_name: new abap.types.Character({length: 30}),
+    json: new abap.types.String()}
+  );
+  input.get().json.set(editor1.getValue());
+  input.get().class_name.set('zcl_foobar');
+  input.get().interface_name.set('zif_foobar');
+  try {
+    const result = await main.run({is_input: input});
+    editor2.setValue(result.get().intf.get());
+    editor3.setValue(result.get().clas.get());
+  } catch (error) {
+    editor2.setValue("");
+    editor3.setValue(error.message);
+    console.dir(error);
+  }
 }
 
 editor1.onDidChangeModelContent(jsonChanged);
 jsonChanged();
 editor1.focus();
-const abap = new ABAP();
