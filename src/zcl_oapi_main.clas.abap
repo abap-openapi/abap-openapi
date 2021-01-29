@@ -36,6 +36,10 @@ CLASS zcl_oapi_main DEFINITION PUBLIC.
     METHODS dump_types
       RETURNING VALUE(rv_abap) TYPE string.
 
+    METHODS dump_basic_type
+      IMPORTING ii_schema TYPE REF TO zif_oapi_schema
+      RETURNING VALUE(rv_type) TYPE string.
+
     METHODS find_uri_prefix
       IMPORTING is_servers LIKE ms_specification-servers
       RETURNING VALUE(rv_prefix) TYPE string.
@@ -106,13 +110,19 @@ CLASS zcl_oapi_main IMPLEMENTATION.
   METHOD dump_types.
 
     DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
+    DATA ls_property TYPE zif_oapi_schema=>ty_property.
 
     LOOP AT ms_specification-components-schemas INTO ls_schema.
       rv_abap = rv_abap && |* Component schema: { ls_schema-name }, { ls_schema-schema->type }\n|.
       IF ls_schema-schema->type = 'object'.
-        rv_abap = rv_abap && |*   Properties: { lines( ls_schema-schema->properties ) }\n|.
+        rv_abap = rv_abap && |  TYPES: BEGIN OF { ls_schema-abap_name },\n|.
+        LOOP AT ls_schema-schema->properties INTO ls_property.
+          rv_abap = rv_abap && |           | && ls_property-abap_name && | TYPE | && dump_basic_type( ls_property-schema ) && |,\n|.
+        ENDLOOP.
+        rv_abap = rv_abap && |         END OF { ls_schema-abap_name }.\n|.
+      ELSE.
+        rv_abap = rv_abap && |  TYPES { ls_schema-abap_name } TYPE string.\n|.
       ENDIF.
-      rv_abap = rv_abap && |  TYPES { ls_schema-abap_name } TYPE string.\n|.
     ENDLOOP.
     IF lines( ms_specification-components-schemas ) > 0.
       rv_abap = rv_abap && |\n|.
@@ -206,6 +216,29 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |    WRITE / mi_client->response->get_cdata( ).\n|.
   ENDMETHOD.
 
+  METHOD dump_basic_type.
+
+    IF ii_schema IS NOT INITIAL.
+      rv_type = ii_schema->type.
+    ENDIF.
+
+    CASE rv_type.
+      WHEN 'array'.
+        rv_type = 'string'. " todo
+      WHEN 'object'.
+        rv_type = 'string'. " todo
+      WHEN 'integer'.
+        rv_type = 'i'.
+      WHEN 'number'.
+        rv_type = 'f'.
+      WHEN 'boolean'.
+        rv_type = 'abap_bool'.
+      WHEN ''.
+        rv_type = 'string'.
+    ENDCASE.
+
+  ENDMETHOD.
+
   METHOD parameters_to_abap.
 
     DATA ls_parameter LIKE LINE OF it_parameters.
@@ -219,20 +252,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
       LOOP AT it_parameters INTO ls_parameter.
 
-        CLEAR lv_type.
-        IF ls_parameter-schema IS NOT INITIAL.
-          lv_type = ls_parameter-schema->type.
-        ENDIF.
-        CASE lv_type.
-          WHEN 'array'.
-            lv_type = 'string'.
-          WHEN 'integer'.
-            lv_type = 'i'.
-          WHEN 'boolean'.
-            lv_type = 'abap_bool'.
-          WHEN ''.
-            lv_type = 'string'.
-        ENDCASE.
+        lv_type = dump_basic_type( ls_parameter-schema ).
 
         CLEAR lv_default.
         IF ls_parameter-schema IS NOT INITIAL AND ls_parameter-schema->default IS NOT INITIAL.

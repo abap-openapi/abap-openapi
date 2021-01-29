@@ -3,29 +3,63 @@ INTERFACE zif_petstore.
 * Swagger Petstore - OpenAPI 3.0
 
 * Component schema: Order, object
-*   Properties: 6
-  TYPES order TYPE string.
+  TYPES: BEGIN OF order,
+           id TYPE i,
+           petid TYPE i,
+           quantity TYPE i,
+           shipdate TYPE string,
+           status TYPE string,
+           complete TYPE abap_bool,
+         END OF order.
 * Component schema: Customer, object
-*   Properties: 3
-  TYPES customer TYPE string.
+  TYPES: BEGIN OF customer,
+           id TYPE i,
+           username TYPE string,
+           address TYPE string,
+         END OF customer.
 * Component schema: Address, object
-*   Properties: 4
-  TYPES address TYPE string.
+  TYPES: BEGIN OF address,
+           street TYPE string,
+           city TYPE string,
+           state TYPE string,
+           zip TYPE string,
+         END OF address.
 * Component schema: Category, object
-*   Properties: 2
-  TYPES category TYPE string.
+  TYPES: BEGIN OF category,
+           id TYPE i,
+           name TYPE string,
+         END OF category.
 * Component schema: User, object
-*   Properties: 8
-  TYPES user TYPE string.
+  TYPES: BEGIN OF user,
+           id TYPE i,
+           username TYPE string,
+           firstname TYPE string,
+           lastname TYPE string,
+           email TYPE string,
+           password TYPE string,
+           phone TYPE string,
+           userstatus TYPE i,
+         END OF user.
 * Component schema: Tag, object
-*   Properties: 2
-  TYPES tag TYPE string.
+  TYPES: BEGIN OF tag,
+           id TYPE i,
+           name TYPE string,
+         END OF tag.
 * Component schema: Pet, object
-*   Properties: 6
-  TYPES pet TYPE string.
+  TYPES: BEGIN OF pet,
+           id TYPE i,
+           name TYPE string,
+           category TYPE string,
+           photourls TYPE string,
+           tags TYPE string,
+           status TYPE string,
+         END OF pet.
 * Component schema: ApiResponse, object
-*   Properties: 3
-  TYPES apiresponse TYPE string.
+  TYPES: BEGIN OF apiresponse,
+           code TYPE i,
+           type TYPE string,
+           message TYPE string,
+         END OF apiresponse.
 
 * PUT - "Update an existing pet"
 * Response: 200
