@@ -1,0 +1,32 @@
+name: Web
+
+on: [push, pull_request]
+
+jobs:
+  transpiler:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '12'
+    - name: npm install
+      run: |
+        npm install
+        npm test
+        cd web
+        npm install
+        npm run build
+    - name: Install SSH Client
+      if: github.ref == 'refs/heads/master' && github.repository == 'abap-openapi/abap-openapi-client'
+      uses: webfactory/ssh-agent@v0.4.1
+      with:
+        ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+    - name: Deploy
+      if: github.ref == 'refs/heads/master' && github.repository == 'abap-openapi/abap-openapi-client'
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        SSH: true
+        BRANCH: main
+        REPOSITORY_NAME: abap-openapi/web-openapi-client
+        FOLDER: web/dist

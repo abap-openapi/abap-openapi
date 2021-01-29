@@ -61,9 +61,24 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_schema.
+    DATA lt_names TYPE string_table.
+    DATA lv_name TYPE string.
+    DATA ls_property TYPE zif_oapi_schema=>ty_property.
+    DATA lo_names TYPE REF TO zcl_oapi_abap_name.
+    CREATE OBJECT lo_names.
+
     CREATE OBJECT ri_schema TYPE zcl_oapi_schema.
     ri_schema->type = mo_json->value_string( iv_prefix && '/type' ).
     ri_schema->default = mo_json->value_string( iv_prefix && '/default' ).
+
+    lt_names = mo_json->members( iv_prefix && '/properties/' ).
+    LOOP AT lt_names INTO lv_name.
+      CLEAR ls_property.
+      ls_property-name = lv_name.
+      ls_property-abap_name = lo_names->to_abap_name( lv_name ).
+      ls_property-schema = parse_schema( iv_prefix && '/properties/' && lv_name ).
+      APPEND ls_property TO ri_schema->properties.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_components.

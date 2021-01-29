@@ -3,13 +3,58 @@ INTERFACE zif_github.
 * GitHub v3 REST API
 
 * Component schema: simple-user, object
-  TYPES simple_user TYPE string.
+  TYPES: BEGIN OF simple_user,
+           login TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           avatar_url TYPE string,
+           gravatar_id TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           followers_url TYPE string,
+           following_url TYPE string,
+           gists_url TYPE string,
+           starred_url TYPE string,
+           subscriptions_url TYPE string,
+           organizations_url TYPE string,
+           repos_url TYPE string,
+           events_url TYPE string,
+           received_events_url TYPE string,
+           type TYPE string,
+           site_admin TYPE abap_bool,
+           starred_at TYPE string,
+         END OF simple_user.
 * Component schema: integration, object
-  TYPES integration TYPE string.
+  TYPES: BEGIN OF integration,
+           id TYPE i,
+           slug TYPE string,
+           node_id TYPE string,
+           owner TYPE string,
+           name TYPE string,
+           description TYPE string,
+           external_url TYPE string,
+           html_url TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           permissions TYPE string,
+           events TYPE string,
+           installations_count TYPE i,
+           client_id TYPE string,
+           client_secret TYPE string,
+           webhook_secret TYPE string,
+           pem TYPE string,
+         END OF integration.
 * Component schema: basic-error, object
-  TYPES basic_error TYPE string.
+  TYPES: BEGIN OF basic_error,
+           message TYPE string,
+           documentation_url TYPE string,
+         END OF basic_error.
 * Component schema: validation-error-simple, object
-  TYPES validation_error_simple TYPE string.
+  TYPES: BEGIN OF validation_error_simple,
+           message TYPE string,
+           documentation_url TYPE string,
+           errors TYPE string,
+         END OF validation_error_simple.
 * Component schema: webhook-config-url, string
   TYPES webhook_config_url TYPE string.
 * Component schema: webhook-config-content-type, string
@@ -19,31 +64,249 @@ INTERFACE zif_github.
 * Component schema: webhook-config-insecure-ssl, string
   TYPES webhook_config_insecure_ssl TYPE string.
 * Component schema: webhook-config, object
-  TYPES webhook_config TYPE string.
+  TYPES: BEGIN OF webhook_config,
+           url TYPE string,
+           content_type TYPE string,
+           secret TYPE string,
+           insecure_ssl TYPE string,
+         END OF webhook_config.
 * Component schema: enterprise, object
-  TYPES enterprise TYPE string.
+  TYPES: BEGIN OF enterprise,
+           description TYPE string,
+           html_url TYPE string,
+           website_url TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           name TYPE string,
+           slug TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           avatar_url TYPE string,
+         END OF enterprise.
 * Component schema: installation, object
-  TYPES installation TYPE string.
+  TYPES: BEGIN OF installation,
+           id TYPE i,
+           account TYPE string,
+           repository_selection TYPE string,
+           access_tokens_url TYPE string,
+           repositories_url TYPE string,
+           html_url TYPE string,
+           app_id TYPE i,
+           target_id TYPE i,
+           target_type TYPE string,
+           permissions TYPE string,
+           events TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           single_file_name TYPE string,
+           has_multiple_single_files TYPE abap_bool,
+           single_file_paths TYPE string,
+           app_slug TYPE string,
+           suspended_by TYPE string,
+           suspended_at TYPE string,
+           contact_email TYPE string,
+         END OF installation.
 * Component schema: app-permissions, object
-  TYPES app_permissions TYPE string.
+  TYPES: BEGIN OF app_permissions,
+           actions TYPE string,
+           administration TYPE string,
+           checks TYPE string,
+           content_references TYPE string,
+           contents TYPE string,
+           deployments TYPE string,
+           environments TYPE string,
+           issues TYPE string,
+           metadata TYPE string,
+           packages TYPE string,
+           pages TYPE string,
+           pull_requests TYPE string,
+           repository_hooks TYPE string,
+           repository_projects TYPE string,
+           secret_scanning_alerts TYPE string,
+           secrets TYPE string,
+           security_events TYPE string,
+           single_file TYPE string,
+           statuses TYPE string,
+           vulnerability_alerts TYPE string,
+           workflows TYPE string,
+           members TYPE string,
+           organization_administration TYPE string,
+           organization_hooks TYPE string,
+           organization_plan TYPE string,
+           organization_projects TYPE string,
+           organization_secrets TYPE string,
+           organization_self_hosted_runne TYPE string,
+           organization_user_blocking TYPE string,
+           team_discussions TYPE string,
+         END OF app_permissions.
 * Component schema: license-simple, object
-  TYPES license_simple TYPE string.
+  TYPES: BEGIN OF license_simple,
+           key TYPE string,
+           name TYPE string,
+           url TYPE string,
+           spdx_id TYPE string,
+           node_id TYPE string,
+           html_url TYPE string,
+         END OF license_simple.
 * Component schema: repository, object
-  TYPES repository TYPE string.
+  TYPES: BEGIN OF repository,
+           id TYPE i,
+           node_id TYPE string,
+           name TYPE string,
+           full_name TYPE string,
+           license TYPE string,
+           forks TYPE i,
+           permissions TYPE string,
+           owner TYPE string,
+           private TYPE abap_bool,
+           html_url TYPE string,
+           description TYPE string,
+           fork TYPE abap_bool,
+           url TYPE string,
+           archive_url TYPE string,
+           assignees_url TYPE string,
+           blobs_url TYPE string,
+           branches_url TYPE string,
+           collaborators_url TYPE string,
+           comments_url TYPE string,
+           commits_url TYPE string,
+           compare_url TYPE string,
+           contents_url TYPE string,
+           contributors_url TYPE string,
+           deployments_url TYPE string,
+           downloads_url TYPE string,
+           events_url TYPE string,
+           forks_url TYPE string,
+           git_commits_url TYPE string,
+           git_refs_url TYPE string,
+           git_tags_url TYPE string,
+           git_url TYPE string,
+           issue_comment_url TYPE string,
+           issue_events_url TYPE string,
+           issues_url TYPE string,
+           keys_url TYPE string,
+           labels_url TYPE string,
+           languages_url TYPE string,
+           merges_url TYPE string,
+           milestones_url TYPE string,
+           notifications_url TYPE string,
+           pulls_url TYPE string,
+           releases_url TYPE string,
+           ssh_url TYPE string,
+           stargazers_url TYPE string,
+           statuses_url TYPE string,
+           subscribers_url TYPE string,
+           subscription_url TYPE string,
+           tags_url TYPE string,
+           teams_url TYPE string,
+           trees_url TYPE string,
+           clone_url TYPE string,
+           mirror_url TYPE string,
+           hooks_url TYPE string,
+           svn_url TYPE string,
+           homepage TYPE string,
+           language TYPE string,
+           forks_count TYPE i,
+           stargazers_count TYPE i,
+           watchers_count TYPE i,
+           size TYPE i,
+           default_branch TYPE string,
+           open_issues_count TYPE i,
+           is_template TYPE abap_bool,
+           topics TYPE string,
+           has_issues TYPE abap_bool,
+           has_projects TYPE abap_bool,
+           has_wiki TYPE abap_bool,
+           has_pages TYPE abap_bool,
+           has_downloads TYPE abap_bool,
+           archived TYPE abap_bool,
+           disabled TYPE abap_bool,
+           visibility TYPE string,
+           pushed_at TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           allow_rebase_merge TYPE abap_bool,
+           template_repository TYPE string,
+           temp_clone_token TYPE string,
+           allow_squash_merge TYPE abap_bool,
+           delete_branch_on_merge TYPE abap_bool,
+           allow_merge_commit TYPE abap_bool,
+           subscribers_count TYPE i,
+           network_count TYPE i,
+           open_issues TYPE i,
+           watchers TYPE i,
+           master_branch TYPE string,
+           starred_at TYPE string,
+         END OF repository.
 * Component schema: installation-token, object
-  TYPES installation_token TYPE string.
+  TYPES: BEGIN OF installation_token,
+           token TYPE string,
+           expires_at TYPE string,
+           permissions TYPE string,
+           repository_selection TYPE string,
+           repositories TYPE string,
+           single_file TYPE string,
+           has_multiple_single_files TYPE abap_bool,
+           single_file_paths TYPE string,
+         END OF installation_token.
 * Component schema: validation-error, object
-  TYPES validation_error TYPE string.
+  TYPES: BEGIN OF validation_error,
+           message TYPE string,
+           documentation_url TYPE string,
+           errors TYPE string,
+         END OF validation_error.
 * Component schema: application-grant, object
-  TYPES application_grant TYPE string.
+  TYPES: BEGIN OF application_grant,
+           id TYPE i,
+           url TYPE string,
+           app TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           scopes TYPE string,
+           user TYPE string,
+         END OF application_grant.
 * Component schema: scoped-installation, object
-  TYPES scoped_installation TYPE string.
+  TYPES: BEGIN OF scoped_installation,
+           permissions TYPE string,
+           repository_selection TYPE string,
+           single_file_name TYPE string,
+           has_multiple_single_files TYPE abap_bool,
+           single_file_paths TYPE string,
+           repositories_url TYPE string,
+           account TYPE string,
+         END OF scoped_installation.
 * Component schema: authorization, object
-  TYPES authorization TYPE string.
+  TYPES: BEGIN OF authorization,
+           id TYPE i,
+           url TYPE string,
+           scopes TYPE string,
+           token TYPE string,
+           token_last_eight TYPE string,
+           hashed_token TYPE string,
+           app TYPE string,
+           note TYPE string,
+           note_url TYPE string,
+           updated_at TYPE string,
+           created_at TYPE string,
+           fingerprint TYPE string,
+           user TYPE string,
+           installation TYPE string,
+         END OF authorization.
 * Component schema: code-of-conduct, object
-  TYPES code_of_conduct TYPE string.
+  TYPES: BEGIN OF code_of_conduct,
+           key TYPE string,
+           name TYPE string,
+           url TYPE string,
+           body TYPE string,
+           html_url TYPE string,
+         END OF code_of_conduct.
 * Component schema: content-reference-attachment, object
-  TYPES content_reference_attachment TYPE string.
+  TYPES: BEGIN OF content_reference_attachment,
+           id TYPE i,
+           title TYPE string,
+           body TYPE string,
+           node_id TYPE string,
+         END OF content_reference_attachment.
 * Component schema: enabled-organizations, string
   TYPES enabled_organizations TYPE string.
 * Component schema: allowed-actions, string
@@ -51,189 +314,1331 @@ INTERFACE zif_github.
 * Component schema: selected-actions-url, string
   TYPES selected_actions_url TYPE string.
 * Component schema: actions-enterprise-permissions, object
-  TYPES actions_enterprise_permissions TYPE string.
+  TYPES: BEGIN OF actions_enterprise_permissions,
+           enabled_organizations TYPE string,
+           selected_organizations_url TYPE string,
+           allowed_actions TYPE string,
+           selected_actions_url TYPE string,
+         END OF actions_enterprise_permissions.
 * Component schema: organization-simple, object
-  TYPES organization_simple TYPE string.
+  TYPES: BEGIN OF organization_simple,
+           login TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           url TYPE string,
+           repos_url TYPE string,
+           events_url TYPE string,
+           hooks_url TYPE string,
+           issues_url TYPE string,
+           members_url TYPE string,
+           public_members_url TYPE string,
+           avatar_url TYPE string,
+           description TYPE string,
+         END OF organization_simple.
 * Component schema: selected-actions, object
-  TYPES selected_actions TYPE string.
+  TYPES: BEGIN OF selected_actions,
+           github_owned_allowed TYPE abap_bool,
+           verified_allowed TYPE abap_bool,
+           patterns_allowed TYPE string,
+         END OF selected_actions.
 * Component schema: runner-groups-enterprise, object
-  TYPES runner_groups_enterprise TYPE string.
+  TYPES: BEGIN OF runner_groups_enterprise,
+           id TYPE f,
+           name TYPE string,
+           visibility TYPE string,
+           default TYPE abap_bool,
+           selected_organizations_url TYPE string,
+           runners_url TYPE string,
+           allows_public_repositories TYPE abap_bool,
+         END OF runner_groups_enterprise.
 * Component schema: runner, object
-  TYPES runner TYPE string.
+  TYPES: BEGIN OF runner,
+           id TYPE i,
+           name TYPE string,
+           os TYPE string,
+           status TYPE string,
+           busy TYPE abap_bool,
+           labels TYPE string,
+         END OF runner.
 * Component schema: runner-application, object
-  TYPES runner_application TYPE string.
+  TYPES: BEGIN OF runner_application,
+           os TYPE string,
+           architecture TYPE string,
+           download_url TYPE string,
+           filename TYPE string,
+         END OF runner_application.
 * Component schema: authentication-token, object
-  TYPES authentication_token TYPE string.
+  TYPES: BEGIN OF authentication_token,
+           token TYPE string,
+           expires_at TYPE string,
+           permissions TYPE string,
+           repositories TYPE string,
+           single_file TYPE string,
+           repository_selection TYPE string,
+         END OF authentication_token.
 * Component schema: audit-log-event, object
-  TYPES audit_log_event TYPE string.
+  TYPES: BEGIN OF audit_log_event,
+           timestamp TYPE i,
+           action TYPE string,
+           active TYPE abap_bool,
+           active_was TYPE abap_bool,
+           actor TYPE string,
+           blocked_user TYPE string,
+           business TYPE string,
+           config TYPE string,
+           config_was TYPE string,
+           content_type TYPE string,
+           created_at TYPE i,
+           deploy_key_fingerprint TYPE string,
+           emoji TYPE string,
+           events TYPE string,
+           events_were TYPE string,
+           explanation TYPE string,
+           fingerprint TYPE string,
+           hook_id TYPE i,
+           limited_availability TYPE abap_bool,
+           message TYPE string,
+           name TYPE string,
+           old_user TYPE string,
+           openssh_public_key TYPE string,
+           org TYPE string,
+           previous_visibility TYPE string,
+           read_only TYPE abap_bool,
+           repo TYPE string,
+           repository TYPE string,
+           repository_public TYPE abap_bool,
+           target_login TYPE string,
+           team TYPE string,
+           transport_protocol TYPE i,
+           transport_protocol_name TYPE string,
+           user TYPE string,
+           visibility TYPE string,
+         END OF audit_log_event.
 * Component schema: actions-billing-usage, object
-  TYPES actions_billing_usage TYPE string.
+  TYPES: BEGIN OF actions_billing_usage,
+           total_minutes_used TYPE i,
+           total_paid_minutes_used TYPE i,
+           included_minutes TYPE i,
+           minutes_used_breakdown TYPE string,
+         END OF actions_billing_usage.
 * Component schema: packages-billing-usage, object
-  TYPES packages_billing_usage TYPE string.
+  TYPES: BEGIN OF packages_billing_usage,
+           total_gigabytes_bandwidth_used TYPE i,
+           total_paid_gigabytes_bandwidth TYPE i,
+           included_gigabytes_bandwidth TYPE i,
+         END OF packages_billing_usage.
 * Component schema: combined-billing-usage, object
-  TYPES combined_billing_usage TYPE string.
+  TYPES: BEGIN OF combined_billing_usage,
+           days_left_in_billing_cycle TYPE i,
+           estimated_paid_storage_for_mon TYPE i,
+           estimated_storage_for_month TYPE i,
+         END OF combined_billing_usage.
 * Component schema: actor, object
-  TYPES actor TYPE string.
+  TYPES: BEGIN OF actor,
+           id TYPE i,
+           login TYPE string,
+           display_login TYPE string,
+           gravatar_id TYPE string,
+           url TYPE string,
+           avatar_url TYPE string,
+         END OF actor.
 * Component schema: label, object
-  TYPES label TYPE string.
+  TYPES: BEGIN OF label,
+           id TYPE i,
+           node_id TYPE string,
+           url TYPE string,
+           name TYPE string,
+           description TYPE string,
+           color TYPE string,
+           default TYPE abap_bool,
+         END OF label.
 * Component schema: milestone, object
-  TYPES milestone TYPE string.
+  TYPES: BEGIN OF milestone,
+           url TYPE string,
+           html_url TYPE string,
+           labels_url TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           number TYPE i,
+           state TYPE string,
+           title TYPE string,
+           description TYPE string,
+           creator TYPE string,
+           open_issues TYPE i,
+           closed_issues TYPE i,
+           created_at TYPE string,
+           updated_at TYPE string,
+           closed_at TYPE string,
+           due_on TYPE string,
+         END OF milestone.
 * Component schema: author_association, string
   TYPES author_association TYPE string.
 * Component schema: issue-simple, object
-  TYPES issue_simple TYPE string.
+  TYPES: BEGIN OF issue_simple,
+           id TYPE i,
+           node_id TYPE string,
+           url TYPE string,
+           repository_url TYPE string,
+           labels_url TYPE string,
+           comments_url TYPE string,
+           events_url TYPE string,
+           html_url TYPE string,
+           number TYPE i,
+           state TYPE string,
+           title TYPE string,
+           body TYPE string,
+           user TYPE string,
+           labels TYPE string,
+           assignee TYPE string,
+           assignees TYPE string,
+           milestone TYPE string,
+           locked TYPE abap_bool,
+           active_lock_reason TYPE string,
+           comments TYPE i,
+           pull_request TYPE string,
+           closed_at TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           author_association TYPE string,
+           body_html TYPE string,
+           body_text TYPE string,
+           timeline_url TYPE string,
+           repository TYPE string,
+           performed_via_github_app TYPE string,
+         END OF issue_simple.
 * Component schema: reaction-rollup, object
-  TYPES reaction_rollup TYPE string.
+  TYPES: BEGIN OF reaction_rollup,
+           url TYPE string,
+           total_count TYPE i,
+           1 TYPE i,
+           _1 TYPE i,
+           laugh TYPE i,
+           confused TYPE i,
+           heart TYPE i,
+           hooray TYPE i,
+           eyes TYPE i,
+           rocket TYPE i,
+         END OF reaction_rollup.
 * Component schema: issue-comment, object
-  TYPES issue_comment TYPE string.
+  TYPES: BEGIN OF issue_comment,
+           id TYPE i,
+           node_id TYPE string,
+           url TYPE string,
+           body TYPE string,
+           body_text TYPE string,
+           body_html TYPE string,
+           html_url TYPE string,
+           user TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           issue_url TYPE string,
+           author_association TYPE string,
+           performed_via_github_app TYPE string,
+           reactions TYPE string,
+         END OF issue_comment.
 * Component schema: event, object
-  TYPES event TYPE string.
+  TYPES: BEGIN OF event,
+           id TYPE string,
+           type TYPE string,
+           actor TYPE string,
+           repo TYPE string,
+           org TYPE string,
+           payload TYPE string,
+           public TYPE abap_bool,
+           created_at TYPE string,
+         END OF event.
 * Component schema: link-with-type, object
-  TYPES link_with_type TYPE string.
+  TYPES: BEGIN OF link_with_type,
+           href TYPE string,
+           type TYPE string,
+         END OF link_with_type.
 * Component schema: feed, object
-  TYPES feed TYPE string.
+  TYPES: BEGIN OF feed,
+           timeline_url TYPE string,
+           user_url TYPE string,
+           current_user_public_url TYPE string,
+           current_user_url TYPE string,
+           current_user_actor_url TYPE string,
+           current_user_organization_url TYPE string,
+           current_user_organization_urls TYPE string,
+           security_advisories_url TYPE string,
+           _links TYPE string,
+         END OF feed.
 * Component schema: base-gist, object
-  TYPES base_gist TYPE string.
+  TYPES: BEGIN OF base_gist,
+           url TYPE string,
+           forks_url TYPE string,
+           commits_url TYPE string,
+           id TYPE string,
+           node_id TYPE string,
+           git_pull_url TYPE string,
+           git_push_url TYPE string,
+           html_url TYPE string,
+           files TYPE string,
+           public TYPE abap_bool,
+           created_at TYPE string,
+           updated_at TYPE string,
+           description TYPE string,
+           comments TYPE i,
+           user TYPE string,
+           comments_url TYPE string,
+           owner TYPE string,
+           truncated TYPE abap_bool,
+           forks TYPE string,
+           history TYPE string,
+         END OF base_gist.
 * Component schema: gist-simple, object
-  TYPES gist_simple TYPE string.
+  TYPES: BEGIN OF gist_simple,
+           url TYPE string,
+           forks_url TYPE string,
+           commits_url TYPE string,
+           id TYPE string,
+           node_id TYPE string,
+           git_pull_url TYPE string,
+           git_push_url TYPE string,
+           html_url TYPE string,
+           files TYPE string,
+           public TYPE abap_bool,
+           created_at TYPE string,
+           updated_at TYPE string,
+           description TYPE string,
+           comments TYPE i,
+           user TYPE string,
+           comments_url TYPE string,
+           owner TYPE string,
+           truncated TYPE abap_bool,
+         END OF gist_simple.
 * Component schema: gist-comment, object
-  TYPES gist_comment TYPE string.
+  TYPES: BEGIN OF gist_comment,
+           id TYPE i,
+           node_id TYPE string,
+           url TYPE string,
+           body TYPE string,
+           user TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           author_association TYPE string,
+         END OF gist_comment.
 * Component schema: gist-commit, object
-  TYPES gist_commit TYPE string.
+  TYPES: BEGIN OF gist_commit,
+           url TYPE string,
+           version TYPE string,
+           user TYPE string,
+           change_status TYPE string,
+           committed_at TYPE string,
+         END OF gist_commit.
 * Component schema: gitignore-template, object
-  TYPES gitignore_template TYPE string.
+  TYPES: BEGIN OF gitignore_template,
+           name TYPE string,
+           source TYPE string,
+         END OF gitignore_template.
 * Component schema: issue, object
-  TYPES issue TYPE string.
+  TYPES: BEGIN OF issue,
+           id TYPE i,
+           node_id TYPE string,
+           url TYPE string,
+           repository_url TYPE string,
+           labels_url TYPE string,
+           comments_url TYPE string,
+           events_url TYPE string,
+           html_url TYPE string,
+           number TYPE i,
+           state TYPE string,
+           title TYPE string,
+           body TYPE string,
+           user TYPE string,
+           labels TYPE string,
+           assignee TYPE string,
+           assignees TYPE string,
+           milestone TYPE string,
+           locked TYPE abap_bool,
+           active_lock_reason TYPE string,
+           comments TYPE i,
+           pull_request TYPE string,
+           closed_at TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           closed_by TYPE string,
+           body_html TYPE string,
+           body_text TYPE string,
+           timeline_url TYPE string,
+           repository TYPE string,
+           performed_via_github_app TYPE string,
+           author_association TYPE string,
+           reactions TYPE string,
+         END OF issue.
 * Component schema: license, object
-  TYPES license TYPE string.
+  TYPES: BEGIN OF license,
+           key TYPE string,
+           name TYPE string,
+           spdx_id TYPE string,
+           url TYPE string,
+           node_id TYPE string,
+           html_url TYPE string,
+           description TYPE string,
+           implementation TYPE string,
+           permissions TYPE string,
+           conditions TYPE string,
+           limitations TYPE string,
+           body TYPE string,
+           featured TYPE abap_bool,
+         END OF license.
 * Component schema: marketplace-listing-plan, object
-  TYPES marketplace_listing_plan TYPE string.
+  TYPES: BEGIN OF marketplace_listing_plan,
+           url TYPE string,
+           accounts_url TYPE string,
+           id TYPE i,
+           number TYPE i,
+           name TYPE string,
+           description TYPE string,
+           monthly_price_in_cents TYPE i,
+           yearly_price_in_cents TYPE i,
+           price_model TYPE string,
+           has_free_trial TYPE abap_bool,
+           unit_name TYPE string,
+           state TYPE string,
+           bullets TYPE string,
+         END OF marketplace_listing_plan.
 * Component schema: marketplace-purchase, object
-  TYPES marketplace_purchase TYPE string.
+  TYPES: BEGIN OF marketplace_purchase,
+           url TYPE string,
+           type TYPE string,
+           id TYPE i,
+           login TYPE string,
+           organization_billing_email TYPE string,
+           marketplace_pending_change TYPE string,
+           marketplace_purchase TYPE string,
+         END OF marketplace_purchase.
 * Component schema: api-overview, object
-  TYPES api_overview TYPE string.
+  TYPES: BEGIN OF api_overview,
+           verifiable_password_authentica TYPE abap_bool,
+           ssh_key_fingerprints TYPE string,
+           hooks TYPE string,
+           web TYPE string,
+           api TYPE string,
+           git TYPE string,
+           pages TYPE string,
+           importer TYPE string,
+           actions TYPE string,
+         END OF api_overview.
 * Component schema: minimal-repository, object
-  TYPES minimal_repository TYPE string.
+  TYPES: BEGIN OF minimal_repository,
+           id TYPE i,
+           node_id TYPE string,
+           name TYPE string,
+           full_name TYPE string,
+           owner TYPE string,
+           private TYPE abap_bool,
+           html_url TYPE string,
+           description TYPE string,
+           fork TYPE abap_bool,
+           url TYPE string,
+           archive_url TYPE string,
+           assignees_url TYPE string,
+           blobs_url TYPE string,
+           branches_url TYPE string,
+           collaborators_url TYPE string,
+           comments_url TYPE string,
+           commits_url TYPE string,
+           compare_url TYPE string,
+           contents_url TYPE string,
+           contributors_url TYPE string,
+           deployments_url TYPE string,
+           downloads_url TYPE string,
+           events_url TYPE string,
+           forks_url TYPE string,
+           git_commits_url TYPE string,
+           git_refs_url TYPE string,
+           git_tags_url TYPE string,
+           git_url TYPE string,
+           issue_comment_url TYPE string,
+           issue_events_url TYPE string,
+           issues_url TYPE string,
+           keys_url TYPE string,
+           labels_url TYPE string,
+           languages_url TYPE string,
+           merges_url TYPE string,
+           milestones_url TYPE string,
+           notifications_url TYPE string,
+           pulls_url TYPE string,
+           releases_url TYPE string,
+           ssh_url TYPE string,
+           stargazers_url TYPE string,
+           statuses_url TYPE string,
+           subscribers_url TYPE string,
+           subscription_url TYPE string,
+           tags_url TYPE string,
+           teams_url TYPE string,
+           trees_url TYPE string,
+           clone_url TYPE string,
+           mirror_url TYPE string,
+           hooks_url TYPE string,
+           svn_url TYPE string,
+           homepage TYPE string,
+           language TYPE string,
+           forks_count TYPE i,
+           stargazers_count TYPE i,
+           watchers_count TYPE i,
+           size TYPE i,
+           default_branch TYPE string,
+           open_issues_count TYPE i,
+           is_template TYPE abap_bool,
+           topics TYPE string,
+           has_issues TYPE abap_bool,
+           has_projects TYPE abap_bool,
+           has_wiki TYPE abap_bool,
+           has_pages TYPE abap_bool,
+           has_downloads TYPE abap_bool,
+           archived TYPE abap_bool,
+           disabled TYPE abap_bool,
+           visibility TYPE string,
+           pushed_at TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           permissions TYPE string,
+           template_repository TYPE string,
+           temp_clone_token TYPE string,
+           delete_branch_on_merge TYPE abap_bool,
+           subscribers_count TYPE i,
+           network_count TYPE i,
+           license TYPE string,
+           forks TYPE i,
+           open_issues TYPE i,
+           watchers TYPE i,
+         END OF minimal_repository.
 * Component schema: thread, object
-  TYPES thread TYPE string.
+  TYPES: BEGIN OF thread,
+           id TYPE string,
+           repository TYPE string,
+           subject TYPE string,
+           reason TYPE string,
+           unread TYPE abap_bool,
+           updated_at TYPE string,
+           last_read_at TYPE string,
+           url TYPE string,
+           subscription_url TYPE string,
+         END OF thread.
 * Component schema: thread-subscription, object
-  TYPES thread_subscription TYPE string.
+  TYPES: BEGIN OF thread_subscription,
+           subscribed TYPE abap_bool,
+           ignored TYPE abap_bool,
+           reason TYPE string,
+           created_at TYPE string,
+           url TYPE string,
+           thread_url TYPE string,
+           repository_url TYPE string,
+         END OF thread_subscription.
 * Component schema: organization-full, object
-  TYPES organization_full TYPE string.
+  TYPES: BEGIN OF organization_full,
+           login TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           url TYPE string,
+           repos_url TYPE string,
+           events_url TYPE string,
+           hooks_url TYPE string,
+           issues_url TYPE string,
+           members_url TYPE string,
+           public_members_url TYPE string,
+           avatar_url TYPE string,
+           description TYPE string,
+           name TYPE string,
+           company TYPE string,
+           blog TYPE string,
+           location TYPE string,
+           email TYPE string,
+           twitter_username TYPE string,
+           is_verified TYPE abap_bool,
+           has_organization_projects TYPE abap_bool,
+           has_repository_projects TYPE abap_bool,
+           public_repos TYPE i,
+           public_gists TYPE i,
+           followers TYPE i,
+           following TYPE i,
+           html_url TYPE string,
+           created_at TYPE string,
+           type TYPE string,
+           total_private_repos TYPE i,
+           owned_private_repos TYPE i,
+           private_gists TYPE i,
+           disk_usage TYPE i,
+           collaborators TYPE i,
+           billing_email TYPE string,
+           plan TYPE string,
+           default_repository_permission TYPE string,
+           members_can_create_repositorie TYPE abap_bool,
+           two_factor_requirement_enabled TYPE abap_bool,
+           members_allowed_repository_cre TYPE string,
+           members_can_create_public_repo TYPE abap_bool,
+           members_can_create_private_rep TYPE abap_bool,
+           members_can_create_internal_re TYPE abap_bool,
+           members_can_create_pages TYPE abap_bool,
+           updated_at TYPE string,
+         END OF organization_full.
 * Component schema: enabled-repositories, string
   TYPES enabled_repositories TYPE string.
 * Component schema: actions-organization-permissions, object
-  TYPES actions_organization_permissio TYPE string.
+  TYPES: BEGIN OF actions_organization_permissio,
+           enabled_repositories TYPE string,
+           selected_repositories_url TYPE string,
+           allowed_actions TYPE string,
+           selected_actions_url TYPE string,
+         END OF actions_organization_permissio.
 * Component schema: runner-groups-org, object
-  TYPES runner_groups_org TYPE string.
+  TYPES: BEGIN OF runner_groups_org,
+           id TYPE f,
+           name TYPE string,
+           visibility TYPE string,
+           default TYPE abap_bool,
+           selected_repositories_url TYPE string,
+           runners_url TYPE string,
+           inherited TYPE abap_bool,
+           inherited_allows_public_reposi TYPE abap_bool,
+           allows_public_repositories TYPE abap_bool,
+         END OF runner_groups_org.
 * Component schema: organization-actions-secret, object
-  TYPES organization_actions_secret TYPE string.
+  TYPES: BEGIN OF organization_actions_secret,
+           name TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           visibility TYPE string,
+           selected_repositories_url TYPE string,
+         END OF organization_actions_secret.
 * Component schema: actions-public-key, object
-  TYPES actions_public_key TYPE string.
+  TYPES: BEGIN OF actions_public_key,
+           key_id TYPE string,
+           key TYPE string,
+           id TYPE i,
+           url TYPE string,
+           title TYPE string,
+           created_at TYPE string,
+         END OF actions_public_key.
 * Component schema: credential-authorization, object
-  TYPES credential_authorization TYPE string.
+  TYPES: BEGIN OF credential_authorization,
+           login TYPE string,
+           credential_id TYPE i,
+           credential_type TYPE string,
+           token_last_eight TYPE string,
+           credential_authorized_at TYPE string,
+           scopes TYPE string,
+           fingerprint TYPE string,
+           credential_accessed_at TYPE string,
+           authorized_credential_id TYPE i,
+           authorized_credential_title TYPE string,
+           authorized_credential_note TYPE string,
+         END OF credential_authorization.
 * Component schema: organization-invitation, object
-  TYPES organization_invitation TYPE string.
+  TYPES: BEGIN OF organization_invitation,
+           id TYPE i,
+           login TYPE string,
+           email TYPE string,
+           role TYPE string,
+           created_at TYPE string,
+           failed_at TYPE string,
+           failed_reason TYPE string,
+           inviter TYPE string,
+           team_count TYPE i,
+           invitation_team_url TYPE string,
+           node_id TYPE string,
+           invitation_teams_url TYPE string,
+         END OF organization_invitation.
 * Component schema: org-hook, object
-  TYPES org_hook TYPE string.
+  TYPES: BEGIN OF org_hook,
+           id TYPE i,
+           url TYPE string,
+           ping_url TYPE string,
+           name TYPE string,
+           events TYPE string,
+           active TYPE abap_bool,
+           config TYPE string,
+           updated_at TYPE string,
+           created_at TYPE string,
+           type TYPE string,
+         END OF org_hook.
 * Component schema: interaction-group, string
   TYPES interaction_group TYPE string.
 * Component schema: interaction-limit-response, object
-  TYPES interaction_limit_response TYPE string.
+  TYPES: BEGIN OF interaction_limit_response,
+           limit TYPE string,
+           origin TYPE string,
+           expires_at TYPE string,
+         END OF interaction_limit_response.
 * Component schema: interaction-expiry, string
   TYPES interaction_expiry TYPE string.
 * Component schema: interaction-limit, object
-  TYPES interaction_limit TYPE string.
+  TYPES: BEGIN OF interaction_limit,
+           limit TYPE string,
+           expiry TYPE string,
+         END OF interaction_limit.
 * Component schema: team-simple, object
-  TYPES team_simple TYPE string.
+  TYPES: BEGIN OF team_simple,
+           id TYPE i,
+           node_id TYPE string,
+           url TYPE string,
+           members_url TYPE string,
+           name TYPE string,
+           description TYPE string,
+           permission TYPE string,
+           privacy TYPE string,
+           html_url TYPE string,
+           repositories_url TYPE string,
+           slug TYPE string,
+           ldap_dn TYPE string,
+         END OF team_simple.
 * Component schema: team, object
-  TYPES team TYPE string.
+  TYPES: BEGIN OF team,
+           id TYPE i,
+           node_id TYPE string,
+           name TYPE string,
+           slug TYPE string,
+           description TYPE string,
+           privacy TYPE string,
+           permission TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           members_url TYPE string,
+           repositories_url TYPE string,
+           parent TYPE string,
+         END OF team.
 * Component schema: org-membership, object
-  TYPES org_membership TYPE string.
+  TYPES: BEGIN OF org_membership,
+           url TYPE string,
+           state TYPE string,
+           role TYPE string,
+           organization_url TYPE string,
+           organization TYPE string,
+           user TYPE string,
+           permissions TYPE string,
+         END OF org_membership.
 * Component schema: migration, object
-  TYPES migration TYPE string.
+  TYPES: BEGIN OF migration,
+           id TYPE i,
+           owner TYPE string,
+           guid TYPE string,
+           state TYPE string,
+           lock_repositories TYPE abap_bool,
+           exclude_attachments TYPE abap_bool,
+           repositories TYPE string,
+           url TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           node_id TYPE string,
+           archive_url TYPE string,
+           exclude TYPE string,
+         END OF migration.
 * Component schema: project, object
-  TYPES project TYPE string.
+  TYPES: BEGIN OF project,
+           owner_url TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           columns_url TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           name TYPE string,
+           body TYPE string,
+           number TYPE i,
+           state TYPE string,
+           creator TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           organization_permission TYPE string,
+           private TYPE abap_bool,
+         END OF project.
 * Component schema: group-mapping, object
-  TYPES group_mapping TYPE string.
+  TYPES: BEGIN OF group_mapping,
+           groups TYPE string,
+           group_id TYPE string,
+           group_name TYPE string,
+           group_description TYPE string,
+           status TYPE string,
+           synced_at TYPE string,
+         END OF group_mapping.
 * Component schema: team-full, object
-  TYPES team_full TYPE string.
+  TYPES: BEGIN OF team_full,
+           id TYPE i,
+           node_id TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           name TYPE string,
+           slug TYPE string,
+           description TYPE string,
+           privacy TYPE string,
+           permission TYPE string,
+           members_url TYPE string,
+           repositories_url TYPE string,
+           parent TYPE string,
+           members_count TYPE i,
+           repos_count TYPE i,
+           created_at TYPE string,
+           updated_at TYPE string,
+           organization TYPE string,
+           ldap_dn TYPE string,
+         END OF team_full.
 * Component schema: team-discussion, object
-  TYPES team_discussion TYPE string.
+  TYPES: BEGIN OF team_discussion,
+           author TYPE string,
+           body TYPE string,
+           body_html TYPE string,
+           body_version TYPE string,
+           comments_count TYPE i,
+           comments_url TYPE string,
+           created_at TYPE string,
+           last_edited_at TYPE string,
+           html_url TYPE string,
+           node_id TYPE string,
+           number TYPE i,
+           pinned TYPE abap_bool,
+           private TYPE abap_bool,
+           team_url TYPE string,
+           title TYPE string,
+           updated_at TYPE string,
+           url TYPE string,
+           reactions TYPE string,
+         END OF team_discussion.
 * Component schema: team-discussion-comment, object
-  TYPES team_discussion_comment TYPE string.
+  TYPES: BEGIN OF team_discussion_comment,
+           author TYPE string,
+           body TYPE string,
+           body_html TYPE string,
+           body_version TYPE string,
+           created_at TYPE string,
+           last_edited_at TYPE string,
+           discussion_url TYPE string,
+           html_url TYPE string,
+           node_id TYPE string,
+           number TYPE i,
+           updated_at TYPE string,
+           url TYPE string,
+           reactions TYPE string,
+         END OF team_discussion_comment.
 * Component schema: reaction, object
-  TYPES reaction TYPE string.
+  TYPES: BEGIN OF reaction,
+           id TYPE i,
+           node_id TYPE string,
+           user TYPE string,
+           content TYPE string,
+           created_at TYPE string,
+         END OF reaction.
 * Component schema: team-membership, object
-  TYPES team_membership TYPE string.
+  TYPES: BEGIN OF team_membership,
+           url TYPE string,
+           role TYPE string,
+           state TYPE string,
+         END OF team_membership.
 * Component schema: team-project, object
-  TYPES team_project TYPE string.
+  TYPES: BEGIN OF team_project,
+           owner_url TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           columns_url TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           name TYPE string,
+           body TYPE string,
+           number TYPE i,
+           state TYPE string,
+           creator TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           organization_permission TYPE string,
+           private TYPE abap_bool,
+           permissions TYPE string,
+         END OF team_project.
 * Component schema: team-repository, object
-  TYPES team_repository TYPE string.
+  TYPES: BEGIN OF team_repository,
+           id TYPE i,
+           node_id TYPE string,
+           name TYPE string,
+           full_name TYPE string,
+           license TYPE string,
+           forks TYPE i,
+           permissions TYPE string,
+           owner TYPE string,
+           private TYPE abap_bool,
+           html_url TYPE string,
+           description TYPE string,
+           fork TYPE abap_bool,
+           url TYPE string,
+           archive_url TYPE string,
+           assignees_url TYPE string,
+           blobs_url TYPE string,
+           branches_url TYPE string,
+           collaborators_url TYPE string,
+           comments_url TYPE string,
+           commits_url TYPE string,
+           compare_url TYPE string,
+           contents_url TYPE string,
+           contributors_url TYPE string,
+           deployments_url TYPE string,
+           downloads_url TYPE string,
+           events_url TYPE string,
+           forks_url TYPE string,
+           git_commits_url TYPE string,
+           git_refs_url TYPE string,
+           git_tags_url TYPE string,
+           git_url TYPE string,
+           issue_comment_url TYPE string,
+           issue_events_url TYPE string,
+           issues_url TYPE string,
+           keys_url TYPE string,
+           labels_url TYPE string,
+           languages_url TYPE string,
+           merges_url TYPE string,
+           milestones_url TYPE string,
+           notifications_url TYPE string,
+           pulls_url TYPE string,
+           releases_url TYPE string,
+           ssh_url TYPE string,
+           stargazers_url TYPE string,
+           statuses_url TYPE string,
+           subscribers_url TYPE string,
+           subscription_url TYPE string,
+           tags_url TYPE string,
+           teams_url TYPE string,
+           trees_url TYPE string,
+           clone_url TYPE string,
+           mirror_url TYPE string,
+           hooks_url TYPE string,
+           svn_url TYPE string,
+           homepage TYPE string,
+           language TYPE string,
+           forks_count TYPE i,
+           stargazers_count TYPE i,
+           watchers_count TYPE i,
+           size TYPE i,
+           default_branch TYPE string,
+           open_issues_count TYPE i,
+           is_template TYPE abap_bool,
+           topics TYPE string,
+           has_issues TYPE abap_bool,
+           has_projects TYPE abap_bool,
+           has_wiki TYPE abap_bool,
+           has_pages TYPE abap_bool,
+           has_downloads TYPE abap_bool,
+           archived TYPE abap_bool,
+           disabled TYPE abap_bool,
+           visibility TYPE string,
+           pushed_at TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           allow_rebase_merge TYPE abap_bool,
+           template_repository TYPE string,
+           temp_clone_token TYPE string,
+           allow_squash_merge TYPE abap_bool,
+           delete_branch_on_merge TYPE abap_bool,
+           allow_merge_commit TYPE abap_bool,
+           subscribers_count TYPE i,
+           network_count TYPE i,
+           open_issues TYPE i,
+           watchers TYPE i,
+           master_branch TYPE string,
+         END OF team_repository.
 * Component schema: project-card, object
-  TYPES project_card TYPE string.
+  TYPES: BEGIN OF project_card,
+           url TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           note TYPE string,
+           creator TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           archived TYPE abap_bool,
+           column_url TYPE string,
+           content_url TYPE string,
+           project_url TYPE string,
+         END OF project_card.
 * Component schema: project-column, object
-  TYPES project_column TYPE string.
+  TYPES: BEGIN OF project_column,
+           url TYPE string,
+           project_url TYPE string,
+           cards_url TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           name TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+         END OF project_column.
 * Component schema: repository-collaborator-permission, object
-  TYPES repository_collaborator_permis TYPE string.
+  TYPES: BEGIN OF repository_collaborator_permis,
+           permission TYPE string,
+           user TYPE string,
+         END OF repository_collaborator_permis.
 * Component schema: rate-limit, object
-  TYPES rate_limit TYPE string.
+  TYPES: BEGIN OF rate_limit,
+           limit TYPE i,
+           remaining TYPE i,
+           reset TYPE i,
+         END OF rate_limit.
 * Component schema: rate-limit-overview, object
-  TYPES rate_limit_overview TYPE string.
+  TYPES: BEGIN OF rate_limit_overview,
+           resources TYPE string,
+           rate TYPE string,
+         END OF rate_limit_overview.
 * Component schema: full-repository, object
-  TYPES full_repository TYPE string.
+  TYPES: BEGIN OF full_repository,
+           id TYPE i,
+           node_id TYPE string,
+           name TYPE string,
+           full_name TYPE string,
+           owner TYPE string,
+           private TYPE abap_bool,
+           html_url TYPE string,
+           description TYPE string,
+           fork TYPE abap_bool,
+           url TYPE string,
+           archive_url TYPE string,
+           assignees_url TYPE string,
+           blobs_url TYPE string,
+           branches_url TYPE string,
+           collaborators_url TYPE string,
+           comments_url TYPE string,
+           commits_url TYPE string,
+           compare_url TYPE string,
+           contents_url TYPE string,
+           contributors_url TYPE string,
+           deployments_url TYPE string,
+           downloads_url TYPE string,
+           events_url TYPE string,
+           forks_url TYPE string,
+           git_commits_url TYPE string,
+           git_refs_url TYPE string,
+           git_tags_url TYPE string,
+           git_url TYPE string,
+           issue_comment_url TYPE string,
+           issue_events_url TYPE string,
+           issues_url TYPE string,
+           keys_url TYPE string,
+           labels_url TYPE string,
+           languages_url TYPE string,
+           merges_url TYPE string,
+           milestones_url TYPE string,
+           notifications_url TYPE string,
+           pulls_url TYPE string,
+           releases_url TYPE string,
+           ssh_url TYPE string,
+           stargazers_url TYPE string,
+           statuses_url TYPE string,
+           subscribers_url TYPE string,
+           subscription_url TYPE string,
+           tags_url TYPE string,
+           teams_url TYPE string,
+           trees_url TYPE string,
+           clone_url TYPE string,
+           mirror_url TYPE string,
+           hooks_url TYPE string,
+           svn_url TYPE string,
+           homepage TYPE string,
+           language TYPE string,
+           forks_count TYPE i,
+           stargazers_count TYPE i,
+           watchers_count TYPE i,
+           size TYPE i,
+           default_branch TYPE string,
+           open_issues_count TYPE i,
+           is_template TYPE abap_bool,
+           topics TYPE string,
+           has_issues TYPE abap_bool,
+           has_projects TYPE abap_bool,
+           has_wiki TYPE abap_bool,
+           has_pages TYPE abap_bool,
+           has_downloads TYPE abap_bool,
+           archived TYPE abap_bool,
+           disabled TYPE abap_bool,
+           visibility TYPE string,
+           pushed_at TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           permissions TYPE string,
+           allow_rebase_merge TYPE abap_bool,
+           template_repository TYPE string,
+           temp_clone_token TYPE string,
+           allow_squash_merge TYPE abap_bool,
+           delete_branch_on_merge TYPE abap_bool,
+           allow_merge_commit TYPE abap_bool,
+           subscribers_count TYPE i,
+           network_count TYPE i,
+           license TYPE string,
+           organization TYPE string,
+           parent TYPE string,
+           source TYPE string,
+           forks TYPE i,
+           master_branch TYPE string,
+           open_issues TYPE i,
+           watchers TYPE i,
+           anonymous_access_enabled TYPE abap_bool,
+         END OF full_repository.
 * Component schema: artifact, object
-  TYPES artifact TYPE string.
+  TYPES: BEGIN OF artifact,
+           id TYPE i,
+           node_id TYPE string,
+           name TYPE string,
+           size_in_bytes TYPE i,
+           url TYPE string,
+           archive_download_url TYPE string,
+           expired TYPE abap_bool,
+           created_at TYPE string,
+           expires_at TYPE string,
+           updated_at TYPE string,
+         END OF artifact.
 * Component schema: job, object
-  TYPES job TYPE string.
+  TYPES: BEGIN OF job,
+           id TYPE i,
+           run_id TYPE i,
+           run_url TYPE string,
+           node_id TYPE string,
+           head_sha TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           status TYPE string,
+           conclusion TYPE string,
+           started_at TYPE string,
+           completed_at TYPE string,
+           name TYPE string,
+           steps TYPE string,
+           check_run_url TYPE string,
+         END OF job.
 * Component schema: actions-enabled, boolean
   TYPES actions_enabled TYPE string.
 * Component schema: actions-repository-permissions, object
-  TYPES actions_repository_permissions TYPE string.
+  TYPES: BEGIN OF actions_repository_permissions,
+           enabled TYPE string,
+           allowed_actions TYPE string,
+           selected_actions_url TYPE string,
+         END OF actions_repository_permissions.
 * Component schema: pull-request-minimal, object
-  TYPES pull_request_minimal TYPE string.
+  TYPES: BEGIN OF pull_request_minimal,
+           id TYPE i,
+           number TYPE i,
+           url TYPE string,
+           head TYPE string,
+           base TYPE string,
+         END OF pull_request_minimal.
 * Component schema: simple-commit, object
-  TYPES simple_commit TYPE string.
+  TYPES: BEGIN OF simple_commit,
+           id TYPE string,
+           tree_id TYPE string,
+           message TYPE string,
+           timestamp TYPE string,
+           author TYPE string,
+           committer TYPE string,
+         END OF simple_commit.
 * Component schema: workflow-run, object
-  TYPES workflow_run TYPE string.
+  TYPES: BEGIN OF workflow_run,
+           id TYPE i,
+           name TYPE string,
+           node_id TYPE string,
+           head_branch TYPE string,
+           head_sha TYPE string,
+           run_number TYPE i,
+           event TYPE string,
+           status TYPE string,
+           conclusion TYPE string,
+           workflow_id TYPE i,
+           url TYPE string,
+           html_url TYPE string,
+           pull_requests TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           jobs_url TYPE string,
+           logs_url TYPE string,
+           check_suite_url TYPE string,
+           artifacts_url TYPE string,
+           cancel_url TYPE string,
+           rerun_url TYPE string,
+           workflow_url TYPE string,
+           head_commit TYPE string,
+           repository TYPE string,
+           head_repository TYPE string,
+           head_repository_id TYPE i,
+         END OF workflow_run.
 * Component schema: workflow-run-usage, object
-  TYPES workflow_run_usage TYPE string.
+  TYPES: BEGIN OF workflow_run_usage,
+           billable TYPE string,
+           run_duration_ms TYPE i,
+         END OF workflow_run_usage.
 * Component schema: actions-secret, object
-  TYPES actions_secret TYPE string.
+  TYPES: BEGIN OF actions_secret,
+           name TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+         END OF actions_secret.
 * Component schema: workflow, object
-  TYPES workflow TYPE string.
+  TYPES: BEGIN OF workflow,
+           id TYPE i,
+           node_id TYPE string,
+           name TYPE string,
+           path TYPE string,
+           state TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           badge_url TYPE string,
+           deleted_at TYPE string,
+         END OF workflow.
 * Component schema: workflow-usage, object
-  TYPES workflow_usage TYPE string.
+  TYPES: BEGIN OF workflow_usage,
+           billable TYPE string,
+         END OF workflow_usage.
 * Component schema: protected-branch-admin-enforced, object
-  TYPES protected_branch_admin_enforce TYPE string.
+  TYPES: BEGIN OF protected_branch_admin_enforce,
+           url TYPE string,
+           enabled TYPE abap_bool,
+         END OF protected_branch_admin_enforce.
 * Component schema: protected-branch-pull-request-review, object
-  TYPES protected_branch_pull_request_ TYPE string.
+  TYPES: BEGIN OF protected_branch_pull_request_,
+           url TYPE string,
+           dismissal_restrictions TYPE string,
+           dismiss_stale_reviews TYPE abap_bool,
+           require_code_owner_reviews TYPE abap_bool,
+           required_approving_review_coun TYPE i,
+         END OF protected_branch_pull_request_.
 * Component schema: branch-restriction-policy, object
-  TYPES branch_restriction_policy TYPE string.
+  TYPES: BEGIN OF branch_restriction_policy,
+           url TYPE string,
+           users_url TYPE string,
+           teams_url TYPE string,
+           apps_url TYPE string,
+           users TYPE string,
+           teams TYPE string,
+           apps TYPE string,
+         END OF branch_restriction_policy.
 * Component schema: branch-protection, object
-  TYPES branch_protection TYPE string.
+  TYPES: BEGIN OF branch_protection,
+           url TYPE string,
+           required_status_checks TYPE string,
+           enforce_admins TYPE string,
+           required_pull_request_reviews TYPE string,
+           restrictions TYPE string,
+           required_linear_history TYPE string,
+           allow_force_pushes TYPE string,
+           allow_deletions TYPE string,
+           enabled TYPE abap_bool,
+           name TYPE string,
+           protection_url TYPE string,
+         END OF branch_protection.
 * Component schema: short-branch, object
-  TYPES short_branch TYPE string.
+  TYPES: BEGIN OF short_branch,
+           name TYPE string,
+           commit TYPE string,
+           protected TYPE abap_bool,
+           protection TYPE string,
+           protection_url TYPE string,
+         END OF short_branch.
 * Component schema: git-user, object
-  TYPES git_user TYPE string.
+  TYPES: BEGIN OF git_user,
+           name TYPE string,
+           email TYPE string,
+           date TYPE string,
+         END OF git_user.
 * Component schema: verification, object
-  TYPES verification TYPE string.
+  TYPES: BEGIN OF verification,
+           verified TYPE abap_bool,
+           reason TYPE string,
+           payload TYPE string,
+           signature TYPE string,
+         END OF verification.
 * Component schema: commit, object
-  TYPES commit TYPE string.
+  TYPES: BEGIN OF commit,
+           url TYPE string,
+           sha TYPE string,
+           node_id TYPE string,
+           html_url TYPE string,
+           comments_url TYPE string,
+           commit TYPE string,
+           author TYPE string,
+           committer TYPE string,
+           parents TYPE string,
+           stats TYPE string,
+           files TYPE string,
+         END OF commit.
 * Component schema: branch-with-protection, object
-  TYPES branch_with_protection TYPE string.
+  TYPES: BEGIN OF branch_with_protection,
+           name TYPE string,
+           commit TYPE string,
+           _links TYPE string,
+           protected TYPE abap_bool,
+           protection TYPE string,
+           protection_url TYPE string,
+           pattern TYPE string,
+           required_approving_review_coun TYPE i,
+         END OF branch_with_protection.
 * Component schema: status-check-policy, object
-  TYPES status_check_policy TYPE string.
+  TYPES: BEGIN OF status_check_policy,
+           url TYPE string,
+           strict TYPE abap_bool,
+           contexts TYPE string,
+           contexts_url TYPE string,
+         END OF status_check_policy.
 * Component schema: protected-branch, object
-  TYPES protected_branch TYPE string.
+  TYPES: BEGIN OF protected_branch,
+           url TYPE string,
+           required_status_checks TYPE string,
+           required_pull_request_reviews TYPE string,
+           required_signatures TYPE string,
+           enforce_admins TYPE string,
+           required_linear_history TYPE string,
+           allow_force_pushes TYPE string,
+           allow_deletions TYPE string,
+           restrictions TYPE string,
+         END OF protected_branch.
 * Component schema: check-run, object
-  TYPES check_run TYPE string.
+  TYPES: BEGIN OF check_run,
+           id TYPE i,
+           head_sha TYPE string,
+           node_id TYPE string,
+           external_id TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           details_url TYPE string,
+           status TYPE string,
+           conclusion TYPE string,
+           started_at TYPE string,
+           completed_at TYPE string,
+           output TYPE string,
+           name TYPE string,
+           check_suite TYPE string,
+           app TYPE string,
+           pull_requests TYPE string,
+         END OF check_run.
 * Component schema: check-annotation, object
-  TYPES check_annotation TYPE string.
+  TYPES: BEGIN OF check_annotation,
+           path TYPE string,
+           start_line TYPE i,
+           end_line TYPE i,
+           start_column TYPE i,
+           end_column TYPE i,
+           annotation_level TYPE string,
+           title TYPE string,
+           message TYPE string,
+           raw_details TYPE string,
+           blob_href TYPE string,
+         END OF check_annotation.
 * Component schema: check-suite, object
-  TYPES check_suite TYPE string.
+  TYPES: BEGIN OF check_suite,
+           id TYPE i,
+           node_id TYPE string,
+           head_branch TYPE string,
+           head_sha TYPE string,
+           status TYPE string,
+           conclusion TYPE string,
+           url TYPE string,
+           before TYPE string,
+           after TYPE string,
+           pull_requests TYPE string,
+           app TYPE string,
+           repository TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           head_commit TYPE string,
+           latest_check_runs_count TYPE i,
+           check_runs_url TYPE string,
+         END OF check_suite.
 * Component schema: check-suite-preference, object
-  TYPES check_suite_preference TYPE string.
+  TYPES: BEGIN OF check_suite_preference,
+           preferences TYPE string,
+           repository TYPE string,
+         END OF check_suite_preference.
 * Component schema: code-scanning-alert-state, string
   TYPES code_scanning_alert_state TYPE string.
 * Component schema: code-scanning-alert-ref, string
@@ -251,13 +1656,31 @@ INTERFACE zif_github.
 * Component schema: code-scanning-alert-dismissed-reason, string
   TYPES code_scanning_alert_dismisse01 TYPE string.
 * Component schema: code-scanning-alert-rule, object
-  TYPES code_scanning_alert_rule TYPE string.
+  TYPES: BEGIN OF code_scanning_alert_rule,
+           id TYPE string,
+           severity TYPE string,
+           description TYPE string,
+         END OF code_scanning_alert_rule.
 * Component schema: code-scanning-analysis-tool-name, string
   TYPES code_scanning_analysis_tool_na TYPE string.
 * Component schema: code-scanning-analysis-tool, object
-  TYPES code_scanning_analysis_tool TYPE string.
+  TYPES: BEGIN OF code_scanning_analysis_tool,
+           name TYPE string,
+           version TYPE string,
+         END OF code_scanning_analysis_tool.
 * Component schema: code-scanning-alert-code-scanning-alert-items, object
-  TYPES code_scanning_alert_code_scann TYPE string.
+  TYPES: BEGIN OF code_scanning_alert_code_scann,
+           number TYPE string,
+           created_at TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           state TYPE string,
+           dismissed_by TYPE string,
+           dismissed_at TYPE string,
+           dismissed_reason TYPE string,
+           rule TYPE string,
+           tool TYPE string,
+         END OF code_scanning_alert_code_scann.
 * Component schema: code-scanning-analysis-analysis-key, string
   TYPES code_scanning_analysis_analysi TYPE string.
 * Component schema: code-scanning-alert-environment, string
@@ -265,7 +1688,19 @@ INTERFACE zif_github.
 * Component schema: code-scanning-alert-instances, array
   TYPES code_scanning_alert_instances TYPE string.
 * Component schema: code-scanning-alert-code-scanning-alert, object
-  TYPES code_scanning_alert_code_sca01 TYPE string.
+  TYPES: BEGIN OF code_scanning_alert_code_sca01,
+           number TYPE string,
+           created_at TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           instances TYPE string,
+           state TYPE string,
+           dismissed_by TYPE string,
+           dismissed_at TYPE string,
+           dismissed_reason TYPE string,
+           rule TYPE string,
+           tool TYPE string,
+         END OF code_scanning_alert_code_sca01.
 * Component schema: code-scanning-alert-set-state, string
   TYPES code_scanning_alert_set_state TYPE string.
 * Component schema: code-scanning-analysis-ref, string
@@ -277,203 +1712,1303 @@ INTERFACE zif_github.
 * Component schema: code-scanning-analysis-environment, string
   TYPES code_scanning_analysis_environ TYPE string.
 * Component schema: code-scanning-analysis-code-scanning-analysis, object
-  TYPES code_scanning_analysis_code_sc TYPE string.
+  TYPES: BEGIN OF code_scanning_analysis_code_sc,
+           commit_sha TYPE string,
+           ref TYPE string,
+           analysis_key TYPE string,
+           created_at TYPE string,
+           tool_name TYPE string,
+           error TYPE string,
+           environment TYPE string,
+         END OF code_scanning_analysis_code_sc.
 * Component schema: code-scanning-analysis-sarif-file, string
   TYPES code_scanning_analysis_sarif_f TYPE string.
 * Component schema: collaborator, object
-  TYPES collaborator TYPE string.
+  TYPES: BEGIN OF collaborator,
+           login TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           avatar_url TYPE string,
+           gravatar_id TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           followers_url TYPE string,
+           following_url TYPE string,
+           gists_url TYPE string,
+           starred_url TYPE string,
+           subscriptions_url TYPE string,
+           organizations_url TYPE string,
+           repos_url TYPE string,
+           events_url TYPE string,
+           received_events_url TYPE string,
+           type TYPE string,
+           site_admin TYPE abap_bool,
+           permissions TYPE string,
+         END OF collaborator.
 * Component schema: repository-invitation, object
-  TYPES repository_invitation TYPE string.
+  TYPES: BEGIN OF repository_invitation,
+           id TYPE i,
+           repository TYPE string,
+           invitee TYPE string,
+           inviter TYPE string,
+           permissions TYPE string,
+           created_at TYPE string,
+           expired TYPE abap_bool,
+           url TYPE string,
+           html_url TYPE string,
+           node_id TYPE string,
+         END OF repository_invitation.
 * Component schema: commit-comment, object
-  TYPES commit_comment TYPE string.
+  TYPES: BEGIN OF commit_comment,
+           html_url TYPE string,
+           url TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           body TYPE string,
+           path TYPE string,
+           position TYPE i,
+           line TYPE i,
+           commit_id TYPE string,
+           user TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           author_association TYPE string,
+           reactions TYPE string,
+         END OF commit_comment.
 * Component schema: scim-error, object
-  TYPES scim_error TYPE string.
+  TYPES: BEGIN OF scim_error,
+           message TYPE string,
+           documentation_url TYPE string,
+           detail TYPE string,
+           status TYPE i,
+           scimtype TYPE string,
+           schemas TYPE string,
+         END OF scim_error.
 * Component schema: branch-short, object
-  TYPES branch_short TYPE string.
+  TYPES: BEGIN OF branch_short,
+           name TYPE string,
+           commit TYPE string,
+           protected TYPE abap_bool,
+         END OF branch_short.
 * Component schema: link, object
-  TYPES link TYPE string.
+  TYPES: BEGIN OF link,
+           href TYPE string,
+         END OF link.
 * Component schema: pull-request-simple, object
-  TYPES pull_request_simple TYPE string.
+  TYPES: BEGIN OF pull_request_simple,
+           url TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           html_url TYPE string,
+           diff_url TYPE string,
+           patch_url TYPE string,
+           issue_url TYPE string,
+           commits_url TYPE string,
+           review_comments_url TYPE string,
+           review_comment_url TYPE string,
+           comments_url TYPE string,
+           statuses_url TYPE string,
+           number TYPE i,
+           state TYPE string,
+           locked TYPE abap_bool,
+           title TYPE string,
+           user TYPE string,
+           body TYPE string,
+           labels TYPE string,
+           milestone TYPE string,
+           active_lock_reason TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           closed_at TYPE string,
+           merged_at TYPE string,
+           merge_commit_sha TYPE string,
+           assignee TYPE string,
+           assignees TYPE string,
+           requested_reviewers TYPE string,
+           requested_teams TYPE string,
+           head TYPE string,
+           base TYPE string,
+           _links TYPE string,
+           author_association TYPE string,
+           draft TYPE abap_bool,
+         END OF pull_request_simple.
 * Component schema: simple-commit-status, object
-  TYPES simple_commit_status TYPE string.
+  TYPES: BEGIN OF simple_commit_status,
+           description TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           state TYPE string,
+           context TYPE string,
+           target_url TYPE string,
+           required TYPE abap_bool,
+           avatar_url TYPE string,
+           url TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+         END OF simple_commit_status.
 * Component schema: combined-commit-status, object
-  TYPES combined_commit_status TYPE string.
+  TYPES: BEGIN OF combined_commit_status,
+           state TYPE string,
+           statuses TYPE string,
+           sha TYPE string,
+           total_count TYPE i,
+           repository TYPE string,
+           commit_url TYPE string,
+           url TYPE string,
+         END OF combined_commit_status.
 * Component schema: status, object
-  TYPES status TYPE string.
+  TYPES: BEGIN OF status,
+           url TYPE string,
+           avatar_url TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           state TYPE string,
+           description TYPE string,
+           target_url TYPE string,
+           context TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           creator TYPE string,
+         END OF status.
 * Component schema: code-of-conduct-simple, object
-  TYPES code_of_conduct_simple TYPE string.
+  TYPES: BEGIN OF code_of_conduct_simple,
+           url TYPE string,
+           key TYPE string,
+           name TYPE string,
+           html_url TYPE string,
+         END OF code_of_conduct_simple.
 * Component schema: community-health-file, object
-  TYPES community_health_file TYPE string.
+  TYPES: BEGIN OF community_health_file,
+           url TYPE string,
+           html_url TYPE string,
+         END OF community_health_file.
 * Component schema: community-profile, object
-  TYPES community_profile TYPE string.
+  TYPES: BEGIN OF community_profile,
+           health_percentage TYPE i,
+           description TYPE string,
+           documentation TYPE string,
+           files TYPE string,
+           updated_at TYPE string,
+           content_reports_enabled TYPE abap_bool,
+         END OF community_profile.
 * Component schema: diff-entry, object
-  TYPES diff_entry TYPE string.
+  TYPES: BEGIN OF diff_entry,
+           sha TYPE string,
+           filename TYPE string,
+           status TYPE string,
+           additions TYPE i,
+           deletions TYPE i,
+           changes TYPE i,
+           blob_url TYPE string,
+           raw_url TYPE string,
+           contents_url TYPE string,
+           patch TYPE string,
+           previous_filename TYPE string,
+         END OF diff_entry.
 * Component schema: commit-comparison, object
-  TYPES commit_comparison TYPE string.
+  TYPES: BEGIN OF commit_comparison,
+           url TYPE string,
+           html_url TYPE string,
+           permalink_url TYPE string,
+           diff_url TYPE string,
+           patch_url TYPE string,
+           base_commit TYPE string,
+           merge_base_commit TYPE string,
+           status TYPE string,
+           ahead_by TYPE i,
+           behind_by TYPE i,
+           total_commits TYPE i,
+           commits TYPE string,
+           files TYPE string,
+         END OF commit_comparison.
 * Component schema: content-tree, object
-  TYPES content_tree TYPE string.
+  TYPES: BEGIN OF content_tree,
+           type TYPE string,
+           size TYPE i,
+           name TYPE string,
+           path TYPE string,
+           sha TYPE string,
+           url TYPE string,
+           git_url TYPE string,
+           html_url TYPE string,
+           download_url TYPE string,
+           entries TYPE string,
+           _links TYPE string,
+         END OF content_tree.
 * Component schema: content-directory, array
   TYPES content_directory TYPE string.
 * Component schema: content-file, object
-  TYPES content_file TYPE string.
+  TYPES: BEGIN OF content_file,
+           type TYPE string,
+           encoding TYPE string,
+           size TYPE i,
+           name TYPE string,
+           path TYPE string,
+           content TYPE string,
+           sha TYPE string,
+           url TYPE string,
+           git_url TYPE string,
+           html_url TYPE string,
+           download_url TYPE string,
+           _links TYPE string,
+           target TYPE string,
+           submodule_git_url TYPE string,
+         END OF content_file.
 * Component schema: content-symlink, object
-  TYPES content_symlink TYPE string.
+  TYPES: BEGIN OF content_symlink,
+           type TYPE string,
+           target TYPE string,
+           size TYPE i,
+           name TYPE string,
+           path TYPE string,
+           sha TYPE string,
+           url TYPE string,
+           git_url TYPE string,
+           html_url TYPE string,
+           download_url TYPE string,
+           _links TYPE string,
+         END OF content_symlink.
 * Component schema: content-submodule, object
-  TYPES content_submodule TYPE string.
+  TYPES: BEGIN OF content_submodule,
+           type TYPE string,
+           submodule_git_url TYPE string,
+           size TYPE i,
+           name TYPE string,
+           path TYPE string,
+           sha TYPE string,
+           url TYPE string,
+           git_url TYPE string,
+           html_url TYPE string,
+           download_url TYPE string,
+           _links TYPE string,
+         END OF content_submodule.
 * Component schema: file-commit, object
-  TYPES file_commit TYPE string.
+  TYPES: BEGIN OF file_commit,
+           content TYPE string,
+           commit TYPE string,
+         END OF file_commit.
 * Component schema: contributor, object
-  TYPES contributor TYPE string.
+  TYPES: BEGIN OF contributor,
+           login TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           avatar_url TYPE string,
+           gravatar_id TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           followers_url TYPE string,
+           following_url TYPE string,
+           gists_url TYPE string,
+           starred_url TYPE string,
+           subscriptions_url TYPE string,
+           organizations_url TYPE string,
+           repos_url TYPE string,
+           events_url TYPE string,
+           received_events_url TYPE string,
+           type TYPE string,
+           site_admin TYPE abap_bool,
+           contributions TYPE i,
+           email TYPE string,
+           name TYPE string,
+         END OF contributor.
 * Component schema: deployment, object
-  TYPES deployment TYPE string.
+  TYPES: BEGIN OF deployment,
+           url TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           sha TYPE string,
+           ref TYPE string,
+           task TYPE string,
+           payload TYPE string,
+           original_environment TYPE string,
+           environment TYPE string,
+           description TYPE string,
+           creator TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           statuses_url TYPE string,
+           repository_url TYPE string,
+           transient_environment TYPE abap_bool,
+           production_environment TYPE abap_bool,
+           performed_via_github_app TYPE string,
+         END OF deployment.
 * Component schema: deployment-status, object
-  TYPES deployment_status TYPE string.
+  TYPES: BEGIN OF deployment_status,
+           url TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           state TYPE string,
+           creator TYPE string,
+           description TYPE string,
+           environment TYPE string,
+           target_url TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           deployment_url TYPE string,
+           repository_url TYPE string,
+           environment_url TYPE string,
+           log_url TYPE string,
+           performed_via_github_app TYPE string,
+         END OF deployment_status.
 * Component schema: short-blob, object
-  TYPES short_blob TYPE string.
+  TYPES: BEGIN OF short_blob,
+           url TYPE string,
+           sha TYPE string,
+         END OF short_blob.
 * Component schema: blob, object
-  TYPES blob TYPE string.
+  TYPES: BEGIN OF blob,
+           content TYPE string,
+           encoding TYPE string,
+           url TYPE string,
+           sha TYPE string,
+           size TYPE i,
+           node_id TYPE string,
+           highlighted_content TYPE string,
+         END OF blob.
 * Component schema: git-commit, object
-  TYPES git_commit TYPE string.
+  TYPES: BEGIN OF git_commit,
+           sha TYPE string,
+           node_id TYPE string,
+           url TYPE string,
+           author TYPE string,
+           committer TYPE string,
+           message TYPE string,
+           tree TYPE string,
+           parents TYPE string,
+           verification TYPE string,
+           html_url TYPE string,
+         END OF git_commit.
 * Component schema: git-ref, object
-  TYPES git_ref TYPE string.
+  TYPES: BEGIN OF git_ref,
+           ref TYPE string,
+           node_id TYPE string,
+           url TYPE string,
+           object TYPE string,
+         END OF git_ref.
 * Component schema: git-tag, object
-  TYPES git_tag TYPE string.
+  TYPES: BEGIN OF git_tag,
+           node_id TYPE string,
+           tag TYPE string,
+           sha TYPE string,
+           url TYPE string,
+           message TYPE string,
+           tagger TYPE string,
+           object TYPE string,
+           verification TYPE string,
+         END OF git_tag.
 * Component schema: git-tree, object
-  TYPES git_tree TYPE string.
+  TYPES: BEGIN OF git_tree,
+           sha TYPE string,
+           url TYPE string,
+           truncated TYPE abap_bool,
+           tree TYPE string,
+         END OF git_tree.
 * Component schema: hook-response, object
-  TYPES hook_response TYPE string.
+  TYPES: BEGIN OF hook_response,
+           code TYPE i,
+           status TYPE string,
+           message TYPE string,
+         END OF hook_response.
 * Component schema: hook, object
-  TYPES hook TYPE string.
+  TYPES: BEGIN OF hook,
+           type TYPE string,
+           id TYPE i,
+           name TYPE string,
+           active TYPE abap_bool,
+           events TYPE string,
+           config TYPE string,
+           updated_at TYPE string,
+           created_at TYPE string,
+           url TYPE string,
+           test_url TYPE string,
+           ping_url TYPE string,
+           last_response TYPE string,
+         END OF hook.
 * Component schema: import, object
-  TYPES import TYPE string.
+  TYPES: BEGIN OF import,
+           vcs TYPE string,
+           use_lfs TYPE string,
+           vcs_url TYPE string,
+           svc_root TYPE string,
+           tfvc_project TYPE string,
+           status TYPE string,
+           status_text TYPE string,
+           failed_step TYPE string,
+           error_message TYPE string,
+           import_percent TYPE i,
+           commit_count TYPE i,
+           push_percent TYPE i,
+           has_large_files TYPE abap_bool,
+           large_files_size TYPE i,
+           large_files_count TYPE i,
+           project_choices TYPE string,
+           message TYPE string,
+           authors_count TYPE i,
+           url TYPE string,
+           html_url TYPE string,
+           authors_url TYPE string,
+           repository_url TYPE string,
+           svn_root TYPE string,
+         END OF import.
 * Component schema: porter-author, object
-  TYPES porter_author TYPE string.
+  TYPES: BEGIN OF porter_author,
+           id TYPE i,
+           remote_id TYPE string,
+           remote_name TYPE string,
+           email TYPE string,
+           name TYPE string,
+           url TYPE string,
+           import_url TYPE string,
+         END OF porter_author.
 * Component schema: porter-large-file, object
-  TYPES porter_large_file TYPE string.
+  TYPES: BEGIN OF porter_large_file,
+           ref_name TYPE string,
+           path TYPE string,
+           oid TYPE string,
+           size TYPE i,
+         END OF porter_large_file.
 * Component schema: issue-event-label, object
-  TYPES issue_event_label TYPE string.
+  TYPES: BEGIN OF issue_event_label,
+           name TYPE string,
+           color TYPE string,
+         END OF issue_event_label.
 * Component schema: issue-event-dismissed-review, object
-  TYPES issue_event_dismissed_review TYPE string.
+  TYPES: BEGIN OF issue_event_dismissed_review,
+           state TYPE string,
+           review_id TYPE i,
+           dismissal_message TYPE string,
+           dismissal_commit_id TYPE string,
+         END OF issue_event_dismissed_review.
 * Component schema: issue-event-milestone, object
-  TYPES issue_event_milestone TYPE string.
+  TYPES: BEGIN OF issue_event_milestone,
+           title TYPE string,
+         END OF issue_event_milestone.
 * Component schema: issue-event-project-card, object
-  TYPES issue_event_project_card TYPE string.
+  TYPES: BEGIN OF issue_event_project_card,
+           url TYPE string,
+           id TYPE i,
+           project_url TYPE string,
+           project_id TYPE i,
+           column_name TYPE string,
+           previous_column_name TYPE string,
+         END OF issue_event_project_card.
 * Component schema: issue-event-rename, object
-  TYPES issue_event_rename TYPE string.
+  TYPES: BEGIN OF issue_event_rename,
+           from TYPE string,
+           to TYPE string,
+         END OF issue_event_rename.
 * Component schema: issue-event, object
-  TYPES issue_event TYPE string.
+  TYPES: BEGIN OF issue_event,
+           id TYPE i,
+           node_id TYPE string,
+           url TYPE string,
+           actor TYPE string,
+           event TYPE string,
+           commit_id TYPE string,
+           commit_url TYPE string,
+           created_at TYPE string,
+           issue TYPE string,
+           label TYPE string,
+           assignee TYPE string,
+           assigner TYPE string,
+           review_requester TYPE string,
+           requested_reviewer TYPE string,
+           requested_team TYPE string,
+           dismissed_review TYPE string,
+           milestone TYPE string,
+           project_card TYPE string,
+           rename TYPE string,
+           author_association TYPE string,
+           lock_reason TYPE string,
+         END OF issue_event.
 * Component schema: issue-event-for-issue, object
-  TYPES issue_event_for_issue TYPE string.
+  TYPES: BEGIN OF issue_event_for_issue,
+           id TYPE i,
+           node_id TYPE string,
+           url TYPE string,
+           actor TYPE string,
+           event TYPE string,
+           commit_id TYPE string,
+           commit_url TYPE string,
+           created_at TYPE string,
+           sha TYPE string,
+           html_url TYPE string,
+           message TYPE string,
+           issue_url TYPE string,
+           updated_at TYPE string,
+           author_association TYPE string,
+           body TYPE string,
+           lock_reason TYPE string,
+           submitted_at TYPE string,
+           state TYPE string,
+           pull_request_url TYPE string,
+           body_html TYPE string,
+           body_text TYPE string,
+         END OF issue_event_for_issue.
 * Component schema: deploy-key, object
-  TYPES deploy_key TYPE string.
+  TYPES: BEGIN OF deploy_key,
+           id TYPE i,
+           key TYPE string,
+           url TYPE string,
+           title TYPE string,
+           verified TYPE abap_bool,
+           created_at TYPE string,
+           read_only TYPE abap_bool,
+         END OF deploy_key.
 * Component schema: language, object
-  TYPES language TYPE string.
+  TYPES: BEGIN OF language,
+         END OF language.
 * Component schema: license-content, object
-  TYPES license_content TYPE string.
+  TYPES: BEGIN OF license_content,
+           name TYPE string,
+           path TYPE string,
+           sha TYPE string,
+           size TYPE i,
+           url TYPE string,
+           html_url TYPE string,
+           git_url TYPE string,
+           download_url TYPE string,
+           type TYPE string,
+           content TYPE string,
+           encoding TYPE string,
+           _links TYPE string,
+           license TYPE string,
+         END OF license_content.
 * Component schema: pages-source-hash, object
-  TYPES pages_source_hash TYPE string.
+  TYPES: BEGIN OF pages_source_hash,
+           branch TYPE string,
+           path TYPE string,
+         END OF pages_source_hash.
 * Component schema: page, object
-  TYPES page TYPE string.
+  TYPES: BEGIN OF page,
+           url TYPE string,
+           status TYPE string,
+           cname TYPE string,
+           custom_404 TYPE abap_bool,
+           html_url TYPE string,
+           source TYPE string,
+           public TYPE abap_bool,
+         END OF page.
 * Component schema: page-build, object
-  TYPES page_build TYPE string.
+  TYPES: BEGIN OF page_build,
+           url TYPE string,
+           status TYPE string,
+           error TYPE string,
+           pusher TYPE string,
+           commit TYPE string,
+           duration TYPE i,
+           created_at TYPE string,
+           updated_at TYPE string,
+         END OF page_build.
 * Component schema: page-build-status, object
-  TYPES page_build_status TYPE string.
+  TYPES: BEGIN OF page_build_status,
+           url TYPE string,
+           status TYPE string,
+         END OF page_build_status.
 * Component schema: pull-request, object
-  TYPES pull_request TYPE string.
+  TYPES: BEGIN OF pull_request,
+           url TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           html_url TYPE string,
+           diff_url TYPE string,
+           patch_url TYPE string,
+           issue_url TYPE string,
+           commits_url TYPE string,
+           review_comments_url TYPE string,
+           review_comment_url TYPE string,
+           comments_url TYPE string,
+           statuses_url TYPE string,
+           number TYPE i,
+           state TYPE string,
+           locked TYPE abap_bool,
+           title TYPE string,
+           user TYPE string,
+           body TYPE string,
+           labels TYPE string,
+           milestone TYPE string,
+           active_lock_reason TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           closed_at TYPE string,
+           merged_at TYPE string,
+           merge_commit_sha TYPE string,
+           assignee TYPE string,
+           assignees TYPE string,
+           requested_reviewers TYPE string,
+           requested_teams TYPE string,
+           head TYPE string,
+           base TYPE string,
+           _links TYPE string,
+           author_association TYPE string,
+           draft TYPE abap_bool,
+           merged TYPE abap_bool,
+           mergeable TYPE abap_bool,
+           rebaseable TYPE abap_bool,
+           mergeable_state TYPE string,
+           merged_by TYPE string,
+           comments TYPE i,
+           review_comments TYPE i,
+           maintainer_can_modify TYPE abap_bool,
+           commits TYPE i,
+           additions TYPE i,
+           deletions TYPE i,
+           changed_files TYPE i,
+         END OF pull_request.
 * Component schema: pull-request-review-comment, object
-  TYPES pull_request_review_comment TYPE string.
+  TYPES: BEGIN OF pull_request_review_comment,
+           url TYPE string,
+           pull_request_review_id TYPE i,
+           id TYPE i,
+           node_id TYPE string,
+           diff_hunk TYPE string,
+           path TYPE string,
+           position TYPE i,
+           original_position TYPE i,
+           commit_id TYPE string,
+           original_commit_id TYPE string,
+           in_reply_to_id TYPE i,
+           user TYPE string,
+           body TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           html_url TYPE string,
+           pull_request_url TYPE string,
+           author_association TYPE string,
+           _links TYPE string,
+           start_line TYPE i,
+           original_start_line TYPE i,
+           start_side TYPE string,
+           line TYPE i,
+           original_line TYPE i,
+           side TYPE string,
+           reactions TYPE string,
+           body_html TYPE string,
+           body_text TYPE string,
+         END OF pull_request_review_comment.
 * Component schema: pull-request-merge-result, object
-  TYPES pull_request_merge_result TYPE string.
+  TYPES: BEGIN OF pull_request_merge_result,
+           sha TYPE string,
+           merged TYPE abap_bool,
+           message TYPE string,
+         END OF pull_request_merge_result.
 * Component schema: pull-request-review-request, object
-  TYPES pull_request_review_request TYPE string.
+  TYPES: BEGIN OF pull_request_review_request,
+           users TYPE string,
+           teams TYPE string,
+         END OF pull_request_review_request.
 * Component schema: pull-request-review, object
-  TYPES pull_request_review TYPE string.
+  TYPES: BEGIN OF pull_request_review,
+           id TYPE i,
+           node_id TYPE string,
+           user TYPE string,
+           body TYPE string,
+           state TYPE string,
+           html_url TYPE string,
+           pull_request_url TYPE string,
+           _links TYPE string,
+           submitted_at TYPE string,
+           commit_id TYPE string,
+           body_html TYPE string,
+           body_text TYPE string,
+           author_association TYPE string,
+         END OF pull_request_review.
 * Component schema: review-comment, object
-  TYPES review_comment TYPE string.
+  TYPES: BEGIN OF review_comment,
+           url TYPE string,
+           pull_request_review_id TYPE i,
+           id TYPE i,
+           node_id TYPE string,
+           diff_hunk TYPE string,
+           path TYPE string,
+           position TYPE i,
+           original_position TYPE i,
+           commit_id TYPE string,
+           original_commit_id TYPE string,
+           in_reply_to_id TYPE i,
+           user TYPE string,
+           body TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           html_url TYPE string,
+           pull_request_url TYPE string,
+           author_association TYPE string,
+           _links TYPE string,
+           body_text TYPE string,
+           body_html TYPE string,
+           side TYPE string,
+           start_side TYPE string,
+           line TYPE i,
+           original_line TYPE i,
+           start_line TYPE i,
+           original_start_line TYPE i,
+         END OF review_comment.
 * Component schema: release-asset, object
-  TYPES release_asset TYPE string.
+  TYPES: BEGIN OF release_asset,
+           url TYPE string,
+           browser_download_url TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           name TYPE string,
+           label TYPE string,
+           state TYPE string,
+           content_type TYPE string,
+           size TYPE i,
+           download_count TYPE i,
+           created_at TYPE string,
+           updated_at TYPE string,
+           uploader TYPE string,
+         END OF release_asset.
 * Component schema: release, object
-  TYPES release TYPE string.
+  TYPES: BEGIN OF release,
+           url TYPE string,
+           html_url TYPE string,
+           assets_url TYPE string,
+           upload_url TYPE string,
+           tarball_url TYPE string,
+           zipball_url TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           tag_name TYPE string,
+           target_commitish TYPE string,
+           name TYPE string,
+           body TYPE string,
+           draft TYPE abap_bool,
+           prerelease TYPE abap_bool,
+           created_at TYPE string,
+           published_at TYPE string,
+           author TYPE string,
+           assets TYPE string,
+           body_html TYPE string,
+           body_text TYPE string,
+         END OF release.
 * Component schema: secret-scanning-alert-state, string
   TYPES secret_scanning_alert_state TYPE string.
 * Component schema: secret-scanning-alert-resolution, string
   TYPES secret_scanning_alert_resoluti TYPE string.
 * Component schema: secret-scanning-alert, object
-  TYPES secret_scanning_alert TYPE string.
+  TYPES: BEGIN OF secret_scanning_alert,
+           number TYPE string,
+           created_at TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           state TYPE string,
+           resolution TYPE string,
+           resolved_at TYPE string,
+           resolved_by TYPE string,
+           secret_type TYPE string,
+           secret TYPE string,
+         END OF secret_scanning_alert.
 * Component schema: stargazer, object
-  TYPES stargazer TYPE string.
+  TYPES: BEGIN OF stargazer,
+           starred_at TYPE string,
+           user TYPE string,
+         END OF stargazer.
 * Component schema: code-frequency-stat, array
   TYPES code_frequency_stat TYPE string.
 * Component schema: commit-activity, object
-  TYPES commit_activity TYPE string.
+  TYPES: BEGIN OF commit_activity,
+           days TYPE string,
+           total TYPE i,
+           week TYPE i,
+         END OF commit_activity.
 * Component schema: contributor-activity, object
-  TYPES contributor_activity TYPE string.
+  TYPES: BEGIN OF contributor_activity,
+           author TYPE string,
+           total TYPE i,
+           weeks TYPE string,
+         END OF contributor_activity.
 * Component schema: participation-stats, object
-  TYPES participation_stats TYPE string.
+  TYPES: BEGIN OF participation_stats,
+           all TYPE string,
+           owner TYPE string,
+         END OF participation_stats.
 * Component schema: repository-subscription, object
-  TYPES repository_subscription TYPE string.
+  TYPES: BEGIN OF repository_subscription,
+           subscribed TYPE abap_bool,
+           ignored TYPE abap_bool,
+           reason TYPE string,
+           created_at TYPE string,
+           url TYPE string,
+           repository_url TYPE string,
+         END OF repository_subscription.
 * Component schema: tag, object
-  TYPES tag TYPE string.
+  TYPES: BEGIN OF tag,
+           name TYPE string,
+           commit TYPE string,
+           zipball_url TYPE string,
+           tarball_url TYPE string,
+           node_id TYPE string,
+         END OF tag.
 * Component schema: topic, object
-  TYPES topic TYPE string.
+  TYPES: BEGIN OF topic,
+           names TYPE string,
+         END OF topic.
 * Component schema: traffic, object
-  TYPES traffic TYPE string.
+  TYPES: BEGIN OF traffic,
+           timestamp TYPE string,
+           uniques TYPE i,
+           count TYPE i,
+         END OF traffic.
 * Component schema: clone-traffic, object
-  TYPES clone_traffic TYPE string.
+  TYPES: BEGIN OF clone_traffic,
+           count TYPE i,
+           uniques TYPE i,
+           clones TYPE string,
+         END OF clone_traffic.
 * Component schema: content-traffic, object
-  TYPES content_traffic TYPE string.
+  TYPES: BEGIN OF content_traffic,
+           path TYPE string,
+           title TYPE string,
+           count TYPE i,
+           uniques TYPE i,
+         END OF content_traffic.
 * Component schema: referrer-traffic, object
-  TYPES referrer_traffic TYPE string.
+  TYPES: BEGIN OF referrer_traffic,
+           referrer TYPE string,
+           count TYPE i,
+           uniques TYPE i,
+         END OF referrer_traffic.
 * Component schema: view-traffic, object
-  TYPES view_traffic TYPE string.
+  TYPES: BEGIN OF view_traffic,
+           count TYPE i,
+           uniques TYPE i,
+           views TYPE string,
+         END OF view_traffic.
 * Component schema: scim-group-list-enterprise, object
-  TYPES scim_group_list_enterprise TYPE string.
+  TYPES: BEGIN OF scim_group_list_enterprise,
+           schemas TYPE string,
+           totalresults TYPE f,
+           itemsperpage TYPE f,
+           startindex TYPE f,
+           resources TYPE string,
+         END OF scim_group_list_enterprise.
 * Component schema: scim-enterprise-group, object
-  TYPES scim_enterprise_group TYPE string.
+  TYPES: BEGIN OF scim_enterprise_group,
+           schemas TYPE string,
+           id TYPE string,
+           externalid TYPE string,
+           displayname TYPE string,
+           members TYPE string,
+           meta TYPE string,
+         END OF scim_enterprise_group.
 * Component schema: scim-user-list-enterprise, object
-  TYPES scim_user_list_enterprise TYPE string.
+  TYPES: BEGIN OF scim_user_list_enterprise,
+           schemas TYPE string,
+           totalresults TYPE f,
+           itemsperpage TYPE f,
+           startindex TYPE f,
+           resources TYPE string,
+         END OF scim_user_list_enterprise.
 * Component schema: scim-enterprise-user, object
-  TYPES scim_enterprise_user TYPE string.
+  TYPES: BEGIN OF scim_enterprise_user,
+           schemas TYPE string,
+           id TYPE string,
+           externalid TYPE string,
+           username TYPE string,
+           name TYPE string,
+           emails TYPE string,
+           groups TYPE string,
+           active TYPE abap_bool,
+           meta TYPE string,
+         END OF scim_enterprise_user.
 * Component schema: scim-user, object
-  TYPES scim_user TYPE string.
+  TYPES: BEGIN OF scim_user,
+           schemas TYPE string,
+           id TYPE string,
+           externalid TYPE string,
+           username TYPE string,
+           displayname TYPE string,
+           name TYPE string,
+           emails TYPE string,
+           active TYPE abap_bool,
+           meta TYPE string,
+           organization_id TYPE i,
+           operations TYPE string,
+           groups TYPE string,
+         END OF scim_user.
 * Component schema: scim-user-list, object
-  TYPES scim_user_list TYPE string.
+  TYPES: BEGIN OF scim_user_list,
+           schemas TYPE string,
+           totalresults TYPE i,
+           itemsperpage TYPE i,
+           startindex TYPE i,
+           resources TYPE string,
+         END OF scim_user_list.
 * Component schema: search-result-text-matches, array
   TYPES search_result_text_matches TYPE string.
 * Component schema: code-search-result-item, object
-  TYPES code_search_result_item TYPE string.
+  TYPES: BEGIN OF code_search_result_item,
+           name TYPE string,
+           path TYPE string,
+           sha TYPE string,
+           url TYPE string,
+           git_url TYPE string,
+           html_url TYPE string,
+           repository TYPE string,
+           score TYPE i,
+           file_size TYPE i,
+           language TYPE string,
+           last_modified_at TYPE string,
+           line_numbers TYPE string,
+           text_matches TYPE string,
+         END OF code_search_result_item.
 * Component schema: commit-search-result-item, object
-  TYPES commit_search_result_item TYPE string.
+  TYPES: BEGIN OF commit_search_result_item,
+           url TYPE string,
+           sha TYPE string,
+           html_url TYPE string,
+           comments_url TYPE string,
+           commit TYPE string,
+           author TYPE string,
+           committer TYPE string,
+           parents TYPE string,
+           repository TYPE string,
+           score TYPE i,
+           node_id TYPE string,
+           text_matches TYPE string,
+         END OF commit_search_result_item.
 * Component schema: issue-search-result-item, object
-  TYPES issue_search_result_item TYPE string.
+  TYPES: BEGIN OF issue_search_result_item,
+           url TYPE string,
+           repository_url TYPE string,
+           labels_url TYPE string,
+           comments_url TYPE string,
+           events_url TYPE string,
+           html_url TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           number TYPE i,
+           title TYPE string,
+           locked TYPE abap_bool,
+           active_lock_reason TYPE string,
+           assignees TYPE string,
+           user TYPE string,
+           labels TYPE string,
+           state TYPE string,
+           assignee TYPE string,
+           milestone TYPE string,
+           comments TYPE i,
+           created_at TYPE string,
+           updated_at TYPE string,
+           closed_at TYPE string,
+           text_matches TYPE string,
+           pull_request TYPE string,
+           body TYPE string,
+           score TYPE i,
+           author_association TYPE string,
+           draft TYPE abap_bool,
+           repository TYPE string,
+           body_html TYPE string,
+           body_text TYPE string,
+           timeline_url TYPE string,
+           performed_via_github_app TYPE string,
+         END OF issue_search_result_item.
 * Component schema: label-search-result-item, object
-  TYPES label_search_result_item TYPE string.
+  TYPES: BEGIN OF label_search_result_item,
+           id TYPE i,
+           node_id TYPE string,
+           url TYPE string,
+           name TYPE string,
+           color TYPE string,
+           default TYPE abap_bool,
+           description TYPE string,
+           score TYPE i,
+           text_matches TYPE string,
+         END OF label_search_result_item.
 * Component schema: repo-search-result-item, object
-  TYPES repo_search_result_item TYPE string.
+  TYPES: BEGIN OF repo_search_result_item,
+           id TYPE i,
+           node_id TYPE string,
+           name TYPE string,
+           full_name TYPE string,
+           owner TYPE string,
+           private TYPE abap_bool,
+           html_url TYPE string,
+           description TYPE string,
+           fork TYPE abap_bool,
+           url TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           pushed_at TYPE string,
+           homepage TYPE string,
+           size TYPE i,
+           stargazers_count TYPE i,
+           watchers_count TYPE i,
+           language TYPE string,
+           forks_count TYPE i,
+           open_issues_count TYPE i,
+           master_branch TYPE string,
+           default_branch TYPE string,
+           score TYPE i,
+           forks_url TYPE string,
+           keys_url TYPE string,
+           collaborators_url TYPE string,
+           teams_url TYPE string,
+           hooks_url TYPE string,
+           issue_events_url TYPE string,
+           events_url TYPE string,
+           assignees_url TYPE string,
+           branches_url TYPE string,
+           tags_url TYPE string,
+           blobs_url TYPE string,
+           git_tags_url TYPE string,
+           git_refs_url TYPE string,
+           trees_url TYPE string,
+           statuses_url TYPE string,
+           languages_url TYPE string,
+           stargazers_url TYPE string,
+           contributors_url TYPE string,
+           subscribers_url TYPE string,
+           subscription_url TYPE string,
+           commits_url TYPE string,
+           git_commits_url TYPE string,
+           comments_url TYPE string,
+           issue_comment_url TYPE string,
+           contents_url TYPE string,
+           compare_url TYPE string,
+           merges_url TYPE string,
+           archive_url TYPE string,
+           downloads_url TYPE string,
+           issues_url TYPE string,
+           pulls_url TYPE string,
+           milestones_url TYPE string,
+           notifications_url TYPE string,
+           labels_url TYPE string,
+           releases_url TYPE string,
+           deployments_url TYPE string,
+           git_url TYPE string,
+           ssh_url TYPE string,
+           clone_url TYPE string,
+           svn_url TYPE string,
+           forks TYPE i,
+           open_issues TYPE i,
+           watchers TYPE i,
+           topics TYPE string,
+           mirror_url TYPE string,
+           has_issues TYPE abap_bool,
+           has_projects TYPE abap_bool,
+           has_pages TYPE abap_bool,
+           has_wiki TYPE abap_bool,
+           has_downloads TYPE abap_bool,
+           archived TYPE abap_bool,
+           disabled TYPE abap_bool,
+           license TYPE string,
+           permissions TYPE string,
+           text_matches TYPE string,
+           temp_clone_token TYPE string,
+           allow_merge_commit TYPE abap_bool,
+           allow_squash_merge TYPE abap_bool,
+           allow_rebase_merge TYPE abap_bool,
+           delete_branch_on_merge TYPE abap_bool,
+         END OF repo_search_result_item.
 * Component schema: topic-search-result-item, object
-  TYPES topic_search_result_item TYPE string.
+  TYPES: BEGIN OF topic_search_result_item,
+           name TYPE string,
+           display_name TYPE string,
+           short_description TYPE string,
+           description TYPE string,
+           created_by TYPE string,
+           released TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           featured TYPE abap_bool,
+           curated TYPE abap_bool,
+           score TYPE i,
+           repository_count TYPE i,
+           logo_url TYPE string,
+           text_matches TYPE string,
+           related TYPE string,
+           aliases TYPE string,
+         END OF topic_search_result_item.
 * Component schema: user-search-result-item, object
-  TYPES user_search_result_item TYPE string.
+  TYPES: BEGIN OF user_search_result_item,
+           login TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           avatar_url TYPE string,
+           gravatar_id TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           followers_url TYPE string,
+           subscriptions_url TYPE string,
+           organizations_url TYPE string,
+           repos_url TYPE string,
+           received_events_url TYPE string,
+           type TYPE string,
+           score TYPE i,
+           following_url TYPE string,
+           gists_url TYPE string,
+           starred_url TYPE string,
+           events_url TYPE string,
+           public_repos TYPE i,
+           public_gists TYPE i,
+           followers TYPE i,
+           following TYPE i,
+           created_at TYPE string,
+           updated_at TYPE string,
+           name TYPE string,
+           bio TYPE string,
+           email TYPE string,
+           location TYPE string,
+           site_admin TYPE abap_bool,
+           hireable TYPE abap_bool,
+           text_matches TYPE string,
+           blog TYPE string,
+           company TYPE string,
+           suspended_at TYPE string,
+         END OF user_search_result_item.
 * Component schema: private-user, object
-  TYPES private_user TYPE string.
+  TYPES: BEGIN OF private_user,
+           login TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           avatar_url TYPE string,
+           gravatar_id TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           followers_url TYPE string,
+           following_url TYPE string,
+           gists_url TYPE string,
+           starred_url TYPE string,
+           subscriptions_url TYPE string,
+           organizations_url TYPE string,
+           repos_url TYPE string,
+           events_url TYPE string,
+           received_events_url TYPE string,
+           type TYPE string,
+           site_admin TYPE abap_bool,
+           name TYPE string,
+           company TYPE string,
+           blog TYPE string,
+           location TYPE string,
+           email TYPE string,
+           hireable TYPE abap_bool,
+           bio TYPE string,
+           twitter_username TYPE string,
+           public_repos TYPE i,
+           public_gists TYPE i,
+           followers TYPE i,
+           following TYPE i,
+           created_at TYPE string,
+           updated_at TYPE string,
+           private_gists TYPE i,
+           total_private_repos TYPE i,
+           owned_private_repos TYPE i,
+           disk_usage TYPE i,
+           collaborators TYPE i,
+           two_factor_authentication TYPE abap_bool,
+           plan TYPE string,
+           suspended_at TYPE string,
+           business_plus TYPE abap_bool,
+           ldap_dn TYPE string,
+         END OF private_user.
 * Component schema: public-user, object
-  TYPES public_user TYPE string.
+  TYPES: BEGIN OF public_user,
+           login TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           avatar_url TYPE string,
+           gravatar_id TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           followers_url TYPE string,
+           following_url TYPE string,
+           gists_url TYPE string,
+           starred_url TYPE string,
+           subscriptions_url TYPE string,
+           organizations_url TYPE string,
+           repos_url TYPE string,
+           events_url TYPE string,
+           received_events_url TYPE string,
+           type TYPE string,
+           site_admin TYPE abap_bool,
+           name TYPE string,
+           company TYPE string,
+           blog TYPE string,
+           location TYPE string,
+           email TYPE string,
+           hireable TYPE abap_bool,
+           bio TYPE string,
+           twitter_username TYPE string,
+           public_repos TYPE i,
+           public_gists TYPE i,
+           followers TYPE i,
+           following TYPE i,
+           created_at TYPE string,
+           updated_at TYPE string,
+           plan TYPE string,
+           suspended_at TYPE string,
+           private_gists TYPE i,
+           total_private_repos TYPE i,
+           owned_private_repos TYPE i,
+           disk_usage TYPE i,
+           collaborators TYPE i,
+         END OF public_user.
 * Component schema: email, 
   TYPES email TYPE string.
 * Component schema: gpg-key, object
-  TYPES gpg_key TYPE string.
+  TYPES: BEGIN OF gpg_key,
+           id TYPE i,
+           primary_key_id TYPE i,
+           key_id TYPE string,
+           public_key TYPE string,
+           emails TYPE string,
+           subkeys TYPE string,
+           can_sign TYPE abap_bool,
+           can_encrypt_comms TYPE abap_bool,
+           can_encrypt_storage TYPE abap_bool,
+           can_certify TYPE abap_bool,
+           created_at TYPE string,
+           expires_at TYPE string,
+           raw_key TYPE string,
+         END OF gpg_key.
 * Component schema: key, object
-  TYPES key TYPE string.
+  TYPES: BEGIN OF key,
+           key_id TYPE string,
+           key TYPE string,
+           id TYPE i,
+           url TYPE string,
+           title TYPE string,
+           created_at TYPE string,
+           verified TYPE abap_bool,
+           read_only TYPE abap_bool,
+         END OF key.
 * Component schema: marketplace-account, object
-  TYPES marketplace_account TYPE string.
+  TYPES: BEGIN OF marketplace_account,
+           url TYPE string,
+           id TYPE i,
+           type TYPE string,
+           node_id TYPE string,
+           login TYPE string,
+           email TYPE string,
+           organization_billing_email TYPE string,
+         END OF marketplace_account.
 * Component schema: user-marketplace-purchase, object
-  TYPES user_marketplace_purchase TYPE string.
+  TYPES: BEGIN OF user_marketplace_purchase,
+           billing_cycle TYPE string,
+           next_billing_date TYPE string,
+           unit_count TYPE i,
+           on_free_trial TYPE abap_bool,
+           free_trial_ends_on TYPE string,
+           updated_at TYPE string,
+           account TYPE string,
+           plan TYPE string,
+         END OF user_marketplace_purchase.
 * Component schema: starred-repository, object
-  TYPES starred_repository TYPE string.
+  TYPES: BEGIN OF starred_repository,
+           starred_at TYPE string,
+           repo TYPE string,
+         END OF starred_repository.
 * Component schema: hovercard, object
-  TYPES hovercard TYPE string.
+  TYPES: BEGIN OF hovercard,
+           contexts TYPE string,
+         END OF hovercard.
 * Component schema: key-simple, object
-  TYPES key_simple TYPE string.
+  TYPES: BEGIN OF key_simple,
+           id TYPE i,
+           key TYPE string,
+         END OF key_simple.
 
 * GET - "GitHub API Root"
 * Response: 200

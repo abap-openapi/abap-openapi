@@ -24,6 +24,8 @@ CLASS zcl_oapi_abap_name IMPLEMENTATION.
     rv_name = to_lower( iv_name ).
     REPLACE ALL OCCURRENCES OF '-' IN rv_name WITH '_'.
     REPLACE ALL OCCURRENCES OF '/' IN rv_name WITH '_'.
+    REPLACE ALL OCCURRENCES OF '@' IN rv_name WITH ''.
+    REPLACE ALL OCCURRENCES OF '+' IN rv_name WITH ''.
     IF strlen( rv_name ) > 30.
       rv_name = rv_name(30).
     ENDIF.
