@@ -212,7 +212,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         |  METHODS { ls_operation-abap_name }{ parameters_to_abap( ls_operation-parameters ) }|.
       ls_return = find_return( ls_operation ).
       IF ls_return IS NOT INITIAL.
-        rv_abap = rv_abap && |    RETURNING VALUE({ ls_return-abap_name }) TYPE { ls_return-abap_name }\n|.
+        rv_abap = rv_abap && |    RETURNING VALUE(return_data) TYPE { ls_return-abap_name }\n|.
       ENDIF.
       rv_abap = rv_abap && |    RAISING cx_static_check.\n\n|.
     ENDLOOP.
@@ -271,7 +271,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     IF ls_return IS NOT INITIAL.
       rv_abap = rv_abap &&
         |    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).\n| &&
-        |    { ls_return-abap_name } = { ls_return-abap_parser_method }( '' ).\n|.
+        |    return_data = { ls_return-abap_parser_method }( '' ).\n|.
     ELSE.
       rv_abap = rv_abap &&
         |* todo, handle more responses\n|.

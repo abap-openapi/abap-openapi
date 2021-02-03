@@ -78,7 +78,7 @@ INTERFACE zif_petstore.
 * Response: 405
 * Body ref: #/components/schemas/Pet
   METHODS updatepet
-    RETURNING VALUE(pet) TYPE pet
+    RETURNING VALUE(return_data) TYPE pet
     RAISING cx_static_check.
 
 * POST - "Add a new pet to the store"
@@ -89,7 +89,7 @@ INTERFACE zif_petstore.
 * Response: 405
 * Body ref: #/components/schemas/Pet
   METHODS addpet
-    RETURNING VALUE(pet) TYPE pet
+    RETURNING VALUE(return_data) TYPE pet
     RAISING cx_static_check.
 
 * GET - "Finds Pets by status"
@@ -127,7 +127,7 @@ INTERFACE zif_petstore.
   METHODS getpetbyid
     IMPORTING
       petid TYPE i
-    RETURNING VALUE(pet) TYPE pet
+    RETURNING VALUE(return_data) TYPE pet
     RAISING cx_static_check.
 
 * POST - "Updates a pet in the store with form data"
@@ -164,7 +164,7 @@ INTERFACE zif_petstore.
     IMPORTING
       petid TYPE i
       additionalmetadata TYPE string OPTIONAL
-    RETURNING VALUE(apiresponse) TYPE apiresponse
+    RETURNING VALUE(return_data) TYPE apiresponse
     RAISING cx_static_check.
 
 * GET - "Returns pet inventories by status"
@@ -181,7 +181,7 @@ INTERFACE zif_petstore.
 * Response: 405
 * Body ref: #/components/schemas/Order
   METHODS placeorder
-    RETURNING VALUE(order) TYPE order
+    RETURNING VALUE(return_data) TYPE order
     RAISING cx_static_check.
 
 * GET - "Find purchase order by ID"
@@ -195,7 +195,7 @@ INTERFACE zif_petstore.
   METHODS getorderbyid
     IMPORTING
       orderid TYPE i
-    RETURNING VALUE(order) TYPE order
+    RETURNING VALUE(return_data) TYPE order
     RAISING cx_static_check.
 
 * DELETE - "Delete purchase order by ID"
@@ -225,7 +225,7 @@ INTERFACE zif_petstore.
 * Response: default
 * Body schema: array
   METHODS createuserswithlistinput
-    RETURNING VALUE(user) TYPE user
+    RETURNING VALUE(return_data) TYPE user
     RAISING cx_static_check.
 
 * GET - "Logs user into the system"
@@ -259,7 +259,7 @@ INTERFACE zif_petstore.
   METHODS getuserbyname
     IMPORTING
       username TYPE string
-    RETURNING VALUE(user) TYPE user
+    RETURNING VALUE(return_data) TYPE user
     RAISING cx_static_check.
 
 * PUT - "Update user"

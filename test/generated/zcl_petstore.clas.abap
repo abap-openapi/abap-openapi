@@ -86,7 +86,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    pet = parse_pet( '' ).
+    return_data = parse_pet( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~addpet.
@@ -98,7 +98,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    pet = parse_pet( '' ).
+    return_data = parse_pet( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~findpetsbystatus.
@@ -139,7 +139,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    pet = parse_pet( '' ).
+    return_data = parse_pet( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~updatepetwithform.
@@ -185,7 +185,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    apiresponse = parse_apiresponse( '' ).
+    return_data = parse_apiresponse( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~getinventory.
@@ -208,7 +208,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    order = parse_order( '' ).
+    return_data = parse_order( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~getorderbyid.
@@ -221,7 +221,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    order = parse_order( '' ).
+    return_data = parse_order( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~deleteorder.
@@ -256,7 +256,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    user = parse_user( '' ).
+    return_data = parse_user( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~loginuser.
@@ -297,7 +297,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    user = parse_user( '' ).
+    return_data = parse_user( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~updateuser.

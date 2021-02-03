@@ -1700,7 +1700,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    integration = parse_integration( '' ).
+    return_data = parse_integration( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_create_from_manifest.
@@ -1724,7 +1724,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    webhook_config = parse_webhook_config( '' ).
+    return_data = parse_webhook_config( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_update_webhook_config_for.
@@ -1736,7 +1736,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    webhook_config = parse_webhook_config( '' ).
+    return_data = parse_webhook_config( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_list_installations.
@@ -1772,7 +1772,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    installation = parse_installation( '' ).
+    return_data = parse_installation( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_delete_installation.
@@ -1850,7 +1850,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    application_grant = parse_application_grant( '' ).
+    return_data = parse_application_grant( '' ).
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_delete_gr.
@@ -1896,7 +1896,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    authorization = parse_authorization( '' ).
+    return_data = parse_authorization( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_reset_token.
@@ -1908,7 +1908,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    authorization = parse_authorization( '' ).
+    return_data = parse_authorization( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_delete_token.
@@ -1931,7 +1931,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    authorization = parse_authorization( '' ).
+    return_data = parse_authorization( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_check_authorization.
@@ -1954,7 +1954,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    authorization = parse_authorization( '' ).
+    return_data = parse_authorization( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_revoke_authorization_for_.
@@ -1978,7 +1978,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    integration = parse_integration( '' ).
+    return_data = parse_integration( '' ).
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_list_auth.
@@ -2018,7 +2018,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    authorization = parse_authorization( '' ).
+    return_data = parse_authorization( '' ).
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_get_or_01.
@@ -2031,7 +2031,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    authorization = parse_authorization( '' ).
+    return_data = parse_authorization( '' ).
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_get_autho.
@@ -2044,7 +2044,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    authorization = parse_authorization( '' ).
+    return_data = parse_authorization( '' ).
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_update_au.
@@ -2057,7 +2057,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    authorization = parse_authorization( '' ).
+    return_data = parse_authorization( '' ).
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_delete_au.
@@ -2093,7 +2093,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    code_of_conduct = parse_code_of_conduct( '' ).
+    return_data = parse_code_of_conduct( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_create_content_attachment.
@@ -2106,7 +2106,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    content_reference_attachment = parse_content_reference_attach( '' ).
+    return_data = parse_content_reference_attach( '' ).
   ENDMETHOD.
 
   METHOD zif_github~emojis_get.
@@ -2130,7 +2130,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    actions_enterprise_permissions = parse_actions_enterprise_permi( '' ).
+    return_data = parse_actions_enterprise_permi( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_set_github_ac.
@@ -2211,7 +2211,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    selected_actions = parse_selected_actions( '' ).
+    return_data = parse_selected_actions( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_set_allowed_a.
@@ -2267,7 +2267,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    runner_groups_enterprise = parse_runner_groups_enterprise( '' ).
+    return_data = parse_runner_groups_enterprise( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_update_self_h.
@@ -2281,7 +2281,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    runner_groups_enterprise = parse_runner_groups_enterprise( '' ).
+    return_data = parse_runner_groups_enterprise( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_delete_self_h.
@@ -2482,7 +2482,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    runner = parse_runner( '' ).
+    return_data = parse_runner( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_delete_self01.
@@ -2523,7 +2523,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    actions_billing_usage = parse_actions_billing_usage( '' ).
+    return_data = parse_actions_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~billing_get_github_packages_bi.
@@ -2536,7 +2536,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    packages_billing_usage = parse_packages_billing_usage( '' ).
+    return_data = parse_packages_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~billing_get_shared_storage_bil.
@@ -2549,7 +2549,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    combined_billing_usage = parse_combined_billing_usage( '' ).
+    return_data = parse_combined_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_list_public_events.
@@ -2578,7 +2578,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    feed = parse_feed( '' ).
+    return_data = parse_feed( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_list.
@@ -2662,7 +2662,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    gist_simple = parse_gist_simple( '' ).
+    return_data = parse_gist_simple( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_update.
@@ -2675,7 +2675,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    gist_simple = parse_gist_simple( '' ).
+    return_data = parse_gist_simple( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_delete.
@@ -2731,7 +2731,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    gist_comment = parse_gist_comment( '' ).
+    return_data = parse_gist_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_update_comment.
@@ -2745,7 +2745,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    gist_comment = parse_gist_comment( '' ).
+    return_data = parse_gist_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_delete_comment.
@@ -2856,7 +2856,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    gist_simple = parse_gist_simple( '' ).
+    return_data = parse_gist_simple( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gitignore_get_all_templates.
@@ -2880,7 +2880,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    gitignore_template = parse_gitignore_template( '' ).
+    return_data = parse_gitignore_template( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_list_repos_accessible_to_.
@@ -2985,7 +2985,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    license = parse_license( '' ).
+    return_data = parse_license( '' ).
   ENDMETHOD.
 
   METHOD zif_github~markdown_render.
@@ -3020,7 +3020,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    marketplace_purchase = parse_marketplace_purchase( '' ).
+    return_data = parse_marketplace_purchase( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_list_plans.
@@ -3074,7 +3074,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    marketplace_purchase = parse_marketplace_purchase( '' ).
+    return_data = parse_marketplace_purchase( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_list_plans_stubbed.
@@ -3127,7 +3127,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    api_overview = parse_api_overview( '' ).
+    return_data = parse_api_overview( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_list_public_events_fo.
@@ -3199,7 +3199,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    thread = parse_thread( '' ).
+    return_data = parse_thread( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_mark_thread_as_read.
@@ -3224,7 +3224,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    thread_subscription = parse_thread_subscription( '' ).
+    return_data = parse_thread_subscription( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_set_thread_subscripti.
@@ -3237,7 +3237,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    thread_subscription = parse_thread_subscription( '' ).
+    return_data = parse_thread_subscription( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_delete_thread_subscri.
@@ -3290,7 +3290,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    organization_full = parse_organization_full( '' ).
+    return_data = parse_organization_full( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_update.
@@ -3303,7 +3303,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    organization_full = parse_organization_full( '' ).
+    return_data = parse_organization_full( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_get_github_actions_per.
@@ -3316,7 +3316,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    actions_organization_permissio = parse_actions_organization_per( '' ).
+    return_data = parse_actions_organization_per( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_set_github_actions_per.
@@ -3397,7 +3397,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    selected_actions = parse_selected_actions( '' ).
+    return_data = parse_selected_actions( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_set_allowed_actions_or.
@@ -3453,7 +3453,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    runner_groups_org = parse_runner_groups_org( '' ).
+    return_data = parse_runner_groups_org( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_update_self_hosted_run.
@@ -3467,7 +3467,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    runner_groups_org = parse_runner_groups_org( '' ).
+    return_data = parse_runner_groups_org( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_delete_self_hosted_run.
@@ -3662,7 +3662,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    runner = parse_runner( '' ).
+    return_data = parse_runner( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_delete_self_hosted_r01.
@@ -3706,7 +3706,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    actions_public_key = parse_actions_public_key( '' ).
+    return_data = parse_actions_public_key( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_get_org_secret.
@@ -3720,7 +3720,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    organization_actions_secret = parse_organization_actions_sec( '' ).
+    return_data = parse_organization_actions_sec( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_create_or_update_org_s.
@@ -3970,7 +3970,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    org_hook = parse_org_hook( '' ).
+    return_data = parse_org_hook( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_update_webhook.
@@ -3983,7 +3983,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    org_hook = parse_org_hook( '' ).
+    return_data = parse_org_hook( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_delete_webhook.
@@ -4008,7 +4008,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    webhook_config = parse_webhook_config( '' ).
+    return_data = parse_webhook_config( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_update_webhook_config_for.
@@ -4021,7 +4021,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    webhook_config = parse_webhook_config( '' ).
+    return_data = parse_webhook_config( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_ping_webhook.
@@ -4046,7 +4046,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    installation = parse_installation( '' ).
+    return_data = parse_installation( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_app_installations.
@@ -4077,7 +4077,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    interaction_limit_response = parse_interaction_limit_respon( '' ).
+    return_data = parse_interaction_limit_respon( '' ).
   ENDMETHOD.
 
   METHOD zif_github~interactions_set_restrictions_.
@@ -4090,7 +4090,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    interaction_limit_response = parse_interaction_limit_respon( '' ).
+    return_data = parse_interaction_limit_respon( '' ).
   ENDMETHOD.
 
   METHOD zif_github~interactions_remove_restrictio.
@@ -4264,7 +4264,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    org_membership = parse_org_membership( '' ).
+    return_data = parse_org_membership( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_set_membership_for_user.
@@ -4278,7 +4278,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    org_membership = parse_org_membership( '' ).
+    return_data = parse_org_membership( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_remove_membership_for_use.
@@ -4335,7 +4335,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    migration = parse_migration( '' ).
+    return_data = parse_migration( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_download_archive_fo.
@@ -4583,7 +4583,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    actions_billing_usage = parse_actions_billing_usage( '' ).
+    return_data = parse_actions_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~billing_get_github_packages_01.
@@ -4596,7 +4596,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    packages_billing_usage = parse_packages_billing_usage( '' ).
+    return_data = parse_packages_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~billing_get_shared_storage_b01.
@@ -4609,7 +4609,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    combined_billing_usage = parse_combined_billing_usage( '' ).
+    return_data = parse_combined_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_list_idp_groups_for_org.
@@ -4628,7 +4628,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    group_mapping = parse_group_mapping( '' ).
+    return_data = parse_group_mapping( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_list.
@@ -4672,7 +4672,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    team_full = parse_team_full( '' ).
+    return_data = parse_team_full( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_update_in_org.
@@ -4747,7 +4747,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    team_discussion = parse_team_discussion( '' ).
+    return_data = parse_team_discussion( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_update_discussion_in_org.
@@ -4761,7 +4761,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    team_discussion = parse_team_discussion( '' ).
+    return_data = parse_team_discussion( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_delete_discussion_in_org.
@@ -4823,7 +4823,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    team_discussion_comment = parse_team_discussion_comment( '' ).
+    return_data = parse_team_discussion_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_update_discussion_commen.
@@ -4837,7 +4837,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    team_discussion_comment = parse_team_discussion_comment( '' ).
+    return_data = parse_team_discussion_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_delete_discussion_commen.
@@ -5002,7 +5002,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    team_membership = parse_team_membership( '' ).
+    return_data = parse_team_membership( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_add_or_update_membership.
@@ -5017,7 +5017,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    team_membership = parse_team_membership( '' ).
+    return_data = parse_team_membership( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_remove_membership_for_us.
@@ -5064,7 +5064,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    team_project = parse_team_project( '' ).
+    return_data = parse_team_project( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_add_or_update_project_pe.
@@ -5168,7 +5168,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    group_mapping = parse_group_mapping( '' ).
+    return_data = parse_group_mapping( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_create_or_update_idp_gro.
@@ -5182,7 +5182,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    group_mapping = parse_group_mapping( '' ).
+    return_data = parse_group_mapping( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_list_child_in_org.
@@ -5214,7 +5214,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    project_card = parse_project_card( '' ).
+    return_data = parse_project_card( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_update_card.
@@ -5227,7 +5227,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    project_card = parse_project_card( '' ).
+    return_data = parse_project_card( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_delete_card.
@@ -5264,7 +5264,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    project_column = parse_project_column( '' ).
+    return_data = parse_project_column( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_update_column.
@@ -5277,7 +5277,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    project_column = parse_project_column( '' ).
+    return_data = parse_project_column( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_delete_column.
@@ -5346,7 +5346,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    project = parse_project( '' ).
+    return_data = parse_project( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_update.
@@ -5358,7 +5358,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    project = parse_project( '' ).
+    return_data = parse_project( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_delete.
@@ -5426,7 +5426,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    repository_collaborator_permis = parse_repository_collaborator_( '' ).
+    return_data = parse_repository_collaborator_( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_list_columns.
@@ -5466,7 +5466,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    rate_limit_overview = parse_rate_limit_overview( '' ).
+    return_data = parse_rate_limit_overview( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_delete_legacy.
@@ -5491,7 +5491,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    full_repository = parse_full_repository( '' ).
+    return_data = parse_full_repository( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update.
@@ -5505,7 +5505,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    full_repository = parse_full_repository( '' ).
+    return_data = parse_full_repository( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete.
@@ -5552,7 +5552,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    artifact = parse_artifact( '' ).
+    return_data = parse_artifact( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_delete_artifact.
@@ -5623,7 +5623,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    actions_repository_permissions = parse_actions_repository_permi( '' ).
+    return_data = parse_actions_repository_permi( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_set_github_actions_p01.
@@ -5650,7 +5650,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    selected_actions = parse_selected_actions( '' ).
+    return_data = parse_selected_actions( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_set_allowed_actions_re.
@@ -5736,7 +5736,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    runner = parse_runner( '' ).
+    return_data = parse_runner( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_delete_self_hosted_r02.
@@ -5789,7 +5789,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    workflow_run = parse_workflow_run( '' ).
+    return_data = parse_workflow_run( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_delete_workflow_run.
@@ -5909,7 +5909,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    workflow_run_usage = parse_workflow_run_usage( '' ).
+    return_data = parse_workflow_run_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_list_repo_secrets.
@@ -5942,7 +5942,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    actions_public_key = parse_actions_public_key( '' ).
+    return_data = parse_actions_public_key( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_get_repo_secret.
@@ -5957,7 +5957,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    actions_secret = parse_actions_secret( '' ).
+    return_data = parse_actions_secret( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_create_or_update_repo_.
@@ -6018,7 +6018,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    workflow = parse_workflow( '' ).
+    return_data = parse_workflow( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_disable_workflow.
@@ -6096,7 +6096,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    workflow_usage = parse_workflow_usage( '' ).
+    return_data = parse_workflow_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_list_assignees.
@@ -6194,7 +6194,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    branch_with_protection = parse_branch_with_protection( '' ).
+    return_data = parse_branch_with_protection( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_branch_protection.
@@ -6211,7 +6211,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    branch_protection = parse_branch_protection( '' ).
+    return_data = parse_branch_protection( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update_branch_protection.
@@ -6228,7 +6228,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    protected_branch = parse_protected_branch( '' ).
+    return_data = parse_protected_branch( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_branch_protection.
@@ -6261,7 +6261,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    protected_branch_admin_enforce = parse_protected_branch_admin_e( '' ).
+    return_data = parse_protected_branch_admin_e( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_set_admin_branch_protect.
@@ -6278,7 +6278,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    protected_branch_admin_enforce = parse_protected_branch_admin_e( '' ).
+    return_data = parse_protected_branch_admin_e( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_admin_branch_prot.
@@ -6327,7 +6327,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    protected_branch_pull_request_ = parse_protected_branch_pull_re( '' ).
+    return_data = parse_protected_branch_pull_re( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_pull_request_revi.
@@ -6360,7 +6360,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    protected_branch_admin_enforce = parse_protected_branch_admin_e( '' ).
+    return_data = parse_protected_branch_admin_e( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_create_commit_signature_.
@@ -6377,7 +6377,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    protected_branch_admin_enforce = parse_protected_branch_admin_e( '' ).
+    return_data = parse_protected_branch_admin_e( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_commit_signature_.
@@ -6410,7 +6410,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    status_check_policy = parse_status_check_policy( '' ).
+    return_data = parse_status_check_policy( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update_status_check_prot.
@@ -6427,7 +6427,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    status_check_policy = parse_status_check_policy( '' ).
+    return_data = parse_status_check_policy( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_remove_status_check_prot.
@@ -6524,7 +6524,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    branch_restriction_policy = parse_branch_restriction_polic( '' ).
+    return_data = parse_branch_restriction_polic( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_access_restrictio.
@@ -6776,7 +6776,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    check_run = parse_check_run( '' ).
+    return_data = parse_check_run( '' ).
   ENDMETHOD.
 
   METHOD zif_github~checks_update.
@@ -6791,7 +6791,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    check_run = parse_check_run( '' ).
+    return_data = parse_check_run( '' ).
   ENDMETHOD.
 
   METHOD zif_github~checks_list_annotations.
@@ -6838,7 +6838,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    check_suite_preference = parse_check_suite_preference( '' ).
+    return_data = parse_check_suite_preference( '' ).
   ENDMETHOD.
 
   METHOD zif_github~checks_get_suite.
@@ -6853,7 +6853,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    check_suite = parse_check_suite( '' ).
+    return_data = parse_check_suite( '' ).
   ENDMETHOD.
 
   METHOD zif_github~checks_list_for_suite.
@@ -6930,7 +6930,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    code_scanning_alert_code_sca01 = parse_code_scanning_alert_co01( '' ).
+    return_data = parse_code_scanning_alert_co01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~code_scanning_update_alert.
@@ -6945,7 +6945,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    code_scanning_alert_code_sca01 = parse_code_scanning_alert_co01( '' ).
+    return_data = parse_code_scanning_alert_co01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~code_scanning_list_recent_anal.
@@ -7056,7 +7056,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    repository_collaborator_permis = parse_repository_collaborator_( '' ).
+    return_data = parse_repository_collaborator_( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_commit_comments_for.
@@ -7090,7 +7090,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    commit_comment = parse_commit_comment( '' ).
+    return_data = parse_commit_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update_commit_comment.
@@ -7105,7 +7105,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    commit_comment = parse_commit_comment( '' ).
+    return_data = parse_commit_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_commit_comment.
@@ -7157,7 +7157,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    reaction = parse_reaction( '' ).
+    return_data = parse_reaction( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_delete_for_commit_co.
@@ -7288,7 +7288,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    commit = parse_commit( '' ).
+    return_data = parse_commit( '' ).
   ENDMETHOD.
 
   METHOD zif_github~checks_list_for_ref.
@@ -7358,7 +7358,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    combined_commit_status = parse_combined_commit_status( '' ).
+    return_data = parse_combined_commit_status( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_commit_statuses_for.
@@ -7392,7 +7392,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    code_of_conduct = parse_code_of_conduct( '' ).
+    return_data = parse_code_of_conduct( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_community_profile_me.
@@ -7406,7 +7406,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    community_profile = parse_community_profile( '' ).
+    return_data = parse_community_profile( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_compare_commits.
@@ -7422,7 +7422,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    commit_comparison = parse_commit_comparison( '' ).
+    return_data = parse_commit_comparison( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_content.
@@ -7454,7 +7454,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    file_commit = parse_file_commit( '' ).
+    return_data = parse_file_commit( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_file.
@@ -7469,7 +7469,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    file_commit = parse_file_commit( '' ).
+    return_data = parse_file_commit( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_contributors.
@@ -7550,7 +7550,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    deployment = parse_deployment( '' ).
+    return_data = parse_deployment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_deployment.
@@ -7614,7 +7614,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    deployment_status = parse_deployment_status( '' ).
+    return_data = parse_deployment_status( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_create_dispatch_event.
@@ -7709,7 +7709,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    blob = parse_blob( '' ).
+    return_data = parse_blob( '' ).
   ENDMETHOD.
 
   METHOD zif_github~git_create_commit.
@@ -7737,7 +7737,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    git_commit = parse_git_commit( '' ).
+    return_data = parse_git_commit( '' ).
   ENDMETHOD.
 
   METHOD zif_github~git_list_matching_refs.
@@ -7772,7 +7772,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    git_ref = parse_git_ref( '' ).
+    return_data = parse_git_ref( '' ).
   ENDMETHOD.
 
   METHOD zif_github~git_create_ref.
@@ -7800,7 +7800,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    git_ref = parse_git_ref( '' ).
+    return_data = parse_git_ref( '' ).
   ENDMETHOD.
 
   METHOD zif_github~git_delete_ref.
@@ -7842,7 +7842,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    git_tag = parse_git_tag( '' ).
+    return_data = parse_git_tag( '' ).
   ENDMETHOD.
 
   METHOD zif_github~git_create_tree.
@@ -7873,7 +7873,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    git_tree = parse_git_tree( '' ).
+    return_data = parse_git_tree( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_webhooks.
@@ -7919,7 +7919,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    hook = parse_hook( '' ).
+    return_data = parse_hook( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update_webhook.
@@ -7933,7 +7933,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    hook = parse_hook( '' ).
+    return_data = parse_hook( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_webhook.
@@ -7960,7 +7960,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    webhook_config = parse_webhook_config( '' ).
+    return_data = parse_webhook_config( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update_webhook_config_fo.
@@ -7974,7 +7974,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    webhook_config = parse_webhook_config( '' ).
+    return_data = parse_webhook_config( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_ping_webhook.
@@ -8014,7 +8014,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    import = parse_import( '' ).
+    return_data = parse_import( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_start_import.
@@ -8041,7 +8041,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    import = parse_import( '' ).
+    return_data = parse_import( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_cancel_import.
@@ -8082,7 +8082,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    porter_author = parse_porter_author( '' ).
+    return_data = parse_porter_author( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_get_large_files.
@@ -8109,7 +8109,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    import = parse_import( '' ).
+    return_data = parse_import( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_get_repo_installation.
@@ -8123,7 +8123,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    installation = parse_installation( '' ).
+    return_data = parse_installation( '' ).
   ENDMETHOD.
 
   METHOD zif_github~interactions_get_restriction01.
@@ -8137,7 +8137,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    interaction_limit_response = parse_interaction_limit_respon( '' ).
+    return_data = parse_interaction_limit_respon( '' ).
   ENDMETHOD.
 
   METHOD zif_github~interactions_set_restriction01.
@@ -8151,7 +8151,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    interaction_limit_response = parse_interaction_limit_respon( '' ).
+    return_data = parse_interaction_limit_respon( '' ).
   ENDMETHOD.
 
   METHOD zif_github~interactions_remove_restrict01.
@@ -8198,7 +8198,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    repository_invitation = parse_repository_invitation( '' ).
+    return_data = parse_repository_invitation( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_invitation.
@@ -8314,7 +8314,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    issue_comment = parse_issue_comment( '' ).
+    return_data = parse_issue_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_update_comment.
@@ -8329,7 +8329,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    issue_comment = parse_issue_comment( '' ).
+    return_data = parse_issue_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_delete_comment.
@@ -8381,7 +8381,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    reaction = parse_reaction( '' ).
+    return_data = parse_reaction( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_delete_for_issue_com.
@@ -8429,7 +8429,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    issue_event = parse_issue_event( '' ).
+    return_data = parse_issue_event( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_get.
@@ -8444,7 +8444,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    issue = parse_issue( '' ).
+    return_data = parse_issue( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_update.
@@ -8459,7 +8459,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    issue = parse_issue( '' ).
+    return_data = parse_issue( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_add_assignees.
@@ -8488,7 +8488,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    issue_simple = parse_issue_simple( '' ).
+    return_data = parse_issue_simple( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_list_comments.
@@ -8768,7 +8768,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    deploy_key = parse_deploy_key( '' ).
+    return_data = parse_deploy_key( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_deploy_key.
@@ -8829,7 +8829,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    label = parse_label( '' ).
+    return_data = parse_label( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_update_label.
@@ -8844,7 +8844,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    label = parse_label( '' ).
+    return_data = parse_label( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_delete_label.
@@ -8872,7 +8872,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    language = parse_language( '' ).
+    return_data = parse_language( '' ).
   ENDMETHOD.
 
   METHOD zif_github~licenses_get_for_repo.
@@ -8886,7 +8886,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    license_content = parse_license_content( '' ).
+    return_data = parse_license_content( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_merge.
@@ -8955,7 +8955,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    milestone = parse_milestone( '' ).
+    return_data = parse_milestone( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_update_milestone.
@@ -8970,7 +8970,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    milestone = parse_milestone( '' ).
+    return_data = parse_milestone( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_delete_milestone.
@@ -9062,7 +9062,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    page = parse_page( '' ).
+    return_data = parse_page( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_create_pages_site.
@@ -9147,7 +9147,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    page_build = parse_page_build( '' ).
+    return_data = parse_page_build( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_pages_build.
@@ -9162,7 +9162,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    page_build = parse_page_build( '' ).
+    return_data = parse_page_build( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_list_for_repo.
@@ -9287,7 +9287,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    pull_request_review_comment = parse_pull_request_review_comm( '' ).
+    return_data = parse_pull_request_review_comm( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_update_review_comment.
@@ -9302,7 +9302,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    pull_request_review_comment = parse_pull_request_review_comm( '' ).
+    return_data = parse_pull_request_review_comm( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_delete_review_comment.
@@ -9354,7 +9354,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    reaction = parse_reaction( '' ).
+    return_data = parse_reaction( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_delete_for_pull_requ.
@@ -9382,7 +9382,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    pull_request = parse_pull_request( '' ).
+    return_data = parse_pull_request( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_update.
@@ -9396,7 +9396,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    pull_request = parse_pull_request( '' ).
+    return_data = parse_pull_request( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_list_review_comments.
@@ -9516,7 +9516,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    pull_request_merge_result = parse_pull_request_merge_resul( '' ).
+    return_data = parse_pull_request_merge_resul( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_list_requested_reviewers.
@@ -9536,7 +9536,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    pull_request_review_request = parse_pull_request_review_requ( '' ).
+    return_data = parse_pull_request_review_requ( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_request_reviewers.
@@ -9595,7 +9595,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    pull_request_review = parse_pull_request_review( '' ).
+    return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_get_review.
@@ -9610,7 +9610,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    pull_request_review = parse_pull_request_review( '' ).
+    return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_update_review.
@@ -9625,7 +9625,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    pull_request_review = parse_pull_request_review( '' ).
+    return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_delete_pending_review.
@@ -9640,7 +9640,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    pull_request_review = parse_pull_request_review( '' ).
+    return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_list_comments_for_review.
@@ -9675,7 +9675,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    pull_request_review = parse_pull_request_review( '' ).
+    return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_submit_review.
@@ -9690,7 +9690,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    pull_request_review = parse_pull_request_review( '' ).
+    return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_update_branch.
@@ -9720,7 +9720,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    content_file = parse_content_file( '' ).
+    return_data = parse_content_file( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_releases.
@@ -9767,7 +9767,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    release_asset = parse_release_asset( '' ).
+    return_data = parse_release_asset( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update_release_asset.
@@ -9782,7 +9782,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    release_asset = parse_release_asset( '' ).
+    return_data = parse_release_asset( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_release_asset.
@@ -9810,7 +9810,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    release = parse_release( '' ).
+    return_data = parse_release( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_release_by_tag.
@@ -9825,7 +9825,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    release = parse_release( '' ).
+    return_data = parse_release( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_release.
@@ -9840,7 +9840,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    release = parse_release( '' ).
+    return_data = parse_release( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update_release.
@@ -9855,7 +9855,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    release = parse_release( '' ).
+    return_data = parse_release( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_release.
@@ -9946,7 +9946,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    secret_scanning_alert = parse_secret_scanning_alert( '' ).
+    return_data = parse_secret_scanning_alert( '' ).
   ENDMETHOD.
 
   METHOD zif_github~secret_scanning_update_alert.
@@ -9961,7 +9961,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    secret_scanning_alert = parse_secret_scanning_alert( '' ).
+    return_data = parse_secret_scanning_alert( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_list_stargazers_for_r.
@@ -10033,7 +10033,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    participation_stats = parse_participation_stats( '' ).
+    return_data = parse_participation_stats( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_punch_card_stats.
@@ -10093,7 +10093,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    repository_subscription = parse_repository_subscription( '' ).
+    return_data = parse_repository_subscription( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_set_repo_subscription.
@@ -10107,7 +10107,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    repository_subscription = parse_repository_subscription( '' ).
+    return_data = parse_repository_subscription( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_delete_repo_subscript.
@@ -10186,7 +10186,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    topic = parse_topic( '' ).
+    return_data = parse_topic( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_replace_all_topics.
@@ -10200,7 +10200,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    topic = parse_topic( '' ).
+    return_data = parse_topic( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_clones.
@@ -10217,7 +10217,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    clone_traffic = parse_clone_traffic( '' ).
+    return_data = parse_clone_traffic( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_top_paths.
@@ -10260,7 +10260,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    view_traffic = parse_view_traffic( '' ).
+    return_data = parse_view_traffic( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_transfer.
@@ -10366,7 +10366,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    scim_group_list_enterprise = parse_scim_group_list_enterpri( '' ).
+    return_data = parse_scim_group_list_enterpri( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_provision_and.
@@ -10392,7 +10392,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    scim_enterprise_group = parse_scim_enterprise_group( '' ).
+    return_data = parse_scim_enterprise_group( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_set_informati.
@@ -10406,7 +10406,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    scim_enterprise_group = parse_scim_enterprise_group( '' ).
+    return_data = parse_scim_enterprise_group( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_update_attrib.
@@ -10420,7 +10420,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    scim_enterprise_group = parse_scim_enterprise_group( '' ).
+    return_data = parse_scim_enterprise_group( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_delete_scim_g.
@@ -10449,7 +10449,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    scim_user_list_enterprise = parse_scim_user_list_enterpris( '' ).
+    return_data = parse_scim_user_list_enterpris( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_provision_a01.
@@ -10475,7 +10475,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    scim_enterprise_user = parse_scim_enterprise_user( '' ).
+    return_data = parse_scim_enterprise_user( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_set_informa01.
@@ -10489,7 +10489,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    scim_enterprise_user = parse_scim_enterprise_user( '' ).
+    return_data = parse_scim_enterprise_user( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_update_attr01.
@@ -10503,7 +10503,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    scim_enterprise_user = parse_scim_enterprise_user( '' ).
+    return_data = parse_scim_enterprise_user( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_delete_user_f.
@@ -10764,7 +10764,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    team_full = parse_team_full( '' ).
+    return_data = parse_team_full( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_update_legacy.
@@ -10829,7 +10829,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    team_discussion = parse_team_discussion( '' ).
+    return_data = parse_team_discussion( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_update_discussion_legacy.
@@ -10841,7 +10841,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    team_discussion = parse_team_discussion( '' ).
+    return_data = parse_team_discussion( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_delete_discussion_legacy.
@@ -10895,7 +10895,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    team_discussion_comment = parse_team_discussion_comment( '' ).
+    return_data = parse_team_discussion_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_update_discussion_comm01.
@@ -10907,7 +10907,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    team_discussion_comment = parse_team_discussion_comment( '' ).
+    return_data = parse_team_discussion_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_delete_discussion_comm01.
@@ -11066,7 +11066,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    team_membership = parse_team_membership( '' ).
+    return_data = parse_team_membership( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_add_or_update_membersh01.
@@ -11079,7 +11079,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    team_membership = parse_team_membership( '' ).
+    return_data = parse_team_membership( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_remove_membership_for_01.
@@ -11120,7 +11120,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    team_project = parse_team_project( '' ).
+    return_data = parse_team_project( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_add_or_update_project_01.
@@ -11210,7 +11210,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    group_mapping = parse_group_mapping( '' ).
+    return_data = parse_group_mapping( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_create_or_update_idp_g01.
@@ -11222,7 +11222,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    group_mapping = parse_group_mapping( '' ).
+    return_data = parse_group_mapping( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_list_child_legacy.
@@ -11262,7 +11262,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    private_user = parse_private_user( '' ).
+    return_data = parse_private_user( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_list_blocked_by_authenti.
@@ -11470,7 +11470,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    gpg_key = parse_gpg_key( '' ).
+    return_data = parse_gpg_key( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_delete_gpg_key_for_authe.
@@ -11555,7 +11555,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    interaction_limit_response = parse_interaction_limit_respon( '' ).
+    return_data = parse_interaction_limit_respon( '' ).
   ENDMETHOD.
 
   METHOD zif_github~interactions_set_restriction02.
@@ -11567,7 +11567,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    interaction_limit_response = parse_interaction_limit_respon( '' ).
+    return_data = parse_interaction_limit_respon( '' ).
   ENDMETHOD.
 
   METHOD zif_github~interactions_remove_restrict02.
@@ -11654,7 +11654,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    key = parse_key( '' ).
+    return_data = parse_key( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_delete_public_ssh_key_fo.
@@ -11733,7 +11733,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    org_membership = parse_org_membership( '' ).
+    return_data = parse_org_membership( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_update_membership_for_aut.
@@ -11746,7 +11746,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    org_membership = parse_org_membership( '' ).
+    return_data = parse_org_membership( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_list_for_authentica.
@@ -11790,7 +11790,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    migration = parse_migration( '' ).
+    return_data = parse_migration( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_get_archive_for_aut.
@@ -12264,7 +12264,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    hovercard = parse_hovercard( '' ).
+    return_data = parse_hovercard( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_get_user_installation.
@@ -12277,7 +12277,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    installation = parse_installation( '' ).
+    return_data = parse_installation( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_list_public_keys_for_use.
@@ -12410,7 +12410,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    actions_billing_usage = parse_actions_billing_usage( '' ).
+    return_data = parse_actions_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~billing_get_github_packages_02.
@@ -12423,7 +12423,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    packages_billing_usage = parse_packages_billing_usage( '' ).
+    return_data = parse_packages_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~billing_get_shared_storage_b02.
@@ -12436,7 +12436,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    combined_billing_usage = parse_combined_billing_usage( '' ).
+    return_data = parse_combined_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_list_repos_starred_01.
