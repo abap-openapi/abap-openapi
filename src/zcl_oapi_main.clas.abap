@@ -23,6 +23,10 @@ CLASS zcl_oapi_main DEFINITION PUBLIC.
       IMPORTING is_operation TYPE zif_oapi_specification_v3=>ty_operation
       RETURNING VALUE(rv_abap) TYPE string.
 
+    METHODS find_return
+      IMPORTING is_operation TYPE zif_oapi_specification_v3=>ty_operation
+      RETURNING VALUE(rs_type) TYPE zif_oapi_specification_v3=>ty_component_schema.
+
     METHODS parameters_to_abap
       IMPORTING it_parameters TYPE zif_oapi_specification_v3=>ty_parameters
       RETURNING VALUE(rv_abap) TYPE string.
@@ -83,12 +87,15 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |    METHODS constructor IMPORTING ii_client TYPE REF TO if_http_client.\n| &&
       |  PROTECTED SECTION.\n| &&
       |    DATA mi_client TYPE REF TO if_http_client.\n| &&
-*      |    DATA mo_json TYPE REF TO zcl_oapi_json.\n| &&
+      |    DATA mo_json TYPE REF TO zcl_oapi_json.\n| &&
       |    METHODS send_receive RETURNING VALUE(rv_code) TYPE i.\n|.
 
     LOOP AT ms_specification-components-schemas INTO ls_schema.
       rv_abap = rv_abap &&
-        |    METHODS { ls_schema-abap_parser_method } IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE { ms_input-interface_name }=>{ ls_schema-abap_name } RAISING cx_static_check.\n|.
+        |    METHODS { ls_schema-abap_parser_method }\n| &&
+        |      IMPORTING iv_prefix TYPE string\n| &&
+        |      RETURNING VALUE({ ls_schema-abap_name }) TYPE { ms_input-interface_name }=>{ ls_schema-abap_name }\n| &&
+        |      RAISING cx_static_check.\n|.
     ENDLOOP.
 
     rv_abap = rv_abap &&
@@ -137,10 +144,8 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       ELSE.
         rv_abap = rv_abap && |  TYPES { ls_schema-abap_name } TYPE string.\n|.
       ENDIF.
-    ENDLOOP.
-    IF lines( ms_specification-components-schemas ) > 0.
       rv_abap = rv_abap && |\n|.
-    ENDIF.
+    ENDLOOP.
 
   ENDMETHOD.
 
@@ -150,6 +155,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     DATA ls_parameter LIKE LINE OF ls_operation-parameters.
     DATA ls_response LIKE LINE OF ls_operation-responses.
     DATA ls_content LIKE LINE OF ls_response-content.
+    DATA ls_return TYPE zif_oapi_specification_v3=>ty_component_schema.
     DATA lv_required TYPE string.
     DATA lv_extra TYPE string.
     DATA lv_ref TYPE string.
@@ -189,7 +195,12 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         ENDLOOP.
       ENDLOOP.
       rv_abap = rv_abap &&
-        |  METHODS { ls_operation-abap_name }{ parameters_to_abap( ls_operation-parameters ) }.\n|.
+        |  METHODS { ls_operation-abap_name }{ parameters_to_abap( ls_operation-parameters ) }|.
+      ls_return = find_return( ls_operation ).
+      IF ls_return IS NOT INITIAL.
+        rv_abap = rv_abap && |    RETURNING VALUE({ ls_return-abap_name }) TYPE { ls_return-abap_name }\n|.
+      ENDIF.
+      rv_abap = rv_abap && |    RAISING cx_static_check.\n\n|.
     ENDLOOP.
     rv_abap = rv_abap && |ENDINTERFACE.|.
 
@@ -209,6 +220,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
   METHOD operation_implementation.
 
     DATA ls_parameter LIKE LINE OF is_operation-parameters.
+    DATA ls_return TYPE zif_oapi_specification_v3=>ty_component_schema.
 
     rv_abap =
       |    DATA lv_code TYPE i.\n| &&
@@ -238,8 +250,39 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 *      |    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).\n| &&
       |    lv_code = send_receive( ).\n| &&
       |    WRITE / lv_code.\n| &&
-*      |    CREATE OBJECT mo_json EXPORTING iv_json = iv_json.\n| &&
+* todo, accept and check content types
       |    WRITE / mi_client->response->get_cdata( ).\n|.
+
+    ls_return = find_return( is_operation ).
+    IF ls_return IS NOT INITIAL.
+      rv_abap = rv_abap &&
+        |    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).\n| &&
+        |* { ls_return-name }, { ls_return-abap_name }, { ls_return-abap_parser_method }\n|.
+    ELSE.
+      rv_abap = rv_abap &&
+        |* todo, handle more responses\n|.
+    ENDIF.
+
+  ENDMETHOD.
+
+  METHOD find_return.
+
+    DATA ls_response LIKE LINE OF is_operation-responses.
+    DATA ls_content LIKE LINE OF ls_response-content.
+
+    LOOP AT is_operation-responses INTO ls_response.
+      IF ls_response-code = '200'.
+        READ TABLE ls_response-content INTO ls_content WITH KEY type = 'application/json'.
+        IF sy-subrc = 0 AND ls_content-schema_ref IS NOT INITIAL.
+          REPLACE FIRST OCCURRENCE OF '#/components/schemas/' IN ls_content-schema_ref WITH ''.
+          READ TABLE ms_specification-components-schemas INTO rs_type WITH KEY name = ls_content-schema_ref.
+          IF sy-subrc = 0.
+            RETURN.
+          ENDIF.
+        ENDIF.
+      ENDIF.
+    ENDLOOP.
+
   ENDMETHOD.
 
   METHOD dump_basic_type.
@@ -300,7 +343,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
                                  sep = |\n| ).
     ENDIF.
 
-    rv_abap = rv_abap && lv_text && |\n    RAISING cx_static_check|.
+    rv_abap = rv_abap && lv_text && |\n|.
 
   ENDMETHOD.
 

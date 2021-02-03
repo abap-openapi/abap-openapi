@@ -6,15 +6,40 @@ CLASS zcl_petstore DEFINITION PUBLIC.
     METHODS constructor IMPORTING ii_client TYPE REF TO if_http_client.
   PROTECTED SECTION.
     DATA mi_client TYPE REF TO if_http_client.
+    DATA mo_json TYPE REF TO zcl_oapi_json.
     METHODS send_receive RETURNING VALUE(rv_code) TYPE i.
-    METHODS parse_order IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE zif_petstore=>order RAISING cx_static_check.
-    METHODS parse_customer IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE zif_petstore=>customer RAISING cx_static_check.
-    METHODS parse_address IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE zif_petstore=>address RAISING cx_static_check.
-    METHODS parse_category IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE zif_petstore=>category RAISING cx_static_check.
-    METHODS parse_user IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE zif_petstore=>user RAISING cx_static_check.
-    METHODS parse_tag IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE zif_petstore=>tag RAISING cx_static_check.
-    METHODS parse_pet IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE zif_petstore=>pet RAISING cx_static_check.
-    METHODS parse_apiresponse IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE zif_petstore=>apiresponse RAISING cx_static_check.
+    METHODS parse_order
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(order) TYPE zif_petstore=>order
+      RAISING cx_static_check.
+    METHODS parse_customer
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(customer) TYPE zif_petstore=>customer
+      RAISING cx_static_check.
+    METHODS parse_address
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(address) TYPE zif_petstore=>address
+      RAISING cx_static_check.
+    METHODS parse_category
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(category) TYPE zif_petstore=>category
+      RAISING cx_static_check.
+    METHODS parse_user
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(user) TYPE zif_petstore=>user
+      RAISING cx_static_check.
+    METHODS parse_tag
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(tag) TYPE zif_petstore=>tag
+      RAISING cx_static_check.
+    METHODS parse_pet
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pet) TYPE zif_petstore=>pet
+      RAISING cx_static_check.
+    METHODS parse_apiresponse
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(apiresponse) TYPE zif_petstore=>apiresponse
+      RAISING cx_static_check.
 ENDCLASS.
 
 CLASS zcl_petstore IMPLEMENTATION.
@@ -60,6 +85,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+* Pet, pet, parse_pet
   ENDMETHOD.
 
   METHOD zif_petstore~addpet.
@@ -70,6 +97,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+* Pet, pet, parse_pet
   ENDMETHOD.
 
   METHOD zif_petstore~findpetsbystatus.
@@ -83,6 +112,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~findpetsbytags.
@@ -96,6 +126,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~getpetbyid.
@@ -107,6 +138,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+* Pet, pet, parse_pet
   ENDMETHOD.
 
   METHOD zif_petstore~updatepetwithform.
@@ -124,6 +157,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~deletepet.
@@ -135,6 +169,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~uploadfile.
@@ -149,6 +184,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+* ApiResponse, apiresponse, parse_apiresponse
   ENDMETHOD.
 
   METHOD zif_petstore~getinventory.
@@ -159,6 +196,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~placeorder.
@@ -169,6 +207,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+* Order, order, parse_order
   ENDMETHOD.
 
   METHOD zif_petstore~getorderbyid.
@@ -180,6 +220,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+* Order, order, parse_order
   ENDMETHOD.
 
   METHOD zif_petstore~deleteorder.
@@ -191,6 +233,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~createuser.
@@ -201,6 +244,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~createuserswithlistinput.
@@ -211,6 +255,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+* User, user, parse_user
   ENDMETHOD.
 
   METHOD zif_petstore~loginuser.
@@ -227,6 +273,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~logoutuser.
@@ -237,6 +284,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~getuserbyname.
@@ -248,6 +296,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+* User, user, parse_user
   ENDMETHOD.
 
   METHOD zif_petstore~updateuser.
@@ -259,6 +309,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~deleteuser.
@@ -270,6 +321,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
 ENDCLASS.
