@@ -82,18 +82,16 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |    METHODS constructor IMPORTING ii_client TYPE REF TO if_http_client.\n| &&
       |  PRIVATE SECTION.\n| &&
       |    DATA mi_client TYPE REF TO if_http_client.\n| &&
-      |    METHODS send_receive.\n| &&
+      |    METHODS send_receive RETURNING VALUE(rv_code) TYPE i.\n| &&
       |ENDCLASS.\n\n| &&
       |CLASS { ms_input-class_name } IMPLEMENTATION.\n| &&
       |  METHOD constructor.\n| &&
       |    mi_client = ii_client.\n| &&
       |  ENDMETHOD.\n\n| &&
       |  METHOD send_receive.\n| &&
-      |    DATA lv_code TYPE i.\n| &&
-      |    DATA lv_cdata TYPE string.\n| &&
       |    mi_client->send( ).\n| &&
       |    mi_client->receive( ).\n| &&
-      |    mi_client->response->get_status( IMPORTING code = lv_code ).\n| &&
+      |    mi_client->response->get_status( IMPORTING code = rv_code ).\n| &&
       |  ENDMETHOD.\n\n|.
 
     LOOP AT ms_specification-operations INTO ls_operation.
@@ -137,6 +135,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     DATA ls_response LIKE LINE OF ls_operation-responses.
     DATA ls_content LIKE LINE OF ls_response-content.
     DATA lv_required TYPE string.
+    DATA lv_extra TYPE string.
     DATA lv_ref TYPE string.
 
     rv_abap = |INTERFACE { ms_input-interface_name }.\n| &&
@@ -164,8 +163,13 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         rv_abap = rv_abap &&
           |* Response: { ls_response-code }\n|.
         LOOP AT ls_response-content INTO ls_content.
+          IF ls_content-schema_ref IS NOT INITIAL.
+            lv_extra = |, { ls_content-schema_ref }|.
+          ELSE.
+            lv_extra = |, { ls_content-schema->type }|.
+          ENDIF.
           rv_abap = rv_abap &&
-            |*     { ls_content-type }\n|.
+            |*     { ls_content-type }{ lv_extra }\n|.
         ENDLOOP.
       ENDLOOP.
       rv_abap = rv_abap &&
@@ -191,6 +195,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     DATA ls_parameter LIKE LINE OF is_operation-parameters.
 
     rv_abap =
+      |    DATA lv_code TYPE i.\n| &&
       |    DATA lv_uri TYPE string VALUE '{ find_uri_prefix( ms_specification-servers ) }{ is_operation-path }'.\n|.
 
     LOOP AT is_operation-parameters INTO ls_parameter WHERE in = 'path'.
@@ -213,9 +218,10 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     rv_abap = rv_abap &&
       |    mi_client->request->set_method( '{ to_upper( is_operation-method ) }' ).\n| &&
       |    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).\n| &&
-      |*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).\n| &&
-      |*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).\n| &&
-      |    send_receive( ).\n| &&
+*      |    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).\n| &&
+*      |    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).\n| &&
+      |    lv_code = send_receive( ).\n| &&
+      |    WRITE / lv_code.\n| &&
       |    WRITE / mi_client->response->get_cdata( ).\n|.
   ENDMETHOD.
 

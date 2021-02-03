@@ -15,6 +15,7 @@ INTERFACE zif_oapi_specification_v3 PUBLIC.
 
   TYPES: BEGIN OF ty_media_type,
            type       TYPE string,
+           schema     TYPE REF TO zif_oapi_schema,
            schema_ref TYPE string,
          END OF ty_media_type.
 

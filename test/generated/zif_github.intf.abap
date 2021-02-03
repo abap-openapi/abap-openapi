@@ -3027,20 +3027,20 @@ INTERFACE zif_github.
 * GET - "GitHub API Root"
 * Operation id: meta/root
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS meta_root
     RAISING cx_static_check.
 * GET - "Get the authenticated app"
 * Operation id: apps/get-authenticated
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/integration
   METHODS apps_get_authenticated
     RAISING cx_static_check.
 * POST - "Create a GitHub App from a manifest"
 * Operation id: apps/create-from-manifest
 * Parameter: code, required, path
 * Response: 201
-*     application/json
+*     application/json, 
 * Response: 404
 * Response: 422
   METHODS apps_create_from_manifest
@@ -3050,13 +3050,13 @@ INTERFACE zif_github.
 * GET - "Get a webhook configuration for an app"
 * Operation id: apps/get-webhook-config-for-app
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/webhook-config
   METHODS apps_get_webhook_config_for_ap
     RAISING cx_static_check.
 * PATCH - "Update a webhook configuration for an app"
 * Operation id: apps/update-webhook-config-for-app
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/webhook-config
   METHODS apps_update_webhook_config_for
     RAISING cx_static_check.
 * GET - "List installations for the authenticated app"
@@ -3066,7 +3066,7 @@ INTERFACE zif_github.
 * Parameter: page, optional, query
 * Parameter: since, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS apps_list_installations
     IMPORTING
       outdated TYPE string OPTIONAL
@@ -3078,7 +3078,7 @@ INTERFACE zif_github.
 * Operation id: apps/get-installation
 * Parameter: installation_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/installation
 * Response: 404
 * Response: 415
   METHODS apps_get_installation
@@ -3098,7 +3098,7 @@ INTERFACE zif_github.
 * Operation id: apps/create-installation-access-token
 * Parameter: installation_id, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/installation-token
 * Response: 401
 * Response: 403
 * Response: 404
@@ -3131,7 +3131,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -3145,7 +3145,7 @@ INTERFACE zif_github.
 * Operation id: oauth-authorizations/get-grant
 * Parameter: grant_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/application-grant
 * Response: 304
 * Response: 401
 * Response: 403
@@ -3178,7 +3178,7 @@ INTERFACE zif_github.
 * POST - "Check a token"
 * Operation id: apps/check-token
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/authorization
 * Response: 404
 * Response: 422
   METHODS apps_check_token
@@ -3186,7 +3186,7 @@ INTERFACE zif_github.
 * PATCH - "Reset a token"
 * Operation id: apps/reset-token
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/authorization
 * Response: 422
   METHODS apps_reset_token
     RAISING cx_static_check.
@@ -3199,7 +3199,7 @@ INTERFACE zif_github.
 * POST - "Create a scoped access token"
 * Operation id: apps/scope-token
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/authorization
 * Response: 401
 * Response: 403
 * Response: 404
@@ -3209,14 +3209,14 @@ INTERFACE zif_github.
 * GET - "Check an authorization"
 * Operation id: apps/check-authorization
 * Response: 200
-*     application/json
+*     application/json, 
 * Response: 404
   METHODS apps_check_authorization
     RAISING cx_static_check.
 * POST - "Reset an authorization"
 * Operation id: apps/reset-authorization
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/authorization
   METHODS apps_reset_authorization
     RAISING cx_static_check.
 * DELETE - "Revoke an authorization for an application"
@@ -3228,7 +3228,7 @@ INTERFACE zif_github.
 * Operation id: apps/get-by-slug
 * Parameter: app_slug, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/integration
 * Response: 403
 * Response: 404
 * Response: 415
@@ -3241,7 +3241,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -3254,7 +3254,7 @@ INTERFACE zif_github.
 * POST - "Create a new authorization"
 * Operation id: oauth-authorizations/create-authorization
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/authorization
 * Response: 304
 * Response: 401
 * Response: 403
@@ -3265,9 +3265,9 @@ INTERFACE zif_github.
 * PUT - "Get-or-create an authorization for a specific app"
 * Operation id: oauth-authorizations/get-or-create-authorization-for-app
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/authorization
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/authorization
 * Response: 304
 * Response: 401
 * Response: 403
@@ -3278,9 +3278,9 @@ INTERFACE zif_github.
 * Operation id: oauth-authorizations/get-or-create-authorization-for-app-and-fingerprint
 * Parameter: fingerprint, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/authorization
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/authorization
 * Response: 422
   METHODS oauth_authorizations_get_or_01
     IMPORTING
@@ -3290,7 +3290,7 @@ INTERFACE zif_github.
 * Operation id: oauth-authorizations/get-authorization
 * Parameter: authorization_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/authorization
 * Response: 304
 * Response: 401
 * Response: 403
@@ -3302,7 +3302,7 @@ INTERFACE zif_github.
 * Operation id: oauth-authorizations/update-authorization
 * Parameter: authorization_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/authorization
 * Response: 422
   METHODS oauth_authorizations_update_au
     IMPORTING
@@ -3322,7 +3322,7 @@ INTERFACE zif_github.
 * GET - "Get all codes of conduct"
 * Operation id: codes-of-conduct/get-all-codes-of-conduct
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 415
   METHODS codes_of_conduct_get_all_codes
@@ -3331,7 +3331,7 @@ INTERFACE zif_github.
 * Operation id: codes-of-conduct/get-conduct-code
 * Parameter: key, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/code-of-conduct
 * Response: 304
 * Response: 404
 * Response: 415
@@ -3343,7 +3343,7 @@ INTERFACE zif_github.
 * Operation id: apps/create-content-attachment
 * Parameter: content_reference_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/content-reference-attachment
 * Response: 304
 * Response: 403
 * Response: 404
@@ -3357,7 +3357,7 @@ INTERFACE zif_github.
 * GET - "Get emojis"
 * Operation id: emojis/get
 * Response: 200
-*     application/json
+*     application/json, object
 * Response: 304
   METHODS emojis_get
     RAISING cx_static_check.
@@ -3365,7 +3365,7 @@ INTERFACE zif_github.
 * Operation id: enterprise-admin/get-github-actions-permissions-enterprise
 * Parameter: enterprise, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/actions-enterprise-permissions
   METHODS enterprise_admin_get_github_ac
     IMPORTING
       enterprise TYPE string
@@ -3384,7 +3384,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS enterprise_admin_list_selected
     IMPORTING
       enterprise TYPE string
@@ -3423,7 +3423,7 @@ INTERFACE zif_github.
 * Operation id: enterprise-admin/get-allowed-actions-enterprise
 * Parameter: enterprise, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/selected-actions
   METHODS enterprise_admin_get_allowed_a
     IMPORTING
       enterprise TYPE string
@@ -3442,7 +3442,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS enterprise_admin_list_self_hos
     IMPORTING
       enterprise TYPE string
@@ -3453,7 +3453,7 @@ INTERFACE zif_github.
 * Operation id: enterprise-admin/create-self-hosted-runner-group-for-enterprise
 * Parameter: enterprise, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/runner-groups-enterprise
   METHODS enterprise_admin_create_self_h
     IMPORTING
       enterprise TYPE string
@@ -3463,7 +3463,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Parameter: runner_group_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/runner-groups-enterprise
   METHODS enterprise_admin_get_self_host
     IMPORTING
       enterprise TYPE string
@@ -3474,7 +3474,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Parameter: runner_group_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/runner-groups-enterprise
   METHODS enterprise_admin_update_self_h
     IMPORTING
       enterprise TYPE string
@@ -3497,7 +3497,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS enterprise_admin_list_org_acce
     IMPORTING
       enterprise TYPE string
@@ -3546,7 +3546,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS enterprise_admin_list_self_h01
     IMPORTING
       enterprise TYPE string
@@ -3594,7 +3594,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS enterprise_admin_list_self_h02
     IMPORTING
       enterprise TYPE string
@@ -3605,7 +3605,7 @@ INTERFACE zif_github.
 * Operation id: enterprise-admin/list-runner-applications-for-enterprise
 * Parameter: enterprise, required, path
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS enterprise_admin_list_runner_a
     IMPORTING
       enterprise TYPE string
@@ -3614,7 +3614,7 @@ INTERFACE zif_github.
 * Operation id: enterprise-admin/create-registration-token-for-enterprise
 * Parameter: enterprise, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/authentication-token
   METHODS enterprise_admin_create_regist
     IMPORTING
       enterprise TYPE string
@@ -3623,7 +3623,7 @@ INTERFACE zif_github.
 * Operation id: enterprise-admin/create-remove-token-for-enterprise
 * Parameter: enterprise, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/authentication-token
   METHODS enterprise_admin_create_remove
     IMPORTING
       enterprise TYPE string
@@ -3633,7 +3633,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Parameter: runner_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/runner
   METHODS enterprise_admin_get_self_ho01
     IMPORTING
       enterprise TYPE string
@@ -3654,7 +3654,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Parameter: per_page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS audit_log_get_audit_log
     IMPORTING
       enterprise TYPE string
@@ -3664,7 +3664,7 @@ INTERFACE zif_github.
 * Operation id: billing/get-github-actions-billing-ghe
 * Parameter: enterprise, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/actions-billing-usage
   METHODS billing_get_github_actions_bil
     IMPORTING
       enterprise TYPE string
@@ -3673,7 +3673,7 @@ INTERFACE zif_github.
 * Operation id: billing/get-github-packages-billing-ghe
 * Parameter: enterprise, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/packages-billing-usage
   METHODS billing_get_github_packages_bi
     IMPORTING
       enterprise TYPE string
@@ -3682,7 +3682,7 @@ INTERFACE zif_github.
 * Operation id: billing/get-shared-storage-billing-ghe
 * Parameter: enterprise, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/combined-billing-usage
   METHODS billing_get_shared_storage_bil
     IMPORTING
       enterprise TYPE string
@@ -3692,7 +3692,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 403
 * Response: 503
@@ -3704,7 +3704,7 @@ INTERFACE zif_github.
 * GET - "Get feeds"
 * Operation id: activity/get-feeds
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/feed
   METHODS activity_get_feeds
     RAISING cx_static_check.
 * GET - "List gists for the authenticated user"
@@ -3713,7 +3713,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 403
   METHODS gists_list
@@ -3725,7 +3725,7 @@ INTERFACE zif_github.
 * POST - "Create a gist"
 * Operation id: gists/create
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/gist-simple
 * Response: 304
 * Response: 403
 * Response: 404
@@ -3738,7 +3738,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 403
 * Response: 422
@@ -3754,7 +3754,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -3768,7 +3768,7 @@ INTERFACE zif_github.
 * Operation id: gists/get
 * Parameter: gist_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/gist-simple
 * Response: 304
 * Response: 403
 * Response: 404
@@ -3780,7 +3780,7 @@ INTERFACE zif_github.
 * Operation id: gists/update
 * Parameter: gist_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/gist-simple
 * Response: 404
 * Response: 422
   METHODS gists_update
@@ -3804,7 +3804,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 403
 * Response: 404
@@ -3818,7 +3818,7 @@ INTERFACE zif_github.
 * Operation id: gists/create-comment
 * Parameter: gist_id, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/gist-comment
 * Response: 304
 * Response: 403
 * Response: 404
@@ -3831,7 +3831,7 @@ INTERFACE zif_github.
 * Parameter: gist_id, required, path
 * Parameter: comment_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/gist-comment
 * Response: 304
 * Response: 403
 * Response: 404
@@ -3845,7 +3845,7 @@ INTERFACE zif_github.
 * Parameter: gist_id, required, path
 * Parameter: comment_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/gist-comment
 * Response: 404
   METHODS gists_update_comment
     IMPORTING
@@ -3871,7 +3871,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 403
 * Response: 404
@@ -3887,7 +3887,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 403
 * Response: 404
@@ -3901,7 +3901,7 @@ INTERFACE zif_github.
 * Operation id: gists/fork
 * Parameter: gist_id, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/base-gist
 * Response: 304
 * Response: 403
 * Response: 404
@@ -3917,7 +3917,7 @@ INTERFACE zif_github.
 * Response: 304
 * Response: 403
 * Response: 404
-*     application/json
+*     application/json, object
   METHODS gists_check_is_starred
     IMPORTING
       gist_id TYPE string
@@ -3949,7 +3949,7 @@ INTERFACE zif_github.
 * Parameter: sha, required, path
 * Parameter: gist_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/gist-simple
 * Response: 403
 * Response: 404
 * Response: 422
@@ -3961,7 +3961,7 @@ INTERFACE zif_github.
 * GET - "Get all gitignore templates"
 * Operation id: gitignore/get-all-templates
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
   METHODS gitignore_get_all_templates
     RAISING cx_static_check.
@@ -3969,7 +3969,7 @@ INTERFACE zif_github.
 * Operation id: gitignore/get-template
 * Parameter: name, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/gitignore-template
 * Response: 304
   METHODS gitignore_get_template
     IMPORTING
@@ -3980,7 +3980,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
 * Response: 304
 * Response: 401
 * Response: 403
@@ -4009,7 +4009,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 404
 * Response: 422
@@ -4033,7 +4033,7 @@ INTERFACE zif_github.
 * Parameter: featured, optional, query
 * Parameter: per_page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
   METHODS licenses_get_all_commonly_used
     IMPORTING
@@ -4044,7 +4044,7 @@ INTERFACE zif_github.
 * Operation id: licenses/get
 * Parameter: license, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/license
 * Response: 304
 * Response: 403
 * Response: 404
@@ -4055,14 +4055,14 @@ INTERFACE zif_github.
 * POST - "Render a Markdown document"
 * Operation id: markdown/render
 * Response: 200
-*     text/html
+*     text/html, string
 * Response: 304
   METHODS markdown_render
     RAISING cx_static_check.
 * POST - "Render a Markdown document in raw mode"
 * Operation id: markdown/render-raw
 * Response: 200
-*     text/html
+*     text/html, string
 * Response: 304
   METHODS markdown_render_raw
     RAISING cx_static_check.
@@ -4070,10 +4070,10 @@ INTERFACE zif_github.
 * Operation id: apps/get-subscription-plan-for-account
 * Parameter: account_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/marketplace-purchase
 * Response: 401
 * Response: 404
-*     application/json
+*     application/json, #/components/schemas/basic-error
   METHODS apps_get_subscription_plan_for
     IMPORTING
       account_id TYPE i
@@ -4083,7 +4083,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 401
 * Response: 404
   METHODS apps_list_plans
@@ -4099,7 +4099,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 401
 * Response: 404
 * Response: 422
@@ -4115,7 +4115,7 @@ INTERFACE zif_github.
 * Operation id: apps/get-subscription-plan-for-account-stubbed
 * Parameter: account_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/marketplace-purchase
 * Response: 401
 * Response: 404
   METHODS apps_get_subscription_plan_f01
@@ -4127,7 +4127,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 401
   METHODS apps_list_plans_stubbed
     IMPORTING
@@ -4142,7 +4142,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 401
   METHODS apps_list_accounts_for_plan_st
     IMPORTING
@@ -4155,7 +4155,7 @@ INTERFACE zif_github.
 * GET - "Get GitHub meta information"
 * Operation id: meta/get
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/api-overview
 * Response: 304
   METHODS meta_get
     RAISING cx_static_check.
@@ -4166,7 +4166,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 301
 * Response: 304
 * Response: 403
@@ -4187,7 +4187,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -4204,7 +4204,7 @@ INTERFACE zif_github.
 * PUT - "Mark notifications as read"
 * Operation id: activity/mark-notifications-as-read
 * Response: 202
-*     application/json
+*     application/json, object
 * Response: 205
 * Response: 304
 * Response: 401
@@ -4215,7 +4215,7 @@ INTERFACE zif_github.
 * Operation id: activity/get-thread
 * Parameter: thread_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/thread
 * Response: 304
 * Response: 401
 * Response: 403
@@ -4237,7 +4237,7 @@ INTERFACE zif_github.
 * Operation id: activity/get-thread-subscription-for-authenticated-user
 * Parameter: thread_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/thread-subscription
 * Response: 304
 * Response: 401
 * Response: 403
@@ -4249,7 +4249,7 @@ INTERFACE zif_github.
 * Operation id: activity/set-thread-subscription
 * Parameter: thread_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/thread-subscription
 * Response: 304
 * Response: 401
 * Response: 403
@@ -4272,7 +4272,7 @@ INTERFACE zif_github.
 * Operation id: meta/get-octocat
 * Parameter: s, optional, query
 * Response: 200
-*     application/octocat-stream
+*     application/octocat-stream, string
   METHODS meta_get_octocat
     IMPORTING
       s TYPE string OPTIONAL
@@ -4281,7 +4281,7 @@ INTERFACE zif_github.
 * Operation id: orgs/list
 * Parameter: per_page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
   METHODS orgs_list
     IMPORTING
@@ -4291,7 +4291,7 @@ INTERFACE zif_github.
 * Operation id: orgs/get
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/organization-full
 * Response: 404
   METHODS orgs_get
     IMPORTING
@@ -4301,11 +4301,11 @@ INTERFACE zif_github.
 * Operation id: orgs/update
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/organization-full
 * Response: 409
 * Response: 415
 * Response: 422
-*     application/json
+*     application/json, 
   METHODS orgs_update
     IMPORTING
       org TYPE string
@@ -4314,7 +4314,7 @@ INTERFACE zif_github.
 * Operation id: actions/get-github-actions-permissions-organization
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/actions-organization-permissions
   METHODS actions_get_github_actions_per
     IMPORTING
       org TYPE string
@@ -4333,7 +4333,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS actions_list_selected_reposito
     IMPORTING
       org TYPE string
@@ -4372,7 +4372,7 @@ INTERFACE zif_github.
 * Operation id: actions/get-allowed-actions-organization
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/selected-actions
   METHODS actions_get_allowed_actions_or
     IMPORTING
       org TYPE string
@@ -4391,7 +4391,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS actions_list_self_hosted_runne
     IMPORTING
       org TYPE string
@@ -4402,7 +4402,7 @@ INTERFACE zif_github.
 * Operation id: actions/create-self-hosted-runner-group-for-org
 * Parameter: org, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/runner-groups-org
   METHODS actions_create_self_hosted_run
     IMPORTING
       org TYPE string
@@ -4412,7 +4412,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: runner_group_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/runner-groups-org
   METHODS actions_get_self_hosted_runner
     IMPORTING
       org TYPE string
@@ -4423,7 +4423,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: runner_group_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/runner-groups-org
   METHODS actions_update_self_hosted_run
     IMPORTING
       org TYPE string
@@ -4444,7 +4444,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: runner_group_id, required, path
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS actions_list_repo_access_to_se
     IMPORTING
       org TYPE string
@@ -4491,7 +4491,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS actions_list_self_hosted_run01
     IMPORTING
       org TYPE string
@@ -4539,7 +4539,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS actions_list_self_hosted_run02
     IMPORTING
       org TYPE string
@@ -4550,7 +4550,7 @@ INTERFACE zif_github.
 * Operation id: actions/list-runner-applications-for-org
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS actions_list_runner_applicatio
     IMPORTING
       org TYPE string
@@ -4559,7 +4559,7 @@ INTERFACE zif_github.
 * Operation id: actions/create-registration-token-for-org
 * Parameter: org, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/authentication-token
   METHODS actions_create_registration_to
     IMPORTING
       org TYPE string
@@ -4568,7 +4568,7 @@ INTERFACE zif_github.
 * Operation id: actions/create-remove-token-for-org
 * Parameter: org, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/authentication-token
   METHODS actions_create_remove_token_fo
     IMPORTING
       org TYPE string
@@ -4578,7 +4578,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: runner_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/runner
   METHODS actions_get_self_hosted_runn01
     IMPORTING
       org TYPE string
@@ -4600,7 +4600,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS actions_list_org_secrets
     IMPORTING
       org TYPE string
@@ -4611,7 +4611,7 @@ INTERFACE zif_github.
 * Operation id: actions/get-org-public-key
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/actions-public-key
   METHODS actions_get_org_public_key
     IMPORTING
       org TYPE string
@@ -4621,7 +4621,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: secret_name, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/organization-actions-secret
   METHODS actions_get_org_secret
     IMPORTING
       org TYPE string
@@ -4653,7 +4653,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: secret_name, required, path
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS actions_list_selected_repos_fo
     IMPORTING
       org TYPE string
@@ -4700,7 +4700,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: per_page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS orgs_get_audit_log
     IMPORTING
       org TYPE string
@@ -4710,7 +4710,7 @@ INTERFACE zif_github.
 * Operation id: orgs/list-blocked-users
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 415
   METHODS orgs_list_blocked_users
     IMPORTING
@@ -4722,7 +4722,7 @@ INTERFACE zif_github.
 * Parameter: username, required, path
 * Response: 204
 * Response: 404
-*     application/json
+*     application/json, #/components/schemas/basic-error
   METHODS orgs_check_blocked_user
     IMPORTING
       org TYPE string
@@ -4753,7 +4753,7 @@ INTERFACE zif_github.
 * Operation id: orgs/list-saml-sso-authorizations
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS orgs_list_saml_sso_authorizati
     IMPORTING
       org TYPE string
@@ -4775,7 +4775,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS activity_list_public_org_event
     IMPORTING
       org TYPE string
@@ -4788,7 +4788,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS orgs_list_failed_invitations
     IMPORTING
@@ -4802,7 +4802,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS orgs_list_webhooks
     IMPORTING
@@ -4814,7 +4814,7 @@ INTERFACE zif_github.
 * Operation id: orgs/create-webhook
 * Parameter: org, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/org-hook
 * Response: 404
 * Response: 422
   METHODS orgs_create_webhook
@@ -4825,7 +4825,7 @@ INTERFACE zif_github.
 * Operation id: orgs/get-webhook
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/org-hook
 * Response: 404
   METHODS orgs_get_webhook
     IMPORTING
@@ -4835,7 +4835,7 @@ INTERFACE zif_github.
 * Operation id: orgs/update-webhook
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/org-hook
 * Response: 404
 * Response: 422
   METHODS orgs_update_webhook
@@ -4855,7 +4855,7 @@ INTERFACE zif_github.
 * Operation id: orgs/get-webhook-config-for-org
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/webhook-config
   METHODS orgs_get_webhook_config_for_or
     IMPORTING
       org TYPE string
@@ -4864,7 +4864,7 @@ INTERFACE zif_github.
 * Operation id: orgs/update-webhook-config-for-org
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/webhook-config
   METHODS orgs_update_webhook_config_for
     IMPORTING
       org TYPE string
@@ -4882,7 +4882,7 @@ INTERFACE zif_github.
 * Operation id: apps/get-org-installation
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/installation
   METHODS apps_get_org_installation
     IMPORTING
       org TYPE string
@@ -4893,7 +4893,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS orgs_list_app_installations
     IMPORTING
       org TYPE string
@@ -4904,7 +4904,7 @@ INTERFACE zif_github.
 * Operation id: interactions/get-restrictions-for-org
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/interaction-limit-response
   METHODS interactions_get_restrictions_
     IMPORTING
       org TYPE string
@@ -4913,7 +4913,7 @@ INTERFACE zif_github.
 * Operation id: interactions/set-restrictions-for-org
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/interaction-limit-response
 * Response: 422
   METHODS interactions_set_restrictions_
     IMPORTING
@@ -4933,7 +4933,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS orgs_list_pending_invitations
     IMPORTING
@@ -4945,7 +4945,7 @@ INTERFACE zif_github.
 * Operation id: orgs/create-invitation
 * Parameter: org, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/organization-invitation
 * Response: 404
 * Response: 422
   METHODS orgs_create_invitation
@@ -4971,7 +4971,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS orgs_list_invitation_teams
     IMPORTING
@@ -4992,7 +4992,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS issues_list_for_org
     IMPORTING
@@ -5014,7 +5014,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 302
 * Response: 422
   METHODS orgs_list_members
@@ -5053,7 +5053,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: username, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/org-membership
 * Response: 403
 * Response: 404
   METHODS orgs_get_membership_for_user
@@ -5066,7 +5066,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: username, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/org-membership
 * Response: 403
 * Response: 422
   METHODS orgs_set_membership_for_user
@@ -5092,7 +5092,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS migrations_list_for_org
     IMPORTING
       org TYPE string
@@ -5103,7 +5103,7 @@ INTERFACE zif_github.
 * Operation id: migrations/start-for-org
 * Parameter: org, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/migration
 * Response: 404
 * Response: 422
   METHODS migrations_start_for_org
@@ -5115,7 +5115,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: migration_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/migration
 * Response: 404
   METHODS migrations_get_status_for_org
     IMPORTING
@@ -5164,7 +5164,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS migrations_list_repos_for_org
     IMPORTING
@@ -5180,7 +5180,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS orgs_list_outside_collaborator
     IMPORTING
       filter TYPE string DEFAULT 'all' OPTIONAL
@@ -5195,7 +5195,7 @@ INTERFACE zif_github.
 * Response: 202
 * Response: 204
 * Response: 403
-*     application/json
+*     application/json, object
 * Response: 404
   METHODS orgs_convert_member_to_outside
     IMPORTING
@@ -5208,7 +5208,7 @@ INTERFACE zif_github.
 * Parameter: username, required, path
 * Response: 204
 * Response: 422
-*     application/json
+*     application/json, object
   METHODS orgs_remove_outside_collaborat
     IMPORTING
       org TYPE string
@@ -5221,7 +5221,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 422
   METHODS projects_list_for_org
     IMPORTING
@@ -5234,7 +5234,7 @@ INTERFACE zif_github.
 * Operation id: projects/create-for-org
 * Parameter: org, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/project
 * Response: 401
 * Response: 403
 * Response: 404
@@ -5250,7 +5250,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS orgs_list_public_members
     IMPORTING
       org TYPE string
@@ -5298,7 +5298,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS repos_list_for_org
     IMPORTING
       type TYPE string OPTIONAL
@@ -5312,7 +5312,7 @@ INTERFACE zif_github.
 * Operation id: repos/create-in-org
 * Parameter: org, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/repository
 * Response: 403
 * Response: 422
   METHODS repos_create_in_org
@@ -5323,7 +5323,7 @@ INTERFACE zif_github.
 * Operation id: billing/get-github-actions-billing-org
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/actions-billing-usage
   METHODS billing_get_github_actions_b01
     IMPORTING
       org TYPE string
@@ -5332,7 +5332,7 @@ INTERFACE zif_github.
 * Operation id: billing/get-github-packages-billing-org
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/packages-billing-usage
   METHODS billing_get_github_packages_01
     IMPORTING
       org TYPE string
@@ -5341,7 +5341,7 @@ INTERFACE zif_github.
 * Operation id: billing/get-shared-storage-billing-org
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/combined-billing-usage
   METHODS billing_get_shared_storage_b01
     IMPORTING
       org TYPE string
@@ -5352,7 +5352,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/group-mapping
   METHODS teams_list_idp_groups_for_org
     IMPORTING
       org TYPE string
@@ -5365,7 +5365,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 403
   METHODS teams_list
     IMPORTING
@@ -5377,7 +5377,7 @@ INTERFACE zif_github.
 * Operation id: teams/create
 * Parameter: org, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/team-full
 * Response: 403
 * Response: 422
   METHODS teams_create
@@ -5389,7 +5389,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/team-full
 * Response: 404
   METHODS teams_get_by_name
     IMPORTING
@@ -5401,7 +5401,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/team-full
   METHODS teams_update_in_org
     IMPORTING
       org TYPE string
@@ -5425,7 +5425,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS teams_list_discussions_in_org
     IMPORTING
       org TYPE string
@@ -5439,7 +5439,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/team-discussion
   METHODS teams_create_discussion_in_org
     IMPORTING
       org TYPE string
@@ -5450,7 +5450,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/team-discussion
   METHODS teams_get_discussion_in_org
     IMPORTING
       org TYPE string
@@ -5461,7 +5461,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/team-discussion
   METHODS teams_update_discussion_in_org
     IMPORTING
       org TYPE string
@@ -5485,7 +5485,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS teams_list_discussion_comments
     IMPORTING
       org TYPE string
@@ -5499,7 +5499,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/team-discussion-comment
   METHODS teams_create_discussion_commen
     IMPORTING
       org TYPE string
@@ -5510,7 +5510,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/team-discussion-comment
   METHODS teams_get_discussion_comment_i
     IMPORTING
       org TYPE string
@@ -5521,7 +5521,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/team-discussion-comment
   METHODS teams_update_discussion_commen
     IMPORTING
       org TYPE string
@@ -5545,7 +5545,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS reactions_list_for_team_discus
     IMPORTING
       content TYPE string OPTIONAL
@@ -5559,7 +5559,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/reaction
   METHODS reactions_create_for_team_disc
     IMPORTING
       org TYPE string
@@ -5583,7 +5583,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS reactions_list_for_team_disc01
     IMPORTING
       content TYPE string OPTIONAL
@@ -5597,7 +5597,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/reaction
   METHODS reactions_create_for_team_di01
     IMPORTING
       org TYPE string
@@ -5620,7 +5620,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS teams_list_pending_invitations
     IMPORTING
       org TYPE string
@@ -5636,7 +5636,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS teams_list_members_in_org
     IMPORTING
       role TYPE string DEFAULT 'all' OPTIONAL
@@ -5651,7 +5651,7 @@ INTERFACE zif_github.
 * Parameter: team_slug, required, path
 * Parameter: username, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/team-membership
 * Response: 404
   METHODS teams_get_membership_for_user_
     IMPORTING
@@ -5665,10 +5665,10 @@ INTERFACE zif_github.
 * Parameter: team_slug, required, path
 * Parameter: username, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/team-membership
 * Response: 403
 * Response: 422
-*     application/json
+*     application/json, object
   METHODS teams_add_or_update_membership
     IMPORTING
       org TYPE string
@@ -5695,7 +5695,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS teams_list_projects_in_org
     IMPORTING
       org TYPE string
@@ -5708,7 +5708,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/team-project
 * Response: 404
   METHODS teams_check_permissions_for_pr
     IMPORTING
@@ -5721,7 +5721,7 @@ INTERFACE zif_github.
 * Parameter: team_slug, required, path
 * Response: 204
 * Response: 403
-*     application/json
+*     application/json, object
   METHODS teams_add_or_update_project_pe
     IMPORTING
       org TYPE string
@@ -5744,7 +5744,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS teams_list_repos_in_org
     IMPORTING
       org TYPE string
@@ -5759,7 +5759,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/vnd.github.v3.repository+json
+*     application/vnd.github.v3.repository+json, #/components/schemas/team-repository
 * Response: 204
 * Response: 404
   METHODS teams_check_permissions_for_re
@@ -5802,7 +5802,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/group-mapping
   METHODS teams_list_idp_groups_in_org
     IMPORTING
       org TYPE string
@@ -5813,7 +5813,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/group-mapping
   METHODS teams_create_or_update_idp_gro
     IMPORTING
       org TYPE string
@@ -5826,7 +5826,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS teams_list_child_in_org
     IMPORTING
       org TYPE string
@@ -5838,7 +5838,7 @@ INTERFACE zif_github.
 * Operation id: projects/get-card
 * Parameter: card_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/project-card
 * Response: 304
 * Response: 401
 * Response: 403
@@ -5851,7 +5851,7 @@ INTERFACE zif_github.
 * Operation id: projects/update-card
 * Parameter: card_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/project-card
 * Response: 304
 * Response: 401
 * Response: 403
@@ -5868,7 +5868,7 @@ INTERFACE zif_github.
 * Response: 304
 * Response: 401
 * Response: 403
-*     application/json
+*     application/json, object
 * Response: 404
   METHODS projects_delete_card
     IMPORTING
@@ -5878,14 +5878,14 @@ INTERFACE zif_github.
 * Operation id: projects/move-card
 * Parameter: card_id, required, path
 * Response: 201
-*     application/json
+*     application/json, object
 * Response: 304
 * Response: 401
 * Response: 403
-*     application/json
+*     application/json, object
 * Response: 422
 * Response: 503
-*     application/json
+*     application/json, object
   METHODS projects_move_card
     IMPORTING
       card_id TYPE i
@@ -5894,7 +5894,7 @@ INTERFACE zif_github.
 * Operation id: projects/get-column
 * Parameter: column_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/project-column
 * Response: 304
 * Response: 401
 * Response: 403
@@ -5907,7 +5907,7 @@ INTERFACE zif_github.
 * Operation id: projects/update-column
 * Parameter: column_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/project-column
 * Response: 304
 * Response: 401
 * Response: 403
@@ -5933,7 +5933,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -5948,14 +5948,14 @@ INTERFACE zif_github.
 * Operation id: projects/create-card
 * Parameter: column_id, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/project-card
 * Response: 304
 * Response: 401
 * Response: 403
 * Response: 422
-*     application/json
+*     application/json, 
 * Response: 503
-*     application/json
+*     application/json, object
   METHODS projects_create_card
     IMPORTING
       column_id TYPE i
@@ -5964,7 +5964,7 @@ INTERFACE zif_github.
 * Operation id: projects/move-column
 * Parameter: column_id, required, path
 * Response: 201
-*     application/json
+*     application/json, object
 * Response: 304
 * Response: 401
 * Response: 403
@@ -5976,7 +5976,7 @@ INTERFACE zif_github.
 * GET - "Get a project"
 * Operation id: projects/get
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/project
 * Response: 304
 * Response: 401
 * Response: 403
@@ -5985,11 +5985,11 @@ INTERFACE zif_github.
 * PATCH - "Update a project"
 * Operation id: projects/update
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/project
 * Response: 304
 * Response: 401
 * Response: 403
-*     application/json
+*     application/json, object
 * Response: 404
 * Response: 410
 * Response: 422
@@ -6001,7 +6001,7 @@ INTERFACE zif_github.
 * Response: 304
 * Response: 401
 * Response: 403
-*     application/json
+*     application/json, object
 * Response: 404
 * Response: 410
   METHODS projects_delete
@@ -6012,7 +6012,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -6057,7 +6057,7 @@ INTERFACE zif_github.
 * Operation id: projects/get-permission-for-user
 * Parameter: username, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/repository-collaborator-permission
 * Response: 304
 * Response: 401
 * Response: 403
@@ -6073,7 +6073,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -6085,7 +6085,7 @@ INTERFACE zif_github.
 * POST - "Create a project column"
 * Operation id: projects/create-column
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/project-column
 * Response: 304
 * Response: 401
 * Response: 403
@@ -6095,7 +6095,7 @@ INTERFACE zif_github.
 * GET - "Get rate limit status for the authenticated user"
 * Operation id: rate-limit/get
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/rate-limit-overview
 * Response: 304
 * Response: 404
   METHODS rate_limit_get
@@ -6115,7 +6115,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/full-repository
 * Response: 301
 * Response: 403
 * Response: 404
@@ -6129,7 +6129,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/full-repository
 * Response: 403
 * Response: 404
 * Response: 422
@@ -6144,7 +6144,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Response: 204
 * Response: 403
-*     application/json
+*     application/json, object
 * Response: 404
   METHODS repos_delete
     IMPORTING
@@ -6158,7 +6158,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS actions_list_artifacts_for_rep
     IMPORTING
       owner TYPE string
@@ -6172,7 +6172,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: artifact_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/artifact
   METHODS actions_get_artifact
     IMPORTING
       owner TYPE string
@@ -6211,7 +6211,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: job_id, required, path
 * Response: 202
-*     application/json
+*     application/json, #/components/schemas/job
   METHODS actions_get_job_for_workflow_r
     IMPORTING
       owner TYPE string
@@ -6235,7 +6235,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/actions-repository-permissions
   METHODS actions_get_github_actions_p01
     IMPORTING
       owner TYPE string
@@ -6256,7 +6256,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/selected-actions
   METHODS actions_get_allowed_actions_re
     IMPORTING
       owner TYPE string
@@ -6279,7 +6279,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS actions_list_self_hosted_run03
     IMPORTING
       owner TYPE string
@@ -6292,7 +6292,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS actions_list_runner_applicat01
     IMPORTING
       owner TYPE string
@@ -6303,7 +6303,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/authentication-token
   METHODS actions_create_registration_01
     IMPORTING
       owner TYPE string
@@ -6314,7 +6314,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/authentication-token
   METHODS actions_create_remove_token_01
     IMPORTING
       owner TYPE string
@@ -6326,7 +6326,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: runner_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/runner
   METHODS actions_get_self_hosted_runn02
     IMPORTING
       owner TYPE string
@@ -6354,7 +6354,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS actions_list_workflow_runs_for
     IMPORTING
       owner TYPE string
@@ -6369,7 +6369,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/workflow-run
   METHODS actions_get_workflow_run
     IMPORTING
       owner TYPE string
@@ -6392,7 +6392,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS actions_list_workflow_run_arti
     IMPORTING
       owner TYPE string
@@ -6418,7 +6418,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS actions_list_jobs_for_workflow
     IMPORTING
       filter TYPE string DEFAULT 'latest' OPTIONAL
@@ -6462,7 +6462,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/workflow-run-usage
   METHODS actions_get_workflow_run_usage
     IMPORTING
       owner TYPE string
@@ -6475,7 +6475,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS actions_list_repo_secrets
     IMPORTING
       owner TYPE string
@@ -6488,7 +6488,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/actions-public-key
   METHODS actions_get_repo_public_key
     IMPORTING
       owner TYPE string
@@ -6500,7 +6500,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: secret_name, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/actions-secret
   METHODS actions_get_repo_secret
     IMPORTING
       owner TYPE string
@@ -6539,7 +6539,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS actions_list_repo_workflows
     IMPORTING
       owner TYPE string
@@ -6552,7 +6552,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/workflow
   METHODS actions_get_workflow
     IMPORTING
       owner TYPE string
@@ -6597,7 +6597,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS actions_list_workflow_runs
     IMPORTING
       owner TYPE string
@@ -6612,7 +6612,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/workflow-usage
   METHODS actions_get_workflow_usage
     IMPORTING
       owner TYPE string
@@ -6625,7 +6625,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS issues_list_assignees
     IMPORTING
@@ -6641,7 +6641,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Response: 204
 * Response: 404
-*     application/json
+*     application/json, #/components/schemas/basic-error
   METHODS issues_check_user_can_be_assig
     IMPORTING
       assignee TYPE string
@@ -6676,7 +6676,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS repos_list_branches
     IMPORTING
@@ -6692,7 +6692,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/branch-with-protection
 * Response: 404
 * Response: 415
   METHODS repos_get_branch
@@ -6707,7 +6707,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/branch-protection
 * Response: 404
   METHODS repos_get_branch_protection
     IMPORTING
@@ -6721,7 +6721,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/protected-branch
 * Response: 403
 * Response: 404
 * Response: 415
@@ -6751,7 +6751,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/protected-branch-admin-enforced
   METHODS repos_get_admin_branch_protect
     IMPORTING
       owner TYPE string
@@ -6764,7 +6764,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/protected-branch-admin-enforced
   METHODS repos_set_admin_branch_protect
     IMPORTING
       owner TYPE string
@@ -6790,7 +6790,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/vnd.github.luke-cage-preview+json
+*     application/vnd.github.luke-cage-preview+json, #/components/schemas/protected-branch-pull-request-review
   METHODS repos_get_pull_request_review_
     IMPORTING
       owner TYPE string
@@ -6803,7 +6803,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/protected-branch-pull-request-review
 * Response: 422
   METHODS repos_update_pull_request_revi
     IMPORTING
@@ -6830,7 +6830,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/protected-branch-admin-enforced
 * Response: 404
   METHODS repos_get_commit_signature_pro
     IMPORTING
@@ -6844,7 +6844,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/protected-branch-admin-enforced
 * Response: 404
   METHODS repos_create_commit_signature_
     IMPORTING
@@ -6871,7 +6871,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/status-check-policy
 * Response: 404
   METHODS repos_get_status_checks_protec
     IMPORTING
@@ -6885,7 +6885,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/status-check-policy
 * Response: 404
 * Response: 422
   METHODS repos_update_status_check_prot
@@ -6912,7 +6912,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS repos_get_all_status_check_con
     IMPORTING
@@ -6926,7 +6926,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 403
 * Response: 404
 * Response: 422
@@ -6942,7 +6942,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
 * Response: 422
   METHODS repos_set_status_check_context
@@ -6957,7 +6957,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
 * Response: 422
   METHODS repos_remove_status_check_cont
@@ -6972,7 +6972,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/branch-restriction-policy
 * Response: 404
   METHODS repos_get_access_restrictions
     IMPORTING
@@ -6998,7 +6998,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS repos_get_apps_with_access_to_
     IMPORTING
@@ -7012,7 +7012,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 422
   METHODS repos_add_app_access_restricti
     IMPORTING
@@ -7026,7 +7026,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 422
   METHODS repos_set_app_access_restricti
     IMPORTING
@@ -7040,7 +7040,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 422
   METHODS repos_remove_app_access_restri
     IMPORTING
@@ -7054,7 +7054,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS repos_get_teams_with_access_to
     IMPORTING
@@ -7068,7 +7068,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 422
   METHODS repos_add_team_access_restrict
     IMPORTING
@@ -7082,7 +7082,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 422
   METHODS repos_set_team_access_restrict
     IMPORTING
@@ -7096,7 +7096,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 422
   METHODS repos_remove_team_access_restr
     IMPORTING
@@ -7110,7 +7110,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS repos_get_users_with_access_to
     IMPORTING
@@ -7124,7 +7124,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 422
   METHODS repos_add_user_access_restrict
     IMPORTING
@@ -7138,7 +7138,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 422
   METHODS repos_set_user_access_restrict
     IMPORTING
@@ -7152,7 +7152,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 422
   METHODS repos_remove_user_access_restr
     IMPORTING
@@ -7166,7 +7166,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/branch-with-protection
 * Response: 403
 * Response: 404
 * Response: 422
@@ -7181,7 +7181,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/check-run
   METHODS checks_create
     IMPORTING
       owner TYPE string
@@ -7193,7 +7193,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: check_run_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/check-run
   METHODS checks_get
     IMPORTING
       owner TYPE string
@@ -7206,7 +7206,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: check_run_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/check-run
   METHODS checks_update
     IMPORTING
       owner TYPE string
@@ -7221,7 +7221,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS checks_list_annotations
     IMPORTING
       owner TYPE string
@@ -7235,7 +7235,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/check-suite
   METHODS checks_create_suite
     IMPORTING
       owner TYPE string
@@ -7246,7 +7246,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/check-suite-preference
   METHODS checks_set_suites_preferences
     IMPORTING
       owner TYPE string
@@ -7258,7 +7258,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: check_suite_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/check-suite
   METHODS checks_get_suite
     IMPORTING
       owner TYPE string
@@ -7276,7 +7276,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS checks_list_for_suite
     IMPORTING
       filter TYPE string DEFAULT 'latest' OPTIONAL
@@ -7307,7 +7307,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 403
 * Response: 404
 * Response: 503
@@ -7324,7 +7324,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/code-scanning-alert-code-scanning-alert
 * Response: 403
 * Response: 404
 * Response: 503
@@ -7340,7 +7340,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: alert_number, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/code-scanning-alert-code-scanning-alert
 * Response: 403
 * Response: 503
   METHODS code_scanning_update_alert
@@ -7356,7 +7356,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 403
   METHODS code_scanning_list_recent_anal
     IMPORTING
@@ -7387,7 +7387,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS repos_list_collaborators
     IMPORTING
@@ -7416,7 +7416,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: username, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/repository-invitation
 * Response: 204
 * Response: 403
 * Response: 422
@@ -7444,7 +7444,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: username, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/repository-collaborator-permission
 * Response: 404
   METHODS repos_get_collaborator_permiss
     IMPORTING
@@ -7459,7 +7459,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS repos_list_commit_comments_for
     IMPORTING
       owner TYPE string
@@ -7473,7 +7473,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: comment_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/commit-comment
 * Response: 404
   METHODS repos_get_commit_comment
     IMPORTING
@@ -7487,7 +7487,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: comment_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/commit-comment
 * Response: 404
   METHODS repos_update_commit_comment
     IMPORTING
@@ -7517,7 +7517,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
 * Response: 415
   METHODS reactions_list_for_commit_comm
@@ -7535,9 +7535,9 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: comment_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/reaction
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/reaction
 * Response: 415
 * Response: 422
   METHODS reactions_create_for_commit_co
@@ -7570,7 +7570,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 400
 * Response: 404
 * Response: 409
@@ -7593,7 +7593,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: commit_sha, required, path
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 415
 * Response: 422
   METHODS repos_list_branches_for_head_c
@@ -7610,7 +7610,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS repos_list_comments_for_commit
     IMPORTING
       owner TYPE string
@@ -7625,7 +7625,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: commit_sha, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/commit-comment
 * Response: 403
 * Response: 422
   METHODS repos_create_commit_comment
@@ -7642,7 +7642,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 415
   METHODS repos_list_pull_requests_assoc
     IMPORTING
@@ -7658,7 +7658,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/commit
 * Response: 404
 * Response: 422
 * Response: 500
@@ -7679,7 +7679,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS checks_list_for_ref
     IMPORTING
       ref TYPE string
@@ -7701,7 +7701,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS checks_list_suites_for_ref
     IMPORTING
       ref TYPE string
@@ -7718,7 +7718,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/combined-commit-status
 * Response: 404
   METHODS repos_get_combined_status_for_
     IMPORTING
@@ -7734,7 +7734,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 301
   METHODS repos_list_commit_statuses_for
     IMPORTING
@@ -7749,7 +7749,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/code-of-conduct
   METHODS codes_of_conduct_get_for_repo
     IMPORTING
       owner TYPE string
@@ -7760,7 +7760,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/community-profile
   METHODS repos_get_community_profile_me
     IMPORTING
       owner TYPE string
@@ -7773,7 +7773,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/commit-comparison
 * Response: 404
 * Response: 500
   METHODS repos_compare_commits
@@ -7790,8 +7790,8 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/vnd.github.v3.object
-*     application/json
+*     application/vnd.github.v3.object, #/components/schemas/content-tree
+*     application/json, 
 * Response: 302
 * Response: 403
 * Response: 404
@@ -7808,9 +7808,9 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/file-commit
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/file-commit
 * Response: 404
 * Response: 409
 * Response: 422
@@ -7826,7 +7826,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/file-commit
 * Response: 404
 * Response: 409
 * Response: 422
@@ -7845,7 +7845,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 204
 * Response: 403
 * Response: 404
@@ -7868,7 +7868,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS repos_list_deployments
     IMPORTING
       sha TYPE string DEFAULT 'none' OPTIONAL
@@ -7885,11 +7885,11 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/deployment
 * Response: 202
-*     application/json
+*     application/json, object
 * Response: 409
-*     application/json
+*     application/json, object
 * Response: 422
   METHODS repos_create_deployment
     IMPORTING
@@ -7902,7 +7902,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: deployment_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/deployment
 * Response: 404
   METHODS repos_get_deployment
     IMPORTING
@@ -7932,7 +7932,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS repos_list_deployment_statuses
     IMPORTING
@@ -7948,7 +7948,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: deployment_id, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/deployment-status
 * Response: 422
   METHODS repos_create_deployment_status
     IMPORTING
@@ -7963,7 +7963,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: deployment_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/deployment-status
 * Response: 404
 * Response: 415
   METHODS repos_get_deployment_status
@@ -7991,7 +7991,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS activity_list_repo_events
     IMPORTING
       owner TYPE string
@@ -8007,7 +8007,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 400
   METHODS repos_list_forks
     IMPORTING
@@ -8022,7 +8022,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 202
-*     application/json
+*     application/json, #/components/schemas/repository
 * Response: 400
 * Response: 403
 * Response: 404
@@ -8037,7 +8037,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/short-blob
 * Response: 403
 * Response: 404
 * Response: 409
@@ -8053,7 +8053,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/blob
 * Response: 403
 * Response: 404
 * Response: 422
@@ -8068,7 +8068,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/git-commit
 * Response: 404
 * Response: 422
   METHODS git_create_commit
@@ -8082,7 +8082,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: commit_sha, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/git-commit
 * Response: 404
   METHODS git_get_commit
     IMPORTING
@@ -8098,7 +8098,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS git_list_matching_refs
     IMPORTING
       ref TYPE string
@@ -8113,7 +8113,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/git-ref
 * Response: 404
   METHODS git_get_ref
     IMPORTING
@@ -8126,7 +8126,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/git-ref
 * Response: 422
   METHODS git_create_ref
     IMPORTING
@@ -8139,7 +8139,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/git-ref
 * Response: 422
   METHODS git_update_ref
     IMPORTING
@@ -8165,7 +8165,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/git-tag
 * Response: 422
   METHODS git_create_tag
     IMPORTING
@@ -8178,7 +8178,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/git-tag
 * Response: 404
   METHODS git_get_tag
     IMPORTING
@@ -8191,7 +8191,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/git-tree
 * Response: 403
 * Response: 404
 * Response: 422
@@ -8207,7 +8207,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/git-tree
 * Response: 404
 * Response: 422
   METHODS git_get_tree
@@ -8224,7 +8224,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS repos_list_webhooks
     IMPORTING
@@ -8238,7 +8238,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/hook
 * Response: 403
 * Response: 404
 * Response: 422
@@ -8252,7 +8252,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/hook
 * Response: 404
   METHODS repos_get_webhook
     IMPORTING
@@ -8264,7 +8264,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/hook
 * Response: 404
 * Response: 422
   METHODS repos_update_webhook
@@ -8288,7 +8288,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/webhook-config
   METHODS repos_get_webhook_config_for_r
     IMPORTING
       owner TYPE string
@@ -8299,7 +8299,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/webhook-config
   METHODS repos_update_webhook_config_fo
     IMPORTING
       owner TYPE string
@@ -8332,7 +8332,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/import
 * Response: 404
   METHODS migrations_get_import_status
     IMPORTING
@@ -8344,7 +8344,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/import
 * Response: 404
 * Response: 422
   METHODS migrations_start_import
@@ -8357,7 +8357,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/import
   METHODS migrations_update_import
     IMPORTING
       owner TYPE string
@@ -8378,7 +8378,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS migrations_get_commit_authors
     IMPORTING
@@ -8391,7 +8391,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/porter-author
 * Response: 404
 * Response: 422
   METHODS migrations_map_commit_author
@@ -8405,7 +8405,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS migrations_get_large_files
     IMPORTING
       owner TYPE string
@@ -8416,7 +8416,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/import
 * Response: 422
   METHODS migrations_set_lfs_preference
     IMPORTING
@@ -8428,7 +8428,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/installation
 * Response: 301
 * Response: 404
   METHODS apps_get_repo_installation
@@ -8441,7 +8441,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/interaction-limit-response
   METHODS interactions_get_restriction01
     IMPORTING
       owner TYPE string
@@ -8452,7 +8452,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/interaction-limit-response
 * Response: 409
   METHODS interactions_set_restriction01
     IMPORTING
@@ -8477,7 +8477,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS repos_list_invitations
     IMPORTING
       owner TYPE string
@@ -8491,7 +8491,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: invitation_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/repository-invitation
   METHODS repos_update_invitation
     IMPORTING
       owner TYPE string
@@ -8526,7 +8526,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 301
 * Response: 404
 * Response: 422
@@ -8551,7 +8551,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/issue
 * Response: 403
 * Response: 404
 * Response: 410
@@ -8572,7 +8572,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
 * Response: 422
   METHODS issues_list_comments_for_repo
@@ -8591,7 +8591,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: comment_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/issue-comment
 * Response: 404
   METHODS issues_get_comment
     IMPORTING
@@ -8605,7 +8605,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: comment_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/issue-comment
 * Response: 422
   METHODS issues_update_comment
     IMPORTING
@@ -8634,7 +8634,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
 * Response: 415
   METHODS reactions_list_for_issue_comme
@@ -8652,9 +8652,9 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: comment_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/reaction
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/reaction
 * Response: 415
 * Response: 422
   METHODS reactions_create_for_issue_com
@@ -8682,7 +8682,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 422
   METHODS issues_list_events_for_repo
     IMPORTING
@@ -8697,7 +8697,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/issue-event
 * Response: 403
 * Response: 404
 * Response: 410
@@ -8713,7 +8713,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: issue_number, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/issue
 * Response: 301
 * Response: 304
 * Response: 404
@@ -8730,7 +8730,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: issue_number, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/issue
 * Response: 301
 * Response: 403
 * Response: 404
@@ -8749,7 +8749,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: issue_number, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/issue-simple
   METHODS issues_add_assignees
     IMPORTING
       owner TYPE string
@@ -8762,7 +8762,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: issue_number, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/issue-simple
   METHODS issues_remove_assignees
     IMPORTING
       owner TYPE string
@@ -8778,7 +8778,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
 * Response: 410
   METHODS issues_list_comments
@@ -8796,7 +8796,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: issue_number, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/issue-comment
 * Response: 403
 * Response: 404
 * Response: 410
@@ -8815,7 +8815,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 410
   METHODS issues_list_events
     IMPORTING
@@ -8833,7 +8833,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 410
   METHODS issues_list_labels_on_issue
     IMPORTING
@@ -8849,7 +8849,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: issue_number, required, path
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 410
 * Response: 422
   METHODS issues_add_labels
@@ -8864,7 +8864,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: issue_number, required, path
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 410
 * Response: 422
   METHODS issues_set_labels
@@ -8893,7 +8893,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: issue_number, required, path
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
 * Response: 410
   METHODS issues_remove_label
@@ -8942,7 +8942,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
 * Response: 410
 * Response: 415
@@ -8961,7 +8961,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: issue_number, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/reaction
 * Response: 415
 * Response: 422
   METHODS reactions_create_for_issue
@@ -8990,7 +8990,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
 * Response: 410
 * Response: 415
@@ -9009,7 +9009,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS repos_list_deploy_keys
     IMPORTING
       owner TYPE string
@@ -9022,7 +9022,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/deploy-key
 * Response: 422
   METHODS repos_create_deploy_key
     IMPORTING
@@ -9035,7 +9035,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: key_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/deploy-key
 * Response: 404
   METHODS repos_get_deploy_key
     IMPORTING
@@ -9062,7 +9062,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS issues_list_labels_for_repo
     IMPORTING
@@ -9076,7 +9076,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/label
 * Response: 404
 * Response: 422
   METHODS issues_create_label
@@ -9090,7 +9090,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/label
 * Response: 404
   METHODS issues_get_label
     IMPORTING
@@ -9104,7 +9104,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/label
   METHODS issues_update_label
     IMPORTING
       name TYPE string
@@ -9128,7 +9128,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/language
   METHODS repos_list_languages
     IMPORTING
       owner TYPE string
@@ -9139,7 +9139,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/license-content
   METHODS licenses_get_for_repo
     IMPORTING
       owner TYPE string
@@ -9150,12 +9150,12 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/commit
 * Response: 403
 * Response: 404
-*     application/json
+*     application/json, object
 * Response: 409
-*     application/json
+*     application/json, object
 * Response: 422
   METHODS repos_merge
     IMPORTING
@@ -9172,7 +9172,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS issues_list_milestones
     IMPORTING
@@ -9189,7 +9189,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/milestone
 * Response: 404
 * Response: 422
   METHODS issues_create_milestone
@@ -9203,7 +9203,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: milestone_number, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/milestone
 * Response: 404
   METHODS issues_get_milestone
     IMPORTING
@@ -9217,7 +9217,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: milestone_number, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/milestone
   METHODS issues_update_milestone
     IMPORTING
       owner TYPE string
@@ -9245,7 +9245,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS issues_list_labels_for_milesto
     IMPORTING
       owner TYPE string
@@ -9265,7 +9265,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS activity_list_repo_notificatio
     IMPORTING
       owner TYPE string
@@ -9292,7 +9292,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/page
 * Response: 404
   METHODS repos_get_pages
     IMPORTING
@@ -9304,7 +9304,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/page
 * Response: 409
 * Response: 415
 * Response: 422
@@ -9345,7 +9345,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS repos_list_pages_builds
     IMPORTING
       owner TYPE string
@@ -9358,7 +9358,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/page-build-status
   METHODS repos_request_pages_build
     IMPORTING
       owner TYPE string
@@ -9369,7 +9369,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/page-build
   METHODS repos_get_latest_pages_build
     IMPORTING
       owner TYPE string
@@ -9381,7 +9381,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/page-build
   METHODS repos_get_pages_build
     IMPORTING
       build_id TYPE i
@@ -9396,7 +9396,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 401
 * Response: 403
 * Response: 404
@@ -9415,7 +9415,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/project
 * Response: 401
 * Response: 403
 * Response: 404
@@ -9438,7 +9438,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 422
   METHODS pulls_list
@@ -9458,7 +9458,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/pull-request
 * Response: 403
 * Response: 422
   METHODS pulls_create
@@ -9476,7 +9476,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS pulls_list_review_comments_for
     IMPORTING
       direction TYPE string OPTIONAL
@@ -9493,7 +9493,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: comment_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/pull-request-review-comment
 * Response: 404
   METHODS pulls_get_review_comment
     IMPORTING
@@ -9507,7 +9507,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: comment_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/pull-request-review-comment
   METHODS pulls_update_review_comment
     IMPORTING
       owner TYPE string
@@ -9536,7 +9536,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
 * Response: 415
   METHODS reactions_list_for_pull_reques
@@ -9554,9 +9554,9 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: comment_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/reaction
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/reaction
 * Response: 415
 * Response: 422
   METHODS reactions_create_for_pull_requ
@@ -9582,7 +9582,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/pull-request
 * Response: 304
 * Response: 404
 * Response: 500
@@ -9596,7 +9596,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/pull-request
 * Response: 403
 * Response: 422
   METHODS pulls_update
@@ -9614,7 +9614,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS pulls_list_review_comments
     IMPORTING
       direction TYPE string OPTIONAL
@@ -9630,7 +9630,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/pull-request-review-comment
 * Response: 403
 * Response: 422
   METHODS pulls_create_review_comment
@@ -9644,7 +9644,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: comment_id, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/pull-request-review-comment
 * Response: 404
   METHODS pulls_create_reply_for_review_
     IMPORTING
@@ -9659,7 +9659,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS pulls_list_commits
     IMPORTING
       owner TYPE string
@@ -9674,7 +9674,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 422
 * Response: 500
   METHODS pulls_list_files
@@ -9700,13 +9700,13 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/pull-request-merge-result
 * Response: 403
 * Response: 404
 * Response: 405
-*     application/json
+*     application/json, object
 * Response: 409
-*     application/json
+*     application/json, object
 * Response: 422
   METHODS pulls_merge
     IMPORTING
@@ -9720,7 +9720,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/pull-request-review-request
   METHODS pulls_list_requested_reviewers
     IMPORTING
       owner TYPE string
@@ -9733,7 +9733,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/pull-request-simple
 * Response: 403
 * Response: 422
   METHODS pulls_request_reviewers
@@ -9759,7 +9759,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS pulls_list_reviews
     IMPORTING
       owner TYPE string
@@ -9772,7 +9772,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/pull-request-review
 * Response: 403
 * Response: 422
   METHODS pulls_create_review
@@ -9786,7 +9786,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: review_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/pull-request-review
 * Response: 404
   METHODS pulls_get_review
     IMPORTING
@@ -9800,7 +9800,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: review_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/pull-request-review
 * Response: 422
   METHODS pulls_update_review
     IMPORTING
@@ -9814,7 +9814,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: review_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/pull-request-review
 * Response: 404
 * Response: 422
   METHODS pulls_delete_pending_review
@@ -9831,7 +9831,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS pulls_list_comments_for_review
     IMPORTING
@@ -9847,7 +9847,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: review_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/pull-request-review
 * Response: 404
 * Response: 422
   METHODS pulls_dismiss_review
@@ -9862,7 +9862,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: review_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/pull-request-review
 * Response: 403
 * Response: 404
 * Response: 422
@@ -9877,7 +9877,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 202
-*     application/json
+*     application/json, object
 * Response: 403
 * Response: 415
 * Response: 422
@@ -9892,7 +9892,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/content-file
 * Response: 404
 * Response: 422
   METHODS repos_get_readme
@@ -9908,7 +9908,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS repos_list_releases
     IMPORTING
@@ -9922,7 +9922,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/release
 * Response: 422
   METHODS repos_create_release
     IMPORTING
@@ -9935,7 +9935,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: asset_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/release-asset
 * Response: 302
 * Response: 404
 * Response: 415
@@ -9951,7 +9951,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: asset_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/release-asset
   METHODS repos_update_release_asset
     IMPORTING
       owner TYPE string
@@ -9975,7 +9975,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/release
   METHODS repos_get_latest_release
     IMPORTING
       owner TYPE string
@@ -9987,7 +9987,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/release
 * Response: 404
   METHODS repos_get_release_by_tag
     IMPORTING
@@ -10001,7 +10001,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: release_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/release
 * Response: 404
   METHODS repos_get_release
     IMPORTING
@@ -10015,7 +10015,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: release_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/release
   METHODS repos_update_release
     IMPORTING
       owner TYPE string
@@ -10042,7 +10042,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS repos_list_release_assets
     IMPORTING
       owner TYPE string
@@ -10059,7 +10059,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: release_id, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/release-asset
   METHODS repos_upload_release_asset
     IMPORTING
       name TYPE string OPTIONAL
@@ -10076,7 +10076,7 @@ INTERFACE zif_github.
 * Parameter: page, optional, query
 * Parameter: per_page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
 * Response: 503
   METHODS secret_scanning_list_alerts_fo
@@ -10093,7 +10093,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: alert_number, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/secret-scanning-alert
 * Response: 404
 * Response: 503
   METHODS secret_scanning_get_alert
@@ -10108,7 +10108,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: alert_number, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/secret-scanning-alert
 * Response: 404
 * Response: 422
 * Response: 503
@@ -10125,8 +10125,8 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
-*     application/vnd.github.v3.star+json
+*     application/json, array
+*     application/vnd.github.v3.star+json, array
 * Response: 422
   METHODS activity_list_stargazers_for_r
     IMPORTING
@@ -10140,7 +10140,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS repos_get_code_frequency_stats
     IMPORTING
       owner TYPE string
@@ -10151,7 +10151,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS repos_get_commit_activity_stat
     IMPORTING
       owner TYPE string
@@ -10162,7 +10162,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS repos_get_contributors_stats
     IMPORTING
       owner TYPE string
@@ -10173,7 +10173,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/participation-stats
 * Response: 404
   METHODS repos_get_participation_stats
     IMPORTING
@@ -10185,7 +10185,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS repos_get_punch_card_stats
     IMPORTING
       owner TYPE string
@@ -10197,7 +10197,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/status
   METHODS repos_create_commit_status
     IMPORTING
       sha TYPE string
@@ -10211,7 +10211,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS activity_list_watchers_for_rep
     IMPORTING
       owner TYPE string
@@ -10224,7 +10224,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/repository-subscription
 * Response: 403
 * Response: 404
   METHODS activity_get_repo_subscription
@@ -10237,7 +10237,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/repository-subscription
   METHODS activity_set_repo_subscription
     IMPORTING
       owner TYPE string
@@ -10260,7 +10260,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS repos_list_tags
     IMPORTING
       owner TYPE string
@@ -10287,7 +10287,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS repos_list_teams
     IMPORTING
       owner TYPE string
@@ -10300,7 +10300,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/topic
 * Response: 404
 * Response: 415
   METHODS repos_get_all_topics
@@ -10313,7 +10313,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/topic
 * Response: 404
 * Response: 415
 * Response: 422
@@ -10328,7 +10328,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: per, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/clone-traffic
 * Response: 403
   METHODS repos_get_clones
     IMPORTING
@@ -10341,7 +10341,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 403
   METHODS repos_get_top_paths
     IMPORTING
@@ -10353,7 +10353,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 403
   METHODS repos_get_top_referrers
     IMPORTING
@@ -10366,7 +10366,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: per, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/view-traffic
 * Response: 403
   METHODS repos_get_views
     IMPORTING
@@ -10379,7 +10379,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 202
-*     application/json
+*     application/json, #/components/schemas/repository
   METHODS repos_transfer
     IMPORTING
       owner TYPE string
@@ -10433,7 +10433,7 @@ INTERFACE zif_github.
 * Parameter: template_owner, required, path
 * Parameter: template_repo, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/repository
   METHODS repos_create_using_template
     IMPORTING
       template_owner TYPE string
@@ -10442,7 +10442,7 @@ INTERFACE zif_github.
 * GET - "List public repositories"
 * Operation id: repos/list-public
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 422
   METHODS repos_list_public
@@ -10452,7 +10452,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Parameter: count, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/scim-group-list-enterprise
   METHODS enterprise_admin_list_provisio
     IMPORTING
       enterprise TYPE string
@@ -10462,7 +10462,7 @@ INTERFACE zif_github.
 * Operation id: enterprise-admin/provision-and-invite-enterprise-group
 * Parameter: enterprise, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/scim-enterprise-group
   METHODS enterprise_admin_provision_and
     IMPORTING
       enterprise TYPE string
@@ -10472,7 +10472,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Parameter: scim_group_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/scim-enterprise-group
   METHODS enterprise_admin_get_provision
     IMPORTING
       enterprise TYPE string
@@ -10483,7 +10483,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Parameter: scim_group_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/scim-enterprise-group
   METHODS enterprise_admin_set_informati
     IMPORTING
       enterprise TYPE string
@@ -10494,7 +10494,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Parameter: scim_group_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/scim-enterprise-group
   METHODS enterprise_admin_update_attrib
     IMPORTING
       enterprise TYPE string
@@ -10515,7 +10515,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Parameter: count, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/scim-user-list-enterprise
   METHODS enterprise_admin_list_provis01
     IMPORTING
       enterprise TYPE string
@@ -10525,7 +10525,7 @@ INTERFACE zif_github.
 * Operation id: enterprise-admin/provision-and-invite-enterprise-user
 * Parameter: enterprise, required, path
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/scim-enterprise-user
   METHODS enterprise_admin_provision_a01
     IMPORTING
       enterprise TYPE string
@@ -10535,7 +10535,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Parameter: scim_user_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/scim-enterprise-user
   METHODS enterprise_admin_get_provisi01
     IMPORTING
       enterprise TYPE string
@@ -10546,7 +10546,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Parameter: scim_user_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/scim-enterprise-user
   METHODS enterprise_admin_set_informa01
     IMPORTING
       enterprise TYPE string
@@ -10557,7 +10557,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Parameter: scim_user_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/scim-enterprise-user
   METHODS enterprise_admin_update_attr01
     IMPORTING
       enterprise TYPE string
@@ -10580,7 +10580,7 @@ INTERFACE zif_github.
 * Parameter: filter, optional, query
 * Parameter: org, required, path
 * Response: 200
-*     application/scim+json
+*     application/scim+json, #/components/schemas/scim-user-list
 * Response: 304
 * Response: 400
 * Response: 403
@@ -10596,7 +10596,7 @@ INTERFACE zif_github.
 * Operation id: scim/provision-and-invite-user
 * Parameter: org, required, path
 * Response: 201
-*     application/scim+json
+*     application/scim+json, #/components/schemas/scim-user
 * Response: 304
 * Response: 400
 * Response: 403
@@ -10612,7 +10612,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: scim_user_id, required, path
 * Response: 200
-*     application/scim+json
+*     application/scim+json, #/components/schemas/scim-user
 * Response: 304
 * Response: 403
 * Response: 404
@@ -10626,7 +10626,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: scim_user_id, required, path
 * Response: 200
-*     application/scim+json
+*     application/scim+json, #/components/schemas/scim-user
 * Response: 304
 * Response: 403
 * Response: 404
@@ -10640,13 +10640,13 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: scim_user_id, required, path
 * Response: 200
-*     application/scim+json
+*     application/scim+json, #/components/schemas/scim-user
 * Response: 304
 * Response: 400
 * Response: 403
 * Response: 404
 * Response: 429
-*     application/json
+*     application/json, #/components/schemas/basic-error
   METHODS scim_update_attribute_for_user
     IMPORTING
       org TYPE string
@@ -10673,7 +10673,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
 * Response: 304
 * Response: 403
 * Response: 422
@@ -10694,7 +10694,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
 * Response: 304
 * Response: 415
   METHODS search_commits
@@ -10713,7 +10713,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
 * Response: 304
 * Response: 403
 * Response: 422
@@ -10733,7 +10733,7 @@ INTERFACE zif_github.
 * Parameter: sort, optional, query
 * Parameter: order, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
 * Response: 304
 * Response: 403
 * Response: 404
@@ -10753,7 +10753,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
 * Response: 304
 * Response: 422
 * Response: 503
@@ -10769,7 +10769,7 @@ INTERFACE zif_github.
 * Operation id: search/topics
 * Parameter: q, required, query
 * Response: 200
-*     application/json
+*     application/json, object
 * Response: 304
 * Response: 415
   METHODS search_topics
@@ -10784,7 +10784,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
 * Response: 304
 * Response: 422
 * Response: 503
@@ -10799,14 +10799,14 @@ INTERFACE zif_github.
 * GET - "Get a team (Legacy)"
 * Operation id: teams/get-legacy
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/team-full
 * Response: 404
   METHODS teams_get_legacy
     RAISING cx_static_check.
 * PATCH - "Update a team (Legacy)"
 * Operation id: teams/update-legacy
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/team-full
 * Response: 403
 * Response: 404
 * Response: 422
@@ -10825,7 +10825,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS teams_list_discussions_legacy
     IMPORTING
       direction TYPE string DEFAULT 'desc' OPTIONAL
@@ -10835,19 +10835,19 @@ INTERFACE zif_github.
 * POST - "Create a discussion (Legacy)"
 * Operation id: teams/create-discussion-legacy
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/team-discussion
   METHODS teams_create_discussion_legacy
     RAISING cx_static_check.
 * GET - "Get a discussion (Legacy)"
 * Operation id: teams/get-discussion-legacy
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/team-discussion
   METHODS teams_get_discussion_legacy
     RAISING cx_static_check.
 * PATCH - "Update a discussion (Legacy)"
 * Operation id: teams/update-discussion-legacy
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/team-discussion
   METHODS teams_update_discussion_legacy
     RAISING cx_static_check.
 * DELETE - "Delete a discussion (Legacy)"
@@ -10861,7 +10861,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS teams_list_discussion_commen01
     IMPORTING
       direction TYPE string DEFAULT 'desc' OPTIONAL
@@ -10871,19 +10871,19 @@ INTERFACE zif_github.
 * POST - "Create a discussion comment (Legacy)"
 * Operation id: teams/create-discussion-comment-legacy
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/team-discussion-comment
   METHODS teams_create_discussion_comm01
     RAISING cx_static_check.
 * GET - "Get a discussion comment (Legacy)"
 * Operation id: teams/get-discussion-comment-legacy
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/team-discussion-comment
   METHODS teams_get_discussion_comment_l
     RAISING cx_static_check.
 * PATCH - "Update a discussion comment (Legacy)"
 * Operation id: teams/update-discussion-comment-legacy
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/team-discussion-comment
   METHODS teams_update_discussion_comm01
     RAISING cx_static_check.
 * DELETE - "Delete a discussion comment (Legacy)"
@@ -10897,7 +10897,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS reactions_list_for_team_disc02
     IMPORTING
       content TYPE string OPTIONAL
@@ -10907,7 +10907,7 @@ INTERFACE zif_github.
 * POST - "Create reaction for a team discussion comment (Legacy)"
 * Operation id: reactions/create-for-team-discussion-comment-legacy
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/reaction
   METHODS reactions_create_for_team_di02
     RAISING cx_static_check.
 * GET - "List reactions for a team discussion (Legacy)"
@@ -10916,7 +10916,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS reactions_list_for_team_disc03
     IMPORTING
       content TYPE string OPTIONAL
@@ -10926,7 +10926,7 @@ INTERFACE zif_github.
 * POST - "Create reaction for a team discussion (Legacy)"
 * Operation id: reactions/create-for-team-discussion-legacy
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/reaction
   METHODS reactions_create_for_team_di03
     RAISING cx_static_check.
 * GET - "List pending team invitations (Legacy)"
@@ -10934,7 +10934,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS teams_list_pending_invitatio01
     IMPORTING
       per_page TYPE i DEFAULT 30 OPTIONAL
@@ -10946,7 +10946,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS teams_list_members_legacy
     IMPORTING
@@ -10970,7 +10970,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
-*     application/json
+*     application/json, object
   METHODS teams_add_member_legacy
     IMPORTING
       username TYPE string
@@ -10988,7 +10988,7 @@ INTERFACE zif_github.
 * Operation id: teams/get-membership-for-user-legacy
 * Parameter: username, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/team-membership
 * Response: 404
   METHODS teams_get_membership_for_use01
     IMPORTING
@@ -10998,11 +10998,11 @@ INTERFACE zif_github.
 * Operation id: teams/add-or-update-membership-for-user-legacy
 * Parameter: username, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/team-membership
 * Response: 403
 * Response: 404
 * Response: 422
-*     application/json
+*     application/json, object
   METHODS teams_add_or_update_membersh01
     IMPORTING
       username TYPE string
@@ -11021,7 +11021,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
 * Response: 415
   METHODS teams_list_projects_legacy
@@ -11032,7 +11032,7 @@ INTERFACE zif_github.
 * GET - "Check team permissions for a project (Legacy)"
 * Operation id: teams/check-permissions-for-project-legacy
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/team-project
 * Response: 404
 * Response: 415
   METHODS teams_check_permissions_for_01
@@ -11041,7 +11041,7 @@ INTERFACE zif_github.
 * Operation id: teams/add-or-update-project-permissions-legacy
 * Response: 204
 * Response: 403
-*     application/json
+*     application/json, object
 * Response: 404
 * Response: 415
 * Response: 422
@@ -11060,7 +11060,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS teams_list_repos_legacy
     IMPORTING
@@ -11072,7 +11072,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/vnd.github.v3.repository+json
+*     application/vnd.github.v3.repository+json, #/components/schemas/team-repository
 * Response: 204
 * Response: 404
   METHODS teams_check_permissions_for_02
@@ -11105,7 +11105,7 @@ INTERFACE zif_github.
 * GET - "List IdP groups for a team (Legacy)"
 * Operation id: teams/list-idp-groups-for-legacy
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/group-mapping
 * Response: 403
 * Response: 404
   METHODS teams_list_idp_groups_for_lega
@@ -11113,7 +11113,7 @@ INTERFACE zif_github.
 * PATCH - "Create or update IdP group connections (Legacy)"
 * Operation id: teams/create-or-update-idp-group-connections-legacy
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/group-mapping
 * Response: 403
 * Response: 422
   METHODS teams_create_or_update_idp_g01
@@ -11123,7 +11123,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 403
 * Response: 404
 * Response: 422
@@ -11135,7 +11135,7 @@ INTERFACE zif_github.
 * GET - "Get the authenticated user"
 * Operation id: users/get-authenticated
 * Response: 200
-*     application/json
+*     application/json, 
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11144,7 +11144,7 @@ INTERFACE zif_github.
 * PATCH - "Update the authenticated user"
 * Operation id: users/update-authenticated
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/private-user
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11155,7 +11155,7 @@ INTERFACE zif_github.
 * GET - "List users blocked by the authenticated user"
 * Operation id: users/list-blocked-by-authenticated
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11171,7 +11171,7 @@ INTERFACE zif_github.
 * Response: 401
 * Response: 403
 * Response: 404
-*     application/json
+*     application/json, #/components/schemas/basic-error
   METHODS users_check_blocked
     IMPORTING
       username TYPE string
@@ -11204,7 +11204,7 @@ INTERFACE zif_github.
 * PATCH - "Set primary email visibility for the authenticated user"
 * Operation id: users/set-primary-email-visibility-for-authenticated
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11217,7 +11217,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11230,7 +11230,7 @@ INTERFACE zif_github.
 * POST - "Add an email address for the authenticated user"
 * Operation id: users/add-email-for-authenticated
 * Response: 201
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11253,7 +11253,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11267,7 +11267,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11284,7 +11284,7 @@ INTERFACE zif_github.
 * Response: 401
 * Response: 403
 * Response: 404
-*     application/json
+*     application/json, #/components/schemas/basic-error
   METHODS users_check_person_is_followed
     IMPORTING
       username TYPE string
@@ -11318,7 +11318,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11331,7 +11331,7 @@ INTERFACE zif_github.
 * POST - "Create a GPG key for the authenticated user"
 * Operation id: users/create-gpg-key-for-authenticated
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/gpg-key
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11343,7 +11343,7 @@ INTERFACE zif_github.
 * Operation id: users/get-gpg-key-for-authenticated
 * Parameter: gpg_key_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/gpg-key
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11370,7 +11370,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11386,7 +11386,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, object
 * Response: 304
 * Response: 403
 * Response: 404
@@ -11425,13 +11425,13 @@ INTERFACE zif_github.
 * GET - "Get interaction restrictions for your public repositories"
 * Operation id: interactions/get-restrictions-for-authenticated-user
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/interaction-limit-response
   METHODS interactions_get_restriction02
     RAISING cx_static_check.
 * PUT - "Set interaction restrictions for your public repositories"
 * Operation id: interactions/set-restrictions-for-authenticated-user
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/interaction-limit-response
 * Response: 422
   METHODS interactions_set_restriction02
     RAISING cx_static_check.
@@ -11451,7 +11451,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 404
   METHODS issues_list_for_authenticated_
@@ -11470,7 +11470,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11483,7 +11483,7 @@ INTERFACE zif_github.
 * POST - "Create a public SSH key for the authenticated user"
 * Operation id: users/create-public-ssh-key-for-authenticated
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/key
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11495,7 +11495,7 @@ INTERFACE zif_github.
 * Operation id: users/get-public-ssh-key-for-authenticated
 * Parameter: key_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/key
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11521,7 +11521,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 404
@@ -11535,7 +11535,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
   METHODS apps_list_subscriptions_for_01
@@ -11549,7 +11549,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11564,7 +11564,7 @@ INTERFACE zif_github.
 * Operation id: orgs/get-membership-for-authenticated-user
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/org-membership
 * Response: 403
 * Response: 404
   METHODS orgs_get_membership_for_authen
@@ -11575,7 +11575,7 @@ INTERFACE zif_github.
 * Operation id: orgs/update-membership-for-authenticated-user
 * Parameter: org, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/org-membership
 * Response: 403
 * Response: 404
 * Response: 422
@@ -11588,7 +11588,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11600,7 +11600,7 @@ INTERFACE zif_github.
 * POST - "Start a user migration"
 * Operation id: migrations/start-for-authenticated-user
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/migration
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11612,7 +11612,7 @@ INTERFACE zif_github.
 * Parameter: exclude, optional, query
 * Parameter: migration_id, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/migration
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11665,7 +11665,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 404
   METHODS migrations_list_repos_for_user
     IMPORTING
@@ -11678,7 +11678,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11690,7 +11690,7 @@ INTERFACE zif_github.
 * POST - "Create a user project"
 * Operation id: projects/create-for-authenticated-user
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/project
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11703,7 +11703,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11725,7 +11725,7 @@ INTERFACE zif_github.
 * Parameter: since, optional, query
 * Parameter: before, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11745,7 +11745,7 @@ INTERFACE zif_github.
 * POST - "Create a repository for the authenticated user"
 * Operation id: repos/create-for-authenticated-user
 * Response: 201
-*     application/json
+*     application/json, #/components/schemas/repository
 * Response: 304
 * Response: 400
 * Response: 401
@@ -11759,7 +11759,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11800,8 +11800,8 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
-*     application/vnd.github.v3.star+json
+*     application/json, array
+*     application/vnd.github.v3.star+json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11821,7 +11821,7 @@ INTERFACE zif_github.
 * Response: 401
 * Response: 403
 * Response: 404
-*     application/json
+*     application/json, #/components/schemas/basic-error
   METHODS activity_check_repo_is_starred
     IMPORTING
       owner TYPE string
@@ -11860,7 +11860,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11874,7 +11874,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
 * Response: 403
 * Response: 404
@@ -11887,7 +11887,7 @@ INTERFACE zif_github.
 * Operation id: users/list
 * Parameter: per_page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 304
   METHODS users_list
     IMPORTING
@@ -11897,7 +11897,7 @@ INTERFACE zif_github.
 * Operation id: users/get-by-username
 * Parameter: username, required, path
 * Response: 200
-*     application/json
+*     application/json, 
 * Response: 404
   METHODS users_get_by_username
     IMPORTING
@@ -11909,7 +11909,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS activity_list_events_for_authe
     IMPORTING
       username TYPE string
@@ -11923,7 +11923,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS activity_list_org_events_for_a
     IMPORTING
       username TYPE string
@@ -11937,7 +11937,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS activity_list_public_events_01
     IMPORTING
       username TYPE string
@@ -11950,7 +11950,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS users_list_followers_for_user
     IMPORTING
       username TYPE string
@@ -11963,7 +11963,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS users_list_following_for_user
     IMPORTING
       username TYPE string
@@ -11988,7 +11988,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 422
   METHODS gists_list_for_user
     IMPORTING
@@ -12003,7 +12003,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS users_list_gpg_keys_for_user
     IMPORTING
       username TYPE string
@@ -12016,7 +12016,7 @@ INTERFACE zif_github.
 * Parameter: subject_id, optional, query
 * Parameter: username, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/hovercard
 * Response: 404
 * Response: 422
   METHODS users_get_context_for_user
@@ -12029,7 +12029,7 @@ INTERFACE zif_github.
 * Operation id: apps/get-user-installation
 * Parameter: username, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/installation
   METHODS apps_get_user_installation
     IMPORTING
       username TYPE string
@@ -12040,7 +12040,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS users_list_public_keys_for_use
     IMPORTING
       username TYPE string
@@ -12053,7 +12053,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS orgs_list_for_user
     IMPORTING
       username TYPE string
@@ -12067,7 +12067,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
 * Response: 415
 * Response: 422
   METHODS projects_list_for_user
@@ -12083,7 +12083,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS activity_list_received_events_
     IMPORTING
       username TYPE string
@@ -12096,7 +12096,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS activity_list_received_public_
     IMPORTING
       username TYPE string
@@ -12112,7 +12112,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS repos_list_for_user
     IMPORTING
       type TYPE string DEFAULT 'owner' OPTIONAL
@@ -12126,7 +12126,7 @@ INTERFACE zif_github.
 * Operation id: billing/get-github-actions-billing-user
 * Parameter: username, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/actions-billing-usage
   METHODS billing_get_github_actions_b02
     IMPORTING
       username TYPE string
@@ -12135,7 +12135,7 @@ INTERFACE zif_github.
 * Operation id: billing/get-github-packages-billing-user
 * Parameter: username, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/packages-billing-usage
   METHODS billing_get_github_packages_02
     IMPORTING
       username TYPE string
@@ -12144,7 +12144,7 @@ INTERFACE zif_github.
 * Operation id: billing/get-shared-storage-billing-user
 * Parameter: username, required, path
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/combined-billing-usage
   METHODS billing_get_shared_storage_b02
     IMPORTING
       username TYPE string
@@ -12157,8 +12157,8 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
-*     application/vnd.github.v3.star+json
+*     application/json, array
+*     application/vnd.github.v3.star+json, array
   METHODS activity_list_repos_starred_01
     IMPORTING
       username TYPE string
@@ -12173,7 +12173,7 @@ INTERFACE zif_github.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json
+*     application/json, array
   METHODS activity_list_repos_watched_by
     IMPORTING
       username TYPE string
@@ -12183,7 +12183,7 @@ INTERFACE zif_github.
 * GET - "Get the Zen of GitHub"
 * Operation id: meta/get-zen
 * Response: 200
-*     text/plain
+*     text/plain, string
   METHODS meta_get_zen
     RAISING cx_static_check.
 ENDINTERFACE.

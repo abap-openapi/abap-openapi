@@ -64,8 +64,8 @@ INTERFACE zif_petstore.
 * PUT - "Update an existing pet"
 * Operation id: updatePet
 * Response: 200
-*     application/xml
-*     application/json
+*     application/xml, #/components/schemas/Pet
+*     application/json, #/components/schemas/Pet
 * Response: 400
 * Response: 404
 * Response: 405
@@ -74,8 +74,8 @@ INTERFACE zif_petstore.
 * POST - "Add a new pet to the store"
 * Operation id: addPet
 * Response: 200
-*     application/xml
-*     application/json
+*     application/xml, #/components/schemas/Pet
+*     application/json, #/components/schemas/Pet
 * Response: 405
   METHODS addpet
     RAISING cx_static_check.
@@ -83,8 +83,8 @@ INTERFACE zif_petstore.
 * Operation id: findPetsByStatus
 * Parameter: status, optional, query
 * Response: 200
-*     application/xml
-*     application/json
+*     application/xml, array
+*     application/json, array
 * Response: 400
   METHODS findpetsbystatus
     IMPORTING
@@ -94,8 +94,8 @@ INTERFACE zif_petstore.
 * Operation id: findPetsByTags
 * Parameter: tags, optional, query
 * Response: 200
-*     application/xml
-*     application/json
+*     application/xml, array
+*     application/json, array
 * Response: 400
   METHODS findpetsbytags
     IMPORTING
@@ -105,8 +105,8 @@ INTERFACE zif_petstore.
 * Operation id: getPetById
 * Parameter: petId, required, path
 * Response: 200
-*     application/xml
-*     application/json
+*     application/xml, #/components/schemas/Pet
+*     application/json, #/components/schemas/Pet
 * Response: 400
 * Response: 404
   METHODS getpetbyid
@@ -140,7 +140,7 @@ INTERFACE zif_petstore.
 * Parameter: petId, required, path
 * Parameter: additionalMetadata, optional, query
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/ApiResponse
   METHODS uploadfile
     IMPORTING
       petid TYPE i
@@ -149,13 +149,13 @@ INTERFACE zif_petstore.
 * GET - "Returns pet inventories by status"
 * Operation id: getInventory
 * Response: 200
-*     application/json
+*     application/json, object
   METHODS getinventory
     RAISING cx_static_check.
 * POST - "Place an order for a pet"
 * Operation id: placeOrder
 * Response: 200
-*     application/json
+*     application/json, #/components/schemas/Order
 * Response: 405
   METHODS placeorder
     RAISING cx_static_check.
@@ -163,8 +163,8 @@ INTERFACE zif_petstore.
 * Operation id: getOrderById
 * Parameter: orderId, required, path
 * Response: 200
-*     application/xml
-*     application/json
+*     application/xml, #/components/schemas/Order
+*     application/json, #/components/schemas/Order
 * Response: 400
 * Response: 404
   METHODS getorderbyid
@@ -183,15 +183,15 @@ INTERFACE zif_petstore.
 * POST - "Create user"
 * Operation id: createUser
 * Response: default
-*     application/json
-*     application/xml
+*     application/json, #/components/schemas/User
+*     application/xml, #/components/schemas/User
   METHODS createuser
     RAISING cx_static_check.
 * POST - "Creates list of users with given input array"
 * Operation id: createUsersWithListInput
 * Response: 200
-*     application/xml
-*     application/json
+*     application/xml, #/components/schemas/User
+*     application/json, #/components/schemas/User
 * Response: default
   METHODS createuserswithlistinput
     RAISING cx_static_check.
@@ -200,8 +200,8 @@ INTERFACE zif_petstore.
 * Parameter: username, optional, query
 * Parameter: password, optional, query
 * Response: 200
-*     application/xml
-*     application/json
+*     application/xml, string
+*     application/json, string
 * Response: 400
   METHODS loginuser
     IMPORTING
@@ -217,8 +217,8 @@ INTERFACE zif_petstore.
 * Operation id: getUserByName
 * Parameter: username, required, path
 * Response: 200
-*     application/xml
-*     application/json
+*     application/xml, #/components/schemas/User
+*     application/json, #/components/schemas/User
 * Response: 400
 * Response: 404
   METHODS getuserbyname

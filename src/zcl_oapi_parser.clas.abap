@@ -211,6 +211,9 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
       CLEAR ls_media_type.
       ls_media_type-type = lv_member.
       ls_media_type-schema_ref = mo_json->value_string( iv_prefix && lv_member && '/schema/$ref' ).
+      IF ls_media_type-schema_ref IS INITIAL.
+        ls_media_type-schema = parse_schema( iv_prefix && lv_member && '/schema' ).
+      ENDIF.
       APPEND ls_media_type TO rt_media_types.
     ENDLOOP.
   ENDMETHOD.
