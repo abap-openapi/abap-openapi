@@ -99,6 +99,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
       CLEAR ls_schema.
       ls_schema-name = lv_name.
       ls_schema-abap_name = lo_names->to_abap_name( ls_schema-name ).
+      ls_schema-abap_parser_method = lo_names->to_abap_name( |parse_{ ls_schema-abap_name }| ).
       ls_schema-schema = parse_schema( iv_prefix && lv_name ).
       APPEND ls_schema TO rt_schemas.
     ENDLOOP.

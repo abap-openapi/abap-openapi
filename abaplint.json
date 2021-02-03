@@ -166,7 +166,7 @@
     "uncaught_exception": false,
     "unknown_types": true,
     "unreachable_code": true,
-    "unused_methods": true,
+    "unused_methods": false,
     "unused_types": {
       "exclude": ["test/"],
       "skipNames": []

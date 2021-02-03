@@ -4,9 +4,17 @@ CLASS zcl_petstore DEFINITION PUBLIC.
   PUBLIC SECTION.
     INTERFACES zif_petstore.
     METHODS constructor IMPORTING ii_client TYPE REF TO if_http_client.
-  PRIVATE SECTION.
+  PROTECTED SECTION.
     DATA mi_client TYPE REF TO if_http_client.
     METHODS send_receive RETURNING VALUE(rv_code) TYPE i.
+    METHODS parse_order IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE zif_petstore=>order RAISING cx_static_check.
+    METHODS parse_customer IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE zif_petstore=>customer RAISING cx_static_check.
+    METHODS parse_address IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE zif_petstore=>address RAISING cx_static_check.
+    METHODS parse_category IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE zif_petstore=>category RAISING cx_static_check.
+    METHODS parse_user IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE zif_petstore=>user RAISING cx_static_check.
+    METHODS parse_tag IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE zif_petstore=>tag RAISING cx_static_check.
+    METHODS parse_pet IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE zif_petstore=>pet RAISING cx_static_check.
+    METHODS parse_apiresponse IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE zif_petstore=>apiresponse RAISING cx_static_check.
 ENDCLASS.
 
 CLASS zcl_petstore IMPLEMENTATION.
@@ -18,6 +26,30 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->send( ).
     mi_client->receive( ).
     mi_client->response->get_status( IMPORTING code = rv_code ).
+  ENDMETHOD.
+
+  METHOD parse_order.
+  ENDMETHOD.
+
+  METHOD parse_customer.
+  ENDMETHOD.
+
+  METHOD parse_address.
+  ENDMETHOD.
+
+  METHOD parse_category.
+  ENDMETHOD.
+
+  METHOD parse_user.
+  ENDMETHOD.
+
+  METHOD parse_tag.
+  ENDMETHOD.
+
+  METHOD parse_pet.
+  ENDMETHOD.
+
+  METHOD parse_apiresponse.
   ENDMETHOD.
 
   METHOD zif_petstore~updatepet.

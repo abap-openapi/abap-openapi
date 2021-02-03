@@ -72,6 +72,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
     DATA ls_operation LIKE LINE OF ms_specification-operations.
     DATA ls_parameter TYPE zif_oapi_specification_v3=>ty_parameter.
+    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
 
     rv_abap =
       |CLASS { ms_input-class_name } DEFINITION PUBLIC.\n| &&
@@ -80,9 +81,17 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |  PUBLIC SECTION.\n| &&
       |    INTERFACES { ms_input-interface_name }.\n| &&
       |    METHODS constructor IMPORTING ii_client TYPE REF TO if_http_client.\n| &&
-      |  PRIVATE SECTION.\n| &&
+      |  PROTECTED SECTION.\n| &&
       |    DATA mi_client TYPE REF TO if_http_client.\n| &&
-      |    METHODS send_receive RETURNING VALUE(rv_code) TYPE i.\n| &&
+*      |    DATA mo_json TYPE REF TO zcl_oapi_json.\n| &&
+      |    METHODS send_receive RETURNING VALUE(rv_code) TYPE i.\n|.
+
+    LOOP AT ms_specification-components-schemas INTO ls_schema.
+      rv_abap = rv_abap &&
+        |    METHODS { ls_schema-abap_parser_method } IMPORTING iv_prefix TYPE string RETURNING VALUE(data) TYPE { ms_input-interface_name }=>{ ls_schema-abap_name } RAISING cx_static_check.\n|.
+    ENDLOOP.
+
+    rv_abap = rv_abap &&
       |ENDCLASS.\n\n| &&
       |CLASS { ms_input-class_name } IMPLEMENTATION.\n| &&
       |  METHOD constructor.\n| &&
@@ -93,6 +102,13 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |    mi_client->receive( ).\n| &&
       |    mi_client->response->get_status( IMPORTING code = rv_code ).\n| &&
       |  ENDMETHOD.\n\n|.
+
+* note: the parser methods might be called recursively, as the structures can be nested
+    LOOP AT ms_specification-components-schemas INTO ls_schema.
+      rv_abap = rv_abap &&
+        |  METHOD { ls_schema-abap_parser_method }.\n| &&
+        |  ENDMETHOD.\n\n|.
+    ENDLOOP.
 
     LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
@@ -222,6 +238,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 *      |    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).\n| &&
       |    lv_code = send_receive( ).\n| &&
       |    WRITE / lv_code.\n| &&
+*      |    CREATE OBJECT mo_json EXPORTING iv_json = iv_json.\n| &&
       |    WRITE / mi_client->response->get_cdata( ).\n|.
   ENDMETHOD.
 

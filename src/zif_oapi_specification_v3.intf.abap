@@ -47,6 +47,7 @@ INTERFACE zif_oapi_specification_v3 PUBLIC.
   TYPES: BEGIN OF ty_component_schema,
            name      TYPE string,
            abap_name TYPE string,
+           abap_parser_method TYPE string,
            schema    TYPE REF TO zif_oapi_schema,
          END OF ty_component_schema.
 
