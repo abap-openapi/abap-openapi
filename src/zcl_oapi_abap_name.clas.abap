@@ -23,6 +23,8 @@ CLASS zcl_oapi_abap_name IMPLEMENTATION.
     ENDIF.
     rv_name = to_lower( iv_name ).
     REPLACE ALL OCCURRENCES OF '-' IN rv_name WITH '_'.
+    REPLACE ALL OCCURRENCES OF ' ' IN rv_name WITH '_'.
+    REPLACE ALL OCCURRENCES OF '.' IN rv_name WITH '_'.
     REPLACE ALL OCCURRENCES OF '/' IN rv_name WITH '_'.
     REPLACE ALL OCCURRENCES OF '@' IN rv_name WITH ''.
     REPLACE ALL OCCURRENCES OF '+' IN rv_name WITH ''.
