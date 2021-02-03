@@ -2448,6 +2448,7 @@ INTERFACE zif_github.
 
 * Component schema: language, object
   TYPES: BEGIN OF language,
+           dummy TYPE i,
          END OF language.
 
 * Component schema: license-content, object
@@ -3279,7 +3280,7 @@ INTERFACE zif_github.
 * Operation id: apps/create-from-manifest
 * Parameter: code, required, path
 * Response: 201
-*     application/json, 
+*     application/json,
 * Response: 404
 * Response: 422
   METHODS apps_create_from_manifest
@@ -3299,6 +3300,7 @@ INTERFACE zif_github.
 * Operation id: apps/update-webhook-config-for-app
 * Response: 200
 *     application/json, #/components/schemas/webhook-config
+* Body schema: object
   METHODS apps_update_webhook_config_for
     RETURNING VALUE(webhook_config) TYPE webhook_config
     RAISING cx_static_check.
@@ -3352,6 +3354,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 415
 * Response: 422
+* Body schema: object
   METHODS apps_create_installation_acces
     IMPORTING
       installation_id TYPE i
@@ -3423,6 +3426,7 @@ INTERFACE zif_github.
 * Operation id: apps/delete-authorization
 * Response: 204
 * Response: 422
+* Body schema: object
   METHODS apps_delete_authorization
     RAISING cx_static_check.
 
@@ -3438,6 +3442,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/authorization
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS apps_check_token
     RETURNING VALUE(authorization) TYPE authorization
     RAISING cx_static_check.
@@ -3447,6 +3452,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, #/components/schemas/authorization
 * Response: 422
+* Body schema: object
   METHODS apps_reset_token
     RETURNING VALUE(authorization) TYPE authorization
     RAISING cx_static_check.
@@ -3455,6 +3461,7 @@ INTERFACE zif_github.
 * Operation id: apps/delete-token
 * Response: 204
 * Response: 422
+* Body schema: object
   METHODS apps_delete_token
     RAISING cx_static_check.
 
@@ -3466,6 +3473,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS apps_scope_token
     RETURNING VALUE(authorization) TYPE authorization
     RAISING cx_static_check.
@@ -3473,7 +3481,7 @@ INTERFACE zif_github.
 * GET - "Check an authorization"
 * Operation id: apps/check-authorization
 * Response: 200
-*     application/json, 
+*     application/json,
 * Response: 404
   METHODS apps_check_authorization
     RAISING cx_static_check.
@@ -3531,6 +3539,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 410
 * Response: 422
+* Body schema: object
   METHODS oauth_authorizations_create_au
     RAISING cx_static_check.
 
@@ -3544,6 +3553,7 @@ INTERFACE zif_github.
 * Response: 401
 * Response: 403
 * Response: 422
+* Body schema: object
   METHODS oauth_authorizations_get_or_cr
     RETURNING VALUE(authorization) TYPE authorization
     RAISING cx_static_check.
@@ -3556,6 +3566,7 @@ INTERFACE zif_github.
 * Response: 201
 *     application/json, #/components/schemas/authorization
 * Response: 422
+* Body schema: object
   METHODS oauth_authorizations_get_or_01
     IMPORTING
       fingerprint TYPE string
@@ -3582,6 +3593,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, #/components/schemas/authorization
 * Response: 422
+* Body schema: object
   METHODS oauth_authorizations_update_au
     IMPORTING
       authorization_id TYPE i
@@ -3595,6 +3607,7 @@ INTERFACE zif_github.
 * Response: 304
 * Response: 401
 * Response: 403
+* Body schema: object
   METHODS oauth_authorizations_delete_au
     IMPORTING
       authorization_id TYPE i
@@ -3634,6 +3647,7 @@ INTERFACE zif_github.
 * Response: 410
 * Response: 415
 * Response: 422
+* Body schema: object
   METHODS apps_create_content_attachment
     IMPORTING
       content_reference_id TYPE i
@@ -3663,6 +3677,7 @@ INTERFACE zif_github.
 * Operation id: enterprise-admin/set-github-actions-permissions-enterprise
 * Parameter: enterprise, required, path
 * Response: 204
+* Body schema: object
   METHODS enterprise_admin_set_github_ac
     IMPORTING
       enterprise TYPE string
@@ -3686,6 +3701,7 @@ INTERFACE zif_github.
 * Operation id: enterprise-admin/set-selected-organizations-enabled-github-actions-enterprise
 * Parameter: enterprise, required, path
 * Response: 204
+* Body schema: object
   METHODS enterprise_admin_set_selected_
     IMPORTING
       enterprise TYPE string
@@ -3728,6 +3744,7 @@ INTERFACE zif_github.
 * Operation id: enterprise-admin/set-allowed-actions-enterprise
 * Parameter: enterprise, required, path
 * Response: 204
+* Body ref: #/components/schemas/selected-actions
   METHODS enterprise_admin_set_allowed_a
     IMPORTING
       enterprise TYPE string
@@ -3752,6 +3769,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Response: 201
 *     application/json, #/components/schemas/runner-groups-enterprise
+* Body schema: object
   METHODS enterprise_admin_create_self_h
     IMPORTING
       enterprise TYPE string
@@ -3776,6 +3794,7 @@ INTERFACE zif_github.
 * Parameter: runner_group_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/runner-groups-enterprise
+* Body schema: object
   METHODS enterprise_admin_update_self_h
     IMPORTING
       enterprise TYPE string
@@ -3788,6 +3807,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Parameter: runner_group_id, required, path
 * Response: 204
+* Body schema: object
   METHODS enterprise_admin_delete_self_h
     IMPORTING
       enterprise TYPE string
@@ -3815,6 +3835,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Parameter: runner_group_id, required, path
 * Response: 204
+* Body schema: object
   METHODS enterprise_admin_set_org_acces
     IMPORTING
       enterprise TYPE string
@@ -3868,6 +3889,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Parameter: runner_group_id, required, path
 * Response: 204
+* Body schema: object
   METHODS enterprise_admin_set_self_host
     IMPORTING
       enterprise TYPE string
@@ -4060,6 +4082,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS gists_create
     RAISING cx_static_check.
 
@@ -4118,6 +4141,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/gist-simple
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS gists_update
     IMPORTING
       gist_id TYPE string
@@ -4131,6 +4155,7 @@ INTERFACE zif_github.
 * Response: 304
 * Response: 403
 * Response: 404
+* Body schema: object
   METHODS gists_delete
     IMPORTING
       gist_id TYPE string
@@ -4161,6 +4186,7 @@ INTERFACE zif_github.
 * Response: 304
 * Response: 403
 * Response: 404
+* Body schema: object
   METHODS gists_create_comment
     IMPORTING
       gist_id TYPE string
@@ -4189,6 +4215,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, #/components/schemas/gist-comment
 * Response: 404
+* Body schema: object
   METHODS gists_update_comment
     IMPORTING
       gist_id TYPE string
@@ -4204,6 +4231,7 @@ INTERFACE zif_github.
 * Response: 304
 * Response: 403
 * Response: 404
+* Body schema: object
   METHODS gists_delete_comment
     IMPORTING
       gist_id TYPE string
@@ -4419,6 +4447,7 @@ INTERFACE zif_github.
 * Response: 200
 *     text/html, string
 * Response: 304
+* Body schema: object
   METHODS markdown_render
     RAISING cx_static_check.
 
@@ -4585,6 +4614,7 @@ INTERFACE zif_github.
 * Response: 304
 * Response: 401
 * Response: 403
+* Body schema: object
   METHODS activity_mark_notifications_as
     RAISING cx_static_check.
 
@@ -4635,6 +4665,7 @@ INTERFACE zif_github.
 * Response: 304
 * Response: 401
 * Response: 403
+* Body schema: object
   METHODS activity_set_thread_subscripti
     IMPORTING
       thread_id TYPE i
@@ -4648,6 +4679,7 @@ INTERFACE zif_github.
 * Response: 304
 * Response: 401
 * Response: 403
+* Body schema: object
   METHODS activity_delete_thread_subscri
     IMPORTING
       thread_id TYPE i
@@ -4694,7 +4726,8 @@ INTERFACE zif_github.
 * Response: 409
 * Response: 415
 * Response: 422
-*     application/json, 
+*     application/json,
+* Body schema: object
   METHODS orgs_update
     IMPORTING
       org TYPE string
@@ -4716,6 +4749,7 @@ INTERFACE zif_github.
 * Operation id: actions/set-github-actions-permissions-organization
 * Parameter: org, required, path
 * Response: 204
+* Body schema: object
   METHODS actions_set_github_actions_per
     IMPORTING
       org TYPE string
@@ -4739,6 +4773,7 @@ INTERFACE zif_github.
 * Operation id: actions/set-selected-repositories-enabled-github-actions-organization
 * Parameter: org, required, path
 * Response: 204
+* Body schema: object
   METHODS actions_set_selected_repositor
     IMPORTING
       org TYPE string
@@ -4781,6 +4816,7 @@ INTERFACE zif_github.
 * Operation id: actions/set-allowed-actions-organization
 * Parameter: org, required, path
 * Response: 204
+* Body ref: #/components/schemas/selected-actions
   METHODS actions_set_allowed_actions_or
     IMPORTING
       org TYPE string
@@ -4805,6 +4841,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Response: 201
 *     application/json, #/components/schemas/runner-groups-org
+* Body schema: object
   METHODS actions_create_self_hosted_run
     IMPORTING
       org TYPE string
@@ -4829,6 +4866,7 @@ INTERFACE zif_github.
 * Parameter: runner_group_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/runner-groups-org
+* Body schema: object
   METHODS actions_update_self_hosted_run
     IMPORTING
       org TYPE string
@@ -4841,6 +4879,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: runner_group_id, required, path
 * Response: 204
+* Body schema: object
   METHODS actions_delete_self_hosted_run
     IMPORTING
       org TYPE string
@@ -4864,6 +4903,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: runner_group_id, required, path
 * Response: 204
+* Body schema: object
   METHODS actions_set_repo_access_to_sel
     IMPORTING
       org TYPE string
@@ -4917,6 +4957,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: runner_group_id, required, path
 * Response: 204
+* Body schema: object
   METHODS actions_set_self_hosted_runner
     IMPORTING
       org TYPE string
@@ -5061,6 +5102,7 @@ INTERFACE zif_github.
 * Parameter: secret_name, required, path
 * Response: 201
 * Response: 204
+* Body schema: object
   METHODS actions_create_or_update_org_s
     IMPORTING
       org TYPE string
@@ -5072,6 +5114,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: secret_name, required, path
 * Response: 204
+* Body schema: object
   METHODS actions_delete_org_secret
     IMPORTING
       org TYPE string
@@ -5095,6 +5138,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: secret_name, required, path
 * Response: 204
+* Body schema: object
   METHODS actions_set_selected_repos_for
     IMPORTING
       org TYPE string
@@ -5261,6 +5305,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/org-hook
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS orgs_create_webhook
     IMPORTING
       org TYPE string
@@ -5285,6 +5330,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/org-hook
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS orgs_update_webhook
     IMPORTING
       org TYPE string
@@ -5296,6 +5342,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Response: 204
 * Response: 404
+* Body schema: object
   METHODS orgs_delete_webhook
     IMPORTING
       org TYPE string
@@ -5317,6 +5364,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Response: 200
 *     application/json, #/components/schemas/webhook-config
+* Body schema: object
   METHODS orgs_update_webhook_config_for
     IMPORTING
       org TYPE string
@@ -5375,6 +5423,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, #/components/schemas/interaction-limit-response
 * Response: 422
+* Body ref: #/components/schemas/interaction-limit
   METHODS interactions_set_restrictions_
     IMPORTING
       org TYPE string
@@ -5412,6 +5461,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/organization-invitation
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS orgs_create_invitation
     IMPORTING
       org TYPE string
@@ -5542,6 +5592,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/org-membership
 * Response: 403
 * Response: 422
+* Body schema: object
   METHODS orgs_set_membership_for_user
     IMPORTING
       org TYPE string
@@ -5556,6 +5607,7 @@ INTERFACE zif_github.
 * Response: 204
 * Response: 403
 * Response: 404
+* Body schema: object
   METHODS orgs_remove_membership_for_use
     IMPORTING
       org TYPE string
@@ -5583,6 +5635,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/migration
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS migrations_start_for_org
     IMPORTING
       org TYPE string
@@ -5728,6 +5781,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 410
 * Response: 422
+* Body schema: object
   METHODS projects_create_for_org
     IMPORTING
       org TYPE string
@@ -5809,6 +5863,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/repository
 * Response: 403
 * Response: 422
+* Body schema: object
   METHODS repos_create_in_org
     IMPORTING
       org TYPE string
@@ -5884,6 +5939,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/team-full
 * Response: 403
 * Response: 422
+* Body schema: object
   METHODS teams_create
     IMPORTING
       org TYPE string
@@ -5909,6 +5965,7 @@ INTERFACE zif_github.
 * Parameter: team_slug, required, path
 * Response: 201
 *     application/json, #/components/schemas/team-full
+* Body schema: object
   METHODS teams_update_in_org
     IMPORTING
       org TYPE string
@@ -5920,6 +5977,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
 * Response: 204
+* Body schema: object
   METHODS teams_delete_in_org
     IMPORTING
       org TYPE string
@@ -5950,6 +6008,7 @@ INTERFACE zif_github.
 * Parameter: team_slug, required, path
 * Response: 201
 *     application/json, #/components/schemas/team-discussion
+* Body schema: object
   METHODS teams_create_discussion_in_org
     IMPORTING
       org TYPE string
@@ -5975,6 +6034,7 @@ INTERFACE zif_github.
 * Parameter: team_slug, required, path
 * Response: 200
 *     application/json, #/components/schemas/team-discussion
+* Body schema: object
   METHODS teams_update_discussion_in_org
     IMPORTING
       org TYPE string
@@ -5987,6 +6047,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
 * Response: 204
+* Body schema: object
   METHODS teams_delete_discussion_in_org
     IMPORTING
       org TYPE string
@@ -6017,6 +6078,7 @@ INTERFACE zif_github.
 * Parameter: team_slug, required, path
 * Response: 201
 *     application/json, #/components/schemas/team-discussion-comment
+* Body schema: object
   METHODS teams_create_discussion_commen
     IMPORTING
       org TYPE string
@@ -6042,6 +6104,7 @@ INTERFACE zif_github.
 * Parameter: team_slug, required, path
 * Response: 200
 *     application/json, #/components/schemas/team-discussion-comment
+* Body schema: object
   METHODS teams_update_discussion_commen
     IMPORTING
       org TYPE string
@@ -6054,6 +6117,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
 * Response: 204
+* Body schema: object
   METHODS teams_delete_discussion_commen
     IMPORTING
       org TYPE string
@@ -6084,6 +6148,7 @@ INTERFACE zif_github.
 * Parameter: team_slug, required, path
 * Response: 201
 *     application/json, #/components/schemas/reaction
+* Body schema: object
   METHODS reactions_create_for_team_disc
     IMPORTING
       org TYPE string
@@ -6125,6 +6190,7 @@ INTERFACE zif_github.
 * Parameter: team_slug, required, path
 * Response: 201
 *     application/json, #/components/schemas/reaction
+* Body schema: object
   METHODS reactions_create_for_team_di01
     IMPORTING
       org TYPE string
@@ -6202,6 +6268,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 422
 *     application/json, object
+* Body schema: object
   METHODS teams_add_or_update_membership
     IMPORTING
       org TYPE string
@@ -6217,6 +6284,7 @@ INTERFACE zif_github.
 * Parameter: username, required, path
 * Response: 204
 * Response: 403
+* Body schema: object
   METHODS teams_remove_membership_for_us
     IMPORTING
       org TYPE string
@@ -6261,6 +6329,7 @@ INTERFACE zif_github.
 * Response: 204
 * Response: 403
 *     application/json, object
+* Body schema: object
   METHODS teams_add_or_update_project_pe
     IMPORTING
       org TYPE string
@@ -6272,6 +6341,7 @@ INTERFACE zif_github.
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
 * Response: 204
+* Body schema: object
   METHODS teams_remove_project_in_org
     IMPORTING
       org TYPE string
@@ -6319,6 +6389,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 204
+* Body schema: object
   METHODS teams_add_or_update_repo_permi
     IMPORTING
       org TYPE string
@@ -6334,6 +6405,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 204
+* Body schema: object
   METHODS teams_remove_repo_in_org
     IMPORTING
       org TYPE string
@@ -6361,6 +6433,7 @@ INTERFACE zif_github.
 * Parameter: team_slug, required, path
 * Response: 200
 *     application/json, #/components/schemas/group-mapping
+* Body schema: object
   METHODS teams_create_or_update_idp_gro
     IMPORTING
       org TYPE string
@@ -6409,6 +6482,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS projects_update_card
     IMPORTING
       card_id TYPE i
@@ -6424,6 +6498,7 @@ INTERFACE zif_github.
 * Response: 403
 *     application/json, object
 * Response: 404
+* Body schema: object
   METHODS projects_delete_card
     IMPORTING
       card_id TYPE i
@@ -6441,6 +6516,7 @@ INTERFACE zif_github.
 * Response: 422
 * Response: 503
 *     application/json, object
+* Body schema: object
   METHODS projects_move_card
     IMPORTING
       card_id TYPE i
@@ -6469,6 +6545,7 @@ INTERFACE zif_github.
 * Response: 304
 * Response: 401
 * Response: 403
+* Body schema: object
   METHODS projects_update_column
     IMPORTING
       column_id TYPE i
@@ -6482,6 +6559,7 @@ INTERFACE zif_github.
 * Response: 304
 * Response: 401
 * Response: 403
+* Body schema: object
   METHODS projects_delete_column
     IMPORTING
       column_id TYPE i
@@ -6515,9 +6593,10 @@ INTERFACE zif_github.
 * Response: 401
 * Response: 403
 * Response: 422
-*     application/json, 
+*     application/json,
 * Response: 503
 *     application/json, object
+* Body schema:
   METHODS projects_create_card
     IMPORTING
       column_id TYPE i
@@ -6532,6 +6611,7 @@ INTERFACE zif_github.
 * Response: 401
 * Response: 403
 * Response: 422
+* Body schema: object
   METHODS projects_move_column
     IMPORTING
       column_id TYPE i
@@ -6559,6 +6639,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 410
 * Response: 422
+* Body schema: object
   METHODS projects_update
     RETURNING VALUE(project) TYPE project
     RAISING cx_static_check.
@@ -6572,6 +6653,7 @@ INTERFACE zif_github.
 *     application/json, object
 * Response: 404
 * Response: 410
+* Body schema: object
   METHODS projects_delete
     RAISING cx_static_check.
 
@@ -6605,6 +6687,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 415
 * Response: 422
+* Body schema: object
   METHODS projects_add_collaborator
     IMPORTING
       username TYPE string
@@ -6620,6 +6703,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 415
 * Response: 422
+* Body schema: object
   METHODS projects_remove_collaborator
     IMPORTING
       username TYPE string
@@ -6665,6 +6749,7 @@ INTERFACE zif_github.
 * Response: 401
 * Response: 403
 * Response: 422
+* Body schema: object
   METHODS projects_create_column
     RAISING cx_static_check.
 
@@ -6714,6 +6799,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS repos_update
     IMPORTING
       owner TYPE string
@@ -6729,6 +6815,7 @@ INTERFACE zif_github.
 * Response: 403
 *     application/json, object
 * Response: 404
+* Body schema: object
   METHODS repos_delete
     IMPORTING
       owner TYPE string
@@ -6839,6 +6926,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 204
+* Body schema: object
   METHODS actions_set_github_actions_p01
     IMPORTING
       owner TYPE string
@@ -6863,6 +6951,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 204
+* Body ref: #/components/schemas/selected-actions
   METHODS actions_set_allowed_actions_re
     IMPORTING
       owner TYPE string
@@ -7135,6 +7224,7 @@ INTERFACE zif_github.
 * Parameter: secret_name, required, path
 * Response: 201
 * Response: 204
+* Body schema: object
   METHODS actions_create_or_update_repo_
     IMPORTING
       owner TYPE string
@@ -7148,6 +7238,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: secret_name, required, path
 * Response: 204
+* Body schema: object
   METHODS actions_delete_repo_secret
     IMPORTING
       owner TYPE string
@@ -7200,6 +7291,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 204
+* Body schema: object
   METHODS actions_create_workflow_dispat
     IMPORTING
       owner TYPE string
@@ -7367,6 +7459,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 415
 * Response: 422
+* Body schema: object
   METHODS repos_update_branch_protection
     IMPORTING
       owner TYPE string
@@ -7382,6 +7475,7 @@ INTERFACE zif_github.
 * Parameter: branch, optional, query
 * Response: 204
 * Response: 403
+* Body schema: object
   METHODS repos_delete_branch_protection
     IMPORTING
       owner TYPE string
@@ -7455,6 +7549,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, #/components/schemas/protected-branch-pull-request-review
 * Response: 422
+* Body schema: object
   METHODS repos_update_pull_request_revi
     IMPORTING
       owner TYPE string
@@ -7470,6 +7565,7 @@ INTERFACE zif_github.
 * Parameter: branch, optional, query
 * Response: 204
 * Response: 404
+* Body schema: object
   METHODS repos_delete_pull_request_revi
     IMPORTING
       owner TYPE string
@@ -7548,6 +7644,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/status-check-policy
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS repos_update_status_check_prot
     IMPORTING
       owner TYPE string
@@ -7562,6 +7659,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: branch, optional, query
 * Response: 204
+* Body schema: object
   METHODS repos_remove_status_check_prot
     IMPORTING
       owner TYPE string
@@ -7594,6 +7692,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS repos_add_status_check_context
     IMPORTING
       owner TYPE string
@@ -7610,6 +7709,7 @@ INTERFACE zif_github.
 *     application/json, array
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS repos_set_status_check_context
     IMPORTING
       owner TYPE string
@@ -7626,6 +7726,7 @@ INTERFACE zif_github.
 *     application/json, array
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS repos_remove_status_check_cont
     IMPORTING
       owner TYPE string
@@ -7685,6 +7786,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, array
 * Response: 422
+* Body schema: object
   METHODS repos_add_app_access_restricti
     IMPORTING
       owner TYPE string
@@ -7700,6 +7802,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, array
 * Response: 422
+* Body schema: object
   METHODS repos_set_app_access_restricti
     IMPORTING
       owner TYPE string
@@ -7715,6 +7818,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, array
 * Response: 422
+* Body schema: object
   METHODS repos_remove_app_access_restri
     IMPORTING
       owner TYPE string
@@ -7745,6 +7849,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, array
 * Response: 422
+* Body schema: object
   METHODS repos_add_team_access_restrict
     IMPORTING
       owner TYPE string
@@ -7760,6 +7865,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, array
 * Response: 422
+* Body schema: object
   METHODS repos_set_team_access_restrict
     IMPORTING
       owner TYPE string
@@ -7775,6 +7881,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, array
 * Response: 422
+* Body schema: object
   METHODS repos_remove_team_access_restr
     IMPORTING
       owner TYPE string
@@ -7805,6 +7912,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, array
 * Response: 422
+* Body schema: object
   METHODS repos_add_user_access_restrict
     IMPORTING
       owner TYPE string
@@ -7820,6 +7928,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, array
 * Response: 422
+* Body schema: object
   METHODS repos_set_user_access_restrict
     IMPORTING
       owner TYPE string
@@ -7835,6 +7944,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, array
 * Response: 422
+* Body schema: object
   METHODS repos_remove_user_access_restr
     IMPORTING
       owner TYPE string
@@ -7852,6 +7962,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS repos_rename_branch
     IMPORTING
       owner TYPE string
@@ -7865,6 +7976,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Response: 201
 *     application/json, #/components/schemas/check-run
+* Body schema: object
   METHODS checks_create
     IMPORTING
       owner TYPE string
@@ -7893,6 +8005,7 @@ INTERFACE zif_github.
 * Parameter: check_run_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/check-run
+* Body schema: object
   METHODS checks_update
     IMPORTING
       owner TYPE string
@@ -7925,6 +8038,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Response: 201
 *     application/json, #/components/schemas/check-suite
+* Body schema: object
   METHODS checks_create_suite
     IMPORTING
       owner TYPE string
@@ -7937,6 +8051,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Response: 200
 *     application/json, #/components/schemas/check-suite-preference
+* Body schema: object
   METHODS checks_set_suites_preferences
     IMPORTING
       owner TYPE string
@@ -8042,6 +8157,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/code-scanning-alert-code-scanning-alert
 * Response: 403
 * Response: 503
+* Body schema: object
   METHODS code_scanning_update_alert
     IMPORTING
       owner TYPE string
@@ -8076,6 +8192,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 413
+* Body schema: object
   METHODS code_scanning_upload_sarif
     IMPORTING
       owner TYPE string
@@ -8125,6 +8242,7 @@ INTERFACE zif_github.
 * Response: 204
 * Response: 403
 * Response: 422
+* Body schema: object
   METHODS repos_add_collaborator
     IMPORTING
       owner TYPE string
@@ -8138,6 +8256,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: username, required, path
 * Response: 204
+* Body schema: object
   METHODS repos_remove_collaborator
     IMPORTING
       owner TYPE string
@@ -8201,6 +8320,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, #/components/schemas/commit-comment
 * Response: 404
+* Body schema: object
   METHODS repos_update_commit_comment
     IMPORTING
       owner TYPE string
@@ -8216,6 +8336,7 @@ INTERFACE zif_github.
 * Parameter: comment_id, required, path
 * Response: 204
 * Response: 404
+* Body schema: object
   METHODS repos_delete_commit_comment
     IMPORTING
       owner TYPE string
@@ -8256,6 +8377,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/reaction
 * Response: 415
 * Response: 422
+* Body schema: object
   METHODS reactions_create_for_commit_co
     IMPORTING
       owner TYPE string
@@ -8350,6 +8472,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/commit-comment
 * Response: 403
 * Response: 422
+* Body schema: object
   METHODS repos_create_commit_comment
     IMPORTING
       owner TYPE string
@@ -8528,7 +8651,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Response: 200
 *     application/vnd.github.v3.object, #/components/schemas/content-tree
-*     application/json, 
+*     application/json,
 * Response: 302
 * Response: 403
 * Response: 404
@@ -8552,6 +8675,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 409
 * Response: 422
+* Body schema: object
   METHODS repos_create_or_update_file_co
     IMPORTING
       path TYPE string
@@ -8571,6 +8695,7 @@ INTERFACE zif_github.
 * Response: 409
 * Response: 422
 * Response: 503
+* Body schema: object
   METHODS repos_delete_file
     IMPORTING
       path TYPE string
@@ -8635,6 +8760,7 @@ INTERFACE zif_github.
 * Response: 409
 *     application/json, object
 * Response: 422
+* Body schema: object
   METHODS repos_create_deployment
     IMPORTING
       owner TYPE string
@@ -8699,6 +8825,7 @@ INTERFACE zif_github.
 * Response: 201
 *     application/json, #/components/schemas/deployment-status
 * Response: 422
+* Body schema: object
   METHODS repos_create_deployment_status
     IMPORTING
       owner TYPE string
@@ -8731,6 +8858,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Response: 204
 * Response: 422
+* Body schema: object
   METHODS repos_create_dispatch_event
     IMPORTING
       owner TYPE string
@@ -8782,6 +8910,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS repos_create_fork
     IMPORTING
       owner TYPE string
@@ -8798,6 +8927,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 409
 * Response: 422
+* Body schema: object
   METHODS git_create_blob
     IMPORTING
       owner TYPE string
@@ -8830,6 +8960,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/git-commit
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS git_create_commit
     IMPORTING
       owner TYPE string
@@ -8893,6 +9024,7 @@ INTERFACE zif_github.
 * Response: 201
 *     application/json, #/components/schemas/git-ref
 * Response: 422
+* Body schema: object
   METHODS git_create_ref
     IMPORTING
       owner TYPE string
@@ -8907,6 +9039,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, #/components/schemas/git-ref
 * Response: 422
+* Body schema: object
   METHODS git_update_ref
     IMPORTING
       ref TYPE string
@@ -8922,6 +9055,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Response: 204
 * Response: 422
+* Body schema: object
   METHODS git_delete_ref
     IMPORTING
       ref TYPE string
@@ -8936,6 +9070,7 @@ INTERFACE zif_github.
 * Response: 201
 *     application/json, #/components/schemas/git-tag
 * Response: 422
+* Body schema: object
   METHODS git_create_tag
     IMPORTING
       owner TYPE string
@@ -8967,6 +9102,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS git_create_tree
     IMPORTING
       owner TYPE string
@@ -9018,6 +9154,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS repos_create_webhook
     IMPORTING
       owner TYPE string
@@ -9046,6 +9183,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/hook
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS repos_update_webhook
     IMPORTING
       owner TYPE string
@@ -9059,6 +9197,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Response: 204
 * Response: 404
+* Body schema: object
   METHODS repos_delete_webhook
     IMPORTING
       owner TYPE string
@@ -9084,6 +9223,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Response: 200
 *     application/json, #/components/schemas/webhook-config
+* Body schema: object
   METHODS repos_update_webhook_config_fo
     IMPORTING
       owner TYPE string
@@ -9137,6 +9277,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/import
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS migrations_start_import
     IMPORTING
       owner TYPE string
@@ -9149,6 +9290,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Response: 200
 *     application/json, #/components/schemas/import
+* Body schema: object
   METHODS migrations_update_import
     IMPORTING
       owner TYPE string
@@ -9161,6 +9303,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 204
+* Body schema: object
   METHODS migrations_cancel_import
     IMPORTING
       owner TYPE string
@@ -9189,6 +9332,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/porter-author
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS migrations_map_commit_author
     IMPORTING
       author_id TYPE i
@@ -9216,6 +9360,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, #/components/schemas/import
 * Response: 422
+* Body schema: object
   METHODS migrations_set_lfs_preference
     IMPORTING
       owner TYPE string
@@ -9258,6 +9403,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, #/components/schemas/interaction-limit-response
 * Response: 409
+* Body ref: #/components/schemas/interaction-limit
   METHODS interactions_set_restriction01
     IMPORTING
       owner TYPE string
@@ -9300,6 +9446,7 @@ INTERFACE zif_github.
 * Parameter: invitation_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/repository-invitation
+* Body schema: object
   METHODS repos_update_invitation
     IMPORTING
       owner TYPE string
@@ -9314,6 +9461,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: invitation_id, required, path
 * Response: 204
+* Body schema: object
   METHODS repos_delete_invitation
     IMPORTING
       owner TYPE string
@@ -9369,6 +9517,7 @@ INTERFACE zif_github.
 * Response: 410
 * Response: 422
 * Response: 503
+* Body schema: object
   METHODS issues_create
     IMPORTING
       owner TYPE string
@@ -9423,6 +9572,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, #/components/schemas/issue-comment
 * Response: 422
+* Body schema: object
   METHODS issues_update_comment
     IMPORTING
       owner TYPE string
@@ -9437,6 +9587,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: comment_id, required, path
 * Response: 204
+* Body schema: object
   METHODS issues_delete_comment
     IMPORTING
       owner TYPE string
@@ -9477,6 +9628,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/reaction
 * Response: 415
 * Response: 422
+* Body schema: object
   METHODS reactions_create_for_issue_com
     IMPORTING
       owner TYPE string
@@ -9565,6 +9717,7 @@ INTERFACE zif_github.
 * Response: 410
 * Response: 422
 * Response: 503
+* Body schema: object
   METHODS issues_update
     IMPORTING
       owner TYPE string
@@ -9580,6 +9733,7 @@ INTERFACE zif_github.
 * Parameter: issue_number, required, path
 * Response: 201
 *     application/json, #/components/schemas/issue-simple
+* Body schema: object
   METHODS issues_add_assignees
     IMPORTING
       owner TYPE string
@@ -9594,6 +9748,7 @@ INTERFACE zif_github.
 * Parameter: issue_number, required, path
 * Response: 200
 *     application/json, #/components/schemas/issue-simple
+* Body schema: object
   METHODS issues_remove_assignees
     IMPORTING
       owner TYPE string
@@ -9635,6 +9790,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 410
 * Response: 422
+* Body schema: object
   METHODS issues_create_comment
     IMPORTING
       owner TYPE string
@@ -9689,6 +9845,7 @@ INTERFACE zif_github.
 *     application/json, array
 * Response: 410
 * Response: 422
+* Body schema: object
   METHODS issues_add_labels
     IMPORTING
       owner TYPE string
@@ -9705,6 +9862,7 @@ INTERFACE zif_github.
 *     application/json, array
 * Response: 410
 * Response: 422
+* Body schema: object
   METHODS issues_set_labels
     IMPORTING
       owner TYPE string
@@ -9719,6 +9877,7 @@ INTERFACE zif_github.
 * Parameter: issue_number, required, path
 * Response: 204
 * Response: 410
+* Body schema: object
   METHODS issues_remove_all_labels
     IMPORTING
       owner TYPE string
@@ -9754,6 +9913,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 410
 * Response: 422
+* Body schema: object
   METHODS issues_lock
     IMPORTING
       owner TYPE string
@@ -9769,6 +9929,7 @@ INTERFACE zif_github.
 * Response: 204
 * Response: 403
 * Response: 404
+* Body schema: object
   METHODS issues_unlock
     IMPORTING
       owner TYPE string
@@ -9808,6 +9969,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/reaction
 * Response: 415
 * Response: 422
+* Body schema: object
   METHODS reactions_create_for_issue
     IMPORTING
       owner TYPE string
@@ -9872,6 +10034,7 @@ INTERFACE zif_github.
 * Response: 201
 *     application/json, #/components/schemas/deploy-key
 * Response: 422
+* Body schema: object
   METHODS repos_create_deploy_key
     IMPORTING
       owner TYPE string
@@ -9932,6 +10095,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/label
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS issues_create_label
     IMPORTING
       owner TYPE string
@@ -9961,6 +10125,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Response: 200
 *     application/json, #/components/schemas/label
+* Body schema: object
   METHODS issues_update_label
     IMPORTING
       name TYPE string
@@ -9975,6 +10140,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 204
+* Body schema: object
   METHODS issues_delete_label
     IMPORTING
       name TYPE string
@@ -10020,6 +10186,7 @@ INTERFACE zif_github.
 * Response: 409
 *     application/json, object
 * Response: 422
+* Body schema: object
   METHODS repos_merge
     IMPORTING
       owner TYPE string
@@ -10057,6 +10224,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/milestone
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS issues_create_milestone
     IMPORTING
       owner TYPE string
@@ -10086,6 +10254,7 @@ INTERFACE zif_github.
 * Parameter: milestone_number, required, path
 * Response: 200
 *     application/json, #/components/schemas/milestone
+* Body schema: object
   METHODS issues_update_milestone
     IMPORTING
       owner TYPE string
@@ -10101,6 +10270,7 @@ INTERFACE zif_github.
 * Parameter: milestone_number, required, path
 * Response: 204
 * Response: 404
+* Body schema: object
   METHODS issues_delete_milestone
     IMPORTING
       owner TYPE string
@@ -10155,6 +10325,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 202
+* Body schema: object
   METHODS activity_mark_repo_notificatio
     IMPORTING
       owner TYPE string
@@ -10184,6 +10355,7 @@ INTERFACE zif_github.
 * Response: 409
 * Response: 415
 * Response: 422
+* Body schema: object
   METHODS repos_create_pages_site
     IMPORTING
       owner TYPE string
@@ -10197,6 +10369,7 @@ INTERFACE zif_github.
 * Response: 204
 * Response: 400
 * Response: 422
+* Body schema: object
   METHODS repos_update_information_about
     IMPORTING
       owner TYPE string
@@ -10211,6 +10384,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 415
 * Response: 422
+* Body schema: object
   METHODS repos_delete_pages_site
     IMPORTING
       owner TYPE string
@@ -10307,6 +10481,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 410
 * Response: 422
+* Body schema: object
   METHODS projects_create_for_repo
     IMPORTING
       owner TYPE string
@@ -10349,6 +10524,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/pull-request
 * Response: 403
 * Response: 422
+* Body schema: object
   METHODS pulls_create
     IMPORTING
       owner TYPE string
@@ -10400,6 +10576,7 @@ INTERFACE zif_github.
 * Parameter: comment_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/pull-request-review-comment
+* Body schema: object
   METHODS pulls_update_review_comment
     IMPORTING
       owner TYPE string
@@ -10415,6 +10592,7 @@ INTERFACE zif_github.
 * Parameter: comment_id, required, path
 * Response: 204
 * Response: 404
+* Body schema: object
   METHODS pulls_delete_review_comment
     IMPORTING
       owner TYPE string
@@ -10455,6 +10633,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/reaction
 * Response: 415
 * Response: 422
+* Body schema: object
   METHODS reactions_create_for_pull_requ
     IMPORTING
       owner TYPE string
@@ -10500,6 +10679,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/pull-request
 * Response: 403
 * Response: 422
+* Body schema: object
   METHODS pulls_update
     IMPORTING
       owner TYPE string
@@ -10537,6 +10717,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/pull-request-review-comment
 * Response: 403
 * Response: 422
+* Body schema: object
   METHODS pulls_create_review_comment
     IMPORTING
       owner TYPE string
@@ -10551,6 +10732,7 @@ INTERFACE zif_github.
 * Response: 201
 *     application/json, #/components/schemas/pull-request-review-comment
 * Response: 404
+* Body schema: object
   METHODS pulls_create_reply_for_review_
     IMPORTING
       owner TYPE string
@@ -10617,6 +10799,7 @@ INTERFACE zif_github.
 * Response: 409
 *     application/json, object
 * Response: 422
+* Body schema: object
   METHODS pulls_merge
     IMPORTING
       owner TYPE string
@@ -10649,6 +10832,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/pull-request-simple
 * Response: 403
 * Response: 422
+* Body schema: object
   METHODS pulls_request_reviewers
     IMPORTING
       owner TYPE string
@@ -10661,6 +10845,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Response: 200
 * Response: 422
+* Body schema: object
   METHODS pulls_remove_requested_reviewe
     IMPORTING
       owner TYPE string
@@ -10691,6 +10876,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/pull-request-review
 * Response: 403
 * Response: 422
+* Body schema: object
   METHODS pulls_create_review
     IMPORTING
       owner TYPE string
@@ -10722,6 +10908,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, #/components/schemas/pull-request-review
 * Response: 422
+* Body schema: object
   METHODS pulls_update_review
     IMPORTING
       owner TYPE string
@@ -10739,6 +10926,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/pull-request-review
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS pulls_delete_pending_review
     IMPORTING
       owner TYPE string
@@ -10775,6 +10963,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/pull-request-review
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS pulls_dismiss_review
     IMPORTING
       owner TYPE string
@@ -10793,6 +10982,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS pulls_submit_review
     IMPORTING
       owner TYPE string
@@ -10810,6 +11000,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 415
 * Response: 422
+* Body schema: object
   METHODS pulls_update_branch
     IMPORTING
       owner TYPE string
@@ -10857,6 +11048,7 @@ INTERFACE zif_github.
 * Response: 201
 *     application/json, #/components/schemas/release
 * Response: 422
+* Body schema: object
   METHODS repos_create_release
     IMPORTING
       owner TYPE string
@@ -10888,6 +11080,7 @@ INTERFACE zif_github.
 * Parameter: asset_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/release-asset
+* Body schema: object
   METHODS repos_update_release_asset
     IMPORTING
       owner TYPE string
@@ -10902,6 +11095,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: asset_id, required, path
 * Response: 204
+* Body schema: object
   METHODS repos_delete_release_asset
     IMPORTING
       owner TYPE string
@@ -10961,6 +11155,7 @@ INTERFACE zif_github.
 * Parameter: release_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/release
+* Body schema: object
   METHODS repos_update_release
     IMPORTING
       owner TYPE string
@@ -10975,6 +11170,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Parameter: release_id, required, path
 * Response: 204
+* Body schema: object
   METHODS repos_delete_release
     IMPORTING
       owner TYPE string
@@ -11065,6 +11261,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 422
 * Response: 503
+* Body schema: object
   METHODS secret_scanning_update_alert
     IMPORTING
       owner TYPE string
@@ -11160,6 +11357,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Response: 201
 *     application/json, #/components/schemas/status
+* Body schema: object
   METHODS repos_create_commit_status
     IMPORTING
       sha TYPE string
@@ -11204,6 +11402,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Response: 200
 *     application/json, #/components/schemas/repository-subscription
+* Body schema: object
   METHODS activity_set_repo_subscription
     IMPORTING
       owner TYPE string
@@ -11216,6 +11415,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 204
+* Body schema: object
   METHODS activity_delete_repo_subscript
     IMPORTING
       owner TYPE string
@@ -11291,6 +11491,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 415
 * Response: 422
+* Body schema: object
   METHODS repos_replace_all_topics
     IMPORTING
       owner TYPE string
@@ -11362,6 +11563,7 @@ INTERFACE zif_github.
 * Parameter: repo, required, path
 * Response: 202
 *     application/json, #/components/schemas/repository
+* Body schema: object
   METHODS repos_transfer
     IMPORTING
       owner TYPE string
@@ -11421,6 +11623,7 @@ INTERFACE zif_github.
 * Parameter: template_repo, required, path
 * Response: 201
 *     application/json, #/components/schemas/repository
+* Body schema: object
   METHODS repos_create_using_template
     IMPORTING
       template_owner TYPE string
@@ -11454,6 +11657,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Response: 201
 *     application/json, #/components/schemas/scim-enterprise-group
+* Body schema: object
   METHODS enterprise_admin_provision_and
     IMPORTING
       enterprise TYPE string
@@ -11478,6 +11682,7 @@ INTERFACE zif_github.
 * Parameter: scim_group_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/scim-enterprise-group
+* Body schema: object
   METHODS enterprise_admin_set_informati
     IMPORTING
       enterprise TYPE string
@@ -11491,6 +11696,7 @@ INTERFACE zif_github.
 * Parameter: scim_group_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/scim-enterprise-group
+* Body schema: object
   METHODS enterprise_admin_update_attrib
     IMPORTING
       enterprise TYPE string
@@ -11503,6 +11709,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Parameter: scim_group_id, required, path
 * Response: 204
+* Body schema: object
   METHODS enterprise_admin_delete_scim_g
     IMPORTING
       enterprise TYPE string
@@ -11527,6 +11734,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Response: 201
 *     application/json, #/components/schemas/scim-enterprise-user
+* Body schema: object
   METHODS enterprise_admin_provision_a01
     IMPORTING
       enterprise TYPE string
@@ -11551,6 +11759,7 @@ INTERFACE zif_github.
 * Parameter: scim_user_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/scim-enterprise-user
+* Body schema: object
   METHODS enterprise_admin_set_informa01
     IMPORTING
       enterprise TYPE string
@@ -11564,6 +11773,7 @@ INTERFACE zif_github.
 * Parameter: scim_user_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/scim-enterprise-user
+* Body schema: object
   METHODS enterprise_admin_update_attr01
     IMPORTING
       enterprise TYPE string
@@ -11576,6 +11786,7 @@ INTERFACE zif_github.
 * Parameter: enterprise, required, path
 * Parameter: scim_user_id, required, path
 * Response: 204
+* Body schema: object
   METHODS enterprise_admin_delete_user_f
     IMPORTING
       enterprise TYPE string
@@ -11613,6 +11824,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 409
 * Response: 500
+* Body schema: object
   METHODS scim_provision_and_invite_user
     IMPORTING
       org TYPE string
@@ -11642,6 +11854,7 @@ INTERFACE zif_github.
 * Response: 304
 * Response: 403
 * Response: 404
+* Body schema: object
   METHODS scim_set_information_for_provi
     IMPORTING
       org TYPE string
@@ -11660,6 +11873,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 429
 *     application/json, #/components/schemas/basic-error
+* Body schema: object
   METHODS scim_update_attribute_for_user
     IMPORTING
       org TYPE string
@@ -11674,6 +11888,7 @@ INTERFACE zif_github.
 * Response: 304
 * Response: 403
 * Response: 404
+* Body schema: object
   METHODS scim_delete_user_from_org
     IMPORTING
       org TYPE string
@@ -11834,6 +12049,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS teams_update_legacy
     RAISING cx_static_check.
 
@@ -11842,6 +12058,7 @@ INTERFACE zif_github.
 * Response: 204
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS teams_delete_legacy
     RAISING cx_static_check.
 
@@ -11863,6 +12080,7 @@ INTERFACE zif_github.
 * Operation id: teams/create-discussion-legacy
 * Response: 201
 *     application/json, #/components/schemas/team-discussion
+* Body schema: object
   METHODS teams_create_discussion_legacy
     RAISING cx_static_check.
 
@@ -11878,6 +12096,7 @@ INTERFACE zif_github.
 * Operation id: teams/update-discussion-legacy
 * Response: 200
 *     application/json, #/components/schemas/team-discussion
+* Body schema: object
   METHODS teams_update_discussion_legacy
     RETURNING VALUE(team_discussion) TYPE team_discussion
     RAISING cx_static_check.
@@ -11885,6 +12104,7 @@ INTERFACE zif_github.
 * DELETE - "Delete a discussion (Legacy)"
 * Operation id: teams/delete-discussion-legacy
 * Response: 204
+* Body schema: object
   METHODS teams_delete_discussion_legacy
     RAISING cx_static_check.
 
@@ -11906,6 +12126,7 @@ INTERFACE zif_github.
 * Operation id: teams/create-discussion-comment-legacy
 * Response: 201
 *     application/json, #/components/schemas/team-discussion-comment
+* Body schema: object
   METHODS teams_create_discussion_comm01
     RAISING cx_static_check.
 
@@ -11921,6 +12142,7 @@ INTERFACE zif_github.
 * Operation id: teams/update-discussion-comment-legacy
 * Response: 200
 *     application/json, #/components/schemas/team-discussion-comment
+* Body schema: object
   METHODS teams_update_discussion_comm01
     RETURNING VALUE(team_discussion_comment) TYPE team_discussion_comment
     RAISING cx_static_check.
@@ -11928,6 +12150,7 @@ INTERFACE zif_github.
 * DELETE - "Delete a discussion comment (Legacy)"
 * Operation id: teams/delete-discussion-comment-legacy
 * Response: 204
+* Body schema: object
   METHODS teams_delete_discussion_comm01
     RAISING cx_static_check.
 
@@ -11949,6 +12172,7 @@ INTERFACE zif_github.
 * Operation id: reactions/create-for-team-discussion-comment-legacy
 * Response: 201
 *     application/json, #/components/schemas/reaction
+* Body schema: object
   METHODS reactions_create_for_team_di02
     RAISING cx_static_check.
 
@@ -11970,6 +12194,7 @@ INTERFACE zif_github.
 * Operation id: reactions/create-for-team-discussion-legacy
 * Response: 201
 *     application/json, #/components/schemas/reaction
+* Body schema: object
   METHODS reactions_create_for_team_di03
     RAISING cx_static_check.
 
@@ -12054,6 +12279,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 422
 *     application/json, object
+* Body schema: object
   METHODS teams_add_or_update_membersh01
     IMPORTING
       username TYPE string
@@ -12065,6 +12291,7 @@ INTERFACE zif_github.
 * Parameter: username, required, path
 * Response: 204
 * Response: 403
+* Body schema: object
   METHODS teams_remove_membership_for_01
     IMPORTING
       username TYPE string
@@ -12102,6 +12329,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 415
 * Response: 422
+* Body schema: object
   METHODS teams_add_or_update_project_01
     RAISING cx_static_check.
 
@@ -12111,6 +12339,7 @@ INTERFACE zif_github.
 * Response: 404
 * Response: 415
 * Response: 422
+* Body schema: object
   METHODS teams_remove_project_legacy
     RAISING cx_static_check.
 
@@ -12148,6 +12377,7 @@ INTERFACE zif_github.
 * Response: 204
 * Response: 403
 * Response: 422
+* Body schema: object
   METHODS teams_add_or_update_repo_per01
     IMPORTING
       owner TYPE string
@@ -12159,6 +12389,7 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 204
+* Body schema: object
   METHODS teams_remove_repo_legacy
     IMPORTING
       owner TYPE string
@@ -12181,6 +12412,7 @@ INTERFACE zif_github.
 *     application/json, #/components/schemas/group-mapping
 * Response: 403
 * Response: 422
+* Body schema: object
   METHODS teams_create_or_update_idp_g01
     RETURNING VALUE(group_mapping) TYPE group_mapping
     RAISING cx_static_check.
@@ -12203,7 +12435,7 @@ INTERFACE zif_github.
 * GET - "Get the authenticated user"
 * Operation id: users/get-authenticated
 * Response: 200
-*     application/json, 
+*     application/json,
 * Response: 304
 * Response: 401
 * Response: 403
@@ -12219,6 +12451,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS users_update_authenticated
     RETURNING VALUE(private_user) TYPE private_user
     RAISING cx_static_check.
@@ -12285,6 +12518,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS users_set_primary_email_visibi
     RAISING cx_static_check.
 
@@ -12313,6 +12547,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema:
   METHODS users_add_email_for_authentica
     RAISING cx_static_check.
 
@@ -12324,6 +12559,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema:
   METHODS users_delete_email_for_authent
     RAISING cx_static_check.
 
@@ -12422,6 +12658,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS users_create_gpg_key_for_authe
     RAISING cx_static_check.
 
@@ -12528,6 +12765,7 @@ INTERFACE zif_github.
 * Response: 200
 *     application/json, #/components/schemas/interaction-limit-response
 * Response: 422
+* Body ref: #/components/schemas/interaction-limit
   METHODS interactions_set_restriction02
     RETURNING VALUE(interaction_limit_response) TYPE interaction_limit_response
     RAISING cx_static_check.
@@ -12589,6 +12827,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS users_create_public_ssh_key_fo
     RAISING cx_static_check.
 
@@ -12688,6 +12927,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS orgs_update_membership_for_aut
     IMPORTING
       org TYPE string
@@ -12717,6 +12957,7 @@ INTERFACE zif_github.
 * Response: 401
 * Response: 403
 * Response: 422
+* Body schema: object
   METHODS migrations_start_for_authentic
     RAISING cx_static_check.
 
@@ -12816,6 +13057,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 415
 * Response: 422
+* Body schema: object
   METHODS projects_create_for_authentica
     RAISING cx_static_check.
 
@@ -12875,6 +13117,7 @@ INTERFACE zif_github.
 * Response: 403
 * Response: 404
 * Response: 422
+* Body schema: object
   METHODS repos_create_for_authenticated
     RAISING cx_static_check.
 
@@ -13031,7 +13274,7 @@ INTERFACE zif_github.
 * Operation id: users/get-by-username
 * Parameter: username, required, path
 * Response: 200
-*     application/json, 
+*     application/json,
 * Response: 404
   METHODS users_get_by_username
     IMPORTING

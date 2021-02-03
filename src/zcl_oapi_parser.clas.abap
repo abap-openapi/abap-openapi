@@ -146,8 +146,13 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
         ls_operation-parameters_ref = parse_parameters_ref( lv_prefix && '/parameters/' ).
         ls_operation-responses = parse_responses( lv_prefix && '/responses/' ).
         ls_operation-abap_name = lo_names->to_abap_name( ls_operation-operation_id ).
+        ls_operation-body_schema_ref = mo_json->value_string( lv_prefix && '/requestBody/content/application/json/schema/$ref' ).
+        IF ls_operation-body_schema_ref IS INITIAL AND lines( mo_json->members( lv_prefix && '/requestBody/content/application/json/schema/' ) ) > 0.
+          ls_operation-body_schema = parse_schema( lv_prefix && '/requestBody/content/application/json/schema' ).
+        ENDIF.
         APPEND ls_operation TO rt_operations.
       ENDLOOP.
+
     ENDLOOP.
   ENDMETHOD.
 

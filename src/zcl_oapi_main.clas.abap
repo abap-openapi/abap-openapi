@@ -65,7 +65,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     ms_specification = lo_parser->parse( is_input-json ).
 
     CREATE OBJECT lo_dereference.
-    ms_specification = lo_dereference->dereference( ms_specification ).
+    ms_specification = lo_dereference->fix( ms_specification ).
 
     rs_result-clas = build_class( ).
     rs_result-intf = build_interface( ).
@@ -132,14 +132,20 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
     DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
     DATA ls_property TYPE zif_oapi_schema=>ty_property.
+    DATA lv_count TYPE i.
 
     LOOP AT ms_specification-components-schemas INTO ls_schema.
       rv_abap = rv_abap && |* Component schema: { ls_schema-name }, { ls_schema-schema->type }\n|.
       IF ls_schema-schema->type = 'object'.
         rv_abap = rv_abap && |  TYPES: BEGIN OF { ls_schema-abap_name },\n|.
+        lv_count = 0.
         LOOP AT ls_schema-schema->properties INTO ls_property.
           rv_abap = rv_abap && |           | && ls_property-abap_name && | TYPE | && dump_basic_type( ls_property-schema ) && |,\n|.
+          lv_count = lv_count + 1.
         ENDLOOP.
+        IF lv_count = 0. " temporary workaround
+          rv_abap = rv_abap && |           dummy TYPE i,\n|.
+        ENDIF.
         rv_abap = rv_abap && |         END OF { ls_schema-abap_name }.\n|.
       ELSE.
         rv_abap = rv_abap && |  TYPES { ls_schema-abap_name } TYPE string.\n|.
@@ -194,6 +200,14 @@ CLASS zcl_oapi_main IMPLEMENTATION.
             |*     { ls_content-type }{ lv_extra }\n|.
         ENDLOOP.
       ENDLOOP.
+      IF ls_operation-body_schema_ref IS NOT INITIAL.
+        rv_abap = rv_abap &&
+          |* Body ref: { ls_operation-body_schema_ref }\n|.
+      ENDIF.
+      IF ls_operation-body_schema IS NOT INITIAL.
+        rv_abap = rv_abap &&
+          |* Body schema: { ls_operation-body_schema->type }\n|.
+      ENDIF.
       rv_abap = rv_abap &&
         |  METHODS { ls_operation-abap_name }{ parameters_to_abap( ls_operation-parameters ) }|.
       ls_return = find_return( ls_operation ).

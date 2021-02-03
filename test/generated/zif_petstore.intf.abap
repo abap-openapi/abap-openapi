@@ -76,6 +76,7 @@ INTERFACE zif_petstore.
 * Response: 400
 * Response: 404
 * Response: 405
+* Body ref: #/components/schemas/Pet
   METHODS updatepet
     RETURNING VALUE(pet) TYPE pet
     RAISING cx_static_check.
@@ -86,6 +87,7 @@ INTERFACE zif_petstore.
 *     application/xml, #/components/schemas/Pet
 *     application/json, #/components/schemas/Pet
 * Response: 405
+* Body ref: #/components/schemas/Pet
   METHODS addpet
     RETURNING VALUE(pet) TYPE pet
     RAISING cx_static_check.
@@ -177,6 +179,7 @@ INTERFACE zif_petstore.
 * Response: 200
 *     application/json, #/components/schemas/Order
 * Response: 405
+* Body ref: #/components/schemas/Order
   METHODS placeorder
     RETURNING VALUE(order) TYPE order
     RAISING cx_static_check.
@@ -210,6 +213,7 @@ INTERFACE zif_petstore.
 * Response: default
 *     application/json, #/components/schemas/User
 *     application/xml, #/components/schemas/User
+* Body ref: #/components/schemas/User
   METHODS createuser
     RAISING cx_static_check.
 
@@ -219,6 +223,7 @@ INTERFACE zif_petstore.
 *     application/xml, #/components/schemas/User
 *     application/json, #/components/schemas/User
 * Response: default
+* Body schema: array
   METHODS createuserswithlistinput
     RETURNING VALUE(user) TYPE user
     RAISING cx_static_check.
@@ -261,6 +266,7 @@ INTERFACE zif_petstore.
 * Operation id: updateUser
 * Parameter: username, required, path
 * Response: default
+* Body ref: #/components/schemas/User
   METHODS updateuser
     IMPORTING
       username TYPE string

@@ -36,19 +36,21 @@ INTERFACE zif_oapi_specification_v3 PUBLIC.
            description    TYPE string,
            operation_id   TYPE string,
            abap_name      TYPE string,
-           parameters     TYPE ty_parameters,
-           parameters_ref TYPE string_table,
-           responses      TYPE ty_responses,
-           responses_ref  TYPE string_table, " ? todo
+           body_schema     TYPE REF TO zif_oapi_schema,
+           body_schema_ref TYPE string,
+           parameters      TYPE ty_parameters,
+           parameters_ref  TYPE string_table,
+           responses       TYPE ty_responses,
+           responses_ref   TYPE string_table, " ? todo
          END OF ty_operation.
 
   TYPES ty_operations TYPE STANDARD TABLE OF ty_operation WITH DEFAULT KEY.
 
   TYPES: BEGIN OF ty_component_schema,
-           name      TYPE string,
-           abap_name TYPE string,
+           name               TYPE string,
+           abap_name          TYPE string,
            abap_parser_method TYPE string,
-           schema    TYPE REF TO zif_oapi_schema,
+           schema             TYPE REF TO zif_oapi_schema,
          END OF ty_component_schema.
 
   TYPES ty_schemas TYPE STANDARD TABLE OF ty_component_schema WITH DEFAULT KEY.
