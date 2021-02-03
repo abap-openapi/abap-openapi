@@ -257,7 +257,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     IF ls_return IS NOT INITIAL.
       rv_abap = rv_abap &&
         |    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).\n| &&
-        |* { ls_return-name }, { ls_return-abap_name }, { ls_return-abap_parser_method }\n|.
+        |    { ls_return-abap_name } = { ls_return-abap_parser_method }( '' ).\n|.
     ELSE.
       rv_abap = rv_abap &&
         |* todo, handle more responses\n|.
