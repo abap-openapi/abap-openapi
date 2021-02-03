@@ -4,9 +4,958 @@ CLASS zcl_github DEFINITION PUBLIC.
   PUBLIC SECTION.
     INTERFACES zif_github.
     METHODS constructor IMPORTING ii_client TYPE REF TO if_http_client.
-  PRIVATE SECTION.
+  PROTECTED SECTION.
     DATA mi_client TYPE REF TO if_http_client.
-    METHODS send_receive.
+    DATA mo_json TYPE REF TO zcl_oapi_json.
+    METHODS send_receive RETURNING VALUE(rv_code) TYPE i.
+    METHODS parse_simple_user
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(simple_user) TYPE zif_github=>simple_user
+      RAISING cx_static_check.
+    METHODS parse_integration
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(integration) TYPE zif_github=>integration
+      RAISING cx_static_check.
+    METHODS parse_basic_error
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(basic_error) TYPE zif_github=>basic_error
+      RAISING cx_static_check.
+    METHODS parse_validation_error_simple
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(validation_error_simple) TYPE zif_github=>validation_error_simple
+      RAISING cx_static_check.
+    METHODS parse_webhook_config_url
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(webhook_config_url) TYPE zif_github=>webhook_config_url
+      RAISING cx_static_check.
+    METHODS parse_webhook_config_content_t
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(webhook_config_content_type) TYPE zif_github=>webhook_config_content_type
+      RAISING cx_static_check.
+    METHODS parse_webhook_config_secret
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(webhook_config_secret) TYPE zif_github=>webhook_config_secret
+      RAISING cx_static_check.
+    METHODS parse_webhook_config_insecure_
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(webhook_config_insecure_ssl) TYPE zif_github=>webhook_config_insecure_ssl
+      RAISING cx_static_check.
+    METHODS parse_webhook_config
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(webhook_config) TYPE zif_github=>webhook_config
+      RAISING cx_static_check.
+    METHODS parse_enterprise
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(enterprise) TYPE zif_github=>enterprise
+      RAISING cx_static_check.
+    METHODS parse_installation
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(installation) TYPE zif_github=>installation
+      RAISING cx_static_check.
+    METHODS parse_app_permissions
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(app_permissions) TYPE zif_github=>app_permissions
+      RAISING cx_static_check.
+    METHODS parse_license_simple
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(license_simple) TYPE zif_github=>license_simple
+      RAISING cx_static_check.
+    METHODS parse_repository
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(repository) TYPE zif_github=>repository
+      RAISING cx_static_check.
+    METHODS parse_installation_token
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(installation_token) TYPE zif_github=>installation_token
+      RAISING cx_static_check.
+    METHODS parse_validation_error
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(validation_error) TYPE zif_github=>validation_error
+      RAISING cx_static_check.
+    METHODS parse_application_grant
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(application_grant) TYPE zif_github=>application_grant
+      RAISING cx_static_check.
+    METHODS parse_scoped_installation
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(scoped_installation) TYPE zif_github=>scoped_installation
+      RAISING cx_static_check.
+    METHODS parse_authorization
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(authorization) TYPE zif_github=>authorization
+      RAISING cx_static_check.
+    METHODS parse_code_of_conduct
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_of_conduct) TYPE zif_github=>code_of_conduct
+      RAISING cx_static_check.
+    METHODS parse_content_reference_attach
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(content_reference_attachment) TYPE zif_github=>content_reference_attachment
+      RAISING cx_static_check.
+    METHODS parse_enabled_organizations
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(enabled_organizations) TYPE zif_github=>enabled_organizations
+      RAISING cx_static_check.
+    METHODS parse_allowed_actions
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(allowed_actions) TYPE zif_github=>allowed_actions
+      RAISING cx_static_check.
+    METHODS parse_selected_actions_url
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(selected_actions_url) TYPE zif_github=>selected_actions_url
+      RAISING cx_static_check.
+    METHODS parse_actions_enterprise_permi
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(actions_enterprise_permissions) TYPE zif_github=>actions_enterprise_permissions
+      RAISING cx_static_check.
+    METHODS parse_organization_simple
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(organization_simple) TYPE zif_github=>organization_simple
+      RAISING cx_static_check.
+    METHODS parse_selected_actions
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(selected_actions) TYPE zif_github=>selected_actions
+      RAISING cx_static_check.
+    METHODS parse_runner_groups_enterprise
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(runner_groups_enterprise) TYPE zif_github=>runner_groups_enterprise
+      RAISING cx_static_check.
+    METHODS parse_runner
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(runner) TYPE zif_github=>runner
+      RAISING cx_static_check.
+    METHODS parse_runner_application
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(runner_application) TYPE zif_github=>runner_application
+      RAISING cx_static_check.
+    METHODS parse_authentication_token
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(authentication_token) TYPE zif_github=>authentication_token
+      RAISING cx_static_check.
+    METHODS parse_audit_log_event
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(audit_log_event) TYPE zif_github=>audit_log_event
+      RAISING cx_static_check.
+    METHODS parse_actions_billing_usage
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(actions_billing_usage) TYPE zif_github=>actions_billing_usage
+      RAISING cx_static_check.
+    METHODS parse_packages_billing_usage
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(packages_billing_usage) TYPE zif_github=>packages_billing_usage
+      RAISING cx_static_check.
+    METHODS parse_combined_billing_usage
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(combined_billing_usage) TYPE zif_github=>combined_billing_usage
+      RAISING cx_static_check.
+    METHODS parse_actor
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(actor) TYPE zif_github=>actor
+      RAISING cx_static_check.
+    METHODS parse_label
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(label) TYPE zif_github=>label
+      RAISING cx_static_check.
+    METHODS parse_milestone
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(milestone) TYPE zif_github=>milestone
+      RAISING cx_static_check.
+    METHODS parse_author_association
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(author_association) TYPE zif_github=>author_association
+      RAISING cx_static_check.
+    METHODS parse_issue_simple
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issue_simple) TYPE zif_github=>issue_simple
+      RAISING cx_static_check.
+    METHODS parse_reaction_rollup
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(reaction_rollup) TYPE zif_github=>reaction_rollup
+      RAISING cx_static_check.
+    METHODS parse_issue_comment
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issue_comment) TYPE zif_github=>issue_comment
+      RAISING cx_static_check.
+    METHODS parse_event
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(event) TYPE zif_github=>event
+      RAISING cx_static_check.
+    METHODS parse_link_with_type
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(link_with_type) TYPE zif_github=>link_with_type
+      RAISING cx_static_check.
+    METHODS parse_feed
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(feed) TYPE zif_github=>feed
+      RAISING cx_static_check.
+    METHODS parse_base_gist
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(base_gist) TYPE zif_github=>base_gist
+      RAISING cx_static_check.
+    METHODS parse_gist_simple
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(gist_simple) TYPE zif_github=>gist_simple
+      RAISING cx_static_check.
+    METHODS parse_gist_comment
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(gist_comment) TYPE zif_github=>gist_comment
+      RAISING cx_static_check.
+    METHODS parse_gist_commit
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(gist_commit) TYPE zif_github=>gist_commit
+      RAISING cx_static_check.
+    METHODS parse_gitignore_template
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(gitignore_template) TYPE zif_github=>gitignore_template
+      RAISING cx_static_check.
+    METHODS parse_issue
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issue) TYPE zif_github=>issue
+      RAISING cx_static_check.
+    METHODS parse_license
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(license) TYPE zif_github=>license
+      RAISING cx_static_check.
+    METHODS parse_marketplace_listing_plan
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(marketplace_listing_plan) TYPE zif_github=>marketplace_listing_plan
+      RAISING cx_static_check.
+    METHODS parse_marketplace_purchase
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(marketplace_purchase) TYPE zif_github=>marketplace_purchase
+      RAISING cx_static_check.
+    METHODS parse_api_overview
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(api_overview) TYPE zif_github=>api_overview
+      RAISING cx_static_check.
+    METHODS parse_minimal_repository
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(minimal_repository) TYPE zif_github=>minimal_repository
+      RAISING cx_static_check.
+    METHODS parse_thread
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(thread) TYPE zif_github=>thread
+      RAISING cx_static_check.
+    METHODS parse_thread_subscription
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(thread_subscription) TYPE zif_github=>thread_subscription
+      RAISING cx_static_check.
+    METHODS parse_organization_full
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(organization_full) TYPE zif_github=>organization_full
+      RAISING cx_static_check.
+    METHODS parse_enabled_repositories
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(enabled_repositories) TYPE zif_github=>enabled_repositories
+      RAISING cx_static_check.
+    METHODS parse_actions_organization_per
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(actions_organization_permissio) TYPE zif_github=>actions_organization_permissio
+      RAISING cx_static_check.
+    METHODS parse_runner_groups_org
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(runner_groups_org) TYPE zif_github=>runner_groups_org
+      RAISING cx_static_check.
+    METHODS parse_organization_actions_sec
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(organization_actions_secret) TYPE zif_github=>organization_actions_secret
+      RAISING cx_static_check.
+    METHODS parse_actions_public_key
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(actions_public_key) TYPE zif_github=>actions_public_key
+      RAISING cx_static_check.
+    METHODS parse_credential_authorization
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(credential_authorization) TYPE zif_github=>credential_authorization
+      RAISING cx_static_check.
+    METHODS parse_organization_invitation
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(organization_invitation) TYPE zif_github=>organization_invitation
+      RAISING cx_static_check.
+    METHODS parse_org_hook
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(org_hook) TYPE zif_github=>org_hook
+      RAISING cx_static_check.
+    METHODS parse_interaction_group
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(interaction_group) TYPE zif_github=>interaction_group
+      RAISING cx_static_check.
+    METHODS parse_interaction_limit_respon
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(interaction_limit_response) TYPE zif_github=>interaction_limit_response
+      RAISING cx_static_check.
+    METHODS parse_interaction_expiry
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(interaction_expiry) TYPE zif_github=>interaction_expiry
+      RAISING cx_static_check.
+    METHODS parse_interaction_limit
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(interaction_limit) TYPE zif_github=>interaction_limit
+      RAISING cx_static_check.
+    METHODS parse_team_simple
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(team_simple) TYPE zif_github=>team_simple
+      RAISING cx_static_check.
+    METHODS parse_team
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(team) TYPE zif_github=>team
+      RAISING cx_static_check.
+    METHODS parse_org_membership
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(org_membership) TYPE zif_github=>org_membership
+      RAISING cx_static_check.
+    METHODS parse_migration
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(migration) TYPE zif_github=>migration
+      RAISING cx_static_check.
+    METHODS parse_project
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(project) TYPE zif_github=>project
+      RAISING cx_static_check.
+    METHODS parse_group_mapping
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(group_mapping) TYPE zif_github=>group_mapping
+      RAISING cx_static_check.
+    METHODS parse_team_full
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(team_full) TYPE zif_github=>team_full
+      RAISING cx_static_check.
+    METHODS parse_team_discussion
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(team_discussion) TYPE zif_github=>team_discussion
+      RAISING cx_static_check.
+    METHODS parse_team_discussion_comment
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(team_discussion_comment) TYPE zif_github=>team_discussion_comment
+      RAISING cx_static_check.
+    METHODS parse_reaction
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(reaction) TYPE zif_github=>reaction
+      RAISING cx_static_check.
+    METHODS parse_team_membership
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(team_membership) TYPE zif_github=>team_membership
+      RAISING cx_static_check.
+    METHODS parse_team_project
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(team_project) TYPE zif_github=>team_project
+      RAISING cx_static_check.
+    METHODS parse_team_repository
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(team_repository) TYPE zif_github=>team_repository
+      RAISING cx_static_check.
+    METHODS parse_project_card
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(project_card) TYPE zif_github=>project_card
+      RAISING cx_static_check.
+    METHODS parse_project_column
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(project_column) TYPE zif_github=>project_column
+      RAISING cx_static_check.
+    METHODS parse_repository_collaborator_
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(repository_collaborator_permis) TYPE zif_github=>repository_collaborator_permis
+      RAISING cx_static_check.
+    METHODS parse_rate_limit
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(rate_limit) TYPE zif_github=>rate_limit
+      RAISING cx_static_check.
+    METHODS parse_rate_limit_overview
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(rate_limit_overview) TYPE zif_github=>rate_limit_overview
+      RAISING cx_static_check.
+    METHODS parse_full_repository
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(full_repository) TYPE zif_github=>full_repository
+      RAISING cx_static_check.
+    METHODS parse_artifact
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(artifact) TYPE zif_github=>artifact
+      RAISING cx_static_check.
+    METHODS parse_job
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(job) TYPE zif_github=>job
+      RAISING cx_static_check.
+    METHODS parse_actions_enabled
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(actions_enabled) TYPE zif_github=>actions_enabled
+      RAISING cx_static_check.
+    METHODS parse_actions_repository_permi
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(actions_repository_permissions) TYPE zif_github=>actions_repository_permissions
+      RAISING cx_static_check.
+    METHODS parse_pull_request_minimal
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pull_request_minimal) TYPE zif_github=>pull_request_minimal
+      RAISING cx_static_check.
+    METHODS parse_simple_commit
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(simple_commit) TYPE zif_github=>simple_commit
+      RAISING cx_static_check.
+    METHODS parse_workflow_run
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflow_run) TYPE zif_github=>workflow_run
+      RAISING cx_static_check.
+    METHODS parse_workflow_run_usage
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflow_run_usage) TYPE zif_github=>workflow_run_usage
+      RAISING cx_static_check.
+    METHODS parse_actions_secret
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(actions_secret) TYPE zif_github=>actions_secret
+      RAISING cx_static_check.
+    METHODS parse_workflow
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflow) TYPE zif_github=>workflow
+      RAISING cx_static_check.
+    METHODS parse_workflow_usage
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflow_usage) TYPE zif_github=>workflow_usage
+      RAISING cx_static_check.
+    METHODS parse_protected_branch_admin_e
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(protected_branch_admin_enforce) TYPE zif_github=>protected_branch_admin_enforce
+      RAISING cx_static_check.
+    METHODS parse_protected_branch_pull_re
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(protected_branch_pull_request_) TYPE zif_github=>protected_branch_pull_request_
+      RAISING cx_static_check.
+    METHODS parse_branch_restriction_polic
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(branch_restriction_policy) TYPE zif_github=>branch_restriction_policy
+      RAISING cx_static_check.
+    METHODS parse_branch_protection
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(branch_protection) TYPE zif_github=>branch_protection
+      RAISING cx_static_check.
+    METHODS parse_short_branch
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(short_branch) TYPE zif_github=>short_branch
+      RAISING cx_static_check.
+    METHODS parse_git_user
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(git_user) TYPE zif_github=>git_user
+      RAISING cx_static_check.
+    METHODS parse_verification
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(verification) TYPE zif_github=>verification
+      RAISING cx_static_check.
+    METHODS parse_commit
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(commit) TYPE zif_github=>commit
+      RAISING cx_static_check.
+    METHODS parse_branch_with_protection
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(branch_with_protection) TYPE zif_github=>branch_with_protection
+      RAISING cx_static_check.
+    METHODS parse_status_check_policy
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(status_check_policy) TYPE zif_github=>status_check_policy
+      RAISING cx_static_check.
+    METHODS parse_protected_branch
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(protected_branch) TYPE zif_github=>protected_branch
+      RAISING cx_static_check.
+    METHODS parse_check_run
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(check_run) TYPE zif_github=>check_run
+      RAISING cx_static_check.
+    METHODS parse_check_annotation
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(check_annotation) TYPE zif_github=>check_annotation
+      RAISING cx_static_check.
+    METHODS parse_check_suite
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(check_suite) TYPE zif_github=>check_suite
+      RAISING cx_static_check.
+    METHODS parse_check_suite_preference
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(check_suite_preference) TYPE zif_github=>check_suite_preference
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_alert_stat
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_alert_state) TYPE zif_github=>code_scanning_alert_state
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_alert_ref
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_alert_ref) TYPE zif_github=>code_scanning_alert_ref
+      RAISING cx_static_check.
+    METHODS parse_alert_number
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(alert_number) TYPE zif_github=>alert_number
+      RAISING cx_static_check.
+    METHODS parse_alert_created_at
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(alert_created_at) TYPE zif_github=>alert_created_at
+      RAISING cx_static_check.
+    METHODS parse_alert_url
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(alert_url) TYPE zif_github=>alert_url
+      RAISING cx_static_check.
+    METHODS parse_alert_html_url
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(alert_html_url) TYPE zif_github=>alert_html_url
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_alert_dism
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_alert_dismissed_) TYPE zif_github=>code_scanning_alert_dismissed_
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_alert_di01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_alert_dismisse01) TYPE zif_github=>code_scanning_alert_dismisse01
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_alert_rule
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_alert_rule) TYPE zif_github=>code_scanning_alert_rule
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_analysis_t
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_analysis_tool_na) TYPE zif_github=>code_scanning_analysis_tool_na
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_analysis01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_analysis_tool) TYPE zif_github=>code_scanning_analysis_tool
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_alert_code
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_alert_code_scann) TYPE zif_github=>code_scanning_alert_code_scann
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_analysis_a
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_analysis_analysi) TYPE zif_github=>code_scanning_analysis_analysi
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_alert_envi
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_alert_environmen) TYPE zif_github=>code_scanning_alert_environmen
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_alert_inst
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_alert_instances) TYPE zif_github=>code_scanning_alert_instances
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_alert_co01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_alert_code_sca01) TYPE zif_github=>code_scanning_alert_code_sca01
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_alert_set_
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_alert_set_state) TYPE zif_github=>code_scanning_alert_set_state
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_analysis_r
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_analysis_ref) TYPE zif_github=>code_scanning_analysis_ref
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_analysis_c
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_analysis_commit_) TYPE zif_github=>code_scanning_analysis_commit_
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_analysis02
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_analysis_created) TYPE zif_github=>code_scanning_analysis_created
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_analysis_e
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_analysis_environ) TYPE zif_github=>code_scanning_analysis_environ
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_analysis03
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_analysis_code_sc) TYPE zif_github=>code_scanning_analysis_code_sc
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_analysis_s
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_scanning_analysis_sarif_f) TYPE zif_github=>code_scanning_analysis_sarif_f
+      RAISING cx_static_check.
+    METHODS parse_collaborator
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(collaborator) TYPE zif_github=>collaborator
+      RAISING cx_static_check.
+    METHODS parse_repository_invitation
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(repository_invitation) TYPE zif_github=>repository_invitation
+      RAISING cx_static_check.
+    METHODS parse_commit_comment
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(commit_comment) TYPE zif_github=>commit_comment
+      RAISING cx_static_check.
+    METHODS parse_scim_error
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(scim_error) TYPE zif_github=>scim_error
+      RAISING cx_static_check.
+    METHODS parse_branch_short
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(branch_short) TYPE zif_github=>branch_short
+      RAISING cx_static_check.
+    METHODS parse_link
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(link) TYPE zif_github=>link
+      RAISING cx_static_check.
+    METHODS parse_auto_merge
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(auto_merge) TYPE zif_github=>auto_merge
+      RAISING cx_static_check.
+    METHODS parse_pull_request_simple
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pull_request_simple) TYPE zif_github=>pull_request_simple
+      RAISING cx_static_check.
+    METHODS parse_simple_commit_status
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(simple_commit_status) TYPE zif_github=>simple_commit_status
+      RAISING cx_static_check.
+    METHODS parse_combined_commit_status
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(combined_commit_status) TYPE zif_github=>combined_commit_status
+      RAISING cx_static_check.
+    METHODS parse_status
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(status) TYPE zif_github=>status
+      RAISING cx_static_check.
+    METHODS parse_code_of_conduct_simple
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_of_conduct_simple) TYPE zif_github=>code_of_conduct_simple
+      RAISING cx_static_check.
+    METHODS parse_community_health_file
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(community_health_file) TYPE zif_github=>community_health_file
+      RAISING cx_static_check.
+    METHODS parse_community_profile
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(community_profile) TYPE zif_github=>community_profile
+      RAISING cx_static_check.
+    METHODS parse_diff_entry
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(diff_entry) TYPE zif_github=>diff_entry
+      RAISING cx_static_check.
+    METHODS parse_commit_comparison
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(commit_comparison) TYPE zif_github=>commit_comparison
+      RAISING cx_static_check.
+    METHODS parse_content_tree
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(content_tree) TYPE zif_github=>content_tree
+      RAISING cx_static_check.
+    METHODS parse_content_directory
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(content_directory) TYPE zif_github=>content_directory
+      RAISING cx_static_check.
+    METHODS parse_content_file
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(content_file) TYPE zif_github=>content_file
+      RAISING cx_static_check.
+    METHODS parse_content_symlink
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(content_symlink) TYPE zif_github=>content_symlink
+      RAISING cx_static_check.
+    METHODS parse_content_submodule
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(content_submodule) TYPE zif_github=>content_submodule
+      RAISING cx_static_check.
+    METHODS parse_file_commit
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(file_commit) TYPE zif_github=>file_commit
+      RAISING cx_static_check.
+    METHODS parse_contributor
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(contributor) TYPE zif_github=>contributor
+      RAISING cx_static_check.
+    METHODS parse_deployment
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(deployment) TYPE zif_github=>deployment
+      RAISING cx_static_check.
+    METHODS parse_deployment_status
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(deployment_status) TYPE zif_github=>deployment_status
+      RAISING cx_static_check.
+    METHODS parse_short_blob
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(short_blob) TYPE zif_github=>short_blob
+      RAISING cx_static_check.
+    METHODS parse_blob
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(blob) TYPE zif_github=>blob
+      RAISING cx_static_check.
+    METHODS parse_git_commit
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(git_commit) TYPE zif_github=>git_commit
+      RAISING cx_static_check.
+    METHODS parse_git_ref
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(git_ref) TYPE zif_github=>git_ref
+      RAISING cx_static_check.
+    METHODS parse_git_tag
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(git_tag) TYPE zif_github=>git_tag
+      RAISING cx_static_check.
+    METHODS parse_git_tree
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(git_tree) TYPE zif_github=>git_tree
+      RAISING cx_static_check.
+    METHODS parse_hook_response
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(hook_response) TYPE zif_github=>hook_response
+      RAISING cx_static_check.
+    METHODS parse_hook
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(hook) TYPE zif_github=>hook
+      RAISING cx_static_check.
+    METHODS parse_import
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(import) TYPE zif_github=>import
+      RAISING cx_static_check.
+    METHODS parse_porter_author
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(porter_author) TYPE zif_github=>porter_author
+      RAISING cx_static_check.
+    METHODS parse_porter_large_file
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(porter_large_file) TYPE zif_github=>porter_large_file
+      RAISING cx_static_check.
+    METHODS parse_issue_event_label
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issue_event_label) TYPE zif_github=>issue_event_label
+      RAISING cx_static_check.
+    METHODS parse_issue_event_dismissed_re
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issue_event_dismissed_review) TYPE zif_github=>issue_event_dismissed_review
+      RAISING cx_static_check.
+    METHODS parse_issue_event_milestone
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issue_event_milestone) TYPE zif_github=>issue_event_milestone
+      RAISING cx_static_check.
+    METHODS parse_issue_event_project_card
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issue_event_project_card) TYPE zif_github=>issue_event_project_card
+      RAISING cx_static_check.
+    METHODS parse_issue_event_rename
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issue_event_rename) TYPE zif_github=>issue_event_rename
+      RAISING cx_static_check.
+    METHODS parse_issue_event
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issue_event) TYPE zif_github=>issue_event
+      RAISING cx_static_check.
+    METHODS parse_issue_event_for_issue
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issue_event_for_issue) TYPE zif_github=>issue_event_for_issue
+      RAISING cx_static_check.
+    METHODS parse_deploy_key
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(deploy_key) TYPE zif_github=>deploy_key
+      RAISING cx_static_check.
+    METHODS parse_language
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(language) TYPE zif_github=>language
+      RAISING cx_static_check.
+    METHODS parse_license_content
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(license_content) TYPE zif_github=>license_content
+      RAISING cx_static_check.
+    METHODS parse_pages_source_hash
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pages_source_hash) TYPE zif_github=>pages_source_hash
+      RAISING cx_static_check.
+    METHODS parse_page
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(page) TYPE zif_github=>page
+      RAISING cx_static_check.
+    METHODS parse_page_build
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(page_build) TYPE zif_github=>page_build
+      RAISING cx_static_check.
+    METHODS parse_page_build_status
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(page_build_status) TYPE zif_github=>page_build_status
+      RAISING cx_static_check.
+    METHODS parse_pull_request
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pull_request) TYPE zif_github=>pull_request
+      RAISING cx_static_check.
+    METHODS parse_pull_request_review_comm
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pull_request_review_comment) TYPE zif_github=>pull_request_review_comment
+      RAISING cx_static_check.
+    METHODS parse_pull_request_merge_resul
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pull_request_merge_result) TYPE zif_github=>pull_request_merge_result
+      RAISING cx_static_check.
+    METHODS parse_pull_request_review_requ
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pull_request_review_request) TYPE zif_github=>pull_request_review_request
+      RAISING cx_static_check.
+    METHODS parse_pull_request_review
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pull_request_review) TYPE zif_github=>pull_request_review
+      RAISING cx_static_check.
+    METHODS parse_review_comment
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(review_comment) TYPE zif_github=>review_comment
+      RAISING cx_static_check.
+    METHODS parse_release_asset
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(release_asset) TYPE zif_github=>release_asset
+      RAISING cx_static_check.
+    METHODS parse_release
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(release) TYPE zif_github=>release
+      RAISING cx_static_check.
+    METHODS parse_secret_scanning_alert_st
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(secret_scanning_alert_state) TYPE zif_github=>secret_scanning_alert_state
+      RAISING cx_static_check.
+    METHODS parse_secret_scanning_alert_re
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(secret_scanning_alert_resoluti) TYPE zif_github=>secret_scanning_alert_resoluti
+      RAISING cx_static_check.
+    METHODS parse_secret_scanning_alert
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(secret_scanning_alert) TYPE zif_github=>secret_scanning_alert
+      RAISING cx_static_check.
+    METHODS parse_stargazer
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(stargazer) TYPE zif_github=>stargazer
+      RAISING cx_static_check.
+    METHODS parse_code_frequency_stat
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_frequency_stat) TYPE zif_github=>code_frequency_stat
+      RAISING cx_static_check.
+    METHODS parse_commit_activity
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(commit_activity) TYPE zif_github=>commit_activity
+      RAISING cx_static_check.
+    METHODS parse_contributor_activity
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(contributor_activity) TYPE zif_github=>contributor_activity
+      RAISING cx_static_check.
+    METHODS parse_participation_stats
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(participation_stats) TYPE zif_github=>participation_stats
+      RAISING cx_static_check.
+    METHODS parse_repository_subscription
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(repository_subscription) TYPE zif_github=>repository_subscription
+      RAISING cx_static_check.
+    METHODS parse_tag
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(tag) TYPE zif_github=>tag
+      RAISING cx_static_check.
+    METHODS parse_topic
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(topic) TYPE zif_github=>topic
+      RAISING cx_static_check.
+    METHODS parse_traffic
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(traffic) TYPE zif_github=>traffic
+      RAISING cx_static_check.
+    METHODS parse_clone_traffic
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(clone_traffic) TYPE zif_github=>clone_traffic
+      RAISING cx_static_check.
+    METHODS parse_content_traffic
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(content_traffic) TYPE zif_github=>content_traffic
+      RAISING cx_static_check.
+    METHODS parse_referrer_traffic
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(referrer_traffic) TYPE zif_github=>referrer_traffic
+      RAISING cx_static_check.
+    METHODS parse_view_traffic
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(view_traffic) TYPE zif_github=>view_traffic
+      RAISING cx_static_check.
+    METHODS parse_scim_group_list_enterpri
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(scim_group_list_enterprise) TYPE zif_github=>scim_group_list_enterprise
+      RAISING cx_static_check.
+    METHODS parse_scim_enterprise_group
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(scim_enterprise_group) TYPE zif_github=>scim_enterprise_group
+      RAISING cx_static_check.
+    METHODS parse_scim_user_list_enterpris
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(scim_user_list_enterprise) TYPE zif_github=>scim_user_list_enterprise
+      RAISING cx_static_check.
+    METHODS parse_scim_enterprise_user
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(scim_enterprise_user) TYPE zif_github=>scim_enterprise_user
+      RAISING cx_static_check.
+    METHODS parse_scim_user
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(scim_user) TYPE zif_github=>scim_user
+      RAISING cx_static_check.
+    METHODS parse_scim_user_list
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(scim_user_list) TYPE zif_github=>scim_user_list
+      RAISING cx_static_check.
+    METHODS parse_search_result_text_match
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(search_result_text_matches) TYPE zif_github=>search_result_text_matches
+      RAISING cx_static_check.
+    METHODS parse_code_search_result_item
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(code_search_result_item) TYPE zif_github=>code_search_result_item
+      RAISING cx_static_check.
+    METHODS parse_commit_search_result_ite
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(commit_search_result_item) TYPE zif_github=>commit_search_result_item
+      RAISING cx_static_check.
+    METHODS parse_issue_search_result_item
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issue_search_result_item) TYPE zif_github=>issue_search_result_item
+      RAISING cx_static_check.
+    METHODS parse_label_search_result_item
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(label_search_result_item) TYPE zif_github=>label_search_result_item
+      RAISING cx_static_check.
+    METHODS parse_repo_search_result_item
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(repo_search_result_item) TYPE zif_github=>repo_search_result_item
+      RAISING cx_static_check.
+    METHODS parse_topic_search_result_item
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(topic_search_result_item) TYPE zif_github=>topic_search_result_item
+      RAISING cx_static_check.
+    METHODS parse_user_search_result_item
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(user_search_result_item) TYPE zif_github=>user_search_result_item
+      RAISING cx_static_check.
+    METHODS parse_private_user
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(private_user) TYPE zif_github=>private_user
+      RAISING cx_static_check.
+    METHODS parse_public_user
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(public_user) TYPE zif_github=>public_user
+      RAISING cx_static_check.
+    METHODS parse_email
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(email) TYPE zif_github=>email
+      RAISING cx_static_check.
+    METHODS parse_gpg_key
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(gpg_key) TYPE zif_github=>gpg_key
+      RAISING cx_static_check.
+    METHODS parse_key
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(key) TYPE zif_github=>key
+      RAISING cx_static_check.
+    METHODS parse_marketplace_account
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(marketplace_account) TYPE zif_github=>marketplace_account
+      RAISING cx_static_check.
+    METHODS parse_user_marketplace_purchas
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(user_marketplace_purchase) TYPE zif_github=>user_marketplace_purchase
+      RAISING cx_static_check.
+    METHODS parse_starred_repository
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(starred_repository) TYPE zif_github=>starred_repository
+      RAISING cx_static_check.
+    METHODS parse_hovercard
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(hovercard) TYPE zif_github=>hovercard
+      RAISING cx_static_check.
+    METHODS parse_key_simple
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(key_simple) TYPE zif_github=>key_simple
+      RAISING cx_static_check.
 ENDCLASS.
 
 CLASS zcl_github IMPLEMENTATION.
@@ -15,65 +964,783 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD send_receive.
-    DATA lv_code TYPE i.
-    DATA lv_cdata TYPE string.
     mi_client->send( ).
     mi_client->receive( ).
-    mi_client->response->get_status( IMPORTING code = lv_code ).
+    mi_client->response->get_status( IMPORTING code = rv_code ).
+  ENDMETHOD.
+
+  METHOD parse_simple_user.
+  ENDMETHOD.
+
+  METHOD parse_integration.
+  ENDMETHOD.
+
+  METHOD parse_basic_error.
+  ENDMETHOD.
+
+  METHOD parse_validation_error_simple.
+  ENDMETHOD.
+
+  METHOD parse_webhook_config_url.
+  ENDMETHOD.
+
+  METHOD parse_webhook_config_content_t.
+  ENDMETHOD.
+
+  METHOD parse_webhook_config_secret.
+  ENDMETHOD.
+
+  METHOD parse_webhook_config_insecure_.
+  ENDMETHOD.
+
+  METHOD parse_webhook_config.
+  ENDMETHOD.
+
+  METHOD parse_enterprise.
+  ENDMETHOD.
+
+  METHOD parse_installation.
+  ENDMETHOD.
+
+  METHOD parse_app_permissions.
+  ENDMETHOD.
+
+  METHOD parse_license_simple.
+  ENDMETHOD.
+
+  METHOD parse_repository.
+  ENDMETHOD.
+
+  METHOD parse_installation_token.
+  ENDMETHOD.
+
+  METHOD parse_validation_error.
+  ENDMETHOD.
+
+  METHOD parse_application_grant.
+  ENDMETHOD.
+
+  METHOD parse_scoped_installation.
+  ENDMETHOD.
+
+  METHOD parse_authorization.
+  ENDMETHOD.
+
+  METHOD parse_code_of_conduct.
+  ENDMETHOD.
+
+  METHOD parse_content_reference_attach.
+  ENDMETHOD.
+
+  METHOD parse_enabled_organizations.
+  ENDMETHOD.
+
+  METHOD parse_allowed_actions.
+  ENDMETHOD.
+
+  METHOD parse_selected_actions_url.
+  ENDMETHOD.
+
+  METHOD parse_actions_enterprise_permi.
+  ENDMETHOD.
+
+  METHOD parse_organization_simple.
+  ENDMETHOD.
+
+  METHOD parse_selected_actions.
+  ENDMETHOD.
+
+  METHOD parse_runner_groups_enterprise.
+  ENDMETHOD.
+
+  METHOD parse_runner.
+  ENDMETHOD.
+
+  METHOD parse_runner_application.
+  ENDMETHOD.
+
+  METHOD parse_authentication_token.
+  ENDMETHOD.
+
+  METHOD parse_audit_log_event.
+  ENDMETHOD.
+
+  METHOD parse_actions_billing_usage.
+  ENDMETHOD.
+
+  METHOD parse_packages_billing_usage.
+  ENDMETHOD.
+
+  METHOD parse_combined_billing_usage.
+  ENDMETHOD.
+
+  METHOD parse_actor.
+  ENDMETHOD.
+
+  METHOD parse_label.
+  ENDMETHOD.
+
+  METHOD parse_milestone.
+  ENDMETHOD.
+
+  METHOD parse_author_association.
+  ENDMETHOD.
+
+  METHOD parse_issue_simple.
+  ENDMETHOD.
+
+  METHOD parse_reaction_rollup.
+  ENDMETHOD.
+
+  METHOD parse_issue_comment.
+  ENDMETHOD.
+
+  METHOD parse_event.
+  ENDMETHOD.
+
+  METHOD parse_link_with_type.
+  ENDMETHOD.
+
+  METHOD parse_feed.
+  ENDMETHOD.
+
+  METHOD parse_base_gist.
+  ENDMETHOD.
+
+  METHOD parse_gist_simple.
+  ENDMETHOD.
+
+  METHOD parse_gist_comment.
+  ENDMETHOD.
+
+  METHOD parse_gist_commit.
+  ENDMETHOD.
+
+  METHOD parse_gitignore_template.
+  ENDMETHOD.
+
+  METHOD parse_issue.
+  ENDMETHOD.
+
+  METHOD parse_license.
+  ENDMETHOD.
+
+  METHOD parse_marketplace_listing_plan.
+  ENDMETHOD.
+
+  METHOD parse_marketplace_purchase.
+  ENDMETHOD.
+
+  METHOD parse_api_overview.
+  ENDMETHOD.
+
+  METHOD parse_minimal_repository.
+  ENDMETHOD.
+
+  METHOD parse_thread.
+  ENDMETHOD.
+
+  METHOD parse_thread_subscription.
+  ENDMETHOD.
+
+  METHOD parse_organization_full.
+  ENDMETHOD.
+
+  METHOD parse_enabled_repositories.
+  ENDMETHOD.
+
+  METHOD parse_actions_organization_per.
+  ENDMETHOD.
+
+  METHOD parse_runner_groups_org.
+  ENDMETHOD.
+
+  METHOD parse_organization_actions_sec.
+  ENDMETHOD.
+
+  METHOD parse_actions_public_key.
+  ENDMETHOD.
+
+  METHOD parse_credential_authorization.
+  ENDMETHOD.
+
+  METHOD parse_organization_invitation.
+  ENDMETHOD.
+
+  METHOD parse_org_hook.
+  ENDMETHOD.
+
+  METHOD parse_interaction_group.
+  ENDMETHOD.
+
+  METHOD parse_interaction_limit_respon.
+  ENDMETHOD.
+
+  METHOD parse_interaction_expiry.
+  ENDMETHOD.
+
+  METHOD parse_interaction_limit.
+  ENDMETHOD.
+
+  METHOD parse_team_simple.
+  ENDMETHOD.
+
+  METHOD parse_team.
+  ENDMETHOD.
+
+  METHOD parse_org_membership.
+  ENDMETHOD.
+
+  METHOD parse_migration.
+  ENDMETHOD.
+
+  METHOD parse_project.
+  ENDMETHOD.
+
+  METHOD parse_group_mapping.
+  ENDMETHOD.
+
+  METHOD parse_team_full.
+  ENDMETHOD.
+
+  METHOD parse_team_discussion.
+  ENDMETHOD.
+
+  METHOD parse_team_discussion_comment.
+  ENDMETHOD.
+
+  METHOD parse_reaction.
+  ENDMETHOD.
+
+  METHOD parse_team_membership.
+  ENDMETHOD.
+
+  METHOD parse_team_project.
+  ENDMETHOD.
+
+  METHOD parse_team_repository.
+  ENDMETHOD.
+
+  METHOD parse_project_card.
+  ENDMETHOD.
+
+  METHOD parse_project_column.
+  ENDMETHOD.
+
+  METHOD parse_repository_collaborator_.
+  ENDMETHOD.
+
+  METHOD parse_rate_limit.
+  ENDMETHOD.
+
+  METHOD parse_rate_limit_overview.
+  ENDMETHOD.
+
+  METHOD parse_full_repository.
+  ENDMETHOD.
+
+  METHOD parse_artifact.
+  ENDMETHOD.
+
+  METHOD parse_job.
+  ENDMETHOD.
+
+  METHOD parse_actions_enabled.
+  ENDMETHOD.
+
+  METHOD parse_actions_repository_permi.
+  ENDMETHOD.
+
+  METHOD parse_pull_request_minimal.
+  ENDMETHOD.
+
+  METHOD parse_simple_commit.
+  ENDMETHOD.
+
+  METHOD parse_workflow_run.
+  ENDMETHOD.
+
+  METHOD parse_workflow_run_usage.
+  ENDMETHOD.
+
+  METHOD parse_actions_secret.
+  ENDMETHOD.
+
+  METHOD parse_workflow.
+  ENDMETHOD.
+
+  METHOD parse_workflow_usage.
+  ENDMETHOD.
+
+  METHOD parse_protected_branch_admin_e.
+  ENDMETHOD.
+
+  METHOD parse_protected_branch_pull_re.
+  ENDMETHOD.
+
+  METHOD parse_branch_restriction_polic.
+  ENDMETHOD.
+
+  METHOD parse_branch_protection.
+  ENDMETHOD.
+
+  METHOD parse_short_branch.
+  ENDMETHOD.
+
+  METHOD parse_git_user.
+  ENDMETHOD.
+
+  METHOD parse_verification.
+  ENDMETHOD.
+
+  METHOD parse_commit.
+  ENDMETHOD.
+
+  METHOD parse_branch_with_protection.
+  ENDMETHOD.
+
+  METHOD parse_status_check_policy.
+  ENDMETHOD.
+
+  METHOD parse_protected_branch.
+  ENDMETHOD.
+
+  METHOD parse_check_run.
+  ENDMETHOD.
+
+  METHOD parse_check_annotation.
+  ENDMETHOD.
+
+  METHOD parse_check_suite.
+  ENDMETHOD.
+
+  METHOD parse_check_suite_preference.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_alert_stat.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_alert_ref.
+  ENDMETHOD.
+
+  METHOD parse_alert_number.
+  ENDMETHOD.
+
+  METHOD parse_alert_created_at.
+  ENDMETHOD.
+
+  METHOD parse_alert_url.
+  ENDMETHOD.
+
+  METHOD parse_alert_html_url.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_alert_dism.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_alert_di01.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_alert_rule.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_analysis_t.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_analysis01.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_alert_code.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_analysis_a.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_alert_envi.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_alert_inst.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_alert_co01.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_alert_set_.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_analysis_r.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_analysis_c.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_analysis02.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_analysis_e.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_analysis03.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_analysis_s.
+  ENDMETHOD.
+
+  METHOD parse_collaborator.
+  ENDMETHOD.
+
+  METHOD parse_repository_invitation.
+  ENDMETHOD.
+
+  METHOD parse_commit_comment.
+  ENDMETHOD.
+
+  METHOD parse_scim_error.
+  ENDMETHOD.
+
+  METHOD parse_branch_short.
+  ENDMETHOD.
+
+  METHOD parse_link.
+  ENDMETHOD.
+
+  METHOD parse_auto_merge.
+  ENDMETHOD.
+
+  METHOD parse_pull_request_simple.
+  ENDMETHOD.
+
+  METHOD parse_simple_commit_status.
+  ENDMETHOD.
+
+  METHOD parse_combined_commit_status.
+  ENDMETHOD.
+
+  METHOD parse_status.
+  ENDMETHOD.
+
+  METHOD parse_code_of_conduct_simple.
+  ENDMETHOD.
+
+  METHOD parse_community_health_file.
+  ENDMETHOD.
+
+  METHOD parse_community_profile.
+  ENDMETHOD.
+
+  METHOD parse_diff_entry.
+  ENDMETHOD.
+
+  METHOD parse_commit_comparison.
+  ENDMETHOD.
+
+  METHOD parse_content_tree.
+  ENDMETHOD.
+
+  METHOD parse_content_directory.
+  ENDMETHOD.
+
+  METHOD parse_content_file.
+  ENDMETHOD.
+
+  METHOD parse_content_symlink.
+  ENDMETHOD.
+
+  METHOD parse_content_submodule.
+  ENDMETHOD.
+
+  METHOD parse_file_commit.
+  ENDMETHOD.
+
+  METHOD parse_contributor.
+  ENDMETHOD.
+
+  METHOD parse_deployment.
+  ENDMETHOD.
+
+  METHOD parse_deployment_status.
+  ENDMETHOD.
+
+  METHOD parse_short_blob.
+  ENDMETHOD.
+
+  METHOD parse_blob.
+  ENDMETHOD.
+
+  METHOD parse_git_commit.
+  ENDMETHOD.
+
+  METHOD parse_git_ref.
+  ENDMETHOD.
+
+  METHOD parse_git_tag.
+  ENDMETHOD.
+
+  METHOD parse_git_tree.
+  ENDMETHOD.
+
+  METHOD parse_hook_response.
+  ENDMETHOD.
+
+  METHOD parse_hook.
+  ENDMETHOD.
+
+  METHOD parse_import.
+  ENDMETHOD.
+
+  METHOD parse_porter_author.
+  ENDMETHOD.
+
+  METHOD parse_porter_large_file.
+  ENDMETHOD.
+
+  METHOD parse_issue_event_label.
+  ENDMETHOD.
+
+  METHOD parse_issue_event_dismissed_re.
+  ENDMETHOD.
+
+  METHOD parse_issue_event_milestone.
+  ENDMETHOD.
+
+  METHOD parse_issue_event_project_card.
+  ENDMETHOD.
+
+  METHOD parse_issue_event_rename.
+  ENDMETHOD.
+
+  METHOD parse_issue_event.
+  ENDMETHOD.
+
+  METHOD parse_issue_event_for_issue.
+  ENDMETHOD.
+
+  METHOD parse_deploy_key.
+  ENDMETHOD.
+
+  METHOD parse_language.
+  ENDMETHOD.
+
+  METHOD parse_license_content.
+  ENDMETHOD.
+
+  METHOD parse_pages_source_hash.
+  ENDMETHOD.
+
+  METHOD parse_page.
+  ENDMETHOD.
+
+  METHOD parse_page_build.
+  ENDMETHOD.
+
+  METHOD parse_page_build_status.
+  ENDMETHOD.
+
+  METHOD parse_pull_request.
+  ENDMETHOD.
+
+  METHOD parse_pull_request_review_comm.
+  ENDMETHOD.
+
+  METHOD parse_pull_request_merge_resul.
+  ENDMETHOD.
+
+  METHOD parse_pull_request_review_requ.
+  ENDMETHOD.
+
+  METHOD parse_pull_request_review.
+  ENDMETHOD.
+
+  METHOD parse_review_comment.
+  ENDMETHOD.
+
+  METHOD parse_release_asset.
+  ENDMETHOD.
+
+  METHOD parse_release.
+  ENDMETHOD.
+
+  METHOD parse_secret_scanning_alert_st.
+  ENDMETHOD.
+
+  METHOD parse_secret_scanning_alert_re.
+  ENDMETHOD.
+
+  METHOD parse_secret_scanning_alert.
+  ENDMETHOD.
+
+  METHOD parse_stargazer.
+  ENDMETHOD.
+
+  METHOD parse_code_frequency_stat.
+  ENDMETHOD.
+
+  METHOD parse_commit_activity.
+  ENDMETHOD.
+
+  METHOD parse_contributor_activity.
+  ENDMETHOD.
+
+  METHOD parse_participation_stats.
+  ENDMETHOD.
+
+  METHOD parse_repository_subscription.
+  ENDMETHOD.
+
+  METHOD parse_tag.
+  ENDMETHOD.
+
+  METHOD parse_topic.
+  ENDMETHOD.
+
+  METHOD parse_traffic.
+  ENDMETHOD.
+
+  METHOD parse_clone_traffic.
+  ENDMETHOD.
+
+  METHOD parse_content_traffic.
+  ENDMETHOD.
+
+  METHOD parse_referrer_traffic.
+  ENDMETHOD.
+
+  METHOD parse_view_traffic.
+  ENDMETHOD.
+
+  METHOD parse_scim_group_list_enterpri.
+  ENDMETHOD.
+
+  METHOD parse_scim_enterprise_group.
+  ENDMETHOD.
+
+  METHOD parse_scim_user_list_enterpris.
+  ENDMETHOD.
+
+  METHOD parse_scim_enterprise_user.
+  ENDMETHOD.
+
+  METHOD parse_scim_user.
+  ENDMETHOD.
+
+  METHOD parse_scim_user_list.
+  ENDMETHOD.
+
+  METHOD parse_search_result_text_match.
+  ENDMETHOD.
+
+  METHOD parse_code_search_result_item.
+  ENDMETHOD.
+
+  METHOD parse_commit_search_result_ite.
+  ENDMETHOD.
+
+  METHOD parse_issue_search_result_item.
+  ENDMETHOD.
+
+  METHOD parse_label_search_result_item.
+  ENDMETHOD.
+
+  METHOD parse_repo_search_result_item.
+  ENDMETHOD.
+
+  METHOD parse_topic_search_result_item.
+  ENDMETHOD.
+
+  METHOD parse_user_search_result_item.
+  ENDMETHOD.
+
+  METHOD parse_private_user.
+  ENDMETHOD.
+
+  METHOD parse_public_user.
+  ENDMETHOD.
+
+  METHOD parse_email.
+  ENDMETHOD.
+
+  METHOD parse_gpg_key.
+  ENDMETHOD.
+
+  METHOD parse_key.
+  ENDMETHOD.
+
+  METHOD parse_marketplace_account.
+  ENDMETHOD.
+
+  METHOD parse_user_marketplace_purchas.
+  ENDMETHOD.
+
+  METHOD parse_starred_repository.
+  ENDMETHOD.
+
+  METHOD parse_hovercard.
+  ENDMETHOD.
+
+  METHOD parse_key_simple.
   ENDMETHOD.
 
   METHOD zif_github~meta_root.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_get_authenticated.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/app'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_integration( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_create_from_manifest.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/app-manifests/{code}/conversions'.
     REPLACE ALL OCCURRENCES OF '{code}' IN lv_uri WITH code.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_get_webhook_config_for_ap.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/app/hook/config'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_webhook_config( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_update_webhook_config_for.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/app/hook/config'.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_webhook_config( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_list_installations.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/app/installations'.
     IF outdated IS SUPPLIED.
       mi_client->request->set_form_field( name = 'outdated' value = outdated ).
@@ -89,68 +1756,75 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_get_installation.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/app/installations/{installation_id}'.
     REPLACE ALL OCCURRENCES OF '{installation_id}' IN lv_uri WITH installation_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_installation( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_delete_installation.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/app/installations/{installation_id}'.
     REPLACE ALL OCCURRENCES OF '{installation_id}' IN lv_uri WITH installation_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_create_installation_acces.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/app/installations/{installation_id}/access_tokens'.
     REPLACE ALL OCCURRENCES OF '{installation_id}' IN lv_uri WITH installation_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_suspend_installation.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/app/installations/{installation_id}/suspended'.
     REPLACE ALL OCCURRENCES OF '{installation_id}' IN lv_uri WITH installation_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_unsuspend_installation.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/app/installations/{installation_id}/suspended'.
     REPLACE ALL OCCURRENCES OF '{installation_id}' IN lv_uri WITH installation_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_list_gran.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/grants'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -160,136 +1834,155 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_get_grant.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/grants/{grant_id}'.
     REPLACE ALL OCCURRENCES OF '{grant_id}' IN lv_uri WITH grant_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_application_grant( '' ).
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_delete_gr.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/grants/{grant_id}'.
     REPLACE ALL OCCURRENCES OF '{grant_id}' IN lv_uri WITH grant_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_delete_authorization.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/grant'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_revoke_grant_for_applicat.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/grants/{access_token}'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_check_token.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/token'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_authorization( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_reset_token.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/token'.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_authorization( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_delete_token.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/token'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_scope_token.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/token/scoped'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_authorization( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_check_authorization.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/tokens/{access_token}'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_reset_authorization.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/tokens/{access_token}'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_authorization( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_revoke_authorization_for_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/tokens/{access_token}'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_get_by_slug.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/apps/{app_slug}'.
     REPLACE ALL OCCURRENCES OF '{app_slug}' IN lv_uri WITH app_slug.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_integration( '' ).
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_list_auth.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/authorizations'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -299,141 +1992,161 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_create_au.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/authorizations'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_get_or_cr.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/authorizations/clients/{client_id}'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_authorization( '' ).
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_get_or_01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/authorizations/clients/{client_id}/{fingerprint}'.
     REPLACE ALL OCCURRENCES OF '{fingerprint}' IN lv_uri WITH fingerprint.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_authorization( '' ).
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_get_autho.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/authorizations/{authorization_id}'.
     REPLACE ALL OCCURRENCES OF '{authorization_id}' IN lv_uri WITH authorization_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_authorization( '' ).
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_update_au.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/authorizations/{authorization_id}'.
     REPLACE ALL OCCURRENCES OF '{authorization_id}' IN lv_uri WITH authorization_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_authorization( '' ).
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_delete_au.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/authorizations/{authorization_id}'.
     REPLACE ALL OCCURRENCES OF '{authorization_id}' IN lv_uri WITH authorization_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~codes_of_conduct_get_all_codes.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/codes_of_conduct'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~codes_of_conduct_get_conduct_c.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/codes_of_conduct/{key}'.
     REPLACE ALL OCCURRENCES OF '{key}' IN lv_uri WITH key.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_code_of_conduct( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_create_content_attachment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/content_references/{content_reference_id}/attachments'.
     REPLACE ALL OCCURRENCES OF '{content_reference_id}' IN lv_uri WITH content_reference_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_content_reference_attach( '' ).
   ENDMETHOD.
 
   METHOD zif_github~emojis_get.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/emojis'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_get_github_ac.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/permissions'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_enterprise_permi( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_set_github_ac.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/permissions'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_list_selected.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/permissions/organizations'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     IF per_page IS SUPPLIED.
@@ -444,70 +2157,77 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_set_selected_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/permissions/organizations'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_enable_select.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/permissions/organizations/{org_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{org_id}' IN lv_uri WITH org_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_disable_selec.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/permissions/organizations/{org_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{org_id}' IN lv_uri WITH org_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_get_allowed_a.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/permissions/selected-actions'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_selected_actions( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_set_allowed_a.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/permissions/selected-actions'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_list_self_hos.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runner-groups'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     IF per_page IS SUPPLIED.
@@ -518,60 +2238,67 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_create_self_h.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runner-groups'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_get_self_host.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_runner_groups_enterprise( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_update_self_h.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_runner_groups_enterprise( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_delete_self_h.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_list_org_acce.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
@@ -583,51 +2310,55 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_set_org_acces.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_add_org_acces.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     REPLACE ALL OCCURRENCES OF '{org_id}' IN lv_uri WITH org_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_remove_org_ac.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     REPLACE ALL OCCURRENCES OF '{org_id}' IN lv_uri WITH org_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_list_self_h01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
@@ -639,51 +2370,55 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_set_self_host.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_add_self_host.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     REPLACE ALL OCCURRENCES OF '{runner_id}' IN lv_uri WITH runner_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_remove_self_h.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     REPLACE ALL OCCURRENCES OF '{runner_id}' IN lv_uri WITH runner_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_list_self_h02.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runners'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     IF per_page IS SUPPLIED.
@@ -694,70 +2429,77 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_list_runner_a.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runners/downloads'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_create_regist.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runners/registration-token'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_create_remove.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runners/remove-token'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_get_self_ho01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runners/{runner_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{runner_id}' IN lv_uri WITH runner_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_runner( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_delete_self01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runners/{runner_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{runner_id}' IN lv_uri WITH runner_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~audit_log_get_audit_log.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/audit-log'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     IF per_page IS SUPPLIED.
@@ -765,46 +2507,53 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~billing_get_github_actions_bil.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/settings/billing/actions'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~billing_get_github_packages_bi.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/settings/billing/packages'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_packages_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~billing_get_shared_storage_bil.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/settings/billing/shared-storage'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_combined_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_list_public_events.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/events'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -814,23 +2563,26 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_get_feeds.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/feeds'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_feed( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_list.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists'.
     IF since IS SUPPLIED.
       mi_client->request->set_form_field( name = 'since' value = since ).
@@ -843,23 +2595,25 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~gists_create.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~gists_list_public.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists/public'.
     IF since IS SUPPLIED.
       mi_client->request->set_form_field( name = 'since' value = since ).
@@ -872,13 +2626,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~gists_list_starred.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists/starred'.
     IF since IS SUPPLIED.
       mi_client->request->set_form_field( name = 'since' value = since ).
@@ -891,46 +2646,52 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~gists_get.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gist_simple( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_update.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gist_simple( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_delete.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~gists_list_comments.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/comments'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     IF per_page IS SUPPLIED.
@@ -941,60 +2702,67 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~gists_create_comment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/comments'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~gists_get_comment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/comments/{comment_id}'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gist_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_update_comment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/comments/{comment_id}'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gist_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_delete_comment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/comments/{comment_id}'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~gists_list_commits.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/commits'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     IF per_page IS SUPPLIED.
@@ -1005,13 +2773,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~gists_list_forks.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/forks'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     IF per_page IS SUPPLIED.
@@ -1022,90 +2791,100 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~gists_fork.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/forks'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~gists_check_is_starred.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/star'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~gists_star.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/star'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~gists_unstar.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/star'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~gists_get_revision.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/{sha}'.
     REPLACE ALL OCCURRENCES OF '{sha}' IN lv_uri WITH sha.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gist_simple( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gitignore_get_all_templates.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gitignore/templates'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~gitignore_get_template.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/gitignore/templates/{name}'.
     REPLACE ALL OCCURRENCES OF '{name}' IN lv_uri WITH name.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gitignore_template( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_list_repos_accessible_to_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/installation/repositories'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -1115,23 +2894,25 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_revoke_installation_acces.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/installation/token'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_list.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/issues'.
     IF filter IS SUPPLIED.
       mi_client->request->set_form_field( name = 'filter' value = filter ).
@@ -1171,13 +2952,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~licenses_get_all_commonly_used.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/licenses'.
     IF featured IS SUPPLIED.
       mi_client->request->set_form_field( name = 'featured' value = featured ).
@@ -1187,55 +2969,62 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~licenses_get.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/licenses/{license}'.
     REPLACE ALL OCCURRENCES OF '{license}' IN lv_uri WITH license.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_license( '' ).
   ENDMETHOD.
 
   METHOD zif_github~markdown_render.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/markdown'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~markdown_render_raw.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/markdown/raw'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_get_subscription_plan_for.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/marketplace_listing/accounts/{account_id}'.
     REPLACE ALL OCCURRENCES OF '{account_id}' IN lv_uri WITH account_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_marketplace_purchase( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_list_plans.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/marketplace_listing/plans'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -1245,13 +3034,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_list_accounts_for_plan.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/marketplace_listing/plans/{plan_id}/accounts'.
     REPLACE ALL OCCURRENCES OF '{plan_id}' IN lv_uri WITH plan_id.
     IF direction IS SUPPLIED.
@@ -1268,24 +3058,27 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_get_subscription_plan_f01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/marketplace_listing/stubbed/accounts/{account_id}'.
     REPLACE ALL OCCURRENCES OF '{account_id}' IN lv_uri WITH account_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_marketplace_purchase( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_list_plans_stubbed.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/marketplace_listing/stubbed/plans'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -1295,13 +3088,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_list_accounts_for_plan_st.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/marketplace_listing/stubbed/plans/{plan_id}/accounts'.
     REPLACE ALL OCCURRENCES OF '{plan_id}' IN lv_uri WITH plan_id.
     IF direction IS SUPPLIED.
@@ -1318,23 +3112,26 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~meta_get.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/meta'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_api_overview( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_list_public_events_fo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/networks/{owner}/{repo}/events'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -1346,13 +3143,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_list_notifications_fo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/notifications'.
     IF all IS SUPPLIED.
       mi_client->request->set_form_field( name = 'all' value = all ).
@@ -1374,148 +3172,167 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_mark_notifications_as.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/notifications'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_get_thread.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/notifications/threads/{thread_id}'.
     REPLACE ALL OCCURRENCES OF '{thread_id}' IN lv_uri WITH thread_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_thread( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_mark_thread_as_read.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/notifications/threads/{thread_id}'.
     REPLACE ALL OCCURRENCES OF '{thread_id}' IN lv_uri WITH thread_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_get_thread_subscripti.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/notifications/threads/{thread_id}/subscription'.
     REPLACE ALL OCCURRENCES OF '{thread_id}' IN lv_uri WITH thread_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_thread_subscription( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_set_thread_subscripti.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/notifications/threads/{thread_id}/subscription'.
     REPLACE ALL OCCURRENCES OF '{thread_id}' IN lv_uri WITH thread_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_thread_subscription( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_delete_thread_subscri.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/notifications/threads/{thread_id}/subscription'.
     REPLACE ALL OCCURRENCES OF '{thread_id}' IN lv_uri WITH thread_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~meta_get_octocat.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/octocat'.
     IF s IS SUPPLIED.
       mi_client->request->set_form_field( name = 's' value = s ).
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_list.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/organizations'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_get.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_organization_full( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_update.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_organization_full( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_get_github_actions_per.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/permissions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_organization_per( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_set_github_actions_per.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/permissions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_list_selected_reposito.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/permissions/repositories'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF per_page IS SUPPLIED.
@@ -1526,70 +3343,77 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_set_selected_repositor.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/permissions/repositories'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_enable_selected_reposi.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/permissions/repositories/{repository_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{repository_id}' IN lv_uri WITH repository_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_disable_selected_repos.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/permissions/repositories/{repository_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{repository_id}' IN lv_uri WITH repository_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_get_allowed_actions_or.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/permissions/selected-actions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_selected_actions( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_set_allowed_actions_or.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/permissions/selected-actions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_list_self_hosted_runne.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runner-groups'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF per_page IS SUPPLIED.
@@ -1600,110 +3424,121 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_create_self_hosted_run.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runner-groups'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_get_self_hosted_runner.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runner-groups/{runner_group_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_runner_groups_org( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_update_self_hosted_run.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runner-groups/{runner_group_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_runner_groups_org( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_delete_self_hosted_run.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runner-groups/{runner_group_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_list_repo_access_to_se.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_set_repo_access_to_sel.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_add_repo_access_to_sel.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     REPLACE ALL OCCURRENCES OF '{repository_id}' IN lv_uri WITH repository_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_remove_repo_access_to_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     REPLACE ALL OCCURRENCES OF '{repository_id}' IN lv_uri WITH repository_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_list_self_hosted_run01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runner-groups/{runner_group_id}/runners'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
@@ -1715,51 +3550,55 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_set_self_hosted_runner.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runner-groups/{runner_group_id}/runners'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_add_self_hosted_runner.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     REPLACE ALL OCCURRENCES OF '{runner_id}' IN lv_uri WITH runner_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_remove_self_hosted_run.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH runner_group_id.
     REPLACE ALL OCCURRENCES OF '{runner_id}' IN lv_uri WITH runner_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_list_self_hosted_run02.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runners'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF per_page IS SUPPLIED.
@@ -1770,70 +3609,77 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_list_runner_applicatio.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runners/downloads'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_create_registration_to.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runners/registration-token'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_create_remove_token_fo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runners/remove-token'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_get_self_hosted_runn01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runners/{runner_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{runner_id}' IN lv_uri WITH runner_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_runner( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_delete_self_hosted_r01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runners/{runner_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{runner_id}' IN lv_uri WITH runner_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_list_org_secrets.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/secrets'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF per_page IS SUPPLIED.
@@ -1844,110 +3690,121 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_get_org_public_key.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/secrets/public-key'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_public_key( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_get_org_secret.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/secrets/{secret_name}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{secret_name}' IN lv_uri WITH secret_name.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_organization_actions_sec( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_create_or_update_org_s.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/secrets/{secret_name}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{secret_name}' IN lv_uri WITH secret_name.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_delete_org_secret.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/secrets/{secret_name}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{secret_name}' IN lv_uri WITH secret_name.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_list_selected_repos_fo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/secrets/{secret_name}/repositories'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{secret_name}' IN lv_uri WITH secret_name.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_set_selected_repos_for.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/secrets/{secret_name}/repositories'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{secret_name}' IN lv_uri WITH secret_name.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_add_selected_repo_to_o.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}'.
     REPLACE ALL OCCURRENCES OF '{repository_id}' IN lv_uri WITH repository_id.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{secret_name}' IN lv_uri WITH secret_name.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_remove_selected_repo_f.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}'.
     REPLACE ALL OCCURRENCES OF '{repository_id}' IN lv_uri WITH repository_id.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{secret_name}' IN lv_uri WITH secret_name.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_get_audit_log.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/audit-log'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF per_page IS SUPPLIED.
@@ -1955,83 +3812,90 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_blocked_users.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/blocks'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_check_blocked_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/blocks/{username}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_block_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/blocks/{username}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_unblock_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/blocks/{username}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_saml_sso_authorizati.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/credential-authorizations'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_remove_saml_sso_authoriza.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/credential-authorizations/{credential_id}'.
     REPLACE ALL OCCURRENCES OF '{credential_id}' IN lv_uri WITH credential_id.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_list_public_org_event.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/events'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF per_page IS SUPPLIED.
@@ -2042,13 +3906,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_failed_invitations.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/failed_invitations'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF per_page IS SUPPLIED.
@@ -2059,13 +3924,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_webhooks.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/hooks'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF per_page IS SUPPLIED.
@@ -2076,101 +3942,115 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_create_webhook.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/hooks'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_get_webhook.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/hooks/{hook_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_org_hook( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_update_webhook.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/hooks/{hook_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_org_hook( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_delete_webhook.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/hooks/{hook_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_get_webhook_config_for_or.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/hooks/{hook_id}/config'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_webhook_config( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_update_webhook_config_for.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/hooks/{hook_id}/config'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_webhook_config( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_ping_webhook.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/hooks/{hook_id}/pings'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_get_org_installation.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/installation'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_installation( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_app_installations.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/installations'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF per_page IS SUPPLIED.
@@ -2181,46 +4061,52 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~interactions_get_restrictions_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/interaction-limits'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_interaction_limit_respon( '' ).
   ENDMETHOD.
 
   METHOD zif_github~interactions_set_restrictions_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/interaction-limits'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_interaction_limit_respon( '' ).
   ENDMETHOD.
 
   METHOD zif_github~interactions_remove_restrictio.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/interaction-limits'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_pending_invitations.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/invitations'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF per_page IS SUPPLIED.
@@ -2231,36 +4117,39 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_create_invitation.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/invitations'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_cancel_invitation.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/invitations/{invitation_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{invitation_id}' IN lv_uri WITH invitation_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_invitation_teams.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/invitations/{invitation_id}/teams'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{invitation_id}' IN lv_uri WITH invitation_id.
@@ -2272,13 +4161,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_list_for_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/issues'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF filter IS SUPPLIED.
@@ -2307,13 +4197,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_members.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/members'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF filter IS SUPPLIED.
@@ -2330,73 +4221,81 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_check_membership_for_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/members/{username}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_remove_member.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/members/{username}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_get_membership_for_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/memberships/{username}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_org_membership( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_set_membership_for_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/memberships/{username}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_org_membership( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_remove_membership_for_use.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/memberships/{username}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~migrations_list_for_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/migrations'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF per_page IS SUPPLIED.
@@ -2407,73 +4306,80 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~migrations_start_for_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/migrations'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~migrations_get_status_for_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/migrations/{migration_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{migration_id}' IN lv_uri WITH migration_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_migration( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_download_archive_fo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/migrations/{migration_id}/archive'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{migration_id}' IN lv_uri WITH migration_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~migrations_delete_archive_for_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/migrations/{migration_id}/archive'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{migration_id}' IN lv_uri WITH migration_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~migrations_unlock_repo_for_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/migrations/{migration_id}/repos/{repo_name}/lock'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{migration_id}' IN lv_uri WITH migration_id.
     REPLACE ALL OCCURRENCES OF '{repo_name}' IN lv_uri WITH repo_name.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~migrations_list_repos_for_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/migrations/{migration_id}/repositories'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{migration_id}' IN lv_uri WITH migration_id.
@@ -2485,13 +4391,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_outside_collaborator.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/outside_collaborators'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF filter IS SUPPLIED.
@@ -2505,37 +4412,40 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_convert_member_to_outside.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/outside_collaborators/{username}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_remove_outside_collaborat.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/outside_collaborators/{username}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~projects_list_for_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/projects'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF state IS SUPPLIED.
@@ -2549,24 +4459,26 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~projects_create_for_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/projects'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_public_members.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/public_members'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF per_page IS SUPPLIED.
@@ -2577,49 +4489,53 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_check_public_membership_f.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/public_members/{username}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_set_public_membership_for.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/public_members/{username}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_remove_public_membership_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/public_members/{username}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_for_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/repos'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF type IS SUPPLIED.
@@ -2639,57 +4555,65 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_create_in_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/repos'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~billing_get_github_actions_b01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/settings/billing/actions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~billing_get_github_packages_01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/settings/billing/packages'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_packages_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~billing_get_shared_storage_b01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/settings/billing/shared-storage'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_combined_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_list_idp_groups_for_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/team-sync/groups'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF per_page IS SUPPLIED.
@@ -2700,13 +4624,15 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_group_mapping( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_list.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF per_page IS SUPPLIED.
@@ -2717,60 +4643,66 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_create.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_get_by_name.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_full( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_update_in_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_delete_in_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_list_discussions_in_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
@@ -2785,61 +4717,68 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_create_discussion_in_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_get_discussion_in_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_discussion( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_update_discussion_in_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_discussion( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_delete_discussion_in_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_list_discussion_comments.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
@@ -2854,61 +4793,68 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_create_discussion_commen.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_get_discussion_comment_i.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_discussion_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_update_discussion_commen.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_discussion_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_delete_discussion_commen.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_list_for_team_discus.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
@@ -2923,37 +4869,40 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_create_for_team_disc.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_delete_for_team_disc.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions/{reaction_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_list_for_team_disc01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
@@ -2968,37 +4917,40 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_create_for_team_di01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_delete_for_team_di01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions/{reaction_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_list_pending_invitations.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/invitations'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
@@ -3010,13 +4962,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_list_members_in_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/members'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
@@ -3031,52 +4984,58 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_get_membership_for_user_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/memberships/{username}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_membership( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_add_or_update_membership.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/memberships/{username}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_membership( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_remove_membership_for_us.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/memberships/{username}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_list_projects_in_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/projects'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
@@ -3088,49 +5047,54 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_check_permissions_for_pr.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/projects/{project_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_project( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_add_or_update_project_pe.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/projects/{project_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_remove_project_in_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/projects/{project_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_list_repos_in_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/repos'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
@@ -3142,13 +5106,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_check_permissions_for_re.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
@@ -3156,13 +5121,14 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_add_or_update_repo_permi.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
@@ -3170,13 +5136,14 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_remove_repo_in_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
@@ -3184,37 +5151,42 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_list_idp_groups_in_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/team-sync/group-mappings'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_group_mapping( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_create_or_update_idp_gro.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/team-sync/group-mappings'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_group_mapping( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_list_child_in_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/teams'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
@@ -3226,90 +5198,102 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~projects_get_card.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/columns/cards/{card_id}'.
     REPLACE ALL OCCURRENCES OF '{card_id}' IN lv_uri WITH card_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_project_card( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_update_card.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/columns/cards/{card_id}'.
     REPLACE ALL OCCURRENCES OF '{card_id}' IN lv_uri WITH card_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_project_card( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_delete_card.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/columns/cards/{card_id}'.
     REPLACE ALL OCCURRENCES OF '{card_id}' IN lv_uri WITH card_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~projects_move_card.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/columns/cards/{card_id}/moves'.
     REPLACE ALL OCCURRENCES OF '{card_id}' IN lv_uri WITH card_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~projects_get_column.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/columns/{column_id}'.
     REPLACE ALL OCCURRENCES OF '{column_id}' IN lv_uri WITH column_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_project_column( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_update_column.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/columns/{column_id}'.
     REPLACE ALL OCCURRENCES OF '{column_id}' IN lv_uri WITH column_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_project_column( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_delete_column.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/columns/{column_id}'.
     REPLACE ALL OCCURRENCES OF '{column_id}' IN lv_uri WITH column_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~projects_list_cards.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/columns/{column_id}/cards'.
     REPLACE ALL OCCURRENCES OF '{column_id}' IN lv_uri WITH column_id.
     IF archived_state IS SUPPLIED.
@@ -3323,65 +5307,73 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~projects_create_card.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/columns/{column_id}/cards'.
     REPLACE ALL OCCURRENCES OF '{column_id}' IN lv_uri WITH column_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~projects_move_column.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/columns/{column_id}/moves'.
     REPLACE ALL OCCURRENCES OF '{column_id}' IN lv_uri WITH column_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~projects_get.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_project( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_update.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}'.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_project( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_delete.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~projects_list_collaborators.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}/collaborators'.
     IF affiliation IS SUPPLIED.
       mi_client->request->set_form_field( name = 'affiliation' value = affiliation ).
@@ -3394,46 +5386,51 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~projects_add_collaborator.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}/collaborators/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~projects_remove_collaborator.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}/collaborators/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~projects_get_permission_for_us.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}/collaborators/{username}/permission'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repository_collaborator_( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_list_columns.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}/columns'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -3443,79 +5440,89 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~projects_create_column.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}/columns'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~rate_limit_get.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/rate_limit'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_rate_limit_overview( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_delete_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/reactions/{reaction_id}'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_full_repository( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_full_repository( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_list_artifacts_for_rep.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/artifacts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -3527,39 +5534,43 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_get_artifact.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/artifacts/{artifact_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{artifact_id}' IN lv_uri WITH artifact_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_artifact( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_delete_artifact.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/artifacts/{artifact_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{artifact_id}' IN lv_uri WITH artifact_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_download_artifact.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}'.
     REPLACE ALL OCCURRENCES OF '{archive_format}' IN lv_uri WITH archive_format.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
@@ -3567,87 +5578,96 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{artifact_id}' IN lv_uri WITH artifact_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_get_job_for_workflow_r.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/jobs/{job_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{job_id}' IN lv_uri WITH job_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_download_job_logs_for_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/jobs/{job_id}/logs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{job_id}' IN lv_uri WITH job_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_get_github_actions_p01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/permissions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_repository_permi( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_set_github_actions_p01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/permissions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_get_allowed_actions_re.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/permissions/selected-actions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_selected_actions( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_set_allowed_actions_re.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/permissions/selected-actions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_list_self_hosted_run03.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runners'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -3659,75 +5679,82 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_list_runner_applicat01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runners/downloads'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_create_registration_01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runners/registration-token'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_create_remove_token_01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runners/remove-token'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_get_self_hosted_runn02.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runners/{runner_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{runner_id}' IN lv_uri WITH runner_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_runner( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_delete_self_hosted_r02.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runners/{runner_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{runner_id}' IN lv_uri WITH runner_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_list_workflow_runs_for.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -3745,37 +5772,41 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_get_workflow_run.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_workflow_run( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_delete_workflow_run.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_list_workflow_run_arti.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}/artifacts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -3787,25 +5818,27 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_cancel_workflow_run.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}/cancel'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_list_jobs_for_workflow.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}/jobs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -3820,61 +5853,67 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_download_workflow_run_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}/logs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_delete_workflow_run_lo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}/logs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_re_run_workflow.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}/rerun'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_get_workflow_run_usage.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}/timing'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_workflow_run_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_list_repo_secrets.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/secrets'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -3886,64 +5925,71 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_get_repo_public_key.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/secrets/public-key'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_public_key( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_get_repo_secret.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/secrets/{secret_name}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{secret_name}' IN lv_uri WITH secret_name.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_secret( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_create_or_update_repo_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/secrets/{secret_name}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{secret_name}' IN lv_uri WITH secret_name.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_delete_repo_secret.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/secrets/{secret_name}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{secret_name}' IN lv_uri WITH secret_name.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_list_repo_workflows.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -3955,61 +6001,67 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_get_workflow.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_workflow( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_disable_workflow.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_create_workflow_dispat.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_enable_workflow.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/enable'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_list_workflow_runs.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4027,25 +6079,28 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~actions_get_workflow_usage.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_workflow_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_list_assignees.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/assignees'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4057,50 +6112,54 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_check_user_can_be_assig.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/assignees/{assignee}'.
     REPLACE ALL OCCURRENCES OF '{assignee}' IN lv_uri WITH assignee.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_enable_automated_securit.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/automated-security-fixes'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_disable_automated_securi.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/automated-security-fixes'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_branches.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4115,13 +6174,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_branch.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4130,13 +6190,15 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_branch_with_protection( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_branch_protection.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4145,13 +6207,15 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_branch_protection( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update_branch_protection.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4160,13 +6224,15 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_protected_branch( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_branch_protection.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4175,13 +6241,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_admin_branch_protect.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4190,13 +6257,15 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_protected_branch_admin_e( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_set_admin_branch_protect.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4205,13 +6274,15 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_protected_branch_admin_e( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_admin_branch_prot.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4220,13 +6291,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_pull_request_review_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4235,13 +6307,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_update_pull_request_revi.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4250,13 +6323,15 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_protected_branch_pull_re( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_pull_request_revi.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4265,13 +6340,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_commit_signature_pro.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4280,13 +6356,15 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_protected_branch_admin_e( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_create_commit_signature_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4295,13 +6373,15 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_protected_branch_admin_e( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_commit_signature_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4310,13 +6390,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_status_checks_protec.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4325,13 +6406,15 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_status_check_policy( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update_status_check_prot.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4340,13 +6423,15 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_status_check_policy( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_remove_status_check_prot.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4355,13 +6440,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_all_status_check_con.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4370,13 +6456,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_add_status_check_context.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4385,13 +6472,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_set_status_check_context.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4400,13 +6488,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_remove_status_check_cont.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4415,13 +6504,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_access_restrictions.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4430,13 +6520,15 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_branch_restriction_polic( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_access_restrictio.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4445,13 +6537,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_apps_with_access_to_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4460,13 +6553,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_add_app_access_restricti.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4475,13 +6569,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_set_app_access_restricti.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4490,13 +6585,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_remove_app_access_restri.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4505,13 +6601,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_teams_with_access_to.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4520,13 +6617,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_add_team_access_restrict.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4535,13 +6633,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_set_team_access_restrict.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4550,13 +6649,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_remove_team_access_restr.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4565,13 +6665,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_users_with_access_to.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4580,13 +6681,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_add_user_access_restrict.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4595,13 +6697,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_set_user_access_restrict.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4610,13 +6713,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_remove_user_access_restr.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4625,13 +6729,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_rename_branch.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/rename'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4640,51 +6745,57 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~checks_create.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/check-runs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~checks_get.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/check-runs/{check_run_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{check_run_id}' IN lv_uri WITH check_run_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_check_run( '' ).
   ENDMETHOD.
 
   METHOD zif_github~checks_update.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/check-runs/{check_run_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{check_run_id}' IN lv_uri WITH check_run_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_check_run( '' ).
   ENDMETHOD.
 
   METHOD zif_github~checks_list_annotations.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/check-runs/{check_run_id}/annotations'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4697,50 +6808,56 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~checks_create_suite.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/check-suites'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~checks_set_suites_preferences.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/check-suites/preferences'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_check_suite_preference( '' ).
   ENDMETHOD.
 
   METHOD zif_github~checks_get_suite.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/check-suites/{check_suite_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{check_suite_id}' IN lv_uri WITH check_suite_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_check_suite( '' ).
   ENDMETHOD.
 
   METHOD zif_github~checks_list_for_suite.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/check-suites/{check_suite_id}/check-runs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4762,26 +6879,28 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~checks_rerequest_suite.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/check-suites/{check_suite_id}/rerequest'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{check_suite_id}' IN lv_uri WITH check_suite_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~code_scanning_list_alerts_for_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/code-scanning/alerts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4793,39 +6912,44 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~code_scanning_get_alert.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}'.
     REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH alert_number.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_code_scanning_alert_co01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~code_scanning_update_alert.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH alert_number.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_code_scanning_alert_co01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~code_scanning_list_recent_anal.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/code-scanning/analyses'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4837,25 +6961,27 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~code_scanning_upload_sarif.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/code-scanning/sarifs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_collaborators.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/collaborators'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4870,65 +6996,71 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_check_collaborator.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/collaborators/{username}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_add_collaborator.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/collaborators/{username}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_remove_collaborator.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/collaborators/{username}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_collaborator_permiss.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/collaborators/{username}/permission'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repository_collaborator_( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_commit_comments_for.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/comments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -4940,52 +7072,58 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_commit_comment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/comments/{comment_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_commit_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update_commit_comment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/comments/{comment_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_commit_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_commit_comment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/comments/{comment_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_list_for_commit_comm.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/comments/{comment_id}/reactions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -5001,39 +7139,43 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_create_for_commit_co.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/comments/{comment_id}/reactions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_reaction( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_delete_for_commit_co.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/comments/{comment_id}/reactions/{reaction_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_commits.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/commits'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -5060,26 +7202,28 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_branches_for_head_c.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/commits/{commit_sha}/branches-where-head'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{commit_sha}' IN lv_uri WITH commit_sha.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_comments_for_commit.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/commits/{commit_sha}/comments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -5092,26 +7236,28 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_create_commit_comment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/commits/{commit_sha}/comments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{commit_sha}' IN lv_uri WITH commit_sha.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_pull_requests_assoc.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/commits/{commit_sha}/pulls'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -5124,26 +7270,29 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_commit.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/commits/{ref}'.
     REPLACE ALL OCCURRENCES OF '{ref}' IN lv_uri WITH ref.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_commit( '' ).
   ENDMETHOD.
 
   METHOD zif_github~checks_list_for_ref.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/commits/{ref}/check-runs'.
     REPLACE ALL OCCURRENCES OF '{ref}' IN lv_uri WITH ref.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
@@ -5165,13 +7314,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~checks_list_suites_for_ref.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/commits/{ref}/check-suites'.
     REPLACE ALL OCCURRENCES OF '{ref}' IN lv_uri WITH ref.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
@@ -5190,26 +7340,29 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_combined_status_for_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/commits/{ref}/status'.
     REPLACE ALL OCCURRENCES OF '{ref}' IN lv_uri WITH ref.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_combined_commit_status( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_commit_statuses_for.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/commits/{ref}/statuses'.
     REPLACE ALL OCCURRENCES OF '{ref}' IN lv_uri WITH ref.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
@@ -5222,37 +7375,42 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~codes_of_conduct_get_for_repo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/community/code_of_conduct'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_code_of_conduct( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_community_profile_me.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/community/profile'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_community_profile( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_compare_commits.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/compare/{base}...{head}'.
     REPLACE ALL OCCURRENCES OF '{base}' IN lv_uri WITH base.
     REPLACE ALL OCCURRENCES OF '{head}' IN lv_uri WITH head.
@@ -5260,13 +7418,15 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_commit_comparison( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_content.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/contents/{path}'.
     REPLACE ALL OCCURRENCES OF '{path}' IN lv_uri WITH path.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
@@ -5276,39 +7436,44 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_create_or_update_file_co.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/contents/{path}'.
     REPLACE ALL OCCURRENCES OF '{path}' IN lv_uri WITH path.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_file_commit( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_file.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/contents/{path}'.
     REPLACE ALL OCCURRENCES OF '{path}' IN lv_uri WITH path.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_file_commit( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_contributors.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/contributors'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -5323,13 +7488,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_deployments.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/deployments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -5353,51 +7519,56 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_create_deployment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/deployments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_deployment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/deployments/{deployment_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{deployment_id}' IN lv_uri WITH deployment_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_deployment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_deployment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/deployments/{deployment_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{deployment_id}' IN lv_uri WITH deployment_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_deployment_statuses.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/deployments/{deployment_id}/statuses'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -5410,26 +7581,28 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_create_deployment_status.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/deployments/{deployment_id}/statuses'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{deployment_id}' IN lv_uri WITH deployment_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_deployment_status.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/deployments/{deployment_id}/statuses/{status_id}'.
     REPLACE ALL OCCURRENCES OF '{status_id}' IN lv_uri WITH status_id.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
@@ -5437,25 +7610,28 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{deployment_id}' IN lv_uri WITH deployment_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_deployment_status( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_create_dispatch_event.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/dispatches'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_list_repo_events.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/events'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -5467,13 +7643,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_forks.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/forks'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -5488,75 +7665,83 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_create_fork.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/forks'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~git_create_blob.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/git/blobs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~git_get_blob.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/git/blobs/{file_sha}'.
     REPLACE ALL OCCURRENCES OF '{file_sha}' IN lv_uri WITH file_sha.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_blob( '' ).
   ENDMETHOD.
 
   METHOD zif_github~git_create_commit.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/git/commits'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~git_get_commit.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/git/commits/{commit_sha}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{commit_sha}' IN lv_uri WITH commit_sha.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_git_commit( '' ).
   ENDMETHOD.
 
   METHOD zif_github~git_list_matching_refs.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/git/matching-refs/{ref}'.
     REPLACE ALL OCCURRENCES OF '{ref}' IN lv_uri WITH ref.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
@@ -5569,101 +7754,112 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~git_get_ref.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/git/ref/{ref}'.
     REPLACE ALL OCCURRENCES OF '{ref}' IN lv_uri WITH ref.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_git_ref( '' ).
   ENDMETHOD.
 
   METHOD zif_github~git_create_ref.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/git/refs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~git_update_ref.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/git/refs/{ref}'.
     REPLACE ALL OCCURRENCES OF '{ref}' IN lv_uri WITH ref.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_git_ref( '' ).
   ENDMETHOD.
 
   METHOD zif_github~git_delete_ref.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/git/refs/{ref}'.
     REPLACE ALL OCCURRENCES OF '{ref}' IN lv_uri WITH ref.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~git_create_tag.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/git/tags'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~git_get_tag.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/git/tags/{tag_sha}'.
     REPLACE ALL OCCURRENCES OF '{tag_sha}' IN lv_uri WITH tag_sha.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_git_tag( '' ).
   ENDMETHOD.
 
   METHOD zif_github~git_create_tree.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/git/trees'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~git_get_tree.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/git/trees/{tree_sha}'.
     REPLACE ALL OCCURRENCES OF '{tree_sha}' IN lv_uri WITH tree_sha.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
@@ -5673,13 +7869,15 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_git_tree( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_webhooks.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/hooks'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -5691,254 +7889,286 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_create_webhook.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/hooks'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_webhook.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/hooks/{hook_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_hook( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update_webhook.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/hooks/{hook_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_hook( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_webhook.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/hooks/{hook_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_webhook_config_for_r.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/hooks/{hook_id}/config'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_webhook_config( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update_webhook_config_fo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/hooks/{hook_id}/config'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_webhook_config( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_ping_webhook.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/hooks/{hook_id}/pings'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_test_push_webhook.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/hooks/{hook_id}/tests'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~migrations_get_import_status.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/import'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_import( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_start_import.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/import'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~migrations_update_import.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/import'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_import( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_cancel_import.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/import'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~migrations_get_commit_authors.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/import/authors'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~migrations_map_commit_author.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/import/authors/{author_id}'.
     REPLACE ALL OCCURRENCES OF '{author_id}' IN lv_uri WITH author_id.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_porter_author( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_get_large_files.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/import/large_files'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~migrations_set_lfs_preference.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/import/lfs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_import( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_get_repo_installation.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/installation'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_installation( '' ).
   ENDMETHOD.
 
   METHOD zif_github~interactions_get_restriction01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/interaction-limits'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_interaction_limit_respon( '' ).
   ENDMETHOD.
 
   METHOD zif_github~interactions_set_restriction01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/interaction-limits'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_interaction_limit_respon( '' ).
   ENDMETHOD.
 
   METHOD zif_github~interactions_remove_restrict01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/interaction-limits'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_invitations.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/invitations'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -5950,39 +8180,43 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_update_invitation.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/invitations/{invitation_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{invitation_id}' IN lv_uri WITH invitation_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repository_invitation( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_invitation.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/invitations/{invitation_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{invitation_id}' IN lv_uri WITH invitation_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_list_for_repo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6021,25 +8255,27 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_create.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_list_comments_for_repo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/comments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6060,52 +8296,58 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_get_comment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/comments/{comment_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issue_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_update_comment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/comments/{comment_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issue_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_delete_comment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/comments/{comment_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_list_for_issue_comme.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6121,39 +8363,43 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_create_for_issue_com.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_reaction( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_delete_for_issue_com.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions/{reaction_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_list_events_for_repo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/events'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6165,78 +8411,88 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_get_event.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/events/{event_id}'.
     REPLACE ALL OCCURRENCES OF '{event_id}' IN lv_uri WITH event_id.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issue_event( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_get.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issue( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_update.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issue( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_add_assignees.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}/assignees'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_remove_assignees.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}/assignees'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issue_simple( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_list_comments.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}/comments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6252,26 +8508,28 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_create_comment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}/comments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_list_events.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}/events'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6284,13 +8542,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_list_labels_on_issue.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}/labels'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6303,52 +8562,56 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_add_labels.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}/labels'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_set_labels.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}/labels'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_remove_all_labels.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}/labels'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_remove_label.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}/labels/{name}'.
     REPLACE ALL OCCURRENCES OF '{name}' IN lv_uri WITH name.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
@@ -6356,39 +8619,42 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_lock.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}/lock'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_unlock.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}/lock'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_list_for_issue.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}/reactions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6404,39 +8670,42 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_create_for_issue.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}/reactions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_delete_for_issue.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}/reactions/{reaction_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_list_events_for_timelin.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/issues/{issue_number}/timeline'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6449,13 +8718,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_deploy_keys.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/keys'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6467,51 +8737,56 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_create_deploy_key.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/keys'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_deploy_key.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/keys/{key_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{key_id}' IN lv_uri WITH key_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_deploy_key( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_deploy_key.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/keys/{key_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{key_id}' IN lv_uri WITH key_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_list_labels_for_repo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/labels'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6523,100 +8798,112 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_create_label.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/labels'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_get_label.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/labels/{name}'.
     REPLACE ALL OCCURRENCES OF '{name}' IN lv_uri WITH name.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_label( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_update_label.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/labels/{name}'.
     REPLACE ALL OCCURRENCES OF '{name}' IN lv_uri WITH name.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_label( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_delete_label.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/labels/{name}'.
     REPLACE ALL OCCURRENCES OF '{name}' IN lv_uri WITH name.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_languages.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/languages'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_language( '' ).
   ENDMETHOD.
 
   METHOD zif_github~licenses_get_for_repo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/license'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_license_content( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_merge.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/merges'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_list_milestones.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/milestones'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6637,64 +8924,71 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_create_milestone.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/milestones'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_get_milestone.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/milestones/{milestone_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{milestone_number}' IN lv_uri WITH milestone_number.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_milestone( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_update_milestone.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/milestones/{milestone_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{milestone_number}' IN lv_uri WITH milestone_number.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_milestone( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_delete_milestone.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/milestones/{milestone_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{milestone_number}' IN lv_uri WITH milestone_number.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_list_labels_for_milesto.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/milestones/{milestone_number}/labels'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6707,13 +9001,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_list_repo_notificatio.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/notifications'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6737,73 +9032,80 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_mark_repo_notificatio.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/notifications'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_pages.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pages'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_page( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_create_pages_site.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pages'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_update_information_about.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pages'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_pages_site.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pages'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_pages_builds.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pages/builds'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6815,50 +9117,56 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_request_pages_build.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pages/builds'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_latest_pages_build.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pages/builds/latest'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_page_build( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_pages_build.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pages/builds/{build_id}'.
     REPLACE ALL OCCURRENCES OF '{build_id}' IN lv_uri WITH build_id.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_page_build( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_list_for_repo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/projects'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6873,25 +9181,27 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~projects_create_for_repo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/projects'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~pulls_list.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6918,25 +9228,27 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~pulls_create.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~pulls_list_review_comments_for.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/comments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -6957,52 +9269,58 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~pulls_get_review_comment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/comments/{comment_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pull_request_review_comm( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_update_review_comment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/comments/{comment_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pull_request_review_comm( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_delete_review_comment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/comments/{comment_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_list_for_pull_reques.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7018,63 +9336,71 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_create_for_pull_requ.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_reaction( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_delete_for_pull_requ.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions/{reaction_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~pulls_get.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pull_request( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_update.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pull_request( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_list_review_comments.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/comments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7095,38 +9421,41 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~pulls_create_review_comment.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/comments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~pulls_create_reply_for_review_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/comments/{comment_id}/replies'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~pulls_list_commits.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/commits'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7138,13 +9467,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~pulls_list_files.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/files'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7156,37 +9486,41 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~pulls_check_if_merged.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/merge'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~pulls_merge.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/merge'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pull_request_merge_resul( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_list_requested_reviewers.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7198,37 +9532,41 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pull_request_review_requ( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_request_reviewers.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~pulls_remove_requested_reviewe.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~pulls_list_reviews.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/reviews'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7240,64 +9578,73 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~pulls_create_review.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/reviews'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_get_review.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{review_id}' IN lv_uri WITH review_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_update_review.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{review_id}' IN lv_uri WITH review_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_delete_pending_review.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{review_id}' IN lv_uri WITH review_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_list_comments_for_review.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7310,51 +9657,57 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~pulls_dismiss_review.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/dismissals'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{review_id}' IN lv_uri WITH review_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_submit_review.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/events'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{review_id}' IN lv_uri WITH review_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_update_branch.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/update-branch'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_readme.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/readme'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7363,13 +9716,15 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_content_file( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_releases.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/releases'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7381,128 +9736,144 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_create_release.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/releases'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_release_asset.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/releases/assets/{asset_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{asset_id}' IN lv_uri WITH asset_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_release_asset( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update_release_asset.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/releases/assets/{asset_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{asset_id}' IN lv_uri WITH asset_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_release_asset( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_release_asset.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/releases/assets/{asset_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{asset_id}' IN lv_uri WITH asset_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_latest_release.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/releases/latest'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_release( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_release_by_tag.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/releases/tags/{tag}'.
     REPLACE ALL OCCURRENCES OF '{tag}' IN lv_uri WITH tag.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_release( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_release.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/releases/{release_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{release_id}' IN lv_uri WITH release_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_release( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update_release.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/releases/{release_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{release_id}' IN lv_uri WITH release_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_release( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_delete_release.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/releases/{release_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{release_id}' IN lv_uri WITH release_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_release_assets.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/releases/{release_id}/assets'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7515,13 +9886,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_upload_release_asset.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/releases/{release_id}/assets'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7534,13 +9906,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~secret_scanning_list_alerts_fo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/secret-scanning/alerts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7555,39 +9928,44 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~secret_scanning_get_alert.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH alert_number.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_secret_scanning_alert( '' ).
   ENDMETHOD.
 
   METHOD zif_github~secret_scanning_update_alert.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH alert_number.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_secret_scanning_alert( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_list_stargazers_for_r.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/stargazers'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7599,86 +9977,94 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_code_frequency_stats.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/stats/code_frequency'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_commit_activity_stat.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/stats/commit_activity'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_contributors_stats.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/stats/contributors'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_participation_stats.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/stats/participation'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_participation_stats( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_punch_card_stats.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/stats/punch_card'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_create_commit_status.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/statuses/{sha}'.
     REPLACE ALL OCCURRENCES OF '{sha}' IN lv_uri WITH sha.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_list_watchers_for_rep.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/subscribers'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7690,49 +10076,55 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_get_repo_subscription.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/subscription'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repository_subscription( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_set_repo_subscription.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/subscription'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repository_subscription( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_delete_repo_subscript.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/subscription'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_tags.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/tags'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7744,26 +10136,28 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_download_tarball_archive.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/tarball/{ref}'.
     REPLACE ALL OCCURRENCES OF '{ref}' IN lv_uri WITH ref.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_teams.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/teams'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7775,37 +10169,42 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_all_topics.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/topics'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_topic( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_replace_all_topics.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/topics'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_topic( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_clones.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/traffic/clones'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7814,37 +10213,41 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_clone_traffic( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_top_paths.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/traffic/popular/paths'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_top_referrers.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/traffic/popular/referrers'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get_views.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/traffic/views'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
@@ -7853,96 +10256,105 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_view_traffic( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_transfer.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/transfer'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_check_vulnerability_aler.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/vulnerability-alerts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_enable_vulnerability_ale.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/vulnerability-alerts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_disable_vulnerability_al.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/vulnerability-alerts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_download_zipball_archive.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/zipball/{ref}'.
     REPLACE ALL OCCURRENCES OF '{ref}' IN lv_uri WITH ref.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_create_using_template.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repos/{template_owner}/{template_repo}/generate'.
     REPLACE ALL OCCURRENCES OF '{template_owner}' IN lv_uri WITH template_owner.
     REPLACE ALL OCCURRENCES OF '{template_repo}' IN lv_uri WITH template_repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_public.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repositories'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_list_provisio.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Groups'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     IF count IS SUPPLIED.
@@ -7950,72 +10362,82 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_scim_group_list_enterpri( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_provision_and.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Groups'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_get_provision.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{scim_group_id}' IN lv_uri WITH scim_group_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_scim_enterprise_group( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_set_informati.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{scim_group_id}' IN lv_uri WITH scim_group_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_scim_enterprise_group( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_update_attrib.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{scim_group_id}' IN lv_uri WITH scim_group_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_scim_enterprise_group( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_delete_scim_g.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{scim_group_id}' IN lv_uri WITH scim_group_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_list_provis01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Users'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     IF count IS SUPPLIED.
@@ -8023,72 +10445,82 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_scim_user_list_enterpris( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_provision_a01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Users'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_get_provisi01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{scim_user_id}' IN lv_uri WITH scim_user_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_scim_enterprise_user( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_set_informa01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{scim_user_id}' IN lv_uri WITH scim_user_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_scim_enterprise_user( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_update_attr01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{scim_user_id}' IN lv_uri WITH scim_user_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_scim_enterprise_user( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_delete_user_f.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     REPLACE ALL OCCURRENCES OF '{scim_user_id}' IN lv_uri WITH scim_user_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~scim_list_provisioned_identiti.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/organizations/{org}/Users'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     IF startindex IS SUPPLIED.
@@ -8102,72 +10534,78 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~scim_provision_and_invite_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/organizations/{org}/Users'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~scim_get_provisioning_informat.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/organizations/{org}/Users/{scim_user_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{scim_user_id}' IN lv_uri WITH scim_user_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~scim_set_information_for_provi.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/organizations/{org}/Users/{scim_user_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{scim_user_id}' IN lv_uri WITH scim_user_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~scim_update_attribute_for_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/organizations/{org}/Users/{scim_user_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{scim_user_id}' IN lv_uri WITH scim_user_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~scim_delete_user_from_org.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/organizations/{org}/Users/{scim_user_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{scim_user_id}' IN lv_uri WITH scim_user_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~search_code.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/search/code'.
     mi_client->request->set_form_field( name = 'q' value = q ).
     IF sort IS SUPPLIED.
@@ -8184,13 +10622,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~search_commits.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/search/commits'.
     mi_client->request->set_form_field( name = 'q' value = q ).
     IF sort IS SUPPLIED.
@@ -8207,13 +10646,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~search_issues_and_pull_request.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/search/issues'.
     mi_client->request->set_form_field( name = 'q' value = q ).
     IF sort IS SUPPLIED.
@@ -8230,13 +10670,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~search_labels.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/search/labels'.
     mi_client->request->set_form_field( name = 'repository_id' value = repository_id ).
     mi_client->request->set_form_field( name = 'q' value = q ).
@@ -8248,13 +10689,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~search_repos.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/search/repositories'.
     mi_client->request->set_form_field( name = 'q' value = q ).
     IF sort IS SUPPLIED.
@@ -8271,24 +10713,26 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~search_topics.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/search/topics'.
     mi_client->request->set_form_field( name = 'q' value = q ).
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~search_users.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/search/users'.
     mi_client->request->set_form_field( name = 'q' value = q ).
     IF sort IS SUPPLIED.
@@ -8305,43 +10749,48 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_get_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_full( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_update_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}'.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_delete_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_list_discussions_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions'.
     IF direction IS SUPPLIED.
       mi_client->request->set_form_field( name = 'direction' value = direction ).
@@ -8354,53 +10803,60 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_create_discussion_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_get_discussion_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_discussion( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_update_discussion_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}'.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_discussion( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_delete_discussion_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_list_discussion_commen01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments'.
     IF direction IS SUPPLIED.
       mi_client->request->set_form_field( name = 'direction' value = direction ).
@@ -8413,53 +10869,60 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_create_discussion_comm01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_get_discussion_comment_l.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_discussion_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_update_discussion_comm01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}'.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_discussion_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_delete_discussion_comm01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_list_for_team_disc02.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions'.
     IF content IS SUPPLIED.
       mi_client->request->set_form_field( name = 'content' value = content ).
@@ -8472,23 +10935,25 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_create_for_team_di02.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_list_for_team_disc03.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/reactions'.
     IF content IS SUPPLIED.
       mi_client->request->set_form_field( name = 'content' value = content ).
@@ -8501,23 +10966,25 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~reactions_create_for_team_di03.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/reactions'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_list_pending_invitatio01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/invitations'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -8527,13 +10994,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_list_members_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/members'.
     IF role IS SUPPLIED.
       mi_client->request->set_form_field( name = 'role' value = role ).
@@ -8546,79 +11014,88 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_get_member_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/members/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_add_member_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/members/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_remove_member_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/members/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_get_membership_for_use01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/memberships/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_membership( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_add_or_update_membersh01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/memberships/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_membership( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_remove_membership_for_01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/memberships/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_list_projects_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/projects'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -8628,43 +11105,48 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_check_permissions_for_01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/projects/{project_id}'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_project( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_add_or_update_project_01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/projects/{project_id}'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_remove_project_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/projects/{project_id}'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_list_repos_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/repos'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -8674,69 +11156,77 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_check_permissions_for_02.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/repos/{owner}/{repo}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_add_or_update_repo_per01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/repos/{owner}/{repo}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_remove_repo_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/repos/{owner}/{repo}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_list_idp_groups_for_lega.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/team-sync/group-mappings'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_group_mapping( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_create_or_update_idp_g01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/team-sync/group-mappings'.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_group_mapping( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_list_child_legacy.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/teams'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -8746,86 +11236,95 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_get_authenticated.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_update_authenticated.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user'.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_private_user( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_list_blocked_by_authenti.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/blocks'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_check_blocked.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/blocks/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_block.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/blocks/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_unblock.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/blocks/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_set_primary_email_visibi.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/email/visibility'.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_list_emails_for_authenti.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/emails'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -8835,33 +11334,36 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_add_email_for_authentica.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/emails'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_delete_email_for_authent.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/emails'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_list_followers_for_authe.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/followers'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -8871,13 +11373,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_list_followed_by_authent.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/following'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -8887,46 +11390,50 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_check_person_is_followed.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/following/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_follow.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/following/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_unfollow.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/following/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_list_gpg_keys_for_authen.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/gpg_keys'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -8936,45 +11443,50 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_create_gpg_key_for_authe.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/gpg_keys'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_get_gpg_key_for_authenti.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/gpg_keys/{gpg_key_id}'.
     REPLACE ALL OCCURRENCES OF '{gpg_key_id}' IN lv_uri WITH gpg_key_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gpg_key( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_delete_gpg_key_for_authe.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/gpg_keys/{gpg_key_id}'.
     REPLACE ALL OCCURRENCES OF '{gpg_key_id}' IN lv_uri WITH gpg_key_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_list_installations_for_au.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/installations'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -8984,13 +11496,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_list_installation_repos_f.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/installations/{installation_id}/repositories'.
     REPLACE ALL OCCURRENCES OF '{installation_id}' IN lv_uri WITH installation_id.
     IF per_page IS SUPPLIED.
@@ -9001,67 +11514,75 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_add_repo_to_installation.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/installations/{installation_id}/repositories/{repository_id}'.
     REPLACE ALL OCCURRENCES OF '{installation_id}' IN lv_uri WITH installation_id.
     REPLACE ALL OCCURRENCES OF '{repository_id}' IN lv_uri WITH repository_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_remove_repo_from_installa.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/installations/{installation_id}/repositories/{repository_id}'.
     REPLACE ALL OCCURRENCES OF '{installation_id}' IN lv_uri WITH installation_id.
     REPLACE ALL OCCURRENCES OF '{repository_id}' IN lv_uri WITH repository_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~interactions_get_restriction02.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/interaction-limits'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_interaction_limit_respon( '' ).
   ENDMETHOD.
 
   METHOD zif_github~interactions_set_restriction02.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/interaction-limits'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_interaction_limit_respon( '' ).
   ENDMETHOD.
 
   METHOD zif_github~interactions_remove_restrict02.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/interaction-limits'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~issues_list_for_authenticated_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/issues'.
     IF filter IS SUPPLIED.
       mi_client->request->set_form_field( name = 'filter' value = filter ).
@@ -9089,13 +11610,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_list_public_ssh_keys_for.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/keys'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -9105,45 +11627,50 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_create_public_ssh_key_fo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/keys'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_get_public_ssh_key_for_a.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/keys/{key_id}'.
     REPLACE ALL OCCURRENCES OF '{key_id}' IN lv_uri WITH key_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_key( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_delete_public_ssh_key_fo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/keys/{key_id}'.
     REPLACE ALL OCCURRENCES OF '{key_id}' IN lv_uri WITH key_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_list_subscriptions_for_au.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/marketplace_purchases'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -9153,13 +11680,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~apps_list_subscriptions_for_01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/marketplace_purchases/stubbed'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -9169,13 +11697,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_memberships_for_auth.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/memberships/orgs'.
     IF state IS SUPPLIED.
       mi_client->request->set_form_field( name = 'state' value = state ).
@@ -9188,35 +11717,40 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_get_membership_for_authen.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/memberships/orgs/{org}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_org_membership( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_update_membership_for_aut.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/memberships/orgs/{org}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_org_membership( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_list_for_authentica.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/migrations'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -9226,23 +11760,25 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~migrations_start_for_authentic.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/migrations'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~migrations_get_status_for_auth.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/migrations/{migration_id}'.
     REPLACE ALL OCCURRENCES OF '{migration_id}' IN lv_uri WITH migration_id.
     IF exclude IS SUPPLIED.
@@ -9250,47 +11786,52 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_migration( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_get_archive_for_aut.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/migrations/{migration_id}/archive'.
     REPLACE ALL OCCURRENCES OF '{migration_id}' IN lv_uri WITH migration_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~migrations_delete_archive_fo01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/migrations/{migration_id}/archive'.
     REPLACE ALL OCCURRENCES OF '{migration_id}' IN lv_uri WITH migration_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~migrations_unlock_repo_for_aut.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/migrations/{migration_id}/repos/{repo_name}/lock'.
     REPLACE ALL OCCURRENCES OF '{migration_id}' IN lv_uri WITH migration_id.
     REPLACE ALL OCCURRENCES OF '{repo_name}' IN lv_uri WITH repo_name.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~migrations_list_repos_for_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/migrations/{migration_id}/repositories'.
     REPLACE ALL OCCURRENCES OF '{migration_id}' IN lv_uri WITH migration_id.
     IF per_page IS SUPPLIED.
@@ -9301,13 +11842,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_for_authenticated_us.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/orgs'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -9317,23 +11859,25 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~projects_create_for_authentica.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/projects'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_list_public_emails_for_a.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/public_emails'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -9343,13 +11887,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_for_authenticated_u.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/repos'.
     IF visibility IS SUPPLIED.
       mi_client->request->set_form_field( name = 'visibility' value = visibility ).
@@ -9380,23 +11925,25 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_create_for_authenticated.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/repos'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_invitations_for_aut.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/repository_invitations'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -9406,35 +11953,38 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_accept_invitation.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/repository_invitations/{invitation_id}'.
     REPLACE ALL OCCURRENCES OF '{invitation_id}' IN lv_uri WITH invitation_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_decline_invitation.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/repository_invitations/{invitation_id}'.
     REPLACE ALL OCCURRENCES OF '{invitation_id}' IN lv_uri WITH invitation_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_list_repos_starred_by.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/starred'.
     IF sort IS SUPPLIED.
       mi_client->request->set_form_field( name = 'sort' value = sort ).
@@ -9450,49 +12000,53 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_check_repo_is_starred.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/starred/{owner}/{repo}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_star_repo_for_authent.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/starred/{owner}/{repo}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_unstar_repo_for_authe.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/starred/{owner}/{repo}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_list_watched_repos_fo.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/subscriptions'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -9502,13 +12056,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~teams_list_for_authenticated_u.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/user/teams'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -9518,37 +12073,40 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_list.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users'.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_get_by_username.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_list_events_for_authe.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/events'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     IF per_page IS SUPPLIED.
@@ -9559,13 +12117,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_list_org_events_for_a.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/events/orgs/{org}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
@@ -9577,13 +12136,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_list_public_events_01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/events/public'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     IF per_page IS SUPPLIED.
@@ -9594,13 +12154,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_list_followers_for_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/followers'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     IF per_page IS SUPPLIED.
@@ -9611,13 +12172,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_list_following_for_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/following'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     IF per_page IS SUPPLIED.
@@ -9628,25 +12190,27 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_check_following_for_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/following/{target_user}'.
     REPLACE ALL OCCURRENCES OF '{target_user}' IN lv_uri WITH target_user.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~gists_list_for_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/gists'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     IF since IS SUPPLIED.
@@ -9660,13 +12224,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_list_gpg_keys_for_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/gpg_keys'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     IF per_page IS SUPPLIED.
@@ -9677,13 +12242,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~users_get_context_for_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/hovercard'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     IF subject_type IS SUPPLIED.
@@ -9694,24 +12260,28 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_hovercard( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_get_user_installation.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/installation'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_installation( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_list_public_keys_for_use.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/keys'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     IF per_page IS SUPPLIED.
@@ -9722,13 +12292,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_for_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/orgs'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     IF per_page IS SUPPLIED.
@@ -9739,13 +12310,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~projects_list_for_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/projects'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     IF state IS SUPPLIED.
@@ -9759,13 +12331,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_list_received_events_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/received_events'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     IF per_page IS SUPPLIED.
@@ -9776,13 +12349,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_list_received_public_.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/received_events/public'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     IF per_page IS SUPPLIED.
@@ -9793,13 +12367,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_list_for_user.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/repos'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     IF type IS SUPPLIED.
@@ -9819,46 +12394,53 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~billing_get_github_actions_b02.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/settings/billing/actions'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~billing_get_github_packages_02.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/settings/billing/packages'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_packages_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~billing_get_shared_storage_b02.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/settings/billing/shared-storage'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_combined_billing_usage( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_list_repos_starred_01.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/starred'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     IF sort IS SUPPLIED.
@@ -9875,13 +12457,14 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~activity_list_repos_watched_by.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users/{username}/subscriptions'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     IF per_page IS SUPPLIED.
@@ -9892,20 +12475,21 @@ CLASS zcl_github IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~meta_get_zen.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/zen'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
 ENDCLASS.

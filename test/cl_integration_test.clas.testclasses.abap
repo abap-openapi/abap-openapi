@@ -21,7 +21,7 @@ CLASS ltcl_json IMPLEMENTATION.
       EXPORTING
         ii_client = li_client.
 
-    li_petstore->loginuser( ).
+    li_petstore->getuserbyname( 'user1' ).
 
 * todo, add assertions here
   ENDMETHOD.
@@ -42,9 +42,9 @@ CLASS ltcl_json IMPLEMENTATION.
       EXPORTING
         ii_client = li_client.
 
-    li_github->pulls_list(
-      owner = 'abapGit'
-      repo  = 'abapGit' ).
+    " li_github->pulls_list(
+    "   owner = 'abapGit'
+    "   repo  = 'abapGit' ).
 
 * todo, add assertions here
   ENDMETHOD.

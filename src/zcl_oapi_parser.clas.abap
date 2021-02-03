@@ -99,6 +99,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
       CLEAR ls_schema.
       ls_schema-name = lv_name.
       ls_schema-abap_name = lo_names->to_abap_name( ls_schema-name ).
+      ls_schema-abap_parser_method = lo_names->to_abap_name( |parse_{ ls_schema-abap_name }| ).
       ls_schema-schema = parse_schema( iv_prefix && lv_name ).
       APPEND ls_schema TO rt_schemas.
     ENDLOOP.
@@ -145,8 +146,13 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
         ls_operation-parameters_ref = parse_parameters_ref( lv_prefix && '/parameters/' ).
         ls_operation-responses = parse_responses( lv_prefix && '/responses/' ).
         ls_operation-abap_name = lo_names->to_abap_name( ls_operation-operation_id ).
+        ls_operation-body_schema_ref = mo_json->value_string( lv_prefix && '/requestBody/content/application/json/schema/$ref' ).
+        IF ls_operation-body_schema_ref IS INITIAL AND lines( mo_json->members( lv_prefix && '/requestBody/content/application/json/schema/' ) ) > 0.
+          ls_operation-body_schema = parse_schema( lv_prefix && '/requestBody/content/application/json/schema' ).
+        ENDIF.
         APPEND ls_operation TO rt_operations.
       ENDLOOP.
+
     ENDLOOP.
   ENDMETHOD.
 
@@ -211,6 +217,9 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
       CLEAR ls_media_type.
       ls_media_type-type = lv_member.
       ls_media_type-schema_ref = mo_json->value_string( iv_prefix && lv_member && '/schema/$ref' ).
+      IF ls_media_type-schema_ref IS INITIAL.
+        ls_media_type-schema = parse_schema( iv_prefix && lv_member && '/schema' ).
+      ENDIF.
       APPEND ls_media_type TO rt_media_types.
     ENDLOOP.
   ENDMETHOD.

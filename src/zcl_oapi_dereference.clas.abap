@@ -1,24 +1,35 @@
 CLASS zcl_oapi_dereference DEFINITION PUBLIC.
+* todo, rename this class to zcl_oapi_references
+
   PUBLIC SECTION.
-    METHODS dereference
+    METHODS fix
       IMPORTING is_spec TYPE zif_oapi_specification_v3=>ty_specification
       RETURNING VALUE(rs_spec) TYPE zif_oapi_specification_v3=>ty_specification.
 
   PRIVATE SECTION.
     DATA ms_spec TYPE zif_oapi_specification_v3=>ty_specification.
 
-    METHODS parameters.
+    METHODS dereference_parameters.
 ENDCLASS.
 
 CLASS zcl_oapi_dereference IMPLEMENTATION.
 
-  METHOD dereference.
+  METHOD fix.
     ms_spec = is_spec.
-    parameters( ).
+
+* always dereference all parameters
+    dereference_parameters( ).
+
+* if body schema is not simple, move to schema ref
+* todo
+
+* if response schema is not simple, move to schema ref
+* todo
+
     rs_spec = ms_spec.
   ENDMETHOD.
 
-  METHOD parameters.
+  METHOD dereference_parameters.
     FIELD-SYMBOLS: <ls_operation> LIKE LINE OF ms_spec-operations.
     DATA ls_parameter TYPE zif_oapi_specification_v3=>ty_parameter.
     DATA lv_ref TYPE string.

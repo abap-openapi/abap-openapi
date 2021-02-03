@@ -4,9 +4,42 @@ CLASS zcl_petstore DEFINITION PUBLIC.
   PUBLIC SECTION.
     INTERFACES zif_petstore.
     METHODS constructor IMPORTING ii_client TYPE REF TO if_http_client.
-  PRIVATE SECTION.
+  PROTECTED SECTION.
     DATA mi_client TYPE REF TO if_http_client.
-    METHODS send_receive.
+    DATA mo_json TYPE REF TO zcl_oapi_json.
+    METHODS send_receive RETURNING VALUE(rv_code) TYPE i.
+    METHODS parse_order
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(order) TYPE zif_petstore=>order
+      RAISING cx_static_check.
+    METHODS parse_customer
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(customer) TYPE zif_petstore=>customer
+      RAISING cx_static_check.
+    METHODS parse_address
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(address) TYPE zif_petstore=>address
+      RAISING cx_static_check.
+    METHODS parse_category
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(category) TYPE zif_petstore=>category
+      RAISING cx_static_check.
+    METHODS parse_user
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(user) TYPE zif_petstore=>user
+      RAISING cx_static_check.
+    METHODS parse_tag
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(tag) TYPE zif_petstore=>tag
+      RAISING cx_static_check.
+    METHODS parse_pet
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pet) TYPE zif_petstore=>pet
+      RAISING cx_static_check.
+    METHODS parse_apiresponse
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(apiresponse) TYPE zif_petstore=>apiresponse
+      RAISING cx_static_check.
 ENDCLASS.
 
 CLASS zcl_petstore IMPLEMENTATION.
@@ -15,71 +48,102 @@ CLASS zcl_petstore IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD send_receive.
-    DATA lv_code TYPE i.
-    DATA lv_cdata TYPE string.
     mi_client->send( ).
     mi_client->receive( ).
-    mi_client->response->get_status( IMPORTING code = lv_code ).
+    mi_client->response->get_status( IMPORTING code = rv_code ).
+  ENDMETHOD.
+
+  METHOD parse_order.
+  ENDMETHOD.
+
+  METHOD parse_customer.
+  ENDMETHOD.
+
+  METHOD parse_address.
+  ENDMETHOD.
+
+  METHOD parse_category.
+  ENDMETHOD.
+
+  METHOD parse_user.
+  ENDMETHOD.
+
+  METHOD parse_tag.
+  ENDMETHOD.
+
+  METHOD parse_pet.
+  ENDMETHOD.
+
+  METHOD parse_apiresponse.
   ENDMETHOD.
 
   METHOD zif_petstore~updatepet.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/pet'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pet( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~addpet.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/pet'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pet( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~findpetsbystatus.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/findByStatus'.
     IF status IS SUPPLIED.
       mi_client->request->set_form_field( name = 'status' value = status ).
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~findpetsbytags.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/findByTags'.
     IF tags IS SUPPLIED.
       mi_client->request->set_form_field( name = 'tags' value = tags ).
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~getpetbyid.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/{petId}'.
     REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH petid.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pet( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~updatepetwithform.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/{petId}'.
     REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH petid.
     IF name IS SUPPLIED.
@@ -90,24 +154,26 @@ CLASS zcl_petstore IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~deletepet.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/{petId}'.
     REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH petid.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~uploadfile.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/{petId}/uploadImage'.
     REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH petid.
     IF additionalmetadata IS SUPPLIED.
@@ -115,75 +181,86 @@ CLASS zcl_petstore IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_apiresponse( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~getinventory.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/store/inventory'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~placeorder.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/store/order'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_order( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~getorderbyid.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/store/order/{orderId}'.
     REPLACE ALL OCCURRENCES OF '{orderId}' IN lv_uri WITH orderid.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_order( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~deleteorder.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/store/order/{orderId}'.
     REPLACE ALL OCCURRENCES OF '{orderId}' IN lv_uri WITH orderid.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~createuser.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/user'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~createuserswithlistinput.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/user/createWithList'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_user( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~loginuser.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/user/login'.
     IF username IS SUPPLIED.
       mi_client->request->set_form_field( name = 'username' value = username ).
@@ -193,53 +270,58 @@ CLASS zcl_petstore IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~logoutuser.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/user/logout'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~getuserbyname.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/user/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_user( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~updateuser.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/user/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~deleteuser.
+    DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/api/v3/user/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-*    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).
-*    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).
-    send_receive( ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
+* todo, handle more responses
   ENDMETHOD.
 
 ENDCLASS.
