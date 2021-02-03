@@ -148,6 +148,9 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
         |* { to_upper( ls_operation-method ) } - "{ ls_operation-summary }"\n|.
+      IF ls_operation-operation_id IS NOT INITIAL.
+        rv_abap = rv_abap && |* Operation id: { ls_operation-operation_id }\n|.
+      ENDIF.
       LOOP AT ls_operation-parameters INTO ls_parameter.
         IF ls_parameter-required = abap_true.
           lv_required = 'required'.

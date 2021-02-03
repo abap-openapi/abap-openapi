@@ -62,6 +62,7 @@ INTERFACE zif_petstore.
          END OF apiresponse.
 
 * PUT - "Update an existing pet"
+* Operation id: updatePet
 * Response: 200
 *     application/xml
 *     application/json
@@ -71,6 +72,7 @@ INTERFACE zif_petstore.
   METHODS updatepet
     RAISING cx_static_check.
 * POST - "Add a new pet to the store"
+* Operation id: addPet
 * Response: 200
 *     application/xml
 *     application/json
@@ -78,6 +80,7 @@ INTERFACE zif_petstore.
   METHODS addpet
     RAISING cx_static_check.
 * GET - "Finds Pets by status"
+* Operation id: findPetsByStatus
 * Parameter: status, optional, query
 * Response: 200
 *     application/xml
@@ -88,6 +91,7 @@ INTERFACE zif_petstore.
       status TYPE string DEFAULT 'available' OPTIONAL
     RAISING cx_static_check.
 * GET - "Finds Pets by tags"
+* Operation id: findPetsByTags
 * Parameter: tags, optional, query
 * Response: 200
 *     application/xml
@@ -98,6 +102,7 @@ INTERFACE zif_petstore.
       tags TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Find pet by ID"
+* Operation id: getPetById
 * Parameter: petId, required, path
 * Response: 200
 *     application/xml
@@ -109,6 +114,7 @@ INTERFACE zif_petstore.
       petid TYPE i
     RAISING cx_static_check.
 * POST - "Updates a pet in the store with form data"
+* Operation id: updatePetWithForm
 * Parameter: petId, required, path
 * Parameter: name, optional, query
 * Parameter: status, optional, query
@@ -120,6 +126,7 @@ INTERFACE zif_petstore.
       status TYPE string OPTIONAL
     RAISING cx_static_check.
 * DELETE - "Deletes a pet"
+* Operation id: deletePet
 * Parameter: api_key, optional, header
 * Parameter: petId, required, path
 * Response: 400
@@ -129,6 +136,7 @@ INTERFACE zif_petstore.
       petid TYPE i
     RAISING cx_static_check.
 * POST - "uploads an image"
+* Operation id: uploadFile
 * Parameter: petId, required, path
 * Parameter: additionalMetadata, optional, query
 * Response: 200
@@ -139,17 +147,20 @@ INTERFACE zif_petstore.
       additionalmetadata TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Returns pet inventories by status"
+* Operation id: getInventory
 * Response: 200
 *     application/json
   METHODS getinventory
     RAISING cx_static_check.
 * POST - "Place an order for a pet"
+* Operation id: placeOrder
 * Response: 200
 *     application/json
 * Response: 405
   METHODS placeorder
     RAISING cx_static_check.
 * GET - "Find purchase order by ID"
+* Operation id: getOrderById
 * Parameter: orderId, required, path
 * Response: 200
 *     application/xml
@@ -161,6 +172,7 @@ INTERFACE zif_petstore.
       orderid TYPE i
     RAISING cx_static_check.
 * DELETE - "Delete purchase order by ID"
+* Operation id: deleteOrder
 * Parameter: orderId, required, path
 * Response: 400
 * Response: 404
@@ -169,12 +181,14 @@ INTERFACE zif_petstore.
       orderid TYPE i
     RAISING cx_static_check.
 * POST - "Create user"
+* Operation id: createUser
 * Response: default
 *     application/json
 *     application/xml
   METHODS createuser
     RAISING cx_static_check.
 * POST - "Creates list of users with given input array"
+* Operation id: createUsersWithListInput
 * Response: 200
 *     application/xml
 *     application/json
@@ -182,6 +196,7 @@ INTERFACE zif_petstore.
   METHODS createuserswithlistinput
     RAISING cx_static_check.
 * GET - "Logs user into the system"
+* Operation id: loginUser
 * Parameter: username, optional, query
 * Parameter: password, optional, query
 * Response: 200
@@ -194,10 +209,12 @@ INTERFACE zif_petstore.
       password TYPE string OPTIONAL
     RAISING cx_static_check.
 * GET - "Logs out current logged in user session"
+* Operation id: logoutUser
 * Response: default
   METHODS logoutuser
     RAISING cx_static_check.
 * GET - "Get user by user name"
+* Operation id: getUserByName
 * Parameter: username, required, path
 * Response: 200
 *     application/xml
@@ -209,6 +226,7 @@ INTERFACE zif_petstore.
       username TYPE string
     RAISING cx_static_check.
 * PUT - "Update user"
+* Operation id: updateUser
 * Parameter: username, required, path
 * Response: default
   METHODS updateuser
@@ -216,6 +234,7 @@ INTERFACE zif_petstore.
       username TYPE string
     RAISING cx_static_check.
 * DELETE - "Delete user"
+* Operation id: deleteUser
 * Parameter: username, required, path
 * Response: 400
 * Response: 404
