@@ -970,714 +970,3296 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_simple_user.
+* sdfsdf object
+* login, string
+* id, integer
+* node_id, string
+* avatar_url, string
+* gravatar_id, string
+* url, string
+* html_url, string
+* followers_url, string
+* following_url, string
+* gists_url, string
+* starred_url, string
+* subscriptions_url, string
+* organizations_url, string
+* repos_url, string
+* events_url, string
+* received_events_url, string
+* type, string
+* site_admin, boolean
+* starred_at, string
   ENDMETHOD.
 
   METHOD parse_integration.
+* sdfsdf object
+* id, integer
+* slug, string
+* node_id, string
+* owner, 
+* name, string
+* description, string
+* external_url, string
+* html_url, string
+* created_at, string
+* updated_at, string
+* permissions, object
+* events, array
+* installations_count, integer
+* client_id, string
+* client_secret, string
+* webhook_secret, string
+* pem, string
   ENDMETHOD.
 
   METHOD parse_basic_error.
+* sdfsdf object
+* message, string
+* documentation_url, string
   ENDMETHOD.
 
   METHOD parse_validation_error_simple.
+* sdfsdf object
+* message, string
+* documentation_url, string
+* errors, array
   ENDMETHOD.
 
   METHOD parse_webhook_config_url.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_webhook_config_content_t.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_webhook_config_secret.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_webhook_config_insecure_.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_webhook_config.
+* sdfsdf object
+* url, 
+* content_type, 
+* secret, 
+* insecure_ssl, 
   ENDMETHOD.
 
   METHOD parse_enterprise.
+* sdfsdf object
+* description, string
+* html_url, string
+* website_url, string
+* id, integer
+* node_id, string
+* name, string
+* slug, string
+* created_at, string
+* updated_at, string
+* avatar_url, string
   ENDMETHOD.
 
   METHOD parse_installation.
+* sdfsdf object
+* id, integer
+* account, 
+* repository_selection, string
+* access_tokens_url, string
+* repositories_url, string
+* html_url, string
+* app_id, integer
+* target_id, integer
+* target_type, string
+* permissions, object
+* events, array
+* created_at, string
+* updated_at, string
+* single_file_name, string
+* has_multiple_single_files, boolean
+* single_file_paths, array
+* app_slug, string
+* suspended_by, 
+* suspended_at, string
+* contact_email, string
   ENDMETHOD.
 
   METHOD parse_app_permissions.
+* sdfsdf object
+* actions, string
+* administration, string
+* checks, string
+* content_references, string
+* contents, string
+* deployments, string
+* environments, string
+* issues, string
+* metadata, string
+* packages, string
+* pages, string
+* pull_requests, string
+* repository_hooks, string
+* repository_projects, string
+* secret_scanning_alerts, string
+* secrets, string
+* security_events, string
+* single_file, string
+* statuses, string
+* vulnerability_alerts, string
+* workflows, string
+* members, string
+* organization_administration, string
+* organization_hooks, string
+* organization_plan, string
+* organization_projects, string
+* organization_secrets, string
+* organization_self_hosted_runne, string
+* organization_user_blocking, string
+* team_discussions, string
   ENDMETHOD.
 
   METHOD parse_license_simple.
+* sdfsdf object
+* key, string
+* name, string
+* url, string
+* spdx_id, string
+* node_id, string
+* html_url, string
   ENDMETHOD.
 
   METHOD parse_repository.
+* sdfsdf object
+* id, integer
+* node_id, string
+* name, string
+* full_name, string
+* license, 
+* forks, integer
+* permissions, object
+* owner, 
+* private, boolean
+* html_url, string
+* description, string
+* fork, boolean
+* url, string
+* archive_url, string
+* assignees_url, string
+* blobs_url, string
+* branches_url, string
+* collaborators_url, string
+* comments_url, string
+* commits_url, string
+* compare_url, string
+* contents_url, string
+* contributors_url, string
+* deployments_url, string
+* downloads_url, string
+* events_url, string
+* forks_url, string
+* git_commits_url, string
+* git_refs_url, string
+* git_tags_url, string
+* git_url, string
+* issue_comment_url, string
+* issue_events_url, string
+* issues_url, string
+* keys_url, string
+* labels_url, string
+* languages_url, string
+* merges_url, string
+* milestones_url, string
+* notifications_url, string
+* pulls_url, string
+* releases_url, string
+* ssh_url, string
+* stargazers_url, string
+* statuses_url, string
+* subscribers_url, string
+* subscription_url, string
+* tags_url, string
+* teams_url, string
+* trees_url, string
+* clone_url, string
+* mirror_url, string
+* hooks_url, string
+* svn_url, string
+* homepage, string
+* language, string
+* forks_count, integer
+* stargazers_count, integer
+* watchers_count, integer
+* size, integer
+* default_branch, string
+* open_issues_count, integer
+* is_template, boolean
+* topics, array
+* has_issues, boolean
+* has_projects, boolean
+* has_wiki, boolean
+* has_pages, boolean
+* has_downloads, boolean
+* archived, boolean
+* disabled, boolean
+* visibility, string
+* pushed_at, string
+* created_at, string
+* updated_at, string
+* allow_rebase_merge, boolean
+* template_repository, object
+* temp_clone_token, string
+* allow_squash_merge, boolean
+* delete_branch_on_merge, boolean
+* allow_merge_commit, boolean
+* subscribers_count, integer
+* network_count, integer
+* open_issues, integer
+* watchers, integer
+* master_branch, string
+* starred_at, string
   ENDMETHOD.
 
   METHOD parse_installation_token.
+* sdfsdf object
+* token, string
+* expires_at, string
+* permissions, object
+* repository_selection, string
+* repositories, array
+* single_file, string
+* has_multiple_single_files, boolean
+* single_file_paths, array
   ENDMETHOD.
 
   METHOD parse_validation_error.
+* sdfsdf object
+* message, string
+* documentation_url, string
+* errors, array
   ENDMETHOD.
 
   METHOD parse_application_grant.
+* sdfsdf object
+* id, integer
+* url, string
+* app, object
+* created_at, string
+* updated_at, string
+* scopes, array
+* user, 
   ENDMETHOD.
 
   METHOD parse_scoped_installation.
+* sdfsdf object
+* permissions, 
+* repository_selection, string
+* single_file_name, string
+* has_multiple_single_files, boolean
+* single_file_paths, array
+* repositories_url, string
+* account, 
   ENDMETHOD.
 
   METHOD parse_authorization.
+* sdfsdf object
+* id, integer
+* url, string
+* scopes, array
+* token, string
+* token_last_eight, string
+* hashed_token, string
+* app, object
+* note, string
+* note_url, string
+* updated_at, string
+* created_at, string
+* fingerprint, string
+* user, 
+* installation, 
   ENDMETHOD.
 
   METHOD parse_code_of_conduct.
+* sdfsdf object
+* key, string
+* name, string
+* url, string
+* body, string
+* html_url, string
   ENDMETHOD.
 
   METHOD parse_content_reference_attach.
+* sdfsdf object
+* id, integer
+* title, string
+* body, string
+* node_id, string
   ENDMETHOD.
 
   METHOD parse_enabled_organizations.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_allowed_actions.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_selected_actions_url.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_actions_enterprise_permi.
+* sdfsdf object
+* enabled_organizations, 
+* selected_organizations_url, string
+* allowed_actions, 
+* selected_actions_url, 
   ENDMETHOD.
 
   METHOD parse_organization_simple.
+* sdfsdf object
+* login, string
+* id, integer
+* node_id, string
+* url, string
+* repos_url, string
+* events_url, string
+* hooks_url, string
+* issues_url, string
+* members_url, string
+* public_members_url, string
+* avatar_url, string
+* description, string
   ENDMETHOD.
 
   METHOD parse_selected_actions.
+* sdfsdf object
+* github_owned_allowed, boolean
+* verified_allowed, boolean
+* patterns_allowed, array
   ENDMETHOD.
 
   METHOD parse_runner_groups_enterprise.
+* sdfsdf object
+* id, number
+* name, string
+* visibility, string
+* default, boolean
+* selected_organizations_url, string
+* runners_url, string
+* allows_public_repositories, boolean
   ENDMETHOD.
 
   METHOD parse_runner.
+* sdfsdf object
+* id, integer
+* name, string
+* os, string
+* status, string
+* busy, boolean
+* labels, array
   ENDMETHOD.
 
   METHOD parse_runner_application.
+* sdfsdf object
+* os, string
+* architecture, string
+* download_url, string
+* filename, string
   ENDMETHOD.
 
   METHOD parse_authentication_token.
+* sdfsdf object
+* token, string
+* expires_at, string
+* permissions, object
+* repositories, array
+* single_file, string
+* repository_selection, string
   ENDMETHOD.
 
   METHOD parse_audit_log_event.
+* sdfsdf object
+* timestamp, integer
+* action, string
+* active, boolean
+* active_was, boolean
+* actor, string
+* blocked_user, string
+* business, string
+* config, array
+* config_was, array
+* content_type, string
+* created_at, integer
+* deploy_key_fingerprint, string
+* emoji, string
+* events, array
+* events_were, array
+* explanation, string
+* fingerprint, string
+* hook_id, integer
+* limited_availability, boolean
+* message, string
+* name, string
+* old_user, string
+* openssh_public_key, string
+* org, string
+* previous_visibility, string
+* read_only, boolean
+* repo, string
+* repository, string
+* repository_public, boolean
+* target_login, string
+* team, string
+* transport_protocol, integer
+* transport_protocol_name, string
+* user, string
+* visibility, string
   ENDMETHOD.
 
   METHOD parse_actions_billing_usage.
+* sdfsdf object
+* total_minutes_used, integer
+* total_paid_minutes_used, integer
+* included_minutes, integer
+* minutes_used_breakdown, object
   ENDMETHOD.
 
   METHOD parse_packages_billing_usage.
+* sdfsdf object
+* total_gigabytes_bandwidth_used, integer
+* total_paid_gigabytes_bandwidth, integer
+* included_gigabytes_bandwidth, integer
   ENDMETHOD.
 
   METHOD parse_combined_billing_usage.
+* sdfsdf object
+* days_left_in_billing_cycle, integer
+* estimated_paid_storage_for_mon, integer
+* estimated_storage_for_month, integer
   ENDMETHOD.
 
   METHOD parse_actor.
+* sdfsdf object
+* id, integer
+* login, string
+* display_login, string
+* gravatar_id, string
+* url, string
+* avatar_url, string
   ENDMETHOD.
 
   METHOD parse_label.
+* sdfsdf object
+* id, integer
+* node_id, string
+* url, string
+* name, string
+* description, string
+* color, string
+* default, boolean
   ENDMETHOD.
 
   METHOD parse_milestone.
+* sdfsdf object
+* url, string
+* html_url, string
+* labels_url, string
+* id, integer
+* node_id, string
+* number, integer
+* state, string
+* title, string
+* description, string
+* creator, 
+* open_issues, integer
+* closed_issues, integer
+* created_at, string
+* updated_at, string
+* closed_at, string
+* due_on, string
   ENDMETHOD.
 
   METHOD parse_author_association.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_issue_simple.
+* sdfsdf object
+* id, integer
+* node_id, string
+* url, string
+* repository_url, string
+* labels_url, string
+* comments_url, string
+* events_url, string
+* html_url, string
+* number, integer
+* state, string
+* title, string
+* body, string
+* user, 
+* labels, array
+* assignee, 
+* assignees, array
+* milestone, 
+* locked, boolean
+* active_lock_reason, string
+* comments, integer
+* pull_request, object
+* closed_at, string
+* created_at, string
+* updated_at, string
+* author_association, 
+* body_html, string
+* body_text, string
+* timeline_url, string
+* repository, 
+* performed_via_github_app, 
   ENDMETHOD.
 
   METHOD parse_reaction_rollup.
+* sdfsdf object
+* url, string
+* total_count, integer
+* 1, integer
+* _1, integer
+* laugh, integer
+* confused, integer
+* heart, integer
+* hooray, integer
+* eyes, integer
+* rocket, integer
   ENDMETHOD.
 
   METHOD parse_issue_comment.
+* sdfsdf object
+* id, integer
+* node_id, string
+* url, string
+* body, string
+* body_text, string
+* body_html, string
+* html_url, string
+* user, 
+* created_at, string
+* updated_at, string
+* issue_url, string
+* author_association, 
+* performed_via_github_app, 
+* reactions, 
   ENDMETHOD.
 
   METHOD parse_event.
+* sdfsdf object
+* id, string
+* type, string
+* actor, 
+* repo, object
+* org, 
+* payload, object
+* public, boolean
+* created_at, string
   ENDMETHOD.
 
   METHOD parse_link_with_type.
+* sdfsdf object
+* href, string
+* type, string
   ENDMETHOD.
 
   METHOD parse_feed.
+* sdfsdf object
+* timeline_url, string
+* user_url, string
+* current_user_public_url, string
+* current_user_url, string
+* current_user_actor_url, string
+* current_user_organization_url, string
+* current_user_organization_urls, array
+* security_advisories_url, string
+* _links, object
   ENDMETHOD.
 
   METHOD parse_base_gist.
+* sdfsdf object
+* url, string
+* forks_url, string
+* commits_url, string
+* id, string
+* node_id, string
+* git_pull_url, string
+* git_push_url, string
+* html_url, string
+* files, object
+* public, boolean
+* created_at, string
+* updated_at, string
+* description, string
+* comments, integer
+* user, 
+* comments_url, string
+* owner, 
+* truncated, boolean
+* forks, array
+* history, array
   ENDMETHOD.
 
   METHOD parse_gist_simple.
+* sdfsdf object
+* url, string
+* forks_url, string
+* commits_url, string
+* id, string
+* node_id, string
+* git_pull_url, string
+* git_push_url, string
+* html_url, string
+* files, object
+* public, boolean
+* created_at, string
+* updated_at, string
+* description, string
+* comments, integer
+* user, string
+* comments_url, string
+* owner, 
+* truncated, boolean
   ENDMETHOD.
 
   METHOD parse_gist_comment.
+* sdfsdf object
+* id, integer
+* node_id, string
+* url, string
+* body, string
+* user, 
+* created_at, string
+* updated_at, string
+* author_association, 
   ENDMETHOD.
 
   METHOD parse_gist_commit.
+* sdfsdf object
+* url, string
+* version, string
+* user, 
+* change_status, object
+* committed_at, string
   ENDMETHOD.
 
   METHOD parse_gitignore_template.
+* sdfsdf object
+* name, string
+* source, string
   ENDMETHOD.
 
   METHOD parse_issue.
+* sdfsdf object
+* id, integer
+* node_id, string
+* url, string
+* repository_url, string
+* labels_url, string
+* comments_url, string
+* events_url, string
+* html_url, string
+* number, integer
+* state, string
+* title, string
+* body, string
+* user, 
+* labels, array
+* assignee, 
+* assignees, array
+* milestone, 
+* locked, boolean
+* active_lock_reason, string
+* comments, integer
+* pull_request, object
+* closed_at, string
+* created_at, string
+* updated_at, string
+* closed_by, 
+* body_html, string
+* body_text, string
+* timeline_url, string
+* repository, 
+* performed_via_github_app, 
+* author_association, 
+* reactions, 
   ENDMETHOD.
 
   METHOD parse_license.
+* sdfsdf object
+* key, string
+* name, string
+* spdx_id, string
+* url, string
+* node_id, string
+* html_url, string
+* description, string
+* implementation, string
+* permissions, array
+* conditions, array
+* limitations, array
+* body, string
+* featured, boolean
   ENDMETHOD.
 
   METHOD parse_marketplace_listing_plan.
+* sdfsdf object
+* url, string
+* accounts_url, string
+* id, integer
+* number, integer
+* name, string
+* description, string
+* monthly_price_in_cents, integer
+* yearly_price_in_cents, integer
+* price_model, string
+* has_free_trial, boolean
+* unit_name, string
+* state, string
+* bullets, array
   ENDMETHOD.
 
   METHOD parse_marketplace_purchase.
+* sdfsdf object
+* url, string
+* type, string
+* id, integer
+* login, string
+* organization_billing_email, string
+* marketplace_pending_change, object
+* marketplace_purchase, object
   ENDMETHOD.
 
   METHOD parse_api_overview.
+* sdfsdf object
+* verifiable_password_authentica, boolean
+* ssh_key_fingerprints, object
+* hooks, array
+* web, array
+* api, array
+* git, array
+* pages, array
+* importer, array
+* actions, array
   ENDMETHOD.
 
   METHOD parse_minimal_repository.
+* sdfsdf object
+* id, integer
+* node_id, string
+* name, string
+* full_name, string
+* owner, object
+* private, boolean
+* html_url, string
+* description, string
+* fork, boolean
+* url, string
+* archive_url, string
+* assignees_url, string
+* blobs_url, string
+* branches_url, string
+* collaborators_url, string
+* comments_url, string
+* commits_url, string
+* compare_url, string
+* contents_url, string
+* contributors_url, string
+* deployments_url, string
+* downloads_url, string
+* events_url, string
+* forks_url, string
+* git_commits_url, string
+* git_refs_url, string
+* git_tags_url, string
+* git_url, string
+* issue_comment_url, string
+* issue_events_url, string
+* issues_url, string
+* keys_url, string
+* labels_url, string
+* languages_url, string
+* merges_url, string
+* milestones_url, string
+* notifications_url, string
+* pulls_url, string
+* releases_url, string
+* ssh_url, string
+* stargazers_url, string
+* statuses_url, string
+* subscribers_url, string
+* subscription_url, string
+* tags_url, string
+* teams_url, string
+* trees_url, string
+* clone_url, string
+* mirror_url, string
+* hooks_url, string
+* svn_url, string
+* homepage, string
+* language, string
+* forks_count, integer
+* stargazers_count, integer
+* watchers_count, integer
+* size, integer
+* default_branch, string
+* open_issues_count, integer
+* is_template, boolean
+* topics, array
+* has_issues, boolean
+* has_projects, boolean
+* has_wiki, boolean
+* has_pages, boolean
+* has_downloads, boolean
+* archived, boolean
+* disabled, boolean
+* visibility, string
+* pushed_at, string
+* created_at, string
+* updated_at, string
+* permissions, object
+* template_repository, object
+* temp_clone_token, string
+* delete_branch_on_merge, boolean
+* subscribers_count, integer
+* network_count, integer
+* license, object
+* forks, integer
+* open_issues, integer
+* watchers, integer
   ENDMETHOD.
 
   METHOD parse_thread.
+* sdfsdf object
+* id, string
+* repository, 
+* subject, object
+* reason, string
+* unread, boolean
+* updated_at, string
+* last_read_at, string
+* url, string
+* subscription_url, string
   ENDMETHOD.
 
   METHOD parse_thread_subscription.
+* sdfsdf object
+* subscribed, boolean
+* ignored, boolean
+* reason, string
+* created_at, string
+* url, string
+* thread_url, string
+* repository_url, string
   ENDMETHOD.
 
   METHOD parse_organization_full.
+* sdfsdf object
+* login, string
+* id, integer
+* node_id, string
+* url, string
+* repos_url, string
+* events_url, string
+* hooks_url, string
+* issues_url, string
+* members_url, string
+* public_members_url, string
+* avatar_url, string
+* description, string
+* name, string
+* company, string
+* blog, string
+* location, string
+* email, string
+* twitter_username, string
+* is_verified, boolean
+* has_organization_projects, boolean
+* has_repository_projects, boolean
+* public_repos, integer
+* public_gists, integer
+* followers, integer
+* following, integer
+* html_url, string
+* created_at, string
+* type, string
+* total_private_repos, integer
+* owned_private_repos, integer
+* private_gists, integer
+* disk_usage, integer
+* collaborators, integer
+* billing_email, string
+* plan, object
+* default_repository_permission, string
+* members_can_create_repositorie, boolean
+* two_factor_requirement_enabled, boolean
+* members_allowed_repository_cre, string
+* members_can_create_public_repo, boolean
+* members_can_create_private_rep, boolean
+* members_can_create_internal_re, boolean
+* members_can_create_pages, boolean
+* updated_at, string
   ENDMETHOD.
 
   METHOD parse_enabled_repositories.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_actions_organization_per.
+* sdfsdf object
+* enabled_repositories, 
+* selected_repositories_url, string
+* allowed_actions, 
+* selected_actions_url, 
   ENDMETHOD.
 
   METHOD parse_runner_groups_org.
+* sdfsdf object
+* id, number
+* name, string
+* visibility, string
+* default, boolean
+* selected_repositories_url, string
+* runners_url, string
+* inherited, boolean
+* inherited_allows_public_reposi, boolean
+* allows_public_repositories, boolean
   ENDMETHOD.
 
   METHOD parse_organization_actions_sec.
+* sdfsdf object
+* name, string
+* created_at, string
+* updated_at, string
+* visibility, string
+* selected_repositories_url, string
   ENDMETHOD.
 
   METHOD parse_actions_public_key.
+* sdfsdf object
+* key_id, string
+* key, string
+* id, integer
+* url, string
+* title, string
+* created_at, string
   ENDMETHOD.
 
   METHOD parse_credential_authorization.
+* sdfsdf object
+* login, string
+* credential_id, integer
+* credential_type, string
+* token_last_eight, string
+* credential_authorized_at, string
+* scopes, array
+* fingerprint, string
+* credential_accessed_at, string
+* authorized_credential_id, integer
+* authorized_credential_title, string
+* authorized_credential_note, string
   ENDMETHOD.
 
   METHOD parse_organization_invitation.
+* sdfsdf object
+* id, integer
+* login, string
+* email, string
+* role, string
+* created_at, string
+* failed_at, string
+* failed_reason, string
+* inviter, 
+* team_count, integer
+* invitation_team_url, string
+* node_id, string
+* invitation_teams_url, string
   ENDMETHOD.
 
   METHOD parse_org_hook.
+* sdfsdf object
+* id, integer
+* url, string
+* ping_url, string
+* name, string
+* events, array
+* active, boolean
+* config, object
+* updated_at, string
+* created_at, string
+* type, string
   ENDMETHOD.
 
   METHOD parse_interaction_group.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_interaction_limit_respon.
+* sdfsdf object
+* limit, 
+* origin, string
+* expires_at, string
   ENDMETHOD.
 
   METHOD parse_interaction_expiry.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_interaction_limit.
+* sdfsdf object
+* limit, 
+* expiry, 
   ENDMETHOD.
 
   METHOD parse_team_simple.
+* sdfsdf object
+* id, integer
+* node_id, string
+* url, string
+* members_url, string
+* name, string
+* description, string
+* permission, string
+* privacy, string
+* html_url, string
+* repositories_url, string
+* slug, string
+* ldap_dn, string
   ENDMETHOD.
 
   METHOD parse_team.
+* sdfsdf object
+* id, integer
+* node_id, string
+* name, string
+* slug, string
+* description, string
+* privacy, string
+* permission, string
+* url, string
+* html_url, string
+* members_url, string
+* repositories_url, string
+* parent, 
   ENDMETHOD.
 
   METHOD parse_org_membership.
+* sdfsdf object
+* url, string
+* state, string
+* role, string
+* organization_url, string
+* organization, 
+* user, 
+* permissions, object
   ENDMETHOD.
 
   METHOD parse_migration.
+* sdfsdf object
+* id, integer
+* owner, 
+* guid, string
+* state, string
+* lock_repositories, boolean
+* exclude_attachments, boolean
+* repositories, array
+* url, string
+* created_at, string
+* updated_at, string
+* node_id, string
+* archive_url, string
+* exclude, array
   ENDMETHOD.
 
   METHOD parse_project.
+* sdfsdf object
+* owner_url, string
+* url, string
+* html_url, string
+* columns_url, string
+* id, integer
+* node_id, string
+* name, string
+* body, string
+* number, integer
+* state, string
+* creator, 
+* created_at, string
+* updated_at, string
+* organization_permission, string
+* private, boolean
   ENDMETHOD.
 
   METHOD parse_group_mapping.
+* sdfsdf object
+* groups, array
+* group_id, string
+* group_name, string
+* group_description, string
+* status, string
+* synced_at, string
   ENDMETHOD.
 
   METHOD parse_team_full.
+* sdfsdf object
+* id, integer
+* node_id, string
+* url, string
+* html_url, string
+* name, string
+* slug, string
+* description, string
+* privacy, string
+* permission, string
+* members_url, string
+* repositories_url, string
+* parent, 
+* members_count, integer
+* repos_count, integer
+* created_at, string
+* updated_at, string
+* organization, 
+* ldap_dn, string
   ENDMETHOD.
 
   METHOD parse_team_discussion.
+* sdfsdf object
+* author, 
+* body, string
+* body_html, string
+* body_version, string
+* comments_count, integer
+* comments_url, string
+* created_at, string
+* last_edited_at, string
+* html_url, string
+* node_id, string
+* number, integer
+* pinned, boolean
+* private, boolean
+* team_url, string
+* title, string
+* updated_at, string
+* url, string
+* reactions, 
   ENDMETHOD.
 
   METHOD parse_team_discussion_comment.
+* sdfsdf object
+* author, 
+* body, string
+* body_html, string
+* body_version, string
+* created_at, string
+* last_edited_at, string
+* discussion_url, string
+* html_url, string
+* node_id, string
+* number, integer
+* updated_at, string
+* url, string
+* reactions, 
   ENDMETHOD.
 
   METHOD parse_reaction.
+* sdfsdf object
+* id, integer
+* node_id, string
+* user, 
+* content, string
+* created_at, string
   ENDMETHOD.
 
   METHOD parse_team_membership.
+* sdfsdf object
+* url, string
+* role, string
+* state, string
   ENDMETHOD.
 
   METHOD parse_team_project.
+* sdfsdf object
+* owner_url, string
+* url, string
+* html_url, string
+* columns_url, string
+* id, integer
+* node_id, string
+* name, string
+* body, string
+* number, integer
+* state, string
+* creator, 
+* created_at, string
+* updated_at, string
+* organization_permission, string
+* private, boolean
+* permissions, object
   ENDMETHOD.
 
   METHOD parse_team_repository.
+* sdfsdf object
+* id, integer
+* node_id, string
+* name, string
+* full_name, string
+* license, 
+* forks, integer
+* permissions, object
+* owner, 
+* private, boolean
+* html_url, string
+* description, string
+* fork, boolean
+* url, string
+* archive_url, string
+* assignees_url, string
+* blobs_url, string
+* branches_url, string
+* collaborators_url, string
+* comments_url, string
+* commits_url, string
+* compare_url, string
+* contents_url, string
+* contributors_url, string
+* deployments_url, string
+* downloads_url, string
+* events_url, string
+* forks_url, string
+* git_commits_url, string
+* git_refs_url, string
+* git_tags_url, string
+* git_url, string
+* issue_comment_url, string
+* issue_events_url, string
+* issues_url, string
+* keys_url, string
+* labels_url, string
+* languages_url, string
+* merges_url, string
+* milestones_url, string
+* notifications_url, string
+* pulls_url, string
+* releases_url, string
+* ssh_url, string
+* stargazers_url, string
+* statuses_url, string
+* subscribers_url, string
+* subscription_url, string
+* tags_url, string
+* teams_url, string
+* trees_url, string
+* clone_url, string
+* mirror_url, string
+* hooks_url, string
+* svn_url, string
+* homepage, string
+* language, string
+* forks_count, integer
+* stargazers_count, integer
+* watchers_count, integer
+* size, integer
+* default_branch, string
+* open_issues_count, integer
+* is_template, boolean
+* topics, array
+* has_issues, boolean
+* has_projects, boolean
+* has_wiki, boolean
+* has_pages, boolean
+* has_downloads, boolean
+* archived, boolean
+* disabled, boolean
+* visibility, string
+* pushed_at, string
+* created_at, string
+* updated_at, string
+* allow_rebase_merge, boolean
+* template_repository, object
+* temp_clone_token, string
+* allow_squash_merge, boolean
+* delete_branch_on_merge, boolean
+* allow_merge_commit, boolean
+* subscribers_count, integer
+* network_count, integer
+* open_issues, integer
+* watchers, integer
+* master_branch, string
   ENDMETHOD.
 
   METHOD parse_project_card.
+* sdfsdf object
+* url, string
+* id, integer
+* node_id, string
+* note, string
+* creator, 
+* created_at, string
+* updated_at, string
+* archived, boolean
+* column_url, string
+* content_url, string
+* project_url, string
   ENDMETHOD.
 
   METHOD parse_project_column.
+* sdfsdf object
+* url, string
+* project_url, string
+* cards_url, string
+* id, integer
+* node_id, string
+* name, string
+* created_at, string
+* updated_at, string
   ENDMETHOD.
 
   METHOD parse_repository_collaborator_.
+* sdfsdf object
+* permission, string
+* user, 
   ENDMETHOD.
 
   METHOD parse_rate_limit.
+* sdfsdf object
+* limit, integer
+* remaining, integer
+* reset, integer
   ENDMETHOD.
 
   METHOD parse_rate_limit_overview.
+* sdfsdf object
+* resources, object
+* rate, 
   ENDMETHOD.
 
   METHOD parse_full_repository.
+* sdfsdf object
+* id, integer
+* node_id, string
+* name, string
+* full_name, string
+* owner, 
+* private, boolean
+* html_url, string
+* description, string
+* fork, boolean
+* url, string
+* archive_url, string
+* assignees_url, string
+* blobs_url, string
+* branches_url, string
+* collaborators_url, string
+* comments_url, string
+* commits_url, string
+* compare_url, string
+* contents_url, string
+* contributors_url, string
+* deployments_url, string
+* downloads_url, string
+* events_url, string
+* forks_url, string
+* git_commits_url, string
+* git_refs_url, string
+* git_tags_url, string
+* git_url, string
+* issue_comment_url, string
+* issue_events_url, string
+* issues_url, string
+* keys_url, string
+* labels_url, string
+* languages_url, string
+* merges_url, string
+* milestones_url, string
+* notifications_url, string
+* pulls_url, string
+* releases_url, string
+* ssh_url, string
+* stargazers_url, string
+* statuses_url, string
+* subscribers_url, string
+* subscription_url, string
+* tags_url, string
+* teams_url, string
+* trees_url, string
+* clone_url, string
+* mirror_url, string
+* hooks_url, string
+* svn_url, string
+* homepage, string
+* language, string
+* forks_count, integer
+* stargazers_count, integer
+* watchers_count, integer
+* size, integer
+* default_branch, string
+* open_issues_count, integer
+* is_template, boolean
+* topics, array
+* has_issues, boolean
+* has_projects, boolean
+* has_wiki, boolean
+* has_pages, boolean
+* has_downloads, boolean
+* archived, boolean
+* disabled, boolean
+* visibility, string
+* pushed_at, string
+* created_at, string
+* updated_at, string
+* permissions, object
+* allow_rebase_merge, boolean
+* template_repository, object
+* temp_clone_token, string
+* allow_squash_merge, boolean
+* delete_branch_on_merge, boolean
+* allow_merge_commit, boolean
+* subscribers_count, integer
+* network_count, integer
+* license, 
+* organization, 
+* parent, 
+* source, 
+* forks, integer
+* master_branch, string
+* open_issues, integer
+* watchers, integer
+* anonymous_access_enabled, boolean
   ENDMETHOD.
 
   METHOD parse_artifact.
+* sdfsdf object
+* id, integer
+* node_id, string
+* name, string
+* size_in_bytes, integer
+* url, string
+* archive_download_url, string
+* expired, boolean
+* created_at, string
+* expires_at, string
+* updated_at, string
   ENDMETHOD.
 
   METHOD parse_job.
+* sdfsdf object
+* id, integer
+* run_id, integer
+* run_url, string
+* node_id, string
+* head_sha, string
+* url, string
+* html_url, string
+* status, string
+* conclusion, string
+* started_at, string
+* completed_at, string
+* name, string
+* steps, array
+* check_run_url, string
   ENDMETHOD.
 
   METHOD parse_actions_enabled.
+* todo, handle type boolean
   ENDMETHOD.
 
   METHOD parse_actions_repository_permi.
+* sdfsdf object
+* enabled, 
+* allowed_actions, 
+* selected_actions_url, 
   ENDMETHOD.
 
   METHOD parse_pull_request_minimal.
+* sdfsdf object
+* id, integer
+* number, integer
+* url, string
+* head, object
+* base, object
   ENDMETHOD.
 
   METHOD parse_simple_commit.
+* sdfsdf object
+* id, string
+* tree_id, string
+* message, string
+* timestamp, string
+* author, object
+* committer, object
   ENDMETHOD.
 
   METHOD parse_workflow_run.
+* sdfsdf object
+* id, integer
+* name, string
+* node_id, string
+* head_branch, string
+* head_sha, string
+* run_number, integer
+* event, string
+* status, string
+* conclusion, string
+* workflow_id, integer
+* url, string
+* html_url, string
+* pull_requests, array
+* created_at, string
+* updated_at, string
+* jobs_url, string
+* logs_url, string
+* check_suite_url, string
+* artifacts_url, string
+* cancel_url, string
+* rerun_url, string
+* workflow_url, string
+* head_commit, 
+* repository, 
+* head_repository, 
+* head_repository_id, integer
   ENDMETHOD.
 
   METHOD parse_workflow_run_usage.
+* sdfsdf object
+* billable, object
+* run_duration_ms, integer
   ENDMETHOD.
 
   METHOD parse_actions_secret.
+* sdfsdf object
+* name, string
+* created_at, string
+* updated_at, string
   ENDMETHOD.
 
   METHOD parse_workflow.
+* sdfsdf object
+* id, integer
+* node_id, string
+* name, string
+* path, string
+* state, string
+* created_at, string
+* updated_at, string
+* url, string
+* html_url, string
+* badge_url, string
+* deleted_at, string
   ENDMETHOD.
 
   METHOD parse_workflow_usage.
+* sdfsdf object
+* billable, object
   ENDMETHOD.
 
   METHOD parse_protected_branch_admin_e.
+* sdfsdf object
+* url, string
+* enabled, boolean
   ENDMETHOD.
 
   METHOD parse_protected_branch_pull_re.
+* sdfsdf object
+* url, string
+* dismissal_restrictions, object
+* dismiss_stale_reviews, boolean
+* require_code_owner_reviews, boolean
+* required_approving_review_coun, integer
   ENDMETHOD.
 
   METHOD parse_branch_restriction_polic.
+* sdfsdf object
+* url, string
+* users_url, string
+* teams_url, string
+* apps_url, string
+* users, array
+* teams, array
+* apps, array
   ENDMETHOD.
 
   METHOD parse_branch_protection.
+* sdfsdf object
+* url, string
+* required_status_checks, object
+* enforce_admins, 
+* required_pull_request_reviews, 
+* restrictions, 
+* required_linear_history, object
+* allow_force_pushes, object
+* allow_deletions, object
+* enabled, boolean
+* name, string
+* protection_url, string
   ENDMETHOD.
 
   METHOD parse_short_branch.
+* sdfsdf object
+* name, string
+* commit, object
+* protected, boolean
+* protection, 
+* protection_url, string
   ENDMETHOD.
 
   METHOD parse_git_user.
+* sdfsdf object
+* name, string
+* email, string
+* date, string
   ENDMETHOD.
 
   METHOD parse_verification.
+* sdfsdf object
+* verified, boolean
+* reason, string
+* payload, string
+* signature, string
   ENDMETHOD.
 
   METHOD parse_commit.
+* sdfsdf object
+* url, string
+* sha, string
+* node_id, string
+* html_url, string
+* comments_url, string
+* commit, object
+* author, 
+* committer, 
+* parents, array
+* stats, object
+* files, array
   ENDMETHOD.
 
   METHOD parse_branch_with_protection.
+* sdfsdf object
+* name, string
+* commit, 
+* _links, object
+* protected, boolean
+* protection, 
+* protection_url, string
+* pattern, string
+* required_approving_review_coun, integer
   ENDMETHOD.
 
   METHOD parse_status_check_policy.
+* sdfsdf object
+* url, string
+* strict, boolean
+* contexts, array
+* contexts_url, string
   ENDMETHOD.
 
   METHOD parse_protected_branch.
+* sdfsdf object
+* url, string
+* required_status_checks, 
+* required_pull_request_reviews, object
+* required_signatures, object
+* enforce_admins, object
+* required_linear_history, object
+* allow_force_pushes, object
+* allow_deletions, object
+* restrictions, 
   ENDMETHOD.
 
   METHOD parse_check_run.
+* sdfsdf object
+* id, integer
+* head_sha, string
+* node_id, string
+* external_id, string
+* url, string
+* html_url, string
+* details_url, string
+* status, string
+* conclusion, string
+* started_at, string
+* completed_at, string
+* output, object
+* name, string
+* check_suite, object
+* app, 
+* pull_requests, 
   ENDMETHOD.
 
   METHOD parse_check_annotation.
+* sdfsdf object
+* path, string
+* start_line, integer
+* end_line, integer
+* start_column, integer
+* end_column, integer
+* annotation_level, string
+* title, string
+* message, string
+* raw_details, string
+* blob_href, string
   ENDMETHOD.
 
   METHOD parse_check_suite.
+* sdfsdf object
+* id, integer
+* node_id, string
+* head_branch, string
+* head_sha, string
+* status, string
+* conclusion, string
+* url, string
+* before, string
+* after, string
+* pull_requests, array
+* app, 
+* repository, 
+* created_at, string
+* updated_at, string
+* head_commit, 
+* latest_check_runs_count, integer
+* check_runs_url, string
   ENDMETHOD.
 
   METHOD parse_check_suite_preference.
+* sdfsdf object
+* preferences, object
+* repository, 
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_stat.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_ref.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_alert_number.
+* todo, handle type integer
   ENDMETHOD.
 
   METHOD parse_alert_created_at.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_alert_url.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_alert_html_url.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_dism.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_di01.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_rule.
+* sdfsdf object
+* id, string
+* severity, string
+* description, string
   ENDMETHOD.
 
   METHOD parse_code_scanning_analysis_t.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_code_scanning_analysis01.
+* sdfsdf object
+* name, 
+* version, string
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_code.
+* sdfsdf object
+* number, 
+* created_at, 
+* url, 
+* html_url, 
+* state, 
+* dismissed_by, 
+* dismissed_at, 
+* dismissed_reason, 
+* rule, 
+* tool, 
   ENDMETHOD.
 
   METHOD parse_code_scanning_analysis_a.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_envi.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_inst.
+* todo, handle type array
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_co01.
+* sdfsdf object
+* number, 
+* created_at, 
+* url, 
+* html_url, 
+* instances, 
+* state, 
+* dismissed_by, 
+* dismissed_at, 
+* dismissed_reason, 
+* rule, 
+* tool, 
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_set_.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_code_scanning_analysis_r.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_code_scanning_analysis_c.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_code_scanning_analysis02.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_code_scanning_analysis_e.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_code_scanning_analysis03.
+* sdfsdf object
+* commit_sha, 
+* ref, 
+* analysis_key, 
+* created_at, 
+* tool_name, 
+* error, string
+* environment, 
   ENDMETHOD.
 
   METHOD parse_code_scanning_analysis_s.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_collaborator.
+* sdfsdf object
+* login, string
+* id, integer
+* node_id, string
+* avatar_url, string
+* gravatar_id, string
+* url, string
+* html_url, string
+* followers_url, string
+* following_url, string
+* gists_url, string
+* starred_url, string
+* subscriptions_url, string
+* organizations_url, string
+* repos_url, string
+* events_url, string
+* received_events_url, string
+* type, string
+* site_admin, boolean
+* permissions, object
   ENDMETHOD.
 
   METHOD parse_repository_invitation.
+* sdfsdf object
+* id, integer
+* repository, 
+* invitee, 
+* inviter, 
+* permissions, string
+* created_at, string
+* expired, boolean
+* url, string
+* html_url, string
+* node_id, string
   ENDMETHOD.
 
   METHOD parse_commit_comment.
+* sdfsdf object
+* html_url, string
+* url, string
+* id, integer
+* node_id, string
+* body, string
+* path, string
+* position, integer
+* line, integer
+* commit_id, string
+* user, 
+* created_at, string
+* updated_at, string
+* author_association, 
+* reactions, 
   ENDMETHOD.
 
   METHOD parse_scim_error.
+* sdfsdf object
+* message, string
+* documentation_url, string
+* detail, string
+* status, integer
+* scimtype, string
+* schemas, array
   ENDMETHOD.
 
   METHOD parse_branch_short.
+* sdfsdf object
+* name, string
+* commit, object
+* protected, boolean
   ENDMETHOD.
 
   METHOD parse_link.
+* sdfsdf object
+* href, string
   ENDMETHOD.
 
   METHOD parse_auto_merge.
+* sdfsdf object
+* enabled_by, 
+* merge_method, string
+* commit_title, string
+* commit_message, string
   ENDMETHOD.
 
   METHOD parse_pull_request_simple.
+* sdfsdf object
+* url, string
+* id, integer
+* node_id, string
+* html_url, string
+* diff_url, string
+* patch_url, string
+* issue_url, string
+* commits_url, string
+* review_comments_url, string
+* review_comment_url, string
+* comments_url, string
+* statuses_url, string
+* number, integer
+* state, string
+* locked, boolean
+* title, string
+* user, 
+* body, string
+* labels, array
+* milestone, 
+* active_lock_reason, string
+* created_at, string
+* updated_at, string
+* closed_at, string
+* merged_at, string
+* merge_commit_sha, string
+* assignee, 
+* assignees, array
+* requested_reviewers, array
+* requested_teams, array
+* head, object
+* base, object
+* _links, object
+* author_association, 
+* auto_merge, 
+* draft, boolean
   ENDMETHOD.
 
   METHOD parse_simple_commit_status.
+* sdfsdf object
+* description, string
+* id, integer
+* node_id, string
+* state, string
+* context, string
+* target_url, string
+* required, boolean
+* avatar_url, string
+* url, string
+* created_at, string
+* updated_at, string
   ENDMETHOD.
 
   METHOD parse_combined_commit_status.
+* sdfsdf object
+* state, string
+* statuses, array
+* sha, string
+* total_count, integer
+* repository, 
+* commit_url, string
+* url, string
   ENDMETHOD.
 
   METHOD parse_status.
+* sdfsdf object
+* url, string
+* avatar_url, string
+* id, integer
+* node_id, string
+* state, string
+* description, string
+* target_url, string
+* context, string
+* created_at, string
+* updated_at, string
+* creator, 
   ENDMETHOD.
 
   METHOD parse_code_of_conduct_simple.
+* sdfsdf object
+* url, string
+* key, string
+* name, string
+* html_url, string
   ENDMETHOD.
 
   METHOD parse_community_health_file.
+* sdfsdf object
+* url, string
+* html_url, string
   ENDMETHOD.
 
   METHOD parse_community_profile.
+* sdfsdf object
+* health_percentage, integer
+* description, string
+* documentation, string
+* files, object
+* updated_at, string
+* content_reports_enabled, boolean
   ENDMETHOD.
 
   METHOD parse_diff_entry.
+* sdfsdf object
+* sha, string
+* filename, string
+* status, string
+* additions, integer
+* deletions, integer
+* changes, integer
+* blob_url, string
+* raw_url, string
+* contents_url, string
+* patch, string
+* previous_filename, string
   ENDMETHOD.
 
   METHOD parse_commit_comparison.
+* sdfsdf object
+* url, string
+* html_url, string
+* permalink_url, string
+* diff_url, string
+* patch_url, string
+* base_commit, 
+* merge_base_commit, 
+* status, string
+* ahead_by, integer
+* behind_by, integer
+* total_commits, integer
+* commits, array
+* files, array
   ENDMETHOD.
 
   METHOD parse_content_tree.
+* sdfsdf object
+* type, string
+* size, integer
+* name, string
+* path, string
+* sha, string
+* url, string
+* git_url, string
+* html_url, string
+* download_url, string
+* entries, array
+* _links, object
   ENDMETHOD.
 
   METHOD parse_content_directory.
+* todo, handle type array
   ENDMETHOD.
 
   METHOD parse_content_file.
+* sdfsdf object
+* type, string
+* encoding, string
+* size, integer
+* name, string
+* path, string
+* content, string
+* sha, string
+* url, string
+* git_url, string
+* html_url, string
+* download_url, string
+* _links, object
+* target, string
+* submodule_git_url, string
   ENDMETHOD.
 
   METHOD parse_content_symlink.
+* sdfsdf object
+* type, string
+* target, string
+* size, integer
+* name, string
+* path, string
+* sha, string
+* url, string
+* git_url, string
+* html_url, string
+* download_url, string
+* _links, object
   ENDMETHOD.
 
   METHOD parse_content_submodule.
+* sdfsdf object
+* type, string
+* submodule_git_url, string
+* size, integer
+* name, string
+* path, string
+* sha, string
+* url, string
+* git_url, string
+* html_url, string
+* download_url, string
+* _links, object
   ENDMETHOD.
 
   METHOD parse_file_commit.
+* sdfsdf object
+* content, object
+* commit, object
   ENDMETHOD.
 
   METHOD parse_contributor.
+* sdfsdf object
+* login, string
+* id, integer
+* node_id, string
+* avatar_url, string
+* gravatar_id, string
+* url, string
+* html_url, string
+* followers_url, string
+* following_url, string
+* gists_url, string
+* starred_url, string
+* subscriptions_url, string
+* organizations_url, string
+* repos_url, string
+* events_url, string
+* received_events_url, string
+* type, string
+* site_admin, boolean
+* contributions, integer
+* email, string
+* name, string
   ENDMETHOD.
 
   METHOD parse_deployment.
+* sdfsdf object
+* url, string
+* id, integer
+* node_id, string
+* sha, string
+* ref, string
+* task, string
+* payload, object
+* original_environment, string
+* environment, string
+* description, string
+* creator, 
+* created_at, string
+* updated_at, string
+* statuses_url, string
+* repository_url, string
+* transient_environment, boolean
+* production_environment, boolean
+* performed_via_github_app, 
   ENDMETHOD.
 
   METHOD parse_deployment_status.
+* sdfsdf object
+* url, string
+* id, integer
+* node_id, string
+* state, string
+* creator, 
+* description, string
+* environment, string
+* target_url, string
+* created_at, string
+* updated_at, string
+* deployment_url, string
+* repository_url, string
+* environment_url, string
+* log_url, string
+* performed_via_github_app, 
   ENDMETHOD.
 
   METHOD parse_short_blob.
+* sdfsdf object
+* url, string
+* sha, string
   ENDMETHOD.
 
   METHOD parse_blob.
+* sdfsdf object
+* content, string
+* encoding, string
+* url, string
+* sha, string
+* size, integer
+* node_id, string
+* highlighted_content, string
   ENDMETHOD.
 
   METHOD parse_git_commit.
+* sdfsdf object
+* sha, string
+* node_id, string
+* url, string
+* author, object
+* committer, object
+* message, string
+* tree, object
+* parents, array
+* verification, object
+* html_url, string
   ENDMETHOD.
 
   METHOD parse_git_ref.
+* sdfsdf object
+* ref, string
+* node_id, string
+* url, string
+* object, object
   ENDMETHOD.
 
   METHOD parse_git_tag.
+* sdfsdf object
+* node_id, string
+* tag, string
+* sha, string
+* url, string
+* message, string
+* tagger, object
+* object, object
+* verification, 
   ENDMETHOD.
 
   METHOD parse_git_tree.
+* sdfsdf object
+* sha, string
+* url, string
+* truncated, boolean
+* tree, array
   ENDMETHOD.
 
   METHOD parse_hook_response.
+* sdfsdf object
+* code, integer
+* status, string
+* message, string
   ENDMETHOD.
 
   METHOD parse_hook.
+* sdfsdf object
+* type, string
+* id, integer
+* name, string
+* active, boolean
+* events, array
+* config, object
+* updated_at, string
+* created_at, string
+* url, string
+* test_url, string
+* ping_url, string
+* last_response, 
   ENDMETHOD.
 
   METHOD parse_import.
+* sdfsdf object
+* vcs, string
+* use_lfs, string
+* vcs_url, string
+* svc_root, string
+* tfvc_project, string
+* status, string
+* status_text, string
+* failed_step, string
+* error_message, string
+* import_percent, integer
+* commit_count, integer
+* push_percent, integer
+* has_large_files, boolean
+* large_files_size, integer
+* large_files_count, integer
+* project_choices, array
+* message, string
+* authors_count, integer
+* url, string
+* html_url, string
+* authors_url, string
+* repository_url, string
+* svn_root, string
   ENDMETHOD.
 
   METHOD parse_porter_author.
+* sdfsdf object
+* id, integer
+* remote_id, string
+* remote_name, string
+* email, string
+* name, string
+* url, string
+* import_url, string
   ENDMETHOD.
 
   METHOD parse_porter_large_file.
+* sdfsdf object
+* ref_name, string
+* path, string
+* oid, string
+* size, integer
   ENDMETHOD.
 
   METHOD parse_issue_event_label.
+* sdfsdf object
+* name, string
+* color, string
   ENDMETHOD.
 
   METHOD parse_issue_event_dismissed_re.
+* sdfsdf object
+* state, string
+* review_id, integer
+* dismissal_message, string
+* dismissal_commit_id, string
   ENDMETHOD.
 
   METHOD parse_issue_event_milestone.
+* sdfsdf object
+* title, string
   ENDMETHOD.
 
   METHOD parse_issue_event_project_card.
+* sdfsdf object
+* url, string
+* id, integer
+* project_url, string
+* project_id, integer
+* column_name, string
+* previous_column_name, string
   ENDMETHOD.
 
   METHOD parse_issue_event_rename.
+* sdfsdf object
+* from, string
+* to, string
   ENDMETHOD.
 
   METHOD parse_issue_event.
+* sdfsdf object
+* id, integer
+* node_id, string
+* url, string
+* actor, 
+* event, string
+* commit_id, string
+* commit_url, string
+* created_at, string
+* issue, 
+* label, 
+* assignee, 
+* assigner, 
+* review_requester, 
+* requested_reviewer, 
+* requested_team, 
+* dismissed_review, 
+* milestone, 
+* project_card, 
+* rename, 
+* author_association, 
+* lock_reason, string
   ENDMETHOD.
 
   METHOD parse_issue_event_for_issue.
+* sdfsdf object
+* id, integer
+* node_id, string
+* url, string
+* actor, 
+* event, string
+* commit_id, string
+* commit_url, string
+* created_at, string
+* sha, string
+* html_url, string
+* message, string
+* issue_url, string
+* updated_at, string
+* author_association, 
+* body, string
+* lock_reason, string
+* submitted_at, string
+* state, string
+* pull_request_url, string
+* body_html, string
+* body_text, string
   ENDMETHOD.
 
   METHOD parse_deploy_key.
+* sdfsdf object
+* id, integer
+* key, string
+* url, string
+* title, string
+* verified, boolean
+* created_at, string
+* read_only, boolean
   ENDMETHOD.
 
   METHOD parse_language.
+* sdfsdf object
   ENDMETHOD.
 
   METHOD parse_license_content.
+* sdfsdf object
+* name, string
+* path, string
+* sha, string
+* size, integer
+* url, string
+* html_url, string
+* git_url, string
+* download_url, string
+* type, string
+* content, string
+* encoding, string
+* _links, object
+* license, 
   ENDMETHOD.
 
   METHOD parse_pages_source_hash.
+* sdfsdf object
+* branch, string
+* path, string
   ENDMETHOD.
 
   METHOD parse_page.
+* sdfsdf object
+* url, string
+* status, string
+* cname, string
+* custom_404, boolean
+* html_url, string
+* source, 
+* public, boolean
   ENDMETHOD.
 
   METHOD parse_page_build.
+* sdfsdf object
+* url, string
+* status, string
+* error, object
+* pusher, 
+* commit, string
+* duration, integer
+* created_at, string
+* updated_at, string
   ENDMETHOD.
 
   METHOD parse_page_build_status.
+* sdfsdf object
+* url, string
+* status, string
   ENDMETHOD.
 
   METHOD parse_pull_request.
+* sdfsdf object
+* url, string
+* id, integer
+* node_id, string
+* html_url, string
+* diff_url, string
+* patch_url, string
+* issue_url, string
+* commits_url, string
+* review_comments_url, string
+* review_comment_url, string
+* comments_url, string
+* statuses_url, string
+* number, integer
+* state, string
+* locked, boolean
+* title, string
+* user, 
+* body, string
+* labels, array
+* milestone, 
+* active_lock_reason, string
+* created_at, string
+* updated_at, string
+* closed_at, string
+* merged_at, string
+* merge_commit_sha, string
+* assignee, 
+* assignees, array
+* requested_reviewers, array
+* requested_teams, array
+* head, object
+* base, object
+* _links, object
+* author_association, 
+* auto_merge, 
+* draft, boolean
+* merged, boolean
+* mergeable, boolean
+* rebaseable, boolean
+* mergeable_state, string
+* merged_by, 
+* comments, integer
+* review_comments, integer
+* maintainer_can_modify, boolean
+* commits, integer
+* additions, integer
+* deletions, integer
+* changed_files, integer
   ENDMETHOD.
 
   METHOD parse_pull_request_review_comm.
+* sdfsdf object
+* url, string
+* pull_request_review_id, integer
+* id, integer
+* node_id, string
+* diff_hunk, string
+* path, string
+* position, integer
+* original_position, integer
+* commit_id, string
+* original_commit_id, string
+* in_reply_to_id, integer
+* user, 
+* body, string
+* created_at, string
+* updated_at, string
+* html_url, string
+* pull_request_url, string
+* author_association, 
+* _links, object
+* start_line, integer
+* original_start_line, integer
+* start_side, string
+* line, integer
+* original_line, integer
+* side, string
+* reactions, 
+* body_html, string
+* body_text, string
   ENDMETHOD.
 
   METHOD parse_pull_request_merge_resul.
+* sdfsdf object
+* sha, string
+* merged, boolean
+* message, string
   ENDMETHOD.
 
   METHOD parse_pull_request_review_requ.
+* sdfsdf object
+* users, array
+* teams, array
   ENDMETHOD.
 
   METHOD parse_pull_request_review.
+* sdfsdf object
+* id, integer
+* node_id, string
+* user, 
+* body, string
+* state, string
+* html_url, string
+* pull_request_url, string
+* _links, object
+* submitted_at, string
+* commit_id, string
+* body_html, string
+* body_text, string
+* author_association, 
   ENDMETHOD.
 
   METHOD parse_review_comment.
+* sdfsdf object
+* url, string
+* pull_request_review_id, integer
+* id, integer
+* node_id, string
+* diff_hunk, string
+* path, string
+* position, integer
+* original_position, integer
+* commit_id, string
+* original_commit_id, string
+* in_reply_to_id, integer
+* user, 
+* body, string
+* created_at, string
+* updated_at, string
+* html_url, string
+* pull_request_url, string
+* author_association, 
+* _links, object
+* body_text, string
+* body_html, string
+* side, string
+* start_side, string
+* line, integer
+* original_line, integer
+* start_line, integer
+* original_start_line, integer
   ENDMETHOD.
 
   METHOD parse_release_asset.
+* sdfsdf object
+* url, string
+* browser_download_url, string
+* id, integer
+* node_id, string
+* name, string
+* label, string
+* state, string
+* content_type, string
+* size, integer
+* download_count, integer
+* created_at, string
+* updated_at, string
+* uploader, 
   ENDMETHOD.
 
   METHOD parse_release.
+* sdfsdf object
+* url, string
+* html_url, string
+* assets_url, string
+* upload_url, string
+* tarball_url, string
+* zipball_url, string
+* id, integer
+* node_id, string
+* tag_name, string
+* target_commitish, string
+* name, string
+* body, string
+* draft, boolean
+* prerelease, boolean
+* created_at, string
+* published_at, string
+* author, 
+* assets, array
+* body_html, string
+* body_text, string
   ENDMETHOD.
 
   METHOD parse_secret_scanning_alert_st.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_secret_scanning_alert_re.
+* todo, handle type string
   ENDMETHOD.
 
   METHOD parse_secret_scanning_alert.
+* sdfsdf object
+* number, 
+* created_at, 
+* url, 
+* html_url, 
+* state, 
+* resolution, 
+* resolved_at, string
+* resolved_by, 
+* secret_type, string
+* secret, string
   ENDMETHOD.
 
   METHOD parse_stargazer.
+* sdfsdf object
+* starred_at, string
+* user, 
   ENDMETHOD.
 
   METHOD parse_code_frequency_stat.
+* todo, handle type array
   ENDMETHOD.
 
   METHOD parse_commit_activity.
+* sdfsdf object
+* days, array
+* total, integer
+* week, integer
   ENDMETHOD.
 
   METHOD parse_contributor_activity.
+* sdfsdf object
+* author, 
+* total, integer
+* weeks, array
   ENDMETHOD.
 
   METHOD parse_participation_stats.
+* sdfsdf object
+* all, array
+* owner, array
   ENDMETHOD.
 
   METHOD parse_repository_subscription.
+* sdfsdf object
+* subscribed, boolean
+* ignored, boolean
+* reason, string
+* created_at, string
+* url, string
+* repository_url, string
   ENDMETHOD.
 
   METHOD parse_tag.
+* sdfsdf object
+* name, string
+* commit, object
+* zipball_url, string
+* tarball_url, string
+* node_id, string
   ENDMETHOD.
 
   METHOD parse_topic.
+* sdfsdf object
+* names, array
   ENDMETHOD.
 
   METHOD parse_traffic.
+* sdfsdf object
+* timestamp, string
+* uniques, integer
+* count, integer
   ENDMETHOD.
 
   METHOD parse_clone_traffic.
+* sdfsdf object
+* count, integer
+* uniques, integer
+* clones, array
   ENDMETHOD.
 
   METHOD parse_content_traffic.
+* sdfsdf object
+* path, string
+* title, string
+* count, integer
+* uniques, integer
   ENDMETHOD.
 
   METHOD parse_referrer_traffic.
+* sdfsdf object
+* referrer, string
+* count, integer
+* uniques, integer
   ENDMETHOD.
 
   METHOD parse_view_traffic.
+* sdfsdf object
+* count, integer
+* uniques, integer
+* views, array
   ENDMETHOD.
 
   METHOD parse_scim_group_list_enterpri.
+* sdfsdf object
+* schemas, array
+* totalresults, number
+* itemsperpage, number
+* startindex, number
+* resources, array
   ENDMETHOD.
 
   METHOD parse_scim_enterprise_group.
+* sdfsdf object
+* schemas, array
+* id, string
+* externalid, string
+* displayname, string
+* members, array
+* meta, object
   ENDMETHOD.
 
   METHOD parse_scim_user_list_enterpris.
+* sdfsdf object
+* schemas, array
+* totalresults, number
+* itemsperpage, number
+* startindex, number
+* resources, array
   ENDMETHOD.
 
   METHOD parse_scim_enterprise_user.
+* sdfsdf object
+* schemas, array
+* id, string
+* externalid, string
+* username, string
+* name, object
+* emails, array
+* groups, array
+* active, boolean
+* meta, object
   ENDMETHOD.
 
   METHOD parse_scim_user.
+* sdfsdf object
+* schemas, array
+* id, string
+* externalid, string
+* username, string
+* displayname, string
+* name, object
+* emails, array
+* active, boolean
+* meta, object
+* organization_id, integer
+* operations, array
+* groups, array
   ENDMETHOD.
 
   METHOD parse_scim_user_list.
+* sdfsdf object
+* schemas, array
+* totalresults, integer
+* itemsperpage, integer
+* startindex, integer
+* resources, array
   ENDMETHOD.
 
   METHOD parse_search_result_text_match.
+* todo, handle type array
   ENDMETHOD.
 
   METHOD parse_code_search_result_item.
+* sdfsdf object
+* name, string
+* path, string
+* sha, string
+* url, string
+* git_url, string
+* html_url, string
+* repository, 
+* score, integer
+* file_size, integer
+* language, string
+* last_modified_at, string
+* line_numbers, array
+* text_matches, 
   ENDMETHOD.
 
   METHOD parse_commit_search_result_ite.
+* sdfsdf object
+* url, string
+* sha, string
+* html_url, string
+* comments_url, string
+* commit, object
+* author, 
+* committer, 
+* parents, array
+* repository, 
+* score, integer
+* node_id, string
+* text_matches, 
   ENDMETHOD.
 
   METHOD parse_issue_search_result_item.
+* sdfsdf object
+* url, string
+* repository_url, string
+* labels_url, string
+* comments_url, string
+* events_url, string
+* html_url, string
+* id, integer
+* node_id, string
+* number, integer
+* title, string
+* locked, boolean
+* active_lock_reason, string
+* assignees, array
+* user, 
+* labels, array
+* state, string
+* assignee, 
+* milestone, 
+* comments, integer
+* created_at, string
+* updated_at, string
+* closed_at, string
+* text_matches, 
+* pull_request, object
+* body, string
+* score, integer
+* author_association, 
+* draft, boolean
+* repository, 
+* body_html, string
+* body_text, string
+* timeline_url, string
+* performed_via_github_app, 
   ENDMETHOD.
 
   METHOD parse_label_search_result_item.
+* sdfsdf object
+* id, integer
+* node_id, string
+* url, string
+* name, string
+* color, string
+* default, boolean
+* description, string
+* score, integer
+* text_matches, 
   ENDMETHOD.
 
   METHOD parse_repo_search_result_item.
+* sdfsdf object
+* id, integer
+* node_id, string
+* name, string
+* full_name, string
+* owner, 
+* private, boolean
+* html_url, string
+* description, string
+* fork, boolean
+* url, string
+* created_at, string
+* updated_at, string
+* pushed_at, string
+* homepage, string
+* size, integer
+* stargazers_count, integer
+* watchers_count, integer
+* language, string
+* forks_count, integer
+* open_issues_count, integer
+* master_branch, string
+* default_branch, string
+* score, integer
+* forks_url, string
+* keys_url, string
+* collaborators_url, string
+* teams_url, string
+* hooks_url, string
+* issue_events_url, string
+* events_url, string
+* assignees_url, string
+* branches_url, string
+* tags_url, string
+* blobs_url, string
+* git_tags_url, string
+* git_refs_url, string
+* trees_url, string
+* statuses_url, string
+* languages_url, string
+* stargazers_url, string
+* contributors_url, string
+* subscribers_url, string
+* subscription_url, string
+* commits_url, string
+* git_commits_url, string
+* comments_url, string
+* issue_comment_url, string
+* contents_url, string
+* compare_url, string
+* merges_url, string
+* archive_url, string
+* downloads_url, string
+* issues_url, string
+* pulls_url, string
+* milestones_url, string
+* notifications_url, string
+* labels_url, string
+* releases_url, string
+* deployments_url, string
+* git_url, string
+* ssh_url, string
+* clone_url, string
+* svn_url, string
+* forks, integer
+* open_issues, integer
+* watchers, integer
+* topics, array
+* mirror_url, string
+* has_issues, boolean
+* has_projects, boolean
+* has_pages, boolean
+* has_wiki, boolean
+* has_downloads, boolean
+* archived, boolean
+* disabled, boolean
+* license, 
+* permissions, object
+* text_matches, 
+* temp_clone_token, string
+* allow_merge_commit, boolean
+* allow_squash_merge, boolean
+* allow_rebase_merge, boolean
+* delete_branch_on_merge, boolean
   ENDMETHOD.
 
   METHOD parse_topic_search_result_item.
+* sdfsdf object
+* name, string
+* display_name, string
+* short_description, string
+* description, string
+* created_by, string
+* released, string
+* created_at, string
+* updated_at, string
+* featured, boolean
+* curated, boolean
+* score, integer
+* repository_count, integer
+* logo_url, string
+* text_matches, 
+* related, array
+* aliases, array
   ENDMETHOD.
 
   METHOD parse_user_search_result_item.
+* sdfsdf object
+* login, string
+* id, integer
+* node_id, string
+* avatar_url, string
+* gravatar_id, string
+* url, string
+* html_url, string
+* followers_url, string
+* subscriptions_url, string
+* organizations_url, string
+* repos_url, string
+* received_events_url, string
+* type, string
+* score, integer
+* following_url, string
+* gists_url, string
+* starred_url, string
+* events_url, string
+* public_repos, integer
+* public_gists, integer
+* followers, integer
+* following, integer
+* created_at, string
+* updated_at, string
+* name, string
+* bio, string
+* email, string
+* location, string
+* site_admin, boolean
+* hireable, boolean
+* text_matches, 
+* blog, string
+* company, string
+* suspended_at, string
   ENDMETHOD.
 
   METHOD parse_private_user.
+* sdfsdf object
+* login, string
+* id, integer
+* node_id, string
+* avatar_url, string
+* gravatar_id, string
+* url, string
+* html_url, string
+* followers_url, string
+* following_url, string
+* gists_url, string
+* starred_url, string
+* subscriptions_url, string
+* organizations_url, string
+* repos_url, string
+* events_url, string
+* received_events_url, string
+* type, string
+* site_admin, boolean
+* name, string
+* company, string
+* blog, string
+* location, string
+* email, string
+* hireable, boolean
+* bio, string
+* twitter_username, string
+* public_repos, integer
+* public_gists, integer
+* followers, integer
+* following, integer
+* created_at, string
+* updated_at, string
+* private_gists, integer
+* total_private_repos, integer
+* owned_private_repos, integer
+* disk_usage, integer
+* collaborators, integer
+* two_factor_authentication, boolean
+* plan, object
+* suspended_at, string
+* business_plus, boolean
+* ldap_dn, string
   ENDMETHOD.
 
   METHOD parse_public_user.
+* sdfsdf object
+* login, string
+* id, integer
+* node_id, string
+* avatar_url, string
+* gravatar_id, string
+* url, string
+* html_url, string
+* followers_url, string
+* following_url, string
+* gists_url, string
+* starred_url, string
+* subscriptions_url, string
+* organizations_url, string
+* repos_url, string
+* events_url, string
+* received_events_url, string
+* type, string
+* site_admin, boolean
+* name, string
+* company, string
+* blog, string
+* location, string
+* email, string
+* hireable, boolean
+* bio, string
+* twitter_username, string
+* public_repos, integer
+* public_gists, integer
+* followers, integer
+* following, integer
+* created_at, string
+* updated_at, string
+* plan, object
+* suspended_at, string
+* private_gists, integer
+* total_private_repos, integer
+* owned_private_repos, integer
+* disk_usage, integer
+* collaborators, integer
   ENDMETHOD.
 
   METHOD parse_email.
+* sdfsdf object
+* email, string
+* primary, boolean
+* verified, boolean
+* visibility, string
   ENDMETHOD.
 
   METHOD parse_gpg_key.
+* sdfsdf object
+* id, integer
+* primary_key_id, integer
+* key_id, string
+* public_key, string
+* emails, array
+* subkeys, array
+* can_sign, boolean
+* can_encrypt_comms, boolean
+* can_encrypt_storage, boolean
+* can_certify, boolean
+* created_at, string
+* expires_at, string
+* raw_key, string
   ENDMETHOD.
 
   METHOD parse_key.
+* sdfsdf object
+* key_id, string
+* key, string
+* id, integer
+* url, string
+* title, string
+* created_at, string
+* verified, boolean
+* read_only, boolean
   ENDMETHOD.
 
   METHOD parse_marketplace_account.
+* sdfsdf object
+* url, string
+* id, integer
+* type, string
+* node_id, string
+* login, string
+* email, string
+* organization_billing_email, string
   ENDMETHOD.
 
   METHOD parse_user_marketplace_purchas.
+* sdfsdf object
+* billing_cycle, string
+* next_billing_date, string
+* unit_count, integer
+* on_free_trial, boolean
+* free_trial_ends_on, string
+* updated_at, string
+* account, 
+* plan, 
   ENDMETHOD.
 
   METHOD parse_starred_repository.
+* sdfsdf object
+* starred_at, string
+* repo, 
   ENDMETHOD.
 
   METHOD parse_hovercard.
+* sdfsdf object
+* contexts, array
   ENDMETHOD.
 
   METHOD parse_key_simple.
+* sdfsdf object
+* id, integer
+* key, string
   ENDMETHOD.
 
   METHOD zif_github~meta_root.

@@ -139,7 +139,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         WHEN 'object'.
           rv_abap = rv_abap && |* sdfsdf { ls_schema-schema->type }\n|.
           LOOP AT ls_schema-schema->properties INTO ls_property.
-            rv_abap = rv_abap && |* { ls_property-abap_name }\n|.
+            rv_abap = rv_abap && |* { ls_property-abap_name }, { ls_property-schema->type }\n|.
           ENDLOOP.
         WHEN OTHERS.
           rv_abap = rv_abap && |* todo, handle type { ls_schema-schema->type }\n|.

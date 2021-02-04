@@ -8,6 +8,22 @@ CLASS zcl_jira DEFINITION PUBLIC.
     DATA mi_client TYPE REF TO if_http_client.
     DATA mo_json TYPE REF TO zcl_oapi_json.
     METHODS send_receive RETURNING VALUE(rv_code) TYPE i.
+    METHODS parse_pagebeanstring
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanstring) TYPE zif_jira=>pagebeanstring
+      RAISING cx_static_check.
+    METHODS parse_projectemailaddress
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectemailaddress) TYPE zif_jira=>projectemailaddress
+      RAISING cx_static_check.
+    METHODS parse_projecttype
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projecttype) TYPE zif_jira=>projecttype
+      RAISING cx_static_check.
+    METHODS parse_taskprogressbeanobject
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(taskprogressbeanobject) TYPE zif_jira=>taskprogressbeanobject
+      RAISING cx_static_check.
     METHODS parse_healthcheckresult
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(healthcheckresult) TYPE zif_jira=>healthcheckresult
@@ -28,258 +44,6 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(issuematchesforjql) TYPE zif_jira=>issuematchesforjql
       RAISING cx_static_check.
-    METHODS parse_avatarurlsbean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(avatarurlsbean) TYPE zif_jira=>avatarurlsbean
-      RAISING cx_static_check.
-    METHODS parse_eventnotification
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(eventnotification) TYPE zif_jira=>eventnotification
-      RAISING cx_static_check.
-    METHODS parse_fielddetails
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(fielddetails) TYPE zif_jira=>fielddetails
-      RAISING cx_static_check.
-    METHODS parse_groupname
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(groupname) TYPE zif_jira=>groupname
-      RAISING cx_static_check.
-    METHODS parse_jsontypebean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jsontypebean) TYPE zif_jira=>jsontypebean
-      RAISING cx_static_check.
-    METHODS parse_notificationevent
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(notificationevent) TYPE zif_jira=>notificationevent
-      RAISING cx_static_check.
-    METHODS parse_notificationscheme
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(notificationscheme) TYPE zif_jira=>notificationscheme
-      RAISING cx_static_check.
-    METHODS parse_notificationschemeevent
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(notificationschemeevent) TYPE zif_jira=>notificationschemeevent
-      RAISING cx_static_check.
-    METHODS parse_projectforscope
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectforscope) TYPE zif_jira=>projectforscope
-      RAISING cx_static_check.
-    METHODS parse_projectrole
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectrole) TYPE zif_jira=>projectrole
-      RAISING cx_static_check.
-    METHODS parse_projectrolegroup
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectrolegroup) TYPE zif_jira=>projectrolegroup
-      RAISING cx_static_check.
-    METHODS parse_projectroleuser
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectroleuser) TYPE zif_jira=>projectroleuser
-      RAISING cx_static_check.
-    METHODS parse_roleactor
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(roleactor) TYPE zif_jira=>roleactor
-      RAISING cx_static_check.
-    METHODS parse_scope
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(scope) TYPE zif_jira=>scope
-      RAISING cx_static_check.
-    METHODS parse_updatedprojectcategory
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(updatedprojectcategory) TYPE zif_jira=>updatedprojectcategory
-      RAISING cx_static_check.
-    METHODS parse_userdetails
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(userdetails) TYPE zif_jira=>userdetails
-      RAISING cx_static_check.
-    METHODS parse_pagebeannotificationsche
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeannotificationscheme) TYPE zif_jira=>pagebeannotificationscheme
-      RAISING cx_static_check.
-    METHODS parse_projectissuesecurityleve
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectissuesecuritylevels) TYPE zif_jira=>projectissuesecuritylevels
-      RAISING cx_static_check.
-    METHODS parse_securitylevel
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(securitylevel) TYPE zif_jira=>securitylevel
-      RAISING cx_static_check.
-    METHODS parse_pagebeanstring
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanstring) TYPE zif_jira=>pagebeanstring
-      RAISING cx_static_check.
-    METHODS parse_groupdetails
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(groupdetails) TYPE zif_jira=>groupdetails
-      RAISING cx_static_check.
-    METHODS parse_pagebeangroupdetails
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeangroupdetails) TYPE zif_jira=>pagebeangroupdetails
-      RAISING cx_static_check.
-    METHODS parse_locale
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(locale) TYPE zif_jira=>locale
-      RAISING cx_static_check.
-    METHODS parse_failedwebhook
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(failedwebhook) TYPE zif_jira=>failedwebhook
-      RAISING cx_static_check.
-    METHODS parse_failedwebhooks
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(failedwebhooks) TYPE zif_jira=>failedwebhooks
-      RAISING cx_static_check.
-    METHODS parse_errorcollection
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(errorcollection) TYPE zif_jira=>errorcollection
-      RAISING cx_static_check.
-    METHODS parse_webhookdetails
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(webhookdetails) TYPE zif_jira=>webhookdetails
-      RAISING cx_static_check.
-    METHODS parse_webhookregistrationdetai
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(webhookregistrationdetails) TYPE zif_jira=>webhookregistrationdetails
-      RAISING cx_static_check.
-    METHODS parse_containerforregisteredwe
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(containerforregisteredwebhooks) TYPE zif_jira=>containerforregisteredwebhooks
-      RAISING cx_static_check.
-    METHODS parse_registeredwebhook
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(registeredwebhook) TYPE zif_jira=>registeredwebhook
-      RAISING cx_static_check.
-    METHODS parse_pagebeanwebhook
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanwebhook) TYPE zif_jira=>pagebeanwebhook
-      RAISING cx_static_check.
-    METHODS parse_webhook
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(webhook) TYPE zif_jira=>webhook
-      RAISING cx_static_check.
-    METHODS parse_containerforwebhookids
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(containerforwebhookids) TYPE zif_jira=>containerforwebhookids
-      RAISING cx_static_check.
-    METHODS parse_webhooksexpirationdate
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(webhooksexpirationdate) TYPE zif_jira=>webhooksexpirationdate
-      RAISING cx_static_check.
-    METHODS parse_bulkissuepropertyupdater
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(bulkissuepropertyupdaterequest) TYPE zif_jira=>bulkissuepropertyupdaterequest
-      RAISING cx_static_check.
-    METHODS parse_issuefilterforbulkproper
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuefilterforbulkpropertyset) TYPE zif_jira=>issuefilterforbulkpropertyset
-      RAISING cx_static_check.
-    METHODS parse_issuefilterforbulkprop01
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuefilterforbulkpropertydele) TYPE zif_jira=>issuefilterforbulkpropertydele
-      RAISING cx_static_check.
-    METHODS parse_issueentityproperties
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issueentityproperties) TYPE zif_jira=>issueentityproperties
-      RAISING cx_static_check.
-    METHODS parse_jsonnode
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jsonnode) TYPE zif_jira=>jsonnode
-      RAISING cx_static_check.
-    METHODS parse_applicationrole
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(applicationrole) TYPE zif_jira=>applicationrole
-      RAISING cx_static_check.
-    METHODS parse_component
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(component) TYPE zif_jira=>component
-      RAISING cx_static_check.
-    METHODS parse_dashboard
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(dashboard) TYPE zif_jira=>dashboard
-      RAISING cx_static_check.
-    METHODS parse_hierarchy
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(hierarchy) TYPE zif_jira=>hierarchy
-      RAISING cx_static_check.
-    METHODS parse_hierarchylevel
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(hierarchylevel) TYPE zif_jira=>hierarchylevel
-      RAISING cx_static_check.
-    METHODS parse_issuetypedetails
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypedetails) TYPE zif_jira=>issuetypedetails
-      RAISING cx_static_check.
-    METHODS parse_listwrappercallbackappli
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(listwrappercallbackapplication) TYPE zif_jira=>listwrappercallbackapplication
-      RAISING cx_static_check.
-    METHODS parse_listwrappercallbackgroup
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(listwrappercallbackgroupname) TYPE zif_jira=>listwrappercallbackgroupname
-      RAISING cx_static_check.
-    METHODS parse_pageofdashboards
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pageofdashboards) TYPE zif_jira=>pageofdashboards
-      RAISING cx_static_check.
-    METHODS parse_project
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(project) TYPE zif_jira=>project
-      RAISING cx_static_check.
-    METHODS parse_projectcategory
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectcategory) TYPE zif_jira=>projectcategory
-      RAISING cx_static_check.
-    METHODS parse_projectinsight
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectinsight) TYPE zif_jira=>projectinsight
-      RAISING cx_static_check.
-    METHODS parse_projectpermissions
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectpermissions) TYPE zif_jira=>projectpermissions
-      RAISING cx_static_check.
-    METHODS parse_sharepermission
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(sharepermission) TYPE zif_jira=>sharepermission
-      RAISING cx_static_check.
-    METHODS parse_simplelink
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(simplelink) TYPE zif_jira=>simplelink
-      RAISING cx_static_check.
-    METHODS parse_simplelistwrapperapplica
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(simplelistwrapperapplicationro) TYPE zif_jira=>simplelistwrapperapplicationro
-      RAISING cx_static_check.
-    METHODS parse_simplelistwrappergroupna
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(simplelistwrappergroupname) TYPE zif_jira=>simplelistwrappergroupname
-      RAISING cx_static_check.
-    METHODS parse_user
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(user) TYPE zif_jira=>user
-      RAISING cx_static_check.
-    METHODS parse_userbean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(userbean) TYPE zif_jira=>userbean
-      RAISING cx_static_check.
-    METHODS parse_userbeanavatarurls
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(userbeanavatarurls) TYPE zif_jira=>userbeanavatarurls
-      RAISING cx_static_check.
-    METHODS parse_version
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(version) TYPE zif_jira=>version
-      RAISING cx_static_check.
-    METHODS parse_versionissuesstatus
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(versionissuesstatus) TYPE zif_jira=>versionissuesstatus
-      RAISING cx_static_check.
-    METHODS parse_pagebeandashboard
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeandashboard) TYPE zif_jira=>pagebeandashboard
-      RAISING cx_static_check.
-    METHODS parse_dashboarddetails
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(dashboarddetails) TYPE zif_jira=>dashboarddetails
-      RAISING cx_static_check.
     METHODS parse_propertykey
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(propertykey) TYPE zif_jira=>propertykey
@@ -292,389 +56,17 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(entityproperty) TYPE zif_jira=>entityproperty
       RAISING cx_static_check.
-    METHODS parse_projectemailaddress
+    METHODS parse_simplelink
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectemailaddress) TYPE zif_jira=>projectemailaddress
+      RETURNING VALUE(simplelink) TYPE zif_jira=>simplelink
       RAISING cx_static_check.
-    METHODS parse_projecttype
+    METHODS parse_version
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projecttype) TYPE zif_jira=>projecttype
+      RETURNING VALUE(version) TYPE zif_jira=>version
       RAISING cx_static_check.
-    METHODS parse_pagebeanuser
+    METHODS parse_versionissuesstatus
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanuser) TYPE zif_jira=>pagebeanuser
-      RAISING cx_static_check.
-    METHODS parse_usermigrationbean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(usermigrationbean) TYPE zif_jira=>usermigrationbean
-      RAISING cx_static_check.
-    METHODS parse_unrestricteduseremail
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(unrestricteduseremail) TYPE zif_jira=>unrestricteduseremail
-      RAISING cx_static_check.
-    METHODS parse_taskprogressbeanobject
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(taskprogressbeanobject) TYPE zif_jira=>taskprogressbeanobject
-      RAISING cx_static_check.
-    METHODS parse_idbean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(idbean) TYPE zif_jira=>idbean
-      RAISING cx_static_check.
-    METHODS parse_permissiongrant
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(permissiongrant) TYPE zif_jira=>permissiongrant
-      RAISING cx_static_check.
-    METHODS parse_permissionholder
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(permissionholder) TYPE zif_jira=>permissionholder
-      RAISING cx_static_check.
-    METHODS parse_permissionscheme
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(permissionscheme) TYPE zif_jira=>permissionscheme
-      RAISING cx_static_check.
-    METHODS parse_permissions
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(permissions) TYPE zif_jira=>permissions
-      RAISING cx_static_check.
-    METHODS parse_userpermission
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(userpermission) TYPE zif_jira=>userpermission
-      RAISING cx_static_check.
-    METHODS parse_bulkpermissionsrequestbe
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(bulkpermissionsrequestbean) TYPE zif_jira=>bulkpermissionsrequestbean
-      RAISING cx_static_check.
-    METHODS parse_bulkprojectpermissions
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(bulkprojectpermissions) TYPE zif_jira=>bulkprojectpermissions
-      RAISING cx_static_check.
-    METHODS parse_bulkpermissiongrants
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(bulkpermissiongrants) TYPE zif_jira=>bulkpermissiongrants
-      RAISING cx_static_check.
-    METHODS parse_bulkprojectpermissiongra
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(bulkprojectpermissiongrants) TYPE zif_jira=>bulkprojectpermissiongrants
-      RAISING cx_static_check.
-    METHODS parse_permissionskeysbean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(permissionskeysbean) TYPE zif_jira=>permissionskeysbean
-      RAISING cx_static_check.
-    METHODS parse_permittedprojects
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(permittedprojects) TYPE zif_jira=>permittedprojects
-      RAISING cx_static_check.
-    METHODS parse_projectidentifierbean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectidentifierbean) TYPE zif_jira=>projectidentifierbean
-      RAISING cx_static_check.
-    METHODS parse_deprecatedworkflow
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(deprecatedworkflow) TYPE zif_jira=>deprecatedworkflow
-      RAISING cx_static_check.
-    METHODS parse_workflowtransitionproper
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowtransitionproperty) TYPE zif_jira=>workflowtransitionproperty
-      RAISING cx_static_check.
-    METHODS parse_columnitem
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(columnitem) TYPE zif_jira=>columnitem
-      RAISING cx_static_check.
-    METHODS parse_configuration
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(configuration) TYPE zif_jira=>configuration
-      RAISING cx_static_check.
-    METHODS parse_timetrackingconfiguratio
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(timetrackingconfiguration) TYPE zif_jira=>timetrackingconfiguration
-      RAISING cx_static_check.
-    METHODS parse_applicationproperty
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(applicationproperty) TYPE zif_jira=>applicationproperty
-      RAISING cx_static_check.
-    METHODS parse_simpleapplicationpropert
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(simpleapplicationpropertybean) TYPE zif_jira=>simpleapplicationpropertybean
-      RAISING cx_static_check.
-    METHODS parse_permissionschemes
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(permissionschemes) TYPE zif_jira=>permissionschemes
-      RAISING cx_static_check.
-    METHODS parse_permissiongrants
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(permissiongrants) TYPE zif_jira=>permissiongrants
-      RAISING cx_static_check.
-    METHODS parse_associateditembean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(associateditembean) TYPE zif_jira=>associateditembean
-      RAISING cx_static_check.
-    METHODS parse_auditrecordbean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(auditrecordbean) TYPE zif_jira=>auditrecordbean
-      RAISING cx_static_check.
-    METHODS parse_auditrecords
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(auditrecords) TYPE zif_jira=>auditrecords
-      RAISING cx_static_check.
-    METHODS parse_changedvaluebean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(changedvaluebean) TYPE zif_jira=>changedvaluebean
-      RAISING cx_static_check.
-    METHODS parse_pagebeanworkflowscheme
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanworkflowscheme) TYPE zif_jira=>pagebeanworkflowscheme
-      RAISING cx_static_check.
-    METHODS parse_workflowscheme
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowscheme) TYPE zif_jira=>workflowscheme
-      RAISING cx_static_check.
-    METHODS parse_issuetypesworkflowmappin
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypesworkflowmapping) TYPE zif_jira=>issuetypesworkflowmapping
-      RAISING cx_static_check.
-    METHODS parse_issuetypeworkflowmapping
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeworkflowmapping) TYPE zif_jira=>issuetypeworkflowmapping
-      RAISING cx_static_check.
-    METHODS parse_defaultworkflow
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(defaultworkflow) TYPE zif_jira=>defaultworkflow
-      RAISING cx_static_check.
-    METHODS parse_containerofworkflowschem
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(containerofworkflowschemeassoc) TYPE zif_jira=>containerofworkflowschemeassoc
-      RAISING cx_static_check.
-    METHODS parse_workflowschemeassociatio
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowschemeassociations) TYPE zif_jira=>workflowschemeassociations
-      RAISING cx_static_check.
-    METHODS parse_workflowschemeprojectass
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowschemeprojectassociati) TYPE zif_jira=>workflowschemeprojectassociati
-      RAISING cx_static_check.
-    METHODS parse_timetrackingprovider
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(timetrackingprovider) TYPE zif_jira=>timetrackingprovider
-      RAISING cx_static_check.
-    METHODS parse_pagebeanworkflow
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanworkflow) TYPE zif_jira=>pagebeanworkflow
-      RAISING cx_static_check.
-    METHODS parse_publishedworkflowid
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(publishedworkflowid) TYPE zif_jira=>publishedworkflowid
-      RAISING cx_static_check.
-    METHODS parse_screenid
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(screenid) TYPE zif_jira=>screenid
-      RAISING cx_static_check.
-    METHODS parse_transition
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(transition) TYPE zif_jira=>transition
-      RAISING cx_static_check.
-    METHODS parse_workflow
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflow) TYPE zif_jira=>workflow
-      RAISING cx_static_check.
-    METHODS parse_workflowrules
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowrules) TYPE zif_jira=>workflowrules
-      RAISING cx_static_check.
-    METHODS parse_workflowstatus
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowstatus) TYPE zif_jira=>workflowstatus
-      RAISING cx_static_check.
-    METHODS parse_workflowstatusproperties
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowstatusproperties) TYPE zif_jira=>workflowstatusproperties
-      RAISING cx_static_check.
-    METHODS parse_workflowtransitionrule
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowtransitionrule) TYPE zif_jira=>workflowtransitionrule
-      RAISING cx_static_check.
-    METHODS parse_connectworkflowtransitio
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(connectworkflowtransitionrule) TYPE zif_jira=>connectworkflowtransitionrule
-      RAISING cx_static_check.
-    METHODS parse_pagebeanworkflowtransiti
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanworkflowtransitionrule) TYPE zif_jira=>pagebeanworkflowtransitionrule
-      RAISING cx_static_check.
-    METHODS parse_ruleconfiguration
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(ruleconfiguration) TYPE zif_jira=>ruleconfiguration
-      RAISING cx_static_check.
-    METHODS parse_workflowid
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowid) TYPE zif_jira=>workflowid
-      RAISING cx_static_check.
-    METHODS parse_workflowtransition
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowtransition) TYPE zif_jira=>workflowtransition
-      RAISING cx_static_check.
-    METHODS parse_workflowtransitionrules
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowtransitionrules) TYPE zif_jira=>workflowtransitionrules
-      RAISING cx_static_check.
-    METHODS parse_workflowtransitionrulesu
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowtransitionrulesupdate) TYPE zif_jira=>workflowtransitionrulesupdate
-      RAISING cx_static_check.
-    METHODS parse_workflowtransitionrule01
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowtransitionrulesupdatee) TYPE zif_jira=>workflowtransitionrulesupdatee
-      RAISING cx_static_check.
-    METHODS parse_workflowtransitionrule02
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowtransitionrulesupdat01) TYPE zif_jira=>workflowtransitionrulesupdat01
-      RAISING cx_static_check.
-    METHODS parse_issuetypeinfo
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeinfo) TYPE zif_jira=>issuetypeinfo
-      RAISING cx_static_check.
-    METHODS parse_projectissuetypehierarch
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectissuetypehierarchy) TYPE zif_jira=>projectissuetypehierarchy
-      RAISING cx_static_check.
-    METHODS parse_projectissuetypeshierarc
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectissuetypeshierarchyleve) TYPE zif_jira=>projectissuetypeshierarchyleve
-      RAISING cx_static_check.
-    METHODS parse_pagebeanuserkey
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanuserkey) TYPE zif_jira=>pagebeanuserkey
-      RAISING cx_static_check.
-    METHODS parse_userkey
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(userkey) TYPE zif_jira=>userkey
-      RAISING cx_static_check.
-    METHODS parse_changedetails
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(changedetails) TYPE zif_jira=>changedetails
-      RAISING cx_static_check.
-    METHODS parse_changelog
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(changelog) TYPE zif_jira=>changelog
-      RAISING cx_static_check.
-    METHODS parse_fieldmetadata
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(fieldmetadata) TYPE zif_jira=>fieldmetadata
-      RAISING cx_static_check.
-    METHODS parse_historymetadata
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(historymetadata) TYPE zif_jira=>historymetadata
-      RAISING cx_static_check.
-    METHODS parse_historymetadataparticipa
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(historymetadataparticipant) TYPE zif_jira=>historymetadataparticipant
-      RAISING cx_static_check.
-    METHODS parse_includedfields
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(includedfields) TYPE zif_jira=>includedfields
-      RAISING cx_static_check.
-    METHODS parse_issuebean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuebean) TYPE zif_jira=>issuebean
-      RAISING cx_static_check.
-    METHODS parse_issuetransition
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetransition) TYPE zif_jira=>issuetransition
-      RAISING cx_static_check.
-    METHODS parse_issueupdatemetadata
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issueupdatemetadata) TYPE zif_jira=>issueupdatemetadata
-      RAISING cx_static_check.
-    METHODS parse_linkgroup
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(linkgroup) TYPE zif_jira=>linkgroup
-      RAISING cx_static_check.
-    METHODS parse_operations
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(operations) TYPE zif_jira=>operations
-      RAISING cx_static_check.
-    METHODS parse_pageofchangelogs
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pageofchangelogs) TYPE zif_jira=>pageofchangelogs
-      RAISING cx_static_check.
-    METHODS parse_searchresults
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(searchresults) TYPE zif_jira=>searchresults
-      RAISING cx_static_check.
-    METHODS parse_statuscategory
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(statuscategory) TYPE zif_jira=>statuscategory
-      RAISING cx_static_check.
-    METHODS parse_statusdetails
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(statusdetails) TYPE zif_jira=>statusdetails
-      RAISING cx_static_check.
-    METHODS parse_searchrequestbean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(searchrequestbean) TYPE zif_jira=>searchrequestbean
-      RAISING cx_static_check.
-    METHODS parse_fieldreferencedata
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(fieldreferencedata) TYPE zif_jira=>fieldreferencedata
-      RAISING cx_static_check.
-    METHODS parse_functionreferencedata
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(functionreferencedata) TYPE zif_jira=>functionreferencedata
-      RAISING cx_static_check.
-    METHODS parse_jqlreferencedata
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jqlreferencedata) TYPE zif_jira=>jqlreferencedata
-      RAISING cx_static_check.
-    METHODS parse_autocompletesuggestion
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(autocompletesuggestion) TYPE zif_jira=>autocompletesuggestion
-      RAISING cx_static_check.
-    METHODS parse_autocompletesuggestions
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(autocompletesuggestions) TYPE zif_jira=>autocompletesuggestions
-      RAISING cx_static_check.
-    METHODS parse_jqlpersonaldatamigration
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jqlpersonaldatamigrationreques) TYPE zif_jira=>jqlpersonaldatamigrationreques
-      RAISING cx_static_check.
-    METHODS parse_convertedjqlqueries
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(convertedjqlqueries) TYPE zif_jira=>convertedjqlqueries
-      RAISING cx_static_check.
-    METHODS parse_jqlquerywithunknownusers
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jqlquerywithunknownusers) TYPE zif_jira=>jqlquerywithunknownusers
-      RAISING cx_static_check.
-    METHODS parse_filter
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(filter) TYPE zif_jira=>filter
-      RAISING cx_static_check.
-    METHODS parse_filtersubscription
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(filtersubscription) TYPE zif_jira=>filtersubscription
-      RAISING cx_static_check.
-    METHODS parse_filtersubscriptionslist
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(filtersubscriptionslist) TYPE zif_jira=>filtersubscriptionslist
-      RAISING cx_static_check.
-    METHODS parse_userlist
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(userlist) TYPE zif_jira=>userlist
-      RAISING cx_static_check.
-    METHODS parse_filterdetails
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(filterdetails) TYPE zif_jira=>filterdetails
-      RAISING cx_static_check.
-    METHODS parse_pagebeanfilterdetails
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanfilterdetails) TYPE zif_jira=>pagebeanfilterdetails
-      RAISING cx_static_check.
-    METHODS parse_defaultsharescope
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(defaultsharescope) TYPE zif_jira=>defaultsharescope
-      RAISING cx_static_check.
-    METHODS parse_sharepermissioninputbean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(sharepermissioninputbean) TYPE zif_jira=>sharepermissioninputbean
+      RETURNING VALUE(versionissuesstatus) TYPE zif_jira=>versionissuesstatus
       RAISING cx_static_check.
     METHODS parse_customfieldreplacement
       IMPORTING iv_prefix TYPE string
@@ -700,6 +92,38 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(versionmovebean) TYPE zif_jira=>versionmovebean
       RAISING cx_static_check.
+    METHODS parse_applicationrole
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(applicationrole) TYPE zif_jira=>applicationrole
+      RAISING cx_static_check.
+    METHODS parse_avatarurlsbean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(avatarurlsbean) TYPE zif_jira=>avatarurlsbean
+      RAISING cx_static_check.
+    METHODS parse_groupname
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(groupname) TYPE zif_jira=>groupname
+      RAISING cx_static_check.
+    METHODS parse_listwrappercallbackappli
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(listwrappercallbackapplication) TYPE zif_jira=>listwrappercallbackapplication
+      RAISING cx_static_check.
+    METHODS parse_listwrappercallbackgroup
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(listwrappercallbackgroupname) TYPE zif_jira=>listwrappercallbackgroupname
+      RAISING cx_static_check.
+    METHODS parse_simplelistwrapperapplica
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(simplelistwrapperapplicationro) TYPE zif_jira=>simplelistwrapperapplicationro
+      RAISING cx_static_check.
+    METHODS parse_simplelistwrappergroupna
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(simplelistwrappergroupname) TYPE zif_jira=>simplelistwrappergroupname
+      RAISING cx_static_check.
+    METHODS parse_user
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(user) TYPE zif_jira=>user
+      RAISING cx_static_check.
     METHODS parse_foundusers
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(foundusers) TYPE zif_jira=>foundusers
@@ -712,6 +136,10 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(userwritebean) TYPE zif_jira=>userwritebean
       RAISING cx_static_check.
+    METHODS parse_columnitem
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(columnitem) TYPE zif_jira=>columnitem
+      RAISING cx_static_check.
     METHODS parse_avatar
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(avatar) TYPE zif_jira=>avatar
@@ -719,6 +147,14 @@ CLASS zcl_jira DEFINITION PUBLIC.
     METHODS parse_avatars
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(avatars) TYPE zif_jira=>avatars
+      RAISING cx_static_check.
+    METHODS parse_statuscategory
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(statuscategory) TYPE zif_jira=>statuscategory
+      RAISING cx_static_check.
+    METHODS parse_statusdetails
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(statusdetails) TYPE zif_jira=>statusdetails
       RAISING cx_static_check.
     METHODS parse_screenabletab
       IMPORTING iv_prefix TYPE string
@@ -728,9 +164,21 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(pagebeanscreen) TYPE zif_jira=>pagebeanscreen
       RAISING cx_static_check.
+    METHODS parse_projectforscope
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectforscope) TYPE zif_jira=>projectforscope
+      RAISING cx_static_check.
+    METHODS parse_scope
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(scope) TYPE zif_jira=>scope
+      RAISING cx_static_check.
     METHODS parse_screen
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(screen) TYPE zif_jira=>screen
+      RAISING cx_static_check.
+    METHODS parse_updatedprojectcategory
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(updatedprojectcategory) TYPE zif_jira=>updatedprojectcategory
       RAISING cx_static_check.
     METHODS parse_screenablefield
       IMPORTING iv_prefix TYPE string
@@ -755,6 +203,42 @@ CLASS zcl_jira DEFINITION PUBLIC.
     METHODS parse_resolution
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(resolution) TYPE zif_jira=>resolution
+      RAISING cx_static_check.
+    METHODS parse_errorcollection
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(errorcollection) TYPE zif_jira=>errorcollection
+      RAISING cx_static_check.
+    METHODS parse_component
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(component) TYPE zif_jira=>component
+      RAISING cx_static_check.
+    METHODS parse_hierarchy
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(hierarchy) TYPE zif_jira=>hierarchy
+      RAISING cx_static_check.
+    METHODS parse_hierarchylevel
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(hierarchylevel) TYPE zif_jira=>hierarchylevel
+      RAISING cx_static_check.
+    METHODS parse_issuetypedetails
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypedetails) TYPE zif_jira=>issuetypedetails
+      RAISING cx_static_check.
+    METHODS parse_project
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(project) TYPE zif_jira=>project
+      RAISING cx_static_check.
+    METHODS parse_projectcategory
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectcategory) TYPE zif_jira=>projectcategory
+      RAISING cx_static_check.
+    METHODS parse_projectinsight
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectinsight) TYPE zif_jira=>projectinsight
+      RAISING cx_static_check.
+    METHODS parse_projectpermissions
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectpermissions) TYPE zif_jira=>projectpermissions
       RAISING cx_static_check.
     METHODS parse_projectinputbean
       IMPORTING iv_prefix TYPE string
@@ -792,6 +276,10 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(issuetypewithstatus) TYPE zif_jira=>issuetypewithstatus
       RAISING cx_static_check.
+    METHODS parse_securitylevel
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(securitylevel) TYPE zif_jira=>securitylevel
+      RAISING cx_static_check.
     METHODS parse_securityscheme
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(securityscheme) TYPE zif_jira=>securityscheme
@@ -827,6 +315,10 @@ CLASS zcl_jira DEFINITION PUBLIC.
     METHODS parse_timetrackingdetails
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(timetrackingdetails) TYPE zif_jira=>timetrackingdetails
+      RAISING cx_static_check.
+    METHODS parse_userdetails
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(userdetails) TYPE zif_jira=>userdetails
       RAISING cx_static_check.
     METHODS parse_visibility
       IMPORTING iv_prefix TYPE string
@@ -864,6 +356,22 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(pagebeanissuesecuritylevelmemb) TYPE zif_jira=>pagebeanissuesecuritylevelmemb
       RAISING cx_static_check.
+    METHODS parse_permissionholder
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(permissionholder) TYPE zif_jira=>permissionholder
+      RAISING cx_static_check.
+    METHODS parse_fieldmetadata
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(fieldmetadata) TYPE zif_jira=>fieldmetadata
+      RAISING cx_static_check.
+    METHODS parse_issuetransition
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetransition) TYPE zif_jira=>issuetransition
+      RAISING cx_static_check.
+    METHODS parse_jsontypebean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(jsontypebean) TYPE zif_jira=>jsontypebean
+      RAISING cx_static_check.
     METHODS parse_transitions
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(transitions) TYPE zif_jira=>transitions
@@ -884,6 +392,14 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(fieldupdateoperation) TYPE zif_jira=>fieldupdateoperation
       RAISING cx_static_check.
+    METHODS parse_historymetadata
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(historymetadata) TYPE zif_jira=>historymetadata
+      RAISING cx_static_check.
+    METHODS parse_historymetadataparticipa
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(historymetadataparticipant) TYPE zif_jira=>historymetadataparticipant
+      RAISING cx_static_check.
     METHODS parse_issueupdatedetails
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(issueupdatedetails) TYPE zif_jira=>issueupdatedetails
@@ -891,6 +407,38 @@ CLASS zcl_jira DEFINITION PUBLIC.
     METHODS parse_votes
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(votes) TYPE zif_jira=>votes
+      RAISING cx_static_check.
+    METHODS parse_changedetails
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(changedetails) TYPE zif_jira=>changedetails
+      RAISING cx_static_check.
+    METHODS parse_changelog
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(changelog) TYPE zif_jira=>changelog
+      RAISING cx_static_check.
+    METHODS parse_includedfields
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(includedfields) TYPE zif_jira=>includedfields
+      RAISING cx_static_check.
+    METHODS parse_issuebean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuebean) TYPE zif_jira=>issuebean
+      RAISING cx_static_check.
+    METHODS parse_issueupdatemetadata
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issueupdatemetadata) TYPE zif_jira=>issueupdatemetadata
+      RAISING cx_static_check.
+    METHODS parse_linkgroup
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(linkgroup) TYPE zif_jira=>linkgroup
+      RAISING cx_static_check.
+    METHODS parse_operations
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(operations) TYPE zif_jira=>operations
+      RAISING cx_static_check.
+    METHODS parse_pageofchangelogs
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pageofchangelogs) TYPE zif_jira=>pageofchangelogs
       RAISING cx_static_check.
     METHODS parse_watchers
       IMPORTING iv_prefix TYPE string
@@ -1040,6 +588,10 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(foundusersandgroups) TYPE zif_jira=>foundusersandgroups
       RAISING cx_static_check.
+    METHODS parse_fielddetails
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(fielddetails) TYPE zif_jira=>fielddetails
+      RAISING cx_static_check.
     METHODS parse_customfielddefinitionjso
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(customfielddefinitionjsonbean) TYPE zif_jira=>customfielddefinitionjsonbean
@@ -1123,6 +675,214 @@ CLASS zcl_jira DEFINITION PUBLIC.
     METHODS parse_systemavatars
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(systemavatars) TYPE zif_jira=>systemavatars
+      RAISING cx_static_check.
+    METHODS parse_projectrole
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectrole) TYPE zif_jira=>projectrole
+      RAISING cx_static_check.
+    METHODS parse_projectrolegroup
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectrolegroup) TYPE zif_jira=>projectrolegroup
+      RAISING cx_static_check.
+    METHODS parse_projectroleuser
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectroleuser) TYPE zif_jira=>projectroleuser
+      RAISING cx_static_check.
+    METHODS parse_roleactor
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(roleactor) TYPE zif_jira=>roleactor
+      RAISING cx_static_check.
+    METHODS parse_createupdaterolerequestb
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(createupdaterolerequestbean) TYPE zif_jira=>createupdaterolerequestbean
+      RAISING cx_static_check.
+    METHODS parse_actorinputbean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(actorinputbean) TYPE zif_jira=>actorinputbean
+      RAISING cx_static_check.
+    METHODS parse_projectroleactorsupdateb
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectroleactorsupdatebean) TYPE zif_jira=>projectroleactorsupdatebean
+      RAISING cx_static_check.
+    METHODS parse_actorsmap
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(actorsmap) TYPE zif_jira=>actorsmap
+      RAISING cx_static_check.
+    METHODS parse_projectroledetail
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectroledetail) TYPE zif_jira=>projectroledetail
+      RAISING cx_static_check.
+    METHODS parse_pagebeanscreenscheme
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanscreenscheme) TYPE zif_jira=>pagebeanscreenscheme
+      RAISING cx_static_check.
+    METHODS parse_screenscheme
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(screenscheme) TYPE zif_jira=>screenscheme
+      RAISING cx_static_check.
+    METHODS parse_screentypes
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(screentypes) TYPE zif_jira=>screentypes
+      RAISING cx_static_check.
+    METHODS parse_screenschemedetails
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(screenschemedetails) TYPE zif_jira=>screenschemedetails
+      RAISING cx_static_check.
+    METHODS parse_screenschemeid
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(screenschemeid) TYPE zif_jira=>screenschemeid
+      RAISING cx_static_check.
+    METHODS parse_updatescreenschemedetail
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(updatescreenschemedetails) TYPE zif_jira=>updatescreenschemedetails
+      RAISING cx_static_check.
+    METHODS parse_updatescreentypes
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(updatescreentypes) TYPE zif_jira=>updatescreentypes
+      RAISING cx_static_check.
+    METHODS parse_issuetypescreenschemeite
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypescreenschemeitem) TYPE zif_jira=>issuetypescreenschemeitem
+      RAISING cx_static_check.
+    METHODS parse_pagebeanissuetypescreens
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanissuetypescreenschemei) TYPE zif_jira=>pagebeanissuetypescreenschemei
+      RAISING cx_static_check.
+    METHODS parse_issuetypescreenscheme
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypescreenscheme) TYPE zif_jira=>issuetypescreenscheme
+      RAISING cx_static_check.
+    METHODS parse_issuetypescreenschemespr
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypescreenschemesprojects) TYPE zif_jira=>issuetypescreenschemesprojects
+      RAISING cx_static_check.
+    METHODS parse_pagebeanissuetypescree01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanissuetypescreenschemes) TYPE zif_jira=>pagebeanissuetypescreenschemes
+      RAISING cx_static_check.
+    METHODS parse_pagebeanissuetypescree02
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanissuetypescreenscheme) TYPE zif_jira=>pagebeanissuetypescreenscheme
+      RAISING cx_static_check.
+    METHODS parse_issuetypescreenschemepro
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypescreenschemeprojectas) TYPE zif_jira=>issuetypescreenschemeprojectas
+      RAISING cx_static_check.
+    METHODS parse_issuetypescreenschemedet
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypescreenschemedetails) TYPE zif_jira=>issuetypescreenschemedetails
+      RAISING cx_static_check.
+    METHODS parse_issuetypescreenschememap
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypescreenschememapping) TYPE zif_jira=>issuetypescreenschememapping
+      RAISING cx_static_check.
+    METHODS parse_issuetypescreenschemeid
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypescreenschemeid) TYPE zif_jira=>issuetypescreenschemeid
+      RAISING cx_static_check.
+    METHODS parse_issuetypescreenschemeupd
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypescreenschemeupdatedet) TYPE zif_jira=>issuetypescreenschemeupdatedet
+      RAISING cx_static_check.
+    METHODS parse_issuetypescreenschemem01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypescreenschememappingde) TYPE zif_jira=>issuetypescreenschememappingde
+      RAISING cx_static_check.
+    METHODS parse_updatedefaultscreenschem
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(updatedefaultscreenscheme) TYPE zif_jira=>updatedefaultscreenscheme
+      RAISING cx_static_check.
+    METHODS parse_issuetypeids
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeids) TYPE zif_jira=>issuetypeids
+      RAISING cx_static_check.
+    METHODS parse_attachmentmetadata
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(attachmentmetadata) TYPE zif_jira=>attachmentmetadata
+      RAISING cx_static_check.
+    METHODS parse_attachmentsettings
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(attachmentsettings) TYPE zif_jira=>attachmentsettings
+      RAISING cx_static_check.
+    METHODS parse_attachmentarchiveentry
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(attachmentarchiveentry) TYPE zif_jira=>attachmentarchiveentry
+      RAISING cx_static_check.
+    METHODS parse_attachmentarchiveimpl
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(attachmentarchiveimpl) TYPE zif_jira=>attachmentarchiveimpl
+      RAISING cx_static_check.
+    METHODS parse_attachmentarchive
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(attachmentarchive) TYPE zif_jira=>attachmentarchive
+      RAISING cx_static_check.
+    METHODS parse_attachmentarchiveitemrea
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(attachmentarchiveitemreadable) TYPE zif_jira=>attachmentarchiveitemreadable
+      RAISING cx_static_check.
+    METHODS parse_attachmentarchivemetadat
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(attachmentarchivemetadatareada) TYPE zif_jira=>attachmentarchivemetadatareada
+      RAISING cx_static_check.
+    METHODS parse_changedworklog
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(changedworklog) TYPE zif_jira=>changedworklog
+      RAISING cx_static_check.
+    METHODS parse_changedworklogs
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(changedworklogs) TYPE zif_jira=>changedworklogs
+      RAISING cx_static_check.
+    METHODS parse_worklogidsrequestbean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(worklogidsrequestbean) TYPE zif_jira=>worklogidsrequestbean
+      RAISING cx_static_check.
+    METHODS parse_issuetypescheme
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypescheme) TYPE zif_jira=>issuetypescheme
+      RAISING cx_static_check.
+    METHODS parse_pagebeanissuetypescheme
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanissuetypescheme) TYPE zif_jira=>pagebeanissuetypescheme
+      RAISING cx_static_check.
+    METHODS parse_issuetypeschemeprojects
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeschemeprojects) TYPE zif_jira=>issuetypeschemeprojects
+      RAISING cx_static_check.
+    METHODS parse_pagebeanissuetypeschemep
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanissuetypeschemeproject) TYPE zif_jira=>pagebeanissuetypeschemeproject
+      RAISING cx_static_check.
+    METHODS parse_issuetypeschememapping
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeschememapping) TYPE zif_jira=>issuetypeschememapping
+      RAISING cx_static_check.
+    METHODS parse_pagebeanissuetypeschemem
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanissuetypeschememapping) TYPE zif_jira=>pagebeanissuetypeschememapping
+      RAISING cx_static_check.
+    METHODS parse_issuetypeschemeprojectas
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeschemeprojectassociat) TYPE zif_jira=>issuetypeschemeprojectassociat
+      RAISING cx_static_check.
+    METHODS parse_issuetypeschemedetails
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeschemedetails) TYPE zif_jira=>issuetypeschemedetails
+      RAISING cx_static_check.
+    METHODS parse_issuetypeschemeid
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeschemeid) TYPE zif_jira=>issuetypeschemeid
+      RAISING cx_static_check.
+    METHODS parse_issuetypeids01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeids01) TYPE zif_jira=>issuetypeids01
+      RAISING cx_static_check.
+    METHODS parse_issuetypeschemeupdatedet
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeschemeupdatedetails) TYPE zif_jira=>issuetypeschemeupdatedetails
+      RAISING cx_static_check.
+    METHODS parse_orderofissuetypes
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(orderofissuetypes) TYPE zif_jira=>orderofissuetypes
       RAISING cx_static_check.
     METHODS parse_globalscopebean
       IMPORTING iv_prefix TYPE string
@@ -1220,110 +980,6 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(pagebeanfieldconfigurationitem) TYPE zif_jira=>pagebeanfieldconfigurationitem
       RAISING cx_static_check.
-    METHODS parse_pagebeanscreenscheme
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanscreenscheme) TYPE zif_jira=>pagebeanscreenscheme
-      RAISING cx_static_check.
-    METHODS parse_screenscheme
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(screenscheme) TYPE zif_jira=>screenscheme
-      RAISING cx_static_check.
-    METHODS parse_screentypes
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(screentypes) TYPE zif_jira=>screentypes
-      RAISING cx_static_check.
-    METHODS parse_screenschemedetails
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(screenschemedetails) TYPE zif_jira=>screenschemedetails
-      RAISING cx_static_check.
-    METHODS parse_screenschemeid
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(screenschemeid) TYPE zif_jira=>screenschemeid
-      RAISING cx_static_check.
-    METHODS parse_updatescreenschemedetail
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(updatescreenschemedetails) TYPE zif_jira=>updatescreenschemedetails
-      RAISING cx_static_check.
-    METHODS parse_updatescreentypes
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(updatescreentypes) TYPE zif_jira=>updatescreentypes
-      RAISING cx_static_check.
-    METHODS parse_createupdaterolerequestb
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(createupdaterolerequestbean) TYPE zif_jira=>createupdaterolerequestbean
-      RAISING cx_static_check.
-    METHODS parse_actorinputbean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(actorinputbean) TYPE zif_jira=>actorinputbean
-      RAISING cx_static_check.
-    METHODS parse_projectroleactorsupdateb
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectroleactorsupdatebean) TYPE zif_jira=>projectroleactorsupdatebean
-      RAISING cx_static_check.
-    METHODS parse_actorsmap
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(actorsmap) TYPE zif_jira=>actorsmap
-      RAISING cx_static_check.
-    METHODS parse_projectroledetail
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectroledetail) TYPE zif_jira=>projectroledetail
-      RAISING cx_static_check.
-    METHODS parse_issuetypescreenschemeite
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypescreenschemeitem) TYPE zif_jira=>issuetypescreenschemeitem
-      RAISING cx_static_check.
-    METHODS parse_pagebeanissuetypescreens
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanissuetypescreenschemei) TYPE zif_jira=>pagebeanissuetypescreenschemei
-      RAISING cx_static_check.
-    METHODS parse_issuetypescreenscheme
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypescreenscheme) TYPE zif_jira=>issuetypescreenscheme
-      RAISING cx_static_check.
-    METHODS parse_issuetypescreenschemespr
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypescreenschemesprojects) TYPE zif_jira=>issuetypescreenschemesprojects
-      RAISING cx_static_check.
-    METHODS parse_pagebeanissuetypescree01
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanissuetypescreenschemes) TYPE zif_jira=>pagebeanissuetypescreenschemes
-      RAISING cx_static_check.
-    METHODS parse_pagebeanissuetypescree02
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanissuetypescreenscheme) TYPE zif_jira=>pagebeanissuetypescreenscheme
-      RAISING cx_static_check.
-    METHODS parse_issuetypescreenschemepro
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypescreenschemeprojectas) TYPE zif_jira=>issuetypescreenschemeprojectas
-      RAISING cx_static_check.
-    METHODS parse_issuetypescreenschemedet
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypescreenschemedetails) TYPE zif_jira=>issuetypescreenschemedetails
-      RAISING cx_static_check.
-    METHODS parse_issuetypescreenschememap
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypescreenschememapping) TYPE zif_jira=>issuetypescreenschememapping
-      RAISING cx_static_check.
-    METHODS parse_issuetypescreenschemeid
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypescreenschemeid) TYPE zif_jira=>issuetypescreenschemeid
-      RAISING cx_static_check.
-    METHODS parse_issuetypescreenschemeupd
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypescreenschemeupdatedet) TYPE zif_jira=>issuetypescreenschemeupdatedet
-      RAISING cx_static_check.
-    METHODS parse_issuetypescreenschemem01
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypescreenschememappingde) TYPE zif_jira=>issuetypescreenschememappingde
-      RAISING cx_static_check.
-    METHODS parse_updatedefaultscreenschem
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(updatedefaultscreenscheme) TYPE zif_jira=>updatedefaultscreenscheme
-      RAISING cx_static_check.
-    METHODS parse_issuetypeids
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeids) TYPE zif_jira=>issuetypeids
-      RAISING cx_static_check.
     METHODS parse_customfieldoption
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(customfieldoption) TYPE zif_jira=>customfieldoption
@@ -1380,93 +1036,117 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(pagebeanissuetypetocontextmapp) TYPE zif_jira=>pagebeanissuetypetocontextmapp
       RAISING cx_static_check.
-    METHODS parse_attachmentmetadata
+    METHODS parse_pagebeanuserkey
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(attachmentmetadata) TYPE zif_jira=>attachmentmetadata
+      RETURNING VALUE(pagebeanuserkey) TYPE zif_jira=>pagebeanuserkey
       RAISING cx_static_check.
-    METHODS parse_attachmentsettings
+    METHODS parse_userkey
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(attachmentsettings) TYPE zif_jira=>attachmentsettings
+      RETURNING VALUE(userkey) TYPE zif_jira=>userkey
       RAISING cx_static_check.
-    METHODS parse_attachmentarchiveentry
+    METHODS parse_pagebeanuser
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(attachmentarchiveentry) TYPE zif_jira=>attachmentarchiveentry
+      RETURNING VALUE(pagebeanuser) TYPE zif_jira=>pagebeanuser
       RAISING cx_static_check.
-    METHODS parse_attachmentarchiveimpl
+    METHODS parse_searchresults
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(attachmentarchiveimpl) TYPE zif_jira=>attachmentarchiveimpl
+      RETURNING VALUE(searchresults) TYPE zif_jira=>searchresults
       RAISING cx_static_check.
-    METHODS parse_attachmentarchive
+    METHODS parse_searchrequestbean
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(attachmentarchive) TYPE zif_jira=>attachmentarchive
+      RETURNING VALUE(searchrequestbean) TYPE zif_jira=>searchrequestbean
       RAISING cx_static_check.
-    METHODS parse_attachmentarchiveitemrea
+    METHODS parse_fieldreferencedata
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(attachmentarchiveitemreadable) TYPE zif_jira=>attachmentarchiveitemreadable
+      RETURNING VALUE(fieldreferencedata) TYPE zif_jira=>fieldreferencedata
       RAISING cx_static_check.
-    METHODS parse_attachmentarchivemetadat
+    METHODS parse_functionreferencedata
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(attachmentarchivemetadatareada) TYPE zif_jira=>attachmentarchivemetadatareada
+      RETURNING VALUE(functionreferencedata) TYPE zif_jira=>functionreferencedata
       RAISING cx_static_check.
-    METHODS parse_changedworklog
+    METHODS parse_jqlreferencedata
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(changedworklog) TYPE zif_jira=>changedworklog
+      RETURNING VALUE(jqlreferencedata) TYPE zif_jira=>jqlreferencedata
       RAISING cx_static_check.
-    METHODS parse_changedworklogs
+    METHODS parse_autocompletesuggestion
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(changedworklogs) TYPE zif_jira=>changedworklogs
+      RETURNING VALUE(autocompletesuggestion) TYPE zif_jira=>autocompletesuggestion
       RAISING cx_static_check.
-    METHODS parse_worklogidsrequestbean
+    METHODS parse_autocompletesuggestions
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(worklogidsrequestbean) TYPE zif_jira=>worklogidsrequestbean
+      RETURNING VALUE(autocompletesuggestions) TYPE zif_jira=>autocompletesuggestions
       RAISING cx_static_check.
-    METHODS parse_issuetypescheme
+    METHODS parse_jqlpersonaldatamigration
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypescheme) TYPE zif_jira=>issuetypescheme
+      RETURNING VALUE(jqlpersonaldatamigrationreques) TYPE zif_jira=>jqlpersonaldatamigrationreques
       RAISING cx_static_check.
-    METHODS parse_pagebeanissuetypescheme
+    METHODS parse_convertedjqlqueries
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanissuetypescheme) TYPE zif_jira=>pagebeanissuetypescheme
+      RETURNING VALUE(convertedjqlqueries) TYPE zif_jira=>convertedjqlqueries
       RAISING cx_static_check.
-    METHODS parse_issuetypeschemeprojects
+    METHODS parse_jqlquerywithunknownusers
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeschemeprojects) TYPE zif_jira=>issuetypeschemeprojects
+      RETURNING VALUE(jqlquerywithunknownusers) TYPE zif_jira=>jqlquerywithunknownusers
       RAISING cx_static_check.
-    METHODS parse_pagebeanissuetypeschemep
+    METHODS parse_filter
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanissuetypeschemeproject) TYPE zif_jira=>pagebeanissuetypeschemeproject
+      RETURNING VALUE(filter) TYPE zif_jira=>filter
       RAISING cx_static_check.
-    METHODS parse_issuetypeschememapping
+    METHODS parse_filtersubscription
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeschememapping) TYPE zif_jira=>issuetypeschememapping
+      RETURNING VALUE(filtersubscription) TYPE zif_jira=>filtersubscription
       RAISING cx_static_check.
-    METHODS parse_pagebeanissuetypeschemem
+    METHODS parse_filtersubscriptionslist
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanissuetypeschememapping) TYPE zif_jira=>pagebeanissuetypeschememapping
+      RETURNING VALUE(filtersubscriptionslist) TYPE zif_jira=>filtersubscriptionslist
       RAISING cx_static_check.
-    METHODS parse_issuetypeschemeprojectas
+    METHODS parse_sharepermission
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeschemeprojectassociat) TYPE zif_jira=>issuetypeschemeprojectassociat
+      RETURNING VALUE(sharepermission) TYPE zif_jira=>sharepermission
       RAISING cx_static_check.
-    METHODS parse_issuetypeschemedetails
+    METHODS parse_userlist
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeschemedetails) TYPE zif_jira=>issuetypeschemedetails
+      RETURNING VALUE(userlist) TYPE zif_jira=>userlist
       RAISING cx_static_check.
-    METHODS parse_issuetypeschemeid
+    METHODS parse_filterdetails
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeschemeid) TYPE zif_jira=>issuetypeschemeid
+      RETURNING VALUE(filterdetails) TYPE zif_jira=>filterdetails
       RAISING cx_static_check.
-    METHODS parse_issuetypeids01
+    METHODS parse_pagebeanfilterdetails
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeids01) TYPE zif_jira=>issuetypeids01
+      RETURNING VALUE(pagebeanfilterdetails) TYPE zif_jira=>pagebeanfilterdetails
       RAISING cx_static_check.
-    METHODS parse_issuetypeschemeupdatedet
+    METHODS parse_defaultsharescope
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeschemeupdatedetails) TYPE zif_jira=>issuetypeschemeupdatedetails
+      RETURNING VALUE(defaultsharescope) TYPE zif_jira=>defaultsharescope
       RAISING cx_static_check.
-    METHODS parse_orderofissuetypes
+    METHODS parse_sharepermissioninputbean
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(orderofissuetypes) TYPE zif_jira=>orderofissuetypes
+      RETURNING VALUE(sharepermissioninputbean) TYPE zif_jira=>sharepermissioninputbean
+      RAISING cx_static_check.
+    METHODS parse_dashboard
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(dashboard) TYPE zif_jira=>dashboard
+      RAISING cx_static_check.
+    METHODS parse_pageofdashboards
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pageofdashboards) TYPE zif_jira=>pageofdashboards
+      RAISING cx_static_check.
+    METHODS parse_userbean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(userbean) TYPE zif_jira=>userbean
+      RAISING cx_static_check.
+    METHODS parse_userbeanavatarurls
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(userbeanavatarurls) TYPE zif_jira=>userbeanavatarurls
+      RAISING cx_static_check.
+    METHODS parse_pagebeandashboard
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeandashboard) TYPE zif_jira=>pagebeandashboard
+      RAISING cx_static_check.
+    METHODS parse_dashboarddetails
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(dashboarddetails) TYPE zif_jira=>dashboarddetails
       RAISING cx_static_check.
     METHODS parse_jqlqueriestoparse
       IMPORTING iv_prefix TYPE string
@@ -1548,6 +1228,234 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(valueoperand) TYPE zif_jira=>valueoperand
       RAISING cx_static_check.
+    METHODS parse_deprecatedworkflow
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(deprecatedworkflow) TYPE zif_jira=>deprecatedworkflow
+      RAISING cx_static_check.
+    METHODS parse_workflowtransitionproper
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowtransitionproperty) TYPE zif_jira=>workflowtransitionproperty
+      RAISING cx_static_check.
+    METHODS parse_configuration
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(configuration) TYPE zif_jira=>configuration
+      RAISING cx_static_check.
+    METHODS parse_timetrackingconfiguratio
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(timetrackingconfiguration) TYPE zif_jira=>timetrackingconfiguration
+      RAISING cx_static_check.
+    METHODS parse_applicationproperty
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(applicationproperty) TYPE zif_jira=>applicationproperty
+      RAISING cx_static_check.
+    METHODS parse_simpleapplicationpropert
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(simpleapplicationpropertybean) TYPE zif_jira=>simpleapplicationpropertybean
+      RAISING cx_static_check.
+    METHODS parse_pagebeanworkflow
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanworkflow) TYPE zif_jira=>pagebeanworkflow
+      RAISING cx_static_check.
+    METHODS parse_publishedworkflowid
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(publishedworkflowid) TYPE zif_jira=>publishedworkflowid
+      RAISING cx_static_check.
+    METHODS parse_screenid
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(screenid) TYPE zif_jira=>screenid
+      RAISING cx_static_check.
+    METHODS parse_transition
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(transition) TYPE zif_jira=>transition
+      RAISING cx_static_check.
+    METHODS parse_workflow
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflow) TYPE zif_jira=>workflow
+      RAISING cx_static_check.
+    METHODS parse_workflowrules
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowrules) TYPE zif_jira=>workflowrules
+      RAISING cx_static_check.
+    METHODS parse_workflowstatus
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowstatus) TYPE zif_jira=>workflowstatus
+      RAISING cx_static_check.
+    METHODS parse_workflowstatusproperties
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowstatusproperties) TYPE zif_jira=>workflowstatusproperties
+      RAISING cx_static_check.
+    METHODS parse_workflowtransitionrule
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowtransitionrule) TYPE zif_jira=>workflowtransitionrule
+      RAISING cx_static_check.
+    METHODS parse_connectworkflowtransitio
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(connectworkflowtransitionrule) TYPE zif_jira=>connectworkflowtransitionrule
+      RAISING cx_static_check.
+    METHODS parse_pagebeanworkflowtransiti
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanworkflowtransitionrule) TYPE zif_jira=>pagebeanworkflowtransitionrule
+      RAISING cx_static_check.
+    METHODS parse_ruleconfiguration
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(ruleconfiguration) TYPE zif_jira=>ruleconfiguration
+      RAISING cx_static_check.
+    METHODS parse_workflowid
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowid) TYPE zif_jira=>workflowid
+      RAISING cx_static_check.
+    METHODS parse_workflowtransition
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowtransition) TYPE zif_jira=>workflowtransition
+      RAISING cx_static_check.
+    METHODS parse_workflowtransitionrules
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowtransitionrules) TYPE zif_jira=>workflowtransitionrules
+      RAISING cx_static_check.
+    METHODS parse_workflowtransitionrulesu
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowtransitionrulesupdate) TYPE zif_jira=>workflowtransitionrulesupdate
+      RAISING cx_static_check.
+    METHODS parse_workflowtransitionrule01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowtransitionrulesupdatee) TYPE zif_jira=>workflowtransitionrulesupdatee
+      RAISING cx_static_check.
+    METHODS parse_workflowtransitionrule02
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowtransitionrulesupdat01) TYPE zif_jira=>workflowtransitionrulesupdat01
+      RAISING cx_static_check.
+    METHODS parse_associateditembean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(associateditembean) TYPE zif_jira=>associateditembean
+      RAISING cx_static_check.
+    METHODS parse_auditrecordbean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(auditrecordbean) TYPE zif_jira=>auditrecordbean
+      RAISING cx_static_check.
+    METHODS parse_auditrecords
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(auditrecords) TYPE zif_jira=>auditrecords
+      RAISING cx_static_check.
+    METHODS parse_changedvaluebean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(changedvaluebean) TYPE zif_jira=>changedvaluebean
+      RAISING cx_static_check.
+    METHODS parse_timetrackingprovider
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(timetrackingprovider) TYPE zif_jira=>timetrackingprovider
+      RAISING cx_static_check.
+    METHODS parse_permissiongrant
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(permissiongrant) TYPE zif_jira=>permissiongrant
+      RAISING cx_static_check.
+    METHODS parse_permissionscheme
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(permissionscheme) TYPE zif_jira=>permissionscheme
+      RAISING cx_static_check.
+    METHODS parse_permissionschemes
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(permissionschemes) TYPE zif_jira=>permissionschemes
+      RAISING cx_static_check.
+    METHODS parse_permissiongrants
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(permissiongrants) TYPE zif_jira=>permissiongrants
+      RAISING cx_static_check.
+    METHODS parse_containerofworkflowschem
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(containerofworkflowschemeassoc) TYPE zif_jira=>containerofworkflowschemeassoc
+      RAISING cx_static_check.
+    METHODS parse_workflowscheme
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowscheme) TYPE zif_jira=>workflowscheme
+      RAISING cx_static_check.
+    METHODS parse_workflowschemeassociatio
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowschemeassociations) TYPE zif_jira=>workflowschemeassociations
+      RAISING cx_static_check.
+    METHODS parse_workflowschemeprojectass
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowschemeprojectassociati) TYPE zif_jira=>workflowschemeprojectassociati
+      RAISING cx_static_check.
+    METHODS parse_pagebeanworkflowscheme
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanworkflowscheme) TYPE zif_jira=>pagebeanworkflowscheme
+      RAISING cx_static_check.
+    METHODS parse_issuetypesworkflowmappin
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypesworkflowmapping) TYPE zif_jira=>issuetypesworkflowmapping
+      RAISING cx_static_check.
+    METHODS parse_issuetypeworkflowmapping
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeworkflowmapping) TYPE zif_jira=>issuetypeworkflowmapping
+      RAISING cx_static_check.
+    METHODS parse_defaultworkflow
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(defaultworkflow) TYPE zif_jira=>defaultworkflow
+      RAISING cx_static_check.
+    METHODS parse_issuetypeinfo
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeinfo) TYPE zif_jira=>issuetypeinfo
+      RAISING cx_static_check.
+    METHODS parse_projectissuetypehierarch
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectissuetypehierarchy) TYPE zif_jira=>projectissuetypehierarchy
+      RAISING cx_static_check.
+    METHODS parse_projectissuetypeshierarc
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectissuetypeshierarchyleve) TYPE zif_jira=>projectissuetypeshierarchyleve
+      RAISING cx_static_check.
+    METHODS parse_groupdetails
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(groupdetails) TYPE zif_jira=>groupdetails
+      RAISING cx_static_check.
+    METHODS parse_pagebeangroupdetails
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeangroupdetails) TYPE zif_jira=>pagebeangroupdetails
+      RAISING cx_static_check.
+    METHODS parse_eventnotification
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(eventnotification) TYPE zif_jira=>eventnotification
+      RAISING cx_static_check.
+    METHODS parse_notificationevent
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(notificationevent) TYPE zif_jira=>notificationevent
+      RAISING cx_static_check.
+    METHODS parse_notificationscheme
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(notificationscheme) TYPE zif_jira=>notificationscheme
+      RAISING cx_static_check.
+    METHODS parse_notificationschemeevent
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(notificationschemeevent) TYPE zif_jira=>notificationschemeevent
+      RAISING cx_static_check.
+    METHODS parse_pagebeannotificationsche
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeannotificationscheme) TYPE zif_jira=>pagebeannotificationscheme
+      RAISING cx_static_check.
+    METHODS parse_projectissuesecurityleve
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectissuesecuritylevels) TYPE zif_jira=>projectissuesecuritylevels
+      RAISING cx_static_check.
+    METHODS parse_bulkissuepropertyupdater
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(bulkissuepropertyupdaterequest) TYPE zif_jira=>bulkissuepropertyupdaterequest
+      RAISING cx_static_check.
+    METHODS parse_issuefilterforbulkproper
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuefilterforbulkpropertyset) TYPE zif_jira=>issuefilterforbulkpropertyset
+      RAISING cx_static_check.
+    METHODS parse_issuefilterforbulkprop01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuefilterforbulkpropertydele) TYPE zif_jira=>issuefilterforbulkpropertydele
+      RAISING cx_static_check.
+    METHODS parse_issueentityproperties
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issueentityproperties) TYPE zif_jira=>issueentityproperties
+      RAISING cx_static_check.
+    METHODS parse_jsonnode
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(jsonnode) TYPE zif_jira=>jsonnode
+      RAISING cx_static_check.
     METHODS parse_idorkeybean
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(idorkeybean) TYPE zif_jira=>idorkeybean
@@ -1612,6 +1520,98 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(jiraexpressionsanalysis) TYPE zif_jira=>jiraexpressionsanalysis
       RAISING cx_static_check.
+    METHODS parse_idbean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(idbean) TYPE zif_jira=>idbean
+      RAISING cx_static_check.
+    METHODS parse_permissions
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(permissions) TYPE zif_jira=>permissions
+      RAISING cx_static_check.
+    METHODS parse_userpermission
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(userpermission) TYPE zif_jira=>userpermission
+      RAISING cx_static_check.
+    METHODS parse_bulkpermissionsrequestbe
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(bulkpermissionsrequestbean) TYPE zif_jira=>bulkpermissionsrequestbean
+      RAISING cx_static_check.
+    METHODS parse_bulkprojectpermissions
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(bulkprojectpermissions) TYPE zif_jira=>bulkprojectpermissions
+      RAISING cx_static_check.
+    METHODS parse_bulkpermissiongrants
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(bulkpermissiongrants) TYPE zif_jira=>bulkpermissiongrants
+      RAISING cx_static_check.
+    METHODS parse_bulkprojectpermissiongra
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(bulkprojectpermissiongrants) TYPE zif_jira=>bulkprojectpermissiongrants
+      RAISING cx_static_check.
+    METHODS parse_permissionskeysbean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(permissionskeysbean) TYPE zif_jira=>permissionskeysbean
+      RAISING cx_static_check.
+    METHODS parse_permittedprojects
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(permittedprojects) TYPE zif_jira=>permittedprojects
+      RAISING cx_static_check.
+    METHODS parse_projectidentifierbean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectidentifierbean) TYPE zif_jira=>projectidentifierbean
+      RAISING cx_static_check.
+    METHODS parse_locale
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(locale) TYPE zif_jira=>locale
+      RAISING cx_static_check.
+    METHODS parse_failedwebhook
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(failedwebhook) TYPE zif_jira=>failedwebhook
+      RAISING cx_static_check.
+    METHODS parse_failedwebhooks
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(failedwebhooks) TYPE zif_jira=>failedwebhooks
+      RAISING cx_static_check.
+    METHODS parse_webhookdetails
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(webhookdetails) TYPE zif_jira=>webhookdetails
+      RAISING cx_static_check.
+    METHODS parse_webhookregistrationdetai
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(webhookregistrationdetails) TYPE zif_jira=>webhookregistrationdetails
+      RAISING cx_static_check.
+    METHODS parse_containerforregisteredwe
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(containerforregisteredwebhooks) TYPE zif_jira=>containerforregisteredwebhooks
+      RAISING cx_static_check.
+    METHODS parse_registeredwebhook
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(registeredwebhook) TYPE zif_jira=>registeredwebhook
+      RAISING cx_static_check.
+    METHODS parse_pagebeanwebhook
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanwebhook) TYPE zif_jira=>pagebeanwebhook
+      RAISING cx_static_check.
+    METHODS parse_webhook
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(webhook) TYPE zif_jira=>webhook
+      RAISING cx_static_check.
+    METHODS parse_containerforwebhookids
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(containerforwebhookids) TYPE zif_jira=>containerforwebhookids
+      RAISING cx_static_check.
+    METHODS parse_webhooksexpirationdate
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(webhooksexpirationdate) TYPE zif_jira=>webhooksexpirationdate
+      RAISING cx_static_check.
+    METHODS parse_usermigrationbean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(usermigrationbean) TYPE zif_jira=>usermigrationbean
+      RAISING cx_static_check.
+    METHODS parse_unrestricteduseremail
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(unrestricteduseremail) TYPE zif_jira=>unrestricteduseremail
+      RAISING cx_static_check.
     METHODS parse_operationmessage
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(operationmessage) TYPE zif_jira=>operationmessage
@@ -1641,1219 +1641,3317 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->response->get_status( IMPORTING code = rv_code ).
   ENDMETHOD.
 
-  METHOD parse_healthcheckresult.
-  ENDMETHOD.
-
-  METHOD parse_serverinformation.
-  ENDMETHOD.
-
-  METHOD parse_issuesandjqlqueries.
-  ENDMETHOD.
-
-  METHOD parse_issuematches.
-  ENDMETHOD.
-
-  METHOD parse_issuematchesforjql.
-  ENDMETHOD.
-
-  METHOD parse_avatarurlsbean.
-  ENDMETHOD.
-
-  METHOD parse_eventnotification.
-  ENDMETHOD.
-
-  METHOD parse_fielddetails.
-  ENDMETHOD.
-
-  METHOD parse_groupname.
-  ENDMETHOD.
-
-  METHOD parse_jsontypebean.
-  ENDMETHOD.
-
-  METHOD parse_notificationevent.
-  ENDMETHOD.
-
-  METHOD parse_notificationscheme.
-  ENDMETHOD.
-
-  METHOD parse_notificationschemeevent.
-  ENDMETHOD.
-
-  METHOD parse_projectforscope.
-  ENDMETHOD.
-
-  METHOD parse_projectrole.
-  ENDMETHOD.
-
-  METHOD parse_projectrolegroup.
-  ENDMETHOD.
-
-  METHOD parse_projectroleuser.
-  ENDMETHOD.
-
-  METHOD parse_roleactor.
-  ENDMETHOD.
-
-  METHOD parse_scope.
-  ENDMETHOD.
-
-  METHOD parse_updatedprojectcategory.
-  ENDMETHOD.
-
-  METHOD parse_userdetails.
-  ENDMETHOD.
-
-  METHOD parse_pagebeannotificationsche.
-  ENDMETHOD.
-
-  METHOD parse_projectissuesecurityleve.
-  ENDMETHOD.
-
-  METHOD parse_securitylevel.
-  ENDMETHOD.
-
   METHOD parse_pagebeanstring.
-  ENDMETHOD.
-
-  METHOD parse_groupdetails.
-  ENDMETHOD.
-
-  METHOD parse_pagebeangroupdetails.
-  ENDMETHOD.
-
-  METHOD parse_locale.
-  ENDMETHOD.
-
-  METHOD parse_failedwebhook.
-  ENDMETHOD.
-
-  METHOD parse_failedwebhooks.
-  ENDMETHOD.
-
-  METHOD parse_errorcollection.
-  ENDMETHOD.
-
-  METHOD parse_webhookdetails.
-  ENDMETHOD.
-
-  METHOD parse_webhookregistrationdetai.
-  ENDMETHOD.
-
-  METHOD parse_containerforregisteredwe.
-  ENDMETHOD.
-
-  METHOD parse_registeredwebhook.
-  ENDMETHOD.
-
-  METHOD parse_pagebeanwebhook.
-  ENDMETHOD.
-
-  METHOD parse_webhook.
-  ENDMETHOD.
-
-  METHOD parse_containerforwebhookids.
-  ENDMETHOD.
-
-  METHOD parse_webhooksexpirationdate.
-  ENDMETHOD.
-
-  METHOD parse_bulkissuepropertyupdater.
-  ENDMETHOD.
-
-  METHOD parse_issuefilterforbulkproper.
-  ENDMETHOD.
-
-  METHOD parse_issuefilterforbulkprop01.
-  ENDMETHOD.
-
-  METHOD parse_issueentityproperties.
-  ENDMETHOD.
-
-  METHOD parse_jsonnode.
-  ENDMETHOD.
-
-  METHOD parse_applicationrole.
-  ENDMETHOD.
-
-  METHOD parse_component.
-  ENDMETHOD.
-
-  METHOD parse_dashboard.
-  ENDMETHOD.
-
-  METHOD parse_hierarchy.
-  ENDMETHOD.
-
-  METHOD parse_hierarchylevel.
-  ENDMETHOD.
-
-  METHOD parse_issuetypedetails.
-  ENDMETHOD.
-
-  METHOD parse_listwrappercallbackappli.
-  ENDMETHOD.
-
-  METHOD parse_listwrappercallbackgroup.
-  ENDMETHOD.
-
-  METHOD parse_pageofdashboards.
-  ENDMETHOD.
-
-  METHOD parse_project.
-  ENDMETHOD.
-
-  METHOD parse_projectcategory.
-  ENDMETHOD.
-
-  METHOD parse_projectinsight.
-  ENDMETHOD.
-
-  METHOD parse_projectpermissions.
-  ENDMETHOD.
-
-  METHOD parse_sharepermission.
-  ENDMETHOD.
-
-  METHOD parse_simplelink.
-  ENDMETHOD.
-
-  METHOD parse_simplelistwrapperapplica.
-  ENDMETHOD.
-
-  METHOD parse_simplelistwrappergroupna.
-  ENDMETHOD.
-
-  METHOD parse_user.
-  ENDMETHOD.
-
-  METHOD parse_userbean.
-  ENDMETHOD.
-
-  METHOD parse_userbeanavatarurls.
-  ENDMETHOD.
-
-  METHOD parse_version.
-  ENDMETHOD.
-
-  METHOD parse_versionissuesstatus.
-  ENDMETHOD.
-
-  METHOD parse_pagebeandashboard.
-  ENDMETHOD.
-
-  METHOD parse_dashboarddetails.
-  ENDMETHOD.
-
-  METHOD parse_propertykey.
-  ENDMETHOD.
-
-  METHOD parse_propertykeys.
-  ENDMETHOD.
-
-  METHOD parse_entityproperty.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
   ENDMETHOD.
 
   METHOD parse_projectemailaddress.
+* sdfsdf object
+* emailaddress, string
   ENDMETHOD.
 
   METHOD parse_projecttype.
-  ENDMETHOD.
-
-  METHOD parse_pagebeanuser.
-  ENDMETHOD.
-
-  METHOD parse_usermigrationbean.
-  ENDMETHOD.
-
-  METHOD parse_unrestricteduseremail.
+* sdfsdf object
+* key, string
+* formattedkey, string
+* descriptioni18nkey, string
+* icon, string
+* color, string
   ENDMETHOD.
 
   METHOD parse_taskprogressbeanobject.
-  ENDMETHOD.
-
-  METHOD parse_idbean.
-  ENDMETHOD.
-
-  METHOD parse_permissiongrant.
-  ENDMETHOD.
-
-  METHOD parse_permissionholder.
-  ENDMETHOD.
-
-  METHOD parse_permissionscheme.
-  ENDMETHOD.
-
-  METHOD parse_permissions.
-  ENDMETHOD.
-
-  METHOD parse_userpermission.
-  ENDMETHOD.
-
-  METHOD parse_bulkpermissionsrequestbe.
-  ENDMETHOD.
-
-  METHOD parse_bulkprojectpermissions.
-  ENDMETHOD.
-
-  METHOD parse_bulkpermissiongrants.
-  ENDMETHOD.
-
-  METHOD parse_bulkprojectpermissiongra.
-  ENDMETHOD.
-
-  METHOD parse_permissionskeysbean.
-  ENDMETHOD.
-
-  METHOD parse_permittedprojects.
-  ENDMETHOD.
-
-  METHOD parse_projectidentifierbean.
-  ENDMETHOD.
-
-  METHOD parse_deprecatedworkflow.
-  ENDMETHOD.
-
-  METHOD parse_workflowtransitionproper.
-  ENDMETHOD.
-
-  METHOD parse_columnitem.
-  ENDMETHOD.
-
-  METHOD parse_configuration.
-  ENDMETHOD.
-
-  METHOD parse_timetrackingconfiguratio.
-  ENDMETHOD.
-
-  METHOD parse_applicationproperty.
-  ENDMETHOD.
-
-  METHOD parse_simpleapplicationpropert.
-  ENDMETHOD.
-
-  METHOD parse_permissionschemes.
-  ENDMETHOD.
-
-  METHOD parse_permissiongrants.
-  ENDMETHOD.
-
-  METHOD parse_associateditembean.
-  ENDMETHOD.
-
-  METHOD parse_auditrecordbean.
-  ENDMETHOD.
-
-  METHOD parse_auditrecords.
-  ENDMETHOD.
-
-  METHOD parse_changedvaluebean.
-  ENDMETHOD.
-
-  METHOD parse_pagebeanworkflowscheme.
-  ENDMETHOD.
-
-  METHOD parse_workflowscheme.
-  ENDMETHOD.
-
-  METHOD parse_issuetypesworkflowmappin.
-  ENDMETHOD.
-
-  METHOD parse_issuetypeworkflowmapping.
-  ENDMETHOD.
-
-  METHOD parse_defaultworkflow.
-  ENDMETHOD.
-
-  METHOD parse_containerofworkflowschem.
-  ENDMETHOD.
-
-  METHOD parse_workflowschemeassociatio.
-  ENDMETHOD.
-
-  METHOD parse_workflowschemeprojectass.
-  ENDMETHOD.
-
-  METHOD parse_timetrackingprovider.
-  ENDMETHOD.
-
-  METHOD parse_pagebeanworkflow.
-  ENDMETHOD.
-
-  METHOD parse_publishedworkflowid.
-  ENDMETHOD.
-
-  METHOD parse_screenid.
-  ENDMETHOD.
-
-  METHOD parse_transition.
-  ENDMETHOD.
-
-  METHOD parse_workflow.
-  ENDMETHOD.
-
-  METHOD parse_workflowrules.
-  ENDMETHOD.
-
-  METHOD parse_workflowstatus.
-  ENDMETHOD.
-
-  METHOD parse_workflowstatusproperties.
-  ENDMETHOD.
-
-  METHOD parse_workflowtransitionrule.
-  ENDMETHOD.
-
-  METHOD parse_connectworkflowtransitio.
-  ENDMETHOD.
-
-  METHOD parse_pagebeanworkflowtransiti.
-  ENDMETHOD.
-
-  METHOD parse_ruleconfiguration.
-  ENDMETHOD.
-
-  METHOD parse_workflowid.
-  ENDMETHOD.
-
-  METHOD parse_workflowtransition.
-  ENDMETHOD.
-
-  METHOD parse_workflowtransitionrules.
-  ENDMETHOD.
-
-  METHOD parse_workflowtransitionrulesu.
-  ENDMETHOD.
-
-  METHOD parse_workflowtransitionrule01.
-  ENDMETHOD.
-
-  METHOD parse_workflowtransitionrule02.
-  ENDMETHOD.
-
-  METHOD parse_issuetypeinfo.
-  ENDMETHOD.
-
-  METHOD parse_projectissuetypehierarch.
-  ENDMETHOD.
-
-  METHOD parse_projectissuetypeshierarc.
-  ENDMETHOD.
-
-  METHOD parse_pagebeanuserkey.
-  ENDMETHOD.
-
-  METHOD parse_userkey.
-  ENDMETHOD.
-
-  METHOD parse_changedetails.
-  ENDMETHOD.
-
-  METHOD parse_changelog.
-  ENDMETHOD.
-
-  METHOD parse_fieldmetadata.
-  ENDMETHOD.
-
-  METHOD parse_historymetadata.
-  ENDMETHOD.
-
-  METHOD parse_historymetadataparticipa.
-  ENDMETHOD.
-
-  METHOD parse_includedfields.
-  ENDMETHOD.
-
-  METHOD parse_issuebean.
-  ENDMETHOD.
-
-  METHOD parse_issuetransition.
-  ENDMETHOD.
-
-  METHOD parse_issueupdatemetadata.
-  ENDMETHOD.
-
-  METHOD parse_linkgroup.
-  ENDMETHOD.
-
-  METHOD parse_operations.
-  ENDMETHOD.
-
-  METHOD parse_pageofchangelogs.
-  ENDMETHOD.
-
-  METHOD parse_searchresults.
-  ENDMETHOD.
-
-  METHOD parse_statuscategory.
-  ENDMETHOD.
-
-  METHOD parse_statusdetails.
-  ENDMETHOD.
-
-  METHOD parse_searchrequestbean.
-  ENDMETHOD.
-
-  METHOD parse_fieldreferencedata.
-  ENDMETHOD.
-
-  METHOD parse_functionreferencedata.
-  ENDMETHOD.
-
-  METHOD parse_jqlreferencedata.
-  ENDMETHOD.
-
-  METHOD parse_autocompletesuggestion.
-  ENDMETHOD.
-
-  METHOD parse_autocompletesuggestions.
-  ENDMETHOD.
-
-  METHOD parse_jqlpersonaldatamigration.
-  ENDMETHOD.
-
-  METHOD parse_convertedjqlqueries.
-  ENDMETHOD.
-
-  METHOD parse_jqlquerywithunknownusers.
-  ENDMETHOD.
-
-  METHOD parse_filter.
-  ENDMETHOD.
-
-  METHOD parse_filtersubscription.
-  ENDMETHOD.
-
-  METHOD parse_filtersubscriptionslist.
-  ENDMETHOD.
-
-  METHOD parse_userlist.
-  ENDMETHOD.
-
-  METHOD parse_filterdetails.
-  ENDMETHOD.
-
-  METHOD parse_pagebeanfilterdetails.
-  ENDMETHOD.
-
-  METHOD parse_defaultsharescope.
-  ENDMETHOD.
-
-  METHOD parse_sharepermissioninputbean.
+* sdfsdf object
+* self, string
+* id, string
+* description, string
+* status, string
+* message, string
+* result, 
+* submittedby, integer
+* progress, integer
+* elapsedruntime, integer
+* submitted, integer
+* started, integer
+* finished, integer
+* lastupdate, integer
+  ENDMETHOD.
+
+  METHOD parse_healthcheckresult.
+* sdfsdf object
+* name, string
+* description, string
+* passed, boolean
+  ENDMETHOD.
+
+  METHOD parse_serverinformation.
+* sdfsdf object
+* baseurl, string
+* version, string
+* versionnumbers, array
+* deploymenttype, string
+* buildnumber, integer
+* builddate, string
+* servertime, string
+* scminfo, string
+* servertitle, string
+* healthchecks, array
+  ENDMETHOD.
+
+  METHOD parse_issuesandjqlqueries.
+* sdfsdf object
+* jqls, array
+* issueids, array
+  ENDMETHOD.
+
+  METHOD parse_issuematches.
+* sdfsdf object
+* matches, array
+  ENDMETHOD.
+
+  METHOD parse_issuematchesforjql.
+* sdfsdf object
+* matchedissues, array
+* errors, array
+  ENDMETHOD.
+
+  METHOD parse_propertykey.
+* sdfsdf object
+* self, string
+* key, string
+  ENDMETHOD.
+
+  METHOD parse_propertykeys.
+* sdfsdf object
+* keys, array
+  ENDMETHOD.
+
+  METHOD parse_entityproperty.
+* sdfsdf object
+* key, string
+* value, 
+  ENDMETHOD.
+
+  METHOD parse_simplelink.
+* sdfsdf object
+* id, string
+* styleclass, string
+* iconclass, string
+* label, string
+* title, string
+* href, string
+* weight, integer
+  ENDMETHOD.
+
+  METHOD parse_version.
+* sdfsdf object
+* expand, string
+* self, string
+* id, string
+* description, string
+* name, string
+* archived, boolean
+* released, boolean
+* startdate, string
+* releasedate, string
+* overdue, boolean
+* userstartdate, string
+* userreleasedate, string
+* project, string
+* projectid, integer
+* moveunfixedissuesto, string
+* operations, array
+* issuesstatusforfixversion, 
+  ENDMETHOD.
+
+  METHOD parse_versionissuesstatus.
+* sdfsdf object
+* unmapped, integer
+* todo, integer
+* inprogress, integer
+* done, integer
   ENDMETHOD.
 
   METHOD parse_customfieldreplacement.
+* sdfsdf object
+* customfieldid, integer
+* moveto, integer
   ENDMETHOD.
 
   METHOD parse_deleteandreplaceversionb.
+* sdfsdf object
+* movefixissuesto, integer
+* moveaffectedissuesto, integer
+* customfieldreplacementlist, array
   ENDMETHOD.
 
   METHOD parse_versionissuecounts.
+* sdfsdf object
+* self, string
+* issuesfixedcount, integer
+* issuesaffectedcount, integer
+* issuecountwithcustomfieldsshow, integer
+* customfieldusage, array
   ENDMETHOD.
 
   METHOD parse_versionusageincustomfiel.
+* sdfsdf object
+* fieldname, string
+* customfieldid, integer
+* issuecountwithversionincustomf, integer
   ENDMETHOD.
 
   METHOD parse_versionunresolvedissuesc.
+* sdfsdf object
+* self, string
+* issuesunresolvedcount, integer
+* issuescount, integer
   ENDMETHOD.
 
   METHOD parse_versionmovebean.
+* sdfsdf object
+* after, string
+* position, string
+  ENDMETHOD.
+
+  METHOD parse_applicationrole.
+* sdfsdf object
+* key, string
+* groups, array
+* name, string
+* defaultgroups, array
+* selectedbydefault, boolean
+* defined, boolean
+* numberofseats, integer
+* remainingseats, integer
+* usercount, integer
+* usercountdescription, string
+* hasunlimitedseats, boolean
+* platform, boolean
+  ENDMETHOD.
+
+  METHOD parse_avatarurlsbean.
+* sdfsdf object
+* 16x16, string
+* 24x24, string
+* 32x32, string
+* 48x48, string
+  ENDMETHOD.
+
+  METHOD parse_groupname.
+* sdfsdf object
+* name, string
+* self, string
+  ENDMETHOD.
+
+  METHOD parse_listwrappercallbackappli.
+* sdfsdf object
+  ENDMETHOD.
+
+  METHOD parse_listwrappercallbackgroup.
+* sdfsdf object
+  ENDMETHOD.
+
+  METHOD parse_simplelistwrapperapplica.
+* sdfsdf object
+* size, integer
+* items, array
+* pagingcallback, 
+* callback, 
+* max_results, integer
+  ENDMETHOD.
+
+  METHOD parse_simplelistwrappergroupna.
+* sdfsdf object
+* size, integer
+* items, array
+* pagingcallback, 
+* callback, 
+* max_results, integer
+  ENDMETHOD.
+
+  METHOD parse_user.
+* sdfsdf object
+* self, string
+* key, string
+* accountid, string
+* accounttype, string
+* name, string
+* emailaddress, string
+* avatarurls, 
+* displayname, string
+* active, boolean
+* timezone, string
+* locale, string
+* groups, 
+* applicationroles, 
+* expand, string
   ENDMETHOD.
 
   METHOD parse_foundusers.
+* sdfsdf object
+* users, array
+* total, integer
+* header, string
   ENDMETHOD.
 
   METHOD parse_userpickeruser.
+* sdfsdf object
+* accountid, string
+* name, string
+* key, string
+* html, string
+* displayname, string
+* avatarurl, string
   ENDMETHOD.
 
   METHOD parse_userwritebean.
+* sdfsdf object
+* self, string
+* key, string
+* name, string
+* password, string
+* emailaddress, string
+* displayname, string
+* notification, string
+* applicationkeys, array
+  ENDMETHOD.
+
+  METHOD parse_columnitem.
+* sdfsdf object
+* label, string
+* value, string
   ENDMETHOD.
 
   METHOD parse_avatar.
+* sdfsdf object
+* id, string
+* owner, string
+* issystemavatar, boolean
+* isselected, boolean
+* isdeletable, boolean
+* filename, string
+* urls, object
   ENDMETHOD.
 
   METHOD parse_avatars.
+* sdfsdf object
+* system, array
+* custom, array
+  ENDMETHOD.
+
+  METHOD parse_statuscategory.
+* sdfsdf object
+* self, string
+* id, integer
+* key, string
+* colorname, string
+* name, string
+  ENDMETHOD.
+
+  METHOD parse_statusdetails.
+* sdfsdf object
+* self, string
+* description, string
+* iconurl, string
+* name, string
+* id, string
+* statuscategory, 
   ENDMETHOD.
 
   METHOD parse_screenabletab.
+* sdfsdf object
+* id, integer
+* name, string
   ENDMETHOD.
 
   METHOD parse_pagebeanscreen.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_projectforscope.
+* sdfsdf object
+* self, string
+* id, string
+* key, string
+* name, string
+* projecttypekey, string
+* simplified, boolean
+* avatarurls, 
+* projectcategory, 
+  ENDMETHOD.
+
+  METHOD parse_scope.
+* sdfsdf object
+* type, string
+* project, 
   ENDMETHOD.
 
   METHOD parse_screen.
+* sdfsdf object
+* id, integer
+* name, string
+* description, string
+* scope, 
+  ENDMETHOD.
+
+  METHOD parse_updatedprojectcategory.
+* sdfsdf object
+* self, string
+* id, string
+* description, string
+* name, string
   ENDMETHOD.
 
   METHOD parse_screenablefield.
+* sdfsdf object
+* id, string
+* name, string
   ENDMETHOD.
 
   METHOD parse_movefieldbean.
+* sdfsdf object
+* after, string
+* position, string
   ENDMETHOD.
 
   METHOD parse_addfieldbean.
+* sdfsdf object
+* fieldid, string
   ENDMETHOD.
 
   METHOD parse_screendetails.
+* sdfsdf object
+* name, string
+* description, string
   ENDMETHOD.
 
   METHOD parse_updatescreendetails.
+* sdfsdf object
+* name, string
+* description, string
   ENDMETHOD.
 
   METHOD parse_resolution.
+* sdfsdf object
+* self, string
+* id, string
+* description, string
+* name, string
+  ENDMETHOD.
+
+  METHOD parse_errorcollection.
+* sdfsdf object
+* errormessages, array
+* errors, object
+* status, integer
+  ENDMETHOD.
+
+  METHOD parse_component.
+* sdfsdf object
+* self, string
+* id, string
+* name, string
+* description, string
+* lead, 
+* leadusername, string
+* leadaccountid, string
+* assigneetype, string
+* assignee, 
+* realassigneetype, string
+* realassignee, 
+* isassigneetypevalid, boolean
+* project, string
+* projectid, integer
+  ENDMETHOD.
+
+  METHOD parse_hierarchy.
+* sdfsdf object
+* level, array
+  ENDMETHOD.
+
+  METHOD parse_hierarchylevel.
+* sdfsdf object
+* id, integer
+* name, string
+* abovelevelid, integer
+* belowlevelid, integer
+* projectconfigurationid, integer
+* level, integer
+* issuetypeids, array
+* externaluuid, string
+* globalhierarchylevel, string
+  ENDMETHOD.
+
+  METHOD parse_issuetypedetails.
+* sdfsdf object
+* self, string
+* id, string
+* description, string
+* iconurl, string
+* name, string
+* subtask, boolean
+* avatarid, integer
+* entityid, string
+* hierarchylevel, integer
+* scope, 
+  ENDMETHOD.
+
+  METHOD parse_project.
+* sdfsdf object
+* expand, string
+* self, string
+* id, string
+* key, string
+* description, string
+* lead, 
+* components, array
+* issuetypes, array
+* url, string
+* email, string
+* assigneetype, string
+* versions, array
+* name, string
+* roles, object
+* avatarurls, 
+* projectcategory, 
+* projecttypekey, string
+* simplified, boolean
+* style, string
+* favourite, boolean
+* isprivate, boolean
+* issuetypehierarchy, 
+* permissions, 
+* properties, object
+* uuid, string
+* insight, 
+* deleted, boolean
+* retentiontilldate, string
+* deleteddate, string
+* deletedby, 
+* archived, boolean
+* archiveddate, string
+* archivedby, 
+  ENDMETHOD.
+
+  METHOD parse_projectcategory.
+* sdfsdf object
+* self, string
+* id, string
+* name, string
+* description, string
+  ENDMETHOD.
+
+  METHOD parse_projectinsight.
+* sdfsdf object
+* totalissuecount, integer
+* lastissueupdatetime, string
+  ENDMETHOD.
+
+  METHOD parse_projectpermissions.
+* sdfsdf object
+* canedit, boolean
   ENDMETHOD.
 
   METHOD parse_projectinputbean.
+* sdfsdf object
+* key, string
+* name, string
+* projecttypekey, string
+* projecttemplatekey, string
+* description, string
+* lead, string
+* leadaccountid, string
+* url, string
+* assigneetype, string
+* avatarid, integer
+* issuesecurityscheme, integer
+* permissionscheme, integer
+* notificationscheme, integer
+* categoryid, integer
   ENDMETHOD.
 
   METHOD parse_projectidentifiers.
+* sdfsdf object
+* self, string
+* id, integer
+* key, string
   ENDMETHOD.
 
   METHOD parse_pagebeanversion.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
   ENDMETHOD.
 
   METHOD parse_componentwithissuecount.
+* sdfsdf object
+* issuecount, integer
+* realassigneetype, string
+* isassigneetypevalid, boolean
+* realassignee, 
+* assignee, 
+* lead, 
+* assigneetype, string
+* description, string
+* self, string
+* project, string
+* projectid, integer
+* name, string
+* id, string
   ENDMETHOD.
 
   METHOD parse_pagebeancomponentwithiss.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
   ENDMETHOD.
 
   METHOD parse_stringlist.
+* sdfsdf object
   ENDMETHOD.
 
   METHOD parse_pagebeanproject.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
   ENDMETHOD.
 
   METHOD parse_projectavatars.
+* sdfsdf object
+* system, array
+* custom, array
   ENDMETHOD.
 
   METHOD parse_issuetypewithstatus.
+* sdfsdf object
+* self, string
+* id, string
+* name, string
+* subtask, boolean
+* statuses, array
+  ENDMETHOD.
+
+  METHOD parse_securitylevel.
+* sdfsdf object
+* self, string
+* id, string
+* description, string
+* name, string
   ENDMETHOD.
 
   METHOD parse_securityscheme.
+* sdfsdf object
+* self, string
+* id, integer
+* name, string
+* description, string
+* defaultsecuritylevelid, integer
+* levels, array
   ENDMETHOD.
 
   METHOD parse_priority.
+* sdfsdf object
+* self, string
+* statuscolor, string
+* description, string
+* iconurl, string
+* name, string
+* id, string
   ENDMETHOD.
 
   METHOD parse_comment.
+* sdfsdf object
+* self, string
+* id, string
+* author, 
+* body, 
+* renderedbody, string
+* updateauthor, 
+* created, string
+* updated, string
+* visibility, 
+* jsdpublic, boolean
+* properties, array
   ENDMETHOD.
 
   METHOD parse_fields.
+* sdfsdf object
+* summary, string
+* status, 
+* priority, 
+* assignee, 
+* timetracking, 
+* issuetype, 
+* issuetype01, 
   ENDMETHOD.
 
   METHOD parse_issuelinktype.
+* sdfsdf object
+* id, string
+* name, string
+* inward, string
+* outward, string
+* self, string
   ENDMETHOD.
 
   METHOD parse_linkissuerequestjsonbean.
+* sdfsdf object
+* type, 
+* inwardissue, 
+* outwardissue, 
+* comment, 
   ENDMETHOD.
 
   METHOD parse_linkedissue.
+* sdfsdf object
+* id, string
+* key, string
+* self, string
+* fields, 
   ENDMETHOD.
 
   METHOD parse_richtext.
+* sdfsdf object
+* valueset, boolean
+* finalised, boolean
+* emptyadf, boolean
   ENDMETHOD.
 
   METHOD parse_timetrackingdetails.
+* sdfsdf object
+* originalestimate, string
+* remainingestimate, string
+* timespent, string
+* originalestimateseconds, integer
+* remainingestimateseconds, integer
+* timespentseconds, integer
+  ENDMETHOD.
+
+  METHOD parse_userdetails.
+* sdfsdf object
+* self, string
+* name, string
+* key, string
+* accountid, string
+* emailaddress, string
+* avatarurls, 
+* displayname, string
+* active, boolean
+* timezone, string
+* accounttype, string
   ENDMETHOD.
 
   METHOD parse_visibility.
+* sdfsdf object
+* type, string
+* value, string
   ENDMETHOD.
 
   METHOD parse_issuelink.
+* sdfsdf object
+* id, string
+* self, string
+* type, 
+* inwardissue, 
+* outwardissue, 
   ENDMETHOD.
 
   METHOD parse_pageofworklogs.
+* sdfsdf object
+* startat, integer
+* maxresults, integer
+* total, integer
+* worklogs, array
   ENDMETHOD.
 
   METHOD parse_worklog.
+* sdfsdf object
+* self, string
+* author, 
+* updateauthor, 
+* comment, 
+* created, string
+* updated, string
+* visibility, 
+* started, string
+* timespent, string
+* timespentseconds, integer
+* id, string
+* issueid, string
+* properties, array
   ENDMETHOD.
 
   METHOD parse_issuetypecreatebean.
+* sdfsdf object
+* name, string
+* description, string
+* type, string
   ENDMETHOD.
 
   METHOD parse_issuetypeupdatebean.
+* sdfsdf object
+* name, string
+* description, string
+* avatarid, integer
   ENDMETHOD.
 
   METHOD parse_securityschemes.
+* sdfsdf object
+* issuesecurityschemes, array
   ENDMETHOD.
 
   METHOD parse_issuesecuritylevelmember.
+* sdfsdf object
+* id, integer
+* issuesecuritylevelid, integer
+* holder, 
   ENDMETHOD.
 
   METHOD parse_pagebeanissuesecuritylev.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_permissionholder.
+* sdfsdf object
+* type, string
+* parameter, string
+* expand, string
+  ENDMETHOD.
+
+  METHOD parse_fieldmetadata.
+* sdfsdf object
+* required, boolean
+* schema, 
+* name, string
+* key, string
+* autocompleteurl, string
+* hasdefaultvalue, boolean
+* operations, array
+* allowedvalues, array
+* defaultvalue, 
+  ENDMETHOD.
+
+  METHOD parse_issuetransition.
+* sdfsdf object
+* id, string
+* name, string
+* to, 
+* hasscreen, boolean
+* isglobal, boolean
+* isinitial, boolean
+* isavailable, boolean
+* isconditional, boolean
+* fields, object
+* expand, string
+* looped, boolean
+  ENDMETHOD.
+
+  METHOD parse_jsontypebean.
+* sdfsdf object
+* type, string
+* items, string
+* system, string
+* custom, string
+* customid, integer
+* configuration, object
   ENDMETHOD.
 
   METHOD parse_transitions.
+* sdfsdf object
+* expand, string
+* transitions, array
   ENDMETHOD.
 
   METHOD parse_issuepickersuggestions.
+* sdfsdf object
+* sections, array
   ENDMETHOD.
 
   METHOD parse_issuepickersuggestionsis.
+* sdfsdf object
+* label, string
+* sub, string
+* id, string
+* msg, string
+* issues, array
   ENDMETHOD.
 
   METHOD parse_suggestedissue.
+* sdfsdf object
+* id, integer
+* key, string
+* keyhtml, string
+* img, string
+* summary, string
+* summarytext, string
   ENDMETHOD.
 
   METHOD parse_fieldupdateoperation.
+* sdfsdf object
+* add, 
+* set, 
+* remove, 
+* edit, 
+  ENDMETHOD.
+
+  METHOD parse_historymetadata.
+* sdfsdf object
+* type, string
+* description, string
+* descriptionkey, string
+* activitydescription, string
+* activitydescriptionkey, string
+* emaildescription, string
+* emaildescriptionkey, string
+* actor, 
+* generator, 
+* cause, 
+* extradata, object
+  ENDMETHOD.
+
+  METHOD parse_historymetadataparticipa.
+* sdfsdf object
+* id, string
+* displayname, string
+* displaynamekey, string
+* type, string
+* avatarurl, string
+* url, string
   ENDMETHOD.
 
   METHOD parse_issueupdatedetails.
+* sdfsdf object
+* transition, 
+* fields, object
+* update, object
+* historymetadata, 
+* properties, array
   ENDMETHOD.
 
   METHOD parse_votes.
+* sdfsdf object
+* self, string
+* votes, integer
+* hasvoted, boolean
+* voters, array
+  ENDMETHOD.
+
+  METHOD parse_changedetails.
+* sdfsdf object
+* field, string
+* fieldtype, string
+* fieldid, string
+* from, string
+* fromstring, string
+* to, string
+* tostring, string
+  ENDMETHOD.
+
+  METHOD parse_changelog.
+* sdfsdf object
+* id, string
+* author, 
+* created, string
+* items, array
+* historymetadata, 
+  ENDMETHOD.
+
+  METHOD parse_includedfields.
+* sdfsdf object
+* included, array
+* actuallyincluded, array
+* excluded, array
+  ENDMETHOD.
+
+  METHOD parse_issuebean.
+* sdfsdf object
+* expand, string
+* id, string
+* self, string
+* key, string
+* renderedfields, object
+* properties, object
+* names, object
+* schema, object
+* transitions, array
+* operations, 
+* editmeta, 
+* changelog, 
+* versionedrepresentations, object
+* fieldstoinclude, 
+* fields, object
+  ENDMETHOD.
+
+  METHOD parse_issueupdatemetadata.
+* sdfsdf object
+* fields, object
+  ENDMETHOD.
+
+  METHOD parse_linkgroup.
+* sdfsdf object
+* id, string
+* styleclass, string
+* header, 
+* weight, integer
+* links, array
+* groups, array
+  ENDMETHOD.
+
+  METHOD parse_operations.
+* sdfsdf object
+* linkgroups, array
+  ENDMETHOD.
+
+  METHOD parse_pageofchangelogs.
+* sdfsdf object
+* startat, integer
+* maxresults, integer
+* total, integer
+* histories, array
   ENDMETHOD.
 
   METHOD parse_watchers.
+* sdfsdf object
+* self, string
+* iswatching, boolean
+* watchcount, integer
+* watchers, array
   ENDMETHOD.
 
   METHOD parse_createdissue.
+* sdfsdf object
+* id, string
+* key, string
+* self, string
+* transition, 
   ENDMETHOD.
 
   METHOD parse_nestedresponse.
+* sdfsdf object
+* status, integer
+* errorcollection, 
   ENDMETHOD.
 
   METHOD parse_issuesupdatebean.
+* sdfsdf object
+* issueupdates, array
   ENDMETHOD.
 
   METHOD parse_bulkoperationerrorresult.
+* sdfsdf object
+* status, integer
+* elementerrors, 
+* failedelementnumber, integer
   ENDMETHOD.
 
   METHOD parse_createdissues.
+* sdfsdf object
+* issues, array
+* errors, array
   ENDMETHOD.
 
   METHOD parse_issuecreatemetadata.
+* sdfsdf object
+* expand, string
+* projects, array
   ENDMETHOD.
 
   METHOD parse_issuetypeissuecreatemeta.
+* sdfsdf object
+* self, string
+* id, string
+* description, string
+* iconurl, string
+* name, string
+* subtask, boolean
+* avatarid, integer
+* entityid, string
+* hierarchylevel, integer
+* scope, 
+* expand, string
+* fields, object
   ENDMETHOD.
 
   METHOD parse_projectissuecreatemetada.
+* sdfsdf object
+* expand, string
+* self, string
+* id, string
+* key, string
+* name, string
+* avatarurls, 
+* issuetypes, array
   ENDMETHOD.
 
   METHOD parse_application.
+* sdfsdf object
+* type, string
+* name, string
   ENDMETHOD.
 
   METHOD parse_iconbean.
+* sdfsdf object
+* url16x16, string
+* title, string
+* link, string
   ENDMETHOD.
 
   METHOD parse_remoteissuelink.
+* sdfsdf object
+* id, integer
+* self, string
+* globalid, string
+* application, 
+* relationship, string
+* object, 
   ENDMETHOD.
 
   METHOD parse_remoteobject.
+* sdfsdf object
+* url, string
+* title, string
+* summary, string
+* icon, 
+* status, 
   ENDMETHOD.
 
   METHOD parse_status.
+* sdfsdf object
+* resolved, boolean
+* icon, 
   ENDMETHOD.
 
   METHOD parse_icon.
+* sdfsdf object
+* url16x16, string
+* title, string
+* link, string
   ENDMETHOD.
 
   METHOD parse_remoteissuelinkrequest.
+* sdfsdf object
+* globalid, string
+* application, 
+* relationship, string
+* object, 
   ENDMETHOD.
 
   METHOD parse_remoteissuelinkidentifie.
+* sdfsdf object
+* id, integer
+* self, string
   ENDMETHOD.
 
   METHOD parse_notification.
+* sdfsdf object
+* subject, string
+* textbody, string
+* htmlbody, string
+* to, 
+* restrict, 
   ENDMETHOD.
 
   METHOD parse_notificationrecipients.
+* sdfsdf object
+* reporter, boolean
+* assignee, boolean
+* watchers, boolean
+* voters, boolean
+* users, array
+* groups, array
   ENDMETHOD.
 
   METHOD parse_notificationrecipientsre.
+* sdfsdf object
+* groups, array
+* permissions, array
   ENDMETHOD.
 
   METHOD parse_restrictedpermission.
+* sdfsdf object
+* id, string
+* key, string
   ENDMETHOD.
 
   METHOD parse_issuelinktypes.
+* sdfsdf object
+* issuelinktypes, array
   ENDMETHOD.
 
   METHOD parse_pageofcomments.
+* sdfsdf object
+* startat, integer
+* maxresults, integer
+* total, integer
+* comments, array
   ENDMETHOD.
 
   METHOD parse_paginatedresponsecomment.
+* sdfsdf object
+* total, integer
+* results, array
+* maxresults, integer
+* startat, integer
   ENDMETHOD.
 
   METHOD parse_issuecommentlistrequestb.
+* sdfsdf object
+* ids, array
   ENDMETHOD.
 
   METHOD parse_pagebeancomment.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
   ENDMETHOD.
 
   METHOD parse_pagebeanchangelog.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
   ENDMETHOD.
 
   METHOD parse_attachment.
+* sdfsdf object
+* self, string
+* id, string
+* filename, string
+* author, 
+* created, string
+* size, integer
+* mimetype, string
+* content, string
+* thumbnail, string
   ENDMETHOD.
 
   METHOD parse_group.
+* sdfsdf object
+* name, string
+* self, string
+* users, 
+* expand, string
   ENDMETHOD.
 
   METHOD parse_pagedlistuserdetailsappl.
+* sdfsdf object
+* size, integer
+* items, array
+* max_results, integer
+* start_index, integer
+* end_index, integer
   ENDMETHOD.
 
   METHOD parse_pagebeanuserdetails.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
   ENDMETHOD.
 
   METHOD parse_addgroupbean.
+* sdfsdf object
+* name, string
   ENDMETHOD.
 
   METHOD parse_updateusertogroupbean.
+* sdfsdf object
+* name, string
+* accountid, string
   ENDMETHOD.
 
   METHOD parse_foundgroup.
+* sdfsdf object
+* name, string
+* html, string
+* labels, array
+* groupid, string
   ENDMETHOD.
 
   METHOD parse_foundgroups.
+* sdfsdf object
+* header, string
+* total, integer
+* groups, array
   ENDMETHOD.
 
   METHOD parse_grouplabel.
+* sdfsdf object
+* text, string
+* title, string
+* type, string
   ENDMETHOD.
 
   METHOD parse_foundusersandgroups.
+* sdfsdf object
+* users, 
+* groups, 
+  ENDMETHOD.
+
+  METHOD parse_fielddetails.
+* sdfsdf object
+* id, string
+* key, string
+* name, string
+* custom, boolean
+* orderable, boolean
+* navigable, boolean
+* searchable, boolean
+* clausenames, array
+* scope, 
+* schema, 
   ENDMETHOD.
 
   METHOD parse_customfielddefinitionjso.
+* sdfsdf object
+* name, string
+* description, string
+* type, string
+* searcherkey, string
   ENDMETHOD.
 
   METHOD parse_context.
+* sdfsdf object
+* id, integer
+* name, string
+* scope, 
   ENDMETHOD.
 
   METHOD parse_pagebeancontext.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
   ENDMETHOD.
 
   METHOD parse_customfieldcontextoption.
+* sdfsdf object
+* id, string
+* value, string
+* optionid, string
+* disabled, boolean
   ENDMETHOD.
 
   METHOD parse_pagebeancustomfieldconte.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
   ENDMETHOD.
 
   METHOD parse_bulkcustomfieldoptioncre.
+* sdfsdf object
+* options, array
   ENDMETHOD.
 
   METHOD parse_customfieldoptioncreate.
+* sdfsdf object
+* value, string
+* optionid, string
+* disabled, boolean
   ENDMETHOD.
 
   METHOD parse_customfieldcreatedcontex.
+* sdfsdf object
+* options, array
   ENDMETHOD.
 
   METHOD parse_orderofcustomfieldoption.
+* sdfsdf object
+* customfieldoptionids, array
+* after, string
+* position, string
   ENDMETHOD.
 
   METHOD parse_bulkcustomfieldoptionupd.
+* sdfsdf object
+* options, array
   ENDMETHOD.
 
   METHOD parse_customfieldoptionupdate.
+* sdfsdf object
+* id, string
+* value, string
+* disabled, boolean
   ENDMETHOD.
 
   METHOD parse_customfieldupdatedcontex.
+* sdfsdf object
+* options, array
   ENDMETHOD.
 
   METHOD parse_componentissuescount.
+* sdfsdf object
+* self, string
+* issuecount, integer
   ENDMETHOD.
 
   METHOD parse_bulkcreatecustomfieldopt.
+* sdfsdf object
+* options, array
   ENDMETHOD.
 
   METHOD parse_customfieldoptionvalue.
+* sdfsdf object
+* value, string
+* cascadingoptions, array
   ENDMETHOD.
 
   METHOD parse_renamedcascadingoption.
+* sdfsdf object
+* value, string
+* newvalue, string
   ENDMETHOD.
 
   METHOD parse_renamedoption.
+* sdfsdf object
+* value, string
+* newvalue, string
+* cascadingoptions, array
   ENDMETHOD.
 
   METHOD parse_updatecustomfieldoption.
+* sdfsdf object
+* options, array
   ENDMETHOD.
 
   METHOD parse_customfieldoptiondetails.
+* sdfsdf object
+* id, integer
+* value, string
+* cascadingoptions, array
   ENDMETHOD.
 
   METHOD parse_pagebeancustomfieldoptio.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
   ENDMETHOD.
 
   METHOD parse_systemavatars.
+* sdfsdf object
+* system, array
   ENDMETHOD.
 
-  METHOD parse_globalscopebean.
+  METHOD parse_projectrole.
+* sdfsdf object
+* self, string
+* name, string
+* id, integer
+* description, string
+* actors, array
+* scope, 
+* translatedname, string
+* currentuserrole, boolean
+* admin, boolean
+* roleconfigurable, boolean
+* default, boolean
   ENDMETHOD.
 
-  METHOD parse_issuefieldoption.
+  METHOD parse_projectrolegroup.
+* sdfsdf object
+* displayname, string
+* name, string
   ENDMETHOD.
 
-  METHOD parse_issuefieldoptionconfigur.
+  METHOD parse_projectroleuser.
+* sdfsdf object
+* accountid, string
   ENDMETHOD.
 
-  METHOD parse_issuefieldoptionscopebea.
-  ENDMETHOD.
-
-  METHOD parse_pagebeanissuefieldoption.
-  ENDMETHOD.
-
-  METHOD parse_projectscopebean.
-  ENDMETHOD.
-
-  METHOD parse_issuefieldoptioncreatebe.
-  ENDMETHOD.
-
-  METHOD parse_removeoptionfromissuesre.
-  ENDMETHOD.
-
-  METHOD parse_simpleerrorcollection.
-  ENDMETHOD.
-
-  METHOD parse_taskprogressbeanremoveop.
-  ENDMETHOD.
-
-  METHOD parse_field.
-  ENDMETHOD.
-
-  METHOD parse_fieldlastused.
-  ENDMETHOD.
-
-  METHOD parse_pagebeanfield.
-  ENDMETHOD.
-
-  METHOD parse_fieldconfigurationscheme.
-  ENDMETHOD.
-
-  METHOD parse_pagebeanfieldconfigurati.
-  ENDMETHOD.
-
-  METHOD parse_fieldconfigurationissuet.
-  ENDMETHOD.
-
-  METHOD parse_pagebeanfieldconfigura01.
-  ENDMETHOD.
-
-  METHOD parse_fieldconfigurationsche01.
-  ENDMETHOD.
-
-  METHOD parse_pagebeanfieldconfigura02.
-  ENDMETHOD.
-
-  METHOD parse_fieldconfigurationsche02.
-  ENDMETHOD.
-
-  METHOD parse_fieldconfiguration.
-  ENDMETHOD.
-
-  METHOD parse_pagebeanfieldconfigura03.
-  ENDMETHOD.
-
-  METHOD parse_fieldconfigurationitem.
-  ENDMETHOD.
-
-  METHOD parse_pagebeanfieldconfigura04.
-  ENDMETHOD.
-
-  METHOD parse_pagebeanscreenscheme.
-  ENDMETHOD.
-
-  METHOD parse_screenscheme.
-  ENDMETHOD.
-
-  METHOD parse_screentypes.
-  ENDMETHOD.
-
-  METHOD parse_screenschemedetails.
-  ENDMETHOD.
-
-  METHOD parse_screenschemeid.
-  ENDMETHOD.
-
-  METHOD parse_updatescreenschemedetail.
-  ENDMETHOD.
-
-  METHOD parse_updatescreentypes.
+  METHOD parse_roleactor.
+* sdfsdf object
+* id, integer
+* displayname, string
+* type, string
+* name, string
+* avatarurl, string
+* actoruser, 
+* actorgroup, 
   ENDMETHOD.
 
   METHOD parse_createupdaterolerequestb.
+* sdfsdf object
+* name, string
+* description, string
   ENDMETHOD.
 
   METHOD parse_actorinputbean.
+* sdfsdf object
+* user, array
+* group, array
   ENDMETHOD.
 
   METHOD parse_projectroleactorsupdateb.
+* sdfsdf object
+* id, integer
+* categorisedactors, object
   ENDMETHOD.
 
   METHOD parse_actorsmap.
+* sdfsdf object
+* user, array
+* group, array
   ENDMETHOD.
 
   METHOD parse_projectroledetail.
+* sdfsdf object
+* self, string
+* name, string
+* id, integer
+* description, string
+* admin, boolean
+* scope, 
+* roleconfigurable, boolean
+* translatedname, string
+* default, boolean
+  ENDMETHOD.
+
+  METHOD parse_pagebeanscreenscheme.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_screenscheme.
+* sdfsdf object
+* id, integer
+* name, string
+* description, string
+* screens, 
+  ENDMETHOD.
+
+  METHOD parse_screentypes.
+* sdfsdf object
+* edit, integer
+* create, integer
+* view, integer
+* default, integer
+  ENDMETHOD.
+
+  METHOD parse_screenschemedetails.
+* sdfsdf object
+* name, string
+* description, string
+* screens, 
+  ENDMETHOD.
+
+  METHOD parse_screenschemeid.
+* sdfsdf object
+* id, integer
+  ENDMETHOD.
+
+  METHOD parse_updatescreenschemedetail.
+* sdfsdf object
+* name, string
+* description, string
+* screens, 
+  ENDMETHOD.
+
+  METHOD parse_updatescreentypes.
+* sdfsdf object
+* edit, string
+* create, string
+* view, string
+* default, string
   ENDMETHOD.
 
   METHOD parse_issuetypescreenschemeite.
+* sdfsdf object
+* issuetypescreenschemeid, string
+* issuetypeid, string
+* screenschemeid, string
   ENDMETHOD.
 
   METHOD parse_pagebeanissuetypescreens.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
   ENDMETHOD.
 
   METHOD parse_issuetypescreenscheme.
+* sdfsdf object
+* id, string
+* name, string
+* description, string
   ENDMETHOD.
 
   METHOD parse_issuetypescreenschemespr.
+* sdfsdf object
+* issuetypescreenscheme, 
+* projectids, array
   ENDMETHOD.
 
   METHOD parse_pagebeanissuetypescree01.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
   ENDMETHOD.
 
   METHOD parse_pagebeanissuetypescree02.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
   ENDMETHOD.
 
   METHOD parse_issuetypescreenschemepro.
+* sdfsdf object
+* issuetypescreenschemeid, string
+* projectid, string
   ENDMETHOD.
 
   METHOD parse_issuetypescreenschemedet.
+* sdfsdf object
+* name, string
+* description, string
+* issuetypemappings, array
   ENDMETHOD.
 
   METHOD parse_issuetypescreenschememap.
+* sdfsdf object
+* issuetypeid, string
+* screenschemeid, string
   ENDMETHOD.
 
   METHOD parse_issuetypescreenschemeid.
+* sdfsdf object
+* id, string
   ENDMETHOD.
 
   METHOD parse_issuetypescreenschemeupd.
+* sdfsdf object
+* name, string
+* description, string
   ENDMETHOD.
 
   METHOD parse_issuetypescreenschemem01.
+* sdfsdf object
+* issuetypemappings, array
   ENDMETHOD.
 
   METHOD parse_updatedefaultscreenschem.
+* sdfsdf object
+* screenschemeid, string
   ENDMETHOD.
 
   METHOD parse_issuetypeids.
-  ENDMETHOD.
-
-  METHOD parse_customfieldoption.
-  ENDMETHOD.
-
-  METHOD parse_customfieldcontextprojec.
-  ENDMETHOD.
-
-  METHOD parse_pagebeancustomfieldcon01.
-  ENDMETHOD.
-
-  METHOD parse_customfieldcontext.
-  ENDMETHOD.
-
-  METHOD parse_pagebeancustomfieldcon02.
-  ENDMETHOD.
-
-  METHOD parse_createcustomfieldcontext.
-  ENDMETHOD.
-
-  METHOD parse_projectids.
-  ENDMETHOD.
-
-  METHOD parse_customfieldcontextupdate.
-  ENDMETHOD.
-
-  METHOD parse_projectissuetypemapping.
-  ENDMETHOD.
-
-  METHOD parse_projectissuetypemappings.
-  ENDMETHOD.
-
-  METHOD parse_contextforprojectandissu.
-  ENDMETHOD.
-
-  METHOD parse_pagebeancontextforprojec.
-  ENDMETHOD.
-
-  METHOD parse_issuetypetocontextmappin.
-  ENDMETHOD.
-
-  METHOD parse_pagebeanissuetypetoconte.
+* sdfsdf object
+* issuetypeids, array
   ENDMETHOD.
 
   METHOD parse_attachmentmetadata.
+* sdfsdf object
+* id, integer
+* self, string
+* filename, string
+* author, 
+* created, string
+* size, integer
+* mimetype, string
+* properties, object
+* content, string
+* thumbnail, string
   ENDMETHOD.
 
   METHOD parse_attachmentsettings.
+* sdfsdf object
+* enabled, boolean
+* uploadlimit, integer
   ENDMETHOD.
 
   METHOD parse_attachmentarchiveentry.
+* sdfsdf object
+* mediatype, string
+* abbreviatedname, string
+* entryindex, integer
+* name, string
+* size, integer
   ENDMETHOD.
 
   METHOD parse_attachmentarchiveimpl.
+* sdfsdf object
+* entries, array
+* totalentrycount, integer
   ENDMETHOD.
 
   METHOD parse_attachmentarchive.
+* sdfsdf object
+* totalnumberofentriesavailable, integer
+* moreavailable, boolean
+* totalentrycount, integer
+* entries, array
   ENDMETHOD.
 
   METHOD parse_attachmentarchiveitemrea.
+* sdfsdf object
+* path, string
+* index, integer
+* size, string
+* mediatype, string
+* label, string
   ENDMETHOD.
 
   METHOD parse_attachmentarchivemetadat.
+* sdfsdf object
+* id, integer
+* name, string
+* entries, array
+* totalentrycount, integer
+* mediatype, string
   ENDMETHOD.
 
   METHOD parse_changedworklog.
+* sdfsdf object
+* worklogid, integer
+* updatedtime, integer
+* properties, array
   ENDMETHOD.
 
   METHOD parse_changedworklogs.
+* sdfsdf object
+* values, array
+* since, integer
+* until, integer
+* self, string
+* nextpage, string
+* lastpage, boolean
   ENDMETHOD.
 
   METHOD parse_worklogidsrequestbean.
+* sdfsdf object
+* ids, array
   ENDMETHOD.
 
   METHOD parse_issuetypescheme.
+* sdfsdf object
+* id, string
+* name, string
+* description, string
+* defaultissuetypeid, string
+* isdefault, boolean
   ENDMETHOD.
 
   METHOD parse_pagebeanissuetypescheme.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
   ENDMETHOD.
 
   METHOD parse_issuetypeschemeprojects.
+* sdfsdf object
+* issuetypescheme, 
+* projectids, array
   ENDMETHOD.
 
   METHOD parse_pagebeanissuetypeschemep.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
   ENDMETHOD.
 
   METHOD parse_issuetypeschememapping.
+* sdfsdf object
+* issuetypeschemeid, string
+* issuetypeid, string
   ENDMETHOD.
 
   METHOD parse_pagebeanissuetypeschemem.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
   ENDMETHOD.
 
   METHOD parse_issuetypeschemeprojectas.
+* sdfsdf object
+* issuetypeschemeid, string
+* projectid, string
   ENDMETHOD.
 
   METHOD parse_issuetypeschemedetails.
+* sdfsdf object
+* name, string
+* description, string
+* defaultissuetypeid, string
+* issuetypeids, array
   ENDMETHOD.
 
   METHOD parse_issuetypeschemeid.
+* sdfsdf object
+* issuetypeschemeid, string
   ENDMETHOD.
 
   METHOD parse_issuetypeids01.
+* sdfsdf object
+* issuetypeids, array
   ENDMETHOD.
 
   METHOD parse_issuetypeschemeupdatedet.
+* sdfsdf object
+* name, string
+* description, string
+* defaultissuetypeid, string
   ENDMETHOD.
 
   METHOD parse_orderofissuetypes.
+* sdfsdf object
+* issuetypeids, array
+* after, string
+* position, string
+  ENDMETHOD.
+
+  METHOD parse_globalscopebean.
+* sdfsdf object
+* attributes, array
+  ENDMETHOD.
+
+  METHOD parse_issuefieldoption.
+* sdfsdf object
+* id, integer
+* value, string
+* properties, object
+* config, 
+  ENDMETHOD.
+
+  METHOD parse_issuefieldoptionconfigur.
+* sdfsdf object
+* scope, 
+* attributes, array
+  ENDMETHOD.
+
+  METHOD parse_issuefieldoptionscopebea.
+* sdfsdf object
+* projects, array
+* projects2, array
+* global, 
+  ENDMETHOD.
+
+  METHOD parse_pagebeanissuefieldoption.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_projectscopebean.
+* sdfsdf object
+* id, integer
+* attributes, array
+  ENDMETHOD.
+
+  METHOD parse_issuefieldoptioncreatebe.
+* sdfsdf object
+* value, string
+* properties, object
+* config, 
+  ENDMETHOD.
+
+  METHOD parse_removeoptionfromissuesre.
+* sdfsdf object
+* modifiedissues, array
+* unmodifiedissues, array
+* errors, 
+  ENDMETHOD.
+
+  METHOD parse_simpleerrorcollection.
+* sdfsdf object
+* errors, object
+* errormessages, array
+* httpstatuscode, integer
+  ENDMETHOD.
+
+  METHOD parse_taskprogressbeanremoveop.
+* sdfsdf object
+* self, string
+* id, string
+* description, string
+* status, string
+* message, string
+* result, 
+* submittedby, integer
+* progress, integer
+* elapsedruntime, integer
+* submitted, integer
+* started, integer
+* finished, integer
+* lastupdate, integer
+  ENDMETHOD.
+
+  METHOD parse_field.
+* sdfsdf object
+* id, string
+* name, string
+* schema, 
+* description, string
+* key, string
+* islocked, boolean
+* screenscount, integer
+* contextscount, integer
+* lastused, 
+  ENDMETHOD.
+
+  METHOD parse_fieldlastused.
+* sdfsdf object
+* type, string
+* value, string
+  ENDMETHOD.
+
+  METHOD parse_pagebeanfield.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_fieldconfigurationscheme.
+* sdfsdf object
+* id, string
+* name, string
+* description, string
+  ENDMETHOD.
+
+  METHOD parse_pagebeanfieldconfigurati.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_fieldconfigurationissuet.
+* sdfsdf object
+* fieldconfigurationschemeid, string
+* issuetypeid, string
+* fieldconfigurationid, string
+  ENDMETHOD.
+
+  METHOD parse_pagebeanfieldconfigura01.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_fieldconfigurationsche01.
+* sdfsdf object
+* fieldconfigurationscheme, 
+* projectids, array
+  ENDMETHOD.
+
+  METHOD parse_pagebeanfieldconfigura02.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_fieldconfigurationsche02.
+* sdfsdf object
+* fieldconfigurationschemeid, string
+* projectid, string
+  ENDMETHOD.
+
+  METHOD parse_fieldconfiguration.
+* sdfsdf object
+* id, integer
+* name, string
+* description, string
+* isdefault, boolean
+  ENDMETHOD.
+
+  METHOD parse_pagebeanfieldconfigura03.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_fieldconfigurationitem.
+* sdfsdf object
+* id, string
+* description, string
+* ishidden, boolean
+* isrequired, boolean
+  ENDMETHOD.
+
+  METHOD parse_pagebeanfieldconfigura04.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_customfieldoption.
+* sdfsdf object
+* self, string
+* value, string
+  ENDMETHOD.
+
+  METHOD parse_customfieldcontextprojec.
+* sdfsdf object
+* contextid, string
+* projectid, string
+* isglobalcontext, boolean
+  ENDMETHOD.
+
+  METHOD parse_pagebeancustomfieldcon01.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_customfieldcontext.
+* sdfsdf object
+* id, string
+* name, string
+* description, string
+* isglobalcontext, boolean
+* isanyissuetype, boolean
+  ENDMETHOD.
+
+  METHOD parse_pagebeancustomfieldcon02.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_createcustomfieldcontext.
+* sdfsdf object
+* id, string
+* name, string
+* description, string
+* projectids, array
+* issuetypeids, array
+  ENDMETHOD.
+
+  METHOD parse_projectids.
+* sdfsdf object
+* projectids, array
+  ENDMETHOD.
+
+  METHOD parse_customfieldcontextupdate.
+* sdfsdf object
+* name, string
+* description, string
+  ENDMETHOD.
+
+  METHOD parse_projectissuetypemapping.
+* sdfsdf object
+* projectid, string
+* issuetypeid, string
+  ENDMETHOD.
+
+  METHOD parse_projectissuetypemappings.
+* sdfsdf object
+* mappings, array
+  ENDMETHOD.
+
+  METHOD parse_contextforprojectandissu.
+* sdfsdf object
+* projectid, string
+* issuetypeid, string
+* contextid, string
+  ENDMETHOD.
+
+  METHOD parse_pagebeancontextforprojec.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_issuetypetocontextmappin.
+* sdfsdf object
+* contextid, string
+* issuetypeid, string
+* isanyissuetype, boolean
+  ENDMETHOD.
+
+  METHOD parse_pagebeanissuetypetoconte.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_pagebeanuserkey.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_userkey.
+* sdfsdf object
+* key, string
+* accountid, string
+  ENDMETHOD.
+
+  METHOD parse_pagebeanuser.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_searchresults.
+* sdfsdf object
+* expand, string
+* startat, integer
+* maxresults, integer
+* total, integer
+* issues, array
+* warningmessages, array
+* names, object
+* schema, object
+  ENDMETHOD.
+
+  METHOD parse_searchrequestbean.
+* sdfsdf object
+* jql, string
+* startat, integer
+* maxresults, integer
+* fields, array
+* validatequery, string
+* expand, array
+* properties, array
+* fieldsbykeys, boolean
+  ENDMETHOD.
+
+  METHOD parse_fieldreferencedata.
+* sdfsdf object
+* value, string
+* displayname, string
+* orderable, string
+* searchable, string
+* auto, string
+* cfid, string
+* operators, array
+* types, array
+  ENDMETHOD.
+
+  METHOD parse_functionreferencedata.
+* sdfsdf object
+* value, string
+* displayname, string
+* islist, string
+* types, array
+  ENDMETHOD.
+
+  METHOD parse_jqlreferencedata.
+* sdfsdf object
+* visiblefieldnames, array
+* visiblefunctionnames, array
+* jqlreservedwords, array
+  ENDMETHOD.
+
+  METHOD parse_autocompletesuggestion.
+* sdfsdf object
+* value, string
+* displayname, string
+  ENDMETHOD.
+
+  METHOD parse_autocompletesuggestions.
+* sdfsdf object
+* results, array
+  ENDMETHOD.
+
+  METHOD parse_jqlpersonaldatamigration.
+* sdfsdf object
+* querystrings, array
+  ENDMETHOD.
+
+  METHOD parse_convertedjqlqueries.
+* sdfsdf object
+* querystrings, array
+* querieswithunknownusers, array
+  ENDMETHOD.
+
+  METHOD parse_jqlquerywithunknownusers.
+* sdfsdf object
+* originalquery, string
+* convertedquery, string
+  ENDMETHOD.
+
+  METHOD parse_filter.
+* sdfsdf object
+* self, string
+* id, string
+* name, string
+* description, string
+* owner, 
+* jql, string
+* viewurl, string
+* searchurl, string
+* favourite, boolean
+* favouritedcount, integer
+* sharepermissions, array
+* sharedusers, 
+* subscriptions, 
+  ENDMETHOD.
+
+  METHOD parse_filtersubscription.
+* sdfsdf object
+* id, integer
+* user, 
+* group, 
+  ENDMETHOD.
+
+  METHOD parse_filtersubscriptionslist.
+* sdfsdf object
+* size, integer
+* items, array
+* max_results, integer
+* start_index, integer
+* end_index, integer
+  ENDMETHOD.
+
+  METHOD parse_sharepermission.
+* sdfsdf object
+* id, integer
+* type, string
+* project, 
+* role, 
+* group, 
+  ENDMETHOD.
+
+  METHOD parse_userlist.
+* sdfsdf object
+* size, integer
+* items, array
+* max_results, integer
+* start_index, integer
+* end_index, integer
+  ENDMETHOD.
+
+  METHOD parse_filterdetails.
+* sdfsdf object
+* self, string
+* id, string
+* name, string
+* description, string
+* owner, 
+* jql, string
+* viewurl, string
+* searchurl, string
+* favourite, boolean
+* favouritedcount, integer
+* sharepermissions, array
+* subscriptions, array
+  ENDMETHOD.
+
+  METHOD parse_pagebeanfilterdetails.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_defaultsharescope.
+* sdfsdf object
+* scope, string
+  ENDMETHOD.
+
+  METHOD parse_sharepermissioninputbean.
+* sdfsdf object
+* type, string
+* projectid, string
+* groupname, string
+* projectroleid, string
+  ENDMETHOD.
+
+  METHOD parse_dashboard.
+* sdfsdf object
+* description, string
+* id, string
+* isfavourite, boolean
+* name, string
+* owner, 
+* popularity, integer
+* rank, integer
+* self, string
+* sharepermissions, array
+* view, string
+  ENDMETHOD.
+
+  METHOD parse_pageofdashboards.
+* sdfsdf object
+* startat, integer
+* maxresults, integer
+* total, integer
+* prev, string
+* next, string
+* dashboards, array
+  ENDMETHOD.
+
+  METHOD parse_userbean.
+* sdfsdf object
+* key, string
+* self, string
+* name, string
+* displayname, string
+* active, boolean
+* accountid, string
+* avatarurls, 
+  ENDMETHOD.
+
+  METHOD parse_userbeanavatarurls.
+* sdfsdf object
+* 32x32, string
+* 24x24, string
+* 16x16, string
+* 48x48, string
+  ENDMETHOD.
+
+  METHOD parse_pagebeandashboard.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_dashboarddetails.
+* sdfsdf object
+* name, string
+* description, string
+* sharepermissions, array
   ENDMETHOD.
 
   METHOD parse_jqlqueriestoparse.
+* sdfsdf object
+* queries, array
   ENDMETHOD.
 
   METHOD parse_compoundclause.
+* sdfsdf object
+* clauses, array
+* operator, string
   ENDMETHOD.
 
   METHOD parse_fieldchangedclause.
+* sdfsdf object
+* field, 
+* operator, string
+* predicates, array
   ENDMETHOD.
 
   METHOD parse_fieldvalueclause.
+* sdfsdf object
+* field, 
+* operator, string
+* operand, 
   ENDMETHOD.
 
   METHOD parse_fieldwasclause.
+* sdfsdf object
+* field, 
+* operator, string
+* operand, 
+* predicates, array
   ENDMETHOD.
 
   METHOD parse_functionoperand.
+* sdfsdf object
+* function, string
+* arguments, array
   ENDMETHOD.
 
   METHOD parse_jqlquery.
+* sdfsdf object
+* where, 
+* orderby, 
   ENDMETHOD.
 
   METHOD parse_jqlqueryclause.
+* sdfsdf object
   ENDMETHOD.
 
   METHOD parse_jqlqueryclauseoperand.
+* sdfsdf object
   ENDMETHOD.
 
   METHOD parse_jqlqueryclausetimepredic.
+* sdfsdf object
+* operator, string
+* operand, 
   ENDMETHOD.
 
   METHOD parse_jqlqueryfield.
+* sdfsdf object
+* name, string
+* property, array
   ENDMETHOD.
 
   METHOD parse_jqlqueryfieldentityprope.
+* sdfsdf object
+* entity, string
+* key, string
+* path, string
+* type, string
   ENDMETHOD.
 
   METHOD parse_jqlqueryorderbyclause.
+* sdfsdf object
+* fields, array
   ENDMETHOD.
 
   METHOD parse_jqlqueryorderbyclauseele.
+* sdfsdf object
+* field, 
+* direction, string
   ENDMETHOD.
 
   METHOD parse_jqlqueryunitaryoperand.
+* sdfsdf object
   ENDMETHOD.
 
   METHOD parse_keywordoperand.
+* sdfsdf object
+* keyword, string
   ENDMETHOD.
 
   METHOD parse_listoperand.
+* sdfsdf object
+* values, array
   ENDMETHOD.
 
   METHOD parse_parsedjqlqueries.
+* sdfsdf object
+* queries, array
   ENDMETHOD.
 
   METHOD parse_parsedjqlquery.
+* sdfsdf object
+* query, string
+* structure, 
+* errors, array
   ENDMETHOD.
 
   METHOD parse_valueoperand.
+* sdfsdf object
+* value, string
+  ENDMETHOD.
+
+  METHOD parse_deprecatedworkflow.
+* sdfsdf object
+* name, string
+* description, string
+* lastmodifieddate, string
+* lastmodifieduser, string
+* lastmodifieduseraccountid, string
+* steps, integer
+* scope, 
+* default, boolean
+  ENDMETHOD.
+
+  METHOD parse_workflowtransitionproper.
+* sdfsdf object
+* key, string
+* value, string
+* id, string
+  ENDMETHOD.
+
+  METHOD parse_configuration.
+* sdfsdf object
+* votingenabled, boolean
+* watchingenabled, boolean
+* unassignedissuesallowed, boolean
+* subtasksenabled, boolean
+* issuelinkingenabled, boolean
+* timetrackingenabled, boolean
+* attachmentsenabled, boolean
+* timetrackingconfiguration, 
+  ENDMETHOD.
+
+  METHOD parse_timetrackingconfiguratio.
+* sdfsdf object
+* workinghoursperday, number
+* workingdaysperweek, number
+* timeformat, string
+* defaultunit, string
+  ENDMETHOD.
+
+  METHOD parse_applicationproperty.
+* sdfsdf object
+* id, string
+* key, string
+* value, string
+* name, string
+* desc, string
+* type, string
+* defaultvalue, string
+* example, string
+* allowedvalues, array
+  ENDMETHOD.
+
+  METHOD parse_simpleapplicationpropert.
+* sdfsdf object
+* id, string
+* value, string
+  ENDMETHOD.
+
+  METHOD parse_pagebeanworkflow.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_publishedworkflowid.
+* sdfsdf object
+* name, string
+  ENDMETHOD.
+
+  METHOD parse_screenid.
+* sdfsdf object
+* id, string
+  ENDMETHOD.
+
+  METHOD parse_transition.
+* sdfsdf object
+* id, string
+* name, string
+* description, string
+* from, array
+* to, string
+* type, string
+* screen, 
+* rules, 
+  ENDMETHOD.
+
+  METHOD parse_workflow.
+* sdfsdf object
+* id, 
+* description, string
+* transitions, array
+* statuses, array
+  ENDMETHOD.
+
+  METHOD parse_workflowrules.
+* sdfsdf object
+* conditions, array
+* validators, array
+* postfunctions, array
+  ENDMETHOD.
+
+  METHOD parse_workflowstatus.
+* sdfsdf object
+* id, string
+* name, string
+* properties, 
+  ENDMETHOD.
+
+  METHOD parse_workflowstatusproperties.
+* sdfsdf object
+* issueeditable, boolean
+  ENDMETHOD.
+
+  METHOD parse_workflowtransitionrule.
+* sdfsdf object
+* type, string
+* configuration, 
+  ENDMETHOD.
+
+  METHOD parse_connectworkflowtransitio.
+* sdfsdf object
+* id, string
+* key, string
+* configuration, 
+* transition, 
+  ENDMETHOD.
+
+  METHOD parse_pagebeanworkflowtransiti.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_ruleconfiguration.
+* sdfsdf object
+* value, string
+  ENDMETHOD.
+
+  METHOD parse_workflowid.
+* sdfsdf object
+* name, string
+* draft, boolean
+  ENDMETHOD.
+
+  METHOD parse_workflowtransition.
+* sdfsdf object
+* id, integer
+* name, string
+  ENDMETHOD.
+
+  METHOD parse_workflowtransitionrules.
+* sdfsdf object
+* workflowid, 
+* postfunctions, array
+* conditions, array
+* validators, array
+  ENDMETHOD.
+
+  METHOD parse_workflowtransitionrulesu.
+* sdfsdf object
+* workflows, array
+  ENDMETHOD.
+
+  METHOD parse_workflowtransitionrule01.
+* sdfsdf object
+* workflowid, 
+* ruleupdateerrors, object
+* updateerrors, array
+  ENDMETHOD.
+
+  METHOD parse_workflowtransitionrule02.
+* sdfsdf object
+* updateresults, array
+  ENDMETHOD.
+
+  METHOD parse_associateditembean.
+* sdfsdf object
+* id, string
+* name, string
+* typename, string
+* parentid, string
+* parentname, string
+  ENDMETHOD.
+
+  METHOD parse_auditrecordbean.
+* sdfsdf object
+* id, integer
+* summary, string
+* remoteaddress, string
+* authorkey, string
+* created, string
+* category, string
+* eventsource, string
+* description, string
+* objectitem, 
+* changedvalues, array
+* associateditems, array
+  ENDMETHOD.
+
+  METHOD parse_auditrecords.
+* sdfsdf object
+* offset, integer
+* limit, integer
+* total, integer
+* records, array
+  ENDMETHOD.
+
+  METHOD parse_changedvaluebean.
+* sdfsdf object
+* fieldname, string
+* changedfrom, string
+* changedto, string
+  ENDMETHOD.
+
+  METHOD parse_timetrackingprovider.
+* sdfsdf object
+* key, string
+* name, string
+* url, string
+  ENDMETHOD.
+
+  METHOD parse_permissiongrant.
+* sdfsdf object
+* id, integer
+* self, string
+* holder, 
+* permission, string
+  ENDMETHOD.
+
+  METHOD parse_permissionscheme.
+* sdfsdf object
+* expand, string
+* id, integer
+* self, string
+* name, string
+* description, string
+* scope, 
+* permissions, array
+  ENDMETHOD.
+
+  METHOD parse_permissionschemes.
+* sdfsdf object
+* permissionschemes, array
+  ENDMETHOD.
+
+  METHOD parse_permissiongrants.
+* sdfsdf object
+* permissions, array
+* expand, string
+  ENDMETHOD.
+
+  METHOD parse_containerofworkflowschem.
+* sdfsdf object
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_workflowscheme.
+* sdfsdf object
+* id, integer
+* name, string
+* description, string
+* defaultworkflow, string
+* issuetypemappings, object
+* originaldefaultworkflow, string
+* originalissuetypemappings, object
+* draft, boolean
+* lastmodifieduser, 
+* lastmodified, string
+* self, string
+* updatedraftifneeded, boolean
+* issuetypes, object
+  ENDMETHOD.
+
+  METHOD parse_workflowschemeassociatio.
+* sdfsdf object
+* projectids, array
+* workflowscheme, 
+  ENDMETHOD.
+
+  METHOD parse_workflowschemeprojectass.
+* sdfsdf object
+* workflowschemeid, string
+* projectid, string
+  ENDMETHOD.
+
+  METHOD parse_pagebeanworkflowscheme.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_issuetypesworkflowmappin.
+* sdfsdf object
+* workflow, string
+* issuetypes, array
+* defaultmapping, boolean
+* updatedraftifneeded, boolean
+  ENDMETHOD.
+
+  METHOD parse_issuetypeworkflowmapping.
+* sdfsdf object
+* issuetype, string
+* workflow, string
+* updatedraftifneeded, boolean
+  ENDMETHOD.
+
+  METHOD parse_defaultworkflow.
+* sdfsdf object
+* workflow, string
+* updatedraftifneeded, boolean
+  ENDMETHOD.
+
+  METHOD parse_issuetypeinfo.
+* sdfsdf object
+* id, integer
+* name, string
+* avatarid, integer
+  ENDMETHOD.
+
+  METHOD parse_projectissuetypehierarch.
+* sdfsdf object
+* projectid, integer
+* hierarchy, array
+  ENDMETHOD.
+
+  METHOD parse_projectissuetypeshierarc.
+* sdfsdf object
+* entityid, string
+* level, integer
+* name, string
+* issuetypes, array
+  ENDMETHOD.
+
+  METHOD parse_groupdetails.
+* sdfsdf object
+* name, string
+* groupid, string
+  ENDMETHOD.
+
+  METHOD parse_pagebeangroupdetails.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_eventnotification.
+* sdfsdf object
+* expand, string
+* id, integer
+* notificationtype, string
+* parameter, string
+* group, 
+* field, 
+* emailaddress, string
+* projectrole, 
+* user, 
+  ENDMETHOD.
+
+  METHOD parse_notificationevent.
+* sdfsdf object
+* id, integer
+* name, string
+* description, string
+* templateevent, 
+  ENDMETHOD.
+
+  METHOD parse_notificationscheme.
+* sdfsdf object
+* expand, string
+* id, integer
+* self, string
+* name, string
+* description, string
+* notificationschemeevents, array
+* scope, 
+  ENDMETHOD.
+
+  METHOD parse_notificationschemeevent.
+* sdfsdf object
+* event, 
+* notifications, array
+  ENDMETHOD.
+
+  METHOD parse_pagebeannotificationsche.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_projectissuesecurityleve.
+* sdfsdf object
+* levels, array
+  ENDMETHOD.
+
+  METHOD parse_bulkissuepropertyupdater.
+* sdfsdf object
+* value, 
+* expression, string
+* filter, 
+  ENDMETHOD.
+
+  METHOD parse_issuefilterforbulkproper.
+* sdfsdf object
+* entityids, array
+* currentvalue, 
+* hasproperty, boolean
+  ENDMETHOD.
+
+  METHOD parse_issuefilterforbulkprop01.
+* sdfsdf object
+* entityids, array
+* currentvalue, 
+  ENDMETHOD.
+
+  METHOD parse_issueentityproperties.
+* sdfsdf object
+* entitiesids, array
+* properties, object
+  ENDMETHOD.
+
+  METHOD parse_jsonnode.
+* sdfsdf object
+* floatingpointnumber, boolean
+* elements, object
+* pojo, boolean
+* containernode, boolean
+* missingnode, boolean
+* object, boolean
+* valuenode, boolean
+* number, boolean
+* integralnumber, boolean
+* int, boolean
+* long, boolean
+* double, boolean
+* bigdecimal, boolean
+* biginteger, boolean
+* textual, boolean
+* boolean, boolean
+* binary, boolean
+* numbervalue, number
+* numbertype, string
+* intvalue, integer
+* longvalue, integer
+* bigintegervalue, integer
+* doublevalue, number
+* decimalvalue, number
+* booleanvalue, boolean
+* binaryvalue, array
+* valueasint, integer
+* valueaslong, integer
+* valueasdouble, number
+* valueasboolean, boolean
+* textvalue, string
+* valueastext, string
+* fieldnames, object
+* array, boolean
+* fields, object
+* null, boolean
   ENDMETHOD.
 
   METHOD parse_idorkeybean.
+* sdfsdf object
+* id, integer
+* key, string
   ENDMETHOD.
 
   METHOD parse_jexpissues.
+* sdfsdf object
+* jql, 
   ENDMETHOD.
 
   METHOD parse_jexpjqlissues.
+* sdfsdf object
+* query, string
+* startat, integer
+* maxresults, integer
+* validation, string
   ENDMETHOD.
 
   METHOD parse_jiraexpressionevalcontex.
+* sdfsdf object
+* issue, 
+* issues, 
+* project, 
+* sprint, integer
+* board, integer
+* servicedesk, integer
+* customerrequest, integer
   ENDMETHOD.
 
   METHOD parse_jiraexpressionevalreques.
+* sdfsdf object
+* expression, string
+* context, 
   ENDMETHOD.
 
   METHOD parse_issuesjqlmetadatabean.
+* sdfsdf object
+* startat, integer
+* maxresults, integer
+* count, integer
+* totalcount, integer
+* validationwarnings, array
   ENDMETHOD.
 
   METHOD parse_issuesmetabean.
+* sdfsdf object
+* jql, 
   ENDMETHOD.
 
   METHOD parse_jiraexpressionevaluation.
+* sdfsdf object
+* complexity, 
+* issues, 
   ENDMETHOD.
 
   METHOD parse_jiraexpressionresult.
+* sdfsdf object
+* value, 
+* meta, 
   ENDMETHOD.
 
   METHOD parse_jiraexpressionscomplexit.
+* sdfsdf object
+* steps, 
+* expensiveoperations, 
+* beans, 
+* primitivevalues, 
   ENDMETHOD.
 
   METHOD parse_jiraexpressionscomplex01.
+* sdfsdf object
+* value, integer
+* limit, integer
   ENDMETHOD.
 
   METHOD parse_jiraexpressionforanalysi.
+* sdfsdf object
+* expressions, array
+* contextvariables, object
   ENDMETHOD.
 
   METHOD parse_jiraexpressionanalysis.
+* sdfsdf object
+* expression, string
+* errors, array
+* valid, boolean
+* type, string
+* complexity, 
   ENDMETHOD.
 
   METHOD parse_jiraexpressioncomplexity.
+* sdfsdf object
+* expensiveoperations, string
+* variables, object
   ENDMETHOD.
 
   METHOD parse_jiraexpressionvalidation.
+* sdfsdf object
+* line, integer
+* column, integer
+* expression, string
+* message, string
+* type, string
   ENDMETHOD.
 
   METHOD parse_jiraexpressionsanalysis.
+* sdfsdf object
+* results, array
+  ENDMETHOD.
+
+  METHOD parse_idbean.
+* sdfsdf object
+* id, integer
+  ENDMETHOD.
+
+  METHOD parse_permissions.
+* sdfsdf object
+* permissions, object
+  ENDMETHOD.
+
+  METHOD parse_userpermission.
+* sdfsdf object
+* id, string
+* key, string
+* name, string
+* type, string
+* description, string
+* havepermission, boolean
+* deprecatedkey, boolean
+  ENDMETHOD.
+
+  METHOD parse_bulkpermissionsrequestbe.
+* sdfsdf object
+* projectpermissions, array
+* globalpermissions, array
+* accountid, string
+  ENDMETHOD.
+
+  METHOD parse_bulkprojectpermissions.
+* sdfsdf object
+* issues, array
+* projects, array
+* permissions, array
+  ENDMETHOD.
+
+  METHOD parse_bulkpermissiongrants.
+* sdfsdf object
+* projectpermissions, array
+* globalpermissions, array
+  ENDMETHOD.
+
+  METHOD parse_bulkprojectpermissiongra.
+* sdfsdf object
+* permission, string
+* issues, array
+* projects, array
+  ENDMETHOD.
+
+  METHOD parse_permissionskeysbean.
+* sdfsdf object
+* permissions, array
+  ENDMETHOD.
+
+  METHOD parse_permittedprojects.
+* sdfsdf object
+* projects, array
+  ENDMETHOD.
+
+  METHOD parse_projectidentifierbean.
+* sdfsdf object
+* id, integer
+* key, string
+  ENDMETHOD.
+
+  METHOD parse_locale.
+* sdfsdf object
+* locale, string
+  ENDMETHOD.
+
+  METHOD parse_failedwebhook.
+* sdfsdf object
+* id, string
+* body, string
+* url, string
+* failuretime, integer
+  ENDMETHOD.
+
+  METHOD parse_failedwebhooks.
+* sdfsdf object
+* values, array
+* maxresults, integer
+* next, string
+  ENDMETHOD.
+
+  METHOD parse_webhookdetails.
+* sdfsdf object
+* jqlfilter, string
+* events, array
+  ENDMETHOD.
+
+  METHOD parse_webhookregistrationdetai.
+* sdfsdf object
+* webhooks, array
+* url, string
+  ENDMETHOD.
+
+  METHOD parse_containerforregisteredwe.
+* sdfsdf object
+* webhookregistrationresult, array
+  ENDMETHOD.
+
+  METHOD parse_registeredwebhook.
+* sdfsdf object
+* createdwebhookid, integer
+* errors, array
+  ENDMETHOD.
+
+  METHOD parse_pagebeanwebhook.
+* sdfsdf object
+* self, string
+* nextpage, string
+* maxresults, integer
+* startat, integer
+* total, integer
+* islast, boolean
+* values, array
+  ENDMETHOD.
+
+  METHOD parse_webhook.
+* sdfsdf object
+* id, integer
+* jqlfilter, string
+* events, array
+* expirationdate, integer
+  ENDMETHOD.
+
+  METHOD parse_containerforwebhookids.
+* sdfsdf object
+* webhookids, array
+  ENDMETHOD.
+
+  METHOD parse_webhooksexpirationdate.
+* sdfsdf object
+* expirationdate, integer
+  ENDMETHOD.
+
+  METHOD parse_usermigrationbean.
+* sdfsdf object
+* key, string
+* username, string
+* accountid, string
+  ENDMETHOD.
+
+  METHOD parse_unrestricteduseremail.
+* sdfsdf object
+* accountid, string
+* email, string
   ENDMETHOD.
 
   METHOD parse_operationmessage.
+* sdfsdf object
+* message, string
+* statuscode, integer
   ENDMETHOD.
 
   METHOD parse_errormessage.
+* sdfsdf object
+* message, string
   ENDMETHOD.
 
   METHOD parse_connectmodules.
+* sdfsdf object
+* modules, array
   ENDMETHOD.
 
   METHOD parse_connectmodule.
+* sdfsdf object
   ENDMETHOD.
 
   METHOD zif_jira~getapplicationproperty.
