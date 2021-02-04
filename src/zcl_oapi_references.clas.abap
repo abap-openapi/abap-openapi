@@ -1,4 +1,4 @@
-CLASS zcl_oapi_dereference DEFINITION PUBLIC.
+CLASS zcl_oapi_references DEFINITION PUBLIC.
 * todo, rename this class to zcl_oapi_references
 
   PUBLIC SECTION.
@@ -12,7 +12,7 @@ CLASS zcl_oapi_dereference DEFINITION PUBLIC.
     METHODS dereference_parameters.
 ENDCLASS.
 
-CLASS zcl_oapi_dereference IMPLEMENTATION.
+CLASS zcl_oapi_references IMPLEMENTATION.
 
   METHOD fix.
     ms_spec = is_spec.
