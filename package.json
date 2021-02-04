@@ -8,6 +8,7 @@
     "test": "abaplint && rm -rf output && abap_transpile && node output/index.js",
     "petstore": "abaplint && rm -rf output && abap_transpile && node index.js https://petstore3.swagger.io/api/v3/openapi.json petstore",
     "github": "abaplint && rm -rf output && abap_transpile && node index.js https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json github",
+    "jira": "abaplint && rm -rf output && abap_transpile && node index.js https://developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json jira",
     "integration_test": "rm -rf output_test && abap_transpile ./abap_transpile_test.json && node output_test/index.js",
     "lint": "abaplint"
   },
@@ -22,7 +23,7 @@
   },
   "homepage": "https://github.com/abap-openapi/abap-openapi-client#readme",
   "dependencies": {
-    "@abaplint/cli": "^2.66.5",
+    "@abaplint/cli": "^2.66.6",
     "@abaplint/runtime": "^1.2.11",
     "@abaplint/transpiler-cli": "^1.2.11"
   }

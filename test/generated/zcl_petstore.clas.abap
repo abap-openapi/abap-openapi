@@ -54,27 +54,61 @@ CLASS zcl_petstore IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_order.
+    order-id = mo_json->value_string( iv_prefix && '/id' ).
+    order-petid = mo_json->value_string( iv_prefix && '/petId' ).
+    order-quantity = mo_json->value_string( iv_prefix && '/quantity' ).
+    order-shipdate = mo_json->value_string( iv_prefix && '/shipDate' ).
+    order-status = mo_json->value_string( iv_prefix && '/status' ).
+    order-complete = mo_json->value_boolean( iv_prefix && '/complete' ).
   ENDMETHOD.
 
   METHOD parse_customer.
+    customer-id = mo_json->value_string( iv_prefix && '/id' ).
+    customer-username = mo_json->value_string( iv_prefix && '/username' ).
+* todo, object, address, array
   ENDMETHOD.
 
   METHOD parse_address.
+    address-street = mo_json->value_string( iv_prefix && '/street' ).
+    address-city = mo_json->value_string( iv_prefix && '/city' ).
+    address-state = mo_json->value_string( iv_prefix && '/state' ).
+    address-zip = mo_json->value_string( iv_prefix && '/zip' ).
   ENDMETHOD.
 
   METHOD parse_category.
+    category-id = mo_json->value_string( iv_prefix && '/id' ).
+    category-name = mo_json->value_string( iv_prefix && '/name' ).
   ENDMETHOD.
 
   METHOD parse_user.
+    user-id = mo_json->value_string( iv_prefix && '/id' ).
+    user-username = mo_json->value_string( iv_prefix && '/username' ).
+    user-firstname = mo_json->value_string( iv_prefix && '/firstName' ).
+    user-lastname = mo_json->value_string( iv_prefix && '/lastName' ).
+    user-email = mo_json->value_string( iv_prefix && '/email' ).
+    user-password = mo_json->value_string( iv_prefix && '/password' ).
+    user-phone = mo_json->value_string( iv_prefix && '/phone' ).
+    user-userstatus = mo_json->value_string( iv_prefix && '/userStatus' ).
   ENDMETHOD.
 
   METHOD parse_tag.
+    tag-id = mo_json->value_string( iv_prefix && '/id' ).
+    tag-name = mo_json->value_string( iv_prefix && '/name' ).
   ENDMETHOD.
 
   METHOD parse_pet.
+    pet-id = mo_json->value_string( iv_prefix && '/id' ).
+    pet-name = mo_json->value_string( iv_prefix && '/name' ).
+* todo, object, category, 
+* todo, object, photourls, array
+* todo, object, tags, array
+    pet-status = mo_json->value_string( iv_prefix && '/status' ).
   ENDMETHOD.
 
   METHOD parse_apiresponse.
+    apiresponse-code = mo_json->value_string( iv_prefix && '/code' ).
+    apiresponse-type = mo_json->value_string( iv_prefix && '/type' ).
+    apiresponse-message = mo_json->value_string( iv_prefix && '/message' ).
   ENDMETHOD.
 
   METHOD zif_petstore~updatepet.

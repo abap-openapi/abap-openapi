@@ -9,6 +9,7 @@ CLASS ltcl_json IMPLEMENTATION.
 
     DATA li_client TYPE REF TO if_http_client.
     DATA li_petstore TYPE REF TO zif_petstore.
+    DATA ls_user TYPE zif_petstore=>user.
 
     cl_http_client=>create_by_url(
       EXPORTING
@@ -21,9 +22,14 @@ CLASS ltcl_json IMPLEMENTATION.
       EXPORTING
         ii_client = li_client.
 
-    li_petstore->getuserbyname( 'user1' ).
+    ls_user = li_petstore->getuserbyname( 'user1' ).
 
-* todo, add assertions here
+    cl_abap_unit_assert=>assert_not_initial( ls_user ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = ls_user-username
+      exp = 'user1' ).
+
   ENDMETHOD.
 
   METHOD github_pulls_list.

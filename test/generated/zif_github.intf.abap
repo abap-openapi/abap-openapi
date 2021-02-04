@@ -550,7 +550,7 @@ INTERFACE zif_github.
   TYPES: BEGIN OF reaction_rollup,
            url TYPE string,
            total_count TYPE i,
-           1 TYPE i,
+           n1 TYPE i,
            _1 TYPE i,
            laugh TYPE i,
            confused TYPE i,
