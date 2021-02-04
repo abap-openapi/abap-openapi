@@ -290,9 +290,8 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 *      |    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).\n| &&
 *      |    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).\n| &&
       |    lv_code = send_receive( ).\n| &&
-      |    WRITE / lv_code.\n| &&
+      |    WRITE / lv_code.\n|.
 * todo, accept and check content types
-      |    WRITE / mi_client->response->get_cdata( ).\n|.
 
     ls_return = find_return( is_operation ).
     IF ls_return IS NOT INITIAL.
@@ -301,6 +300,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         |    return_data = { ls_return-abap_parser_method }( '' ).\n|.
     ELSE.
       rv_abap = rv_abap &&
+        |    WRITE / mi_client->response->get_cdata( ).\n| &&
         |* todo, handle more responses\n|.
     ENDIF.
 

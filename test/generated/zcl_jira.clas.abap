@@ -4588,7 +4588,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_applicationproperty( '' ).
   ENDMETHOD.
@@ -4612,7 +4611,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_applicationrole( '' ).
   ENDMETHOD.
@@ -4624,7 +4622,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_attachmentsettings( '' ).
   ENDMETHOD.
@@ -4637,7 +4634,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_attachmentmetadata( '' ).
   ENDMETHOD.
@@ -4662,7 +4658,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_attachmentarchivemetadat( '' ).
   ENDMETHOD.
@@ -4675,7 +4670,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_attachmentarchiveimpl( '' ).
   ENDMETHOD.
@@ -4702,7 +4696,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_auditrecords( '' ).
   ENDMETHOD.
@@ -4715,7 +4708,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_systemavatars( '' ).
   ENDMETHOD.
@@ -4730,7 +4722,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeancomment( '' ).
   ENDMETHOD.
@@ -4743,7 +4734,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_propertykeys( '' ).
   ENDMETHOD.
@@ -4757,7 +4747,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_entityproperty( '' ).
   ENDMETHOD.
@@ -4807,7 +4796,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_component( '' ).
   ENDMETHOD.
@@ -4820,7 +4808,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_component( '' ).
   ENDMETHOD.
@@ -4848,7 +4835,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_componentissuescount( '' ).
   ENDMETHOD.
@@ -4860,7 +4846,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_configuration( '' ).
   ENDMETHOD.
@@ -4872,7 +4857,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_timetrackingprovider( '' ).
   ENDMETHOD.
@@ -4906,7 +4890,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_timetrackingconfiguratio( '' ).
   ENDMETHOD.
@@ -4918,7 +4901,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_timetrackingconfiguratio( '' ).
   ENDMETHOD.
@@ -4937,7 +4919,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeancustomfieldoptio( '' ).
   ENDMETHOD.
@@ -4974,7 +4955,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_customfieldoption( '' ).
   ENDMETHOD.
@@ -4995,7 +4975,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pageofdashboards( '' ).
   ENDMETHOD.
@@ -5007,7 +4986,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_dashboard( '' ).
   ENDMETHOD.
@@ -5046,7 +5024,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeandashboard( '' ).
   ENDMETHOD.
@@ -5060,7 +5037,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_propertykeys( '' ).
   ENDMETHOD.
@@ -5075,7 +5051,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_entityproperty( '' ).
   ENDMETHOD.
@@ -5116,7 +5091,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_dashboard( '' ).
   ENDMETHOD.
@@ -5129,7 +5103,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_dashboard( '' ).
   ENDMETHOD.
@@ -5154,7 +5127,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_dashboard( '' ).
   ENDMETHOD.
@@ -5169,7 +5141,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_jiraexpressionsanalysis( '' ).
   ENDMETHOD.
@@ -5184,7 +5155,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_jiraexpressionresult( '' ).
   ENDMETHOD.
@@ -5239,7 +5209,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanfield( '' ).
   ENDMETHOD.
@@ -5267,7 +5236,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeancustomfieldcon02( '' ).
   ENDMETHOD.
@@ -5301,7 +5269,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanissuetypetoconte( '' ).
   ENDMETHOD.
@@ -5320,7 +5287,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeancontextforprojec( '' ).
   ENDMETHOD.
@@ -5342,7 +5308,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeancustomfieldcon01( '' ).
   ENDMETHOD.
@@ -5420,7 +5385,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeancustomfieldconte( '' ).
   ENDMETHOD.
@@ -5434,7 +5398,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_customfieldupdatedcontex( '' ).
   ENDMETHOD.
@@ -5448,7 +5411,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_customfieldcreatedcontex( '' ).
   ENDMETHOD.
@@ -5520,7 +5482,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeancontext( '' ).
   ENDMETHOD.
@@ -5539,7 +5500,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanscreen( '' ).
   ENDMETHOD.
@@ -5558,7 +5518,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanissuefieldoption( '' ).
   ENDMETHOD.
@@ -5571,7 +5530,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issuefieldoption( '' ).
   ENDMETHOD.
@@ -5593,7 +5551,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanissuefieldoption( '' ).
   ENDMETHOD.
@@ -5615,7 +5572,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanissuefieldoption( '' ).
   ENDMETHOD.
@@ -5629,7 +5585,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issuefieldoption( '' ).
   ENDMETHOD.
@@ -5643,7 +5598,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issuefieldoption( '' ).
   ENDMETHOD.
@@ -5699,7 +5653,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanfieldconfigura03( '' ).
   ENDMETHOD.
@@ -5718,7 +5671,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanfieldconfigura04( '' ).
   ENDMETHOD.
@@ -5739,7 +5691,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanfieldconfigurati( '' ).
   ENDMETHOD.
@@ -5760,7 +5711,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanfieldconfigura01( '' ).
   ENDMETHOD.
@@ -5779,7 +5729,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanfieldconfigura02( '' ).
   ENDMETHOD.
@@ -5819,7 +5768,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_filter( '' ).
   ENDMETHOD.
@@ -5831,7 +5779,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_defaultsharescope( '' ).
   ENDMETHOD.
@@ -5843,7 +5790,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_defaultsharescope( '' ).
   ENDMETHOD.
@@ -5916,7 +5862,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanfilterdetails( '' ).
   ENDMETHOD.
@@ -5932,7 +5877,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_filter( '' ).
   ENDMETHOD.
@@ -5948,7 +5892,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_filter( '' ).
   ENDMETHOD.
@@ -6012,7 +5955,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_filter( '' ).
   ENDMETHOD.
@@ -6028,7 +5970,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_filter( '' ).
   ENDMETHOD.
@@ -6066,7 +6007,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_sharepermission( '' ).
   ENDMETHOD.
@@ -6095,7 +6035,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_group( '' ).
   ENDMETHOD.
@@ -6145,7 +6084,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeangroupdetails( '' ).
   ENDMETHOD.
@@ -6167,7 +6105,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanuserdetails( '' ).
   ENDMETHOD.
@@ -6222,7 +6159,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_foundgroups( '' ).
   ENDMETHOD.
@@ -6259,7 +6195,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_foundusersandgroups( '' ).
   ENDMETHOD.
@@ -6311,7 +6246,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issuecreatemetadata( '' ).
   ENDMETHOD.
@@ -6341,7 +6275,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issuepickersuggestions( '' ).
   ENDMETHOD.
@@ -6404,7 +6337,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issuebean( '' ).
   ENDMETHOD.
@@ -6483,7 +6415,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanchangelog( '' ).
   ENDMETHOD.
@@ -6508,7 +6439,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pageofcomments( '' ).
   ENDMETHOD.
@@ -6540,7 +6470,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_comment( '' ).
   ENDMETHOD.
@@ -6557,7 +6486,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_comment( '' ).
   ENDMETHOD.
@@ -6589,7 +6517,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issueupdatemetadata( '' ).
   ENDMETHOD.
@@ -6614,7 +6541,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_propertykeys( '' ).
   ENDMETHOD.
@@ -6628,7 +6554,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_entityproperty( '' ).
   ENDMETHOD.
@@ -6670,7 +6595,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_remoteissuelink( '' ).
   ENDMETHOD.
@@ -6683,7 +6607,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_remoteissuelinkidentifie( '' ).
   ENDMETHOD.
@@ -6710,7 +6633,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_remoteissuelink( '' ).
   ENDMETHOD.
@@ -6764,7 +6686,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_transitions( '' ).
   ENDMETHOD.
@@ -6789,7 +6710,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_votes( '' ).
   ENDMETHOD.
@@ -6826,7 +6746,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_watchers( '' ).
   ENDMETHOD.
@@ -6881,7 +6800,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pageofworklogs( '' ).
   ENDMETHOD.
@@ -6928,7 +6846,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_worklog( '' ).
   ENDMETHOD.
@@ -6957,7 +6874,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_worklog( '' ).
   ENDMETHOD.
@@ -6999,7 +6915,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_propertykeys( '' ).
   ENDMETHOD.
@@ -7014,7 +6929,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_entityproperty( '' ).
   ENDMETHOD.
@@ -7066,7 +6980,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issuelink( '' ).
   ENDMETHOD.
@@ -7090,7 +7003,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issuelinktypes( '' ).
   ENDMETHOD.
@@ -7114,7 +7026,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issuelinktype( '' ).
   ENDMETHOD.
@@ -7127,7 +7038,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issuelinktype( '' ).
   ENDMETHOD.
@@ -7151,7 +7061,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_securityschemes( '' ).
   ENDMETHOD.
@@ -7164,7 +7073,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_securityscheme( '' ).
   ENDMETHOD.
@@ -7189,7 +7097,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanissuesecuritylev( '' ).
   ENDMETHOD.
@@ -7224,7 +7131,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issuetypedetails( '' ).
   ENDMETHOD.
@@ -7237,7 +7143,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issuetypedetails( '' ).
   ENDMETHOD.
@@ -7296,7 +7201,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_propertykeys( '' ).
   ENDMETHOD.
@@ -7310,7 +7214,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_entityproperty( '' ).
   ENDMETHOD.
@@ -7357,7 +7260,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanissuetypescheme( '' ).
   ENDMETHOD.
@@ -7389,7 +7291,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanissuetypeschemem( '' ).
   ENDMETHOD.
@@ -7408,7 +7309,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanissuetypeschemep( '' ).
   ENDMETHOD.
@@ -7501,7 +7401,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanissuetypescree02( '' ).
   ENDMETHOD.
@@ -7533,7 +7432,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanissuetypescreens( '' ).
   ENDMETHOD.
@@ -7552,7 +7450,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanissuetypescree01( '' ).
   ENDMETHOD.
@@ -7635,7 +7532,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_jqlreferencedata( '' ).
   ENDMETHOD.
@@ -7659,7 +7555,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_autocompletesuggestions( '' ).
   ENDMETHOD.
@@ -7671,7 +7566,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issuematches( '' ).
   ENDMETHOD.
@@ -7686,7 +7580,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_parsedjqlqueries( '' ).
   ENDMETHOD.
@@ -7698,7 +7591,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_convertedjqlqueries( '' ).
   ENDMETHOD.
@@ -7716,7 +7608,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanstring( '' ).
   ENDMETHOD.
@@ -7749,7 +7640,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_permissions( '' ).
   ENDMETHOD.
@@ -7797,7 +7687,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_locale( '' ).
   ENDMETHOD.
@@ -7834,7 +7723,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_user( '' ).
   ENDMETHOD.
@@ -7855,7 +7743,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeannotificationsche( '' ).
   ENDMETHOD.
@@ -7871,7 +7758,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_notificationscheme( '' ).
   ENDMETHOD.
@@ -7883,7 +7769,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_permissions( '' ).
   ENDMETHOD.
@@ -7895,7 +7780,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_bulkpermissiongrants( '' ).
   ENDMETHOD.
@@ -7907,7 +7791,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_permittedprojects( '' ).
   ENDMETHOD.
@@ -7922,7 +7805,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_permissionschemes( '' ).
   ENDMETHOD.
@@ -7952,7 +7834,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_permissionscheme( '' ).
   ENDMETHOD.
@@ -7968,7 +7849,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_permissionscheme( '' ).
   ENDMETHOD.
@@ -7996,7 +7876,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_permissiongrants( '' ).
   ENDMETHOD.
@@ -8028,7 +7907,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_permissiongrant( '' ).
   ENDMETHOD.
@@ -8065,7 +7943,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_priority( '' ).
   ENDMETHOD.
@@ -8141,7 +8018,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanproject( '' ).
   ENDMETHOD.
@@ -8176,7 +8052,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projecttype( '' ).
   ENDMETHOD.
@@ -8189,7 +8064,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projecttype( '' ).
   ENDMETHOD.
@@ -8208,7 +8082,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_project( '' ).
   ENDMETHOD.
@@ -8224,7 +8097,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_project( '' ).
   ENDMETHOD.
@@ -8310,7 +8182,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projectavatars( '' ).
   ENDMETHOD.
@@ -8335,7 +8206,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeancomponentwithiss( '' ).
   ENDMETHOD.
@@ -8372,7 +8242,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_propertykeys( '' ).
   ENDMETHOD.
@@ -8386,7 +8255,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_entityproperty( '' ).
   ENDMETHOD.
@@ -8425,7 +8293,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_project( '' ).
   ENDMETHOD.
@@ -8451,7 +8318,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projectrole( '' ).
   ENDMETHOD.
@@ -8465,7 +8331,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projectrole( '' ).
   ENDMETHOD.
@@ -8479,7 +8344,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projectrole( '' ).
   ENDMETHOD.
@@ -8542,7 +8406,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_project( '' ).
   ENDMETHOD.
@@ -8573,7 +8436,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanversion( '' ).
   ENDMETHOD.
@@ -8601,7 +8463,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projectemailaddress( '' ).
   ENDMETHOD.
@@ -8626,7 +8487,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projectissuetypehierarch( '' ).
   ENDMETHOD.
@@ -8639,7 +8499,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_securityscheme( '' ).
   ENDMETHOD.
@@ -8655,7 +8514,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_notificationscheme( '' ).
   ENDMETHOD.
@@ -8671,7 +8529,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_permissionscheme( '' ).
   ENDMETHOD.
@@ -8687,7 +8544,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_permissionscheme( '' ).
   ENDMETHOD.
@@ -8700,7 +8556,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projectissuesecurityleve( '' ).
   ENDMETHOD.
@@ -8735,7 +8590,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projectcategory( '' ).
   ENDMETHOD.
@@ -8748,7 +8602,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_updatedprojectcategory( '' ).
   ENDMETHOD.
@@ -8775,7 +8628,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_errorcollection( '' ).
   ENDMETHOD.
@@ -8825,7 +8677,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_resolution( '' ).
   ENDMETHOD.
@@ -8848,7 +8699,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projectrole( '' ).
   ENDMETHOD.
@@ -8861,7 +8711,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projectrole( '' ).
   ENDMETHOD.
@@ -8874,7 +8723,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projectrole( '' ).
   ENDMETHOD.
@@ -8887,7 +8735,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projectrole( '' ).
   ENDMETHOD.
@@ -8915,7 +8762,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projectrole( '' ).
   ENDMETHOD.
@@ -8928,7 +8774,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projectrole( '' ).
   ENDMETHOD.
@@ -8947,7 +8792,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projectrole( '' ).
   ENDMETHOD.
@@ -8968,7 +8812,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanscreen( '' ).
   ENDMETHOD.
@@ -9004,7 +8847,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_screen( '' ).
   ENDMETHOD.
@@ -9056,7 +8898,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_screenabletab( '' ).
   ENDMETHOD.
@@ -9070,7 +8911,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_screenabletab( '' ).
   ENDMETHOD.
@@ -9113,7 +8953,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_screenablefield( '' ).
   ENDMETHOD.
@@ -9176,7 +9015,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanscreenscheme( '' ).
   ENDMETHOD.
@@ -9247,7 +9085,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_searchresults( '' ).
   ENDMETHOD.
@@ -9259,7 +9096,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_searchresults( '' ).
   ENDMETHOD.
@@ -9272,7 +9108,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_securitylevel( '' ).
   ENDMETHOD.
@@ -9284,7 +9119,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_serverinformation( '' ).
   ENDMETHOD.
@@ -9330,7 +9164,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_statusdetails( '' ).
   ENDMETHOD.
@@ -9354,7 +9187,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_statuscategory( '' ).
   ENDMETHOD.
@@ -9367,7 +9199,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_taskprogressbeanobject( '' ).
   ENDMETHOD.
@@ -9393,7 +9224,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_avatars( '' ).
   ENDMETHOD.
@@ -9451,7 +9281,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_user( '' ).
   ENDMETHOD.
@@ -9573,7 +9402,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanuser( '' ).
   ENDMETHOD.
@@ -9657,7 +9485,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_unrestricteduseremail( '' ).
   ENDMETHOD.
@@ -9670,7 +9497,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_unrestricteduseremail( '' ).
   ENDMETHOD.
@@ -9752,7 +9578,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_foundusers( '' ).
   ENDMETHOD.
@@ -9773,7 +9598,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_propertykeys( '' ).
   ENDMETHOD.
@@ -9795,7 +9619,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_entityproperty( '' ).
   ENDMETHOD.
@@ -9885,7 +9708,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanuser( '' ).
   ENDMETHOD.
@@ -9904,7 +9726,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanuserkey( '' ).
   ENDMETHOD.
@@ -9997,7 +9818,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_version( '' ).
   ENDMETHOD.
@@ -10010,7 +9830,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_version( '' ).
   ENDMETHOD.
@@ -10054,7 +9873,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_version( '' ).
   ENDMETHOD.
@@ -10067,7 +9885,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_versionissuecounts( '' ).
   ENDMETHOD.
@@ -10092,7 +9909,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_versionunresolvedissuesc( '' ).
   ENDMETHOD.
@@ -10110,7 +9926,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanwebhook( '' ).
   ENDMETHOD.
@@ -10122,7 +9937,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_containerforregisteredwe( '' ).
   ENDMETHOD.
@@ -10151,7 +9965,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_failedwebhooks( '' ).
   ENDMETHOD.
@@ -10163,7 +9976,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_webhooksexpirationdate( '' ).
   ENDMETHOD.
@@ -10202,7 +10014,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanworkflowtransiti( '' ).
   ENDMETHOD.
@@ -10214,7 +10025,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowtransitionrule02( '' ).
   ENDMETHOD.
@@ -10238,7 +10048,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanworkflow( '' ).
   ENDMETHOD.
@@ -10261,7 +10070,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowtransitionproper( '' ).
   ENDMETHOD.
@@ -10279,7 +10087,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowtransitionproper( '' ).
   ENDMETHOD.
@@ -10297,7 +10104,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowtransitionproper( '' ).
   ENDMETHOD.
@@ -10332,7 +10138,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pagebeanworkflowscheme( '' ).
   ENDMETHOD.
@@ -10356,7 +10161,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_containerofworkflowschem( '' ).
   ENDMETHOD.
@@ -10383,7 +10187,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowscheme( '' ).
   ENDMETHOD.
@@ -10396,7 +10199,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowscheme( '' ).
   ENDMETHOD.
@@ -10436,7 +10238,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_defaultworkflow( '' ).
   ENDMETHOD.
@@ -10449,7 +10250,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowscheme( '' ).
   ENDMETHOD.
@@ -10465,7 +10265,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowscheme( '' ).
   ENDMETHOD.
@@ -10478,7 +10277,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowscheme( '' ).
   ENDMETHOD.
@@ -10491,7 +10289,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowscheme( '' ).
   ENDMETHOD.
@@ -10516,7 +10313,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_defaultworkflow( '' ).
   ENDMETHOD.
@@ -10529,7 +10325,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowscheme( '' ).
   ENDMETHOD.
@@ -10542,7 +10337,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowscheme( '' ).
   ENDMETHOD.
@@ -10556,7 +10350,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issuetypeworkflowmapping( '' ).
   ENDMETHOD.
@@ -10570,7 +10363,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowscheme( '' ).
   ENDMETHOD.
@@ -10584,7 +10376,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowscheme( '' ).
   ENDMETHOD.
@@ -10600,7 +10391,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issuetypesworkflowmappin( '' ).
   ENDMETHOD.
@@ -10614,7 +10404,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowscheme( '' ).
   ENDMETHOD.
@@ -10644,7 +10433,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issuetypeworkflowmapping( '' ).
   ENDMETHOD.
@@ -10658,7 +10446,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowscheme( '' ).
   ENDMETHOD.
@@ -10675,7 +10462,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowscheme( '' ).
   ENDMETHOD.
@@ -10694,7 +10480,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issuetypesworkflowmappin( '' ).
   ENDMETHOD.
@@ -10708,7 +10493,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_workflowscheme( '' ).
   ENDMETHOD.
@@ -10739,7 +10523,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_changedworklogs( '' ).
   ENDMETHOD.
@@ -10771,7 +10554,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_changedworklogs( '' ).
   ENDMETHOD.
@@ -10784,7 +10566,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_propertykeys( '' ).
   ENDMETHOD.
@@ -10798,7 +10579,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_entityproperty( '' ).
   ENDMETHOD.
@@ -10812,7 +10592,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_operationmessage( '' ).
   ENDMETHOD.
@@ -10837,7 +10616,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_connectmodules( '' ).
   ENDMETHOD.
