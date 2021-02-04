@@ -970,60 +970,56 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_simple_user.
-* sdfsdf object
-* login, string
-* id, integer
-* node_id, string
-* avatar_url, string
-* gravatar_id, string
-* url, string
-* html_url, string
-* followers_url, string
-* following_url, string
-* gists_url, string
-* starred_url, string
-* subscriptions_url, string
-* organizations_url, string
-* repos_url, string
-* events_url, string
-* received_events_url, string
-* type, string
-* site_admin, boolean
-* starred_at, string
+    simple_user-login = mo_json->value_string( iv_prefix && '/login' ).
+    simple_user-id = mo_json->value_string( iv_prefix && '/id' ).
+    simple_user-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    simple_user-avatar_url = mo_json->value_string( iv_prefix && '/avatar_url' ).
+    simple_user-gravatar_id = mo_json->value_string( iv_prefix && '/gravatar_id' ).
+    simple_user-url = mo_json->value_string( iv_prefix && '/url' ).
+    simple_user-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    simple_user-followers_url = mo_json->value_string( iv_prefix && '/followers_url' ).
+    simple_user-following_url = mo_json->value_string( iv_prefix && '/following_url' ).
+    simple_user-gists_url = mo_json->value_string( iv_prefix && '/gists_url' ).
+    simple_user-starred_url = mo_json->value_string( iv_prefix && '/starred_url' ).
+    simple_user-subscriptions_url = mo_json->value_string( iv_prefix && '/subscriptions_url' ).
+    simple_user-organizations_url = mo_json->value_string( iv_prefix && '/organizations_url' ).
+    simple_user-repos_url = mo_json->value_string( iv_prefix && '/repos_url' ).
+    simple_user-events_url = mo_json->value_string( iv_prefix && '/events_url' ).
+    simple_user-received_events_url = mo_json->value_string( iv_prefix && '/received_events_url' ).
+    simple_user-type = mo_json->value_string( iv_prefix && '/type' ).
+    simple_user-site_admin = mo_json->value_boolean( iv_prefix && '/site_admin' ).
+    simple_user-starred_at = mo_json->value_string( iv_prefix && '/starred_at' ).
   ENDMETHOD.
 
   METHOD parse_integration.
-* sdfsdf object
-* id, integer
-* slug, string
-* node_id, string
-* owner, 
-* name, string
-* description, string
-* external_url, string
-* html_url, string
-* created_at, string
-* updated_at, string
-* permissions, object
-* events, array
-* installations_count, integer
-* client_id, string
-* client_secret, string
-* webhook_secret, string
-* pem, string
+    integration-id = mo_json->value_string( iv_prefix && '/id' ).
+    integration-slug = mo_json->value_string( iv_prefix && '/slug' ).
+    integration-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+* todo, object, owner, 
+    integration-name = mo_json->value_string( iv_prefix && '/name' ).
+    integration-description = mo_json->value_string( iv_prefix && '/description' ).
+    integration-external_url = mo_json->value_string( iv_prefix && '/external_url' ).
+    integration-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    integration-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    integration-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+* todo, object, permissions, object
+* todo, object, events, array
+    integration-installations_count = mo_json->value_string( iv_prefix && '/installations_count' ).
+    integration-client_id = mo_json->value_string( iv_prefix && '/client_id' ).
+    integration-client_secret = mo_json->value_string( iv_prefix && '/client_secret' ).
+    integration-webhook_secret = mo_json->value_string( iv_prefix && '/webhook_secret' ).
+    integration-pem = mo_json->value_string( iv_prefix && '/pem' ).
   ENDMETHOD.
 
   METHOD parse_basic_error.
-* sdfsdf object
-* message, string
-* documentation_url, string
+    basic_error-message = mo_json->value_string( iv_prefix && '/message' ).
+    basic_error-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
   ENDMETHOD.
 
   METHOD parse_validation_error_simple.
-* sdfsdf object
-* message, string
-* documentation_url, string
-* errors, array
+    validation_error_simple-message = mo_json->value_string( iv_prefix && '/message' ).
+    validation_error_simple-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+* todo, object, errors, array
   ENDMETHOD.
 
   METHOD parse_webhook_config_url.
@@ -1043,260 +1039,247 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_webhook_config.
-* sdfsdf object
-* url, 
-* content_type, 
-* secret, 
-* insecure_ssl, 
+* todo, object, url, 
+* todo, object, content_type, 
+* todo, object, secret, 
+* todo, object, insecure_ssl, 
   ENDMETHOD.
 
   METHOD parse_enterprise.
-* sdfsdf object
-* description, string
-* html_url, string
-* website_url, string
-* id, integer
-* node_id, string
-* name, string
-* slug, string
-* created_at, string
-* updated_at, string
-* avatar_url, string
+    enterprise-description = mo_json->value_string( iv_prefix && '/description' ).
+    enterprise-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    enterprise-website_url = mo_json->value_string( iv_prefix && '/website_url' ).
+    enterprise-id = mo_json->value_string( iv_prefix && '/id' ).
+    enterprise-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    enterprise-name = mo_json->value_string( iv_prefix && '/name' ).
+    enterprise-slug = mo_json->value_string( iv_prefix && '/slug' ).
+    enterprise-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    enterprise-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    enterprise-avatar_url = mo_json->value_string( iv_prefix && '/avatar_url' ).
   ENDMETHOD.
 
   METHOD parse_installation.
-* sdfsdf object
-* id, integer
-* account, 
-* repository_selection, string
-* access_tokens_url, string
-* repositories_url, string
-* html_url, string
-* app_id, integer
-* target_id, integer
-* target_type, string
-* permissions, object
-* events, array
-* created_at, string
-* updated_at, string
-* single_file_name, string
-* has_multiple_single_files, boolean
-* single_file_paths, array
-* app_slug, string
-* suspended_by, 
-* suspended_at, string
-* contact_email, string
+    installation-id = mo_json->value_string( iv_prefix && '/id' ).
+* todo, object, account, 
+    installation-repository_selection = mo_json->value_string( iv_prefix && '/repository_selection' ).
+    installation-access_tokens_url = mo_json->value_string( iv_prefix && '/access_tokens_url' ).
+    installation-repositories_url = mo_json->value_string( iv_prefix && '/repositories_url' ).
+    installation-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    installation-app_id = mo_json->value_string( iv_prefix && '/app_id' ).
+    installation-target_id = mo_json->value_string( iv_prefix && '/target_id' ).
+    installation-target_type = mo_json->value_string( iv_prefix && '/target_type' ).
+* todo, object, permissions, object
+* todo, object, events, array
+    installation-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    installation-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    installation-single_file_name = mo_json->value_string( iv_prefix && '/single_file_name' ).
+    installation-has_multiple_single_files = mo_json->value_boolean( iv_prefix && '/has_multiple_single_files' ).
+* todo, object, single_file_paths, array
+    installation-app_slug = mo_json->value_string( iv_prefix && '/app_slug' ).
+* todo, object, suspended_by, 
+    installation-suspended_at = mo_json->value_string( iv_prefix && '/suspended_at' ).
+    installation-contact_email = mo_json->value_string( iv_prefix && '/contact_email' ).
   ENDMETHOD.
 
   METHOD parse_app_permissions.
-* sdfsdf object
-* actions, string
-* administration, string
-* checks, string
-* content_references, string
-* contents, string
-* deployments, string
-* environments, string
-* issues, string
-* metadata, string
-* packages, string
-* pages, string
-* pull_requests, string
-* repository_hooks, string
-* repository_projects, string
-* secret_scanning_alerts, string
-* secrets, string
-* security_events, string
-* single_file, string
-* statuses, string
-* vulnerability_alerts, string
-* workflows, string
-* members, string
-* organization_administration, string
-* organization_hooks, string
-* organization_plan, string
-* organization_projects, string
-* organization_secrets, string
-* organization_self_hosted_runne, string
-* organization_user_blocking, string
-* team_discussions, string
+    app_permissions-actions = mo_json->value_string( iv_prefix && '/actions' ).
+    app_permissions-administration = mo_json->value_string( iv_prefix && '/administration' ).
+    app_permissions-checks = mo_json->value_string( iv_prefix && '/checks' ).
+    app_permissions-content_references = mo_json->value_string( iv_prefix && '/content_references' ).
+    app_permissions-contents = mo_json->value_string( iv_prefix && '/contents' ).
+    app_permissions-deployments = mo_json->value_string( iv_prefix && '/deployments' ).
+    app_permissions-environments = mo_json->value_string( iv_prefix && '/environments' ).
+    app_permissions-issues = mo_json->value_string( iv_prefix && '/issues' ).
+    app_permissions-metadata = mo_json->value_string( iv_prefix && '/metadata' ).
+    app_permissions-packages = mo_json->value_string( iv_prefix && '/packages' ).
+    app_permissions-pages = mo_json->value_string( iv_prefix && '/pages' ).
+    app_permissions-pull_requests = mo_json->value_string( iv_prefix && '/pull_requests' ).
+    app_permissions-repository_hooks = mo_json->value_string( iv_prefix && '/repository_hooks' ).
+    app_permissions-repository_projects = mo_json->value_string( iv_prefix && '/repository_projects' ).
+    app_permissions-secret_scanning_alerts = mo_json->value_string( iv_prefix && '/secret_scanning_alerts' ).
+    app_permissions-secrets = mo_json->value_string( iv_prefix && '/secrets' ).
+    app_permissions-security_events = mo_json->value_string( iv_prefix && '/security_events' ).
+    app_permissions-single_file = mo_json->value_string( iv_prefix && '/single_file' ).
+    app_permissions-statuses = mo_json->value_string( iv_prefix && '/statuses' ).
+    app_permissions-vulnerability_alerts = mo_json->value_string( iv_prefix && '/vulnerability_alerts' ).
+    app_permissions-workflows = mo_json->value_string( iv_prefix && '/workflows' ).
+    app_permissions-members = mo_json->value_string( iv_prefix && '/members' ).
+    app_permissions-organization_administration = mo_json->value_string( iv_prefix && '/organization_administration' ).
+    app_permissions-organization_hooks = mo_json->value_string( iv_prefix && '/organization_hooks' ).
+    app_permissions-organization_plan = mo_json->value_string( iv_prefix && '/organization_plan' ).
+    app_permissions-organization_projects = mo_json->value_string( iv_prefix && '/organization_projects' ).
+    app_permissions-organization_secrets = mo_json->value_string( iv_prefix && '/organization_secrets' ).
+    app_permissions-organization_self_hosted_runne = mo_json->value_string( iv_prefix && '/organization_self_hosted_runners' ).
+    app_permissions-organization_user_blocking = mo_json->value_string( iv_prefix && '/organization_user_blocking' ).
+    app_permissions-team_discussions = mo_json->value_string( iv_prefix && '/team_discussions' ).
   ENDMETHOD.
 
   METHOD parse_license_simple.
-* sdfsdf object
-* key, string
-* name, string
-* url, string
-* spdx_id, string
-* node_id, string
-* html_url, string
+    license_simple-key = mo_json->value_string( iv_prefix && '/key' ).
+    license_simple-name = mo_json->value_string( iv_prefix && '/name' ).
+    license_simple-url = mo_json->value_string( iv_prefix && '/url' ).
+    license_simple-spdx_id = mo_json->value_string( iv_prefix && '/spdx_id' ).
+    license_simple-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    license_simple-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
   ENDMETHOD.
 
   METHOD parse_repository.
-* sdfsdf object
-* id, integer
-* node_id, string
-* name, string
-* full_name, string
-* license, 
-* forks, integer
-* permissions, object
-* owner, 
-* private, boolean
-* html_url, string
-* description, string
-* fork, boolean
-* url, string
-* archive_url, string
-* assignees_url, string
-* blobs_url, string
-* branches_url, string
-* collaborators_url, string
-* comments_url, string
-* commits_url, string
-* compare_url, string
-* contents_url, string
-* contributors_url, string
-* deployments_url, string
-* downloads_url, string
-* events_url, string
-* forks_url, string
-* git_commits_url, string
-* git_refs_url, string
-* git_tags_url, string
-* git_url, string
-* issue_comment_url, string
-* issue_events_url, string
-* issues_url, string
-* keys_url, string
-* labels_url, string
-* languages_url, string
-* merges_url, string
-* milestones_url, string
-* notifications_url, string
-* pulls_url, string
-* releases_url, string
-* ssh_url, string
-* stargazers_url, string
-* statuses_url, string
-* subscribers_url, string
-* subscription_url, string
-* tags_url, string
-* teams_url, string
-* trees_url, string
-* clone_url, string
-* mirror_url, string
-* hooks_url, string
-* svn_url, string
-* homepage, string
-* language, string
-* forks_count, integer
-* stargazers_count, integer
-* watchers_count, integer
-* size, integer
-* default_branch, string
-* open_issues_count, integer
-* is_template, boolean
-* topics, array
-* has_issues, boolean
-* has_projects, boolean
-* has_wiki, boolean
-* has_pages, boolean
-* has_downloads, boolean
-* archived, boolean
-* disabled, boolean
-* visibility, string
-* pushed_at, string
-* created_at, string
-* updated_at, string
-* allow_rebase_merge, boolean
-* template_repository, object
-* temp_clone_token, string
-* allow_squash_merge, boolean
-* delete_branch_on_merge, boolean
-* allow_merge_commit, boolean
-* subscribers_count, integer
-* network_count, integer
-* open_issues, integer
-* watchers, integer
-* master_branch, string
-* starred_at, string
+    repository-id = mo_json->value_string( iv_prefix && '/id' ).
+    repository-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    repository-name = mo_json->value_string( iv_prefix && '/name' ).
+    repository-full_name = mo_json->value_string( iv_prefix && '/full_name' ).
+* todo, object, license, 
+    repository-forks = mo_json->value_string( iv_prefix && '/forks' ).
+* todo, object, permissions, object
+* todo, object, owner, 
+    repository-private = mo_json->value_boolean( iv_prefix && '/private' ).
+    repository-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    repository-description = mo_json->value_string( iv_prefix && '/description' ).
+    repository-fork = mo_json->value_boolean( iv_prefix && '/fork' ).
+    repository-url = mo_json->value_string( iv_prefix && '/url' ).
+    repository-archive_url = mo_json->value_string( iv_prefix && '/archive_url' ).
+    repository-assignees_url = mo_json->value_string( iv_prefix && '/assignees_url' ).
+    repository-blobs_url = mo_json->value_string( iv_prefix && '/blobs_url' ).
+    repository-branches_url = mo_json->value_string( iv_prefix && '/branches_url' ).
+    repository-collaborators_url = mo_json->value_string( iv_prefix && '/collaborators_url' ).
+    repository-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
+    repository-commits_url = mo_json->value_string( iv_prefix && '/commits_url' ).
+    repository-compare_url = mo_json->value_string( iv_prefix && '/compare_url' ).
+    repository-contents_url = mo_json->value_string( iv_prefix && '/contents_url' ).
+    repository-contributors_url = mo_json->value_string( iv_prefix && '/contributors_url' ).
+    repository-deployments_url = mo_json->value_string( iv_prefix && '/deployments_url' ).
+    repository-downloads_url = mo_json->value_string( iv_prefix && '/downloads_url' ).
+    repository-events_url = mo_json->value_string( iv_prefix && '/events_url' ).
+    repository-forks_url = mo_json->value_string( iv_prefix && '/forks_url' ).
+    repository-git_commits_url = mo_json->value_string( iv_prefix && '/git_commits_url' ).
+    repository-git_refs_url = mo_json->value_string( iv_prefix && '/git_refs_url' ).
+    repository-git_tags_url = mo_json->value_string( iv_prefix && '/git_tags_url' ).
+    repository-git_url = mo_json->value_string( iv_prefix && '/git_url' ).
+    repository-issue_comment_url = mo_json->value_string( iv_prefix && '/issue_comment_url' ).
+    repository-issue_events_url = mo_json->value_string( iv_prefix && '/issue_events_url' ).
+    repository-issues_url = mo_json->value_string( iv_prefix && '/issues_url' ).
+    repository-keys_url = mo_json->value_string( iv_prefix && '/keys_url' ).
+    repository-labels_url = mo_json->value_string( iv_prefix && '/labels_url' ).
+    repository-languages_url = mo_json->value_string( iv_prefix && '/languages_url' ).
+    repository-merges_url = mo_json->value_string( iv_prefix && '/merges_url' ).
+    repository-milestones_url = mo_json->value_string( iv_prefix && '/milestones_url' ).
+    repository-notifications_url = mo_json->value_string( iv_prefix && '/notifications_url' ).
+    repository-pulls_url = mo_json->value_string( iv_prefix && '/pulls_url' ).
+    repository-releases_url = mo_json->value_string( iv_prefix && '/releases_url' ).
+    repository-ssh_url = mo_json->value_string( iv_prefix && '/ssh_url' ).
+    repository-stargazers_url = mo_json->value_string( iv_prefix && '/stargazers_url' ).
+    repository-statuses_url = mo_json->value_string( iv_prefix && '/statuses_url' ).
+    repository-subscribers_url = mo_json->value_string( iv_prefix && '/subscribers_url' ).
+    repository-subscription_url = mo_json->value_string( iv_prefix && '/subscription_url' ).
+    repository-tags_url = mo_json->value_string( iv_prefix && '/tags_url' ).
+    repository-teams_url = mo_json->value_string( iv_prefix && '/teams_url' ).
+    repository-trees_url = mo_json->value_string( iv_prefix && '/trees_url' ).
+    repository-clone_url = mo_json->value_string( iv_prefix && '/clone_url' ).
+    repository-mirror_url = mo_json->value_string( iv_prefix && '/mirror_url' ).
+    repository-hooks_url = mo_json->value_string( iv_prefix && '/hooks_url' ).
+    repository-svn_url = mo_json->value_string( iv_prefix && '/svn_url' ).
+    repository-homepage = mo_json->value_string( iv_prefix && '/homepage' ).
+    repository-language = mo_json->value_string( iv_prefix && '/language' ).
+    repository-forks_count = mo_json->value_string( iv_prefix && '/forks_count' ).
+    repository-stargazers_count = mo_json->value_string( iv_prefix && '/stargazers_count' ).
+    repository-watchers_count = mo_json->value_string( iv_prefix && '/watchers_count' ).
+    repository-size = mo_json->value_string( iv_prefix && '/size' ).
+    repository-default_branch = mo_json->value_string( iv_prefix && '/default_branch' ).
+    repository-open_issues_count = mo_json->value_string( iv_prefix && '/open_issues_count' ).
+    repository-is_template = mo_json->value_boolean( iv_prefix && '/is_template' ).
+* todo, object, topics, array
+    repository-has_issues = mo_json->value_boolean( iv_prefix && '/has_issues' ).
+    repository-has_projects = mo_json->value_boolean( iv_prefix && '/has_projects' ).
+    repository-has_wiki = mo_json->value_boolean( iv_prefix && '/has_wiki' ).
+    repository-has_pages = mo_json->value_boolean( iv_prefix && '/has_pages' ).
+    repository-has_downloads = mo_json->value_boolean( iv_prefix && '/has_downloads' ).
+    repository-archived = mo_json->value_boolean( iv_prefix && '/archived' ).
+    repository-disabled = mo_json->value_boolean( iv_prefix && '/disabled' ).
+    repository-visibility = mo_json->value_string( iv_prefix && '/visibility' ).
+    repository-pushed_at = mo_json->value_string( iv_prefix && '/pushed_at' ).
+    repository-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    repository-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    repository-allow_rebase_merge = mo_json->value_boolean( iv_prefix && '/allow_rebase_merge' ).
+* todo, object, template_repository, object
+    repository-temp_clone_token = mo_json->value_string( iv_prefix && '/temp_clone_token' ).
+    repository-allow_squash_merge = mo_json->value_boolean( iv_prefix && '/allow_squash_merge' ).
+    repository-delete_branch_on_merge = mo_json->value_boolean( iv_prefix && '/delete_branch_on_merge' ).
+    repository-allow_merge_commit = mo_json->value_boolean( iv_prefix && '/allow_merge_commit' ).
+    repository-subscribers_count = mo_json->value_string( iv_prefix && '/subscribers_count' ).
+    repository-network_count = mo_json->value_string( iv_prefix && '/network_count' ).
+    repository-open_issues = mo_json->value_string( iv_prefix && '/open_issues' ).
+    repository-watchers = mo_json->value_string( iv_prefix && '/watchers' ).
+    repository-master_branch = mo_json->value_string( iv_prefix && '/master_branch' ).
+    repository-starred_at = mo_json->value_string( iv_prefix && '/starred_at' ).
   ENDMETHOD.
 
   METHOD parse_installation_token.
-* sdfsdf object
-* token, string
-* expires_at, string
-* permissions, object
-* repository_selection, string
-* repositories, array
-* single_file, string
-* has_multiple_single_files, boolean
-* single_file_paths, array
+    installation_token-token = mo_json->value_string( iv_prefix && '/token' ).
+    installation_token-expires_at = mo_json->value_string( iv_prefix && '/expires_at' ).
+* todo, object, permissions, object
+    installation_token-repository_selection = mo_json->value_string( iv_prefix && '/repository_selection' ).
+* todo, object, repositories, array
+    installation_token-single_file = mo_json->value_string( iv_prefix && '/single_file' ).
+    installation_token-has_multiple_single_files = mo_json->value_boolean( iv_prefix && '/has_multiple_single_files' ).
+* todo, object, single_file_paths, array
   ENDMETHOD.
 
   METHOD parse_validation_error.
-* sdfsdf object
-* message, string
-* documentation_url, string
-* errors, array
+    validation_error-message = mo_json->value_string( iv_prefix && '/message' ).
+    validation_error-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+* todo, object, errors, array
   ENDMETHOD.
 
   METHOD parse_application_grant.
-* sdfsdf object
-* id, integer
-* url, string
-* app, object
-* created_at, string
-* updated_at, string
-* scopes, array
-* user, 
+    application_grant-id = mo_json->value_string( iv_prefix && '/id' ).
+    application_grant-url = mo_json->value_string( iv_prefix && '/url' ).
+* todo, object, app, object
+    application_grant-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    application_grant-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+* todo, object, scopes, array
+* todo, object, user, 
   ENDMETHOD.
 
   METHOD parse_scoped_installation.
-* sdfsdf object
-* permissions, 
-* repository_selection, string
-* single_file_name, string
-* has_multiple_single_files, boolean
-* single_file_paths, array
-* repositories_url, string
-* account, 
+* todo, object, permissions, 
+    scoped_installation-repository_selection = mo_json->value_string( iv_prefix && '/repository_selection' ).
+    scoped_installation-single_file_name = mo_json->value_string( iv_prefix && '/single_file_name' ).
+    scoped_installation-has_multiple_single_files = mo_json->value_boolean( iv_prefix && '/has_multiple_single_files' ).
+* todo, object, single_file_paths, array
+    scoped_installation-repositories_url = mo_json->value_string( iv_prefix && '/repositories_url' ).
+* todo, object, account, 
   ENDMETHOD.
 
   METHOD parse_authorization.
-* sdfsdf object
-* id, integer
-* url, string
-* scopes, array
-* token, string
-* token_last_eight, string
-* hashed_token, string
-* app, object
-* note, string
-* note_url, string
-* updated_at, string
-* created_at, string
-* fingerprint, string
-* user, 
-* installation, 
+    authorization-id = mo_json->value_string( iv_prefix && '/id' ).
+    authorization-url = mo_json->value_string( iv_prefix && '/url' ).
+* todo, object, scopes, array
+    authorization-token = mo_json->value_string( iv_prefix && '/token' ).
+    authorization-token_last_eight = mo_json->value_string( iv_prefix && '/token_last_eight' ).
+    authorization-hashed_token = mo_json->value_string( iv_prefix && '/hashed_token' ).
+* todo, object, app, object
+    authorization-note = mo_json->value_string( iv_prefix && '/note' ).
+    authorization-note_url = mo_json->value_string( iv_prefix && '/note_url' ).
+    authorization-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    authorization-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    authorization-fingerprint = mo_json->value_string( iv_prefix && '/fingerprint' ).
+* todo, object, user, 
+* todo, object, installation, 
   ENDMETHOD.
 
   METHOD parse_code_of_conduct.
-* sdfsdf object
-* key, string
-* name, string
-* url, string
-* body, string
-* html_url, string
+    code_of_conduct-key = mo_json->value_string( iv_prefix && '/key' ).
+    code_of_conduct-name = mo_json->value_string( iv_prefix && '/name' ).
+    code_of_conduct-url = mo_json->value_string( iv_prefix && '/url' ).
+    code_of_conduct-body = mo_json->value_string( iv_prefix && '/body' ).
+    code_of_conduct-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
   ENDMETHOD.
 
   METHOD parse_content_reference_attach.
-* sdfsdf object
-* id, integer
-* title, string
-* body, string
-* node_id, string
+    content_reference_attachment-id = mo_json->value_string( iv_prefix && '/id' ).
+    content_reference_attachment-title = mo_json->value_string( iv_prefix && '/title' ).
+    content_reference_attachment-body = mo_json->value_string( iv_prefix && '/body' ).
+    content_reference_attachment-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
   ENDMETHOD.
 
   METHOD parse_enabled_organizations.
@@ -1312,175 +1295,161 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_actions_enterprise_permi.
-* sdfsdf object
-* enabled_organizations, 
-* selected_organizations_url, string
-* allowed_actions, 
-* selected_actions_url, 
+* todo, object, enabled_organizations, 
+    actions_enterprise_permissions-selected_organizations_url = mo_json->value_string( iv_prefix && '/selected_organizations_url' ).
+* todo, object, allowed_actions, 
+* todo, object, selected_actions_url, 
   ENDMETHOD.
 
   METHOD parse_organization_simple.
-* sdfsdf object
-* login, string
-* id, integer
-* node_id, string
-* url, string
-* repos_url, string
-* events_url, string
-* hooks_url, string
-* issues_url, string
-* members_url, string
-* public_members_url, string
-* avatar_url, string
-* description, string
+    organization_simple-login = mo_json->value_string( iv_prefix && '/login' ).
+    organization_simple-id = mo_json->value_string( iv_prefix && '/id' ).
+    organization_simple-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    organization_simple-url = mo_json->value_string( iv_prefix && '/url' ).
+    organization_simple-repos_url = mo_json->value_string( iv_prefix && '/repos_url' ).
+    organization_simple-events_url = mo_json->value_string( iv_prefix && '/events_url' ).
+    organization_simple-hooks_url = mo_json->value_string( iv_prefix && '/hooks_url' ).
+    organization_simple-issues_url = mo_json->value_string( iv_prefix && '/issues_url' ).
+    organization_simple-members_url = mo_json->value_string( iv_prefix && '/members_url' ).
+    organization_simple-public_members_url = mo_json->value_string( iv_prefix && '/public_members_url' ).
+    organization_simple-avatar_url = mo_json->value_string( iv_prefix && '/avatar_url' ).
+    organization_simple-description = mo_json->value_string( iv_prefix && '/description' ).
   ENDMETHOD.
 
   METHOD parse_selected_actions.
-* sdfsdf object
-* github_owned_allowed, boolean
-* verified_allowed, boolean
-* patterns_allowed, array
+    selected_actions-github_owned_allowed = mo_json->value_boolean( iv_prefix && '/github_owned_allowed' ).
+    selected_actions-verified_allowed = mo_json->value_boolean( iv_prefix && '/verified_allowed' ).
+* todo, object, patterns_allowed, array
   ENDMETHOD.
 
   METHOD parse_runner_groups_enterprise.
-* sdfsdf object
-* id, number
-* name, string
-* visibility, string
-* default, boolean
-* selected_organizations_url, string
-* runners_url, string
-* allows_public_repositories, boolean
+* todo, object, id, number
+    runner_groups_enterprise-name = mo_json->value_string( iv_prefix && '/name' ).
+    runner_groups_enterprise-visibility = mo_json->value_string( iv_prefix && '/visibility' ).
+    runner_groups_enterprise-default = mo_json->value_boolean( iv_prefix && '/default' ).
+    runner_groups_enterprise-selected_organizations_url = mo_json->value_string( iv_prefix && '/selected_organizations_url' ).
+    runner_groups_enterprise-runners_url = mo_json->value_string( iv_prefix && '/runners_url' ).
+    runner_groups_enterprise-allows_public_repositories = mo_json->value_boolean( iv_prefix && '/allows_public_repositories' ).
   ENDMETHOD.
 
   METHOD parse_runner.
-* sdfsdf object
-* id, integer
-* name, string
-* os, string
-* status, string
-* busy, boolean
-* labels, array
+    runner-id = mo_json->value_string( iv_prefix && '/id' ).
+    runner-name = mo_json->value_string( iv_prefix && '/name' ).
+    runner-os = mo_json->value_string( iv_prefix && '/os' ).
+    runner-status = mo_json->value_string( iv_prefix && '/status' ).
+    runner-busy = mo_json->value_boolean( iv_prefix && '/busy' ).
+* todo, object, labels, array
   ENDMETHOD.
 
   METHOD parse_runner_application.
-* sdfsdf object
-* os, string
-* architecture, string
-* download_url, string
-* filename, string
+    runner_application-os = mo_json->value_string( iv_prefix && '/os' ).
+    runner_application-architecture = mo_json->value_string( iv_prefix && '/architecture' ).
+    runner_application-download_url = mo_json->value_string( iv_prefix && '/download_url' ).
+    runner_application-filename = mo_json->value_string( iv_prefix && '/filename' ).
   ENDMETHOD.
 
   METHOD parse_authentication_token.
-* sdfsdf object
-* token, string
-* expires_at, string
-* permissions, object
-* repositories, array
-* single_file, string
-* repository_selection, string
+    authentication_token-token = mo_json->value_string( iv_prefix && '/token' ).
+    authentication_token-expires_at = mo_json->value_string( iv_prefix && '/expires_at' ).
+* todo, object, permissions, object
+* todo, object, repositories, array
+    authentication_token-single_file = mo_json->value_string( iv_prefix && '/single_file' ).
+    authentication_token-repository_selection = mo_json->value_string( iv_prefix && '/repository_selection' ).
   ENDMETHOD.
 
   METHOD parse_audit_log_event.
-* sdfsdf object
-* timestamp, integer
-* action, string
-* active, boolean
-* active_was, boolean
-* actor, string
-* blocked_user, string
-* business, string
-* config, array
-* config_was, array
-* content_type, string
-* created_at, integer
-* deploy_key_fingerprint, string
-* emoji, string
-* events, array
-* events_were, array
-* explanation, string
-* fingerprint, string
-* hook_id, integer
-* limited_availability, boolean
-* message, string
-* name, string
-* old_user, string
-* openssh_public_key, string
-* org, string
-* previous_visibility, string
-* read_only, boolean
-* repo, string
-* repository, string
-* repository_public, boolean
-* target_login, string
-* team, string
-* transport_protocol, integer
-* transport_protocol_name, string
-* user, string
-* visibility, string
+    audit_log_event-timestamp = mo_json->value_string( iv_prefix && '/@timestamp' ).
+    audit_log_event-action = mo_json->value_string( iv_prefix && '/action' ).
+    audit_log_event-active = mo_json->value_boolean( iv_prefix && '/active' ).
+    audit_log_event-active_was = mo_json->value_boolean( iv_prefix && '/active_was' ).
+    audit_log_event-actor = mo_json->value_string( iv_prefix && '/actor' ).
+    audit_log_event-blocked_user = mo_json->value_string( iv_prefix && '/blocked_user' ).
+    audit_log_event-business = mo_json->value_string( iv_prefix && '/business' ).
+* todo, object, config, array
+* todo, object, config_was, array
+    audit_log_event-content_type = mo_json->value_string( iv_prefix && '/content_type' ).
+    audit_log_event-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    audit_log_event-deploy_key_fingerprint = mo_json->value_string( iv_prefix && '/deploy_key_fingerprint' ).
+    audit_log_event-emoji = mo_json->value_string( iv_prefix && '/emoji' ).
+* todo, object, events, array
+* todo, object, events_were, array
+    audit_log_event-explanation = mo_json->value_string( iv_prefix && '/explanation' ).
+    audit_log_event-fingerprint = mo_json->value_string( iv_prefix && '/fingerprint' ).
+    audit_log_event-hook_id = mo_json->value_string( iv_prefix && '/hook_id' ).
+    audit_log_event-limited_availability = mo_json->value_boolean( iv_prefix && '/limited_availability' ).
+    audit_log_event-message = mo_json->value_string( iv_prefix && '/message' ).
+    audit_log_event-name = mo_json->value_string( iv_prefix && '/name' ).
+    audit_log_event-old_user = mo_json->value_string( iv_prefix && '/old_user' ).
+    audit_log_event-openssh_public_key = mo_json->value_string( iv_prefix && '/openssh_public_key' ).
+    audit_log_event-org = mo_json->value_string( iv_prefix && '/org' ).
+    audit_log_event-previous_visibility = mo_json->value_string( iv_prefix && '/previous_visibility' ).
+    audit_log_event-read_only = mo_json->value_boolean( iv_prefix && '/read_only' ).
+    audit_log_event-repo = mo_json->value_string( iv_prefix && '/repo' ).
+    audit_log_event-repository = mo_json->value_string( iv_prefix && '/repository' ).
+    audit_log_event-repository_public = mo_json->value_boolean( iv_prefix && '/repository_public' ).
+    audit_log_event-target_login = mo_json->value_string( iv_prefix && '/target_login' ).
+    audit_log_event-team = mo_json->value_string( iv_prefix && '/team' ).
+    audit_log_event-transport_protocol = mo_json->value_string( iv_prefix && '/transport_protocol' ).
+    audit_log_event-transport_protocol_name = mo_json->value_string( iv_prefix && '/transport_protocol_name' ).
+    audit_log_event-user = mo_json->value_string( iv_prefix && '/user' ).
+    audit_log_event-visibility = mo_json->value_string( iv_prefix && '/visibility' ).
   ENDMETHOD.
 
   METHOD parse_actions_billing_usage.
-* sdfsdf object
-* total_minutes_used, integer
-* total_paid_minutes_used, integer
-* included_minutes, integer
-* minutes_used_breakdown, object
+    actions_billing_usage-total_minutes_used = mo_json->value_string( iv_prefix && '/total_minutes_used' ).
+    actions_billing_usage-total_paid_minutes_used = mo_json->value_string( iv_prefix && '/total_paid_minutes_used' ).
+    actions_billing_usage-included_minutes = mo_json->value_string( iv_prefix && '/included_minutes' ).
+* todo, object, minutes_used_breakdown, object
   ENDMETHOD.
 
   METHOD parse_packages_billing_usage.
-* sdfsdf object
-* total_gigabytes_bandwidth_used, integer
-* total_paid_gigabytes_bandwidth, integer
-* included_gigabytes_bandwidth, integer
+    packages_billing_usage-total_gigabytes_bandwidth_used = mo_json->value_string( iv_prefix && '/total_gigabytes_bandwidth_used' ).
+    packages_billing_usage-total_paid_gigabytes_bandwidth = mo_json->value_string( iv_prefix && '/total_paid_gigabytes_bandwidth_used' ).
+    packages_billing_usage-included_gigabytes_bandwidth = mo_json->value_string( iv_prefix && '/included_gigabytes_bandwidth' ).
   ENDMETHOD.
 
   METHOD parse_combined_billing_usage.
-* sdfsdf object
-* days_left_in_billing_cycle, integer
-* estimated_paid_storage_for_mon, integer
-* estimated_storage_for_month, integer
+    combined_billing_usage-days_left_in_billing_cycle = mo_json->value_string( iv_prefix && '/days_left_in_billing_cycle' ).
+    combined_billing_usage-estimated_paid_storage_for_mon = mo_json->value_string( iv_prefix && '/estimated_paid_storage_for_month' ).
+    combined_billing_usage-estimated_storage_for_month = mo_json->value_string( iv_prefix && '/estimated_storage_for_month' ).
   ENDMETHOD.
 
   METHOD parse_actor.
-* sdfsdf object
-* id, integer
-* login, string
-* display_login, string
-* gravatar_id, string
-* url, string
-* avatar_url, string
+    actor-id = mo_json->value_string( iv_prefix && '/id' ).
+    actor-login = mo_json->value_string( iv_prefix && '/login' ).
+    actor-display_login = mo_json->value_string( iv_prefix && '/display_login' ).
+    actor-gravatar_id = mo_json->value_string( iv_prefix && '/gravatar_id' ).
+    actor-url = mo_json->value_string( iv_prefix && '/url' ).
+    actor-avatar_url = mo_json->value_string( iv_prefix && '/avatar_url' ).
   ENDMETHOD.
 
   METHOD parse_label.
-* sdfsdf object
-* id, integer
-* node_id, string
-* url, string
-* name, string
-* description, string
-* color, string
-* default, boolean
+    label-id = mo_json->value_string( iv_prefix && '/id' ).
+    label-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    label-url = mo_json->value_string( iv_prefix && '/url' ).
+    label-name = mo_json->value_string( iv_prefix && '/name' ).
+    label-description = mo_json->value_string( iv_prefix && '/description' ).
+    label-color = mo_json->value_string( iv_prefix && '/color' ).
+    label-default = mo_json->value_boolean( iv_prefix && '/default' ).
   ENDMETHOD.
 
   METHOD parse_milestone.
-* sdfsdf object
-* url, string
-* html_url, string
-* labels_url, string
-* id, integer
-* node_id, string
-* number, integer
-* state, string
-* title, string
-* description, string
-* creator, 
-* open_issues, integer
-* closed_issues, integer
-* created_at, string
-* updated_at, string
-* closed_at, string
-* due_on, string
+    milestone-url = mo_json->value_string( iv_prefix && '/url' ).
+    milestone-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    milestone-labels_url = mo_json->value_string( iv_prefix && '/labels_url' ).
+    milestone-id = mo_json->value_string( iv_prefix && '/id' ).
+    milestone-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    milestone-number = mo_json->value_string( iv_prefix && '/number' ).
+    milestone-state = mo_json->value_string( iv_prefix && '/state' ).
+    milestone-title = mo_json->value_string( iv_prefix && '/title' ).
+    milestone-description = mo_json->value_string( iv_prefix && '/description' ).
+* todo, object, creator, 
+    milestone-open_issues = mo_json->value_string( iv_prefix && '/open_issues' ).
+    milestone-closed_issues = mo_json->value_string( iv_prefix && '/closed_issues' ).
+    milestone-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    milestone-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    milestone-closed_at = mo_json->value_string( iv_prefix && '/closed_at' ).
+    milestone-due_on = mo_json->value_string( iv_prefix && '/due_on' ).
   ENDMETHOD.
 
   METHOD parse_author_association.
@@ -1488,425 +1457,405 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_issue_simple.
-* sdfsdf object
-* id, integer
-* node_id, string
-* url, string
-* repository_url, string
-* labels_url, string
-* comments_url, string
-* events_url, string
-* html_url, string
-* number, integer
-* state, string
-* title, string
-* body, string
-* user, 
-* labels, array
-* assignee, 
-* assignees, array
-* milestone, 
-* locked, boolean
-* active_lock_reason, string
-* comments, integer
-* pull_request, object
-* closed_at, string
-* created_at, string
-* updated_at, string
-* author_association, 
-* body_html, string
-* body_text, string
-* timeline_url, string
-* repository, 
-* performed_via_github_app, 
+    issue_simple-id = mo_json->value_string( iv_prefix && '/id' ).
+    issue_simple-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    issue_simple-url = mo_json->value_string( iv_prefix && '/url' ).
+    issue_simple-repository_url = mo_json->value_string( iv_prefix && '/repository_url' ).
+    issue_simple-labels_url = mo_json->value_string( iv_prefix && '/labels_url' ).
+    issue_simple-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
+    issue_simple-events_url = mo_json->value_string( iv_prefix && '/events_url' ).
+    issue_simple-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    issue_simple-number = mo_json->value_string( iv_prefix && '/number' ).
+    issue_simple-state = mo_json->value_string( iv_prefix && '/state' ).
+    issue_simple-title = mo_json->value_string( iv_prefix && '/title' ).
+    issue_simple-body = mo_json->value_string( iv_prefix && '/body' ).
+* todo, object, user, 
+* todo, object, labels, array
+* todo, object, assignee, 
+* todo, object, assignees, array
+* todo, object, milestone, 
+    issue_simple-locked = mo_json->value_boolean( iv_prefix && '/locked' ).
+    issue_simple-active_lock_reason = mo_json->value_string( iv_prefix && '/active_lock_reason' ).
+    issue_simple-comments = mo_json->value_string( iv_prefix && '/comments' ).
+* todo, object, pull_request, object
+    issue_simple-closed_at = mo_json->value_string( iv_prefix && '/closed_at' ).
+    issue_simple-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    issue_simple-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+* todo, object, author_association, 
+    issue_simple-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
+    issue_simple-body_text = mo_json->value_string( iv_prefix && '/body_text' ).
+    issue_simple-timeline_url = mo_json->value_string( iv_prefix && '/timeline_url' ).
+* todo, object, repository, 
+* todo, object, performed_via_github_app, 
   ENDMETHOD.
 
   METHOD parse_reaction_rollup.
-* sdfsdf object
-* url, string
-* total_count, integer
-* 1, integer
-* _1, integer
-* laugh, integer
-* confused, integer
-* heart, integer
-* hooray, integer
-* eyes, integer
-* rocket, integer
+    reaction_rollup-url = mo_json->value_string( iv_prefix && '/url' ).
+    reaction_rollup-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+    reaction_rollup-n1 = mo_json->value_string( iv_prefix && '/+1' ).
+    reaction_rollup-_1 = mo_json->value_string( iv_prefix && '/-1' ).
+    reaction_rollup-laugh = mo_json->value_string( iv_prefix && '/laugh' ).
+    reaction_rollup-confused = mo_json->value_string( iv_prefix && '/confused' ).
+    reaction_rollup-heart = mo_json->value_string( iv_prefix && '/heart' ).
+    reaction_rollup-hooray = mo_json->value_string( iv_prefix && '/hooray' ).
+    reaction_rollup-eyes = mo_json->value_string( iv_prefix && '/eyes' ).
+    reaction_rollup-rocket = mo_json->value_string( iv_prefix && '/rocket' ).
   ENDMETHOD.
 
   METHOD parse_issue_comment.
-* sdfsdf object
-* id, integer
-* node_id, string
-* url, string
-* body, string
-* body_text, string
-* body_html, string
-* html_url, string
-* user, 
-* created_at, string
-* updated_at, string
-* issue_url, string
-* author_association, 
-* performed_via_github_app, 
-* reactions, 
+    issue_comment-id = mo_json->value_string( iv_prefix && '/id' ).
+    issue_comment-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    issue_comment-url = mo_json->value_string( iv_prefix && '/url' ).
+    issue_comment-body = mo_json->value_string( iv_prefix && '/body' ).
+    issue_comment-body_text = mo_json->value_string( iv_prefix && '/body_text' ).
+    issue_comment-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
+    issue_comment-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+* todo, object, user, 
+    issue_comment-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    issue_comment-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    issue_comment-issue_url = mo_json->value_string( iv_prefix && '/issue_url' ).
+* todo, object, author_association, 
+* todo, object, performed_via_github_app, 
+* todo, object, reactions, 
   ENDMETHOD.
 
   METHOD parse_event.
-* sdfsdf object
-* id, string
-* type, string
-* actor, 
-* repo, object
-* org, 
-* payload, object
-* public, boolean
-* created_at, string
+    event-id = mo_json->value_string( iv_prefix && '/id' ).
+    event-type = mo_json->value_string( iv_prefix && '/type' ).
+* todo, object, actor, 
+* todo, object, repo, object
+* todo, object, org, 
+* todo, object, payload, object
+    event-public = mo_json->value_boolean( iv_prefix && '/public' ).
+    event-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
   ENDMETHOD.
 
   METHOD parse_link_with_type.
-* sdfsdf object
-* href, string
-* type, string
+    link_with_type-href = mo_json->value_string( iv_prefix && '/href' ).
+    link_with_type-type = mo_json->value_string( iv_prefix && '/type' ).
   ENDMETHOD.
 
   METHOD parse_feed.
-* sdfsdf object
-* timeline_url, string
-* user_url, string
-* current_user_public_url, string
-* current_user_url, string
-* current_user_actor_url, string
-* current_user_organization_url, string
-* current_user_organization_urls, array
-* security_advisories_url, string
-* _links, object
+    feed-timeline_url = mo_json->value_string( iv_prefix && '/timeline_url' ).
+    feed-user_url = mo_json->value_string( iv_prefix && '/user_url' ).
+    feed-current_user_public_url = mo_json->value_string( iv_prefix && '/current_user_public_url' ).
+    feed-current_user_url = mo_json->value_string( iv_prefix && '/current_user_url' ).
+    feed-current_user_actor_url = mo_json->value_string( iv_prefix && '/current_user_actor_url' ).
+    feed-current_user_organization_url = mo_json->value_string( iv_prefix && '/current_user_organization_url' ).
+* todo, object, current_user_organization_urls, array
+    feed-security_advisories_url = mo_json->value_string( iv_prefix && '/security_advisories_url' ).
+* todo, object, _links, object
   ENDMETHOD.
 
   METHOD parse_base_gist.
-* sdfsdf object
-* url, string
-* forks_url, string
-* commits_url, string
-* id, string
-* node_id, string
-* git_pull_url, string
-* git_push_url, string
-* html_url, string
-* files, object
-* public, boolean
-* created_at, string
-* updated_at, string
-* description, string
-* comments, integer
-* user, 
-* comments_url, string
-* owner, 
-* truncated, boolean
-* forks, array
-* history, array
+    base_gist-url = mo_json->value_string( iv_prefix && '/url' ).
+    base_gist-forks_url = mo_json->value_string( iv_prefix && '/forks_url' ).
+    base_gist-commits_url = mo_json->value_string( iv_prefix && '/commits_url' ).
+    base_gist-id = mo_json->value_string( iv_prefix && '/id' ).
+    base_gist-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    base_gist-git_pull_url = mo_json->value_string( iv_prefix && '/git_pull_url' ).
+    base_gist-git_push_url = mo_json->value_string( iv_prefix && '/git_push_url' ).
+    base_gist-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+* todo, object, files, object
+    base_gist-public = mo_json->value_boolean( iv_prefix && '/public' ).
+    base_gist-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    base_gist-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    base_gist-description = mo_json->value_string( iv_prefix && '/description' ).
+    base_gist-comments = mo_json->value_string( iv_prefix && '/comments' ).
+* todo, object, user, 
+    base_gist-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
+* todo, object, owner, 
+    base_gist-truncated = mo_json->value_boolean( iv_prefix && '/truncated' ).
+* todo, object, forks, array
+* todo, object, history, array
   ENDMETHOD.
 
   METHOD parse_gist_simple.
-* sdfsdf object
-* url, string
-* forks_url, string
-* commits_url, string
-* id, string
-* node_id, string
-* git_pull_url, string
-* git_push_url, string
-* html_url, string
-* files, object
-* public, boolean
-* created_at, string
-* updated_at, string
-* description, string
-* comments, integer
-* user, string
-* comments_url, string
-* owner, 
-* truncated, boolean
+    gist_simple-url = mo_json->value_string( iv_prefix && '/url' ).
+    gist_simple-forks_url = mo_json->value_string( iv_prefix && '/forks_url' ).
+    gist_simple-commits_url = mo_json->value_string( iv_prefix && '/commits_url' ).
+    gist_simple-id = mo_json->value_string( iv_prefix && '/id' ).
+    gist_simple-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    gist_simple-git_pull_url = mo_json->value_string( iv_prefix && '/git_pull_url' ).
+    gist_simple-git_push_url = mo_json->value_string( iv_prefix && '/git_push_url' ).
+    gist_simple-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+* todo, object, files, object
+    gist_simple-public = mo_json->value_boolean( iv_prefix && '/public' ).
+    gist_simple-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    gist_simple-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    gist_simple-description = mo_json->value_string( iv_prefix && '/description' ).
+    gist_simple-comments = mo_json->value_string( iv_prefix && '/comments' ).
+    gist_simple-user = mo_json->value_string( iv_prefix && '/user' ).
+    gist_simple-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
+* todo, object, owner, 
+    gist_simple-truncated = mo_json->value_boolean( iv_prefix && '/truncated' ).
   ENDMETHOD.
 
   METHOD parse_gist_comment.
-* sdfsdf object
-* id, integer
-* node_id, string
-* url, string
-* body, string
-* user, 
-* created_at, string
-* updated_at, string
-* author_association, 
+    gist_comment-id = mo_json->value_string( iv_prefix && '/id' ).
+    gist_comment-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    gist_comment-url = mo_json->value_string( iv_prefix && '/url' ).
+    gist_comment-body = mo_json->value_string( iv_prefix && '/body' ).
+* todo, object, user, 
+    gist_comment-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    gist_comment-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+* todo, object, author_association, 
   ENDMETHOD.
 
   METHOD parse_gist_commit.
-* sdfsdf object
-* url, string
-* version, string
-* user, 
-* change_status, object
-* committed_at, string
+    gist_commit-url = mo_json->value_string( iv_prefix && '/url' ).
+    gist_commit-version = mo_json->value_string( iv_prefix && '/version' ).
+* todo, object, user, 
+* todo, object, change_status, object
+    gist_commit-committed_at = mo_json->value_string( iv_prefix && '/committed_at' ).
   ENDMETHOD.
 
   METHOD parse_gitignore_template.
-* sdfsdf object
-* name, string
-* source, string
+    gitignore_template-name = mo_json->value_string( iv_prefix && '/name' ).
+    gitignore_template-source = mo_json->value_string( iv_prefix && '/source' ).
   ENDMETHOD.
 
   METHOD parse_issue.
-* sdfsdf object
-* id, integer
-* node_id, string
-* url, string
-* repository_url, string
-* labels_url, string
-* comments_url, string
-* events_url, string
-* html_url, string
-* number, integer
-* state, string
-* title, string
-* body, string
-* user, 
-* labels, array
-* assignee, 
-* assignees, array
-* milestone, 
-* locked, boolean
-* active_lock_reason, string
-* comments, integer
-* pull_request, object
-* closed_at, string
-* created_at, string
-* updated_at, string
-* closed_by, 
-* body_html, string
-* body_text, string
-* timeline_url, string
-* repository, 
-* performed_via_github_app, 
-* author_association, 
-* reactions, 
+    issue-id = mo_json->value_string( iv_prefix && '/id' ).
+    issue-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    issue-url = mo_json->value_string( iv_prefix && '/url' ).
+    issue-repository_url = mo_json->value_string( iv_prefix && '/repository_url' ).
+    issue-labels_url = mo_json->value_string( iv_prefix && '/labels_url' ).
+    issue-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
+    issue-events_url = mo_json->value_string( iv_prefix && '/events_url' ).
+    issue-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    issue-number = mo_json->value_string( iv_prefix && '/number' ).
+    issue-state = mo_json->value_string( iv_prefix && '/state' ).
+    issue-title = mo_json->value_string( iv_prefix && '/title' ).
+    issue-body = mo_json->value_string( iv_prefix && '/body' ).
+* todo, object, user, 
+* todo, object, labels, array
+* todo, object, assignee, 
+* todo, object, assignees, array
+* todo, object, milestone, 
+    issue-locked = mo_json->value_boolean( iv_prefix && '/locked' ).
+    issue-active_lock_reason = mo_json->value_string( iv_prefix && '/active_lock_reason' ).
+    issue-comments = mo_json->value_string( iv_prefix && '/comments' ).
+* todo, object, pull_request, object
+    issue-closed_at = mo_json->value_string( iv_prefix && '/closed_at' ).
+    issue-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    issue-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+* todo, object, closed_by, 
+    issue-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
+    issue-body_text = mo_json->value_string( iv_prefix && '/body_text' ).
+    issue-timeline_url = mo_json->value_string( iv_prefix && '/timeline_url' ).
+* todo, object, repository, 
+* todo, object, performed_via_github_app, 
+* todo, object, author_association, 
+* todo, object, reactions, 
   ENDMETHOD.
 
   METHOD parse_license.
-* sdfsdf object
-* key, string
-* name, string
-* spdx_id, string
-* url, string
-* node_id, string
-* html_url, string
-* description, string
-* implementation, string
-* permissions, array
-* conditions, array
-* limitations, array
-* body, string
-* featured, boolean
+    license-key = mo_json->value_string( iv_prefix && '/key' ).
+    license-name = mo_json->value_string( iv_prefix && '/name' ).
+    license-spdx_id = mo_json->value_string( iv_prefix && '/spdx_id' ).
+    license-url = mo_json->value_string( iv_prefix && '/url' ).
+    license-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    license-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    license-description = mo_json->value_string( iv_prefix && '/description' ).
+    license-implementation = mo_json->value_string( iv_prefix && '/implementation' ).
+* todo, object, permissions, array
+* todo, object, conditions, array
+* todo, object, limitations, array
+    license-body = mo_json->value_string( iv_prefix && '/body' ).
+    license-featured = mo_json->value_boolean( iv_prefix && '/featured' ).
   ENDMETHOD.
 
   METHOD parse_marketplace_listing_plan.
-* sdfsdf object
-* url, string
-* accounts_url, string
-* id, integer
-* number, integer
-* name, string
-* description, string
-* monthly_price_in_cents, integer
-* yearly_price_in_cents, integer
-* price_model, string
-* has_free_trial, boolean
-* unit_name, string
-* state, string
-* bullets, array
+    marketplace_listing_plan-url = mo_json->value_string( iv_prefix && '/url' ).
+    marketplace_listing_plan-accounts_url = mo_json->value_string( iv_prefix && '/accounts_url' ).
+    marketplace_listing_plan-id = mo_json->value_string( iv_prefix && '/id' ).
+    marketplace_listing_plan-number = mo_json->value_string( iv_prefix && '/number' ).
+    marketplace_listing_plan-name = mo_json->value_string( iv_prefix && '/name' ).
+    marketplace_listing_plan-description = mo_json->value_string( iv_prefix && '/description' ).
+    marketplace_listing_plan-monthly_price_in_cents = mo_json->value_string( iv_prefix && '/monthly_price_in_cents' ).
+    marketplace_listing_plan-yearly_price_in_cents = mo_json->value_string( iv_prefix && '/yearly_price_in_cents' ).
+    marketplace_listing_plan-price_model = mo_json->value_string( iv_prefix && '/price_model' ).
+    marketplace_listing_plan-has_free_trial = mo_json->value_boolean( iv_prefix && '/has_free_trial' ).
+    marketplace_listing_plan-unit_name = mo_json->value_string( iv_prefix && '/unit_name' ).
+    marketplace_listing_plan-state = mo_json->value_string( iv_prefix && '/state' ).
+* todo, object, bullets, array
   ENDMETHOD.
 
   METHOD parse_marketplace_purchase.
-* sdfsdf object
-* url, string
-* type, string
-* id, integer
-* login, string
-* organization_billing_email, string
-* marketplace_pending_change, object
-* marketplace_purchase, object
+    marketplace_purchase-url = mo_json->value_string( iv_prefix && '/url' ).
+    marketplace_purchase-type = mo_json->value_string( iv_prefix && '/type' ).
+    marketplace_purchase-id = mo_json->value_string( iv_prefix && '/id' ).
+    marketplace_purchase-login = mo_json->value_string( iv_prefix && '/login' ).
+    marketplace_purchase-organization_billing_email = mo_json->value_string( iv_prefix && '/organization_billing_email' ).
+* todo, object, marketplace_pending_change, object
+* todo, object, marketplace_purchase, object
   ENDMETHOD.
 
   METHOD parse_api_overview.
-* sdfsdf object
-* verifiable_password_authentica, boolean
-* ssh_key_fingerprints, object
-* hooks, array
-* web, array
-* api, array
-* git, array
-* pages, array
-* importer, array
-* actions, array
+    api_overview-verifiable_password_authentica = mo_json->value_boolean( iv_prefix && '/verifiable_password_authentication' ).
+* todo, object, ssh_key_fingerprints, object
+* todo, object, hooks, array
+* todo, object, web, array
+* todo, object, api, array
+* todo, object, git, array
+* todo, object, pages, array
+* todo, object, importer, array
+* todo, object, actions, array
   ENDMETHOD.
 
   METHOD parse_minimal_repository.
-* sdfsdf object
-* id, integer
-* node_id, string
-* name, string
-* full_name, string
-* owner, object
-* private, boolean
-* html_url, string
-* description, string
-* fork, boolean
-* url, string
-* archive_url, string
-* assignees_url, string
-* blobs_url, string
-* branches_url, string
-* collaborators_url, string
-* comments_url, string
-* commits_url, string
-* compare_url, string
-* contents_url, string
-* contributors_url, string
-* deployments_url, string
-* downloads_url, string
-* events_url, string
-* forks_url, string
-* git_commits_url, string
-* git_refs_url, string
-* git_tags_url, string
-* git_url, string
-* issue_comment_url, string
-* issue_events_url, string
-* issues_url, string
-* keys_url, string
-* labels_url, string
-* languages_url, string
-* merges_url, string
-* milestones_url, string
-* notifications_url, string
-* pulls_url, string
-* releases_url, string
-* ssh_url, string
-* stargazers_url, string
-* statuses_url, string
-* subscribers_url, string
-* subscription_url, string
-* tags_url, string
-* teams_url, string
-* trees_url, string
-* clone_url, string
-* mirror_url, string
-* hooks_url, string
-* svn_url, string
-* homepage, string
-* language, string
-* forks_count, integer
-* stargazers_count, integer
-* watchers_count, integer
-* size, integer
-* default_branch, string
-* open_issues_count, integer
-* is_template, boolean
-* topics, array
-* has_issues, boolean
-* has_projects, boolean
-* has_wiki, boolean
-* has_pages, boolean
-* has_downloads, boolean
-* archived, boolean
-* disabled, boolean
-* visibility, string
-* pushed_at, string
-* created_at, string
-* updated_at, string
-* permissions, object
-* template_repository, object
-* temp_clone_token, string
-* delete_branch_on_merge, boolean
-* subscribers_count, integer
-* network_count, integer
-* license, object
-* forks, integer
-* open_issues, integer
-* watchers, integer
+    minimal_repository-id = mo_json->value_string( iv_prefix && '/id' ).
+    minimal_repository-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    minimal_repository-name = mo_json->value_string( iv_prefix && '/name' ).
+    minimal_repository-full_name = mo_json->value_string( iv_prefix && '/full_name' ).
+* todo, object, owner, object
+    minimal_repository-private = mo_json->value_boolean( iv_prefix && '/private' ).
+    minimal_repository-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    minimal_repository-description = mo_json->value_string( iv_prefix && '/description' ).
+    minimal_repository-fork = mo_json->value_boolean( iv_prefix && '/fork' ).
+    minimal_repository-url = mo_json->value_string( iv_prefix && '/url' ).
+    minimal_repository-archive_url = mo_json->value_string( iv_prefix && '/archive_url' ).
+    minimal_repository-assignees_url = mo_json->value_string( iv_prefix && '/assignees_url' ).
+    minimal_repository-blobs_url = mo_json->value_string( iv_prefix && '/blobs_url' ).
+    minimal_repository-branches_url = mo_json->value_string( iv_prefix && '/branches_url' ).
+    minimal_repository-collaborators_url = mo_json->value_string( iv_prefix && '/collaborators_url' ).
+    minimal_repository-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
+    minimal_repository-commits_url = mo_json->value_string( iv_prefix && '/commits_url' ).
+    minimal_repository-compare_url = mo_json->value_string( iv_prefix && '/compare_url' ).
+    minimal_repository-contents_url = mo_json->value_string( iv_prefix && '/contents_url' ).
+    minimal_repository-contributors_url = mo_json->value_string( iv_prefix && '/contributors_url' ).
+    minimal_repository-deployments_url = mo_json->value_string( iv_prefix && '/deployments_url' ).
+    minimal_repository-downloads_url = mo_json->value_string( iv_prefix && '/downloads_url' ).
+    minimal_repository-events_url = mo_json->value_string( iv_prefix && '/events_url' ).
+    minimal_repository-forks_url = mo_json->value_string( iv_prefix && '/forks_url' ).
+    minimal_repository-git_commits_url = mo_json->value_string( iv_prefix && '/git_commits_url' ).
+    minimal_repository-git_refs_url = mo_json->value_string( iv_prefix && '/git_refs_url' ).
+    minimal_repository-git_tags_url = mo_json->value_string( iv_prefix && '/git_tags_url' ).
+    minimal_repository-git_url = mo_json->value_string( iv_prefix && '/git_url' ).
+    minimal_repository-issue_comment_url = mo_json->value_string( iv_prefix && '/issue_comment_url' ).
+    minimal_repository-issue_events_url = mo_json->value_string( iv_prefix && '/issue_events_url' ).
+    minimal_repository-issues_url = mo_json->value_string( iv_prefix && '/issues_url' ).
+    minimal_repository-keys_url = mo_json->value_string( iv_prefix && '/keys_url' ).
+    minimal_repository-labels_url = mo_json->value_string( iv_prefix && '/labels_url' ).
+    minimal_repository-languages_url = mo_json->value_string( iv_prefix && '/languages_url' ).
+    minimal_repository-merges_url = mo_json->value_string( iv_prefix && '/merges_url' ).
+    minimal_repository-milestones_url = mo_json->value_string( iv_prefix && '/milestones_url' ).
+    minimal_repository-notifications_url = mo_json->value_string( iv_prefix && '/notifications_url' ).
+    minimal_repository-pulls_url = mo_json->value_string( iv_prefix && '/pulls_url' ).
+    minimal_repository-releases_url = mo_json->value_string( iv_prefix && '/releases_url' ).
+    minimal_repository-ssh_url = mo_json->value_string( iv_prefix && '/ssh_url' ).
+    minimal_repository-stargazers_url = mo_json->value_string( iv_prefix && '/stargazers_url' ).
+    minimal_repository-statuses_url = mo_json->value_string( iv_prefix && '/statuses_url' ).
+    minimal_repository-subscribers_url = mo_json->value_string( iv_prefix && '/subscribers_url' ).
+    minimal_repository-subscription_url = mo_json->value_string( iv_prefix && '/subscription_url' ).
+    minimal_repository-tags_url = mo_json->value_string( iv_prefix && '/tags_url' ).
+    minimal_repository-teams_url = mo_json->value_string( iv_prefix && '/teams_url' ).
+    minimal_repository-trees_url = mo_json->value_string( iv_prefix && '/trees_url' ).
+    minimal_repository-clone_url = mo_json->value_string( iv_prefix && '/clone_url' ).
+    minimal_repository-mirror_url = mo_json->value_string( iv_prefix && '/mirror_url' ).
+    minimal_repository-hooks_url = mo_json->value_string( iv_prefix && '/hooks_url' ).
+    minimal_repository-svn_url = mo_json->value_string( iv_prefix && '/svn_url' ).
+    minimal_repository-homepage = mo_json->value_string( iv_prefix && '/homepage' ).
+    minimal_repository-language = mo_json->value_string( iv_prefix && '/language' ).
+    minimal_repository-forks_count = mo_json->value_string( iv_prefix && '/forks_count' ).
+    minimal_repository-stargazers_count = mo_json->value_string( iv_prefix && '/stargazers_count' ).
+    minimal_repository-watchers_count = mo_json->value_string( iv_prefix && '/watchers_count' ).
+    minimal_repository-size = mo_json->value_string( iv_prefix && '/size' ).
+    minimal_repository-default_branch = mo_json->value_string( iv_prefix && '/default_branch' ).
+    minimal_repository-open_issues_count = mo_json->value_string( iv_prefix && '/open_issues_count' ).
+    minimal_repository-is_template = mo_json->value_boolean( iv_prefix && '/is_template' ).
+* todo, object, topics, array
+    minimal_repository-has_issues = mo_json->value_boolean( iv_prefix && '/has_issues' ).
+    minimal_repository-has_projects = mo_json->value_boolean( iv_prefix && '/has_projects' ).
+    minimal_repository-has_wiki = mo_json->value_boolean( iv_prefix && '/has_wiki' ).
+    minimal_repository-has_pages = mo_json->value_boolean( iv_prefix && '/has_pages' ).
+    minimal_repository-has_downloads = mo_json->value_boolean( iv_prefix && '/has_downloads' ).
+    minimal_repository-archived = mo_json->value_boolean( iv_prefix && '/archived' ).
+    minimal_repository-disabled = mo_json->value_boolean( iv_prefix && '/disabled' ).
+    minimal_repository-visibility = mo_json->value_string( iv_prefix && '/visibility' ).
+    minimal_repository-pushed_at = mo_json->value_string( iv_prefix && '/pushed_at' ).
+    minimal_repository-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    minimal_repository-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+* todo, object, permissions, object
+* todo, object, template_repository, object
+    minimal_repository-temp_clone_token = mo_json->value_string( iv_prefix && '/temp_clone_token' ).
+    minimal_repository-delete_branch_on_merge = mo_json->value_boolean( iv_prefix && '/delete_branch_on_merge' ).
+    minimal_repository-subscribers_count = mo_json->value_string( iv_prefix && '/subscribers_count' ).
+    minimal_repository-network_count = mo_json->value_string( iv_prefix && '/network_count' ).
+* todo, object, license, object
+    minimal_repository-forks = mo_json->value_string( iv_prefix && '/forks' ).
+    minimal_repository-open_issues = mo_json->value_string( iv_prefix && '/open_issues' ).
+    minimal_repository-watchers = mo_json->value_string( iv_prefix && '/watchers' ).
   ENDMETHOD.
 
   METHOD parse_thread.
-* sdfsdf object
-* id, string
-* repository, 
-* subject, object
-* reason, string
-* unread, boolean
-* updated_at, string
-* last_read_at, string
-* url, string
-* subscription_url, string
+    thread-id = mo_json->value_string( iv_prefix && '/id' ).
+* todo, object, repository, 
+* todo, object, subject, object
+    thread-reason = mo_json->value_string( iv_prefix && '/reason' ).
+    thread-unread = mo_json->value_boolean( iv_prefix && '/unread' ).
+    thread-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    thread-last_read_at = mo_json->value_string( iv_prefix && '/last_read_at' ).
+    thread-url = mo_json->value_string( iv_prefix && '/url' ).
+    thread-subscription_url = mo_json->value_string( iv_prefix && '/subscription_url' ).
   ENDMETHOD.
 
   METHOD parse_thread_subscription.
-* sdfsdf object
-* subscribed, boolean
-* ignored, boolean
-* reason, string
-* created_at, string
-* url, string
-* thread_url, string
-* repository_url, string
+    thread_subscription-subscribed = mo_json->value_boolean( iv_prefix && '/subscribed' ).
+    thread_subscription-ignored = mo_json->value_boolean( iv_prefix && '/ignored' ).
+    thread_subscription-reason = mo_json->value_string( iv_prefix && '/reason' ).
+    thread_subscription-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    thread_subscription-url = mo_json->value_string( iv_prefix && '/url' ).
+    thread_subscription-thread_url = mo_json->value_string( iv_prefix && '/thread_url' ).
+    thread_subscription-repository_url = mo_json->value_string( iv_prefix && '/repository_url' ).
   ENDMETHOD.
 
   METHOD parse_organization_full.
-* sdfsdf object
-* login, string
-* id, integer
-* node_id, string
-* url, string
-* repos_url, string
-* events_url, string
-* hooks_url, string
-* issues_url, string
-* members_url, string
-* public_members_url, string
-* avatar_url, string
-* description, string
-* name, string
-* company, string
-* blog, string
-* location, string
-* email, string
-* twitter_username, string
-* is_verified, boolean
-* has_organization_projects, boolean
-* has_repository_projects, boolean
-* public_repos, integer
-* public_gists, integer
-* followers, integer
-* following, integer
-* html_url, string
-* created_at, string
-* type, string
-* total_private_repos, integer
-* owned_private_repos, integer
-* private_gists, integer
-* disk_usage, integer
-* collaborators, integer
-* billing_email, string
-* plan, object
-* default_repository_permission, string
-* members_can_create_repositorie, boolean
-* two_factor_requirement_enabled, boolean
-* members_allowed_repository_cre, string
-* members_can_create_public_repo, boolean
-* members_can_create_private_rep, boolean
-* members_can_create_internal_re, boolean
-* members_can_create_pages, boolean
-* updated_at, string
+    organization_full-login = mo_json->value_string( iv_prefix && '/login' ).
+    organization_full-id = mo_json->value_string( iv_prefix && '/id' ).
+    organization_full-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    organization_full-url = mo_json->value_string( iv_prefix && '/url' ).
+    organization_full-repos_url = mo_json->value_string( iv_prefix && '/repos_url' ).
+    organization_full-events_url = mo_json->value_string( iv_prefix && '/events_url' ).
+    organization_full-hooks_url = mo_json->value_string( iv_prefix && '/hooks_url' ).
+    organization_full-issues_url = mo_json->value_string( iv_prefix && '/issues_url' ).
+    organization_full-members_url = mo_json->value_string( iv_prefix && '/members_url' ).
+    organization_full-public_members_url = mo_json->value_string( iv_prefix && '/public_members_url' ).
+    organization_full-avatar_url = mo_json->value_string( iv_prefix && '/avatar_url' ).
+    organization_full-description = mo_json->value_string( iv_prefix && '/description' ).
+    organization_full-name = mo_json->value_string( iv_prefix && '/name' ).
+    organization_full-company = mo_json->value_string( iv_prefix && '/company' ).
+    organization_full-blog = mo_json->value_string( iv_prefix && '/blog' ).
+    organization_full-location = mo_json->value_string( iv_prefix && '/location' ).
+    organization_full-email = mo_json->value_string( iv_prefix && '/email' ).
+    organization_full-twitter_username = mo_json->value_string( iv_prefix && '/twitter_username' ).
+    organization_full-is_verified = mo_json->value_boolean( iv_prefix && '/is_verified' ).
+    organization_full-has_organization_projects = mo_json->value_boolean( iv_prefix && '/has_organization_projects' ).
+    organization_full-has_repository_projects = mo_json->value_boolean( iv_prefix && '/has_repository_projects' ).
+    organization_full-public_repos = mo_json->value_string( iv_prefix && '/public_repos' ).
+    organization_full-public_gists = mo_json->value_string( iv_prefix && '/public_gists' ).
+    organization_full-followers = mo_json->value_string( iv_prefix && '/followers' ).
+    organization_full-following = mo_json->value_string( iv_prefix && '/following' ).
+    organization_full-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    organization_full-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    organization_full-type = mo_json->value_string( iv_prefix && '/type' ).
+    organization_full-total_private_repos = mo_json->value_string( iv_prefix && '/total_private_repos' ).
+    organization_full-owned_private_repos = mo_json->value_string( iv_prefix && '/owned_private_repos' ).
+    organization_full-private_gists = mo_json->value_string( iv_prefix && '/private_gists' ).
+    organization_full-disk_usage = mo_json->value_string( iv_prefix && '/disk_usage' ).
+    organization_full-collaborators = mo_json->value_string( iv_prefix && '/collaborators' ).
+    organization_full-billing_email = mo_json->value_string( iv_prefix && '/billing_email' ).
+* todo, object, plan, object
+    organization_full-default_repository_permission = mo_json->value_string( iv_prefix && '/default_repository_permission' ).
+    organization_full-members_can_create_repositorie = mo_json->value_boolean( iv_prefix && '/members_can_create_repositories' ).
+    organization_full-two_factor_requirement_enabled = mo_json->value_boolean( iv_prefix && '/two_factor_requirement_enabled' ).
+    organization_full-members_allowed_repository_cre = mo_json->value_string( iv_prefix && '/members_allowed_repository_creation_type' ).
+    organization_full-members_can_create_public_repo = mo_json->value_boolean( iv_prefix && '/members_can_create_public_repositories' ).
+    organization_full-members_can_create_private_rep = mo_json->value_boolean( iv_prefix && '/members_can_create_private_repositories' ).
+    organization_full-members_can_create_internal_re = mo_json->value_boolean( iv_prefix && '/members_can_create_internal_repositories' ).
+    organization_full-members_can_create_pages = mo_json->value_boolean( iv_prefix && '/members_can_create_pages' ).
+    organization_full-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
   ENDMETHOD.
 
   METHOD parse_enabled_repositories.
@@ -1914,88 +1863,81 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_actions_organization_per.
-* sdfsdf object
-* enabled_repositories, 
-* selected_repositories_url, string
-* allowed_actions, 
-* selected_actions_url, 
+* todo, object, enabled_repositories, 
+    actions_organization_permissio-selected_repositories_url = mo_json->value_string( iv_prefix && '/selected_repositories_url' ).
+* todo, object, allowed_actions, 
+* todo, object, selected_actions_url, 
   ENDMETHOD.
 
   METHOD parse_runner_groups_org.
-* sdfsdf object
-* id, number
-* name, string
-* visibility, string
-* default, boolean
-* selected_repositories_url, string
-* runners_url, string
-* inherited, boolean
-* inherited_allows_public_reposi, boolean
-* allows_public_repositories, boolean
+* todo, object, id, number
+    runner_groups_org-name = mo_json->value_string( iv_prefix && '/name' ).
+    runner_groups_org-visibility = mo_json->value_string( iv_prefix && '/visibility' ).
+    runner_groups_org-default = mo_json->value_boolean( iv_prefix && '/default' ).
+    runner_groups_org-selected_repositories_url = mo_json->value_string( iv_prefix && '/selected_repositories_url' ).
+    runner_groups_org-runners_url = mo_json->value_string( iv_prefix && '/runners_url' ).
+    runner_groups_org-inherited = mo_json->value_boolean( iv_prefix && '/inherited' ).
+    runner_groups_org-inherited_allows_public_reposi = mo_json->value_boolean( iv_prefix && '/inherited_allows_public_repositories' ).
+    runner_groups_org-allows_public_repositories = mo_json->value_boolean( iv_prefix && '/allows_public_repositories' ).
   ENDMETHOD.
 
   METHOD parse_organization_actions_sec.
-* sdfsdf object
-* name, string
-* created_at, string
-* updated_at, string
-* visibility, string
-* selected_repositories_url, string
+    organization_actions_secret-name = mo_json->value_string( iv_prefix && '/name' ).
+    organization_actions_secret-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    organization_actions_secret-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    organization_actions_secret-visibility = mo_json->value_string( iv_prefix && '/visibility' ).
+    organization_actions_secret-selected_repositories_url = mo_json->value_string( iv_prefix && '/selected_repositories_url' ).
   ENDMETHOD.
 
   METHOD parse_actions_public_key.
-* sdfsdf object
-* key_id, string
-* key, string
-* id, integer
-* url, string
-* title, string
-* created_at, string
+    actions_public_key-key_id = mo_json->value_string( iv_prefix && '/key_id' ).
+    actions_public_key-key = mo_json->value_string( iv_prefix && '/key' ).
+    actions_public_key-id = mo_json->value_string( iv_prefix && '/id' ).
+    actions_public_key-url = mo_json->value_string( iv_prefix && '/url' ).
+    actions_public_key-title = mo_json->value_string( iv_prefix && '/title' ).
+    actions_public_key-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
   ENDMETHOD.
 
   METHOD parse_credential_authorization.
-* sdfsdf object
-* login, string
-* credential_id, integer
-* credential_type, string
-* token_last_eight, string
-* credential_authorized_at, string
-* scopes, array
-* fingerprint, string
-* credential_accessed_at, string
-* authorized_credential_id, integer
-* authorized_credential_title, string
-* authorized_credential_note, string
+    credential_authorization-login = mo_json->value_string( iv_prefix && '/login' ).
+    credential_authorization-credential_id = mo_json->value_string( iv_prefix && '/credential_id' ).
+    credential_authorization-credential_type = mo_json->value_string( iv_prefix && '/credential_type' ).
+    credential_authorization-token_last_eight = mo_json->value_string( iv_prefix && '/token_last_eight' ).
+    credential_authorization-credential_authorized_at = mo_json->value_string( iv_prefix && '/credential_authorized_at' ).
+* todo, object, scopes, array
+    credential_authorization-fingerprint = mo_json->value_string( iv_prefix && '/fingerprint' ).
+    credential_authorization-credential_accessed_at = mo_json->value_string( iv_prefix && '/credential_accessed_at' ).
+    credential_authorization-authorized_credential_id = mo_json->value_string( iv_prefix && '/authorized_credential_id' ).
+    credential_authorization-authorized_credential_title = mo_json->value_string( iv_prefix && '/authorized_credential_title' ).
+    credential_authorization-authorized_credential_note = mo_json->value_string( iv_prefix && '/authorized_credential_note' ).
   ENDMETHOD.
 
   METHOD parse_organization_invitation.
-* sdfsdf object
-* id, integer
-* login, string
-* email, string
-* role, string
-* created_at, string
-* failed_at, string
-* failed_reason, string
-* inviter, 
-* team_count, integer
-* invitation_team_url, string
-* node_id, string
-* invitation_teams_url, string
+    organization_invitation-id = mo_json->value_string( iv_prefix && '/id' ).
+    organization_invitation-login = mo_json->value_string( iv_prefix && '/login' ).
+    organization_invitation-email = mo_json->value_string( iv_prefix && '/email' ).
+    organization_invitation-role = mo_json->value_string( iv_prefix && '/role' ).
+    organization_invitation-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    organization_invitation-failed_at = mo_json->value_string( iv_prefix && '/failed_at' ).
+    organization_invitation-failed_reason = mo_json->value_string( iv_prefix && '/failed_reason' ).
+* todo, object, inviter, 
+    organization_invitation-team_count = mo_json->value_string( iv_prefix && '/team_count' ).
+    organization_invitation-invitation_team_url = mo_json->value_string( iv_prefix && '/invitation_team_url' ).
+    organization_invitation-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    organization_invitation-invitation_teams_url = mo_json->value_string( iv_prefix && '/invitation_teams_url' ).
   ENDMETHOD.
 
   METHOD parse_org_hook.
-* sdfsdf object
-* id, integer
-* url, string
-* ping_url, string
-* name, string
-* events, array
-* active, boolean
-* config, object
-* updated_at, string
-* created_at, string
-* type, string
+    org_hook-id = mo_json->value_string( iv_prefix && '/id' ).
+    org_hook-url = mo_json->value_string( iv_prefix && '/url' ).
+    org_hook-ping_url = mo_json->value_string( iv_prefix && '/ping_url' ).
+    org_hook-name = mo_json->value_string( iv_prefix && '/name' ).
+* todo, object, events, array
+    org_hook-active = mo_json->value_boolean( iv_prefix && '/active' ).
+* todo, object, config, object
+    org_hook-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    org_hook-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    org_hook-type = mo_json->value_string( iv_prefix && '/type' ).
   ENDMETHOD.
 
   METHOD parse_interaction_group.
@@ -2003,10 +1945,9 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_interaction_limit_respon.
-* sdfsdf object
-* limit, 
-* origin, string
-* expires_at, string
+* todo, object, limit, 
+    interaction_limit_response-origin = mo_json->value_string( iv_prefix && '/origin' ).
+    interaction_limit_response-expires_at = mo_json->value_string( iv_prefix && '/expires_at' ).
   ENDMETHOD.
 
   METHOD parse_interaction_expiry.
@@ -2014,457 +1955,435 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_interaction_limit.
-* sdfsdf object
-* limit, 
-* expiry, 
+* todo, object, limit, 
+* todo, object, expiry, 
   ENDMETHOD.
 
   METHOD parse_team_simple.
-* sdfsdf object
-* id, integer
-* node_id, string
-* url, string
-* members_url, string
-* name, string
-* description, string
-* permission, string
-* privacy, string
-* html_url, string
-* repositories_url, string
-* slug, string
-* ldap_dn, string
+    team_simple-id = mo_json->value_string( iv_prefix && '/id' ).
+    team_simple-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    team_simple-url = mo_json->value_string( iv_prefix && '/url' ).
+    team_simple-members_url = mo_json->value_string( iv_prefix && '/members_url' ).
+    team_simple-name = mo_json->value_string( iv_prefix && '/name' ).
+    team_simple-description = mo_json->value_string( iv_prefix && '/description' ).
+    team_simple-permission = mo_json->value_string( iv_prefix && '/permission' ).
+    team_simple-privacy = mo_json->value_string( iv_prefix && '/privacy' ).
+    team_simple-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    team_simple-repositories_url = mo_json->value_string( iv_prefix && '/repositories_url' ).
+    team_simple-slug = mo_json->value_string( iv_prefix && '/slug' ).
+    team_simple-ldap_dn = mo_json->value_string( iv_prefix && '/ldap_dn' ).
   ENDMETHOD.
 
   METHOD parse_team.
-* sdfsdf object
-* id, integer
-* node_id, string
-* name, string
-* slug, string
-* description, string
-* privacy, string
-* permission, string
-* url, string
-* html_url, string
-* members_url, string
-* repositories_url, string
-* parent, 
+    team-id = mo_json->value_string( iv_prefix && '/id' ).
+    team-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    team-name = mo_json->value_string( iv_prefix && '/name' ).
+    team-slug = mo_json->value_string( iv_prefix && '/slug' ).
+    team-description = mo_json->value_string( iv_prefix && '/description' ).
+    team-privacy = mo_json->value_string( iv_prefix && '/privacy' ).
+    team-permission = mo_json->value_string( iv_prefix && '/permission' ).
+    team-url = mo_json->value_string( iv_prefix && '/url' ).
+    team-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    team-members_url = mo_json->value_string( iv_prefix && '/members_url' ).
+    team-repositories_url = mo_json->value_string( iv_prefix && '/repositories_url' ).
+* todo, object, parent, 
   ENDMETHOD.
 
   METHOD parse_org_membership.
-* sdfsdf object
-* url, string
-* state, string
-* role, string
-* organization_url, string
-* organization, 
-* user, 
-* permissions, object
+    org_membership-url = mo_json->value_string( iv_prefix && '/url' ).
+    org_membership-state = mo_json->value_string( iv_prefix && '/state' ).
+    org_membership-role = mo_json->value_string( iv_prefix && '/role' ).
+    org_membership-organization_url = mo_json->value_string( iv_prefix && '/organization_url' ).
+* todo, object, organization, 
+* todo, object, user, 
+* todo, object, permissions, object
   ENDMETHOD.
 
   METHOD parse_migration.
-* sdfsdf object
-* id, integer
-* owner, 
-* guid, string
-* state, string
-* lock_repositories, boolean
-* exclude_attachments, boolean
-* repositories, array
-* url, string
-* created_at, string
-* updated_at, string
-* node_id, string
-* archive_url, string
-* exclude, array
+    migration-id = mo_json->value_string( iv_prefix && '/id' ).
+* todo, object, owner, 
+    migration-guid = mo_json->value_string( iv_prefix && '/guid' ).
+    migration-state = mo_json->value_string( iv_prefix && '/state' ).
+    migration-lock_repositories = mo_json->value_boolean( iv_prefix && '/lock_repositories' ).
+    migration-exclude_attachments = mo_json->value_boolean( iv_prefix && '/exclude_attachments' ).
+* todo, object, repositories, array
+    migration-url = mo_json->value_string( iv_prefix && '/url' ).
+    migration-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    migration-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    migration-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    migration-archive_url = mo_json->value_string( iv_prefix && '/archive_url' ).
+* todo, object, exclude, array
   ENDMETHOD.
 
   METHOD parse_project.
-* sdfsdf object
-* owner_url, string
-* url, string
-* html_url, string
-* columns_url, string
-* id, integer
-* node_id, string
-* name, string
-* body, string
-* number, integer
-* state, string
-* creator, 
-* created_at, string
-* updated_at, string
-* organization_permission, string
-* private, boolean
+    project-owner_url = mo_json->value_string( iv_prefix && '/owner_url' ).
+    project-url = mo_json->value_string( iv_prefix && '/url' ).
+    project-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    project-columns_url = mo_json->value_string( iv_prefix && '/columns_url' ).
+    project-id = mo_json->value_string( iv_prefix && '/id' ).
+    project-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    project-name = mo_json->value_string( iv_prefix && '/name' ).
+    project-body = mo_json->value_string( iv_prefix && '/body' ).
+    project-number = mo_json->value_string( iv_prefix && '/number' ).
+    project-state = mo_json->value_string( iv_prefix && '/state' ).
+* todo, object, creator, 
+    project-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    project-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    project-organization_permission = mo_json->value_string( iv_prefix && '/organization_permission' ).
+    project-private = mo_json->value_boolean( iv_prefix && '/private' ).
   ENDMETHOD.
 
   METHOD parse_group_mapping.
-* sdfsdf object
-* groups, array
-* group_id, string
-* group_name, string
-* group_description, string
-* status, string
-* synced_at, string
+* todo, object, groups, array
+    group_mapping-group_id = mo_json->value_string( iv_prefix && '/group_id' ).
+    group_mapping-group_name = mo_json->value_string( iv_prefix && '/group_name' ).
+    group_mapping-group_description = mo_json->value_string( iv_prefix && '/group_description' ).
+    group_mapping-status = mo_json->value_string( iv_prefix && '/status' ).
+    group_mapping-synced_at = mo_json->value_string( iv_prefix && '/synced_at' ).
   ENDMETHOD.
 
   METHOD parse_team_full.
-* sdfsdf object
-* id, integer
-* node_id, string
-* url, string
-* html_url, string
-* name, string
-* slug, string
-* description, string
-* privacy, string
-* permission, string
-* members_url, string
-* repositories_url, string
-* parent, 
-* members_count, integer
-* repos_count, integer
-* created_at, string
-* updated_at, string
-* organization, 
-* ldap_dn, string
+    team_full-id = mo_json->value_string( iv_prefix && '/id' ).
+    team_full-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    team_full-url = mo_json->value_string( iv_prefix && '/url' ).
+    team_full-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    team_full-name = mo_json->value_string( iv_prefix && '/name' ).
+    team_full-slug = mo_json->value_string( iv_prefix && '/slug' ).
+    team_full-description = mo_json->value_string( iv_prefix && '/description' ).
+    team_full-privacy = mo_json->value_string( iv_prefix && '/privacy' ).
+    team_full-permission = mo_json->value_string( iv_prefix && '/permission' ).
+    team_full-members_url = mo_json->value_string( iv_prefix && '/members_url' ).
+    team_full-repositories_url = mo_json->value_string( iv_prefix && '/repositories_url' ).
+* todo, object, parent, 
+    team_full-members_count = mo_json->value_string( iv_prefix && '/members_count' ).
+    team_full-repos_count = mo_json->value_string( iv_prefix && '/repos_count' ).
+    team_full-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    team_full-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+* todo, object, organization, 
+    team_full-ldap_dn = mo_json->value_string( iv_prefix && '/ldap_dn' ).
   ENDMETHOD.
 
   METHOD parse_team_discussion.
-* sdfsdf object
-* author, 
-* body, string
-* body_html, string
-* body_version, string
-* comments_count, integer
-* comments_url, string
-* created_at, string
-* last_edited_at, string
-* html_url, string
-* node_id, string
-* number, integer
-* pinned, boolean
-* private, boolean
-* team_url, string
-* title, string
-* updated_at, string
-* url, string
-* reactions, 
+* todo, object, author, 
+    team_discussion-body = mo_json->value_string( iv_prefix && '/body' ).
+    team_discussion-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
+    team_discussion-body_version = mo_json->value_string( iv_prefix && '/body_version' ).
+    team_discussion-comments_count = mo_json->value_string( iv_prefix && '/comments_count' ).
+    team_discussion-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
+    team_discussion-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    team_discussion-last_edited_at = mo_json->value_string( iv_prefix && '/last_edited_at' ).
+    team_discussion-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    team_discussion-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    team_discussion-number = mo_json->value_string( iv_prefix && '/number' ).
+    team_discussion-pinned = mo_json->value_boolean( iv_prefix && '/pinned' ).
+    team_discussion-private = mo_json->value_boolean( iv_prefix && '/private' ).
+    team_discussion-team_url = mo_json->value_string( iv_prefix && '/team_url' ).
+    team_discussion-title = mo_json->value_string( iv_prefix && '/title' ).
+    team_discussion-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    team_discussion-url = mo_json->value_string( iv_prefix && '/url' ).
+* todo, object, reactions, 
   ENDMETHOD.
 
   METHOD parse_team_discussion_comment.
-* sdfsdf object
-* author, 
-* body, string
-* body_html, string
-* body_version, string
-* created_at, string
-* last_edited_at, string
-* discussion_url, string
-* html_url, string
-* node_id, string
-* number, integer
-* updated_at, string
-* url, string
-* reactions, 
+* todo, object, author, 
+    team_discussion_comment-body = mo_json->value_string( iv_prefix && '/body' ).
+    team_discussion_comment-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
+    team_discussion_comment-body_version = mo_json->value_string( iv_prefix && '/body_version' ).
+    team_discussion_comment-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    team_discussion_comment-last_edited_at = mo_json->value_string( iv_prefix && '/last_edited_at' ).
+    team_discussion_comment-discussion_url = mo_json->value_string( iv_prefix && '/discussion_url' ).
+    team_discussion_comment-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    team_discussion_comment-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    team_discussion_comment-number = mo_json->value_string( iv_prefix && '/number' ).
+    team_discussion_comment-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    team_discussion_comment-url = mo_json->value_string( iv_prefix && '/url' ).
+* todo, object, reactions, 
   ENDMETHOD.
 
   METHOD parse_reaction.
-* sdfsdf object
-* id, integer
-* node_id, string
-* user, 
-* content, string
-* created_at, string
+    reaction-id = mo_json->value_string( iv_prefix && '/id' ).
+    reaction-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+* todo, object, user, 
+    reaction-content = mo_json->value_string( iv_prefix && '/content' ).
+    reaction-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
   ENDMETHOD.
 
   METHOD parse_team_membership.
-* sdfsdf object
-* url, string
-* role, string
-* state, string
+    team_membership-url = mo_json->value_string( iv_prefix && '/url' ).
+    team_membership-role = mo_json->value_string( iv_prefix && '/role' ).
+    team_membership-state = mo_json->value_string( iv_prefix && '/state' ).
   ENDMETHOD.
 
   METHOD parse_team_project.
-* sdfsdf object
-* owner_url, string
-* url, string
-* html_url, string
-* columns_url, string
-* id, integer
-* node_id, string
-* name, string
-* body, string
-* number, integer
-* state, string
-* creator, 
-* created_at, string
-* updated_at, string
-* organization_permission, string
-* private, boolean
-* permissions, object
+    team_project-owner_url = mo_json->value_string( iv_prefix && '/owner_url' ).
+    team_project-url = mo_json->value_string( iv_prefix && '/url' ).
+    team_project-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    team_project-columns_url = mo_json->value_string( iv_prefix && '/columns_url' ).
+    team_project-id = mo_json->value_string( iv_prefix && '/id' ).
+    team_project-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    team_project-name = mo_json->value_string( iv_prefix && '/name' ).
+    team_project-body = mo_json->value_string( iv_prefix && '/body' ).
+    team_project-number = mo_json->value_string( iv_prefix && '/number' ).
+    team_project-state = mo_json->value_string( iv_prefix && '/state' ).
+* todo, object, creator, 
+    team_project-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    team_project-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    team_project-organization_permission = mo_json->value_string( iv_prefix && '/organization_permission' ).
+    team_project-private = mo_json->value_boolean( iv_prefix && '/private' ).
+* todo, object, permissions, object
   ENDMETHOD.
 
   METHOD parse_team_repository.
-* sdfsdf object
-* id, integer
-* node_id, string
-* name, string
-* full_name, string
-* license, 
-* forks, integer
-* permissions, object
-* owner, 
-* private, boolean
-* html_url, string
-* description, string
-* fork, boolean
-* url, string
-* archive_url, string
-* assignees_url, string
-* blobs_url, string
-* branches_url, string
-* collaborators_url, string
-* comments_url, string
-* commits_url, string
-* compare_url, string
-* contents_url, string
-* contributors_url, string
-* deployments_url, string
-* downloads_url, string
-* events_url, string
-* forks_url, string
-* git_commits_url, string
-* git_refs_url, string
-* git_tags_url, string
-* git_url, string
-* issue_comment_url, string
-* issue_events_url, string
-* issues_url, string
-* keys_url, string
-* labels_url, string
-* languages_url, string
-* merges_url, string
-* milestones_url, string
-* notifications_url, string
-* pulls_url, string
-* releases_url, string
-* ssh_url, string
-* stargazers_url, string
-* statuses_url, string
-* subscribers_url, string
-* subscription_url, string
-* tags_url, string
-* teams_url, string
-* trees_url, string
-* clone_url, string
-* mirror_url, string
-* hooks_url, string
-* svn_url, string
-* homepage, string
-* language, string
-* forks_count, integer
-* stargazers_count, integer
-* watchers_count, integer
-* size, integer
-* default_branch, string
-* open_issues_count, integer
-* is_template, boolean
-* topics, array
-* has_issues, boolean
-* has_projects, boolean
-* has_wiki, boolean
-* has_pages, boolean
-* has_downloads, boolean
-* archived, boolean
-* disabled, boolean
-* visibility, string
-* pushed_at, string
-* created_at, string
-* updated_at, string
-* allow_rebase_merge, boolean
-* template_repository, object
-* temp_clone_token, string
-* allow_squash_merge, boolean
-* delete_branch_on_merge, boolean
-* allow_merge_commit, boolean
-* subscribers_count, integer
-* network_count, integer
-* open_issues, integer
-* watchers, integer
-* master_branch, string
+    team_repository-id = mo_json->value_string( iv_prefix && '/id' ).
+    team_repository-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    team_repository-name = mo_json->value_string( iv_prefix && '/name' ).
+    team_repository-full_name = mo_json->value_string( iv_prefix && '/full_name' ).
+* todo, object, license, 
+    team_repository-forks = mo_json->value_string( iv_prefix && '/forks' ).
+* todo, object, permissions, object
+* todo, object, owner, 
+    team_repository-private = mo_json->value_boolean( iv_prefix && '/private' ).
+    team_repository-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    team_repository-description = mo_json->value_string( iv_prefix && '/description' ).
+    team_repository-fork = mo_json->value_boolean( iv_prefix && '/fork' ).
+    team_repository-url = mo_json->value_string( iv_prefix && '/url' ).
+    team_repository-archive_url = mo_json->value_string( iv_prefix && '/archive_url' ).
+    team_repository-assignees_url = mo_json->value_string( iv_prefix && '/assignees_url' ).
+    team_repository-blobs_url = mo_json->value_string( iv_prefix && '/blobs_url' ).
+    team_repository-branches_url = mo_json->value_string( iv_prefix && '/branches_url' ).
+    team_repository-collaborators_url = mo_json->value_string( iv_prefix && '/collaborators_url' ).
+    team_repository-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
+    team_repository-commits_url = mo_json->value_string( iv_prefix && '/commits_url' ).
+    team_repository-compare_url = mo_json->value_string( iv_prefix && '/compare_url' ).
+    team_repository-contents_url = mo_json->value_string( iv_prefix && '/contents_url' ).
+    team_repository-contributors_url = mo_json->value_string( iv_prefix && '/contributors_url' ).
+    team_repository-deployments_url = mo_json->value_string( iv_prefix && '/deployments_url' ).
+    team_repository-downloads_url = mo_json->value_string( iv_prefix && '/downloads_url' ).
+    team_repository-events_url = mo_json->value_string( iv_prefix && '/events_url' ).
+    team_repository-forks_url = mo_json->value_string( iv_prefix && '/forks_url' ).
+    team_repository-git_commits_url = mo_json->value_string( iv_prefix && '/git_commits_url' ).
+    team_repository-git_refs_url = mo_json->value_string( iv_prefix && '/git_refs_url' ).
+    team_repository-git_tags_url = mo_json->value_string( iv_prefix && '/git_tags_url' ).
+    team_repository-git_url = mo_json->value_string( iv_prefix && '/git_url' ).
+    team_repository-issue_comment_url = mo_json->value_string( iv_prefix && '/issue_comment_url' ).
+    team_repository-issue_events_url = mo_json->value_string( iv_prefix && '/issue_events_url' ).
+    team_repository-issues_url = mo_json->value_string( iv_prefix && '/issues_url' ).
+    team_repository-keys_url = mo_json->value_string( iv_prefix && '/keys_url' ).
+    team_repository-labels_url = mo_json->value_string( iv_prefix && '/labels_url' ).
+    team_repository-languages_url = mo_json->value_string( iv_prefix && '/languages_url' ).
+    team_repository-merges_url = mo_json->value_string( iv_prefix && '/merges_url' ).
+    team_repository-milestones_url = mo_json->value_string( iv_prefix && '/milestones_url' ).
+    team_repository-notifications_url = mo_json->value_string( iv_prefix && '/notifications_url' ).
+    team_repository-pulls_url = mo_json->value_string( iv_prefix && '/pulls_url' ).
+    team_repository-releases_url = mo_json->value_string( iv_prefix && '/releases_url' ).
+    team_repository-ssh_url = mo_json->value_string( iv_prefix && '/ssh_url' ).
+    team_repository-stargazers_url = mo_json->value_string( iv_prefix && '/stargazers_url' ).
+    team_repository-statuses_url = mo_json->value_string( iv_prefix && '/statuses_url' ).
+    team_repository-subscribers_url = mo_json->value_string( iv_prefix && '/subscribers_url' ).
+    team_repository-subscription_url = mo_json->value_string( iv_prefix && '/subscription_url' ).
+    team_repository-tags_url = mo_json->value_string( iv_prefix && '/tags_url' ).
+    team_repository-teams_url = mo_json->value_string( iv_prefix && '/teams_url' ).
+    team_repository-trees_url = mo_json->value_string( iv_prefix && '/trees_url' ).
+    team_repository-clone_url = mo_json->value_string( iv_prefix && '/clone_url' ).
+    team_repository-mirror_url = mo_json->value_string( iv_prefix && '/mirror_url' ).
+    team_repository-hooks_url = mo_json->value_string( iv_prefix && '/hooks_url' ).
+    team_repository-svn_url = mo_json->value_string( iv_prefix && '/svn_url' ).
+    team_repository-homepage = mo_json->value_string( iv_prefix && '/homepage' ).
+    team_repository-language = mo_json->value_string( iv_prefix && '/language' ).
+    team_repository-forks_count = mo_json->value_string( iv_prefix && '/forks_count' ).
+    team_repository-stargazers_count = mo_json->value_string( iv_prefix && '/stargazers_count' ).
+    team_repository-watchers_count = mo_json->value_string( iv_prefix && '/watchers_count' ).
+    team_repository-size = mo_json->value_string( iv_prefix && '/size' ).
+    team_repository-default_branch = mo_json->value_string( iv_prefix && '/default_branch' ).
+    team_repository-open_issues_count = mo_json->value_string( iv_prefix && '/open_issues_count' ).
+    team_repository-is_template = mo_json->value_boolean( iv_prefix && '/is_template' ).
+* todo, object, topics, array
+    team_repository-has_issues = mo_json->value_boolean( iv_prefix && '/has_issues' ).
+    team_repository-has_projects = mo_json->value_boolean( iv_prefix && '/has_projects' ).
+    team_repository-has_wiki = mo_json->value_boolean( iv_prefix && '/has_wiki' ).
+    team_repository-has_pages = mo_json->value_boolean( iv_prefix && '/has_pages' ).
+    team_repository-has_downloads = mo_json->value_boolean( iv_prefix && '/has_downloads' ).
+    team_repository-archived = mo_json->value_boolean( iv_prefix && '/archived' ).
+    team_repository-disabled = mo_json->value_boolean( iv_prefix && '/disabled' ).
+    team_repository-visibility = mo_json->value_string( iv_prefix && '/visibility' ).
+    team_repository-pushed_at = mo_json->value_string( iv_prefix && '/pushed_at' ).
+    team_repository-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    team_repository-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    team_repository-allow_rebase_merge = mo_json->value_boolean( iv_prefix && '/allow_rebase_merge' ).
+* todo, object, template_repository, object
+    team_repository-temp_clone_token = mo_json->value_string( iv_prefix && '/temp_clone_token' ).
+    team_repository-allow_squash_merge = mo_json->value_boolean( iv_prefix && '/allow_squash_merge' ).
+    team_repository-delete_branch_on_merge = mo_json->value_boolean( iv_prefix && '/delete_branch_on_merge' ).
+    team_repository-allow_merge_commit = mo_json->value_boolean( iv_prefix && '/allow_merge_commit' ).
+    team_repository-subscribers_count = mo_json->value_string( iv_prefix && '/subscribers_count' ).
+    team_repository-network_count = mo_json->value_string( iv_prefix && '/network_count' ).
+    team_repository-open_issues = mo_json->value_string( iv_prefix && '/open_issues' ).
+    team_repository-watchers = mo_json->value_string( iv_prefix && '/watchers' ).
+    team_repository-master_branch = mo_json->value_string( iv_prefix && '/master_branch' ).
   ENDMETHOD.
 
   METHOD parse_project_card.
-* sdfsdf object
-* url, string
-* id, integer
-* node_id, string
-* note, string
-* creator, 
-* created_at, string
-* updated_at, string
-* archived, boolean
-* column_url, string
-* content_url, string
-* project_url, string
+    project_card-url = mo_json->value_string( iv_prefix && '/url' ).
+    project_card-id = mo_json->value_string( iv_prefix && '/id' ).
+    project_card-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    project_card-note = mo_json->value_string( iv_prefix && '/note' ).
+* todo, object, creator, 
+    project_card-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    project_card-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    project_card-archived = mo_json->value_boolean( iv_prefix && '/archived' ).
+    project_card-column_url = mo_json->value_string( iv_prefix && '/column_url' ).
+    project_card-content_url = mo_json->value_string( iv_prefix && '/content_url' ).
+    project_card-project_url = mo_json->value_string( iv_prefix && '/project_url' ).
   ENDMETHOD.
 
   METHOD parse_project_column.
-* sdfsdf object
-* url, string
-* project_url, string
-* cards_url, string
-* id, integer
-* node_id, string
-* name, string
-* created_at, string
-* updated_at, string
+    project_column-url = mo_json->value_string( iv_prefix && '/url' ).
+    project_column-project_url = mo_json->value_string( iv_prefix && '/project_url' ).
+    project_column-cards_url = mo_json->value_string( iv_prefix && '/cards_url' ).
+    project_column-id = mo_json->value_string( iv_prefix && '/id' ).
+    project_column-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    project_column-name = mo_json->value_string( iv_prefix && '/name' ).
+    project_column-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    project_column-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
   ENDMETHOD.
 
   METHOD parse_repository_collaborator_.
-* sdfsdf object
-* permission, string
-* user, 
+    repository_collaborator_permis-permission = mo_json->value_string( iv_prefix && '/permission' ).
+* todo, object, user, 
   ENDMETHOD.
 
   METHOD parse_rate_limit.
-* sdfsdf object
-* limit, integer
-* remaining, integer
-* reset, integer
+    rate_limit-limit = mo_json->value_string( iv_prefix && '/limit' ).
+    rate_limit-remaining = mo_json->value_string( iv_prefix && '/remaining' ).
+    rate_limit-reset = mo_json->value_string( iv_prefix && '/reset' ).
   ENDMETHOD.
 
   METHOD parse_rate_limit_overview.
-* sdfsdf object
-* resources, object
-* rate, 
+* todo, object, resources, object
+* todo, object, rate, 
   ENDMETHOD.
 
   METHOD parse_full_repository.
-* sdfsdf object
-* id, integer
-* node_id, string
-* name, string
-* full_name, string
-* owner, 
-* private, boolean
-* html_url, string
-* description, string
-* fork, boolean
-* url, string
-* archive_url, string
-* assignees_url, string
-* blobs_url, string
-* branches_url, string
-* collaborators_url, string
-* comments_url, string
-* commits_url, string
-* compare_url, string
-* contents_url, string
-* contributors_url, string
-* deployments_url, string
-* downloads_url, string
-* events_url, string
-* forks_url, string
-* git_commits_url, string
-* git_refs_url, string
-* git_tags_url, string
-* git_url, string
-* issue_comment_url, string
-* issue_events_url, string
-* issues_url, string
-* keys_url, string
-* labels_url, string
-* languages_url, string
-* merges_url, string
-* milestones_url, string
-* notifications_url, string
-* pulls_url, string
-* releases_url, string
-* ssh_url, string
-* stargazers_url, string
-* statuses_url, string
-* subscribers_url, string
-* subscription_url, string
-* tags_url, string
-* teams_url, string
-* trees_url, string
-* clone_url, string
-* mirror_url, string
-* hooks_url, string
-* svn_url, string
-* homepage, string
-* language, string
-* forks_count, integer
-* stargazers_count, integer
-* watchers_count, integer
-* size, integer
-* default_branch, string
-* open_issues_count, integer
-* is_template, boolean
-* topics, array
-* has_issues, boolean
-* has_projects, boolean
-* has_wiki, boolean
-* has_pages, boolean
-* has_downloads, boolean
-* archived, boolean
-* disabled, boolean
-* visibility, string
-* pushed_at, string
-* created_at, string
-* updated_at, string
-* permissions, object
-* allow_rebase_merge, boolean
-* template_repository, object
-* temp_clone_token, string
-* allow_squash_merge, boolean
-* delete_branch_on_merge, boolean
-* allow_merge_commit, boolean
-* subscribers_count, integer
-* network_count, integer
-* license, 
-* organization, 
-* parent, 
-* source, 
-* forks, integer
-* master_branch, string
-* open_issues, integer
-* watchers, integer
-* anonymous_access_enabled, boolean
+    full_repository-id = mo_json->value_string( iv_prefix && '/id' ).
+    full_repository-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    full_repository-name = mo_json->value_string( iv_prefix && '/name' ).
+    full_repository-full_name = mo_json->value_string( iv_prefix && '/full_name' ).
+* todo, object, owner, 
+    full_repository-private = mo_json->value_boolean( iv_prefix && '/private' ).
+    full_repository-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    full_repository-description = mo_json->value_string( iv_prefix && '/description' ).
+    full_repository-fork = mo_json->value_boolean( iv_prefix && '/fork' ).
+    full_repository-url = mo_json->value_string( iv_prefix && '/url' ).
+    full_repository-archive_url = mo_json->value_string( iv_prefix && '/archive_url' ).
+    full_repository-assignees_url = mo_json->value_string( iv_prefix && '/assignees_url' ).
+    full_repository-blobs_url = mo_json->value_string( iv_prefix && '/blobs_url' ).
+    full_repository-branches_url = mo_json->value_string( iv_prefix && '/branches_url' ).
+    full_repository-collaborators_url = mo_json->value_string( iv_prefix && '/collaborators_url' ).
+    full_repository-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
+    full_repository-commits_url = mo_json->value_string( iv_prefix && '/commits_url' ).
+    full_repository-compare_url = mo_json->value_string( iv_prefix && '/compare_url' ).
+    full_repository-contents_url = mo_json->value_string( iv_prefix && '/contents_url' ).
+    full_repository-contributors_url = mo_json->value_string( iv_prefix && '/contributors_url' ).
+    full_repository-deployments_url = mo_json->value_string( iv_prefix && '/deployments_url' ).
+    full_repository-downloads_url = mo_json->value_string( iv_prefix && '/downloads_url' ).
+    full_repository-events_url = mo_json->value_string( iv_prefix && '/events_url' ).
+    full_repository-forks_url = mo_json->value_string( iv_prefix && '/forks_url' ).
+    full_repository-git_commits_url = mo_json->value_string( iv_prefix && '/git_commits_url' ).
+    full_repository-git_refs_url = mo_json->value_string( iv_prefix && '/git_refs_url' ).
+    full_repository-git_tags_url = mo_json->value_string( iv_prefix && '/git_tags_url' ).
+    full_repository-git_url = mo_json->value_string( iv_prefix && '/git_url' ).
+    full_repository-issue_comment_url = mo_json->value_string( iv_prefix && '/issue_comment_url' ).
+    full_repository-issue_events_url = mo_json->value_string( iv_prefix && '/issue_events_url' ).
+    full_repository-issues_url = mo_json->value_string( iv_prefix && '/issues_url' ).
+    full_repository-keys_url = mo_json->value_string( iv_prefix && '/keys_url' ).
+    full_repository-labels_url = mo_json->value_string( iv_prefix && '/labels_url' ).
+    full_repository-languages_url = mo_json->value_string( iv_prefix && '/languages_url' ).
+    full_repository-merges_url = mo_json->value_string( iv_prefix && '/merges_url' ).
+    full_repository-milestones_url = mo_json->value_string( iv_prefix && '/milestones_url' ).
+    full_repository-notifications_url = mo_json->value_string( iv_prefix && '/notifications_url' ).
+    full_repository-pulls_url = mo_json->value_string( iv_prefix && '/pulls_url' ).
+    full_repository-releases_url = mo_json->value_string( iv_prefix && '/releases_url' ).
+    full_repository-ssh_url = mo_json->value_string( iv_prefix && '/ssh_url' ).
+    full_repository-stargazers_url = mo_json->value_string( iv_prefix && '/stargazers_url' ).
+    full_repository-statuses_url = mo_json->value_string( iv_prefix && '/statuses_url' ).
+    full_repository-subscribers_url = mo_json->value_string( iv_prefix && '/subscribers_url' ).
+    full_repository-subscription_url = mo_json->value_string( iv_prefix && '/subscription_url' ).
+    full_repository-tags_url = mo_json->value_string( iv_prefix && '/tags_url' ).
+    full_repository-teams_url = mo_json->value_string( iv_prefix && '/teams_url' ).
+    full_repository-trees_url = mo_json->value_string( iv_prefix && '/trees_url' ).
+    full_repository-clone_url = mo_json->value_string( iv_prefix && '/clone_url' ).
+    full_repository-mirror_url = mo_json->value_string( iv_prefix && '/mirror_url' ).
+    full_repository-hooks_url = mo_json->value_string( iv_prefix && '/hooks_url' ).
+    full_repository-svn_url = mo_json->value_string( iv_prefix && '/svn_url' ).
+    full_repository-homepage = mo_json->value_string( iv_prefix && '/homepage' ).
+    full_repository-language = mo_json->value_string( iv_prefix && '/language' ).
+    full_repository-forks_count = mo_json->value_string( iv_prefix && '/forks_count' ).
+    full_repository-stargazers_count = mo_json->value_string( iv_prefix && '/stargazers_count' ).
+    full_repository-watchers_count = mo_json->value_string( iv_prefix && '/watchers_count' ).
+    full_repository-size = mo_json->value_string( iv_prefix && '/size' ).
+    full_repository-default_branch = mo_json->value_string( iv_prefix && '/default_branch' ).
+    full_repository-open_issues_count = mo_json->value_string( iv_prefix && '/open_issues_count' ).
+    full_repository-is_template = mo_json->value_boolean( iv_prefix && '/is_template' ).
+* todo, object, topics, array
+    full_repository-has_issues = mo_json->value_boolean( iv_prefix && '/has_issues' ).
+    full_repository-has_projects = mo_json->value_boolean( iv_prefix && '/has_projects' ).
+    full_repository-has_wiki = mo_json->value_boolean( iv_prefix && '/has_wiki' ).
+    full_repository-has_pages = mo_json->value_boolean( iv_prefix && '/has_pages' ).
+    full_repository-has_downloads = mo_json->value_boolean( iv_prefix && '/has_downloads' ).
+    full_repository-archived = mo_json->value_boolean( iv_prefix && '/archived' ).
+    full_repository-disabled = mo_json->value_boolean( iv_prefix && '/disabled' ).
+    full_repository-visibility = mo_json->value_string( iv_prefix && '/visibility' ).
+    full_repository-pushed_at = mo_json->value_string( iv_prefix && '/pushed_at' ).
+    full_repository-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    full_repository-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+* todo, object, permissions, object
+    full_repository-allow_rebase_merge = mo_json->value_boolean( iv_prefix && '/allow_rebase_merge' ).
+* todo, object, template_repository, object
+    full_repository-temp_clone_token = mo_json->value_string( iv_prefix && '/temp_clone_token' ).
+    full_repository-allow_squash_merge = mo_json->value_boolean( iv_prefix && '/allow_squash_merge' ).
+    full_repository-delete_branch_on_merge = mo_json->value_boolean( iv_prefix && '/delete_branch_on_merge' ).
+    full_repository-allow_merge_commit = mo_json->value_boolean( iv_prefix && '/allow_merge_commit' ).
+    full_repository-subscribers_count = mo_json->value_string( iv_prefix && '/subscribers_count' ).
+    full_repository-network_count = mo_json->value_string( iv_prefix && '/network_count' ).
+* todo, object, license, 
+* todo, object, organization, 
+* todo, object, parent, 
+* todo, object, source, 
+    full_repository-forks = mo_json->value_string( iv_prefix && '/forks' ).
+    full_repository-master_branch = mo_json->value_string( iv_prefix && '/master_branch' ).
+    full_repository-open_issues = mo_json->value_string( iv_prefix && '/open_issues' ).
+    full_repository-watchers = mo_json->value_string( iv_prefix && '/watchers' ).
+    full_repository-anonymous_access_enabled = mo_json->value_boolean( iv_prefix && '/anonymous_access_enabled' ).
   ENDMETHOD.
 
   METHOD parse_artifact.
-* sdfsdf object
-* id, integer
-* node_id, string
-* name, string
-* size_in_bytes, integer
-* url, string
-* archive_download_url, string
-* expired, boolean
-* created_at, string
-* expires_at, string
-* updated_at, string
+    artifact-id = mo_json->value_string( iv_prefix && '/id' ).
+    artifact-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    artifact-name = mo_json->value_string( iv_prefix && '/name' ).
+    artifact-size_in_bytes = mo_json->value_string( iv_prefix && '/size_in_bytes' ).
+    artifact-url = mo_json->value_string( iv_prefix && '/url' ).
+    artifact-archive_download_url = mo_json->value_string( iv_prefix && '/archive_download_url' ).
+    artifact-expired = mo_json->value_boolean( iv_prefix && '/expired' ).
+    artifact-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    artifact-expires_at = mo_json->value_string( iv_prefix && '/expires_at' ).
+    artifact-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
   ENDMETHOD.
 
   METHOD parse_job.
-* sdfsdf object
-* id, integer
-* run_id, integer
-* run_url, string
-* node_id, string
-* head_sha, string
-* url, string
-* html_url, string
-* status, string
-* conclusion, string
-* started_at, string
-* completed_at, string
-* name, string
-* steps, array
-* check_run_url, string
+    job-id = mo_json->value_string( iv_prefix && '/id' ).
+    job-run_id = mo_json->value_string( iv_prefix && '/run_id' ).
+    job-run_url = mo_json->value_string( iv_prefix && '/run_url' ).
+    job-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    job-head_sha = mo_json->value_string( iv_prefix && '/head_sha' ).
+    job-url = mo_json->value_string( iv_prefix && '/url' ).
+    job-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    job-status = mo_json->value_string( iv_prefix && '/status' ).
+    job-conclusion = mo_json->value_string( iv_prefix && '/conclusion' ).
+    job-started_at = mo_json->value_string( iv_prefix && '/started_at' ).
+    job-completed_at = mo_json->value_string( iv_prefix && '/completed_at' ).
+    job-name = mo_json->value_string( iv_prefix && '/name' ).
+* todo, object, steps, array
+    job-check_run_url = mo_json->value_string( iv_prefix && '/check_run_url' ).
   ENDMETHOD.
 
   METHOD parse_actions_enabled.
@@ -2472,266 +2391,243 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_actions_repository_permi.
-* sdfsdf object
-* enabled, 
-* allowed_actions, 
-* selected_actions_url, 
+* todo, object, enabled, 
+* todo, object, allowed_actions, 
+* todo, object, selected_actions_url, 
   ENDMETHOD.
 
   METHOD parse_pull_request_minimal.
-* sdfsdf object
-* id, integer
-* number, integer
-* url, string
-* head, object
-* base, object
+    pull_request_minimal-id = mo_json->value_string( iv_prefix && '/id' ).
+    pull_request_minimal-number = mo_json->value_string( iv_prefix && '/number' ).
+    pull_request_minimal-url = mo_json->value_string( iv_prefix && '/url' ).
+* todo, object, head, object
+* todo, object, base, object
   ENDMETHOD.
 
   METHOD parse_simple_commit.
-* sdfsdf object
-* id, string
-* tree_id, string
-* message, string
-* timestamp, string
-* author, object
-* committer, object
+    simple_commit-id = mo_json->value_string( iv_prefix && '/id' ).
+    simple_commit-tree_id = mo_json->value_string( iv_prefix && '/tree_id' ).
+    simple_commit-message = mo_json->value_string( iv_prefix && '/message' ).
+    simple_commit-timestamp = mo_json->value_string( iv_prefix && '/timestamp' ).
+* todo, object, author, object
+* todo, object, committer, object
   ENDMETHOD.
 
   METHOD parse_workflow_run.
-* sdfsdf object
-* id, integer
-* name, string
-* node_id, string
-* head_branch, string
-* head_sha, string
-* run_number, integer
-* event, string
-* status, string
-* conclusion, string
-* workflow_id, integer
-* url, string
-* html_url, string
-* pull_requests, array
-* created_at, string
-* updated_at, string
-* jobs_url, string
-* logs_url, string
-* check_suite_url, string
-* artifacts_url, string
-* cancel_url, string
-* rerun_url, string
-* workflow_url, string
-* head_commit, 
-* repository, 
-* head_repository, 
-* head_repository_id, integer
+    workflow_run-id = mo_json->value_string( iv_prefix && '/id' ).
+    workflow_run-name = mo_json->value_string( iv_prefix && '/name' ).
+    workflow_run-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    workflow_run-head_branch = mo_json->value_string( iv_prefix && '/head_branch' ).
+    workflow_run-head_sha = mo_json->value_string( iv_prefix && '/head_sha' ).
+    workflow_run-run_number = mo_json->value_string( iv_prefix && '/run_number' ).
+    workflow_run-event = mo_json->value_string( iv_prefix && '/event' ).
+    workflow_run-status = mo_json->value_string( iv_prefix && '/status' ).
+    workflow_run-conclusion = mo_json->value_string( iv_prefix && '/conclusion' ).
+    workflow_run-workflow_id = mo_json->value_string( iv_prefix && '/workflow_id' ).
+    workflow_run-url = mo_json->value_string( iv_prefix && '/url' ).
+    workflow_run-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+* todo, object, pull_requests, array
+    workflow_run-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    workflow_run-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    workflow_run-jobs_url = mo_json->value_string( iv_prefix && '/jobs_url' ).
+    workflow_run-logs_url = mo_json->value_string( iv_prefix && '/logs_url' ).
+    workflow_run-check_suite_url = mo_json->value_string( iv_prefix && '/check_suite_url' ).
+    workflow_run-artifacts_url = mo_json->value_string( iv_prefix && '/artifacts_url' ).
+    workflow_run-cancel_url = mo_json->value_string( iv_prefix && '/cancel_url' ).
+    workflow_run-rerun_url = mo_json->value_string( iv_prefix && '/rerun_url' ).
+    workflow_run-workflow_url = mo_json->value_string( iv_prefix && '/workflow_url' ).
+* todo, object, head_commit, 
+* todo, object, repository, 
+* todo, object, head_repository, 
+    workflow_run-head_repository_id = mo_json->value_string( iv_prefix && '/head_repository_id' ).
   ENDMETHOD.
 
   METHOD parse_workflow_run_usage.
-* sdfsdf object
-* billable, object
-* run_duration_ms, integer
+* todo, object, billable, object
+    workflow_run_usage-run_duration_ms = mo_json->value_string( iv_prefix && '/run_duration_ms' ).
   ENDMETHOD.
 
   METHOD parse_actions_secret.
-* sdfsdf object
-* name, string
-* created_at, string
-* updated_at, string
+    actions_secret-name = mo_json->value_string( iv_prefix && '/name' ).
+    actions_secret-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    actions_secret-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
   ENDMETHOD.
 
   METHOD parse_workflow.
-* sdfsdf object
-* id, integer
-* node_id, string
-* name, string
-* path, string
-* state, string
-* created_at, string
-* updated_at, string
-* url, string
-* html_url, string
-* badge_url, string
-* deleted_at, string
+    workflow-id = mo_json->value_string( iv_prefix && '/id' ).
+    workflow-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    workflow-name = mo_json->value_string( iv_prefix && '/name' ).
+    workflow-path = mo_json->value_string( iv_prefix && '/path' ).
+    workflow-state = mo_json->value_string( iv_prefix && '/state' ).
+    workflow-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    workflow-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    workflow-url = mo_json->value_string( iv_prefix && '/url' ).
+    workflow-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    workflow-badge_url = mo_json->value_string( iv_prefix && '/badge_url' ).
+    workflow-deleted_at = mo_json->value_string( iv_prefix && '/deleted_at' ).
   ENDMETHOD.
 
   METHOD parse_workflow_usage.
-* sdfsdf object
-* billable, object
+* todo, object, billable, object
   ENDMETHOD.
 
   METHOD parse_protected_branch_admin_e.
-* sdfsdf object
-* url, string
-* enabled, boolean
+    protected_branch_admin_enforce-url = mo_json->value_string( iv_prefix && '/url' ).
+    protected_branch_admin_enforce-enabled = mo_json->value_boolean( iv_prefix && '/enabled' ).
   ENDMETHOD.
 
   METHOD parse_protected_branch_pull_re.
-* sdfsdf object
-* url, string
-* dismissal_restrictions, object
-* dismiss_stale_reviews, boolean
-* require_code_owner_reviews, boolean
-* required_approving_review_coun, integer
+    protected_branch_pull_request_-url = mo_json->value_string( iv_prefix && '/url' ).
+* todo, object, dismissal_restrictions, object
+    protected_branch_pull_request_-dismiss_stale_reviews = mo_json->value_boolean( iv_prefix && '/dismiss_stale_reviews' ).
+    protected_branch_pull_request_-require_code_owner_reviews = mo_json->value_boolean( iv_prefix && '/require_code_owner_reviews' ).
+    protected_branch_pull_request_-required_approving_review_coun = mo_json->value_string( iv_prefix && '/required_approving_review_count' ).
   ENDMETHOD.
 
   METHOD parse_branch_restriction_polic.
-* sdfsdf object
-* url, string
-* users_url, string
-* teams_url, string
-* apps_url, string
-* users, array
-* teams, array
-* apps, array
+    branch_restriction_policy-url = mo_json->value_string( iv_prefix && '/url' ).
+    branch_restriction_policy-users_url = mo_json->value_string( iv_prefix && '/users_url' ).
+    branch_restriction_policy-teams_url = mo_json->value_string( iv_prefix && '/teams_url' ).
+    branch_restriction_policy-apps_url = mo_json->value_string( iv_prefix && '/apps_url' ).
+* todo, object, users, array
+* todo, object, teams, array
+* todo, object, apps, array
   ENDMETHOD.
 
   METHOD parse_branch_protection.
-* sdfsdf object
-* url, string
-* required_status_checks, object
-* enforce_admins, 
-* required_pull_request_reviews, 
-* restrictions, 
-* required_linear_history, object
-* allow_force_pushes, object
-* allow_deletions, object
-* enabled, boolean
-* name, string
-* protection_url, string
+    branch_protection-url = mo_json->value_string( iv_prefix && '/url' ).
+* todo, object, required_status_checks, object
+* todo, object, enforce_admins, 
+* todo, object, required_pull_request_reviews, 
+* todo, object, restrictions, 
+* todo, object, required_linear_history, object
+* todo, object, allow_force_pushes, object
+* todo, object, allow_deletions, object
+    branch_protection-enabled = mo_json->value_boolean( iv_prefix && '/enabled' ).
+    branch_protection-name = mo_json->value_string( iv_prefix && '/name' ).
+    branch_protection-protection_url = mo_json->value_string( iv_prefix && '/protection_url' ).
   ENDMETHOD.
 
   METHOD parse_short_branch.
-* sdfsdf object
-* name, string
-* commit, object
-* protected, boolean
-* protection, 
-* protection_url, string
+    short_branch-name = mo_json->value_string( iv_prefix && '/name' ).
+* todo, object, commit, object
+    short_branch-protected = mo_json->value_boolean( iv_prefix && '/protected' ).
+* todo, object, protection, 
+    short_branch-protection_url = mo_json->value_string( iv_prefix && '/protection_url' ).
   ENDMETHOD.
 
   METHOD parse_git_user.
-* sdfsdf object
-* name, string
-* email, string
-* date, string
+    git_user-name = mo_json->value_string( iv_prefix && '/name' ).
+    git_user-email = mo_json->value_string( iv_prefix && '/email' ).
+    git_user-date = mo_json->value_string( iv_prefix && '/date' ).
   ENDMETHOD.
 
   METHOD parse_verification.
-* sdfsdf object
-* verified, boolean
-* reason, string
-* payload, string
-* signature, string
+    verification-verified = mo_json->value_boolean( iv_prefix && '/verified' ).
+    verification-reason = mo_json->value_string( iv_prefix && '/reason' ).
+    verification-payload = mo_json->value_string( iv_prefix && '/payload' ).
+    verification-signature = mo_json->value_string( iv_prefix && '/signature' ).
   ENDMETHOD.
 
   METHOD parse_commit.
-* sdfsdf object
-* url, string
-* sha, string
-* node_id, string
-* html_url, string
-* comments_url, string
-* commit, object
-* author, 
-* committer, 
-* parents, array
-* stats, object
-* files, array
+    commit-url = mo_json->value_string( iv_prefix && '/url' ).
+    commit-sha = mo_json->value_string( iv_prefix && '/sha' ).
+    commit-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    commit-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    commit-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
+* todo, object, commit, object
+* todo, object, author, 
+* todo, object, committer, 
+* todo, object, parents, array
+* todo, object, stats, object
+* todo, object, files, array
   ENDMETHOD.
 
   METHOD parse_branch_with_protection.
-* sdfsdf object
-* name, string
-* commit, 
-* _links, object
-* protected, boolean
-* protection, 
-* protection_url, string
-* pattern, string
-* required_approving_review_coun, integer
+    branch_with_protection-name = mo_json->value_string( iv_prefix && '/name' ).
+* todo, object, commit, 
+* todo, object, _links, object
+    branch_with_protection-protected = mo_json->value_boolean( iv_prefix && '/protected' ).
+* todo, object, protection, 
+    branch_with_protection-protection_url = mo_json->value_string( iv_prefix && '/protection_url' ).
+    branch_with_protection-pattern = mo_json->value_string( iv_prefix && '/pattern' ).
+    branch_with_protection-required_approving_review_coun = mo_json->value_string( iv_prefix && '/required_approving_review_count' ).
   ENDMETHOD.
 
   METHOD parse_status_check_policy.
-* sdfsdf object
-* url, string
-* strict, boolean
-* contexts, array
-* contexts_url, string
+    status_check_policy-url = mo_json->value_string( iv_prefix && '/url' ).
+    status_check_policy-strict = mo_json->value_boolean( iv_prefix && '/strict' ).
+* todo, object, contexts, array
+    status_check_policy-contexts_url = mo_json->value_string( iv_prefix && '/contexts_url' ).
   ENDMETHOD.
 
   METHOD parse_protected_branch.
-* sdfsdf object
-* url, string
-* required_status_checks, 
-* required_pull_request_reviews, object
-* required_signatures, object
-* enforce_admins, object
-* required_linear_history, object
-* allow_force_pushes, object
-* allow_deletions, object
-* restrictions, 
+    protected_branch-url = mo_json->value_string( iv_prefix && '/url' ).
+* todo, object, required_status_checks, 
+* todo, object, required_pull_request_reviews, object
+* todo, object, required_signatures, object
+* todo, object, enforce_admins, object
+* todo, object, required_linear_history, object
+* todo, object, allow_force_pushes, object
+* todo, object, allow_deletions, object
+* todo, object, restrictions, 
   ENDMETHOD.
 
   METHOD parse_check_run.
-* sdfsdf object
-* id, integer
-* head_sha, string
-* node_id, string
-* external_id, string
-* url, string
-* html_url, string
-* details_url, string
-* status, string
-* conclusion, string
-* started_at, string
-* completed_at, string
-* output, object
-* name, string
-* check_suite, object
-* app, 
-* pull_requests, 
+    check_run-id = mo_json->value_string( iv_prefix && '/id' ).
+    check_run-head_sha = mo_json->value_string( iv_prefix && '/head_sha' ).
+    check_run-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    check_run-external_id = mo_json->value_string( iv_prefix && '/external_id' ).
+    check_run-url = mo_json->value_string( iv_prefix && '/url' ).
+    check_run-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    check_run-details_url = mo_json->value_string( iv_prefix && '/details_url' ).
+    check_run-status = mo_json->value_string( iv_prefix && '/status' ).
+    check_run-conclusion = mo_json->value_string( iv_prefix && '/conclusion' ).
+    check_run-started_at = mo_json->value_string( iv_prefix && '/started_at' ).
+    check_run-completed_at = mo_json->value_string( iv_prefix && '/completed_at' ).
+* todo, object, output, object
+    check_run-name = mo_json->value_string( iv_prefix && '/name' ).
+* todo, object, check_suite, object
+* todo, object, app, 
+* todo, object, pull_requests, 
   ENDMETHOD.
 
   METHOD parse_check_annotation.
-* sdfsdf object
-* path, string
-* start_line, integer
-* end_line, integer
-* start_column, integer
-* end_column, integer
-* annotation_level, string
-* title, string
-* message, string
-* raw_details, string
-* blob_href, string
+    check_annotation-path = mo_json->value_string( iv_prefix && '/path' ).
+    check_annotation-start_line = mo_json->value_string( iv_prefix && '/start_line' ).
+    check_annotation-end_line = mo_json->value_string( iv_prefix && '/end_line' ).
+    check_annotation-start_column = mo_json->value_string( iv_prefix && '/start_column' ).
+    check_annotation-end_column = mo_json->value_string( iv_prefix && '/end_column' ).
+    check_annotation-annotation_level = mo_json->value_string( iv_prefix && '/annotation_level' ).
+    check_annotation-title = mo_json->value_string( iv_prefix && '/title' ).
+    check_annotation-message = mo_json->value_string( iv_prefix && '/message' ).
+    check_annotation-raw_details = mo_json->value_string( iv_prefix && '/raw_details' ).
+    check_annotation-blob_href = mo_json->value_string( iv_prefix && '/blob_href' ).
   ENDMETHOD.
 
   METHOD parse_check_suite.
-* sdfsdf object
-* id, integer
-* node_id, string
-* head_branch, string
-* head_sha, string
-* status, string
-* conclusion, string
-* url, string
-* before, string
-* after, string
-* pull_requests, array
-* app, 
-* repository, 
-* created_at, string
-* updated_at, string
-* head_commit, 
-* latest_check_runs_count, integer
-* check_runs_url, string
+    check_suite-id = mo_json->value_string( iv_prefix && '/id' ).
+    check_suite-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    check_suite-head_branch = mo_json->value_string( iv_prefix && '/head_branch' ).
+    check_suite-head_sha = mo_json->value_string( iv_prefix && '/head_sha' ).
+    check_suite-status = mo_json->value_string( iv_prefix && '/status' ).
+    check_suite-conclusion = mo_json->value_string( iv_prefix && '/conclusion' ).
+    check_suite-url = mo_json->value_string( iv_prefix && '/url' ).
+    check_suite-before = mo_json->value_string( iv_prefix && '/before' ).
+    check_suite-after = mo_json->value_string( iv_prefix && '/after' ).
+* todo, object, pull_requests, array
+* todo, object, app, 
+* todo, object, repository, 
+    check_suite-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    check_suite-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+* todo, object, head_commit, 
+    check_suite-latest_check_runs_count = mo_json->value_string( iv_prefix && '/latest_check_runs_count' ).
+    check_suite-check_runs_url = mo_json->value_string( iv_prefix && '/check_runs_url' ).
   ENDMETHOD.
 
   METHOD parse_check_suite_preference.
-* sdfsdf object
-* preferences, object
-* repository, 
+* todo, object, preferences, object
+* todo, object, repository, 
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_stat.
@@ -2767,10 +2663,9 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_rule.
-* sdfsdf object
-* id, string
-* severity, string
-* description, string
+    code_scanning_alert_rule-id = mo_json->value_string( iv_prefix && '/id' ).
+    code_scanning_alert_rule-severity = mo_json->value_string( iv_prefix && '/severity' ).
+    code_scanning_alert_rule-description = mo_json->value_string( iv_prefix && '/description' ).
   ENDMETHOD.
 
   METHOD parse_code_scanning_analysis_t.
@@ -2778,23 +2673,21 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_code_scanning_analysis01.
-* sdfsdf object
-* name, 
-* version, string
+* todo, object, name, 
+    code_scanning_analysis_tool-version = mo_json->value_string( iv_prefix && '/version' ).
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_code.
-* sdfsdf object
-* number, 
-* created_at, 
-* url, 
-* html_url, 
-* state, 
-* dismissed_by, 
-* dismissed_at, 
-* dismissed_reason, 
-* rule, 
-* tool, 
+* todo, object, number, 
+* todo, object, created_at, 
+* todo, object, url, 
+* todo, object, html_url, 
+* todo, object, state, 
+* todo, object, dismissed_by, 
+* todo, object, dismissed_at, 
+* todo, object, dismissed_reason, 
+* todo, object, rule, 
+* todo, object, tool, 
   ENDMETHOD.
 
   METHOD parse_code_scanning_analysis_a.
@@ -2810,18 +2703,17 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_co01.
-* sdfsdf object
-* number, 
-* created_at, 
-* url, 
-* html_url, 
-* instances, 
-* state, 
-* dismissed_by, 
-* dismissed_at, 
-* dismissed_reason, 
-* rule, 
-* tool, 
+* todo, object, number, 
+* todo, object, created_at, 
+* todo, object, url, 
+* todo, object, html_url, 
+* todo, object, instances, 
+* todo, object, state, 
+* todo, object, dismissed_by, 
+* todo, object, dismissed_at, 
+* todo, object, dismissed_reason, 
+* todo, object, rule, 
+* todo, object, tool, 
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_set_.
@@ -2845,14 +2737,13 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_code_scanning_analysis03.
-* sdfsdf object
-* commit_sha, 
-* ref, 
-* analysis_key, 
-* created_at, 
-* tool_name, 
-* error, string
-* environment, 
+* todo, object, commit_sha, 
+* todo, object, ref, 
+* todo, object, analysis_key, 
+* todo, object, created_at, 
+* todo, object, tool_name, 
+    code_scanning_analysis_code_sc-error = mo_json->value_string( iv_prefix && '/error' ).
+* todo, object, environment, 
   ENDMETHOD.
 
   METHOD parse_code_scanning_analysis_s.
@@ -2860,240 +2751,223 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_collaborator.
-* sdfsdf object
-* login, string
-* id, integer
-* node_id, string
-* avatar_url, string
-* gravatar_id, string
-* url, string
-* html_url, string
-* followers_url, string
-* following_url, string
-* gists_url, string
-* starred_url, string
-* subscriptions_url, string
-* organizations_url, string
-* repos_url, string
-* events_url, string
-* received_events_url, string
-* type, string
-* site_admin, boolean
-* permissions, object
+    collaborator-login = mo_json->value_string( iv_prefix && '/login' ).
+    collaborator-id = mo_json->value_string( iv_prefix && '/id' ).
+    collaborator-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    collaborator-avatar_url = mo_json->value_string( iv_prefix && '/avatar_url' ).
+    collaborator-gravatar_id = mo_json->value_string( iv_prefix && '/gravatar_id' ).
+    collaborator-url = mo_json->value_string( iv_prefix && '/url' ).
+    collaborator-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    collaborator-followers_url = mo_json->value_string( iv_prefix && '/followers_url' ).
+    collaborator-following_url = mo_json->value_string( iv_prefix && '/following_url' ).
+    collaborator-gists_url = mo_json->value_string( iv_prefix && '/gists_url' ).
+    collaborator-starred_url = mo_json->value_string( iv_prefix && '/starred_url' ).
+    collaborator-subscriptions_url = mo_json->value_string( iv_prefix && '/subscriptions_url' ).
+    collaborator-organizations_url = mo_json->value_string( iv_prefix && '/organizations_url' ).
+    collaborator-repos_url = mo_json->value_string( iv_prefix && '/repos_url' ).
+    collaborator-events_url = mo_json->value_string( iv_prefix && '/events_url' ).
+    collaborator-received_events_url = mo_json->value_string( iv_prefix && '/received_events_url' ).
+    collaborator-type = mo_json->value_string( iv_prefix && '/type' ).
+    collaborator-site_admin = mo_json->value_boolean( iv_prefix && '/site_admin' ).
+* todo, object, permissions, object
   ENDMETHOD.
 
   METHOD parse_repository_invitation.
-* sdfsdf object
-* id, integer
-* repository, 
-* invitee, 
-* inviter, 
-* permissions, string
-* created_at, string
-* expired, boolean
-* url, string
-* html_url, string
-* node_id, string
+    repository_invitation-id = mo_json->value_string( iv_prefix && '/id' ).
+* todo, object, repository, 
+* todo, object, invitee, 
+* todo, object, inviter, 
+    repository_invitation-permissions = mo_json->value_string( iv_prefix && '/permissions' ).
+    repository_invitation-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    repository_invitation-expired = mo_json->value_boolean( iv_prefix && '/expired' ).
+    repository_invitation-url = mo_json->value_string( iv_prefix && '/url' ).
+    repository_invitation-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    repository_invitation-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
   ENDMETHOD.
 
   METHOD parse_commit_comment.
-* sdfsdf object
-* html_url, string
-* url, string
-* id, integer
-* node_id, string
-* body, string
-* path, string
-* position, integer
-* line, integer
-* commit_id, string
-* user, 
-* created_at, string
-* updated_at, string
-* author_association, 
-* reactions, 
+    commit_comment-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    commit_comment-url = mo_json->value_string( iv_prefix && '/url' ).
+    commit_comment-id = mo_json->value_string( iv_prefix && '/id' ).
+    commit_comment-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    commit_comment-body = mo_json->value_string( iv_prefix && '/body' ).
+    commit_comment-path = mo_json->value_string( iv_prefix && '/path' ).
+    commit_comment-position = mo_json->value_string( iv_prefix && '/position' ).
+    commit_comment-line = mo_json->value_string( iv_prefix && '/line' ).
+    commit_comment-commit_id = mo_json->value_string( iv_prefix && '/commit_id' ).
+* todo, object, user, 
+    commit_comment-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    commit_comment-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+* todo, object, author_association, 
+* todo, object, reactions, 
   ENDMETHOD.
 
   METHOD parse_scim_error.
-* sdfsdf object
-* message, string
-* documentation_url, string
-* detail, string
-* status, integer
-* scimtype, string
-* schemas, array
+    scim_error-message = mo_json->value_string( iv_prefix && '/message' ).
+    scim_error-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+    scim_error-detail = mo_json->value_string( iv_prefix && '/detail' ).
+    scim_error-status = mo_json->value_string( iv_prefix && '/status' ).
+    scim_error-scimtype = mo_json->value_string( iv_prefix && '/scimType' ).
+* todo, object, schemas, array
   ENDMETHOD.
 
   METHOD parse_branch_short.
-* sdfsdf object
-* name, string
-* commit, object
-* protected, boolean
+    branch_short-name = mo_json->value_string( iv_prefix && '/name' ).
+* todo, object, commit, object
+    branch_short-protected = mo_json->value_boolean( iv_prefix && '/protected' ).
   ENDMETHOD.
 
   METHOD parse_link.
-* sdfsdf object
-* href, string
+    link-href = mo_json->value_string( iv_prefix && '/href' ).
   ENDMETHOD.
 
   METHOD parse_auto_merge.
-* sdfsdf object
-* enabled_by, 
-* merge_method, string
-* commit_title, string
-* commit_message, string
+* todo, object, enabled_by, 
+    auto_merge-merge_method = mo_json->value_string( iv_prefix && '/merge_method' ).
+    auto_merge-commit_title = mo_json->value_string( iv_prefix && '/commit_title' ).
+    auto_merge-commit_message = mo_json->value_string( iv_prefix && '/commit_message' ).
   ENDMETHOD.
 
   METHOD parse_pull_request_simple.
-* sdfsdf object
-* url, string
-* id, integer
-* node_id, string
-* html_url, string
-* diff_url, string
-* patch_url, string
-* issue_url, string
-* commits_url, string
-* review_comments_url, string
-* review_comment_url, string
-* comments_url, string
-* statuses_url, string
-* number, integer
-* state, string
-* locked, boolean
-* title, string
-* user, 
-* body, string
-* labels, array
-* milestone, 
-* active_lock_reason, string
-* created_at, string
-* updated_at, string
-* closed_at, string
-* merged_at, string
-* merge_commit_sha, string
-* assignee, 
-* assignees, array
-* requested_reviewers, array
-* requested_teams, array
-* head, object
-* base, object
-* _links, object
-* author_association, 
-* auto_merge, 
-* draft, boolean
+    pull_request_simple-url = mo_json->value_string( iv_prefix && '/url' ).
+    pull_request_simple-id = mo_json->value_string( iv_prefix && '/id' ).
+    pull_request_simple-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    pull_request_simple-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    pull_request_simple-diff_url = mo_json->value_string( iv_prefix && '/diff_url' ).
+    pull_request_simple-patch_url = mo_json->value_string( iv_prefix && '/patch_url' ).
+    pull_request_simple-issue_url = mo_json->value_string( iv_prefix && '/issue_url' ).
+    pull_request_simple-commits_url = mo_json->value_string( iv_prefix && '/commits_url' ).
+    pull_request_simple-review_comments_url = mo_json->value_string( iv_prefix && '/review_comments_url' ).
+    pull_request_simple-review_comment_url = mo_json->value_string( iv_prefix && '/review_comment_url' ).
+    pull_request_simple-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
+    pull_request_simple-statuses_url = mo_json->value_string( iv_prefix && '/statuses_url' ).
+    pull_request_simple-number = mo_json->value_string( iv_prefix && '/number' ).
+    pull_request_simple-state = mo_json->value_string( iv_prefix && '/state' ).
+    pull_request_simple-locked = mo_json->value_boolean( iv_prefix && '/locked' ).
+    pull_request_simple-title = mo_json->value_string( iv_prefix && '/title' ).
+* todo, object, user, 
+    pull_request_simple-body = mo_json->value_string( iv_prefix && '/body' ).
+* todo, object, labels, array
+* todo, object, milestone, 
+    pull_request_simple-active_lock_reason = mo_json->value_string( iv_prefix && '/active_lock_reason' ).
+    pull_request_simple-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    pull_request_simple-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    pull_request_simple-closed_at = mo_json->value_string( iv_prefix && '/closed_at' ).
+    pull_request_simple-merged_at = mo_json->value_string( iv_prefix && '/merged_at' ).
+    pull_request_simple-merge_commit_sha = mo_json->value_string( iv_prefix && '/merge_commit_sha' ).
+* todo, object, assignee, 
+* todo, object, assignees, array
+* todo, object, requested_reviewers, array
+* todo, object, requested_teams, array
+* todo, object, head, object
+* todo, object, base, object
+* todo, object, _links, object
+* todo, object, author_association, 
+* todo, object, auto_merge, 
+    pull_request_simple-draft = mo_json->value_boolean( iv_prefix && '/draft' ).
   ENDMETHOD.
 
   METHOD parse_simple_commit_status.
-* sdfsdf object
-* description, string
-* id, integer
-* node_id, string
-* state, string
-* context, string
-* target_url, string
-* required, boolean
-* avatar_url, string
-* url, string
-* created_at, string
-* updated_at, string
+    simple_commit_status-description = mo_json->value_string( iv_prefix && '/description' ).
+    simple_commit_status-id = mo_json->value_string( iv_prefix && '/id' ).
+    simple_commit_status-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    simple_commit_status-state = mo_json->value_string( iv_prefix && '/state' ).
+    simple_commit_status-context = mo_json->value_string( iv_prefix && '/context' ).
+    simple_commit_status-target_url = mo_json->value_string( iv_prefix && '/target_url' ).
+    simple_commit_status-required = mo_json->value_boolean( iv_prefix && '/required' ).
+    simple_commit_status-avatar_url = mo_json->value_string( iv_prefix && '/avatar_url' ).
+    simple_commit_status-url = mo_json->value_string( iv_prefix && '/url' ).
+    simple_commit_status-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    simple_commit_status-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
   ENDMETHOD.
 
   METHOD parse_combined_commit_status.
-* sdfsdf object
-* state, string
-* statuses, array
-* sha, string
-* total_count, integer
-* repository, 
-* commit_url, string
-* url, string
+    combined_commit_status-state = mo_json->value_string( iv_prefix && '/state' ).
+* todo, object, statuses, array
+    combined_commit_status-sha = mo_json->value_string( iv_prefix && '/sha' ).
+    combined_commit_status-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, object, repository, 
+    combined_commit_status-commit_url = mo_json->value_string( iv_prefix && '/commit_url' ).
+    combined_commit_status-url = mo_json->value_string( iv_prefix && '/url' ).
   ENDMETHOD.
 
   METHOD parse_status.
-* sdfsdf object
-* url, string
-* avatar_url, string
-* id, integer
-* node_id, string
-* state, string
-* description, string
-* target_url, string
-* context, string
-* created_at, string
-* updated_at, string
-* creator, 
+    status-url = mo_json->value_string( iv_prefix && '/url' ).
+    status-avatar_url = mo_json->value_string( iv_prefix && '/avatar_url' ).
+    status-id = mo_json->value_string( iv_prefix && '/id' ).
+    status-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    status-state = mo_json->value_string( iv_prefix && '/state' ).
+    status-description = mo_json->value_string( iv_prefix && '/description' ).
+    status-target_url = mo_json->value_string( iv_prefix && '/target_url' ).
+    status-context = mo_json->value_string( iv_prefix && '/context' ).
+    status-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    status-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+* todo, object, creator, 
   ENDMETHOD.
 
   METHOD parse_code_of_conduct_simple.
-* sdfsdf object
-* url, string
-* key, string
-* name, string
-* html_url, string
+    code_of_conduct_simple-url = mo_json->value_string( iv_prefix && '/url' ).
+    code_of_conduct_simple-key = mo_json->value_string( iv_prefix && '/key' ).
+    code_of_conduct_simple-name = mo_json->value_string( iv_prefix && '/name' ).
+    code_of_conduct_simple-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
   ENDMETHOD.
 
   METHOD parse_community_health_file.
-* sdfsdf object
-* url, string
-* html_url, string
+    community_health_file-url = mo_json->value_string( iv_prefix && '/url' ).
+    community_health_file-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
   ENDMETHOD.
 
   METHOD parse_community_profile.
-* sdfsdf object
-* health_percentage, integer
-* description, string
-* documentation, string
-* files, object
-* updated_at, string
-* content_reports_enabled, boolean
+    community_profile-health_percentage = mo_json->value_string( iv_prefix && '/health_percentage' ).
+    community_profile-description = mo_json->value_string( iv_prefix && '/description' ).
+    community_profile-documentation = mo_json->value_string( iv_prefix && '/documentation' ).
+* todo, object, files, object
+    community_profile-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    community_profile-content_reports_enabled = mo_json->value_boolean( iv_prefix && '/content_reports_enabled' ).
   ENDMETHOD.
 
   METHOD parse_diff_entry.
-* sdfsdf object
-* sha, string
-* filename, string
-* status, string
-* additions, integer
-* deletions, integer
-* changes, integer
-* blob_url, string
-* raw_url, string
-* contents_url, string
-* patch, string
-* previous_filename, string
+    diff_entry-sha = mo_json->value_string( iv_prefix && '/sha' ).
+    diff_entry-filename = mo_json->value_string( iv_prefix && '/filename' ).
+    diff_entry-status = mo_json->value_string( iv_prefix && '/status' ).
+    diff_entry-additions = mo_json->value_string( iv_prefix && '/additions' ).
+    diff_entry-deletions = mo_json->value_string( iv_prefix && '/deletions' ).
+    diff_entry-changes = mo_json->value_string( iv_prefix && '/changes' ).
+    diff_entry-blob_url = mo_json->value_string( iv_prefix && '/blob_url' ).
+    diff_entry-raw_url = mo_json->value_string( iv_prefix && '/raw_url' ).
+    diff_entry-contents_url = mo_json->value_string( iv_prefix && '/contents_url' ).
+    diff_entry-patch = mo_json->value_string( iv_prefix && '/patch' ).
+    diff_entry-previous_filename = mo_json->value_string( iv_prefix && '/previous_filename' ).
   ENDMETHOD.
 
   METHOD parse_commit_comparison.
-* sdfsdf object
-* url, string
-* html_url, string
-* permalink_url, string
-* diff_url, string
-* patch_url, string
-* base_commit, 
-* merge_base_commit, 
-* status, string
-* ahead_by, integer
-* behind_by, integer
-* total_commits, integer
-* commits, array
-* files, array
+    commit_comparison-url = mo_json->value_string( iv_prefix && '/url' ).
+    commit_comparison-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    commit_comparison-permalink_url = mo_json->value_string( iv_prefix && '/permalink_url' ).
+    commit_comparison-diff_url = mo_json->value_string( iv_prefix && '/diff_url' ).
+    commit_comparison-patch_url = mo_json->value_string( iv_prefix && '/patch_url' ).
+* todo, object, base_commit, 
+* todo, object, merge_base_commit, 
+    commit_comparison-status = mo_json->value_string( iv_prefix && '/status' ).
+    commit_comparison-ahead_by = mo_json->value_string( iv_prefix && '/ahead_by' ).
+    commit_comparison-behind_by = mo_json->value_string( iv_prefix && '/behind_by' ).
+    commit_comparison-total_commits = mo_json->value_string( iv_prefix && '/total_commits' ).
+* todo, object, commits, array
+* todo, object, files, array
   ENDMETHOD.
 
   METHOD parse_content_tree.
-* sdfsdf object
-* type, string
-* size, integer
-* name, string
-* path, string
-* sha, string
-* url, string
-* git_url, string
-* html_url, string
-* download_url, string
-* entries, array
-* _links, object
+    content_tree-type = mo_json->value_string( iv_prefix && '/type' ).
+    content_tree-size = mo_json->value_string( iv_prefix && '/size' ).
+    content_tree-name = mo_json->value_string( iv_prefix && '/name' ).
+    content_tree-path = mo_json->value_string( iv_prefix && '/path' ).
+    content_tree-sha = mo_json->value_string( iv_prefix && '/sha' ).
+    content_tree-url = mo_json->value_string( iv_prefix && '/url' ).
+    content_tree-git_url = mo_json->value_string( iv_prefix && '/git_url' ).
+    content_tree-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    content_tree-download_url = mo_json->value_string( iv_prefix && '/download_url' ).
+* todo, object, entries, array
+* todo, object, _links, object
   ENDMETHOD.
 
   METHOD parse_content_directory.
@@ -3101,589 +2975,549 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_content_file.
-* sdfsdf object
-* type, string
-* encoding, string
-* size, integer
-* name, string
-* path, string
-* content, string
-* sha, string
-* url, string
-* git_url, string
-* html_url, string
-* download_url, string
-* _links, object
-* target, string
-* submodule_git_url, string
+    content_file-type = mo_json->value_string( iv_prefix && '/type' ).
+    content_file-encoding = mo_json->value_string( iv_prefix && '/encoding' ).
+    content_file-size = mo_json->value_string( iv_prefix && '/size' ).
+    content_file-name = mo_json->value_string( iv_prefix && '/name' ).
+    content_file-path = mo_json->value_string( iv_prefix && '/path' ).
+    content_file-content = mo_json->value_string( iv_prefix && '/content' ).
+    content_file-sha = mo_json->value_string( iv_prefix && '/sha' ).
+    content_file-url = mo_json->value_string( iv_prefix && '/url' ).
+    content_file-git_url = mo_json->value_string( iv_prefix && '/git_url' ).
+    content_file-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    content_file-download_url = mo_json->value_string( iv_prefix && '/download_url' ).
+* todo, object, _links, object
+    content_file-target = mo_json->value_string( iv_prefix && '/target' ).
+    content_file-submodule_git_url = mo_json->value_string( iv_prefix && '/submodule_git_url' ).
   ENDMETHOD.
 
   METHOD parse_content_symlink.
-* sdfsdf object
-* type, string
-* target, string
-* size, integer
-* name, string
-* path, string
-* sha, string
-* url, string
-* git_url, string
-* html_url, string
-* download_url, string
-* _links, object
+    content_symlink-type = mo_json->value_string( iv_prefix && '/type' ).
+    content_symlink-target = mo_json->value_string( iv_prefix && '/target' ).
+    content_symlink-size = mo_json->value_string( iv_prefix && '/size' ).
+    content_symlink-name = mo_json->value_string( iv_prefix && '/name' ).
+    content_symlink-path = mo_json->value_string( iv_prefix && '/path' ).
+    content_symlink-sha = mo_json->value_string( iv_prefix && '/sha' ).
+    content_symlink-url = mo_json->value_string( iv_prefix && '/url' ).
+    content_symlink-git_url = mo_json->value_string( iv_prefix && '/git_url' ).
+    content_symlink-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    content_symlink-download_url = mo_json->value_string( iv_prefix && '/download_url' ).
+* todo, object, _links, object
   ENDMETHOD.
 
   METHOD parse_content_submodule.
-* sdfsdf object
-* type, string
-* submodule_git_url, string
-* size, integer
-* name, string
-* path, string
-* sha, string
-* url, string
-* git_url, string
-* html_url, string
-* download_url, string
-* _links, object
+    content_submodule-type = mo_json->value_string( iv_prefix && '/type' ).
+    content_submodule-submodule_git_url = mo_json->value_string( iv_prefix && '/submodule_git_url' ).
+    content_submodule-size = mo_json->value_string( iv_prefix && '/size' ).
+    content_submodule-name = mo_json->value_string( iv_prefix && '/name' ).
+    content_submodule-path = mo_json->value_string( iv_prefix && '/path' ).
+    content_submodule-sha = mo_json->value_string( iv_prefix && '/sha' ).
+    content_submodule-url = mo_json->value_string( iv_prefix && '/url' ).
+    content_submodule-git_url = mo_json->value_string( iv_prefix && '/git_url' ).
+    content_submodule-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    content_submodule-download_url = mo_json->value_string( iv_prefix && '/download_url' ).
+* todo, object, _links, object
   ENDMETHOD.
 
   METHOD parse_file_commit.
-* sdfsdf object
-* content, object
-* commit, object
+* todo, object, content, object
+* todo, object, commit, object
   ENDMETHOD.
 
   METHOD parse_contributor.
-* sdfsdf object
-* login, string
-* id, integer
-* node_id, string
-* avatar_url, string
-* gravatar_id, string
-* url, string
-* html_url, string
-* followers_url, string
-* following_url, string
-* gists_url, string
-* starred_url, string
-* subscriptions_url, string
-* organizations_url, string
-* repos_url, string
-* events_url, string
-* received_events_url, string
-* type, string
-* site_admin, boolean
-* contributions, integer
-* email, string
-* name, string
+    contributor-login = mo_json->value_string( iv_prefix && '/login' ).
+    contributor-id = mo_json->value_string( iv_prefix && '/id' ).
+    contributor-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    contributor-avatar_url = mo_json->value_string( iv_prefix && '/avatar_url' ).
+    contributor-gravatar_id = mo_json->value_string( iv_prefix && '/gravatar_id' ).
+    contributor-url = mo_json->value_string( iv_prefix && '/url' ).
+    contributor-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    contributor-followers_url = mo_json->value_string( iv_prefix && '/followers_url' ).
+    contributor-following_url = mo_json->value_string( iv_prefix && '/following_url' ).
+    contributor-gists_url = mo_json->value_string( iv_prefix && '/gists_url' ).
+    contributor-starred_url = mo_json->value_string( iv_prefix && '/starred_url' ).
+    contributor-subscriptions_url = mo_json->value_string( iv_prefix && '/subscriptions_url' ).
+    contributor-organizations_url = mo_json->value_string( iv_prefix && '/organizations_url' ).
+    contributor-repos_url = mo_json->value_string( iv_prefix && '/repos_url' ).
+    contributor-events_url = mo_json->value_string( iv_prefix && '/events_url' ).
+    contributor-received_events_url = mo_json->value_string( iv_prefix && '/received_events_url' ).
+    contributor-type = mo_json->value_string( iv_prefix && '/type' ).
+    contributor-site_admin = mo_json->value_boolean( iv_prefix && '/site_admin' ).
+    contributor-contributions = mo_json->value_string( iv_prefix && '/contributions' ).
+    contributor-email = mo_json->value_string( iv_prefix && '/email' ).
+    contributor-name = mo_json->value_string( iv_prefix && '/name' ).
   ENDMETHOD.
 
   METHOD parse_deployment.
-* sdfsdf object
-* url, string
-* id, integer
-* node_id, string
-* sha, string
-* ref, string
-* task, string
-* payload, object
-* original_environment, string
-* environment, string
-* description, string
-* creator, 
-* created_at, string
-* updated_at, string
-* statuses_url, string
-* repository_url, string
-* transient_environment, boolean
-* production_environment, boolean
-* performed_via_github_app, 
+    deployment-url = mo_json->value_string( iv_prefix && '/url' ).
+    deployment-id = mo_json->value_string( iv_prefix && '/id' ).
+    deployment-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    deployment-sha = mo_json->value_string( iv_prefix && '/sha' ).
+    deployment-ref = mo_json->value_string( iv_prefix && '/ref' ).
+    deployment-task = mo_json->value_string( iv_prefix && '/task' ).
+* todo, object, payload, object
+    deployment-original_environment = mo_json->value_string( iv_prefix && '/original_environment' ).
+    deployment-environment = mo_json->value_string( iv_prefix && '/environment' ).
+    deployment-description = mo_json->value_string( iv_prefix && '/description' ).
+* todo, object, creator, 
+    deployment-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    deployment-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    deployment-statuses_url = mo_json->value_string( iv_prefix && '/statuses_url' ).
+    deployment-repository_url = mo_json->value_string( iv_prefix && '/repository_url' ).
+    deployment-transient_environment = mo_json->value_boolean( iv_prefix && '/transient_environment' ).
+    deployment-production_environment = mo_json->value_boolean( iv_prefix && '/production_environment' ).
+* todo, object, performed_via_github_app, 
   ENDMETHOD.
 
   METHOD parse_deployment_status.
-* sdfsdf object
-* url, string
-* id, integer
-* node_id, string
-* state, string
-* creator, 
-* description, string
-* environment, string
-* target_url, string
-* created_at, string
-* updated_at, string
-* deployment_url, string
-* repository_url, string
-* environment_url, string
-* log_url, string
-* performed_via_github_app, 
+    deployment_status-url = mo_json->value_string( iv_prefix && '/url' ).
+    deployment_status-id = mo_json->value_string( iv_prefix && '/id' ).
+    deployment_status-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    deployment_status-state = mo_json->value_string( iv_prefix && '/state' ).
+* todo, object, creator, 
+    deployment_status-description = mo_json->value_string( iv_prefix && '/description' ).
+    deployment_status-environment = mo_json->value_string( iv_prefix && '/environment' ).
+    deployment_status-target_url = mo_json->value_string( iv_prefix && '/target_url' ).
+    deployment_status-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    deployment_status-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    deployment_status-deployment_url = mo_json->value_string( iv_prefix && '/deployment_url' ).
+    deployment_status-repository_url = mo_json->value_string( iv_prefix && '/repository_url' ).
+    deployment_status-environment_url = mo_json->value_string( iv_prefix && '/environment_url' ).
+    deployment_status-log_url = mo_json->value_string( iv_prefix && '/log_url' ).
+* todo, object, performed_via_github_app, 
   ENDMETHOD.
 
   METHOD parse_short_blob.
-* sdfsdf object
-* url, string
-* sha, string
+    short_blob-url = mo_json->value_string( iv_prefix && '/url' ).
+    short_blob-sha = mo_json->value_string( iv_prefix && '/sha' ).
   ENDMETHOD.
 
   METHOD parse_blob.
-* sdfsdf object
-* content, string
-* encoding, string
-* url, string
-* sha, string
-* size, integer
-* node_id, string
-* highlighted_content, string
+    blob-content = mo_json->value_string( iv_prefix && '/content' ).
+    blob-encoding = mo_json->value_string( iv_prefix && '/encoding' ).
+    blob-url = mo_json->value_string( iv_prefix && '/url' ).
+    blob-sha = mo_json->value_string( iv_prefix && '/sha' ).
+    blob-size = mo_json->value_string( iv_prefix && '/size' ).
+    blob-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    blob-highlighted_content = mo_json->value_string( iv_prefix && '/highlighted_content' ).
   ENDMETHOD.
 
   METHOD parse_git_commit.
-* sdfsdf object
-* sha, string
-* node_id, string
-* url, string
-* author, object
-* committer, object
-* message, string
-* tree, object
-* parents, array
-* verification, object
-* html_url, string
+    git_commit-sha = mo_json->value_string( iv_prefix && '/sha' ).
+    git_commit-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    git_commit-url = mo_json->value_string( iv_prefix && '/url' ).
+* todo, object, author, object
+* todo, object, committer, object
+    git_commit-message = mo_json->value_string( iv_prefix && '/message' ).
+* todo, object, tree, object
+* todo, object, parents, array
+* todo, object, verification, object
+    git_commit-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
   ENDMETHOD.
 
   METHOD parse_git_ref.
-* sdfsdf object
-* ref, string
-* node_id, string
-* url, string
-* object, object
+    git_ref-ref = mo_json->value_string( iv_prefix && '/ref' ).
+    git_ref-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    git_ref-url = mo_json->value_string( iv_prefix && '/url' ).
+* todo, object, object, object
   ENDMETHOD.
 
   METHOD parse_git_tag.
-* sdfsdf object
-* node_id, string
-* tag, string
-* sha, string
-* url, string
-* message, string
-* tagger, object
-* object, object
-* verification, 
+    git_tag-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    git_tag-tag = mo_json->value_string( iv_prefix && '/tag' ).
+    git_tag-sha = mo_json->value_string( iv_prefix && '/sha' ).
+    git_tag-url = mo_json->value_string( iv_prefix && '/url' ).
+    git_tag-message = mo_json->value_string( iv_prefix && '/message' ).
+* todo, object, tagger, object
+* todo, object, object, object
+* todo, object, verification, 
   ENDMETHOD.
 
   METHOD parse_git_tree.
-* sdfsdf object
-* sha, string
-* url, string
-* truncated, boolean
-* tree, array
+    git_tree-sha = mo_json->value_string( iv_prefix && '/sha' ).
+    git_tree-url = mo_json->value_string( iv_prefix && '/url' ).
+    git_tree-truncated = mo_json->value_boolean( iv_prefix && '/truncated' ).
+* todo, object, tree, array
   ENDMETHOD.
 
   METHOD parse_hook_response.
-* sdfsdf object
-* code, integer
-* status, string
-* message, string
+    hook_response-code = mo_json->value_string( iv_prefix && '/code' ).
+    hook_response-status = mo_json->value_string( iv_prefix && '/status' ).
+    hook_response-message = mo_json->value_string( iv_prefix && '/message' ).
   ENDMETHOD.
 
   METHOD parse_hook.
-* sdfsdf object
-* type, string
-* id, integer
-* name, string
-* active, boolean
-* events, array
-* config, object
-* updated_at, string
-* created_at, string
-* url, string
-* test_url, string
-* ping_url, string
-* last_response, 
+    hook-type = mo_json->value_string( iv_prefix && '/type' ).
+    hook-id = mo_json->value_string( iv_prefix && '/id' ).
+    hook-name = mo_json->value_string( iv_prefix && '/name' ).
+    hook-active = mo_json->value_boolean( iv_prefix && '/active' ).
+* todo, object, events, array
+* todo, object, config, object
+    hook-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    hook-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    hook-url = mo_json->value_string( iv_prefix && '/url' ).
+    hook-test_url = mo_json->value_string( iv_prefix && '/test_url' ).
+    hook-ping_url = mo_json->value_string( iv_prefix && '/ping_url' ).
+* todo, object, last_response, 
   ENDMETHOD.
 
   METHOD parse_import.
-* sdfsdf object
-* vcs, string
-* use_lfs, string
-* vcs_url, string
-* svc_root, string
-* tfvc_project, string
-* status, string
-* status_text, string
-* failed_step, string
-* error_message, string
-* import_percent, integer
-* commit_count, integer
-* push_percent, integer
-* has_large_files, boolean
-* large_files_size, integer
-* large_files_count, integer
-* project_choices, array
-* message, string
-* authors_count, integer
-* url, string
-* html_url, string
-* authors_url, string
-* repository_url, string
-* svn_root, string
+    import-vcs = mo_json->value_string( iv_prefix && '/vcs' ).
+    import-use_lfs = mo_json->value_string( iv_prefix && '/use_lfs' ).
+    import-vcs_url = mo_json->value_string( iv_prefix && '/vcs_url' ).
+    import-svc_root = mo_json->value_string( iv_prefix && '/svc_root' ).
+    import-tfvc_project = mo_json->value_string( iv_prefix && '/tfvc_project' ).
+    import-status = mo_json->value_string( iv_prefix && '/status' ).
+    import-status_text = mo_json->value_string( iv_prefix && '/status_text' ).
+    import-failed_step = mo_json->value_string( iv_prefix && '/failed_step' ).
+    import-error_message = mo_json->value_string( iv_prefix && '/error_message' ).
+    import-import_percent = mo_json->value_string( iv_prefix && '/import_percent' ).
+    import-commit_count = mo_json->value_string( iv_prefix && '/commit_count' ).
+    import-push_percent = mo_json->value_string( iv_prefix && '/push_percent' ).
+    import-has_large_files = mo_json->value_boolean( iv_prefix && '/has_large_files' ).
+    import-large_files_size = mo_json->value_string( iv_prefix && '/large_files_size' ).
+    import-large_files_count = mo_json->value_string( iv_prefix && '/large_files_count' ).
+* todo, object, project_choices, array
+    import-message = mo_json->value_string( iv_prefix && '/message' ).
+    import-authors_count = mo_json->value_string( iv_prefix && '/authors_count' ).
+    import-url = mo_json->value_string( iv_prefix && '/url' ).
+    import-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    import-authors_url = mo_json->value_string( iv_prefix && '/authors_url' ).
+    import-repository_url = mo_json->value_string( iv_prefix && '/repository_url' ).
+    import-svn_root = mo_json->value_string( iv_prefix && '/svn_root' ).
   ENDMETHOD.
 
   METHOD parse_porter_author.
-* sdfsdf object
-* id, integer
-* remote_id, string
-* remote_name, string
-* email, string
-* name, string
-* url, string
-* import_url, string
+    porter_author-id = mo_json->value_string( iv_prefix && '/id' ).
+    porter_author-remote_id = mo_json->value_string( iv_prefix && '/remote_id' ).
+    porter_author-remote_name = mo_json->value_string( iv_prefix && '/remote_name' ).
+    porter_author-email = mo_json->value_string( iv_prefix && '/email' ).
+    porter_author-name = mo_json->value_string( iv_prefix && '/name' ).
+    porter_author-url = mo_json->value_string( iv_prefix && '/url' ).
+    porter_author-import_url = mo_json->value_string( iv_prefix && '/import_url' ).
   ENDMETHOD.
 
   METHOD parse_porter_large_file.
-* sdfsdf object
-* ref_name, string
-* path, string
-* oid, string
-* size, integer
+    porter_large_file-ref_name = mo_json->value_string( iv_prefix && '/ref_name' ).
+    porter_large_file-path = mo_json->value_string( iv_prefix && '/path' ).
+    porter_large_file-oid = mo_json->value_string( iv_prefix && '/oid' ).
+    porter_large_file-size = mo_json->value_string( iv_prefix && '/size' ).
   ENDMETHOD.
 
   METHOD parse_issue_event_label.
-* sdfsdf object
-* name, string
-* color, string
+    issue_event_label-name = mo_json->value_string( iv_prefix && '/name' ).
+    issue_event_label-color = mo_json->value_string( iv_prefix && '/color' ).
   ENDMETHOD.
 
   METHOD parse_issue_event_dismissed_re.
-* sdfsdf object
-* state, string
-* review_id, integer
-* dismissal_message, string
-* dismissal_commit_id, string
+    issue_event_dismissed_review-state = mo_json->value_string( iv_prefix && '/state' ).
+    issue_event_dismissed_review-review_id = mo_json->value_string( iv_prefix && '/review_id' ).
+    issue_event_dismissed_review-dismissal_message = mo_json->value_string( iv_prefix && '/dismissal_message' ).
+    issue_event_dismissed_review-dismissal_commit_id = mo_json->value_string( iv_prefix && '/dismissal_commit_id' ).
   ENDMETHOD.
 
   METHOD parse_issue_event_milestone.
-* sdfsdf object
-* title, string
+    issue_event_milestone-title = mo_json->value_string( iv_prefix && '/title' ).
   ENDMETHOD.
 
   METHOD parse_issue_event_project_card.
-* sdfsdf object
-* url, string
-* id, integer
-* project_url, string
-* project_id, integer
-* column_name, string
-* previous_column_name, string
+    issue_event_project_card-url = mo_json->value_string( iv_prefix && '/url' ).
+    issue_event_project_card-id = mo_json->value_string( iv_prefix && '/id' ).
+    issue_event_project_card-project_url = mo_json->value_string( iv_prefix && '/project_url' ).
+    issue_event_project_card-project_id = mo_json->value_string( iv_prefix && '/project_id' ).
+    issue_event_project_card-column_name = mo_json->value_string( iv_prefix && '/column_name' ).
+    issue_event_project_card-previous_column_name = mo_json->value_string( iv_prefix && '/previous_column_name' ).
   ENDMETHOD.
 
   METHOD parse_issue_event_rename.
-* sdfsdf object
-* from, string
-* to, string
+    issue_event_rename-from = mo_json->value_string( iv_prefix && '/from' ).
+    issue_event_rename-to = mo_json->value_string( iv_prefix && '/to' ).
   ENDMETHOD.
 
   METHOD parse_issue_event.
-* sdfsdf object
-* id, integer
-* node_id, string
-* url, string
-* actor, 
-* event, string
-* commit_id, string
-* commit_url, string
-* created_at, string
-* issue, 
-* label, 
-* assignee, 
-* assigner, 
-* review_requester, 
-* requested_reviewer, 
-* requested_team, 
-* dismissed_review, 
-* milestone, 
-* project_card, 
-* rename, 
-* author_association, 
-* lock_reason, string
+    issue_event-id = mo_json->value_string( iv_prefix && '/id' ).
+    issue_event-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    issue_event-url = mo_json->value_string( iv_prefix && '/url' ).
+* todo, object, actor, 
+    issue_event-event = mo_json->value_string( iv_prefix && '/event' ).
+    issue_event-commit_id = mo_json->value_string( iv_prefix && '/commit_id' ).
+    issue_event-commit_url = mo_json->value_string( iv_prefix && '/commit_url' ).
+    issue_event-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+* todo, object, issue, 
+* todo, object, label, 
+* todo, object, assignee, 
+* todo, object, assigner, 
+* todo, object, review_requester, 
+* todo, object, requested_reviewer, 
+* todo, object, requested_team, 
+* todo, object, dismissed_review, 
+* todo, object, milestone, 
+* todo, object, project_card, 
+* todo, object, rename, 
+* todo, object, author_association, 
+    issue_event-lock_reason = mo_json->value_string( iv_prefix && '/lock_reason' ).
   ENDMETHOD.
 
   METHOD parse_issue_event_for_issue.
-* sdfsdf object
-* id, integer
-* node_id, string
-* url, string
-* actor, 
-* event, string
-* commit_id, string
-* commit_url, string
-* created_at, string
-* sha, string
-* html_url, string
-* message, string
-* issue_url, string
-* updated_at, string
-* author_association, 
-* body, string
-* lock_reason, string
-* submitted_at, string
-* state, string
-* pull_request_url, string
-* body_html, string
-* body_text, string
+    issue_event_for_issue-id = mo_json->value_string( iv_prefix && '/id' ).
+    issue_event_for_issue-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    issue_event_for_issue-url = mo_json->value_string( iv_prefix && '/url' ).
+* todo, object, actor, 
+    issue_event_for_issue-event = mo_json->value_string( iv_prefix && '/event' ).
+    issue_event_for_issue-commit_id = mo_json->value_string( iv_prefix && '/commit_id' ).
+    issue_event_for_issue-commit_url = mo_json->value_string( iv_prefix && '/commit_url' ).
+    issue_event_for_issue-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    issue_event_for_issue-sha = mo_json->value_string( iv_prefix && '/sha' ).
+    issue_event_for_issue-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    issue_event_for_issue-message = mo_json->value_string( iv_prefix && '/message' ).
+    issue_event_for_issue-issue_url = mo_json->value_string( iv_prefix && '/issue_url' ).
+    issue_event_for_issue-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+* todo, object, author_association, 
+    issue_event_for_issue-body = mo_json->value_string( iv_prefix && '/body' ).
+    issue_event_for_issue-lock_reason = mo_json->value_string( iv_prefix && '/lock_reason' ).
+    issue_event_for_issue-submitted_at = mo_json->value_string( iv_prefix && '/submitted_at' ).
+    issue_event_for_issue-state = mo_json->value_string( iv_prefix && '/state' ).
+    issue_event_for_issue-pull_request_url = mo_json->value_string( iv_prefix && '/pull_request_url' ).
+    issue_event_for_issue-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
+    issue_event_for_issue-body_text = mo_json->value_string( iv_prefix && '/body_text' ).
   ENDMETHOD.
 
   METHOD parse_deploy_key.
-* sdfsdf object
-* id, integer
-* key, string
-* url, string
-* title, string
-* verified, boolean
-* created_at, string
-* read_only, boolean
+    deploy_key-id = mo_json->value_string( iv_prefix && '/id' ).
+    deploy_key-key = mo_json->value_string( iv_prefix && '/key' ).
+    deploy_key-url = mo_json->value_string( iv_prefix && '/url' ).
+    deploy_key-title = mo_json->value_string( iv_prefix && '/title' ).
+    deploy_key-verified = mo_json->value_boolean( iv_prefix && '/verified' ).
+    deploy_key-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    deploy_key-read_only = mo_json->value_boolean( iv_prefix && '/read_only' ).
   ENDMETHOD.
 
   METHOD parse_language.
-* sdfsdf object
   ENDMETHOD.
 
   METHOD parse_license_content.
-* sdfsdf object
-* name, string
-* path, string
-* sha, string
-* size, integer
-* url, string
-* html_url, string
-* git_url, string
-* download_url, string
-* type, string
-* content, string
-* encoding, string
-* _links, object
-* license, 
+    license_content-name = mo_json->value_string( iv_prefix && '/name' ).
+    license_content-path = mo_json->value_string( iv_prefix && '/path' ).
+    license_content-sha = mo_json->value_string( iv_prefix && '/sha' ).
+    license_content-size = mo_json->value_string( iv_prefix && '/size' ).
+    license_content-url = mo_json->value_string( iv_prefix && '/url' ).
+    license_content-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    license_content-git_url = mo_json->value_string( iv_prefix && '/git_url' ).
+    license_content-download_url = mo_json->value_string( iv_prefix && '/download_url' ).
+    license_content-type = mo_json->value_string( iv_prefix && '/type' ).
+    license_content-content = mo_json->value_string( iv_prefix && '/content' ).
+    license_content-encoding = mo_json->value_string( iv_prefix && '/encoding' ).
+* todo, object, _links, object
+* todo, object, license, 
   ENDMETHOD.
 
   METHOD parse_pages_source_hash.
-* sdfsdf object
-* branch, string
-* path, string
+    pages_source_hash-branch = mo_json->value_string( iv_prefix && '/branch' ).
+    pages_source_hash-path = mo_json->value_string( iv_prefix && '/path' ).
   ENDMETHOD.
 
   METHOD parse_page.
-* sdfsdf object
-* url, string
-* status, string
-* cname, string
-* custom_404, boolean
-* html_url, string
-* source, 
-* public, boolean
+    page-url = mo_json->value_string( iv_prefix && '/url' ).
+    page-status = mo_json->value_string( iv_prefix && '/status' ).
+    page-cname = mo_json->value_string( iv_prefix && '/cname' ).
+    page-custom_404 = mo_json->value_boolean( iv_prefix && '/custom_404' ).
+    page-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+* todo, object, source, 
+    page-public = mo_json->value_boolean( iv_prefix && '/public' ).
   ENDMETHOD.
 
   METHOD parse_page_build.
-* sdfsdf object
-* url, string
-* status, string
-* error, object
-* pusher, 
-* commit, string
-* duration, integer
-* created_at, string
-* updated_at, string
+    page_build-url = mo_json->value_string( iv_prefix && '/url' ).
+    page_build-status = mo_json->value_string( iv_prefix && '/status' ).
+* todo, object, error, object
+* todo, object, pusher, 
+    page_build-commit = mo_json->value_string( iv_prefix && '/commit' ).
+    page_build-duration = mo_json->value_string( iv_prefix && '/duration' ).
+    page_build-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    page_build-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
   ENDMETHOD.
 
   METHOD parse_page_build_status.
-* sdfsdf object
-* url, string
-* status, string
+    page_build_status-url = mo_json->value_string( iv_prefix && '/url' ).
+    page_build_status-status = mo_json->value_string( iv_prefix && '/status' ).
   ENDMETHOD.
 
   METHOD parse_pull_request.
-* sdfsdf object
-* url, string
-* id, integer
-* node_id, string
-* html_url, string
-* diff_url, string
-* patch_url, string
-* issue_url, string
-* commits_url, string
-* review_comments_url, string
-* review_comment_url, string
-* comments_url, string
-* statuses_url, string
-* number, integer
-* state, string
-* locked, boolean
-* title, string
-* user, 
-* body, string
-* labels, array
-* milestone, 
-* active_lock_reason, string
-* created_at, string
-* updated_at, string
-* closed_at, string
-* merged_at, string
-* merge_commit_sha, string
-* assignee, 
-* assignees, array
-* requested_reviewers, array
-* requested_teams, array
-* head, object
-* base, object
-* _links, object
-* author_association, 
-* auto_merge, 
-* draft, boolean
-* merged, boolean
-* mergeable, boolean
-* rebaseable, boolean
-* mergeable_state, string
-* merged_by, 
-* comments, integer
-* review_comments, integer
-* maintainer_can_modify, boolean
-* commits, integer
-* additions, integer
-* deletions, integer
-* changed_files, integer
+    pull_request-url = mo_json->value_string( iv_prefix && '/url' ).
+    pull_request-id = mo_json->value_string( iv_prefix && '/id' ).
+    pull_request-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    pull_request-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    pull_request-diff_url = mo_json->value_string( iv_prefix && '/diff_url' ).
+    pull_request-patch_url = mo_json->value_string( iv_prefix && '/patch_url' ).
+    pull_request-issue_url = mo_json->value_string( iv_prefix && '/issue_url' ).
+    pull_request-commits_url = mo_json->value_string( iv_prefix && '/commits_url' ).
+    pull_request-review_comments_url = mo_json->value_string( iv_prefix && '/review_comments_url' ).
+    pull_request-review_comment_url = mo_json->value_string( iv_prefix && '/review_comment_url' ).
+    pull_request-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
+    pull_request-statuses_url = mo_json->value_string( iv_prefix && '/statuses_url' ).
+    pull_request-number = mo_json->value_string( iv_prefix && '/number' ).
+    pull_request-state = mo_json->value_string( iv_prefix && '/state' ).
+    pull_request-locked = mo_json->value_boolean( iv_prefix && '/locked' ).
+    pull_request-title = mo_json->value_string( iv_prefix && '/title' ).
+* todo, object, user, 
+    pull_request-body = mo_json->value_string( iv_prefix && '/body' ).
+* todo, object, labels, array
+* todo, object, milestone, 
+    pull_request-active_lock_reason = mo_json->value_string( iv_prefix && '/active_lock_reason' ).
+    pull_request-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    pull_request-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    pull_request-closed_at = mo_json->value_string( iv_prefix && '/closed_at' ).
+    pull_request-merged_at = mo_json->value_string( iv_prefix && '/merged_at' ).
+    pull_request-merge_commit_sha = mo_json->value_string( iv_prefix && '/merge_commit_sha' ).
+* todo, object, assignee, 
+* todo, object, assignees, array
+* todo, object, requested_reviewers, array
+* todo, object, requested_teams, array
+* todo, object, head, object
+* todo, object, base, object
+* todo, object, _links, object
+* todo, object, author_association, 
+* todo, object, auto_merge, 
+    pull_request-draft = mo_json->value_boolean( iv_prefix && '/draft' ).
+    pull_request-merged = mo_json->value_boolean( iv_prefix && '/merged' ).
+    pull_request-mergeable = mo_json->value_boolean( iv_prefix && '/mergeable' ).
+    pull_request-rebaseable = mo_json->value_boolean( iv_prefix && '/rebaseable' ).
+    pull_request-mergeable_state = mo_json->value_string( iv_prefix && '/mergeable_state' ).
+* todo, object, merged_by, 
+    pull_request-comments = mo_json->value_string( iv_prefix && '/comments' ).
+    pull_request-review_comments = mo_json->value_string( iv_prefix && '/review_comments' ).
+    pull_request-maintainer_can_modify = mo_json->value_boolean( iv_prefix && '/maintainer_can_modify' ).
+    pull_request-commits = mo_json->value_string( iv_prefix && '/commits' ).
+    pull_request-additions = mo_json->value_string( iv_prefix && '/additions' ).
+    pull_request-deletions = mo_json->value_string( iv_prefix && '/deletions' ).
+    pull_request-changed_files = mo_json->value_string( iv_prefix && '/changed_files' ).
   ENDMETHOD.
 
   METHOD parse_pull_request_review_comm.
-* sdfsdf object
-* url, string
-* pull_request_review_id, integer
-* id, integer
-* node_id, string
-* diff_hunk, string
-* path, string
-* position, integer
-* original_position, integer
-* commit_id, string
-* original_commit_id, string
-* in_reply_to_id, integer
-* user, 
-* body, string
-* created_at, string
-* updated_at, string
-* html_url, string
-* pull_request_url, string
-* author_association, 
-* _links, object
-* start_line, integer
-* original_start_line, integer
-* start_side, string
-* line, integer
-* original_line, integer
-* side, string
-* reactions, 
-* body_html, string
-* body_text, string
+    pull_request_review_comment-url = mo_json->value_string( iv_prefix && '/url' ).
+    pull_request_review_comment-pull_request_review_id = mo_json->value_string( iv_prefix && '/pull_request_review_id' ).
+    pull_request_review_comment-id = mo_json->value_string( iv_prefix && '/id' ).
+    pull_request_review_comment-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    pull_request_review_comment-diff_hunk = mo_json->value_string( iv_prefix && '/diff_hunk' ).
+    pull_request_review_comment-path = mo_json->value_string( iv_prefix && '/path' ).
+    pull_request_review_comment-position = mo_json->value_string( iv_prefix && '/position' ).
+    pull_request_review_comment-original_position = mo_json->value_string( iv_prefix && '/original_position' ).
+    pull_request_review_comment-commit_id = mo_json->value_string( iv_prefix && '/commit_id' ).
+    pull_request_review_comment-original_commit_id = mo_json->value_string( iv_prefix && '/original_commit_id' ).
+    pull_request_review_comment-in_reply_to_id = mo_json->value_string( iv_prefix && '/in_reply_to_id' ).
+* todo, object, user, 
+    pull_request_review_comment-body = mo_json->value_string( iv_prefix && '/body' ).
+    pull_request_review_comment-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    pull_request_review_comment-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    pull_request_review_comment-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    pull_request_review_comment-pull_request_url = mo_json->value_string( iv_prefix && '/pull_request_url' ).
+* todo, object, author_association, 
+* todo, object, _links, object
+    pull_request_review_comment-start_line = mo_json->value_string( iv_prefix && '/start_line' ).
+    pull_request_review_comment-original_start_line = mo_json->value_string( iv_prefix && '/original_start_line' ).
+    pull_request_review_comment-start_side = mo_json->value_string( iv_prefix && '/start_side' ).
+    pull_request_review_comment-line = mo_json->value_string( iv_prefix && '/line' ).
+    pull_request_review_comment-original_line = mo_json->value_string( iv_prefix && '/original_line' ).
+    pull_request_review_comment-side = mo_json->value_string( iv_prefix && '/side' ).
+* todo, object, reactions, 
+    pull_request_review_comment-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
+    pull_request_review_comment-body_text = mo_json->value_string( iv_prefix && '/body_text' ).
   ENDMETHOD.
 
   METHOD parse_pull_request_merge_resul.
-* sdfsdf object
-* sha, string
-* merged, boolean
-* message, string
+    pull_request_merge_result-sha = mo_json->value_string( iv_prefix && '/sha' ).
+    pull_request_merge_result-merged = mo_json->value_boolean( iv_prefix && '/merged' ).
+    pull_request_merge_result-message = mo_json->value_string( iv_prefix && '/message' ).
   ENDMETHOD.
 
   METHOD parse_pull_request_review_requ.
-* sdfsdf object
-* users, array
-* teams, array
+* todo, object, users, array
+* todo, object, teams, array
   ENDMETHOD.
 
   METHOD parse_pull_request_review.
-* sdfsdf object
-* id, integer
-* node_id, string
-* user, 
-* body, string
-* state, string
-* html_url, string
-* pull_request_url, string
-* _links, object
-* submitted_at, string
-* commit_id, string
-* body_html, string
-* body_text, string
-* author_association, 
+    pull_request_review-id = mo_json->value_string( iv_prefix && '/id' ).
+    pull_request_review-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+* todo, object, user, 
+    pull_request_review-body = mo_json->value_string( iv_prefix && '/body' ).
+    pull_request_review-state = mo_json->value_string( iv_prefix && '/state' ).
+    pull_request_review-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    pull_request_review-pull_request_url = mo_json->value_string( iv_prefix && '/pull_request_url' ).
+* todo, object, _links, object
+    pull_request_review-submitted_at = mo_json->value_string( iv_prefix && '/submitted_at' ).
+    pull_request_review-commit_id = mo_json->value_string( iv_prefix && '/commit_id' ).
+    pull_request_review-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
+    pull_request_review-body_text = mo_json->value_string( iv_prefix && '/body_text' ).
+* todo, object, author_association, 
   ENDMETHOD.
 
   METHOD parse_review_comment.
-* sdfsdf object
-* url, string
-* pull_request_review_id, integer
-* id, integer
-* node_id, string
-* diff_hunk, string
-* path, string
-* position, integer
-* original_position, integer
-* commit_id, string
-* original_commit_id, string
-* in_reply_to_id, integer
-* user, 
-* body, string
-* created_at, string
-* updated_at, string
-* html_url, string
-* pull_request_url, string
-* author_association, 
-* _links, object
-* body_text, string
-* body_html, string
-* side, string
-* start_side, string
-* line, integer
-* original_line, integer
-* start_line, integer
-* original_start_line, integer
+    review_comment-url = mo_json->value_string( iv_prefix && '/url' ).
+    review_comment-pull_request_review_id = mo_json->value_string( iv_prefix && '/pull_request_review_id' ).
+    review_comment-id = mo_json->value_string( iv_prefix && '/id' ).
+    review_comment-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    review_comment-diff_hunk = mo_json->value_string( iv_prefix && '/diff_hunk' ).
+    review_comment-path = mo_json->value_string( iv_prefix && '/path' ).
+    review_comment-position = mo_json->value_string( iv_prefix && '/position' ).
+    review_comment-original_position = mo_json->value_string( iv_prefix && '/original_position' ).
+    review_comment-commit_id = mo_json->value_string( iv_prefix && '/commit_id' ).
+    review_comment-original_commit_id = mo_json->value_string( iv_prefix && '/original_commit_id' ).
+    review_comment-in_reply_to_id = mo_json->value_string( iv_prefix && '/in_reply_to_id' ).
+* todo, object, user, 
+    review_comment-body = mo_json->value_string( iv_prefix && '/body' ).
+    review_comment-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    review_comment-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    review_comment-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    review_comment-pull_request_url = mo_json->value_string( iv_prefix && '/pull_request_url' ).
+* todo, object, author_association, 
+* todo, object, _links, object
+    review_comment-body_text = mo_json->value_string( iv_prefix && '/body_text' ).
+    review_comment-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
+    review_comment-side = mo_json->value_string( iv_prefix && '/side' ).
+    review_comment-start_side = mo_json->value_string( iv_prefix && '/start_side' ).
+    review_comment-line = mo_json->value_string( iv_prefix && '/line' ).
+    review_comment-original_line = mo_json->value_string( iv_prefix && '/original_line' ).
+    review_comment-start_line = mo_json->value_string( iv_prefix && '/start_line' ).
+    review_comment-original_start_line = mo_json->value_string( iv_prefix && '/original_start_line' ).
   ENDMETHOD.
 
   METHOD parse_release_asset.
-* sdfsdf object
-* url, string
-* browser_download_url, string
-* id, integer
-* node_id, string
-* name, string
-* label, string
-* state, string
-* content_type, string
-* size, integer
-* download_count, integer
-* created_at, string
-* updated_at, string
-* uploader, 
+    release_asset-url = mo_json->value_string( iv_prefix && '/url' ).
+    release_asset-browser_download_url = mo_json->value_string( iv_prefix && '/browser_download_url' ).
+    release_asset-id = mo_json->value_string( iv_prefix && '/id' ).
+    release_asset-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    release_asset-name = mo_json->value_string( iv_prefix && '/name' ).
+    release_asset-label = mo_json->value_string( iv_prefix && '/label' ).
+    release_asset-state = mo_json->value_string( iv_prefix && '/state' ).
+    release_asset-content_type = mo_json->value_string( iv_prefix && '/content_type' ).
+    release_asset-size = mo_json->value_string( iv_prefix && '/size' ).
+    release_asset-download_count = mo_json->value_string( iv_prefix && '/download_count' ).
+    release_asset-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    release_asset-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+* todo, object, uploader, 
   ENDMETHOD.
 
   METHOD parse_release.
-* sdfsdf object
-* url, string
-* html_url, string
-* assets_url, string
-* upload_url, string
-* tarball_url, string
-* zipball_url, string
-* id, integer
-* node_id, string
-* tag_name, string
-* target_commitish, string
-* name, string
-* body, string
-* draft, boolean
-* prerelease, boolean
-* created_at, string
-* published_at, string
-* author, 
-* assets, array
-* body_html, string
-* body_text, string
+    release-url = mo_json->value_string( iv_prefix && '/url' ).
+    release-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    release-assets_url = mo_json->value_string( iv_prefix && '/assets_url' ).
+    release-upload_url = mo_json->value_string( iv_prefix && '/upload_url' ).
+    release-tarball_url = mo_json->value_string( iv_prefix && '/tarball_url' ).
+    release-zipball_url = mo_json->value_string( iv_prefix && '/zipball_url' ).
+    release-id = mo_json->value_string( iv_prefix && '/id' ).
+    release-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    release-tag_name = mo_json->value_string( iv_prefix && '/tag_name' ).
+    release-target_commitish = mo_json->value_string( iv_prefix && '/target_commitish' ).
+    release-name = mo_json->value_string( iv_prefix && '/name' ).
+    release-body = mo_json->value_string( iv_prefix && '/body' ).
+    release-draft = mo_json->value_boolean( iv_prefix && '/draft' ).
+    release-prerelease = mo_json->value_boolean( iv_prefix && '/prerelease' ).
+    release-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    release-published_at = mo_json->value_string( iv_prefix && '/published_at' ).
+* todo, object, author, 
+* todo, object, assets, array
+    release-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
+    release-body_text = mo_json->value_string( iv_prefix && '/body_text' ).
   ENDMETHOD.
 
   METHOD parse_secret_scanning_alert_st.
@@ -3695,23 +3529,21 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_secret_scanning_alert.
-* sdfsdf object
-* number, 
-* created_at, 
-* url, 
-* html_url, 
-* state, 
-* resolution, 
-* resolved_at, string
-* resolved_by, 
-* secret_type, string
-* secret, string
+* todo, object, number, 
+* todo, object, created_at, 
+* todo, object, url, 
+* todo, object, html_url, 
+* todo, object, state, 
+* todo, object, resolution, 
+    secret_scanning_alert-resolved_at = mo_json->value_string( iv_prefix && '/resolved_at' ).
+* todo, object, resolved_by, 
+    secret_scanning_alert-secret_type = mo_json->value_string( iv_prefix && '/secret_type' ).
+    secret_scanning_alert-secret = mo_json->value_string( iv_prefix && '/secret' ).
   ENDMETHOD.
 
   METHOD parse_stargazer.
-* sdfsdf object
-* starred_at, string
-* user, 
+    stargazer-starred_at = mo_json->value_string( iv_prefix && '/starred_at' ).
+* todo, object, user, 
   ENDMETHOD.
 
   METHOD parse_code_frequency_stat.
@@ -3719,149 +3551,132 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_commit_activity.
-* sdfsdf object
-* days, array
-* total, integer
-* week, integer
+* todo, object, days, array
+    commit_activity-total = mo_json->value_string( iv_prefix && '/total' ).
+    commit_activity-week = mo_json->value_string( iv_prefix && '/week' ).
   ENDMETHOD.
 
   METHOD parse_contributor_activity.
-* sdfsdf object
-* author, 
-* total, integer
-* weeks, array
+* todo, object, author, 
+    contributor_activity-total = mo_json->value_string( iv_prefix && '/total' ).
+* todo, object, weeks, array
   ENDMETHOD.
 
   METHOD parse_participation_stats.
-* sdfsdf object
-* all, array
-* owner, array
+* todo, object, all, array
+* todo, object, owner, array
   ENDMETHOD.
 
   METHOD parse_repository_subscription.
-* sdfsdf object
-* subscribed, boolean
-* ignored, boolean
-* reason, string
-* created_at, string
-* url, string
-* repository_url, string
+    repository_subscription-subscribed = mo_json->value_boolean( iv_prefix && '/subscribed' ).
+    repository_subscription-ignored = mo_json->value_boolean( iv_prefix && '/ignored' ).
+    repository_subscription-reason = mo_json->value_string( iv_prefix && '/reason' ).
+    repository_subscription-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    repository_subscription-url = mo_json->value_string( iv_prefix && '/url' ).
+    repository_subscription-repository_url = mo_json->value_string( iv_prefix && '/repository_url' ).
   ENDMETHOD.
 
   METHOD parse_tag.
-* sdfsdf object
-* name, string
-* commit, object
-* zipball_url, string
-* tarball_url, string
-* node_id, string
+    tag-name = mo_json->value_string( iv_prefix && '/name' ).
+* todo, object, commit, object
+    tag-zipball_url = mo_json->value_string( iv_prefix && '/zipball_url' ).
+    tag-tarball_url = mo_json->value_string( iv_prefix && '/tarball_url' ).
+    tag-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
   ENDMETHOD.
 
   METHOD parse_topic.
-* sdfsdf object
-* names, array
+* todo, object, names, array
   ENDMETHOD.
 
   METHOD parse_traffic.
-* sdfsdf object
-* timestamp, string
-* uniques, integer
-* count, integer
+    traffic-timestamp = mo_json->value_string( iv_prefix && '/timestamp' ).
+    traffic-uniques = mo_json->value_string( iv_prefix && '/uniques' ).
+    traffic-count = mo_json->value_string( iv_prefix && '/count' ).
   ENDMETHOD.
 
   METHOD parse_clone_traffic.
-* sdfsdf object
-* count, integer
-* uniques, integer
-* clones, array
+    clone_traffic-count = mo_json->value_string( iv_prefix && '/count' ).
+    clone_traffic-uniques = mo_json->value_string( iv_prefix && '/uniques' ).
+* todo, object, clones, array
   ENDMETHOD.
 
   METHOD parse_content_traffic.
-* sdfsdf object
-* path, string
-* title, string
-* count, integer
-* uniques, integer
+    content_traffic-path = mo_json->value_string( iv_prefix && '/path' ).
+    content_traffic-title = mo_json->value_string( iv_prefix && '/title' ).
+    content_traffic-count = mo_json->value_string( iv_prefix && '/count' ).
+    content_traffic-uniques = mo_json->value_string( iv_prefix && '/uniques' ).
   ENDMETHOD.
 
   METHOD parse_referrer_traffic.
-* sdfsdf object
-* referrer, string
-* count, integer
-* uniques, integer
+    referrer_traffic-referrer = mo_json->value_string( iv_prefix && '/referrer' ).
+    referrer_traffic-count = mo_json->value_string( iv_prefix && '/count' ).
+    referrer_traffic-uniques = mo_json->value_string( iv_prefix && '/uniques' ).
   ENDMETHOD.
 
   METHOD parse_view_traffic.
-* sdfsdf object
-* count, integer
-* uniques, integer
-* views, array
+    view_traffic-count = mo_json->value_string( iv_prefix && '/count' ).
+    view_traffic-uniques = mo_json->value_string( iv_prefix && '/uniques' ).
+* todo, object, views, array
   ENDMETHOD.
 
   METHOD parse_scim_group_list_enterpri.
-* sdfsdf object
-* schemas, array
-* totalresults, number
-* itemsperpage, number
-* startindex, number
-* resources, array
+* todo, object, schemas, array
+* todo, object, totalresults, number
+* todo, object, itemsperpage, number
+* todo, object, startindex, number
+* todo, object, resources, array
   ENDMETHOD.
 
   METHOD parse_scim_enterprise_group.
-* sdfsdf object
-* schemas, array
-* id, string
-* externalid, string
-* displayname, string
-* members, array
-* meta, object
+* todo, object, schemas, array
+    scim_enterprise_group-id = mo_json->value_string( iv_prefix && '/id' ).
+    scim_enterprise_group-externalid = mo_json->value_string( iv_prefix && '/externalId' ).
+    scim_enterprise_group-displayname = mo_json->value_string( iv_prefix && '/displayName' ).
+* todo, object, members, array
+* todo, object, meta, object
   ENDMETHOD.
 
   METHOD parse_scim_user_list_enterpris.
-* sdfsdf object
-* schemas, array
-* totalresults, number
-* itemsperpage, number
-* startindex, number
-* resources, array
+* todo, object, schemas, array
+* todo, object, totalresults, number
+* todo, object, itemsperpage, number
+* todo, object, startindex, number
+* todo, object, resources, array
   ENDMETHOD.
 
   METHOD parse_scim_enterprise_user.
-* sdfsdf object
-* schemas, array
-* id, string
-* externalid, string
-* username, string
-* name, object
-* emails, array
-* groups, array
-* active, boolean
-* meta, object
+* todo, object, schemas, array
+    scim_enterprise_user-id = mo_json->value_string( iv_prefix && '/id' ).
+    scim_enterprise_user-externalid = mo_json->value_string( iv_prefix && '/externalId' ).
+    scim_enterprise_user-username = mo_json->value_string( iv_prefix && '/userName' ).
+* todo, object, name, object
+* todo, object, emails, array
+* todo, object, groups, array
+    scim_enterprise_user-active = mo_json->value_boolean( iv_prefix && '/active' ).
+* todo, object, meta, object
   ENDMETHOD.
 
   METHOD parse_scim_user.
-* sdfsdf object
-* schemas, array
-* id, string
-* externalid, string
-* username, string
-* displayname, string
-* name, object
-* emails, array
-* active, boolean
-* meta, object
-* organization_id, integer
-* operations, array
-* groups, array
+* todo, object, schemas, array
+    scim_user-id = mo_json->value_string( iv_prefix && '/id' ).
+    scim_user-externalid = mo_json->value_string( iv_prefix && '/externalId' ).
+    scim_user-username = mo_json->value_string( iv_prefix && '/userName' ).
+    scim_user-displayname = mo_json->value_string( iv_prefix && '/displayName' ).
+* todo, object, name, object
+* todo, object, emails, array
+    scim_user-active = mo_json->value_boolean( iv_prefix && '/active' ).
+* todo, object, meta, object
+    scim_user-organization_id = mo_json->value_string( iv_prefix && '/organization_id' ).
+* todo, object, operations, array
+* todo, object, groups, array
   ENDMETHOD.
 
   METHOD parse_scim_user_list.
-* sdfsdf object
-* schemas, array
-* totalresults, integer
-* itemsperpage, integer
-* startindex, integer
-* resources, array
+* todo, object, schemas, array
+    scim_user_list-totalresults = mo_json->value_string( iv_prefix && '/totalResults' ).
+    scim_user_list-itemsperpage = mo_json->value_string( iv_prefix && '/itemsPerPage' ).
+    scim_user_list-startindex = mo_json->value_string( iv_prefix && '/startIndex' ).
+* todo, object, resources, array
   ENDMETHOD.
 
   METHOD parse_search_result_text_match.
@@ -3869,397 +3684,380 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_code_search_result_item.
-* sdfsdf object
-* name, string
-* path, string
-* sha, string
-* url, string
-* git_url, string
-* html_url, string
-* repository, 
-* score, integer
-* file_size, integer
-* language, string
-* last_modified_at, string
-* line_numbers, array
-* text_matches, 
+    code_search_result_item-name = mo_json->value_string( iv_prefix && '/name' ).
+    code_search_result_item-path = mo_json->value_string( iv_prefix && '/path' ).
+    code_search_result_item-sha = mo_json->value_string( iv_prefix && '/sha' ).
+    code_search_result_item-url = mo_json->value_string( iv_prefix && '/url' ).
+    code_search_result_item-git_url = mo_json->value_string( iv_prefix && '/git_url' ).
+    code_search_result_item-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+* todo, object, repository, 
+    code_search_result_item-score = mo_json->value_string( iv_prefix && '/score' ).
+    code_search_result_item-file_size = mo_json->value_string( iv_prefix && '/file_size' ).
+    code_search_result_item-language = mo_json->value_string( iv_prefix && '/language' ).
+    code_search_result_item-last_modified_at = mo_json->value_string( iv_prefix && '/last_modified_at' ).
+* todo, object, line_numbers, array
+* todo, object, text_matches, 
   ENDMETHOD.
 
   METHOD parse_commit_search_result_ite.
-* sdfsdf object
-* url, string
-* sha, string
-* html_url, string
-* comments_url, string
-* commit, object
-* author, 
-* committer, 
-* parents, array
-* repository, 
-* score, integer
-* node_id, string
-* text_matches, 
+    commit_search_result_item-url = mo_json->value_string( iv_prefix && '/url' ).
+    commit_search_result_item-sha = mo_json->value_string( iv_prefix && '/sha' ).
+    commit_search_result_item-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    commit_search_result_item-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
+* todo, object, commit, object
+* todo, object, author, 
+* todo, object, committer, 
+* todo, object, parents, array
+* todo, object, repository, 
+    commit_search_result_item-score = mo_json->value_string( iv_prefix && '/score' ).
+    commit_search_result_item-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+* todo, object, text_matches, 
   ENDMETHOD.
 
   METHOD parse_issue_search_result_item.
-* sdfsdf object
-* url, string
-* repository_url, string
-* labels_url, string
-* comments_url, string
-* events_url, string
-* html_url, string
-* id, integer
-* node_id, string
-* number, integer
-* title, string
-* locked, boolean
-* active_lock_reason, string
-* assignees, array
-* user, 
-* labels, array
-* state, string
-* assignee, 
-* milestone, 
-* comments, integer
-* created_at, string
-* updated_at, string
-* closed_at, string
-* text_matches, 
-* pull_request, object
-* body, string
-* score, integer
-* author_association, 
-* draft, boolean
-* repository, 
-* body_html, string
-* body_text, string
-* timeline_url, string
-* performed_via_github_app, 
+    issue_search_result_item-url = mo_json->value_string( iv_prefix && '/url' ).
+    issue_search_result_item-repository_url = mo_json->value_string( iv_prefix && '/repository_url' ).
+    issue_search_result_item-labels_url = mo_json->value_string( iv_prefix && '/labels_url' ).
+    issue_search_result_item-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
+    issue_search_result_item-events_url = mo_json->value_string( iv_prefix && '/events_url' ).
+    issue_search_result_item-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    issue_search_result_item-id = mo_json->value_string( iv_prefix && '/id' ).
+    issue_search_result_item-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    issue_search_result_item-number = mo_json->value_string( iv_prefix && '/number' ).
+    issue_search_result_item-title = mo_json->value_string( iv_prefix && '/title' ).
+    issue_search_result_item-locked = mo_json->value_boolean( iv_prefix && '/locked' ).
+    issue_search_result_item-active_lock_reason = mo_json->value_string( iv_prefix && '/active_lock_reason' ).
+* todo, object, assignees, array
+* todo, object, user, 
+* todo, object, labels, array
+    issue_search_result_item-state = mo_json->value_string( iv_prefix && '/state' ).
+* todo, object, assignee, 
+* todo, object, milestone, 
+    issue_search_result_item-comments = mo_json->value_string( iv_prefix && '/comments' ).
+    issue_search_result_item-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    issue_search_result_item-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    issue_search_result_item-closed_at = mo_json->value_string( iv_prefix && '/closed_at' ).
+* todo, object, text_matches, 
+* todo, object, pull_request, object
+    issue_search_result_item-body = mo_json->value_string( iv_prefix && '/body' ).
+    issue_search_result_item-score = mo_json->value_string( iv_prefix && '/score' ).
+* todo, object, author_association, 
+    issue_search_result_item-draft = mo_json->value_boolean( iv_prefix && '/draft' ).
+* todo, object, repository, 
+    issue_search_result_item-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
+    issue_search_result_item-body_text = mo_json->value_string( iv_prefix && '/body_text' ).
+    issue_search_result_item-timeline_url = mo_json->value_string( iv_prefix && '/timeline_url' ).
+* todo, object, performed_via_github_app, 
   ENDMETHOD.
 
   METHOD parse_label_search_result_item.
-* sdfsdf object
-* id, integer
-* node_id, string
-* url, string
-* name, string
-* color, string
-* default, boolean
-* description, string
-* score, integer
-* text_matches, 
+    label_search_result_item-id = mo_json->value_string( iv_prefix && '/id' ).
+    label_search_result_item-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    label_search_result_item-url = mo_json->value_string( iv_prefix && '/url' ).
+    label_search_result_item-name = mo_json->value_string( iv_prefix && '/name' ).
+    label_search_result_item-color = mo_json->value_string( iv_prefix && '/color' ).
+    label_search_result_item-default = mo_json->value_boolean( iv_prefix && '/default' ).
+    label_search_result_item-description = mo_json->value_string( iv_prefix && '/description' ).
+    label_search_result_item-score = mo_json->value_string( iv_prefix && '/score' ).
+* todo, object, text_matches, 
   ENDMETHOD.
 
   METHOD parse_repo_search_result_item.
-* sdfsdf object
-* id, integer
-* node_id, string
-* name, string
-* full_name, string
-* owner, 
-* private, boolean
-* html_url, string
-* description, string
-* fork, boolean
-* url, string
-* created_at, string
-* updated_at, string
-* pushed_at, string
-* homepage, string
-* size, integer
-* stargazers_count, integer
-* watchers_count, integer
-* language, string
-* forks_count, integer
-* open_issues_count, integer
-* master_branch, string
-* default_branch, string
-* score, integer
-* forks_url, string
-* keys_url, string
-* collaborators_url, string
-* teams_url, string
-* hooks_url, string
-* issue_events_url, string
-* events_url, string
-* assignees_url, string
-* branches_url, string
-* tags_url, string
-* blobs_url, string
-* git_tags_url, string
-* git_refs_url, string
-* trees_url, string
-* statuses_url, string
-* languages_url, string
-* stargazers_url, string
-* contributors_url, string
-* subscribers_url, string
-* subscription_url, string
-* commits_url, string
-* git_commits_url, string
-* comments_url, string
-* issue_comment_url, string
-* contents_url, string
-* compare_url, string
-* merges_url, string
-* archive_url, string
-* downloads_url, string
-* issues_url, string
-* pulls_url, string
-* milestones_url, string
-* notifications_url, string
-* labels_url, string
-* releases_url, string
-* deployments_url, string
-* git_url, string
-* ssh_url, string
-* clone_url, string
-* svn_url, string
-* forks, integer
-* open_issues, integer
-* watchers, integer
-* topics, array
-* mirror_url, string
-* has_issues, boolean
-* has_projects, boolean
-* has_pages, boolean
-* has_wiki, boolean
-* has_downloads, boolean
-* archived, boolean
-* disabled, boolean
-* license, 
-* permissions, object
-* text_matches, 
-* temp_clone_token, string
-* allow_merge_commit, boolean
-* allow_squash_merge, boolean
-* allow_rebase_merge, boolean
-* delete_branch_on_merge, boolean
+    repo_search_result_item-id = mo_json->value_string( iv_prefix && '/id' ).
+    repo_search_result_item-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    repo_search_result_item-name = mo_json->value_string( iv_prefix && '/name' ).
+    repo_search_result_item-full_name = mo_json->value_string( iv_prefix && '/full_name' ).
+* todo, object, owner, 
+    repo_search_result_item-private = mo_json->value_boolean( iv_prefix && '/private' ).
+    repo_search_result_item-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    repo_search_result_item-description = mo_json->value_string( iv_prefix && '/description' ).
+    repo_search_result_item-fork = mo_json->value_boolean( iv_prefix && '/fork' ).
+    repo_search_result_item-url = mo_json->value_string( iv_prefix && '/url' ).
+    repo_search_result_item-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    repo_search_result_item-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    repo_search_result_item-pushed_at = mo_json->value_string( iv_prefix && '/pushed_at' ).
+    repo_search_result_item-homepage = mo_json->value_string( iv_prefix && '/homepage' ).
+    repo_search_result_item-size = mo_json->value_string( iv_prefix && '/size' ).
+    repo_search_result_item-stargazers_count = mo_json->value_string( iv_prefix && '/stargazers_count' ).
+    repo_search_result_item-watchers_count = mo_json->value_string( iv_prefix && '/watchers_count' ).
+    repo_search_result_item-language = mo_json->value_string( iv_prefix && '/language' ).
+    repo_search_result_item-forks_count = mo_json->value_string( iv_prefix && '/forks_count' ).
+    repo_search_result_item-open_issues_count = mo_json->value_string( iv_prefix && '/open_issues_count' ).
+    repo_search_result_item-master_branch = mo_json->value_string( iv_prefix && '/master_branch' ).
+    repo_search_result_item-default_branch = mo_json->value_string( iv_prefix && '/default_branch' ).
+    repo_search_result_item-score = mo_json->value_string( iv_prefix && '/score' ).
+    repo_search_result_item-forks_url = mo_json->value_string( iv_prefix && '/forks_url' ).
+    repo_search_result_item-keys_url = mo_json->value_string( iv_prefix && '/keys_url' ).
+    repo_search_result_item-collaborators_url = mo_json->value_string( iv_prefix && '/collaborators_url' ).
+    repo_search_result_item-teams_url = mo_json->value_string( iv_prefix && '/teams_url' ).
+    repo_search_result_item-hooks_url = mo_json->value_string( iv_prefix && '/hooks_url' ).
+    repo_search_result_item-issue_events_url = mo_json->value_string( iv_prefix && '/issue_events_url' ).
+    repo_search_result_item-events_url = mo_json->value_string( iv_prefix && '/events_url' ).
+    repo_search_result_item-assignees_url = mo_json->value_string( iv_prefix && '/assignees_url' ).
+    repo_search_result_item-branches_url = mo_json->value_string( iv_prefix && '/branches_url' ).
+    repo_search_result_item-tags_url = mo_json->value_string( iv_prefix && '/tags_url' ).
+    repo_search_result_item-blobs_url = mo_json->value_string( iv_prefix && '/blobs_url' ).
+    repo_search_result_item-git_tags_url = mo_json->value_string( iv_prefix && '/git_tags_url' ).
+    repo_search_result_item-git_refs_url = mo_json->value_string( iv_prefix && '/git_refs_url' ).
+    repo_search_result_item-trees_url = mo_json->value_string( iv_prefix && '/trees_url' ).
+    repo_search_result_item-statuses_url = mo_json->value_string( iv_prefix && '/statuses_url' ).
+    repo_search_result_item-languages_url = mo_json->value_string( iv_prefix && '/languages_url' ).
+    repo_search_result_item-stargazers_url = mo_json->value_string( iv_prefix && '/stargazers_url' ).
+    repo_search_result_item-contributors_url = mo_json->value_string( iv_prefix && '/contributors_url' ).
+    repo_search_result_item-subscribers_url = mo_json->value_string( iv_prefix && '/subscribers_url' ).
+    repo_search_result_item-subscription_url = mo_json->value_string( iv_prefix && '/subscription_url' ).
+    repo_search_result_item-commits_url = mo_json->value_string( iv_prefix && '/commits_url' ).
+    repo_search_result_item-git_commits_url = mo_json->value_string( iv_prefix && '/git_commits_url' ).
+    repo_search_result_item-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
+    repo_search_result_item-issue_comment_url = mo_json->value_string( iv_prefix && '/issue_comment_url' ).
+    repo_search_result_item-contents_url = mo_json->value_string( iv_prefix && '/contents_url' ).
+    repo_search_result_item-compare_url = mo_json->value_string( iv_prefix && '/compare_url' ).
+    repo_search_result_item-merges_url = mo_json->value_string( iv_prefix && '/merges_url' ).
+    repo_search_result_item-archive_url = mo_json->value_string( iv_prefix && '/archive_url' ).
+    repo_search_result_item-downloads_url = mo_json->value_string( iv_prefix && '/downloads_url' ).
+    repo_search_result_item-issues_url = mo_json->value_string( iv_prefix && '/issues_url' ).
+    repo_search_result_item-pulls_url = mo_json->value_string( iv_prefix && '/pulls_url' ).
+    repo_search_result_item-milestones_url = mo_json->value_string( iv_prefix && '/milestones_url' ).
+    repo_search_result_item-notifications_url = mo_json->value_string( iv_prefix && '/notifications_url' ).
+    repo_search_result_item-labels_url = mo_json->value_string( iv_prefix && '/labels_url' ).
+    repo_search_result_item-releases_url = mo_json->value_string( iv_prefix && '/releases_url' ).
+    repo_search_result_item-deployments_url = mo_json->value_string( iv_prefix && '/deployments_url' ).
+    repo_search_result_item-git_url = mo_json->value_string( iv_prefix && '/git_url' ).
+    repo_search_result_item-ssh_url = mo_json->value_string( iv_prefix && '/ssh_url' ).
+    repo_search_result_item-clone_url = mo_json->value_string( iv_prefix && '/clone_url' ).
+    repo_search_result_item-svn_url = mo_json->value_string( iv_prefix && '/svn_url' ).
+    repo_search_result_item-forks = mo_json->value_string( iv_prefix && '/forks' ).
+    repo_search_result_item-open_issues = mo_json->value_string( iv_prefix && '/open_issues' ).
+    repo_search_result_item-watchers = mo_json->value_string( iv_prefix && '/watchers' ).
+* todo, object, topics, array
+    repo_search_result_item-mirror_url = mo_json->value_string( iv_prefix && '/mirror_url' ).
+    repo_search_result_item-has_issues = mo_json->value_boolean( iv_prefix && '/has_issues' ).
+    repo_search_result_item-has_projects = mo_json->value_boolean( iv_prefix && '/has_projects' ).
+    repo_search_result_item-has_pages = mo_json->value_boolean( iv_prefix && '/has_pages' ).
+    repo_search_result_item-has_wiki = mo_json->value_boolean( iv_prefix && '/has_wiki' ).
+    repo_search_result_item-has_downloads = mo_json->value_boolean( iv_prefix && '/has_downloads' ).
+    repo_search_result_item-archived = mo_json->value_boolean( iv_prefix && '/archived' ).
+    repo_search_result_item-disabled = mo_json->value_boolean( iv_prefix && '/disabled' ).
+* todo, object, license, 
+* todo, object, permissions, object
+* todo, object, text_matches, 
+    repo_search_result_item-temp_clone_token = mo_json->value_string( iv_prefix && '/temp_clone_token' ).
+    repo_search_result_item-allow_merge_commit = mo_json->value_boolean( iv_prefix && '/allow_merge_commit' ).
+    repo_search_result_item-allow_squash_merge = mo_json->value_boolean( iv_prefix && '/allow_squash_merge' ).
+    repo_search_result_item-allow_rebase_merge = mo_json->value_boolean( iv_prefix && '/allow_rebase_merge' ).
+    repo_search_result_item-delete_branch_on_merge = mo_json->value_boolean( iv_prefix && '/delete_branch_on_merge' ).
   ENDMETHOD.
 
   METHOD parse_topic_search_result_item.
-* sdfsdf object
-* name, string
-* display_name, string
-* short_description, string
-* description, string
-* created_by, string
-* released, string
-* created_at, string
-* updated_at, string
-* featured, boolean
-* curated, boolean
-* score, integer
-* repository_count, integer
-* logo_url, string
-* text_matches, 
-* related, array
-* aliases, array
+    topic_search_result_item-name = mo_json->value_string( iv_prefix && '/name' ).
+    topic_search_result_item-display_name = mo_json->value_string( iv_prefix && '/display_name' ).
+    topic_search_result_item-short_description = mo_json->value_string( iv_prefix && '/short_description' ).
+    topic_search_result_item-description = mo_json->value_string( iv_prefix && '/description' ).
+    topic_search_result_item-created_by = mo_json->value_string( iv_prefix && '/created_by' ).
+    topic_search_result_item-released = mo_json->value_string( iv_prefix && '/released' ).
+    topic_search_result_item-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    topic_search_result_item-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    topic_search_result_item-featured = mo_json->value_boolean( iv_prefix && '/featured' ).
+    topic_search_result_item-curated = mo_json->value_boolean( iv_prefix && '/curated' ).
+    topic_search_result_item-score = mo_json->value_string( iv_prefix && '/score' ).
+    topic_search_result_item-repository_count = mo_json->value_string( iv_prefix && '/repository_count' ).
+    topic_search_result_item-logo_url = mo_json->value_string( iv_prefix && '/logo_url' ).
+* todo, object, text_matches, 
+* todo, object, related, array
+* todo, object, aliases, array
   ENDMETHOD.
 
   METHOD parse_user_search_result_item.
-* sdfsdf object
-* login, string
-* id, integer
-* node_id, string
-* avatar_url, string
-* gravatar_id, string
-* url, string
-* html_url, string
-* followers_url, string
-* subscriptions_url, string
-* organizations_url, string
-* repos_url, string
-* received_events_url, string
-* type, string
-* score, integer
-* following_url, string
-* gists_url, string
-* starred_url, string
-* events_url, string
-* public_repos, integer
-* public_gists, integer
-* followers, integer
-* following, integer
-* created_at, string
-* updated_at, string
-* name, string
-* bio, string
-* email, string
-* location, string
-* site_admin, boolean
-* hireable, boolean
-* text_matches, 
-* blog, string
-* company, string
-* suspended_at, string
+    user_search_result_item-login = mo_json->value_string( iv_prefix && '/login' ).
+    user_search_result_item-id = mo_json->value_string( iv_prefix && '/id' ).
+    user_search_result_item-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    user_search_result_item-avatar_url = mo_json->value_string( iv_prefix && '/avatar_url' ).
+    user_search_result_item-gravatar_id = mo_json->value_string( iv_prefix && '/gravatar_id' ).
+    user_search_result_item-url = mo_json->value_string( iv_prefix && '/url' ).
+    user_search_result_item-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    user_search_result_item-followers_url = mo_json->value_string( iv_prefix && '/followers_url' ).
+    user_search_result_item-subscriptions_url = mo_json->value_string( iv_prefix && '/subscriptions_url' ).
+    user_search_result_item-organizations_url = mo_json->value_string( iv_prefix && '/organizations_url' ).
+    user_search_result_item-repos_url = mo_json->value_string( iv_prefix && '/repos_url' ).
+    user_search_result_item-received_events_url = mo_json->value_string( iv_prefix && '/received_events_url' ).
+    user_search_result_item-type = mo_json->value_string( iv_prefix && '/type' ).
+    user_search_result_item-score = mo_json->value_string( iv_prefix && '/score' ).
+    user_search_result_item-following_url = mo_json->value_string( iv_prefix && '/following_url' ).
+    user_search_result_item-gists_url = mo_json->value_string( iv_prefix && '/gists_url' ).
+    user_search_result_item-starred_url = mo_json->value_string( iv_prefix && '/starred_url' ).
+    user_search_result_item-events_url = mo_json->value_string( iv_prefix && '/events_url' ).
+    user_search_result_item-public_repos = mo_json->value_string( iv_prefix && '/public_repos' ).
+    user_search_result_item-public_gists = mo_json->value_string( iv_prefix && '/public_gists' ).
+    user_search_result_item-followers = mo_json->value_string( iv_prefix && '/followers' ).
+    user_search_result_item-following = mo_json->value_string( iv_prefix && '/following' ).
+    user_search_result_item-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    user_search_result_item-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    user_search_result_item-name = mo_json->value_string( iv_prefix && '/name' ).
+    user_search_result_item-bio = mo_json->value_string( iv_prefix && '/bio' ).
+    user_search_result_item-email = mo_json->value_string( iv_prefix && '/email' ).
+    user_search_result_item-location = mo_json->value_string( iv_prefix && '/location' ).
+    user_search_result_item-site_admin = mo_json->value_boolean( iv_prefix && '/site_admin' ).
+    user_search_result_item-hireable = mo_json->value_boolean( iv_prefix && '/hireable' ).
+* todo, object, text_matches, 
+    user_search_result_item-blog = mo_json->value_string( iv_prefix && '/blog' ).
+    user_search_result_item-company = mo_json->value_string( iv_prefix && '/company' ).
+    user_search_result_item-suspended_at = mo_json->value_string( iv_prefix && '/suspended_at' ).
   ENDMETHOD.
 
   METHOD parse_private_user.
-* sdfsdf object
-* login, string
-* id, integer
-* node_id, string
-* avatar_url, string
-* gravatar_id, string
-* url, string
-* html_url, string
-* followers_url, string
-* following_url, string
-* gists_url, string
-* starred_url, string
-* subscriptions_url, string
-* organizations_url, string
-* repos_url, string
-* events_url, string
-* received_events_url, string
-* type, string
-* site_admin, boolean
-* name, string
-* company, string
-* blog, string
-* location, string
-* email, string
-* hireable, boolean
-* bio, string
-* twitter_username, string
-* public_repos, integer
-* public_gists, integer
-* followers, integer
-* following, integer
-* created_at, string
-* updated_at, string
-* private_gists, integer
-* total_private_repos, integer
-* owned_private_repos, integer
-* disk_usage, integer
-* collaborators, integer
-* two_factor_authentication, boolean
-* plan, object
-* suspended_at, string
-* business_plus, boolean
-* ldap_dn, string
+    private_user-login = mo_json->value_string( iv_prefix && '/login' ).
+    private_user-id = mo_json->value_string( iv_prefix && '/id' ).
+    private_user-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    private_user-avatar_url = mo_json->value_string( iv_prefix && '/avatar_url' ).
+    private_user-gravatar_id = mo_json->value_string( iv_prefix && '/gravatar_id' ).
+    private_user-url = mo_json->value_string( iv_prefix && '/url' ).
+    private_user-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    private_user-followers_url = mo_json->value_string( iv_prefix && '/followers_url' ).
+    private_user-following_url = mo_json->value_string( iv_prefix && '/following_url' ).
+    private_user-gists_url = mo_json->value_string( iv_prefix && '/gists_url' ).
+    private_user-starred_url = mo_json->value_string( iv_prefix && '/starred_url' ).
+    private_user-subscriptions_url = mo_json->value_string( iv_prefix && '/subscriptions_url' ).
+    private_user-organizations_url = mo_json->value_string( iv_prefix && '/organizations_url' ).
+    private_user-repos_url = mo_json->value_string( iv_prefix && '/repos_url' ).
+    private_user-events_url = mo_json->value_string( iv_prefix && '/events_url' ).
+    private_user-received_events_url = mo_json->value_string( iv_prefix && '/received_events_url' ).
+    private_user-type = mo_json->value_string( iv_prefix && '/type' ).
+    private_user-site_admin = mo_json->value_boolean( iv_prefix && '/site_admin' ).
+    private_user-name = mo_json->value_string( iv_prefix && '/name' ).
+    private_user-company = mo_json->value_string( iv_prefix && '/company' ).
+    private_user-blog = mo_json->value_string( iv_prefix && '/blog' ).
+    private_user-location = mo_json->value_string( iv_prefix && '/location' ).
+    private_user-email = mo_json->value_string( iv_prefix && '/email' ).
+    private_user-hireable = mo_json->value_boolean( iv_prefix && '/hireable' ).
+    private_user-bio = mo_json->value_string( iv_prefix && '/bio' ).
+    private_user-twitter_username = mo_json->value_string( iv_prefix && '/twitter_username' ).
+    private_user-public_repos = mo_json->value_string( iv_prefix && '/public_repos' ).
+    private_user-public_gists = mo_json->value_string( iv_prefix && '/public_gists' ).
+    private_user-followers = mo_json->value_string( iv_prefix && '/followers' ).
+    private_user-following = mo_json->value_string( iv_prefix && '/following' ).
+    private_user-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    private_user-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+    private_user-private_gists = mo_json->value_string( iv_prefix && '/private_gists' ).
+    private_user-total_private_repos = mo_json->value_string( iv_prefix && '/total_private_repos' ).
+    private_user-owned_private_repos = mo_json->value_string( iv_prefix && '/owned_private_repos' ).
+    private_user-disk_usage = mo_json->value_string( iv_prefix && '/disk_usage' ).
+    private_user-collaborators = mo_json->value_string( iv_prefix && '/collaborators' ).
+    private_user-two_factor_authentication = mo_json->value_boolean( iv_prefix && '/two_factor_authentication' ).
+* todo, object, plan, object
+    private_user-suspended_at = mo_json->value_string( iv_prefix && '/suspended_at' ).
+    private_user-business_plus = mo_json->value_boolean( iv_prefix && '/business_plus' ).
+    private_user-ldap_dn = mo_json->value_string( iv_prefix && '/ldap_dn' ).
   ENDMETHOD.
 
   METHOD parse_public_user.
-* sdfsdf object
-* login, string
-* id, integer
-* node_id, string
-* avatar_url, string
-* gravatar_id, string
-* url, string
-* html_url, string
-* followers_url, string
-* following_url, string
-* gists_url, string
-* starred_url, string
-* subscriptions_url, string
-* organizations_url, string
-* repos_url, string
-* events_url, string
-* received_events_url, string
-* type, string
-* site_admin, boolean
-* name, string
-* company, string
-* blog, string
-* location, string
-* email, string
-* hireable, boolean
-* bio, string
-* twitter_username, string
-* public_repos, integer
-* public_gists, integer
-* followers, integer
-* following, integer
-* created_at, string
-* updated_at, string
-* plan, object
-* suspended_at, string
-* private_gists, integer
-* total_private_repos, integer
-* owned_private_repos, integer
-* disk_usage, integer
-* collaborators, integer
+    public_user-login = mo_json->value_string( iv_prefix && '/login' ).
+    public_user-id = mo_json->value_string( iv_prefix && '/id' ).
+    public_user-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    public_user-avatar_url = mo_json->value_string( iv_prefix && '/avatar_url' ).
+    public_user-gravatar_id = mo_json->value_string( iv_prefix && '/gravatar_id' ).
+    public_user-url = mo_json->value_string( iv_prefix && '/url' ).
+    public_user-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
+    public_user-followers_url = mo_json->value_string( iv_prefix && '/followers_url' ).
+    public_user-following_url = mo_json->value_string( iv_prefix && '/following_url' ).
+    public_user-gists_url = mo_json->value_string( iv_prefix && '/gists_url' ).
+    public_user-starred_url = mo_json->value_string( iv_prefix && '/starred_url' ).
+    public_user-subscriptions_url = mo_json->value_string( iv_prefix && '/subscriptions_url' ).
+    public_user-organizations_url = mo_json->value_string( iv_prefix && '/organizations_url' ).
+    public_user-repos_url = mo_json->value_string( iv_prefix && '/repos_url' ).
+    public_user-events_url = mo_json->value_string( iv_prefix && '/events_url' ).
+    public_user-received_events_url = mo_json->value_string( iv_prefix && '/received_events_url' ).
+    public_user-type = mo_json->value_string( iv_prefix && '/type' ).
+    public_user-site_admin = mo_json->value_boolean( iv_prefix && '/site_admin' ).
+    public_user-name = mo_json->value_string( iv_prefix && '/name' ).
+    public_user-company = mo_json->value_string( iv_prefix && '/company' ).
+    public_user-blog = mo_json->value_string( iv_prefix && '/blog' ).
+    public_user-location = mo_json->value_string( iv_prefix && '/location' ).
+    public_user-email = mo_json->value_string( iv_prefix && '/email' ).
+    public_user-hireable = mo_json->value_boolean( iv_prefix && '/hireable' ).
+    public_user-bio = mo_json->value_string( iv_prefix && '/bio' ).
+    public_user-twitter_username = mo_json->value_string( iv_prefix && '/twitter_username' ).
+    public_user-public_repos = mo_json->value_string( iv_prefix && '/public_repos' ).
+    public_user-public_gists = mo_json->value_string( iv_prefix && '/public_gists' ).
+    public_user-followers = mo_json->value_string( iv_prefix && '/followers' ).
+    public_user-following = mo_json->value_string( iv_prefix && '/following' ).
+    public_user-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    public_user-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+* todo, object, plan, object
+    public_user-suspended_at = mo_json->value_string( iv_prefix && '/suspended_at' ).
+    public_user-private_gists = mo_json->value_string( iv_prefix && '/private_gists' ).
+    public_user-total_private_repos = mo_json->value_string( iv_prefix && '/total_private_repos' ).
+    public_user-owned_private_repos = mo_json->value_string( iv_prefix && '/owned_private_repos' ).
+    public_user-disk_usage = mo_json->value_string( iv_prefix && '/disk_usage' ).
+    public_user-collaborators = mo_json->value_string( iv_prefix && '/collaborators' ).
   ENDMETHOD.
 
   METHOD parse_email.
-* sdfsdf object
-* email, string
-* primary, boolean
-* verified, boolean
-* visibility, string
+    email-email = mo_json->value_string( iv_prefix && '/email' ).
+    email-primary = mo_json->value_boolean( iv_prefix && '/primary' ).
+    email-verified = mo_json->value_boolean( iv_prefix && '/verified' ).
+    email-visibility = mo_json->value_string( iv_prefix && '/visibility' ).
   ENDMETHOD.
 
   METHOD parse_gpg_key.
-* sdfsdf object
-* id, integer
-* primary_key_id, integer
-* key_id, string
-* public_key, string
-* emails, array
-* subkeys, array
-* can_sign, boolean
-* can_encrypt_comms, boolean
-* can_encrypt_storage, boolean
-* can_certify, boolean
-* created_at, string
-* expires_at, string
-* raw_key, string
+    gpg_key-id = mo_json->value_string( iv_prefix && '/id' ).
+    gpg_key-primary_key_id = mo_json->value_string( iv_prefix && '/primary_key_id' ).
+    gpg_key-key_id = mo_json->value_string( iv_prefix && '/key_id' ).
+    gpg_key-public_key = mo_json->value_string( iv_prefix && '/public_key' ).
+* todo, object, emails, array
+* todo, object, subkeys, array
+    gpg_key-can_sign = mo_json->value_boolean( iv_prefix && '/can_sign' ).
+    gpg_key-can_encrypt_comms = mo_json->value_boolean( iv_prefix && '/can_encrypt_comms' ).
+    gpg_key-can_encrypt_storage = mo_json->value_boolean( iv_prefix && '/can_encrypt_storage' ).
+    gpg_key-can_certify = mo_json->value_boolean( iv_prefix && '/can_certify' ).
+    gpg_key-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    gpg_key-expires_at = mo_json->value_string( iv_prefix && '/expires_at' ).
+    gpg_key-raw_key = mo_json->value_string( iv_prefix && '/raw_key' ).
   ENDMETHOD.
 
   METHOD parse_key.
-* sdfsdf object
-* key_id, string
-* key, string
-* id, integer
-* url, string
-* title, string
-* created_at, string
-* verified, boolean
-* read_only, boolean
+    key-key_id = mo_json->value_string( iv_prefix && '/key_id' ).
+    key-key = mo_json->value_string( iv_prefix && '/key' ).
+    key-id = mo_json->value_string( iv_prefix && '/id' ).
+    key-url = mo_json->value_string( iv_prefix && '/url' ).
+    key-title = mo_json->value_string( iv_prefix && '/title' ).
+    key-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
+    key-verified = mo_json->value_boolean( iv_prefix && '/verified' ).
+    key-read_only = mo_json->value_boolean( iv_prefix && '/read_only' ).
   ENDMETHOD.
 
   METHOD parse_marketplace_account.
-* sdfsdf object
-* url, string
-* id, integer
-* type, string
-* node_id, string
-* login, string
-* email, string
-* organization_billing_email, string
+    marketplace_account-url = mo_json->value_string( iv_prefix && '/url' ).
+    marketplace_account-id = mo_json->value_string( iv_prefix && '/id' ).
+    marketplace_account-type = mo_json->value_string( iv_prefix && '/type' ).
+    marketplace_account-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
+    marketplace_account-login = mo_json->value_string( iv_prefix && '/login' ).
+    marketplace_account-email = mo_json->value_string( iv_prefix && '/email' ).
+    marketplace_account-organization_billing_email = mo_json->value_string( iv_prefix && '/organization_billing_email' ).
   ENDMETHOD.
 
   METHOD parse_user_marketplace_purchas.
-* sdfsdf object
-* billing_cycle, string
-* next_billing_date, string
-* unit_count, integer
-* on_free_trial, boolean
-* free_trial_ends_on, string
-* updated_at, string
-* account, 
-* plan, 
+    user_marketplace_purchase-billing_cycle = mo_json->value_string( iv_prefix && '/billing_cycle' ).
+    user_marketplace_purchase-next_billing_date = mo_json->value_string( iv_prefix && '/next_billing_date' ).
+    user_marketplace_purchase-unit_count = mo_json->value_string( iv_prefix && '/unit_count' ).
+    user_marketplace_purchase-on_free_trial = mo_json->value_boolean( iv_prefix && '/on_free_trial' ).
+    user_marketplace_purchase-free_trial_ends_on = mo_json->value_string( iv_prefix && '/free_trial_ends_on' ).
+    user_marketplace_purchase-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
+* todo, object, account, 
+* todo, object, plan, 
   ENDMETHOD.
 
   METHOD parse_starred_repository.
-* sdfsdf object
-* starred_at, string
-* repo, 
+    starred_repository-starred_at = mo_json->value_string( iv_prefix && '/starred_at' ).
+* todo, object, repo, 
   ENDMETHOD.
 
   METHOD parse_hovercard.
-* sdfsdf object
-* contexts, array
+* todo, object, contexts, array
   ENDMETHOD.
 
   METHOD parse_key_simple.
-* sdfsdf object
-* id, integer
-* key, string
+    key_simple-id = mo_json->value_string( iv_prefix && '/id' ).
+    key_simple-key = mo_json->value_string( iv_prefix && '/key' ).
   ENDMETHOD.
 
   METHOD zif_github~meta_root.

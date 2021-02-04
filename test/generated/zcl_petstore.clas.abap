@@ -54,69 +54,61 @@ CLASS zcl_petstore IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_order.
-* sdfsdf object
-* id, integer
-* petid, integer
-* quantity, integer
-* shipdate, string
-* status, string
-* complete, boolean
+    order-id = mo_json->value_string( iv_prefix && '/id' ).
+    order-petid = mo_json->value_string( iv_prefix && '/petId' ).
+    order-quantity = mo_json->value_string( iv_prefix && '/quantity' ).
+    order-shipdate = mo_json->value_string( iv_prefix && '/shipDate' ).
+    order-status = mo_json->value_string( iv_prefix && '/status' ).
+    order-complete = mo_json->value_boolean( iv_prefix && '/complete' ).
   ENDMETHOD.
 
   METHOD parse_customer.
-* sdfsdf object
-* id, integer
-* username, string
-* address, array
+    customer-id = mo_json->value_string( iv_prefix && '/id' ).
+    customer-username = mo_json->value_string( iv_prefix && '/username' ).
+* todo, object, address, array
   ENDMETHOD.
 
   METHOD parse_address.
-* sdfsdf object
-* street, string
-* city, string
-* state, string
-* zip, string
+    address-street = mo_json->value_string( iv_prefix && '/street' ).
+    address-city = mo_json->value_string( iv_prefix && '/city' ).
+    address-state = mo_json->value_string( iv_prefix && '/state' ).
+    address-zip = mo_json->value_string( iv_prefix && '/zip' ).
   ENDMETHOD.
 
   METHOD parse_category.
-* sdfsdf object
-* id, integer
-* name, string
+    category-id = mo_json->value_string( iv_prefix && '/id' ).
+    category-name = mo_json->value_string( iv_prefix && '/name' ).
   ENDMETHOD.
 
   METHOD parse_user.
-* sdfsdf object
-* id, integer
-* username, string
-* firstname, string
-* lastname, string
-* email, string
-* password, string
-* phone, string
-* userstatus, integer
+    user-id = mo_json->value_string( iv_prefix && '/id' ).
+    user-username = mo_json->value_string( iv_prefix && '/username' ).
+    user-firstname = mo_json->value_string( iv_prefix && '/firstName' ).
+    user-lastname = mo_json->value_string( iv_prefix && '/lastName' ).
+    user-email = mo_json->value_string( iv_prefix && '/email' ).
+    user-password = mo_json->value_string( iv_prefix && '/password' ).
+    user-phone = mo_json->value_string( iv_prefix && '/phone' ).
+    user-userstatus = mo_json->value_string( iv_prefix && '/userStatus' ).
   ENDMETHOD.
 
   METHOD parse_tag.
-* sdfsdf object
-* id, integer
-* name, string
+    tag-id = mo_json->value_string( iv_prefix && '/id' ).
+    tag-name = mo_json->value_string( iv_prefix && '/name' ).
   ENDMETHOD.
 
   METHOD parse_pet.
-* sdfsdf object
-* id, integer
-* name, string
-* category, 
-* photourls, array
-* tags, array
-* status, string
+    pet-id = mo_json->value_string( iv_prefix && '/id' ).
+    pet-name = mo_json->value_string( iv_prefix && '/name' ).
+* todo, object, category, 
+* todo, object, photourls, array
+* todo, object, tags, array
+    pet-status = mo_json->value_string( iv_prefix && '/status' ).
   ENDMETHOD.
 
   METHOD parse_apiresponse.
-* sdfsdf object
-* code, integer
-* type, string
-* message, string
+    apiresponse-code = mo_json->value_string( iv_prefix && '/code' ).
+    apiresponse-type = mo_json->value_string( iv_prefix && '/type' ).
+    apiresponse-message = mo_json->value_string( iv_prefix && '/message' ).
   ENDMETHOD.
 
   METHOD zif_petstore~updatepet.

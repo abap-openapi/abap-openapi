@@ -137,9 +137,15 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         |  METHOD { ls_schema-abap_parser_method }.\n|.
       CASE ls_schema-schema->type.
         WHEN 'object'.
-          rv_abap = rv_abap && |* sdfsdf { ls_schema-schema->type }\n|.
           LOOP AT ls_schema-schema->properties INTO ls_property.
-            rv_abap = rv_abap && |* { ls_property-abap_name }, { ls_property-schema->type }\n|.
+            IF ls_property-schema->type = 'string'
+                OR ls_property-schema->type = 'integer'.
+              rv_abap = rv_abap && |    { ls_schema-abap_name }-{ ls_property-abap_name } = mo_json->value_string( iv_prefix && '/{ ls_property-name }' ).\n|.
+            ELSEIF ls_property-schema->type = 'boolean'.
+              rv_abap = rv_abap && |    { ls_schema-abap_name }-{ ls_property-abap_name } = mo_json->value_boolean( iv_prefix && '/{ ls_property-name }' ).\n|.
+            ELSE.
+              rv_abap = rv_abap && |* todo, object, { ls_property-abap_name }, { ls_property-schema->type }\n|.
+            ENDIF.
           ENDLOOP.
         WHEN OTHERS.
           rv_abap = rv_abap && |* todo, handle type { ls_schema-schema->type }\n|.
