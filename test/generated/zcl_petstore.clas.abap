@@ -54,27 +54,69 @@ CLASS zcl_petstore IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_order.
+* sdfsdf object
+* id
+* petid
+* quantity
+* shipdate
+* status
+* complete
   ENDMETHOD.
 
   METHOD parse_customer.
+* sdfsdf object
+* id
+* username
+* address
   ENDMETHOD.
 
   METHOD parse_address.
+* sdfsdf object
+* street
+* city
+* state
+* zip
   ENDMETHOD.
 
   METHOD parse_category.
+* sdfsdf object
+* id
+* name
   ENDMETHOD.
 
   METHOD parse_user.
+* sdfsdf object
+* id
+* username
+* firstname
+* lastname
+* email
+* password
+* phone
+* userstatus
   ENDMETHOD.
 
   METHOD parse_tag.
+* sdfsdf object
+* id
+* name
   ENDMETHOD.
 
   METHOD parse_pet.
+* sdfsdf object
+* id
+* name
+* category
+* photourls
+* tags
+* status
   ENDMETHOD.
 
   METHOD parse_apiresponse.
+* sdfsdf object
+* code
+* type
+* message
   ENDMETHOD.
 
   METHOD zif_petstore~updatepet.

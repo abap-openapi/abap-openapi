@@ -1,5 +1,4 @@
 CLASS zcl_oapi_references DEFINITION PUBLIC.
-* todo, rename this class to zcl_oapi_references
 
   PUBLIC SECTION.
     METHODS fix

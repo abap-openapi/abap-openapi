@@ -40,6 +40,9 @@ CLASS zcl_oapi_main DEFINITION PUBLIC.
     METHODS dump_types
       RETURNING VALUE(rv_abap) TYPE string.
 
+    METHODS dump_parser_methods
+      RETURNING VALUE(rv_abap) TYPE string.
+
     METHODS dump_basic_type
       IMPORTING ii_schema TYPE REF TO zif_oapi_schema
       RETURNING VALUE(rv_type) TYPE string.
@@ -110,12 +113,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |    mi_client->response->get_status( IMPORTING code = rv_code ).\n| &&
       |  ENDMETHOD.\n\n|.
 
-* note: the parser methods might be called recursively, as the structures can be nested
-    LOOP AT ms_specification-components-schemas INTO ls_schema.
-      rv_abap = rv_abap &&
-        |  METHOD { ls_schema-abap_parser_method }.\n| &&
-        |  ENDMETHOD.\n\n|.
-    ENDLOOP.
+    rv_abap = rv_abap && dump_parser_methods( ).
 
     LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
@@ -125,6 +123,29 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     ENDLOOP.
 
     rv_abap = rv_abap && |ENDCLASS.|.
+
+  ENDMETHOD.
+
+  METHOD dump_parser_methods.
+* note: the parser methods might be called recursively, as the structures can be nested
+
+    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
+    DATA ls_property TYPE zif_oapi_schema=>ty_property.
+
+    LOOP AT ms_specification-components-schemas INTO ls_schema.
+      rv_abap = rv_abap &&
+        |  METHOD { ls_schema-abap_parser_method }.\n|.
+      CASE ls_schema-schema->type.
+        WHEN 'object'.
+          rv_abap = rv_abap && |* sdfsdf { ls_schema-schema->type }\n|.
+          LOOP AT ls_schema-schema->properties INTO ls_property.
+            rv_abap = rv_abap && |* { ls_property-abap_name }\n|.
+          ENDLOOP.
+        WHEN OTHERS.
+          rv_abap = rv_abap && |* todo, handle type { ls_schema-schema->type }\n|.
+      ENDCASE.
+      rv_abap = rv_abap && |  ENDMETHOD.\n\n|.
+    ENDLOOP.
 
   ENDMETHOD.
 
