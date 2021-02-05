@@ -36,7 +36,11 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
     DATA ls_property TYPE zif_oapi_schema=>ty_property.
     DATA ls_ref TYPE zif_oapi_specification_v3=>ty_component_schema.
     DATA lv_count TYPE i.
+    DATA lv_name TYPE string.
+    DATA lo_names TYPE REF TO zcl_oapi_abap_name.
+    CREATE OBJECT lo_names.
 
+    lo_names->add_used( iv_name ).
     IF zif_oapi_schema~type = 'object'.
       rv_abap = rv_abap && |  TYPES: BEGIN OF { iv_name },\n|.
       lv_count = 0.
@@ -47,8 +51,13 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
           rv_abap = rv_abap && ls_ref-abap_name && |,\n|.
         ELSEIF ls_property-schema->is_simple_type( ) = abap_true.
           rv_abap = rv_abap && ls_property-schema->get_simple_type( ) && |,\n|.
+        ELSEIF ls_property-schema->type = 'array'.
+          rv_abap = rv_abap && |STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array\n|.
         ELSE.
-          rv_abap = rv_abap && |string, " not simple, { ls_property-schema->type }, todo\n|.
+* todo, there is a change that this clashes with something else
+          lv_name = lo_names->to_abap_name( iv_name && '_' && ls_property-abap_name ).
+          rv_abap = ls_property-schema->build_type_definition( iv_name = lv_name it_refs = it_refs ) && rv_abap && lv_name && |,\n|.
+*          rv_abap = rv_abap && |string, " not simple, { ls_property-schema->type }, todo\n|.
         ENDIF.
         lv_count = lv_count + 1.
       ENDLOOP.
@@ -59,7 +68,7 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
     ELSEIF zif_oapi_schema~is_simple_type( ) = abap_true.
       rv_abap = rv_abap && |  TYPES { iv_name } TYPE { zif_oapi_schema~get_simple_type( ) }.\n|.
     ELSE.
-      rv_abap = rv_abap && |  TYPES { iv_name } TYPE string. " { zif_oapi_schema~type }, todo\n|.
+      rv_abap = rv_abap && |  TYPES { iv_name } TYPE string. " { zif_oapi_schema~type } { zif_oapi_schema~items_ref } todo\n|.
     ENDIF.
 
   ENDMETHOD.
