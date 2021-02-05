@@ -135,7 +135,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         WHEN 'object'.
           LOOP AT ls_schema-schema->properties INTO ls_property.
             IF ls_property-schema IS INITIAL.
-              rv_abap = rv_abap && |* todo, ref?\n|.
+              rv_abap = rv_abap && |* todo, { ls_property-ref }, ref?\n|.
               CONTINUE.
             ENDIF.
             IF ls_property-schema->type = 'string'
@@ -144,7 +144,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
             ELSEIF ls_property-schema->type = 'boolean'.
               rv_abap = rv_abap && |    { ls_schema-abap_name }-{ ls_property-abap_name } = mo_json->value_boolean( iv_prefix && '/{ ls_property-name }' ).\n|.
             ELSE.
-              rv_abap = rv_abap && |* todo, object, { ls_property-schema->type }, { ls_property-abap_name }\n|.
+              rv_abap = rv_abap && |* todo, { ls_property-schema->type }, { ls_property-abap_name }\n|.
             ENDIF.
           ENDLOOP.
         WHEN OTHERS.
