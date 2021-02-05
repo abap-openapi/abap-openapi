@@ -154,8 +154,9 @@ CLASS zcl_petstore IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/findByTags'.
+    lv_temp = tags.
     IF tags IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'tags' value = tags ).
+      mi_client->request->set_form_field( name = 'tags' value = lv_temp ).
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).

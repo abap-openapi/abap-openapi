@@ -251,6 +251,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
     DATA ls_parameter LIKE LINE OF is_operation-parameters.
     DATA ls_return TYPE zif_oapi_specification_v3=>ty_component_schema.
+    DATA lv_value TYPE string.
 
     rv_abap =
       |    DATA lv_code TYPE i.\n| &&
@@ -270,14 +271,21 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     ENDLOOP.
 
     LOOP AT is_operation-parameters INTO ls_parameter WHERE in = 'query'.
+      lv_value = ls_parameter-abap_name.
+      IF ls_parameter-schema->type <> 'string'.
+* todo, booleans and other types should also be converted
+        rv_abap = rv_abap && |    lv_temp = { lv_value }.\n|.
+        rv_abap = rv_abap && |    CONDENSE lv_temp.\n|.
+        lv_value = 'lv_temp'.
+      ENDIF.
       IF ls_parameter-required = abap_false.
         rv_abap = rv_abap &&
           |    IF { ls_parameter-abap_name } IS SUPPLIED.\n| &&
-          |      mi_client->request->set_form_field( name = '{ ls_parameter-name }' value = { ls_parameter-abap_name } ).\n| &&
+          |      mi_client->request->set_form_field( name = '{ ls_parameter-name }' value = { lv_value } ).\n| &&
           |    ENDIF.\n|.
       ELSE.
         rv_abap = rv_abap &&
-          |    mi_client->request->set_form_field( name = '{ ls_parameter-name }' value = { ls_parameter-abap_name } ).\n|.
+          |    mi_client->request->set_form_field( name = '{ ls_parameter-name }' value = { lv_value } ).\n|.
       ENDIF.
     ENDLOOP.
 
