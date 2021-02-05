@@ -82,9 +82,16 @@ CLASS ltcl_github IMPLEMENTATION.
 
   METHOD pulls_get.
 
-*    mi_github->pulls_get(
-*       owner = 'abapGit-tests'
-*       repo  = 'VIEW' ).
+    DATA ls_pull_request TYPE zif_github=>pull_request.
+
+    ls_pull_request = mi_github->pulls_get(
+       owner       = 'abapGit-tests'
+       repo        = 'VIEW'
+       pull_number = 1 ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = ls_pull_request-url
+      exp = 'https://api.github.com/repos/abapGit-tests/VIEW/pulls/1' ).
 
   ENDMETHOD.
 

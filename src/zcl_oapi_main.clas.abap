@@ -144,7 +144,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
             ELSEIF ls_property-schema->type = 'boolean'.
               rv_abap = rv_abap && |    { ls_schema-abap_name }-{ ls_property-abap_name } = mo_json->value_boolean( iv_prefix && '/{ ls_property-name }' ).\n|.
             ELSE.
-              rv_abap = rv_abap && |* todo, object, { ls_property-abap_name }, { ls_property-schema->type }\n|.
+              rv_abap = rv_abap && |* todo, object, { ls_property-schema->type }, { ls_property-abap_name }\n|.
             ENDIF.
           ENDLOOP.
         WHEN OTHERS.
@@ -265,11 +265,19 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
     rv_abap =
       |    DATA lv_code TYPE i.\n| &&
+      |    DATA lv_temp TYPE string.\n| &&
       |    DATA lv_uri TYPE string VALUE '{ find_uri_prefix( ms_specification-servers ) }{ is_operation-path }'.\n|.
 
     LOOP AT is_operation-parameters INTO ls_parameter WHERE in = 'path'.
-      rv_abap = rv_abap &&
-        |    REPLACE ALL OCCURRENCES OF '\{{ ls_parameter-name }\}' IN lv_uri WITH { ls_parameter-abap_name }.\n|.
+      IF ls_parameter-schema->type = 'string'.
+        rv_abap = rv_abap &&
+          |    REPLACE ALL OCCURRENCES OF '\{{ ls_parameter-name }\}' IN lv_uri WITH { ls_parameter-abap_name }.\n|.
+      ELSE.
+        rv_abap = rv_abap &&
+          |    lv_temp = { ls_parameter-abap_name }.\n| &&
+          |    CONDENSE lv_temp.\n| &&
+          |    REPLACE ALL OCCURRENCES OF '\{{ ls_parameter-name }\}' IN lv_uri WITH lv_temp.\n|.
+      ENDIF.
     ENDLOOP.
 
     LOOP AT is_operation-parameters INTO ls_parameter WHERE in = 'query'.

@@ -1643,9 +1643,9 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD parse_applicationrole.
     applicationrole-key = mo_json->value_string( iv_prefix && '/key' ).
-* todo, object, groups, array
+* todo, object, array, groups
     applicationrole-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, defaultgroups, array
+* todo, object, array, defaultgroups
     applicationrole-selectedbydefault = mo_json->value_boolean( iv_prefix && '/selectedByDefault' ).
     applicationrole-defined = mo_json->value_boolean( iv_prefix && '/defined' ).
     applicationrole-numberofseats = mo_json->value_string( iv_prefix && '/numberOfSeats' ).
@@ -1668,13 +1668,13 @@ CLASS zcl_jira IMPLEMENTATION.
     component-id = mo_json->value_string( iv_prefix && '/id' ).
     component-name = mo_json->value_string( iv_prefix && '/name' ).
     component-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, lead, 
+* todo, object, , lead
     component-leadusername = mo_json->value_string( iv_prefix && '/leadUserName' ).
     component-leadaccountid = mo_json->value_string( iv_prefix && '/leadAccountId' ).
     component-assigneetype = mo_json->value_string( iv_prefix && '/assigneeType' ).
-* todo, object, assignee, 
+* todo, object, , assignee
     component-realassigneetype = mo_json->value_string( iv_prefix && '/realAssigneeType' ).
-* todo, object, realassignee, 
+* todo, object, , realassignee
     component-isassigneetypevalid = mo_json->value_boolean( iv_prefix && '/isAssigneeTypeValid' ).
     component-project = mo_json->value_string( iv_prefix && '/project' ).
     component-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
@@ -1685,11 +1685,11 @@ CLASS zcl_jira IMPLEMENTATION.
     dashboard-id = mo_json->value_string( iv_prefix && '/id' ).
     dashboard-isfavourite = mo_json->value_boolean( iv_prefix && '/isFavourite' ).
     dashboard-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, owner, 
+* todo, object, , owner
     dashboard-popularity = mo_json->value_string( iv_prefix && '/popularity' ).
     dashboard-rank = mo_json->value_string( iv_prefix && '/rank' ).
     dashboard-self = mo_json->value_string( iv_prefix && '/self' ).
-* todo, object, sharepermissions, array
+* todo, object, array, sharepermissions
     dashboard-view = mo_json->value_string( iv_prefix && '/view' ).
   ENDMETHOD.
 
@@ -1699,7 +1699,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_hierarchy.
-* todo, object, level, array
+* todo, object, array, level
   ENDMETHOD.
 
   METHOD parse_hierarchylevel.
@@ -1709,7 +1709,7 @@ CLASS zcl_jira IMPLEMENTATION.
     hierarchylevel-belowlevelid = mo_json->value_string( iv_prefix && '/belowLevelId' ).
     hierarchylevel-projectconfigurationid = mo_json->value_string( iv_prefix && '/projectConfigurationId' ).
     hierarchylevel-level = mo_json->value_string( iv_prefix && '/level' ).
-* todo, object, issuetypeids, array
+* todo, object, array, issuetypeids
     hierarchylevel-externaluuid = mo_json->value_string( iv_prefix && '/externalUuid' ).
     hierarchylevel-globalhierarchylevel = mo_json->value_string( iv_prefix && '/globalHierarchyLevel' ).
   ENDMETHOD.
@@ -1724,7 +1724,7 @@ CLASS zcl_jira IMPLEMENTATION.
     issuetypedetails-avatarid = mo_json->value_string( iv_prefix && '/avatarId' ).
     issuetypedetails-entityid = mo_json->value_string( iv_prefix && '/entityId' ).
     issuetypedetails-hierarchylevel = mo_json->value_string( iv_prefix && '/hierarchyLevel' ).
-* todo, object, scope, 
+* todo, object, , scope
   ENDMETHOD.
 
   METHOD parse_listwrappercallbackappli.
@@ -1739,7 +1739,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pageofdashboards-total = mo_json->value_string( iv_prefix && '/total' ).
     pageofdashboards-prev = mo_json->value_string( iv_prefix && '/prev' ).
     pageofdashboards-next = mo_json->value_string( iv_prefix && '/next' ).
-* todo, object, dashboards, array
+* todo, object, array, dashboards
   ENDMETHOD.
 
   METHOD parse_project.
@@ -1748,34 +1748,34 @@ CLASS zcl_jira IMPLEMENTATION.
     project-id = mo_json->value_string( iv_prefix && '/id' ).
     project-key = mo_json->value_string( iv_prefix && '/key' ).
     project-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, lead, 
-* todo, object, components, array
-* todo, object, issuetypes, array
+* todo, object, , lead
+* todo, object, array, components
+* todo, object, array, issuetypes
     project-url = mo_json->value_string( iv_prefix && '/url' ).
     project-email = mo_json->value_string( iv_prefix && '/email' ).
     project-assigneetype = mo_json->value_string( iv_prefix && '/assigneeType' ).
-* todo, object, versions, array
+* todo, object, array, versions
     project-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, roles, object
-* todo, object, avatarurls, 
-* todo, object, projectcategory, 
+* todo, object, object, roles
+* todo, object, , avatarurls
+* todo, object, , projectcategory
     project-projecttypekey = mo_json->value_string( iv_prefix && '/projectTypeKey' ).
     project-simplified = mo_json->value_boolean( iv_prefix && '/simplified' ).
     project-style = mo_json->value_string( iv_prefix && '/style' ).
     project-favourite = mo_json->value_boolean( iv_prefix && '/favourite' ).
     project-isprivate = mo_json->value_boolean( iv_prefix && '/isPrivate' ).
-* todo, object, issuetypehierarchy, 
-* todo, object, permissions, 
-* todo, object, properties, object
+* todo, object, , issuetypehierarchy
+* todo, object, , permissions
+* todo, object, object, properties
     project-uuid = mo_json->value_string( iv_prefix && '/uuid' ).
-* todo, object, insight, 
+* todo, object, , insight
     project-deleted = mo_json->value_boolean( iv_prefix && '/deleted' ).
     project-retentiontilldate = mo_json->value_string( iv_prefix && '/retentionTillDate' ).
     project-deleteddate = mo_json->value_string( iv_prefix && '/deletedDate' ).
-* todo, object, deletedby, 
+* todo, object, , deletedby
     project-archived = mo_json->value_boolean( iv_prefix && '/archived' ).
     project-archiveddate = mo_json->value_string( iv_prefix && '/archivedDate' ).
-* todo, object, archivedby, 
+* todo, object, , archivedby
   ENDMETHOD.
 
   METHOD parse_projectcategory.
@@ -1792,8 +1792,8 @@ CLASS zcl_jira IMPLEMENTATION.
     projectforscope-name = mo_json->value_string( iv_prefix && '/name' ).
     projectforscope-projecttypekey = mo_json->value_string( iv_prefix && '/projectTypeKey' ).
     projectforscope-simplified = mo_json->value_boolean( iv_prefix && '/simplified' ).
-* todo, object, avatarurls, 
-* todo, object, projectcategory, 
+* todo, object, , avatarurls
+* todo, object, , projectcategory
   ENDMETHOD.
 
   METHOD parse_projectinsight.
@@ -1810,8 +1810,8 @@ CLASS zcl_jira IMPLEMENTATION.
     projectrole-name = mo_json->value_string( iv_prefix && '/name' ).
     projectrole-id = mo_json->value_string( iv_prefix && '/id' ).
     projectrole-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, actors, array
-* todo, object, scope, 
+* todo, object, array, actors
+* todo, object, , scope
     projectrole-translatedname = mo_json->value_string( iv_prefix && '/translatedName' ).
     projectrole-currentuserrole = mo_json->value_boolean( iv_prefix && '/currentUserRole' ).
     projectrole-admin = mo_json->value_boolean( iv_prefix && '/admin' ).
@@ -1834,21 +1834,21 @@ CLASS zcl_jira IMPLEMENTATION.
     roleactor-type = mo_json->value_string( iv_prefix && '/type' ).
     roleactor-name = mo_json->value_string( iv_prefix && '/name' ).
     roleactor-avatarurl = mo_json->value_string( iv_prefix && '/avatarUrl' ).
-* todo, object, actoruser, 
-* todo, object, actorgroup, 
+* todo, object, , actoruser
+* todo, object, , actorgroup
   ENDMETHOD.
 
   METHOD parse_scope.
     scope-type = mo_json->value_string( iv_prefix && '/type' ).
-* todo, object, project, 
+* todo, object, , project
   ENDMETHOD.
 
   METHOD parse_sharepermission.
     sharepermission-id = mo_json->value_string( iv_prefix && '/id' ).
     sharepermission-type = mo_json->value_string( iv_prefix && '/type' ).
-* todo, object, project, 
-* todo, object, role, 
-* todo, object, group, 
+* todo, object, , project
+* todo, object, , role
+* todo, object, , group
   ENDMETHOD.
 
   METHOD parse_simplelink.
@@ -1863,17 +1863,17 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD parse_simplelistwrapperapplica.
     simplelistwrapperapplicationro-size = mo_json->value_string( iv_prefix && '/size' ).
-* todo, object, items, array
-* todo, object, pagingcallback, 
-* todo, object, callback, 
+* todo, object, array, items
+* todo, object, , pagingcallback
+* todo, object, , callback
     simplelistwrapperapplicationro-max_results = mo_json->value_string( iv_prefix && '/max-results' ).
   ENDMETHOD.
 
   METHOD parse_simplelistwrappergroupna.
     simplelistwrappergroupname-size = mo_json->value_string( iv_prefix && '/size' ).
-* todo, object, items, array
-* todo, object, pagingcallback, 
-* todo, object, callback, 
+* todo, object, array, items
+* todo, object, , pagingcallback
+* todo, object, , callback
     simplelistwrappergroupname-max_results = mo_json->value_string( iv_prefix && '/max-results' ).
   ENDMETHOD.
 
@@ -1891,13 +1891,13 @@ CLASS zcl_jira IMPLEMENTATION.
     user-accounttype = mo_json->value_string( iv_prefix && '/accountType' ).
     user-name = mo_json->value_string( iv_prefix && '/name' ).
     user-emailaddress = mo_json->value_string( iv_prefix && '/emailAddress' ).
-* todo, object, avatarurls, 
+* todo, object, , avatarurls
     user-displayname = mo_json->value_string( iv_prefix && '/displayName' ).
     user-active = mo_json->value_boolean( iv_prefix && '/active' ).
     user-timezone = mo_json->value_string( iv_prefix && '/timeZone' ).
     user-locale = mo_json->value_string( iv_prefix && '/locale' ).
-* todo, object, groups, 
-* todo, object, applicationroles, 
+* todo, object, , groups
+* todo, object, , applicationroles
     user-expand = mo_json->value_string( iv_prefix && '/expand' ).
   ENDMETHOD.
 
@@ -1908,7 +1908,7 @@ CLASS zcl_jira IMPLEMENTATION.
     userbean-displayname = mo_json->value_string( iv_prefix && '/displayName' ).
     userbean-active = mo_json->value_boolean( iv_prefix && '/active' ).
     userbean-accountid = mo_json->value_string( iv_prefix && '/accountId' ).
-* todo, object, avatarurls, 
+* todo, object, , avatarurls
   ENDMETHOD.
 
   METHOD parse_userbeanavatarurls.
@@ -1934,8 +1934,8 @@ CLASS zcl_jira IMPLEMENTATION.
     version-project = mo_json->value_string( iv_prefix && '/project' ).
     version-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
     version-moveunfixedissuesto = mo_json->value_string( iv_prefix && '/moveUnfixedIssuesTo' ).
-* todo, object, operations, array
-* todo, object, issuesstatusforfixversion, 
+* todo, object, array, operations
+* todo, object, , issuesstatusforfixversion
   ENDMETHOD.
 
   METHOD parse_versionissuesstatus.
@@ -1946,8 +1946,8 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_errorcollection.
-* todo, object, errormessages, array
-* todo, object, errors, object
+* todo, object, array, errormessages
+* todo, object, object, errors
     errorcollection-status = mo_json->value_string( iv_prefix && '/status' ).
   ENDMETHOD.
 
@@ -1958,13 +1958,13 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeandashboard-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeandashboard-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeandashboard-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_dashboarddetails.
     dashboarddetails-name = mo_json->value_string( iv_prefix && '/name' ).
     dashboarddetails-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, sharepermissions, array
+* todo, object, array, sharepermissions
   ENDMETHOD.
 
   METHOD parse_propertykey.
@@ -1973,16 +1973,16 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_propertykeys.
-* todo, object, keys, array
+* todo, object, array, keys
   ENDMETHOD.
 
   METHOD parse_entityproperty.
     entityproperty-key = mo_json->value_string( iv_prefix && '/key' ).
-* todo, object, value, 
+* todo, object, , value
   ENDMETHOD.
 
   METHOD parse_projectissuesecurityleve.
-* todo, object, levels, array
+* todo, object, array, levels
   ENDMETHOD.
 
   METHOD parse_securitylevel.
@@ -1999,7 +1999,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanstring-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanstring-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanstring-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_pagebeanuserkey.
@@ -2009,7 +2009,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanuserkey-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanuserkey-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanuserkey-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_userkey.
@@ -2024,7 +2024,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanuser-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanuser-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanuser-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_changedetails.
@@ -2039,22 +2039,22 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD parse_changelog.
     changelog-id = mo_json->value_string( iv_prefix && '/id' ).
-* todo, object, author, 
+* todo, object, , author
     changelog-created = mo_json->value_string( iv_prefix && '/created' ).
-* todo, object, items, array
-* todo, object, historymetadata, 
+* todo, object, array, items
+* todo, object, , historymetadata
   ENDMETHOD.
 
   METHOD parse_fieldmetadata.
     fieldmetadata-required = mo_json->value_boolean( iv_prefix && '/required' ).
-* todo, object, schema, 
+* todo, object, , schema
     fieldmetadata-name = mo_json->value_string( iv_prefix && '/name' ).
     fieldmetadata-key = mo_json->value_string( iv_prefix && '/key' ).
     fieldmetadata-autocompleteurl = mo_json->value_string( iv_prefix && '/autoCompleteUrl' ).
     fieldmetadata-hasdefaultvalue = mo_json->value_boolean( iv_prefix && '/hasDefaultValue' ).
-* todo, object, operations, array
-* todo, object, allowedvalues, array
-* todo, object, defaultvalue, 
+* todo, object, array, operations
+* todo, object, array, allowedvalues
+* todo, object, , defaultvalue
   ENDMETHOD.
 
   METHOD parse_historymetadata.
@@ -2065,10 +2065,10 @@ CLASS zcl_jira IMPLEMENTATION.
     historymetadata-activitydescriptionkey = mo_json->value_string( iv_prefix && '/activityDescriptionKey' ).
     historymetadata-emaildescription = mo_json->value_string( iv_prefix && '/emailDescription' ).
     historymetadata-emaildescriptionkey = mo_json->value_string( iv_prefix && '/emailDescriptionKey' ).
-* todo, object, actor, 
-* todo, object, generator, 
-* todo, object, cause, 
-* todo, object, extradata, object
+* todo, object, , actor
+* todo, object, , generator
+* todo, object, , cause
+* todo, object, object, extradata
   ENDMETHOD.
 
   METHOD parse_historymetadataparticipa.
@@ -2081,9 +2081,9 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_includedfields.
-* todo, object, included, array
-* todo, object, excluded, array
-* todo, object, actuallyincluded, array
+* todo, object, array, included
+* todo, object, array, excluded
+* todo, object, array, actuallyincluded
   ENDMETHOD.
 
   METHOD parse_issuebean.
@@ -2091,35 +2091,35 @@ CLASS zcl_jira IMPLEMENTATION.
     issuebean-id = mo_json->value_string( iv_prefix && '/id' ).
     issuebean-self = mo_json->value_string( iv_prefix && '/self' ).
     issuebean-key = mo_json->value_string( iv_prefix && '/key' ).
-* todo, object, renderedfields, object
-* todo, object, properties, object
-* todo, object, names, object
-* todo, object, schema, object
-* todo, object, transitions, array
-* todo, object, operations, 
-* todo, object, editmeta, 
-* todo, object, changelog, 
-* todo, object, versionedrepresentations, object
-* todo, object, fieldstoinclude, 
-* todo, object, fields, object
+* todo, object, object, renderedfields
+* todo, object, object, properties
+* todo, object, object, names
+* todo, object, object, schema
+* todo, object, array, transitions
+* todo, object, , operations
+* todo, object, , editmeta
+* todo, object, , changelog
+* todo, object, object, versionedrepresentations
+* todo, object, , fieldstoinclude
+* todo, object, object, fields
   ENDMETHOD.
 
   METHOD parse_issuetransition.
     issuetransition-id = mo_json->value_string( iv_prefix && '/id' ).
     issuetransition-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, to, 
+* todo, object, , to
     issuetransition-hasscreen = mo_json->value_boolean( iv_prefix && '/hasScreen' ).
     issuetransition-isglobal = mo_json->value_boolean( iv_prefix && '/isGlobal' ).
     issuetransition-isinitial = mo_json->value_boolean( iv_prefix && '/isInitial' ).
     issuetransition-isavailable = mo_json->value_boolean( iv_prefix && '/isAvailable' ).
     issuetransition-isconditional = mo_json->value_boolean( iv_prefix && '/isConditional' ).
-* todo, object, fields, object
+* todo, object, object, fields
     issuetransition-expand = mo_json->value_string( iv_prefix && '/expand' ).
     issuetransition-looped = mo_json->value_boolean( iv_prefix && '/looped' ).
   ENDMETHOD.
 
   METHOD parse_issueupdatemetadata.
-* todo, object, fields, object
+* todo, object, object, fields
   ENDMETHOD.
 
   METHOD parse_jsontypebean.
@@ -2128,27 +2128,27 @@ CLASS zcl_jira IMPLEMENTATION.
     jsontypebean-system = mo_json->value_string( iv_prefix && '/system' ).
     jsontypebean-custom = mo_json->value_string( iv_prefix && '/custom' ).
     jsontypebean-customid = mo_json->value_string( iv_prefix && '/customId' ).
-* todo, object, configuration, object
+* todo, object, object, configuration
   ENDMETHOD.
 
   METHOD parse_linkgroup.
     linkgroup-id = mo_json->value_string( iv_prefix && '/id' ).
     linkgroup-styleclass = mo_json->value_string( iv_prefix && '/styleClass' ).
-* todo, object, header, 
+* todo, object, , header
     linkgroup-weight = mo_json->value_string( iv_prefix && '/weight' ).
-* todo, object, links, array
-* todo, object, groups, array
+* todo, object, array, links
+* todo, object, array, groups
   ENDMETHOD.
 
   METHOD parse_operations.
-* todo, object, linkgroups, array
+* todo, object, array, linkgroups
   ENDMETHOD.
 
   METHOD parse_pageofchangelogs.
     pageofchangelogs-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pageofchangelogs-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
     pageofchangelogs-total = mo_json->value_string( iv_prefix && '/total' ).
-* todo, object, histories, array
+* todo, object, array, histories
   ENDMETHOD.
 
   METHOD parse_searchresults.
@@ -2156,10 +2156,10 @@ CLASS zcl_jira IMPLEMENTATION.
     searchresults-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     searchresults-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
     searchresults-total = mo_json->value_string( iv_prefix && '/total' ).
-* todo, object, issues, array
-* todo, object, warningmessages, array
-* todo, object, names, object
-* todo, object, schema, object
+* todo, object, array, issues
+* todo, object, array, warningmessages
+* todo, object, object, names
+* todo, object, object, schema
   ENDMETHOD.
 
   METHOD parse_statuscategory.
@@ -2176,7 +2176,7 @@ CLASS zcl_jira IMPLEMENTATION.
     statusdetails-iconurl = mo_json->value_string( iv_prefix && '/iconUrl' ).
     statusdetails-name = mo_json->value_string( iv_prefix && '/name' ).
     statusdetails-id = mo_json->value_string( iv_prefix && '/id' ).
-* todo, object, statuscategory, 
+* todo, object, , statuscategory
   ENDMETHOD.
 
   METHOD parse_userdetails.
@@ -2185,7 +2185,7 @@ CLASS zcl_jira IMPLEMENTATION.
     userdetails-key = mo_json->value_string( iv_prefix && '/key' ).
     userdetails-accountid = mo_json->value_string( iv_prefix && '/accountId' ).
     userdetails-emailaddress = mo_json->value_string( iv_prefix && '/emailAddress' ).
-* todo, object, avatarurls, 
+* todo, object, , avatarurls
     userdetails-displayname = mo_json->value_string( iv_prefix && '/displayName' ).
     userdetails-active = mo_json->value_boolean( iv_prefix && '/active' ).
     userdetails-timezone = mo_json->value_string( iv_prefix && '/timeZone' ).
@@ -2196,10 +2196,10 @@ CLASS zcl_jira IMPLEMENTATION.
     searchrequestbean-jql = mo_json->value_string( iv_prefix && '/jql' ).
     searchrequestbean-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     searchrequestbean-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-* todo, object, fields, array
+* todo, object, array, fields
     searchrequestbean-validatequery = mo_json->value_string( iv_prefix && '/validateQuery' ).
-* todo, object, expand, array
-* todo, object, properties, array
+* todo, object, array, expand
+* todo, object, array, properties
     searchrequestbean-fieldsbykeys = mo_json->value_boolean( iv_prefix && '/fieldsByKeys' ).
   ENDMETHOD.
 
@@ -2210,21 +2210,21 @@ CLASS zcl_jira IMPLEMENTATION.
     fieldreferencedata-searchable = mo_json->value_string( iv_prefix && '/searchable' ).
     fieldreferencedata-auto = mo_json->value_string( iv_prefix && '/auto' ).
     fieldreferencedata-cfid = mo_json->value_string( iv_prefix && '/cfid' ).
-* todo, object, operators, array
-* todo, object, types, array
+* todo, object, array, operators
+* todo, object, array, types
   ENDMETHOD.
 
   METHOD parse_functionreferencedata.
     functionreferencedata-value = mo_json->value_string( iv_prefix && '/value' ).
     functionreferencedata-displayname = mo_json->value_string( iv_prefix && '/displayName' ).
     functionreferencedata-islist = mo_json->value_string( iv_prefix && '/isList' ).
-* todo, object, types, array
+* todo, object, array, types
   ENDMETHOD.
 
   METHOD parse_jqlreferencedata.
-* todo, object, visiblefieldnames, array
-* todo, object, visiblefunctionnames, array
-* todo, object, jqlreservedwords, array
+* todo, object, array, visiblefieldnames
+* todo, object, array, visiblefunctionnames
+* todo, object, array, jqlreservedwords
   ENDMETHOD.
 
   METHOD parse_autocompletesuggestion.
@@ -2233,16 +2233,16 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_autocompletesuggestions.
-* todo, object, results, array
+* todo, object, array, results
   ENDMETHOD.
 
   METHOD parse_jqlpersonaldatamigration.
-* todo, object, querystrings, array
+* todo, object, array, querystrings
   ENDMETHOD.
 
   METHOD parse_convertedjqlqueries.
-* todo, object, querystrings, array
-* todo, object, querieswithunknownusers, array
+* todo, object, array, querystrings
+* todo, object, array, querieswithunknownusers
   ENDMETHOD.
 
   METHOD parse_jqlquerywithunknownusers.
@@ -2255,26 +2255,26 @@ CLASS zcl_jira IMPLEMENTATION.
     filter-id = mo_json->value_string( iv_prefix && '/id' ).
     filter-name = mo_json->value_string( iv_prefix && '/name' ).
     filter-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, owner, 
+* todo, object, , owner
     filter-jql = mo_json->value_string( iv_prefix && '/jql' ).
     filter-viewurl = mo_json->value_string( iv_prefix && '/viewUrl' ).
     filter-searchurl = mo_json->value_string( iv_prefix && '/searchUrl' ).
     filter-favourite = mo_json->value_boolean( iv_prefix && '/favourite' ).
     filter-favouritedcount = mo_json->value_string( iv_prefix && '/favouritedCount' ).
-* todo, object, sharepermissions, array
-* todo, object, sharedusers, 
-* todo, object, subscriptions, 
+* todo, object, array, sharepermissions
+* todo, object, , sharedusers
+* todo, object, , subscriptions
   ENDMETHOD.
 
   METHOD parse_filtersubscription.
     filtersubscription-id = mo_json->value_string( iv_prefix && '/id' ).
-* todo, object, user, 
-* todo, object, group, 
+* todo, object, , user
+* todo, object, , group
   ENDMETHOD.
 
   METHOD parse_filtersubscriptionslist.
     filtersubscriptionslist-size = mo_json->value_string( iv_prefix && '/size' ).
-* todo, object, items, array
+* todo, object, array, items
     filtersubscriptionslist-max_results = mo_json->value_string( iv_prefix && '/max-results' ).
     filtersubscriptionslist-start_index = mo_json->value_string( iv_prefix && '/start-index' ).
     filtersubscriptionslist-end_index = mo_json->value_string( iv_prefix && '/end-index' ).
@@ -2282,7 +2282,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD parse_userlist.
     userlist-size = mo_json->value_string( iv_prefix && '/size' ).
-* todo, object, items, array
+* todo, object, array, items
     userlist-max_results = mo_json->value_string( iv_prefix && '/max-results' ).
     userlist-start_index = mo_json->value_string( iv_prefix && '/start-index' ).
     userlist-end_index = mo_json->value_string( iv_prefix && '/end-index' ).
@@ -2293,14 +2293,14 @@ CLASS zcl_jira IMPLEMENTATION.
     filterdetails-id = mo_json->value_string( iv_prefix && '/id' ).
     filterdetails-name = mo_json->value_string( iv_prefix && '/name' ).
     filterdetails-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, owner, 
+* todo, object, , owner
     filterdetails-jql = mo_json->value_string( iv_prefix && '/jql' ).
     filterdetails-viewurl = mo_json->value_string( iv_prefix && '/viewUrl' ).
     filterdetails-searchurl = mo_json->value_string( iv_prefix && '/searchUrl' ).
     filterdetails-favourite = mo_json->value_boolean( iv_prefix && '/favourite' ).
     filterdetails-favouritedcount = mo_json->value_string( iv_prefix && '/favouritedCount' ).
-* todo, object, sharepermissions, array
-* todo, object, subscriptions, array
+* todo, object, array, sharepermissions
+* todo, object, array, subscriptions
   ENDMETHOD.
 
   METHOD parse_pagebeanfilterdetails.
@@ -2310,7 +2310,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanfilterdetails-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanfilterdetails-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanfilterdetails-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_defaultsharescope.
@@ -2336,7 +2336,7 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_permissiongrant.
     permissiongrant-id = mo_json->value_string( iv_prefix && '/id' ).
     permissiongrant-self = mo_json->value_string( iv_prefix && '/self' ).
-* todo, object, holder, 
+* todo, object, , holder
     permissiongrant-permission = mo_json->value_string( iv_prefix && '/permission' ).
   ENDMETHOD.
 
@@ -2352,12 +2352,12 @@ CLASS zcl_jira IMPLEMENTATION.
     permissionscheme-self = mo_json->value_string( iv_prefix && '/self' ).
     permissionscheme-name = mo_json->value_string( iv_prefix && '/name' ).
     permissionscheme-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, scope, 
-* todo, object, permissions, array
+* todo, object, , scope
+* todo, object, array, permissions
   ENDMETHOD.
 
   METHOD parse_permissions.
-* todo, object, permissions, object
+* todo, object, object, permissions
   ENDMETHOD.
 
   METHOD parse_userpermission.
@@ -2371,34 +2371,34 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_bulkpermissionsrequestbe.
-* todo, object, projectpermissions, array
-* todo, object, globalpermissions, array
+* todo, object, array, projectpermissions
+* todo, object, array, globalpermissions
     bulkpermissionsrequestbean-accountid = mo_json->value_string( iv_prefix && '/accountId' ).
   ENDMETHOD.
 
   METHOD parse_bulkprojectpermissions.
-* todo, object, issues, array
-* todo, object, projects, array
-* todo, object, permissions, array
+* todo, object, array, issues
+* todo, object, array, projects
+* todo, object, array, permissions
   ENDMETHOD.
 
   METHOD parse_bulkpermissiongrants.
-* todo, object, projectpermissions, array
-* todo, object, globalpermissions, array
+* todo, object, array, projectpermissions
+* todo, object, array, globalpermissions
   ENDMETHOD.
 
   METHOD parse_bulkprojectpermissiongra.
     bulkprojectpermissiongrants-permission = mo_json->value_string( iv_prefix && '/permission' ).
-* todo, object, issues, array
-* todo, object, projects, array
+* todo, object, array, issues
+* todo, object, array, projects
   ENDMETHOD.
 
   METHOD parse_permissionskeysbean.
-* todo, object, permissions, array
+* todo, object, array, permissions
   ENDMETHOD.
 
   METHOD parse_permittedprojects.
-* todo, object, projects, array
+* todo, object, array, projects
   ENDMETHOD.
 
   METHOD parse_projectidentifierbean.
@@ -2407,29 +2407,29 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_bulkissuepropertyupdater.
-* todo, object, value, 
+* todo, object, , value
     bulkissuepropertyupdaterequest-expression = mo_json->value_string( iv_prefix && '/expression' ).
-* todo, object, filter, 
+* todo, object, , filter
   ENDMETHOD.
 
   METHOD parse_issuefilterforbulkproper.
-* todo, object, entityids, array
-* todo, object, currentvalue, 
+* todo, object, array, entityids
+* todo, object, , currentvalue
     issuefilterforbulkpropertyset-hasproperty = mo_json->value_boolean( iv_prefix && '/hasProperty' ).
   ENDMETHOD.
 
   METHOD parse_issuefilterforbulkprop01.
-* todo, object, entityids, array
-* todo, object, currentvalue, 
+* todo, object, array, entityids
+* todo, object, , currentvalue
   ENDMETHOD.
 
   METHOD parse_issueentityproperties.
-* todo, object, entitiesids, array
-* todo, object, properties, object
+* todo, object, array, entitiesids
+* todo, object, object, properties
   ENDMETHOD.
 
   METHOD parse_jsonnode.
-* todo, object, elements, object
+* todo, object, object, elements
     jsonnode-floatingpointnumber = mo_json->value_boolean( iv_prefix && '/floatingPointNumber' ).
     jsonnode-pojo = mo_json->value_boolean( iv_prefix && '/pojo' ).
     jsonnode-containernode = mo_json->value_boolean( iv_prefix && '/containerNode' ).
@@ -2446,24 +2446,24 @@ CLASS zcl_jira IMPLEMENTATION.
     jsonnode-textual = mo_json->value_boolean( iv_prefix && '/textual' ).
     jsonnode-boolean = mo_json->value_boolean( iv_prefix && '/boolean' ).
     jsonnode-binary = mo_json->value_boolean( iv_prefix && '/binary' ).
-* todo, object, numbervalue, number
+* todo, object, number, numbervalue
     jsonnode-numbertype = mo_json->value_string( iv_prefix && '/numberType' ).
     jsonnode-intvalue = mo_json->value_string( iv_prefix && '/intValue' ).
     jsonnode-longvalue = mo_json->value_string( iv_prefix && '/longValue' ).
     jsonnode-bigintegervalue = mo_json->value_string( iv_prefix && '/bigIntegerValue' ).
-* todo, object, doublevalue, number
-* todo, object, decimalvalue, number
+* todo, object, number, doublevalue
+* todo, object, number, decimalvalue
     jsonnode-booleanvalue = mo_json->value_boolean( iv_prefix && '/booleanValue' ).
-* todo, object, binaryvalue, array
+* todo, object, array, binaryvalue
     jsonnode-valueasint = mo_json->value_string( iv_prefix && '/valueAsInt' ).
     jsonnode-valueaslong = mo_json->value_string( iv_prefix && '/valueAsLong' ).
-* todo, object, valueasdouble, number
+* todo, object, number, valueasdouble
     jsonnode-valueasboolean = mo_json->value_boolean( iv_prefix && '/valueAsBoolean' ).
     jsonnode-textvalue = mo_json->value_string( iv_prefix && '/textValue' ).
     jsonnode-valueastext = mo_json->value_string( iv_prefix && '/valueAsText' ).
-* todo, object, fieldnames, object
+* todo, object, object, fieldnames
     jsonnode-array = mo_json->value_boolean( iv_prefix && '/array' ).
-* todo, object, fields, object
+* todo, object, object, fields
     jsonnode-null = mo_json->value_boolean( iv_prefix && '/null' ).
   ENDMETHOD.
 
@@ -2475,7 +2475,7 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_deleteandreplaceversionb.
     deleteandreplaceversionbean-movefixissuesto = mo_json->value_string( iv_prefix && '/moveFixIssuesTo' ).
     deleteandreplaceversionbean-moveaffectedissuesto = mo_json->value_string( iv_prefix && '/moveAffectedIssuesTo' ).
-* todo, object, customfieldreplacementlist, array
+* todo, object, array, customfieldreplacementlist
   ENDMETHOD.
 
   METHOD parse_versionissuecounts.
@@ -2483,7 +2483,7 @@ CLASS zcl_jira IMPLEMENTATION.
     versionissuecounts-issuesfixedcount = mo_json->value_string( iv_prefix && '/issuesFixedCount' ).
     versionissuecounts-issuesaffectedcount = mo_json->value_string( iv_prefix && '/issuesAffectedCount' ).
     versionissuecounts-issuecountwithcustomfieldsshow = mo_json->value_string( iv_prefix && '/issueCountWithCustomFieldsShowingVersion' ).
-* todo, object, customfieldusage, array
+* todo, object, array, customfieldusage
   ENDMETHOD.
 
   METHOD parse_versionusageincustomfiel.
@@ -2504,7 +2504,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_foundusers.
-* todo, object, users, array
+* todo, object, array, users
     foundusers-total = mo_json->value_string( iv_prefix && '/total' ).
     foundusers-header = mo_json->value_string( iv_prefix && '/header' ).
   ENDMETHOD.
@@ -2526,7 +2526,7 @@ CLASS zcl_jira IMPLEMENTATION.
     userwritebean-emailaddress = mo_json->value_string( iv_prefix && '/emailAddress' ).
     userwritebean-displayname = mo_json->value_string( iv_prefix && '/displayName' ).
     userwritebean-notification = mo_json->value_string( iv_prefix && '/notification' ).
-* todo, object, applicationkeys, array
+* todo, object, array, applicationkeys
   ENDMETHOD.
 
   METHOD parse_avatar.
@@ -2536,12 +2536,12 @@ CLASS zcl_jira IMPLEMENTATION.
     avatar-isselected = mo_json->value_boolean( iv_prefix && '/isSelected' ).
     avatar-isdeletable = mo_json->value_boolean( iv_prefix && '/isDeletable' ).
     avatar-filename = mo_json->value_string( iv_prefix && '/fileName' ).
-* todo, object, urls, object
+* todo, object, object, urls
   ENDMETHOD.
 
   METHOD parse_avatars.
-* todo, object, system, array
-* todo, object, custom, array
+* todo, object, array, system
+* todo, object, array, custom
   ENDMETHOD.
 
   METHOD parse_screenabletab.
@@ -2556,14 +2556,14 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanscreen-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanscreen-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanscreen-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_screen.
     screen-id = mo_json->value_string( iv_prefix && '/id' ).
     screen-name = mo_json->value_string( iv_prefix && '/name' ).
     screen-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, scope, 
+* todo, object, , scope
   ENDMETHOD.
 
   METHOD parse_screenablefield.
@@ -2626,7 +2626,7 @@ CLASS zcl_jira IMPLEMENTATION.
     taskprogressbeanobject-description = mo_json->value_string( iv_prefix && '/description' ).
     taskprogressbeanobject-status = mo_json->value_string( iv_prefix && '/status' ).
     taskprogressbeanobject-message = mo_json->value_string( iv_prefix && '/message' ).
-* todo, object, result, 
+* todo, object, , result
     taskprogressbeanobject-submittedby = mo_json->value_string( iv_prefix && '/submittedBy' ).
     taskprogressbeanobject-progress = mo_json->value_string( iv_prefix && '/progress' ).
     taskprogressbeanobject-elapsedruntime = mo_json->value_string( iv_prefix && '/elapsedRuntime' ).
@@ -2643,17 +2643,17 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanversion-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanversion-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanversion-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_componentwithissuecount.
     componentwithissuecount-issuecount = mo_json->value_string( iv_prefix && '/issueCount' ).
-* todo, object, realassignee, 
+* todo, object, , realassignee
     componentwithissuecount-isassigneetypevalid = mo_json->value_boolean( iv_prefix && '/isAssigneeTypeValid' ).
-* todo, object, assignee, 
+* todo, object, , assignee
     componentwithissuecount-realassigneetype = mo_json->value_string( iv_prefix && '/realAssigneeType' ).
     componentwithissuecount-assigneetype = mo_json->value_string( iv_prefix && '/assigneeType' ).
-* todo, object, lead, 
+* todo, object, , lead
     componentwithissuecount-description = mo_json->value_string( iv_prefix && '/description' ).
     componentwithissuecount-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
     componentwithissuecount-project = mo_json->value_string( iv_prefix && '/project' ).
@@ -2669,7 +2669,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeancomponentwithissuecoun-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeancomponentwithissuecoun-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeancomponentwithissuecoun-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_stringlist.
@@ -2682,12 +2682,12 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanproject-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanproject-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanproject-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_projectavatars.
-* todo, object, system, array
-* todo, object, custom, array
+* todo, object, array, system
+* todo, object, array, custom
   ENDMETHOD.
 
   METHOD parse_issuetypewithstatus.
@@ -2695,7 +2695,7 @@ CLASS zcl_jira IMPLEMENTATION.
     issuetypewithstatus-id = mo_json->value_string( iv_prefix && '/id' ).
     issuetypewithstatus-name = mo_json->value_string( iv_prefix && '/name' ).
     issuetypewithstatus-subtask = mo_json->value_boolean( iv_prefix && '/subtask' ).
-* todo, object, statuses, array
+* todo, object, array, statuses
   ENDMETHOD.
 
   METHOD parse_securityscheme.
@@ -2704,7 +2704,7 @@ CLASS zcl_jira IMPLEMENTATION.
     securityscheme-name = mo_json->value_string( iv_prefix && '/name' ).
     securityscheme-description = mo_json->value_string( iv_prefix && '/description' ).
     securityscheme-defaultsecuritylevelid = mo_json->value_string( iv_prefix && '/defaultSecurityLevelId' ).
-* todo, object, levels, array
+* todo, object, array, levels
   ENDMETHOD.
 
   METHOD parse_priority.
@@ -2719,25 +2719,25 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_comment.
     comment-self = mo_json->value_string( iv_prefix && '/self' ).
     comment-id = mo_json->value_string( iv_prefix && '/id' ).
-* todo, object, author, 
-* todo, object, body, 
+* todo, object, , author
+* todo, object, , body
     comment-renderedbody = mo_json->value_string( iv_prefix && '/renderedBody' ).
-* todo, object, updateauthor, 
+* todo, object, , updateauthor
     comment-created = mo_json->value_string( iv_prefix && '/created' ).
     comment-updated = mo_json->value_string( iv_prefix && '/updated' ).
-* todo, object, visibility, 
+* todo, object, , visibility
     comment-jsdpublic = mo_json->value_boolean( iv_prefix && '/jsdPublic' ).
-* todo, object, properties, array
+* todo, object, array, properties
   ENDMETHOD.
 
   METHOD parse_fields.
     fields-summary = mo_json->value_string( iv_prefix && '/summary' ).
-* todo, object, status, 
-* todo, object, priority, 
-* todo, object, assignee, 
-* todo, object, timetracking, 
-* todo, object, issuetype, 
-* todo, object, issuetype01, 
+* todo, object, , status
+* todo, object, , priority
+* todo, object, , assignee
+* todo, object, , timetracking
+* todo, object, , issuetype
+* todo, object, , issuetype01
   ENDMETHOD.
 
   METHOD parse_issuelinktype.
@@ -2749,17 +2749,17 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_linkissuerequestjsonbean.
-* todo, object, type, 
-* todo, object, inwardissue, 
-* todo, object, outwardissue, 
-* todo, object, comment, 
+* todo, object, , type
+* todo, object, , inwardissue
+* todo, object, , outwardissue
+* todo, object, , comment
   ENDMETHOD.
 
   METHOD parse_linkedissue.
     linkedissue-id = mo_json->value_string( iv_prefix && '/id' ).
     linkedissue-key = mo_json->value_string( iv_prefix && '/key' ).
     linkedissue-self = mo_json->value_string( iv_prefix && '/self' ).
-* todo, object, fields, 
+* todo, object, , fields
   ENDMETHOD.
 
   METHOD parse_richtext.
@@ -2785,32 +2785,32 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_issuelink.
     issuelink-id = mo_json->value_string( iv_prefix && '/id' ).
     issuelink-self = mo_json->value_string( iv_prefix && '/self' ).
-* todo, object, type, 
-* todo, object, inwardissue, 
-* todo, object, outwardissue, 
+* todo, object, , type
+* todo, object, , inwardissue
+* todo, object, , outwardissue
   ENDMETHOD.
 
   METHOD parse_pageofworklogs.
     pageofworklogs-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pageofworklogs-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
     pageofworklogs-total = mo_json->value_string( iv_prefix && '/total' ).
-* todo, object, worklogs, array
+* todo, object, array, worklogs
   ENDMETHOD.
 
   METHOD parse_worklog.
     worklog-self = mo_json->value_string( iv_prefix && '/self' ).
-* todo, object, author, 
-* todo, object, updateauthor, 
-* todo, object, comment, 
+* todo, object, , author
+* todo, object, , updateauthor
+* todo, object, , comment
     worklog-created = mo_json->value_string( iv_prefix && '/created' ).
     worklog-updated = mo_json->value_string( iv_prefix && '/updated' ).
-* todo, object, visibility, 
+* todo, object, , visibility
     worklog-started = mo_json->value_string( iv_prefix && '/started' ).
     worklog-timespent = mo_json->value_string( iv_prefix && '/timeSpent' ).
     worklog-timespentseconds = mo_json->value_string( iv_prefix && '/timeSpentSeconds' ).
     worklog-id = mo_json->value_string( iv_prefix && '/id' ).
     worklog-issueid = mo_json->value_string( iv_prefix && '/issueId' ).
-* todo, object, properties, array
+* todo, object, array, properties
   ENDMETHOD.
 
   METHOD parse_issuetypecreatebean.
@@ -2826,13 +2826,13 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_securityschemes.
-* todo, object, issuesecurityschemes, array
+* todo, object, array, issuesecurityschemes
   ENDMETHOD.
 
   METHOD parse_issuesecuritylevelmember.
     issuesecuritylevelmember-id = mo_json->value_string( iv_prefix && '/id' ).
     issuesecuritylevelmember-issuesecuritylevelid = mo_json->value_string( iv_prefix && '/issueSecurityLevelId' ).
-* todo, object, holder, 
+* todo, object, , holder
   ENDMETHOD.
 
   METHOD parse_pagebeanissuesecuritylev.
@@ -2842,16 +2842,16 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanissuesecuritylevelmemb-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanissuesecuritylevelmemb-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanissuesecuritylevelmemb-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_transitions.
     transitions-expand = mo_json->value_string( iv_prefix && '/expand' ).
-* todo, object, transitions, array
+* todo, object, array, transitions
   ENDMETHOD.
 
   METHOD parse_issuepickersuggestions.
-* todo, object, sections, array
+* todo, object, array, sections
   ENDMETHOD.
 
   METHOD parse_issuepickersuggestionsis.
@@ -2859,7 +2859,7 @@ CLASS zcl_jira IMPLEMENTATION.
     issuepickersuggestionsissuetyp-sub = mo_json->value_string( iv_prefix && '/sub' ).
     issuepickersuggestionsissuetyp-id = mo_json->value_string( iv_prefix && '/id' ).
     issuepickersuggestionsissuetyp-msg = mo_json->value_string( iv_prefix && '/msg' ).
-* todo, object, issues, array
+* todo, object, array, issues
   ENDMETHOD.
 
   METHOD parse_suggestedissue.
@@ -2872,64 +2872,64 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_fieldupdateoperation.
-* todo, object, add, 
-* todo, object, set, 
-* todo, object, remove, 
-* todo, object, edit, 
+* todo, object, , add
+* todo, object, , set
+* todo, object, , remove
+* todo, object, , edit
   ENDMETHOD.
 
   METHOD parse_issueupdatedetails.
-* todo, object, transition, 
-* todo, object, fields, object
-* todo, object, update, object
-* todo, object, historymetadata, 
-* todo, object, properties, array
+* todo, object, , transition
+* todo, object, object, fields
+* todo, object, object, update
+* todo, object, , historymetadata
+* todo, object, array, properties
   ENDMETHOD.
 
   METHOD parse_votes.
     votes-self = mo_json->value_string( iv_prefix && '/self' ).
     votes-votes = mo_json->value_string( iv_prefix && '/votes' ).
     votes-hasvoted = mo_json->value_boolean( iv_prefix && '/hasVoted' ).
-* todo, object, voters, array
+* todo, object, array, voters
   ENDMETHOD.
 
   METHOD parse_watchers.
     watchers-self = mo_json->value_string( iv_prefix && '/self' ).
     watchers-iswatching = mo_json->value_boolean( iv_prefix && '/isWatching' ).
     watchers-watchcount = mo_json->value_string( iv_prefix && '/watchCount' ).
-* todo, object, watchers, array
+* todo, object, array, watchers
   ENDMETHOD.
 
   METHOD parse_createdissue.
     createdissue-id = mo_json->value_string( iv_prefix && '/id' ).
     createdissue-key = mo_json->value_string( iv_prefix && '/key' ).
     createdissue-self = mo_json->value_string( iv_prefix && '/self' ).
-* todo, object, transition, 
+* todo, object, , transition
   ENDMETHOD.
 
   METHOD parse_nestedresponse.
     nestedresponse-status = mo_json->value_string( iv_prefix && '/status' ).
-* todo, object, errorcollection, 
+* todo, object, , errorcollection
   ENDMETHOD.
 
   METHOD parse_issuesupdatebean.
-* todo, object, issueupdates, array
+* todo, object, array, issueupdates
   ENDMETHOD.
 
   METHOD parse_bulkoperationerrorresult.
     bulkoperationerrorresult-status = mo_json->value_string( iv_prefix && '/status' ).
-* todo, object, elementerrors, 
+* todo, object, , elementerrors
     bulkoperationerrorresult-failedelementnumber = mo_json->value_string( iv_prefix && '/failedElementNumber' ).
   ENDMETHOD.
 
   METHOD parse_createdissues.
-* todo, object, issues, array
-* todo, object, errors, array
+* todo, object, array, issues
+* todo, object, array, errors
   ENDMETHOD.
 
   METHOD parse_issuecreatemetadata.
     issuecreatemetadata-expand = mo_json->value_string( iv_prefix && '/expand' ).
-* todo, object, projects, array
+* todo, object, array, projects
   ENDMETHOD.
 
   METHOD parse_issuetypeissuecreatemeta.
@@ -2942,9 +2942,9 @@ CLASS zcl_jira IMPLEMENTATION.
     issuetypeissuecreatemetadata-avatarid = mo_json->value_string( iv_prefix && '/avatarId' ).
     issuetypeissuecreatemetadata-entityid = mo_json->value_string( iv_prefix && '/entityId' ).
     issuetypeissuecreatemetadata-hierarchylevel = mo_json->value_string( iv_prefix && '/hierarchyLevel' ).
-* todo, object, scope, 
+* todo, object, , scope
     issuetypeissuecreatemetadata-expand = mo_json->value_string( iv_prefix && '/expand' ).
-* todo, object, fields, object
+* todo, object, object, fields
   ENDMETHOD.
 
   METHOD parse_projectissuecreatemetada.
@@ -2953,8 +2953,8 @@ CLASS zcl_jira IMPLEMENTATION.
     projectissuecreatemetadata-id = mo_json->value_string( iv_prefix && '/id' ).
     projectissuecreatemetadata-key = mo_json->value_string( iv_prefix && '/key' ).
     projectissuecreatemetadata-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, avatarurls, 
-* todo, object, issuetypes, array
+* todo, object, , avatarurls
+* todo, object, array, issuetypes
   ENDMETHOD.
 
   METHOD parse_application.
@@ -2972,22 +2972,22 @@ CLASS zcl_jira IMPLEMENTATION.
     remoteissuelink-id = mo_json->value_string( iv_prefix && '/id' ).
     remoteissuelink-self = mo_json->value_string( iv_prefix && '/self' ).
     remoteissuelink-globalid = mo_json->value_string( iv_prefix && '/globalId' ).
-* todo, object, application, 
+* todo, object, , application
     remoteissuelink-relationship = mo_json->value_string( iv_prefix && '/relationship' ).
-* todo, object, object, 
+* todo, object, , object
   ENDMETHOD.
 
   METHOD parse_remoteobject.
     remoteobject-url = mo_json->value_string( iv_prefix && '/url' ).
     remoteobject-title = mo_json->value_string( iv_prefix && '/title' ).
     remoteobject-summary = mo_json->value_string( iv_prefix && '/summary' ).
-* todo, object, icon, 
-* todo, object, status, 
+* todo, object, , icon
+* todo, object, , status
   ENDMETHOD.
 
   METHOD parse_status.
     status-resolved = mo_json->value_boolean( iv_prefix && '/resolved' ).
-* todo, object, icon, 
+* todo, object, , icon
   ENDMETHOD.
 
   METHOD parse_icon.
@@ -2998,9 +2998,9 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD parse_remoteissuelinkrequest.
     remoteissuelinkrequest-globalid = mo_json->value_string( iv_prefix && '/globalId' ).
-* todo, object, application, 
+* todo, object, , application
     remoteissuelinkrequest-relationship = mo_json->value_string( iv_prefix && '/relationship' ).
-* todo, object, object, 
+* todo, object, , object
   ENDMETHOD.
 
   METHOD parse_remoteissuelinkidentifie.
@@ -3012,8 +3012,8 @@ CLASS zcl_jira IMPLEMENTATION.
     notification-subject = mo_json->value_string( iv_prefix && '/subject' ).
     notification-textbody = mo_json->value_string( iv_prefix && '/textBody' ).
     notification-htmlbody = mo_json->value_string( iv_prefix && '/htmlBody' ).
-* todo, object, to, 
-* todo, object, restrict, 
+* todo, object, , to
+* todo, object, , restrict
   ENDMETHOD.
 
   METHOD parse_notificationrecipients.
@@ -3021,13 +3021,13 @@ CLASS zcl_jira IMPLEMENTATION.
     notificationrecipients-assignee = mo_json->value_boolean( iv_prefix && '/assignee' ).
     notificationrecipients-watchers = mo_json->value_boolean( iv_prefix && '/watchers' ).
     notificationrecipients-voters = mo_json->value_boolean( iv_prefix && '/voters' ).
-* todo, object, users, array
-* todo, object, groups, array
+* todo, object, array, users
+* todo, object, array, groups
   ENDMETHOD.
 
   METHOD parse_notificationrecipientsre.
-* todo, object, groups, array
-* todo, object, permissions, array
+* todo, object, array, groups
+* todo, object, array, permissions
   ENDMETHOD.
 
   METHOD parse_restrictedpermission.
@@ -3036,25 +3036,25 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_issuelinktypes.
-* todo, object, issuelinktypes, array
+* todo, object, array, issuelinktypes
   ENDMETHOD.
 
   METHOD parse_pageofcomments.
     pageofcomments-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pageofcomments-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
     pageofcomments-total = mo_json->value_string( iv_prefix && '/total' ).
-* todo, object, comments, array
+* todo, object, array, comments
   ENDMETHOD.
 
   METHOD parse_paginatedresponsecomment.
     paginatedresponsecomment-total = mo_json->value_string( iv_prefix && '/total' ).
-* todo, object, results, array
+* todo, object, array, results
     paginatedresponsecomment-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
     paginatedresponsecomment-startat = mo_json->value_string( iv_prefix && '/startAt' ).
   ENDMETHOD.
 
   METHOD parse_issuecommentlistrequestb.
-* todo, object, ids, array
+* todo, object, array, ids
   ENDMETHOD.
 
   METHOD parse_pagebeancomment.
@@ -3064,7 +3064,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeancomment-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeancomment-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeancomment-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_pagebeanchangelog.
@@ -3074,14 +3074,14 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanchangelog-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanchangelog-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanchangelog-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_attachment.
     attachment-self = mo_json->value_string( iv_prefix && '/self' ).
     attachment-id = mo_json->value_string( iv_prefix && '/id' ).
     attachment-filename = mo_json->value_string( iv_prefix && '/filename' ).
-* todo, object, author, 
+* todo, object, , author
     attachment-created = mo_json->value_string( iv_prefix && '/created' ).
     attachment-size = mo_json->value_string( iv_prefix && '/size' ).
     attachment-mimetype = mo_json->value_string( iv_prefix && '/mimeType' ).
@@ -3092,13 +3092,13 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_group.
     group-name = mo_json->value_string( iv_prefix && '/name' ).
     group-self = mo_json->value_string( iv_prefix && '/self' ).
-* todo, object, users, 
+* todo, object, , users
     group-expand = mo_json->value_string( iv_prefix && '/expand' ).
   ENDMETHOD.
 
   METHOD parse_pagedlistuserdetailsappl.
     pagedlistuserdetailsapplicatio-size = mo_json->value_string( iv_prefix && '/size' ).
-* todo, object, items, array
+* todo, object, array, items
     pagedlistuserdetailsapplicatio-max_results = mo_json->value_string( iv_prefix && '/max-results' ).
     pagedlistuserdetailsapplicatio-start_index = mo_json->value_string( iv_prefix && '/start-index' ).
     pagedlistuserdetailsapplicatio-end_index = mo_json->value_string( iv_prefix && '/end-index' ).
@@ -3111,7 +3111,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanuserdetails-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanuserdetails-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanuserdetails-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_addgroupbean.
@@ -3126,14 +3126,14 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_foundgroup.
     foundgroup-name = mo_json->value_string( iv_prefix && '/name' ).
     foundgroup-html = mo_json->value_string( iv_prefix && '/html' ).
-* todo, object, labels, array
+* todo, object, array, labels
     foundgroup-groupid = mo_json->value_string( iv_prefix && '/groupId' ).
   ENDMETHOD.
 
   METHOD parse_foundgroups.
     foundgroups-header = mo_json->value_string( iv_prefix && '/header' ).
     foundgroups-total = mo_json->value_string( iv_prefix && '/total' ).
-* todo, object, groups, array
+* todo, object, array, groups
   ENDMETHOD.
 
   METHOD parse_grouplabel.
@@ -3143,8 +3143,8 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_foundusersandgroups.
-* todo, object, users, 
-* todo, object, groups, 
+* todo, object, , users
+* todo, object, , groups
   ENDMETHOD.
 
   METHOD parse_fielddetails.
@@ -3155,9 +3155,9 @@ CLASS zcl_jira IMPLEMENTATION.
     fielddetails-orderable = mo_json->value_boolean( iv_prefix && '/orderable' ).
     fielddetails-navigable = mo_json->value_boolean( iv_prefix && '/navigable' ).
     fielddetails-searchable = mo_json->value_boolean( iv_prefix && '/searchable' ).
-* todo, object, clausenames, array
-* todo, object, scope, 
-* todo, object, schema, 
+* todo, object, array, clausenames
+* todo, object, , scope
+* todo, object, , schema
   ENDMETHOD.
 
   METHOD parse_customfielddefinitionjso.
@@ -3170,7 +3170,7 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_context.
     context-id = mo_json->value_string( iv_prefix && '/id' ).
     context-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, scope, 
+* todo, object, , scope
   ENDMETHOD.
 
   METHOD parse_pagebeancontext.
@@ -3180,7 +3180,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeancontext-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeancontext-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeancontext-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_customfieldcontextoption.
@@ -3197,11 +3197,11 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeancustomfieldcontextopti-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeancustomfieldcontextopti-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeancustomfieldcontextopti-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_bulkcustomfieldoptioncre.
-* todo, object, options, array
+* todo, object, array, options
   ENDMETHOD.
 
   METHOD parse_customfieldoptioncreate.
@@ -3211,17 +3211,17 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_customfieldcreatedcontex.
-* todo, object, options, array
+* todo, object, array, options
   ENDMETHOD.
 
   METHOD parse_orderofcustomfieldoption.
-* todo, object, customfieldoptionids, array
+* todo, object, array, customfieldoptionids
     orderofcustomfieldoptions-after = mo_json->value_string( iv_prefix && '/after' ).
     orderofcustomfieldoptions-position = mo_json->value_string( iv_prefix && '/position' ).
   ENDMETHOD.
 
   METHOD parse_bulkcustomfieldoptionupd.
-* todo, object, options, array
+* todo, object, array, options
   ENDMETHOD.
 
   METHOD parse_customfieldoptionupdate.
@@ -3231,7 +3231,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_customfieldupdatedcontex.
-* todo, object, options, array
+* todo, object, array, options
   ENDMETHOD.
 
   METHOD parse_componentissuescount.
@@ -3240,12 +3240,12 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_bulkcreatecustomfieldopt.
-* todo, object, options, array
+* todo, object, array, options
   ENDMETHOD.
 
   METHOD parse_customfieldoptionvalue.
     customfieldoptionvalue-value = mo_json->value_string( iv_prefix && '/value' ).
-* todo, object, cascadingoptions, array
+* todo, object, array, cascadingoptions
   ENDMETHOD.
 
   METHOD parse_renamedcascadingoption.
@@ -3256,17 +3256,17 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_renamedoption.
     renamedoption-value = mo_json->value_string( iv_prefix && '/value' ).
     renamedoption-newvalue = mo_json->value_string( iv_prefix && '/newValue' ).
-* todo, object, cascadingoptions, array
+* todo, object, array, cascadingoptions
   ENDMETHOD.
 
   METHOD parse_updatecustomfieldoption.
-* todo, object, options, array
+* todo, object, array, options
   ENDMETHOD.
 
   METHOD parse_customfieldoptiondetails.
     customfieldoptiondetails-id = mo_json->value_string( iv_prefix && '/id' ).
     customfieldoptiondetails-value = mo_json->value_string( iv_prefix && '/value' ).
-* todo, object, cascadingoptions, array
+* todo, object, array, cascadingoptions
   ENDMETHOD.
 
   METHOD parse_pagebeancustomfieldoptio.
@@ -3276,11 +3276,11 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeancustomfieldoptiondetai-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeancustomfieldoptiondetai-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeancustomfieldoptiondetai-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_systemavatars.
-* todo, object, system, array
+* todo, object, array, system
   ENDMETHOD.
 
   METHOD parse_issuetypescheme.
@@ -3298,12 +3298,12 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanissuetypescheme-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanissuetypescheme-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanissuetypescheme-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_issuetypeschemeprojects.
-* todo, object, issuetypescheme, 
-* todo, object, projectids, array
+* todo, object, , issuetypescheme
+* todo, object, array, projectids
   ENDMETHOD.
 
   METHOD parse_pagebeanissuetypeschemep.
@@ -3313,7 +3313,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanissuetypeschemeproject-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanissuetypeschemeproject-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanissuetypeschemeproject-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_issuetypeschememapping.
@@ -3328,7 +3328,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanissuetypeschememapping-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanissuetypeschememapping-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanissuetypeschememapping-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_issuetypeschemeprojectas.
@@ -3340,7 +3340,7 @@ CLASS zcl_jira IMPLEMENTATION.
     issuetypeschemedetails-name = mo_json->value_string( iv_prefix && '/name' ).
     issuetypeschemedetails-description = mo_json->value_string( iv_prefix && '/description' ).
     issuetypeschemedetails-defaultissuetypeid = mo_json->value_string( iv_prefix && '/defaultIssueTypeId' ).
-* todo, object, issuetypeids, array
+* todo, object, array, issuetypeids
   ENDMETHOD.
 
   METHOD parse_issuetypeschemeid.
@@ -3348,7 +3348,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_issuetypeids.
-* todo, object, issuetypeids, array
+* todo, object, array, issuetypeids
   ENDMETHOD.
 
   METHOD parse_issuetypeschemeupdatedet.
@@ -3358,7 +3358,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_orderofissuetypes.
-* todo, object, issuetypeids, array
+* todo, object, array, issuetypeids
     orderofissuetypes-after = mo_json->value_string( iv_prefix && '/after' ).
     orderofissuetypes-position = mo_json->value_string( iv_prefix && '/position' ).
   ENDMETHOD.
@@ -3366,11 +3366,11 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_changedworklog.
     changedworklog-worklogid = mo_json->value_string( iv_prefix && '/worklogId' ).
     changedworklog-updatedtime = mo_json->value_string( iv_prefix && '/updatedTime' ).
-* todo, object, properties, array
+* todo, object, array, properties
   ENDMETHOD.
 
   METHOD parse_changedworklogs.
-* todo, object, values, array
+* todo, object, array, values
     changedworklogs-since = mo_json->value_string( iv_prefix && '/since' ).
     changedworklogs-until = mo_json->value_string( iv_prefix && '/until' ).
     changedworklogs-self = mo_json->value_string( iv_prefix && '/self' ).
@@ -3379,29 +3379,29 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_worklogidsrequestbean.
-* todo, object, ids, array
+* todo, object, array, ids
   ENDMETHOD.
 
   METHOD parse_globalscopebean.
-* todo, object, attributes, array
+* todo, object, array, attributes
   ENDMETHOD.
 
   METHOD parse_issuefieldoption.
     issuefieldoption-id = mo_json->value_string( iv_prefix && '/id' ).
     issuefieldoption-value = mo_json->value_string( iv_prefix && '/value' ).
-* todo, object, properties, object
-* todo, object, config, 
+* todo, object, object, properties
+* todo, object, , config
   ENDMETHOD.
 
   METHOD parse_issuefieldoptionconfigur.
-* todo, object, scope, 
-* todo, object, attributes, array
+* todo, object, , scope
+* todo, object, array, attributes
   ENDMETHOD.
 
   METHOD parse_issuefieldoptionscopebea.
-* todo, object, projects, array
-* todo, object, projects2, array
-* todo, object, global, 
+* todo, object, array, projects
+* todo, object, array, projects2
+* todo, object, , global
   ENDMETHOD.
 
   METHOD parse_pagebeanissuefieldoption.
@@ -3411,29 +3411,29 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanissuefieldoption-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanissuefieldoption-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanissuefieldoption-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_projectscopebean.
     projectscopebean-id = mo_json->value_string( iv_prefix && '/id' ).
-* todo, object, attributes, array
+* todo, object, array, attributes
   ENDMETHOD.
 
   METHOD parse_issuefieldoptioncreatebe.
     issuefieldoptioncreatebean-value = mo_json->value_string( iv_prefix && '/value' ).
-* todo, object, properties, object
-* todo, object, config, 
+* todo, object, object, properties
+* todo, object, , config
   ENDMETHOD.
 
   METHOD parse_removeoptionfromissuesre.
-* todo, object, modifiedissues, array
-* todo, object, unmodifiedissues, array
-* todo, object, errors, 
+* todo, object, array, modifiedissues
+* todo, object, array, unmodifiedissues
+* todo, object, , errors
   ENDMETHOD.
 
   METHOD parse_simpleerrorcollection.
-* todo, object, errors, object
-* todo, object, errormessages, array
+* todo, object, object, errors
+* todo, object, array, errormessages
     simpleerrorcollection-httpstatuscode = mo_json->value_string( iv_prefix && '/httpStatusCode' ).
   ENDMETHOD.
 
@@ -3443,7 +3443,7 @@ CLASS zcl_jira IMPLEMENTATION.
     taskprogressbeanremoveoptionfr-description = mo_json->value_string( iv_prefix && '/description' ).
     taskprogressbeanremoveoptionfr-status = mo_json->value_string( iv_prefix && '/status' ).
     taskprogressbeanremoveoptionfr-message = mo_json->value_string( iv_prefix && '/message' ).
-* todo, object, result, 
+* todo, object, , result
     taskprogressbeanremoveoptionfr-submittedby = mo_json->value_string( iv_prefix && '/submittedBy' ).
     taskprogressbeanremoveoptionfr-progress = mo_json->value_string( iv_prefix && '/progress' ).
     taskprogressbeanremoveoptionfr-elapsedruntime = mo_json->value_string( iv_prefix && '/elapsedRuntime' ).
@@ -3456,13 +3456,13 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_field.
     field-id = mo_json->value_string( iv_prefix && '/id' ).
     field-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, schema, 
+* todo, object, , schema
     field-description = mo_json->value_string( iv_prefix && '/description' ).
     field-key = mo_json->value_string( iv_prefix && '/key' ).
     field-islocked = mo_json->value_boolean( iv_prefix && '/isLocked' ).
     field-screenscount = mo_json->value_string( iv_prefix && '/screensCount' ).
     field-contextscount = mo_json->value_string( iv_prefix && '/contextsCount' ).
-* todo, object, lastused, 
+* todo, object, , lastused
   ENDMETHOD.
 
   METHOD parse_fieldlastused.
@@ -3477,7 +3477,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanfield-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanfield-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanfield-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_fieldconfigurationscheme.
@@ -3493,7 +3493,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanfieldconfigurationsche-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanfieldconfigurationsche-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanfieldconfigurationsche-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_fieldconfigurationissuet.
@@ -3509,12 +3509,12 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanfieldconfigurationissu-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanfieldconfigurationissu-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanfieldconfigurationissu-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_fieldconfigurationsche01.
-* todo, object, fieldconfigurationscheme, 
-* todo, object, projectids, array
+* todo, object, , fieldconfigurationscheme
+* todo, object, array, projectids
   ENDMETHOD.
 
   METHOD parse_pagebeanfieldconfigura02.
@@ -3524,7 +3524,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanfieldconfigurationsc01-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanfieldconfigurationsc01-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanfieldconfigurationsc01-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_fieldconfigurationsche02.
@@ -3546,7 +3546,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanfieldconfiguration-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanfieldconfiguration-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanfieldconfiguration-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_fieldconfigurationitem.
@@ -3563,18 +3563,18 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanfieldconfigurationitem-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanfieldconfigurationitem-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanfieldconfigurationitem-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_attachmentmetadata.
     attachmentmetadata-id = mo_json->value_string( iv_prefix && '/id' ).
     attachmentmetadata-self = mo_json->value_string( iv_prefix && '/self' ).
     attachmentmetadata-filename = mo_json->value_string( iv_prefix && '/filename' ).
-* todo, object, author, 
+* todo, object, , author
     attachmentmetadata-created = mo_json->value_string( iv_prefix && '/created' ).
     attachmentmetadata-size = mo_json->value_string( iv_prefix && '/size' ).
     attachmentmetadata-mimetype = mo_json->value_string( iv_prefix && '/mimeType' ).
-* todo, object, properties, object
+* todo, object, object, properties
     attachmentmetadata-content = mo_json->value_string( iv_prefix && '/content' ).
     attachmentmetadata-thumbnail = mo_json->value_string( iv_prefix && '/thumbnail' ).
   ENDMETHOD.
@@ -3593,7 +3593,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_attachmentarchiveimpl.
-* todo, object, entries, array
+* todo, object, array, entries
     attachmentarchiveimpl-totalentrycount = mo_json->value_string( iv_prefix && '/totalEntryCount' ).
   ENDMETHOD.
 
@@ -3601,7 +3601,7 @@ CLASS zcl_jira IMPLEMENTATION.
     attachmentarchive-moreavailable = mo_json->value_boolean( iv_prefix && '/moreAvailable' ).
     attachmentarchive-totalnumberofentriesavailable = mo_json->value_string( iv_prefix && '/totalNumberOfEntriesAvailable' ).
     attachmentarchive-totalentrycount = mo_json->value_string( iv_prefix && '/totalEntryCount' ).
-* todo, object, entries, array
+* todo, object, array, entries
   ENDMETHOD.
 
   METHOD parse_attachmentarchiveitemrea.
@@ -3615,7 +3615,7 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_attachmentarchivemetadat.
     attachmentarchivemetadatareada-id = mo_json->value_string( iv_prefix && '/id' ).
     attachmentarchivemetadatareada-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, entries, array
+* todo, object, array, entries
     attachmentarchivemetadatareada-totalentrycount = mo_json->value_string( iv_prefix && '/totalEntryCount' ).
     attachmentarchivemetadatareada-mediatype = mo_json->value_string( iv_prefix && '/mediaType' ).
   ENDMETHOD.
@@ -3626,18 +3626,18 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_actorinputbean.
-* todo, object, user, array
-* todo, object, group, array
+* todo, object, array, user
+* todo, object, array, group
   ENDMETHOD.
 
   METHOD parse_projectroleactorsupdateb.
     projectroleactorsupdatebean-id = mo_json->value_string( iv_prefix && '/id' ).
-* todo, object, categorisedactors, object
+* todo, object, object, categorisedactors
   ENDMETHOD.
 
   METHOD parse_actorsmap.
-* todo, object, user, array
-* todo, object, group, array
+* todo, object, array, user
+* todo, object, array, group
   ENDMETHOD.
 
   METHOD parse_projectroledetail.
@@ -3646,7 +3646,7 @@ CLASS zcl_jira IMPLEMENTATION.
     projectroledetail-id = mo_json->value_string( iv_prefix && '/id' ).
     projectroledetail-description = mo_json->value_string( iv_prefix && '/description' ).
     projectroledetail-admin = mo_json->value_boolean( iv_prefix && '/admin' ).
-* todo, object, scope, 
+* todo, object, , scope
     projectroledetail-roleconfigurable = mo_json->value_boolean( iv_prefix && '/roleConfigurable' ).
     projectroledetail-translatedname = mo_json->value_string( iv_prefix && '/translatedName' ).
     projectroledetail-default = mo_json->value_boolean( iv_prefix && '/default' ).
@@ -3659,14 +3659,14 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanscreenscheme-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanscreenscheme-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanscreenscheme-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_screenscheme.
     screenscheme-id = mo_json->value_string( iv_prefix && '/id' ).
     screenscheme-name = mo_json->value_string( iv_prefix && '/name' ).
     screenscheme-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, screens, 
+* todo, object, , screens
   ENDMETHOD.
 
   METHOD parse_screentypes.
@@ -3679,7 +3679,7 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_screenschemedetails.
     screenschemedetails-name = mo_json->value_string( iv_prefix && '/name' ).
     screenschemedetails-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, screens, 
+* todo, object, , screens
   ENDMETHOD.
 
   METHOD parse_screenschemeid.
@@ -3689,7 +3689,7 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_updatescreenschemedetail.
     updatescreenschemedetails-name = mo_json->value_string( iv_prefix && '/name' ).
     updatescreenschemedetails-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, screens, 
+* todo, object, , screens
   ENDMETHOD.
 
   METHOD parse_updatescreentypes.
@@ -3717,7 +3717,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeancustomfieldcontextproj-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeancustomfieldcontextproj-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeancustomfieldcontextproj-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_customfieldcontext.
@@ -3735,19 +3735,19 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeancustomfieldcontext-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeancustomfieldcontext-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeancustomfieldcontext-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_createcustomfieldcontext.
     createcustomfieldcontext-id = mo_json->value_string( iv_prefix && '/id' ).
     createcustomfieldcontext-name = mo_json->value_string( iv_prefix && '/name' ).
     createcustomfieldcontext-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, projectids, array
-* todo, object, issuetypeids, array
+* todo, object, array, projectids
+* todo, object, array, issuetypeids
   ENDMETHOD.
 
   METHOD parse_projectids.
-* todo, object, projectids, array
+* todo, object, array, projectids
   ENDMETHOD.
 
   METHOD parse_customfieldcontextupdate.
@@ -3756,7 +3756,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_issuetypeids01.
-* todo, object, issuetypeids, array
+* todo, object, array, issuetypeids
   ENDMETHOD.
 
   METHOD parse_projectissuetypemapping.
@@ -3765,7 +3765,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_projectissuetypemappings.
-* todo, object, mappings, array
+* todo, object, array, mappings
   ENDMETHOD.
 
   METHOD parse_contextforprojectandissu.
@@ -3781,7 +3781,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeancontextforprojectandis-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeancontextforprojectandis-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeancontextforprojectandis-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_issuetypetocontextmappin.
@@ -3797,7 +3797,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanissuetypetocontextmapp-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanissuetypetocontextmapp-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanissuetypetocontextmapp-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_issuetypescreenschemeite.
@@ -3813,7 +3813,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanissuetypescreenschemei-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanissuetypescreenschemei-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanissuetypescreenschemei-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_issuetypescreenscheme.
@@ -3823,8 +3823,8 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_issuetypescreenschemespr.
-* todo, object, issuetypescreenscheme, 
-* todo, object, projectids, array
+* todo, object, , issuetypescreenscheme
+* todo, object, array, projectids
   ENDMETHOD.
 
   METHOD parse_pagebeanissuetypescree01.
@@ -3834,7 +3834,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanissuetypescreenschemes-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanissuetypescreenschemes-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanissuetypescreenschemes-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_pagebeanissuetypescree02.
@@ -3844,7 +3844,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanissuetypescreenscheme-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanissuetypescreenscheme-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanissuetypescreenscheme-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_issuetypescreenschemepro.
@@ -3855,7 +3855,7 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_issuetypescreenschemedet.
     issuetypescreenschemedetails-name = mo_json->value_string( iv_prefix && '/name' ).
     issuetypescreenschemedetails-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, issuetypemappings, array
+* todo, object, array, issuetypemappings
   ENDMETHOD.
 
   METHOD parse_issuetypescreenschememap.
@@ -3873,7 +3873,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_issuetypescreenschemem01.
-* todo, object, issuetypemappings, array
+* todo, object, array, issuetypemappings
   ENDMETHOD.
 
   METHOD parse_updatedefaultscreenschem.
@@ -3886,7 +3886,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_jexpissues.
-* todo, object, jql, 
+* todo, object, , jql
   ENDMETHOD.
 
   METHOD parse_jexpjqlissues.
@@ -3897,9 +3897,9 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_jiraexpressionevalcontex.
-* todo, object, issue, 
-* todo, object, issues, 
-* todo, object, project, 
+* todo, object, , issue
+* todo, object, , issues
+* todo, object, , project
     jiraexpressionevalcontextbean-sprint = mo_json->value_string( iv_prefix && '/sprint' ).
     jiraexpressionevalcontextbean-board = mo_json->value_string( iv_prefix && '/board' ).
     jiraexpressionevalcontextbean-servicedesk = mo_json->value_string( iv_prefix && '/serviceDesk' ).
@@ -3908,7 +3908,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD parse_jiraexpressionevalreques.
     jiraexpressionevalrequestbean-expression = mo_json->value_string( iv_prefix && '/expression' ).
-* todo, object, context, 
+* todo, object, , context
   ENDMETHOD.
 
   METHOD parse_issuesjqlmetadatabean.
@@ -3916,28 +3916,28 @@ CLASS zcl_jira IMPLEMENTATION.
     issuesjqlmetadatabean-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
     issuesjqlmetadatabean-count = mo_json->value_string( iv_prefix && '/count' ).
     issuesjqlmetadatabean-totalcount = mo_json->value_string( iv_prefix && '/totalCount' ).
-* todo, object, validationwarnings, array
+* todo, object, array, validationwarnings
   ENDMETHOD.
 
   METHOD parse_issuesmetabean.
-* todo, object, jql, 
+* todo, object, , jql
   ENDMETHOD.
 
   METHOD parse_jiraexpressionevaluation.
-* todo, object, complexity, 
-* todo, object, issues, 
+* todo, object, , complexity
+* todo, object, , issues
   ENDMETHOD.
 
   METHOD parse_jiraexpressionresult.
-* todo, object, value, 
-* todo, object, meta, 
+* todo, object, , value
+* todo, object, , meta
   ENDMETHOD.
 
   METHOD parse_jiraexpressionscomplexit.
-* todo, object, steps, 
-* todo, object, expensiveoperations, 
-* todo, object, beans, 
-* todo, object, primitivevalues, 
+* todo, object, , steps
+* todo, object, , expensiveoperations
+* todo, object, , beans
+* todo, object, , primitivevalues
   ENDMETHOD.
 
   METHOD parse_jiraexpressionscomplex01.
@@ -3946,21 +3946,21 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_jiraexpressionforanalysi.
-* todo, object, expressions, array
-* todo, object, contextvariables, object
+* todo, object, array, expressions
+* todo, object, object, contextvariables
   ENDMETHOD.
 
   METHOD parse_jiraexpressionanalysis.
     jiraexpressionanalysis-expression = mo_json->value_string( iv_prefix && '/expression' ).
-* todo, object, errors, array
+* todo, object, array, errors
     jiraexpressionanalysis-valid = mo_json->value_boolean( iv_prefix && '/valid' ).
     jiraexpressionanalysis-type = mo_json->value_string( iv_prefix && '/type' ).
-* todo, object, complexity, 
+* todo, object, , complexity
   ENDMETHOD.
 
   METHOD parse_jiraexpressioncomplexity.
     jiraexpressioncomplexity-expensiveoperations = mo_json->value_string( iv_prefix && '/expensiveOperations' ).
-* todo, object, variables, object
+* todo, object, object, variables
   ENDMETHOD.
 
   METHOD parse_jiraexpressionvalidation.
@@ -3972,7 +3972,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_jiraexpressionsanalysis.
-* todo, object, results, array
+* todo, object, array, results
   ENDMETHOD.
 
   METHOD parse_healthcheckresult.
@@ -3984,14 +3984,14 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_serverinformation.
     serverinformation-baseurl = mo_json->value_string( iv_prefix && '/baseUrl' ).
     serverinformation-version = mo_json->value_string( iv_prefix && '/version' ).
-* todo, object, versionnumbers, array
+* todo, object, array, versionnumbers
     serverinformation-deploymenttype = mo_json->value_string( iv_prefix && '/deploymentType' ).
     serverinformation-buildnumber = mo_json->value_string( iv_prefix && '/buildNumber' ).
     serverinformation-builddate = mo_json->value_string( iv_prefix && '/buildDate' ).
     serverinformation-servertime = mo_json->value_string( iv_prefix && '/serverTime' ).
     serverinformation-scminfo = mo_json->value_string( iv_prefix && '/scmInfo' ).
     serverinformation-servertitle = mo_json->value_string( iv_prefix && '/serverTitle' ).
-* todo, object, healthchecks, array
+* todo, object, array, healthchecks
   ENDMETHOD.
 
   METHOD parse_usermigrationbean.
@@ -4012,7 +4012,7 @@ CLASS zcl_jira IMPLEMENTATION.
     deprecatedworkflow-lastmodifieduser = mo_json->value_string( iv_prefix && '/lastModifiedUser' ).
     deprecatedworkflow-lastmodifieduseraccountid = mo_json->value_string( iv_prefix && '/lastModifiedUserAccountId' ).
     deprecatedworkflow-steps = mo_json->value_string( iv_prefix && '/steps' ).
-* todo, object, scope, 
+* todo, object, , scope
     deprecatedworkflow-default = mo_json->value_boolean( iv_prefix && '/default' ).
   ENDMETHOD.
 
@@ -4030,12 +4030,12 @@ CLASS zcl_jira IMPLEMENTATION.
     configuration-issuelinkingenabled = mo_json->value_boolean( iv_prefix && '/issueLinkingEnabled' ).
     configuration-timetrackingenabled = mo_json->value_boolean( iv_prefix && '/timeTrackingEnabled' ).
     configuration-attachmentsenabled = mo_json->value_boolean( iv_prefix && '/attachmentsEnabled' ).
-* todo, object, timetrackingconfiguration, 
+* todo, object, , timetrackingconfiguration
   ENDMETHOD.
 
   METHOD parse_timetrackingconfiguratio.
-* todo, object, workinghoursperday, number
-* todo, object, workingdaysperweek, number
+* todo, object, number, workinghoursperday
+* todo, object, number, workingdaysperweek
     timetrackingconfiguration-timeformat = mo_json->value_string( iv_prefix && '/timeFormat' ).
     timetrackingconfiguration-defaultunit = mo_json->value_string( iv_prefix && '/defaultUnit' ).
   ENDMETHOD.
@@ -4049,7 +4049,7 @@ CLASS zcl_jira IMPLEMENTATION.
     applicationproperty-type = mo_json->value_string( iv_prefix && '/type' ).
     applicationproperty-defaultvalue = mo_json->value_string( iv_prefix && '/defaultValue' ).
     applicationproperty-example = mo_json->value_string( iv_prefix && '/example' ).
-* todo, object, allowedvalues, array
+* todo, object, array, allowedvalues
   ENDMETHOD.
 
   METHOD parse_simpleapplicationpropert.
@@ -4064,7 +4064,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanworkflowscheme-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanworkflowscheme-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanworkflowscheme-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_workflowscheme.
@@ -4072,20 +4072,20 @@ CLASS zcl_jira IMPLEMENTATION.
     workflowscheme-name = mo_json->value_string( iv_prefix && '/name' ).
     workflowscheme-description = mo_json->value_string( iv_prefix && '/description' ).
     workflowscheme-defaultworkflow = mo_json->value_string( iv_prefix && '/defaultWorkflow' ).
-* todo, object, issuetypemappings, object
+* todo, object, object, issuetypemappings
     workflowscheme-originaldefaultworkflow = mo_json->value_string( iv_prefix && '/originalDefaultWorkflow' ).
-* todo, object, originalissuetypemappings, object
+* todo, object, object, originalissuetypemappings
     workflowscheme-draft = mo_json->value_boolean( iv_prefix && '/draft' ).
-* todo, object, lastmodifieduser, 
+* todo, object, , lastmodifieduser
     workflowscheme-lastmodified = mo_json->value_string( iv_prefix && '/lastModified' ).
     workflowscheme-self = mo_json->value_string( iv_prefix && '/self' ).
     workflowscheme-updatedraftifneeded = mo_json->value_boolean( iv_prefix && '/updateDraftIfNeeded' ).
-* todo, object, issuetypes, object
+* todo, object, object, issuetypes
   ENDMETHOD.
 
   METHOD parse_issuetypesworkflowmappin.
     issuetypesworkflowmapping-workflow = mo_json->value_string( iv_prefix && '/workflow' ).
-* todo, object, issuetypes, array
+* todo, object, array, issuetypes
     issuetypesworkflowmapping-defaultmapping = mo_json->value_boolean( iv_prefix && '/defaultMapping' ).
     issuetypesworkflowmapping-updatedraftifneeded = mo_json->value_boolean( iv_prefix && '/updateDraftIfNeeded' ).
   ENDMETHOD.
@@ -4102,12 +4102,12 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_containerofworkflowschem.
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_workflowschemeassociatio.
-* todo, object, projectids, array
-* todo, object, workflowscheme, 
+* todo, object, array, projectids
+* todo, object, , workflowscheme
   ENDMETHOD.
 
   METHOD parse_workflowschemeprojectass.
@@ -4132,16 +4132,16 @@ CLASS zcl_jira IMPLEMENTATION.
     auditrecordbean-category = mo_json->value_string( iv_prefix && '/category' ).
     auditrecordbean-eventsource = mo_json->value_string( iv_prefix && '/eventSource' ).
     auditrecordbean-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, objectitem, 
-* todo, object, changedvalues, array
-* todo, object, associateditems, array
+* todo, object, , objectitem
+* todo, object, array, changedvalues
+* todo, object, array, associateditems
   ENDMETHOD.
 
   METHOD parse_auditrecords.
     auditrecords-offset = mo_json->value_string( iv_prefix && '/offset' ).
     auditrecords-limit = mo_json->value_string( iv_prefix && '/limit' ).
     auditrecords-total = mo_json->value_string( iv_prefix && '/total' ).
-* todo, object, records, array
+* todo, object, array, records
   ENDMETHOD.
 
   METHOD parse_changedvaluebean.
@@ -4151,11 +4151,11 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_permissionschemes.
-* todo, object, permissionschemes, array
+* todo, object, array, permissionschemes
   ENDMETHOD.
 
   METHOD parse_permissiongrants.
-* todo, object, permissions, array
+* todo, object, array, permissions
     permissiongrants-expand = mo_json->value_string( iv_prefix && '/expand' ).
   ENDMETHOD.
 
@@ -4172,7 +4172,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanworkflow-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanworkflow-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanworkflow-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_publishedworkflowid.
@@ -4187,30 +4187,30 @@ CLASS zcl_jira IMPLEMENTATION.
     transition-id = mo_json->value_string( iv_prefix && '/id' ).
     transition-name = mo_json->value_string( iv_prefix && '/name' ).
     transition-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, from, array
+* todo, object, array, from
     transition-to = mo_json->value_string( iv_prefix && '/to' ).
     transition-type = mo_json->value_string( iv_prefix && '/type' ).
-* todo, object, screen, 
-* todo, object, rules, 
+* todo, object, , screen
+* todo, object, , rules
   ENDMETHOD.
 
   METHOD parse_workflow.
-* todo, object, id, 
+* todo, object, , id
     workflow-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, transitions, array
-* todo, object, statuses, array
+* todo, object, array, transitions
+* todo, object, array, statuses
   ENDMETHOD.
 
   METHOD parse_workflowrules.
-* todo, object, conditions, array
-* todo, object, validators, array
-* todo, object, postfunctions, array
+* todo, object, array, conditions
+* todo, object, array, validators
+* todo, object, array, postfunctions
   ENDMETHOD.
 
   METHOD parse_workflowstatus.
     workflowstatus-id = mo_json->value_string( iv_prefix && '/id' ).
     workflowstatus-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, properties, 
+* todo, object, , properties
   ENDMETHOD.
 
   METHOD parse_workflowstatusproperties.
@@ -4219,14 +4219,14 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD parse_workflowtransitionrule.
     workflowtransitionrule-type = mo_json->value_string( iv_prefix && '/type' ).
-* todo, object, configuration, 
+* todo, object, , configuration
   ENDMETHOD.
 
   METHOD parse_connectworkflowtransitio.
     connectworkflowtransitionrule-id = mo_json->value_string( iv_prefix && '/id' ).
     connectworkflowtransitionrule-key = mo_json->value_string( iv_prefix && '/key' ).
-* todo, object, configuration, 
-* todo, object, transition, 
+* todo, object, , configuration
+* todo, object, , transition
   ENDMETHOD.
 
   METHOD parse_pagebeanworkflowtransiti.
@@ -4236,7 +4236,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanworkflowtransitionrule-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanworkflowtransitionrule-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanworkflowtransitionrule-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_ruleconfiguration.
@@ -4254,24 +4254,24 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_workflowtransitionrules.
-* todo, object, workflowid, 
-* todo, object, postfunctions, array
-* todo, object, conditions, array
-* todo, object, validators, array
+* todo, object, , workflowid
+* todo, object, array, postfunctions
+* todo, object, array, conditions
+* todo, object, array, validators
   ENDMETHOD.
 
   METHOD parse_workflowtransitionrulesu.
-* todo, object, workflows, array
+* todo, object, array, workflows
   ENDMETHOD.
 
   METHOD parse_workflowtransitionrule01.
-* todo, object, workflowid, 
-* todo, object, ruleupdateerrors, object
-* todo, object, updateerrors, array
+* todo, object, , workflowid
+* todo, object, object, ruleupdateerrors
+* todo, object, array, updateerrors
   ENDMETHOD.
 
   METHOD parse_workflowtransitionrule02.
-* todo, object, updateresults, array
+* todo, object, array, updateresults
   ENDMETHOD.
 
   METHOD parse_locale.
@@ -4298,28 +4298,28 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_failedwebhooks.
-* todo, object, values, array
+* todo, object, array, values
     failedwebhooks-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
     failedwebhooks-next = mo_json->value_string( iv_prefix && '/next' ).
   ENDMETHOD.
 
   METHOD parse_webhookdetails.
     webhookdetails-jqlfilter = mo_json->value_string( iv_prefix && '/jqlFilter' ).
-* todo, object, events, array
+* todo, object, array, events
   ENDMETHOD.
 
   METHOD parse_webhookregistrationdetai.
-* todo, object, webhooks, array
+* todo, object, array, webhooks
     webhookregistrationdetails-url = mo_json->value_string( iv_prefix && '/url' ).
   ENDMETHOD.
 
   METHOD parse_containerforregisteredwe.
-* todo, object, webhookregistrationresult, array
+* todo, object, array, webhookregistrationresult
   ENDMETHOD.
 
   METHOD parse_registeredwebhook.
     registeredwebhook-createdwebhookid = mo_json->value_string( iv_prefix && '/createdWebhookId' ).
-* todo, object, errors, array
+* todo, object, array, errors
   ENDMETHOD.
 
   METHOD parse_pagebeanwebhook.
@@ -4329,18 +4329,18 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeanwebhook-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeanwebhook-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeanwebhook-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_webhook.
     webhook-id = mo_json->value_string( iv_prefix && '/id' ).
     webhook-jqlfilter = mo_json->value_string( iv_prefix && '/jqlFilter' ).
-* todo, object, events, array
+* todo, object, array, events
     webhook-expirationdate = mo_json->value_string( iv_prefix && '/expirationDate' ).
   ENDMETHOD.
 
   METHOD parse_containerforwebhookids.
-* todo, object, webhookids, array
+* todo, object, array, webhookids
   ENDMETHOD.
 
   METHOD parse_webhooksexpirationdate.
@@ -4359,59 +4359,59 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeangroupdetails-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeangroupdetails-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeangroupdetails-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_issuesandjqlqueries.
-* todo, object, jqls, array
-* todo, object, issueids, array
+* todo, object, array, jqls
+* todo, object, array, issueids
   ENDMETHOD.
 
   METHOD parse_issuematches.
-* todo, object, matches, array
+* todo, object, array, matches
   ENDMETHOD.
 
   METHOD parse_issuematchesforjql.
-* todo, object, matchedissues, array
-* todo, object, errors, array
+* todo, object, array, matchedissues
+* todo, object, array, errors
   ENDMETHOD.
 
   METHOD parse_jqlqueriestoparse.
-* todo, object, queries, array
+* todo, object, array, queries
   ENDMETHOD.
 
   METHOD parse_compoundclause.
-* todo, object, clauses, array
+* todo, object, array, clauses
     compoundclause-operator = mo_json->value_string( iv_prefix && '/operator' ).
   ENDMETHOD.
 
   METHOD parse_fieldchangedclause.
-* todo, object, field, 
+* todo, object, , field
     fieldchangedclause-operator = mo_json->value_string( iv_prefix && '/operator' ).
-* todo, object, predicates, array
+* todo, object, array, predicates
   ENDMETHOD.
 
   METHOD parse_fieldvalueclause.
-* todo, object, field, 
+* todo, object, , field
     fieldvalueclause-operator = mo_json->value_string( iv_prefix && '/operator' ).
-* todo, object, operand, 
+* todo, object, , operand
   ENDMETHOD.
 
   METHOD parse_fieldwasclause.
-* todo, object, field, 
+* todo, object, , field
     fieldwasclause-operator = mo_json->value_string( iv_prefix && '/operator' ).
-* todo, object, operand, 
-* todo, object, predicates, array
+* todo, object, , operand
+* todo, object, array, predicates
   ENDMETHOD.
 
   METHOD parse_functionoperand.
     functionoperand-function = mo_json->value_string( iv_prefix && '/function' ).
-* todo, object, arguments, array
+* todo, object, array, arguments
   ENDMETHOD.
 
   METHOD parse_jqlquery.
-* todo, object, where, 
-* todo, object, orderby, 
+* todo, object, , where
+* todo, object, , orderby
   ENDMETHOD.
 
   METHOD parse_jqlqueryclause.
@@ -4422,12 +4422,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD parse_jqlqueryclausetimepredic.
     jqlqueryclausetimepredicate-operator = mo_json->value_string( iv_prefix && '/operator' ).
-* todo, object, operand, 
+* todo, object, , operand
   ENDMETHOD.
 
   METHOD parse_jqlqueryfield.
     jqlqueryfield-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, property, array
+* todo, object, array, property
   ENDMETHOD.
 
   METHOD parse_jqlqueryfieldentityprope.
@@ -4438,11 +4438,11 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_jqlqueryorderbyclause.
-* todo, object, fields, array
+* todo, object, array, fields
   ENDMETHOD.
 
   METHOD parse_jqlqueryorderbyclauseele.
-* todo, object, field, 
+* todo, object, , field
     jqlqueryorderbyclauseelement-direction = mo_json->value_string( iv_prefix && '/direction' ).
   ENDMETHOD.
 
@@ -4454,17 +4454,17 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_listoperand.
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_parsedjqlqueries.
-* todo, object, queries, array
+* todo, object, array, queries
   ENDMETHOD.
 
   METHOD parse_parsedjqlquery.
     parsedjqlquery-query = mo_json->value_string( iv_prefix && '/query' ).
-* todo, object, structure, 
-* todo, object, errors, array
+* todo, object, , structure
+* todo, object, array, errors
   ENDMETHOD.
 
   METHOD parse_valueoperand.
@@ -4476,18 +4476,18 @@ CLASS zcl_jira IMPLEMENTATION.
     eventnotification-id = mo_json->value_string( iv_prefix && '/id' ).
     eventnotification-notificationtype = mo_json->value_string( iv_prefix && '/notificationType' ).
     eventnotification-parameter = mo_json->value_string( iv_prefix && '/parameter' ).
-* todo, object, group, 
-* todo, object, field, 
+* todo, object, , group
+* todo, object, , field
     eventnotification-emailaddress = mo_json->value_string( iv_prefix && '/emailAddress' ).
-* todo, object, projectrole, 
-* todo, object, user, 
+* todo, object, , projectrole
+* todo, object, , user
   ENDMETHOD.
 
   METHOD parse_notificationevent.
     notificationevent-id = mo_json->value_string( iv_prefix && '/id' ).
     notificationevent-name = mo_json->value_string( iv_prefix && '/name' ).
     notificationevent-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, templateevent, 
+* todo, object, , templateevent
   ENDMETHOD.
 
   METHOD parse_notificationscheme.
@@ -4496,13 +4496,13 @@ CLASS zcl_jira IMPLEMENTATION.
     notificationscheme-self = mo_json->value_string( iv_prefix && '/self' ).
     notificationscheme-name = mo_json->value_string( iv_prefix && '/name' ).
     notificationscheme-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, notificationschemeevents, array
-* todo, object, scope, 
+* todo, object, array, notificationschemeevents
+* todo, object, , scope
   ENDMETHOD.
 
   METHOD parse_notificationschemeevent.
-* todo, object, event, 
-* todo, object, notifications, array
+* todo, object, , event
+* todo, object, array, notifications
   ENDMETHOD.
 
   METHOD parse_pagebeannotificationsche.
@@ -4512,7 +4512,7 @@ CLASS zcl_jira IMPLEMENTATION.
     pagebeannotificationscheme-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     pagebeannotificationscheme-total = mo_json->value_string( iv_prefix && '/total' ).
     pagebeannotificationscheme-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+* todo, object, array, values
   ENDMETHOD.
 
   METHOD parse_issuetypeinfo.
@@ -4523,14 +4523,14 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD parse_projectissuetypehierarch.
     projectissuetypehierarchy-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
-* todo, object, hierarchy, array
+* todo, object, array, hierarchy
   ENDMETHOD.
 
   METHOD parse_projectissuetypeshierarc.
     projectissuetypeshierarchyleve-entityid = mo_json->value_string( iv_prefix && '/entityId' ).
     projectissuetypeshierarchyleve-level = mo_json->value_string( iv_prefix && '/level' ).
     projectissuetypeshierarchyleve-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, issuetypes, array
+* todo, object, array, issuetypes
   ENDMETHOD.
 
   METHOD parse_operationmessage.
@@ -4543,7 +4543,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_connectmodules.
-* todo, object, modules, array
+* todo, object, array, modules
   ENDMETHOD.
 
   METHOD parse_connectmodule.
@@ -4551,6 +4551,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getapplicationproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/application-properties'.
     IF key IS SUPPLIED.
       mi_client->request->set_form_field( name = 'key' value = key ).
@@ -4571,6 +4572,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getadvancedsettings.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/application-properties/advanced-settings'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -4582,6 +4584,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setapplicationproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/application-properties/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'PUT' ).
@@ -4594,6 +4597,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallapplicationroles.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/applicationrole'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -4605,6 +4609,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getapplicationrole.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/applicationrole/{key}'.
     REPLACE ALL OCCURRENCES OF '{key}' IN lv_uri WITH key.
     mi_client->request->set_method( 'GET' ).
@@ -4617,6 +4622,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getattachmentmeta.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/attachment/meta'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -4628,6 +4634,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getattachment.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/attachment/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'GET' ).
@@ -4640,6 +4647,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~removeattachment.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/attachment/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'DELETE' ).
@@ -4652,6 +4660,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~expandattachmentforhumans.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/attachment/{id}/expand/human'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'GET' ).
@@ -4664,6 +4673,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~expandattachmentformachines.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/attachment/{id}/expand/raw'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'GET' ).
@@ -4676,6 +4686,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getauditrecords.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/auditing/record'.
     IF offset IS SUPPLIED.
       mi_client->request->set_form_field( name = 'offset' value = offset ).
@@ -4702,6 +4713,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallsystemavatars.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/avatar/{type}/system'.
     REPLACE ALL OCCURRENCES OF '{type}' IN lv_uri WITH type.
     mi_client->request->set_method( 'GET' ).
@@ -4714,6 +4726,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getcommentsbyids.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/comment/list'.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
@@ -4728,6 +4741,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getcommentpropertykeys.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/comment/{commentId}/properties'.
     REPLACE ALL OCCURRENCES OF '{commentId}' IN lv_uri WITH commentid.
     mi_client->request->set_method( 'GET' ).
@@ -4740,6 +4754,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getcommentproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/comment/{commentId}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{commentId}' IN lv_uri WITH commentid.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
@@ -4753,6 +4768,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setcommentproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/comment/{commentId}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{commentId}' IN lv_uri WITH commentid.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
@@ -4766,6 +4782,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletecommentproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/comment/{commentId}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{commentId}' IN lv_uri WITH commentid.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
@@ -4779,6 +4796,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createcomponent.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/component'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -4790,6 +4808,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getcomponent.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/component/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'GET' ).
@@ -4802,6 +4821,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updatecomponent.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/component/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'PUT' ).
@@ -4814,6 +4834,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletecomponent.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/component/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     IF moveissuesto IS SUPPLIED.
@@ -4829,6 +4850,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getcomponentrelatedissues.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/component/{id}/relatedIssueCounts'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'GET' ).
@@ -4841,6 +4863,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getconfiguration.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/configuration'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -4852,6 +4875,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getselectedtimetrackingimpleme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/configuration/timetracking'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -4863,6 +4887,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~selecttimetrackingimplementati.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/configuration/timetracking'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -4874,6 +4899,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getavailabletimetrackingimplem.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/configuration/timetracking/list'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -4885,6 +4911,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getsharedtimetrackingconfigura.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/configuration/timetracking/options'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -4896,6 +4923,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setsharedtimetrackingconfigura.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/configuration/timetracking/options'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -4907,8 +4935,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getoptionsforfield.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/customField/{fieldId}/option'.
-    REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
+    lv_temp = fieldid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH lv_temp.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
     ENDIF.
@@ -4925,8 +4956,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updatecustomfieldoptions.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/customField/{fieldId}/option'.
-    REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
+    lv_temp = fieldid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -4937,8 +4971,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createcustomfieldoptions.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/customField/{fieldId}/option'.
-    REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
+    lv_temp = fieldid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -4949,6 +4986,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getcustomfieldoption.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/customFieldOption/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'GET' ).
@@ -4961,6 +4999,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getalldashboards.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/dashboard'.
     IF filter IS SUPPLIED.
       mi_client->request->set_form_field( name = 'filter' value = filter ).
@@ -4981,6 +5020,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createdashboard.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/dashboard'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -4992,6 +5032,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getdashboardspaginated.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/dashboard/search'.
     IF dashboardname IS SUPPLIED.
       mi_client->request->set_form_field( name = 'dashboardName' value = dashboardname ).
@@ -5030,6 +5071,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getdashboarditempropertykeys.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/dashboard/{dashboardId}/items/{itemId}/properties'.
     REPLACE ALL OCCURRENCES OF '{dashboardId}' IN lv_uri WITH dashboardid.
     REPLACE ALL OCCURRENCES OF '{itemId}' IN lv_uri WITH itemid.
@@ -5043,6 +5085,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getdashboarditemproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/dashboard/{dashboardId}/items/{itemId}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{dashboardId}' IN lv_uri WITH dashboardid.
     REPLACE ALL OCCURRENCES OF '{itemId}' IN lv_uri WITH itemid.
@@ -5057,6 +5100,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setdashboarditemproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/dashboard/{dashboardId}/items/{itemId}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{dashboardId}' IN lv_uri WITH dashboardid.
     REPLACE ALL OCCURRENCES OF '{itemId}' IN lv_uri WITH itemid.
@@ -5071,6 +5115,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletedashboarditemproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/dashboard/{dashboardId}/items/{itemId}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{dashboardId}' IN lv_uri WITH dashboardid.
     REPLACE ALL OCCURRENCES OF '{itemId}' IN lv_uri WITH itemid.
@@ -5085,6 +5130,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getdashboard.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/dashboard/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'GET' ).
@@ -5097,6 +5143,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updatedashboard.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/dashboard/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'PUT' ).
@@ -5109,6 +5156,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletedashboard.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/dashboard/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'DELETE' ).
@@ -5121,6 +5169,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~copydashboard.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/dashboard/{id}/copy'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'POST' ).
@@ -5133,6 +5182,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~analyseexpression.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/expression/analyse'.
     IF check IS SUPPLIED.
       mi_client->request->set_form_field( name = 'check' value = check ).
@@ -5147,6 +5197,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~evaluatejiraexpression.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/expression/eval'.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
@@ -5161,6 +5212,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getfields.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -5172,6 +5224,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createcustomfield.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -5183,6 +5236,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getfieldspaginated.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/search'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -5215,6 +5269,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getcontextsforfield.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/context'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
     IF isanyissuetype IS SUPPLIED.
@@ -5242,6 +5297,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createcustomfieldcontext.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/context'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
     mi_client->request->set_method( 'POST' ).
@@ -5254,6 +5310,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuetypemappingsforcontext.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/context/issueTypeMapping'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
     IF contextid IS SUPPLIED.
@@ -5275,6 +5332,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getcustomfieldcontextsforproje.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/context/mapping'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
     IF startat IS SUPPLIED.
@@ -5293,6 +5351,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getprojectcontextmapping.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/context/projectmapping'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
     IF contextid IS SUPPLIED.
@@ -5314,9 +5373,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updatecustomfieldcontext.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/context/{contextId}'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
-    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH contextid.
+    lv_temp = contextid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5327,9 +5389,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletecustomfieldcontext.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/context/{contextId}'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
-    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH contextid.
+    lv_temp = contextid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5340,9 +5405,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addissuetypestocontext.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/context/{contextId}/issuetype'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
-    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH contextid.
+    lv_temp = contextid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5353,9 +5421,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~removeissuetypesfromcontext.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/context/{contextId}/issuetype/remove'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
-    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH contextid.
+    lv_temp = contextid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5366,9 +5437,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getoptionsforcontext.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/context/{contextId}/option'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
-    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH contextid.
+    lv_temp = contextid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH lv_temp.
     IF optionid IS SUPPLIED.
       mi_client->request->set_form_field( name = 'optionId' value = optionid ).
     ENDIF.
@@ -5391,9 +5465,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updatecustomfieldoption.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/context/{contextId}/option'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
-    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH contextid.
+    lv_temp = contextid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5404,9 +5481,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createcustomfieldoption.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/context/{contextId}/option'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
-    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH contextid.
+    lv_temp = contextid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5417,9 +5497,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~reordercustomfieldoptions.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/context/{contextId}/option/move'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
-    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH contextid.
+    lv_temp = contextid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5430,10 +5513,15 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletecustomfieldoption.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/context/{contextId}/option/{optionId}'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
-    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH contextid.
-    REPLACE ALL OCCURRENCES OF '{optionId}' IN lv_uri WITH optionid.
+    lv_temp = contextid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH lv_temp.
+    lv_temp = optionid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{optionId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5444,9 +5532,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~assignprojectstocustomfieldcon.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/context/{contextId}/project'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
-    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH contextid.
+    lv_temp = contextid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5457,9 +5548,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~removecustomfieldcontextfrompr.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/context/{contextId}/project/remove'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
-    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH contextid.
+    lv_temp = contextid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{contextId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5470,6 +5564,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getcontextsforfielddeprecated.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/contexts'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
     IF startat IS SUPPLIED.
@@ -5488,6 +5583,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getscreensforfield.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldId}/screens'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
     IF startat IS SUPPLIED.
@@ -5506,6 +5602,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallissuefieldoptions.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldKey}/option'.
     REPLACE ALL OCCURRENCES OF '{fieldKey}' IN lv_uri WITH fieldkey.
     IF startat IS SUPPLIED.
@@ -5524,6 +5621,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createissuefieldoption.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldKey}/option'.
     REPLACE ALL OCCURRENCES OF '{fieldKey}' IN lv_uri WITH fieldkey.
     mi_client->request->set_method( 'POST' ).
@@ -5536,6 +5634,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getselectableissuefieldoptions.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldKey}/option/suggestions/edit'.
     REPLACE ALL OCCURRENCES OF '{fieldKey}' IN lv_uri WITH fieldkey.
     IF startat IS SUPPLIED.
@@ -5557,6 +5656,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getvisibleissuefieldoptions.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldKey}/option/suggestions/search'.
     REPLACE ALL OCCURRENCES OF '{fieldKey}' IN lv_uri WITH fieldkey.
     IF startat IS SUPPLIED.
@@ -5578,9 +5678,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuefieldoption.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldKey}/option/{optionId}'.
     REPLACE ALL OCCURRENCES OF '{fieldKey}' IN lv_uri WITH fieldkey.
-    REPLACE ALL OCCURRENCES OF '{optionId}' IN lv_uri WITH optionid.
+    lv_temp = optionid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{optionId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5591,9 +5694,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateissuefieldoption.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldKey}/option/{optionId}'.
     REPLACE ALL OCCURRENCES OF '{fieldKey}' IN lv_uri WITH fieldkey.
-    REPLACE ALL OCCURRENCES OF '{optionId}' IN lv_uri WITH optionid.
+    lv_temp = optionid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{optionId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5604,9 +5710,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteissuefieldoption.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldKey}/option/{optionId}'.
     REPLACE ALL OCCURRENCES OF '{fieldKey}' IN lv_uri WITH fieldkey.
-    REPLACE ALL OCCURRENCES OF '{optionId}' IN lv_uri WITH optionid.
+    lv_temp = optionid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{optionId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5617,9 +5726,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~replaceissuefieldoption.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/field/{fieldKey}/option/{optionId}/issue'.
     REPLACE ALL OCCURRENCES OF '{fieldKey}' IN lv_uri WITH fieldkey.
-    REPLACE ALL OCCURRENCES OF '{optionId}' IN lv_uri WITH optionid.
+    lv_temp = optionid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{optionId}' IN lv_uri WITH lv_temp.
     IF replacewith IS SUPPLIED.
       mi_client->request->set_form_field( name = 'replaceWith' value = replacewith ).
     ENDIF.
@@ -5636,6 +5748,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallfieldconfigurations.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/fieldconfiguration'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -5659,8 +5772,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getfieldconfigurationitems.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/fieldconfiguration/{id}/fields'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
     ENDIF.
@@ -5677,6 +5793,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallfieldconfigurationscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/fieldconfigurationscheme'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -5697,6 +5814,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getfieldconfigurationschememap.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/fieldconfigurationscheme/mapping'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -5717,6 +5835,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getfieldconfigurationschemepro.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/fieldconfigurationscheme/project'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -5735,6 +5854,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~assignfieldconfigurationscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/fieldconfigurationscheme/project'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -5746,6 +5866,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getfilters.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter'.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
@@ -5760,6 +5881,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createfilter.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter'.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
@@ -5774,6 +5896,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getdefaultsharescope.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter/defaultShareScope'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -5785,6 +5908,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setdefaultsharescope.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter/defaultShareScope'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -5796,6 +5920,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getfavouritefilters.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter/favourite'.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
@@ -5810,6 +5935,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getmyfilters.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter/my'.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
@@ -5827,6 +5953,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getfilterspaginated.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter/search'.
     IF filtername IS SUPPLIED.
       mi_client->request->set_form_field( name = 'filterName' value = filtername ).
@@ -5868,8 +5995,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getfilter.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter/{id}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
     ENDIF.
@@ -5883,8 +6013,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updatefilter.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter/{id}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
     ENDIF.
@@ -5898,8 +6031,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletefilter.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter/{id}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5910,8 +6046,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getcolumns.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter/{id}/columns'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5922,8 +6061,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setcolumns.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter/{id}/columns'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5934,8 +6076,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~resetcolumns.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter/{id}/columns'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5946,8 +6091,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setfavouriteforfilter.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter/{id}/favourite'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
     ENDIF.
@@ -5961,8 +6109,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletefavouriteforfilter.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter/{id}/favourite'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
     ENDIF.
@@ -5976,8 +6127,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getsharepermissions.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter/{id}/permission'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -5988,8 +6142,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addsharepermission.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter/{id}/permission'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -6000,9 +6157,14 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getsharepermission.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter/{id}/permission/{permissionId}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
-    REPLACE ALL OCCURRENCES OF '{permissionId}' IN lv_uri WITH permissionid.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
+    lv_temp = permissionid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{permissionId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -6013,9 +6175,14 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletesharepermission.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/filter/{id}/permission/{permissionId}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
-    REPLACE ALL OCCURRENCES OF '{permissionId}' IN lv_uri WITH permissionid.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
+    lv_temp = permissionid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{permissionId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -6026,6 +6193,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getgroup.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/group'.
     mi_client->request->set_form_field( name = 'groupname' value = groupname ).
     IF expand IS SUPPLIED.
@@ -6041,6 +6209,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~creategroup.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/group'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -6052,6 +6221,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~removegroup.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/group'.
     mi_client->request->set_form_field( name = 'groupname' value = groupname ).
     IF swapgroup IS SUPPLIED.
@@ -6067,6 +6237,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~bulkgetgroups.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/group/bulk'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -6090,6 +6261,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getusersfromgroup.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/group/member'.
     mi_client->request->set_form_field( name = 'groupname' value = groupname ).
     IF includeinactiveusers IS SUPPLIED.
@@ -6111,6 +6283,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addusertogroup.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/group/user'.
     mi_client->request->set_form_field( name = 'groupname' value = groupname ).
     mi_client->request->set_method( 'POST' ).
@@ -6123,6 +6296,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~removeuserfromgroup.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/group/user'.
     mi_client->request->set_form_field( name = 'groupname' value = groupname ).
     IF username IS SUPPLIED.
@@ -6139,6 +6313,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~findgroups.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/groups/picker'.
     IF accountid IS SUPPLIED.
       mi_client->request->set_form_field( name = 'accountId' value = accountid ).
@@ -6165,6 +6340,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~findusersandgroups.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/groupuserpicker'.
     mi_client->request->set_form_field( name = 'query' value = query ).
     IF maxresults IS SUPPLIED.
@@ -6201,6 +6377,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createissue.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue'.
     IF updatehistory IS SUPPLIED.
       mi_client->request->set_form_field( name = 'updateHistory' value = updatehistory ).
@@ -6215,6 +6392,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createissues.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/bulk'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -6226,6 +6404,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getcreateissuemeta.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/createmeta'.
     IF projectids IS SUPPLIED.
       mi_client->request->set_form_field( name = 'projectIds' value = projectids ).
@@ -6252,6 +6431,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuepickerresource.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/picker'.
     IF query IS SUPPLIED.
       mi_client->request->set_form_field( name = 'query' value = query ).
@@ -6281,6 +6461,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~bulksetissuesproperties.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/properties'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -6292,6 +6473,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~bulksetissueproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
     mi_client->request->set_method( 'PUT' ).
@@ -6304,6 +6486,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~bulkdeleteissueproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
     mi_client->request->set_method( 'DELETE' ).
@@ -6316,6 +6499,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissue.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     IF fields IS SUPPLIED.
@@ -6343,6 +6527,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~editissue.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     IF notifyusers IS SUPPLIED.
@@ -6364,6 +6549,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteissue.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     IF deletesubtasks IS SUPPLIED.
@@ -6379,6 +6565,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~assignissue.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/assignee'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     mi_client->request->set_method( 'PUT' ).
@@ -6391,6 +6578,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addattachment.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/attachments'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     mi_client->request->set_method( 'POST' ).
@@ -6403,6 +6591,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getchangelogs.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/changelog'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     IF startat IS SUPPLIED.
@@ -6421,6 +6610,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getcomments.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/comment'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     IF startat IS SUPPLIED.
@@ -6445,6 +6635,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addcomment.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/comment'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     IF expand IS SUPPLIED.
@@ -6460,6 +6651,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getcomment.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/comment/{id}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
@@ -6476,6 +6668,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updatecomment.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/comment/{id}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
@@ -6492,6 +6685,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletecomment.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/comment/{id}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
@@ -6505,6 +6699,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~geteditissuemeta.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/editmeta'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     IF overridescreensecurity IS SUPPLIED.
@@ -6523,6 +6718,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~notify.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/notify'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     mi_client->request->set_method( 'POST' ).
@@ -6535,6 +6731,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuepropertykeys.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/properties'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     mi_client->request->set_method( 'GET' ).
@@ -6547,6 +6744,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissueproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
@@ -6560,6 +6758,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setissueproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
@@ -6573,6 +6772,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteissueproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
@@ -6586,6 +6786,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getremoteissuelinks.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/remotelink'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     IF globalid IS SUPPLIED.
@@ -6601,6 +6802,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createorupdateremoteissuelink.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/remotelink'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     mi_client->request->set_method( 'POST' ).
@@ -6613,6 +6815,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteremoteissuelinkbyglobali.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/remotelink'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     mi_client->request->set_form_field( name = 'globalId' value = globalid ).
@@ -6626,6 +6829,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getremoteissuelinkbyid.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/remotelink/{linkId}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     REPLACE ALL OCCURRENCES OF '{linkId}' IN lv_uri WITH linkid.
@@ -6639,6 +6843,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateremoteissuelink.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/remotelink/{linkId}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     REPLACE ALL OCCURRENCES OF '{linkId}' IN lv_uri WITH linkid.
@@ -6652,6 +6857,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteremoteissuelinkbyid.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/remotelink/{linkId}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     REPLACE ALL OCCURRENCES OF '{linkId}' IN lv_uri WITH linkid.
@@ -6665,6 +6871,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~gettransitions.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/transitions'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     IF expand IS SUPPLIED.
@@ -6692,6 +6899,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~dotransition.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/transitions'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     mi_client->request->set_method( 'POST' ).
@@ -6704,6 +6912,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getvotes.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/votes'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     mi_client->request->set_method( 'GET' ).
@@ -6716,6 +6925,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addvote.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/votes'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     mi_client->request->set_method( 'POST' ).
@@ -6728,6 +6938,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~removevote.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/votes'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     mi_client->request->set_method( 'DELETE' ).
@@ -6740,6 +6951,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuewatchers.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/watchers'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     mi_client->request->set_method( 'GET' ).
@@ -6752,6 +6964,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addwatcher.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/watchers'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     mi_client->request->set_method( 'POST' ).
@@ -6764,6 +6977,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~removewatcher.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/watchers'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     IF username IS SUPPLIED.
@@ -6782,6 +6996,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissueworklog.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/worklog'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     IF startat IS SUPPLIED.
@@ -6806,6 +7021,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addworklog.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/worklog'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     IF notifyusers IS SUPPLIED.
@@ -6836,6 +7052,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getworklog.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/worklog/{id}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
@@ -6852,6 +7069,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateworklog.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/worklog/{id}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
@@ -6880,6 +7098,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteworklog.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/worklog/{id}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
@@ -6908,6 +7127,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getworklogpropertykeys.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/worklog/{worklogId}/properties'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     REPLACE ALL OCCURRENCES OF '{worklogId}' IN lv_uri WITH worklogid.
@@ -6921,6 +7141,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getworklogproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/worklog/{worklogId}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     REPLACE ALL OCCURRENCES OF '{worklogId}' IN lv_uri WITH worklogid.
@@ -6935,6 +7156,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setworklogproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/worklog/{worklogId}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     REPLACE ALL OCCURRENCES OF '{worklogId}' IN lv_uri WITH worklogid.
@@ -6949,6 +7171,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteworklogproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issue/{issueIdOrKey}/worklog/{worklogId}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{issueIdOrKey}' IN lv_uri WITH issueidorkey.
     REPLACE ALL OCCURRENCES OF '{worklogId}' IN lv_uri WITH worklogid.
@@ -6963,6 +7186,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~linkissues.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issueLink'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -6974,6 +7198,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuelink.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issueLink/{linkId}'.
     REPLACE ALL OCCURRENCES OF '{linkId}' IN lv_uri WITH linkid.
     mi_client->request->set_method( 'GET' ).
@@ -6986,6 +7211,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteissuelink.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issueLink/{linkId}'.
     REPLACE ALL OCCURRENCES OF '{linkId}' IN lv_uri WITH linkid.
     mi_client->request->set_method( 'DELETE' ).
@@ -6998,6 +7224,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuelinktypes.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issueLinkType'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7009,6 +7236,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createissuelinktype.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issueLinkType'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7020,6 +7248,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuelinktype.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issueLinkType/{issueLinkTypeId}'.
     REPLACE ALL OCCURRENCES OF '{issueLinkTypeId}' IN lv_uri WITH issuelinktypeid.
     mi_client->request->set_method( 'GET' ).
@@ -7032,6 +7261,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateissuelinktype.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issueLinkType/{issueLinkTypeId}'.
     REPLACE ALL OCCURRENCES OF '{issueLinkTypeId}' IN lv_uri WITH issuelinktypeid.
     mi_client->request->set_method( 'PUT' ).
@@ -7044,6 +7274,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteissuelinktype.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issueLinkType/{issueLinkTypeId}'.
     REPLACE ALL OCCURRENCES OF '{issueLinkTypeId}' IN lv_uri WITH issuelinktypeid.
     mi_client->request->set_method( 'DELETE' ).
@@ -7056,6 +7287,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuesecurityschemes.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuesecurityschemes'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7067,8 +7299,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuesecurityscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuesecurityschemes/{id}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7079,8 +7314,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuesecuritylevelmembers.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuesecurityschemes/{issueSecuritySchemeId}/members'.
-    REPLACE ALL OCCURRENCES OF '{issueSecuritySchemeId}' IN lv_uri WITH issuesecurityschemeid.
+    lv_temp = issuesecurityschemeid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{issueSecuritySchemeId}' IN lv_uri WITH lv_temp.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
     ENDIF.
@@ -7103,6 +7341,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuealltypes.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetype'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7114,6 +7353,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createissuetype.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetype'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7125,6 +7365,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuetype.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetype/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'GET' ).
@@ -7137,6 +7378,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateissuetype.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetype/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'PUT' ).
@@ -7149,6 +7391,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteissuetype.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetype/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     IF alternativeissuetypeid IS SUPPLIED.
@@ -7164,6 +7407,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getalternativeissuetypes.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetype/{id}/alternatives'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'GET' ).
@@ -7176,6 +7420,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createissuetypeavatar.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetype/{id}/avatar2'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     IF x IS SUPPLIED.
@@ -7195,6 +7440,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuetypepropertykeys.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetype/{issueTypeId}/properties'.
     REPLACE ALL OCCURRENCES OF '{issueTypeId}' IN lv_uri WITH issuetypeid.
     mi_client->request->set_method( 'GET' ).
@@ -7207,6 +7453,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuetypeproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetype/{issueTypeId}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{issueTypeId}' IN lv_uri WITH issuetypeid.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
@@ -7220,6 +7467,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setissuetypeproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetype/{issueTypeId}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{issueTypeId}' IN lv_uri WITH issuetypeid.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
@@ -7233,6 +7481,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteissuetypeproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetype/{issueTypeId}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{issueTypeId}' IN lv_uri WITH issuetypeid.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
@@ -7246,6 +7495,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallissuetypeschemes.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescheme'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -7266,6 +7516,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createissuetypescheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescheme'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7277,6 +7528,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuetypeschemesmapping.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescheme/mapping'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -7297,6 +7549,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuetypeschemeforprojects.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescheme/project'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -7315,6 +7568,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~assignissuetypeschemetoproject.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescheme/project'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7326,8 +7580,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateissuetypescheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescheme/{issueTypeSchemeId}'.
-    REPLACE ALL OCCURRENCES OF '{issueTypeSchemeId}' IN lv_uri WITH issuetypeschemeid.
+    lv_temp = issuetypeschemeid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{issueTypeSchemeId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7338,8 +7595,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteissuetypescheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescheme/{issueTypeSchemeId}'.
-    REPLACE ALL OCCURRENCES OF '{issueTypeSchemeId}' IN lv_uri WITH issuetypeschemeid.
+    lv_temp = issuetypeschemeid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{issueTypeSchemeId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7350,8 +7610,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addissuetypestoissuetypescheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescheme/{issueTypeSchemeId}/issuetype'.
-    REPLACE ALL OCCURRENCES OF '{issueTypeSchemeId}' IN lv_uri WITH issuetypeschemeid.
+    lv_temp = issuetypeschemeid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{issueTypeSchemeId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7362,8 +7625,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~reorderissuetypesinissuetypesc.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescheme/{issueTypeSchemeId}/issuetype/move'.
-    REPLACE ALL OCCURRENCES OF '{issueTypeSchemeId}' IN lv_uri WITH issuetypeschemeid.
+    lv_temp = issuetypeschemeid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{issueTypeSchemeId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7374,9 +7640,14 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~removeissuetypefromissuetypesc.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescheme/{issueTypeSchemeId}/issuetype/{issueTypeId}'.
-    REPLACE ALL OCCURRENCES OF '{issueTypeSchemeId}' IN lv_uri WITH issuetypeschemeid.
-    REPLACE ALL OCCURRENCES OF '{issueTypeId}' IN lv_uri WITH issuetypeid.
+    lv_temp = issuetypeschemeid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{issueTypeSchemeId}' IN lv_uri WITH lv_temp.
+    lv_temp = issuetypeid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{issueTypeId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7387,6 +7658,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuetypescreenschemes.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescreenscheme'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -7407,6 +7679,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createissuetypescreenscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescreenscheme'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7418,6 +7691,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuetypescreenschememappin.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescreenscheme/mapping'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -7438,6 +7712,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuetypescreenschemeprojec.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescreenscheme/project'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -7456,6 +7731,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~assignissuetypescreenschemetop.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescreenscheme/project'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7467,6 +7743,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateissuetypescreenscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescreenscheme/{issueTypeScreenSchemeId}'.
     REPLACE ALL OCCURRENCES OF '{issueTypeScreenSchemeId}' IN lv_uri WITH issuetypescreenschemeid.
     mi_client->request->set_method( 'PUT' ).
@@ -7479,6 +7756,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteissuetypescreenscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescreenscheme/{issueTypeScreenSchemeId}'.
     REPLACE ALL OCCURRENCES OF '{issueTypeScreenSchemeId}' IN lv_uri WITH issuetypescreenschemeid.
     mi_client->request->set_method( 'DELETE' ).
@@ -7491,6 +7769,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~appendmappingsforissuetypescre.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescreenscheme/{issueTypeScreenSchemeId}/mapping'.
     REPLACE ALL OCCURRENCES OF '{issueTypeScreenSchemeId}' IN lv_uri WITH issuetypescreenschemeid.
     mi_client->request->set_method( 'PUT' ).
@@ -7503,6 +7782,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updatedefaultscreenscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescreenscheme/{issueTypeScreenSchemeId}/mapping/default'.
     REPLACE ALL OCCURRENCES OF '{issueTypeScreenSchemeId}' IN lv_uri WITH issuetypescreenschemeid.
     mi_client->request->set_method( 'PUT' ).
@@ -7515,6 +7795,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~removemappingsfromissuetypescr.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/issuetypescreenscheme/{issueTypeScreenSchemeId}/mapping/remove'.
     REPLACE ALL OCCURRENCES OF '{issueTypeScreenSchemeId}' IN lv_uri WITH issuetypescreenschemeid.
     mi_client->request->set_method( 'POST' ).
@@ -7527,6 +7808,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getautocomplete.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/jql/autocompletedata'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7538,6 +7820,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getfieldautocompleteforqueryst.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/jql/autocompletedata/suggestions'.
     IF fieldname IS SUPPLIED.
       mi_client->request->set_form_field( name = 'fieldName' value = fieldname ).
@@ -7561,6 +7844,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~matchissues.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/jql/match'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7572,6 +7856,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~parsejqlqueries.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/jql/parse'.
     IF validation IS SUPPLIED.
       mi_client->request->set_form_field( name = 'validation' value = validation ).
@@ -7586,6 +7871,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~migratequeries.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/jql/pdcleaner'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7597,6 +7883,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getalllabels.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/label'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -7614,6 +7901,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getmypermissions.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/mypermissions'.
     IF projectkey IS SUPPLIED.
       mi_client->request->set_form_field( name = 'projectKey' value = projectkey ).
@@ -7646,6 +7934,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getpreference.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/mypreferences'.
     mi_client->request->set_form_field( name = 'key' value = key ).
     mi_client->request->set_method( 'GET' ).
@@ -7658,6 +7947,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setpreference.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/mypreferences'.
     mi_client->request->set_form_field( name = 'key' value = key ).
     mi_client->request->set_method( 'PUT' ).
@@ -7670,6 +7960,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~removepreference.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/mypreferences'.
     mi_client->request->set_form_field( name = 'key' value = key ).
     mi_client->request->set_method( 'DELETE' ).
@@ -7682,6 +7973,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getlocale.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/mypreferences/locale'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7693,6 +7985,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setlocale.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/mypreferences/locale'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7704,6 +7997,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletelocale.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/mypreferences/locale'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7715,6 +8009,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getcurrentuser.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/myself'.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
@@ -7729,6 +8024,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getnotificationschemes.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/notificationscheme'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -7749,8 +8045,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getnotificationscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/notificationscheme/{id}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
     ENDIF.
@@ -7764,6 +8063,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallpermissions.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/permissions'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7775,6 +8075,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getbulkpermissions.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/permissions/check'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7786,6 +8087,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getpermittedprojects.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/permissions/project'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7797,6 +8099,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallpermissionschemes.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/permissionscheme'.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
@@ -7811,6 +8114,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createpermissionscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/permissionscheme'.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
@@ -7825,8 +8129,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getpermissionscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/permissionscheme/{schemeId}'.
-    REPLACE ALL OCCURRENCES OF '{schemeId}' IN lv_uri WITH schemeid.
+    lv_temp = schemeid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{schemeId}' IN lv_uri WITH lv_temp.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
     ENDIF.
@@ -7840,8 +8147,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updatepermissionscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/permissionscheme/{schemeId}'.
-    REPLACE ALL OCCURRENCES OF '{schemeId}' IN lv_uri WITH schemeid.
+    lv_temp = schemeid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{schemeId}' IN lv_uri WITH lv_temp.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
     ENDIF.
@@ -7855,8 +8165,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletepermissionscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/permissionscheme/{schemeId}'.
-    REPLACE ALL OCCURRENCES OF '{schemeId}' IN lv_uri WITH schemeid.
+    lv_temp = schemeid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{schemeId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7867,8 +8180,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getpermissionschemegrants.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/permissionscheme/{schemeId}/permission'.
-    REPLACE ALL OCCURRENCES OF '{schemeId}' IN lv_uri WITH schemeid.
+    lv_temp = schemeid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{schemeId}' IN lv_uri WITH lv_temp.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
     ENDIF.
@@ -7882,8 +8198,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createpermissiongrant.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/permissionscheme/{schemeId}/permission'.
-    REPLACE ALL OCCURRENCES OF '{schemeId}' IN lv_uri WITH schemeid.
+    lv_temp = schemeid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{schemeId}' IN lv_uri WITH lv_temp.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
     ENDIF.
@@ -7897,9 +8216,14 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getpermissionschemegrant.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/permissionscheme/{schemeId}/permission/{permissionId}'.
-    REPLACE ALL OCCURRENCES OF '{schemeId}' IN lv_uri WITH schemeid.
-    REPLACE ALL OCCURRENCES OF '{permissionId}' IN lv_uri WITH permissionid.
+    lv_temp = schemeid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{schemeId}' IN lv_uri WITH lv_temp.
+    lv_temp = permissionid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{permissionId}' IN lv_uri WITH lv_temp.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
     ENDIF.
@@ -7913,9 +8237,14 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletepermissionschemeentity.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/permissionscheme/{schemeId}/permission/{permissionId}'.
-    REPLACE ALL OCCURRENCES OF '{schemeId}' IN lv_uri WITH schemeid.
-    REPLACE ALL OCCURRENCES OF '{permissionId}' IN lv_uri WITH permissionid.
+    lv_temp = schemeid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{schemeId}' IN lv_uri WITH lv_temp.
+    lv_temp = permissionid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{permissionId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7926,6 +8255,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getpriorities.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/priority'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7937,6 +8267,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getpriority.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/priority/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'GET' ).
@@ -7949,6 +8280,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallprojects.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project'.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
@@ -7969,6 +8301,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createproject.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7980,6 +8313,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~searchprojects.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/search'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -8024,6 +8358,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallprojecttypes.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/type'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -8035,6 +8370,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallaccessibleprojecttypes.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/type/accessible'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -8046,6 +8382,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getprojecttypebykey.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/type/{projectTypeKey}'.
     REPLACE ALL OCCURRENCES OF '{projectTypeKey}' IN lv_uri WITH projecttypekey.
     mi_client->request->set_method( 'GET' ).
@@ -8058,6 +8395,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getaccessibleprojecttypebykey.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/type/{projectTypeKey}/accessible'.
     REPLACE ALL OCCURRENCES OF '{projectTypeKey}' IN lv_uri WITH projecttypekey.
     mi_client->request->set_method( 'GET' ).
@@ -8070,6 +8408,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getproject.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     IF expand IS SUPPLIED.
@@ -8088,6 +8427,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateproject.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     IF expand IS SUPPLIED.
@@ -8103,6 +8443,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteproject.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     IF enableundo IS SUPPLIED.
@@ -8118,6 +8459,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~archiveproject.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/archive'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     mi_client->request->set_method( 'POST' ).
@@ -8130,6 +8472,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateprojectavatar.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/avatar'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     mi_client->request->set_method( 'PUT' ).
@@ -8142,9 +8485,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteprojectavatar.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/avatar/{id}'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8155,6 +8501,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createprojectavatar.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/avatar2'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     IF x IS SUPPLIED.
@@ -8176,6 +8523,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallprojectavatars.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/avatars'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     mi_client->request->set_method( 'GET' ).
@@ -8188,6 +8536,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getprojectcomponentspaginated.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/component'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     IF startat IS SUPPLIED.
@@ -8212,6 +8561,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getprojectcomponents.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/components'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     mi_client->request->set_method( 'GET' ).
@@ -8224,6 +8574,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteprojectasynchronously.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/delete'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     mi_client->request->set_method( 'POST' ).
@@ -8236,6 +8587,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getprojectpropertykeys.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/properties'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     mi_client->request->set_method( 'GET' ).
@@ -8248,6 +8600,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getprojectproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
@@ -8261,6 +8614,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setprojectproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
@@ -8274,6 +8628,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteprojectproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
@@ -8287,6 +8642,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~restore.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/restore'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     mi_client->request->set_method( 'POST' ).
@@ -8299,6 +8655,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getprojectroles.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/role'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     mi_client->request->set_method( 'GET' ).
@@ -8311,9 +8668,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getprojectrole.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/role/{id}'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8324,9 +8684,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setactors.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/role/{id}'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8337,9 +8700,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addactorusers.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/role/{id}'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8350,9 +8716,12 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteactor.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/role/{id}'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     IF user IS SUPPLIED.
       mi_client->request->set_form_field( name = 'user' value = user ).
     ENDIF.
@@ -8369,6 +8738,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getprojectroledetails.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/roledetails'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     IF currentmember IS SUPPLIED.
@@ -8387,6 +8757,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallstatuses.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/statuses'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     mi_client->request->set_method( 'GET' ).
@@ -8399,6 +8770,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateprojecttype.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/type/{newProjectTypeKey}'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     REPLACE ALL OCCURRENCES OF '{newProjectTypeKey}' IN lv_uri WITH newprojecttypekey.
@@ -8412,6 +8784,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getprojectversionspaginated.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/version'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     IF startat IS SUPPLIED.
@@ -8442,6 +8815,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getprojectversions.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectIdOrKey}/versions'.
     REPLACE ALL OCCURRENCES OF '{projectIdOrKey}' IN lv_uri WITH projectidorkey.
     IF expand IS SUPPLIED.
@@ -8457,8 +8831,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getprojectemail.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectId}/email'.
-    REPLACE ALL OCCURRENCES OF '{projectId}' IN lv_uri WITH projectid.
+    lv_temp = projectid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{projectId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8469,8 +8846,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateprojectemail.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectId}/email'.
-    REPLACE ALL OCCURRENCES OF '{projectId}' IN lv_uri WITH projectid.
+    lv_temp = projectid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{projectId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8481,8 +8861,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~gethierarchy.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectId}/hierarchy'.
-    REPLACE ALL OCCURRENCES OF '{projectId}' IN lv_uri WITH projectid.
+    lv_temp = projectid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{projectId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8493,6 +8876,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getprojectissuesecurityscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectKeyOrId}/issuesecuritylevelscheme'.
     REPLACE ALL OCCURRENCES OF '{projectKeyOrId}' IN lv_uri WITH projectkeyorid.
     mi_client->request->set_method( 'GET' ).
@@ -8505,6 +8889,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getnotificationschemeforprojec.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectKeyOrId}/notificationscheme'.
     REPLACE ALL OCCURRENCES OF '{projectKeyOrId}' IN lv_uri WITH projectkeyorid.
     IF expand IS SUPPLIED.
@@ -8520,6 +8905,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getassignedpermissionscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectKeyOrId}/permissionscheme'.
     REPLACE ALL OCCURRENCES OF '{projectKeyOrId}' IN lv_uri WITH projectkeyorid.
     IF expand IS SUPPLIED.
@@ -8535,6 +8921,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~assignpermissionscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectKeyOrId}/permissionscheme'.
     REPLACE ALL OCCURRENCES OF '{projectKeyOrId}' IN lv_uri WITH projectkeyorid.
     IF expand IS SUPPLIED.
@@ -8550,6 +8937,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getsecuritylevelsforproject.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/project/{projectKeyOrId}/securitylevel'.
     REPLACE ALL OCCURRENCES OF '{projectKeyOrId}' IN lv_uri WITH projectkeyorid.
     mi_client->request->set_method( 'GET' ).
@@ -8562,6 +8950,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallprojectcategories.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/projectCategory'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -8573,6 +8962,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createprojectcategory.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/projectCategory'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -8584,8 +8974,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getprojectcategorybyid.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/projectCategory/{id}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8596,8 +8989,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateprojectcategory.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/projectCategory/{id}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8608,8 +9004,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~removeprojectcategory.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/projectCategory/{id}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8620,6 +9019,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~validateprojectkey.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/projectvalidate/key'.
     IF key IS SUPPLIED.
       mi_client->request->set_form_field( name = 'key' value = key ).
@@ -8634,6 +9034,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getvalidprojectkey.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/projectvalidate/validProjectKey'.
     IF key IS SUPPLIED.
       mi_client->request->set_form_field( name = 'key' value = key ).
@@ -8648,6 +9049,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getvalidprojectname.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/projectvalidate/validProjectName'.
     mi_client->request->set_form_field( name = 'name' value = name ).
     mi_client->request->set_method( 'GET' ).
@@ -8660,6 +9062,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getresolutions.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/resolution'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -8671,6 +9074,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getresolution.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/resolution/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'GET' ).
@@ -8683,6 +9087,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallprojectroles.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/role'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -8694,6 +9099,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createprojectrole.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/role'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -8705,8 +9111,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getprojectrolebyid.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/role/{id}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8717,8 +9126,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~fullyupdateprojectrole.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/role/{id}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8729,8 +9141,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~partialupdateprojectrole.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/role/{id}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8741,8 +9156,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteprojectrole.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/role/{id}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     IF swap IS SUPPLIED.
       mi_client->request->set_form_field( name = 'swap' value = swap ).
     ENDIF.
@@ -8756,8 +9174,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getprojectroleactorsforrole.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/role/{id}/actors'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8768,8 +9189,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addprojectroleactorstorole.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/role/{id}/actors'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8780,8 +9204,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteprojectroleactorsfromrol.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/role/{id}/actors'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     IF user IS SUPPLIED.
       mi_client->request->set_form_field( name = 'user' value = user ).
     ENDIF.
@@ -8798,6 +9225,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getscreens.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screens'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -8818,6 +9246,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createscreen.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screens'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -8829,6 +9258,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addfieldtodefaultscreen.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screens/addToDefault/{fieldId}'.
     REPLACE ALL OCCURRENCES OF '{fieldId}' IN lv_uri WITH fieldid.
     mi_client->request->set_method( 'POST' ).
@@ -8841,8 +9271,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updatescreen.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screens/{screenId}'.
-    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH screenid.
+    lv_temp = screenid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8853,8 +9286,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletescreen.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screens/{screenId}'.
-    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH screenid.
+    lv_temp = screenid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8865,8 +9301,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getavailablescreenfields.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screens/{screenId}/availableFields'.
-    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH screenid.
+    lv_temp = screenid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8877,8 +9316,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallscreentabs.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screens/{screenId}/tabs'.
-    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH screenid.
+    lv_temp = screenid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH lv_temp.
     IF projectkey IS SUPPLIED.
       mi_client->request->set_form_field( name = 'projectKey' value = projectkey ).
     ENDIF.
@@ -8892,8 +9334,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addscreentab.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screens/{screenId}/tabs'.
-    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH screenid.
+    lv_temp = screenid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8904,9 +9349,14 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~renamescreentab.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screens/{screenId}/tabs/{tabId}'.
-    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH screenid.
-    REPLACE ALL OCCURRENCES OF '{tabId}' IN lv_uri WITH tabid.
+    lv_temp = screenid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH lv_temp.
+    lv_temp = tabid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{tabId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8917,9 +9367,14 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletescreentab.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screens/{screenId}/tabs/{tabId}'.
-    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH screenid.
-    REPLACE ALL OCCURRENCES OF '{tabId}' IN lv_uri WITH tabid.
+    lv_temp = screenid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH lv_temp.
+    lv_temp = tabid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{tabId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8930,9 +9385,14 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallscreentabfields.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screens/{screenId}/tabs/{tabId}/fields'.
-    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH screenid.
-    REPLACE ALL OCCURRENCES OF '{tabId}' IN lv_uri WITH tabid.
+    lv_temp = screenid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH lv_temp.
+    lv_temp = tabid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{tabId}' IN lv_uri WITH lv_temp.
     IF projectkey IS SUPPLIED.
       mi_client->request->set_form_field( name = 'projectKey' value = projectkey ).
     ENDIF.
@@ -8946,9 +9406,14 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addscreentabfield.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screens/{screenId}/tabs/{tabId}/fields'.
-    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH screenid.
-    REPLACE ALL OCCURRENCES OF '{tabId}' IN lv_uri WITH tabid.
+    lv_temp = screenid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH lv_temp.
+    lv_temp = tabid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{tabId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8959,9 +9424,14 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~removescreentabfield.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screens/{screenId}/tabs/{tabId}/fields/{id}'.
-    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH screenid.
-    REPLACE ALL OCCURRENCES OF '{tabId}' IN lv_uri WITH tabid.
+    lv_temp = screenid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH lv_temp.
+    lv_temp = tabid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{tabId}' IN lv_uri WITH lv_temp.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -8973,9 +9443,14 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~movescreentabfield.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screens/{screenId}/tabs/{tabId}/fields/{id}/move'.
-    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH screenid.
-    REPLACE ALL OCCURRENCES OF '{tabId}' IN lv_uri WITH tabid.
+    lv_temp = screenid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH lv_temp.
+    lv_temp = tabid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{tabId}' IN lv_uri WITH lv_temp.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -8987,10 +9462,17 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~movescreentab.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screens/{screenId}/tabs/{tabId}/move/{pos}'.
-    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH screenid.
-    REPLACE ALL OCCURRENCES OF '{tabId}' IN lv_uri WITH tabid.
-    REPLACE ALL OCCURRENCES OF '{pos}' IN lv_uri WITH pos.
+    lv_temp = screenid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{screenId}' IN lv_uri WITH lv_temp.
+    lv_temp = tabid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{tabId}' IN lv_uri WITH lv_temp.
+    lv_temp = pos.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{pos}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -9001,6 +9483,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getscreenschemes.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screenscheme'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -9021,6 +9504,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createscreenscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screenscheme'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -9032,6 +9516,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updatescreenscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screenscheme/{screenSchemeId}'.
     REPLACE ALL OCCURRENCES OF '{screenSchemeId}' IN lv_uri WITH screenschemeid.
     mi_client->request->set_method( 'PUT' ).
@@ -9044,6 +9529,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletescreenscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/screenscheme/{screenSchemeId}'.
     REPLACE ALL OCCURRENCES OF '{screenSchemeId}' IN lv_uri WITH screenschemeid.
     mi_client->request->set_method( 'DELETE' ).
@@ -9056,6 +9542,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~searchforissuesusingjql.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/search'.
     IF jql IS SUPPLIED.
       mi_client->request->set_form_field( name = 'jql' value = jql ).
@@ -9091,6 +9578,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~searchforissuesusingjqlpost.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/search'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -9102,6 +9590,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuesecuritylevel.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/securitylevel/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'GET' ).
@@ -9114,6 +9603,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getserverinfo.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/serverInfo'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -9125,6 +9615,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getissuenavigatordefaultcolumn.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/settings/columns'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -9136,6 +9627,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setissuenavigatordefaultcolumn.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/settings/columns'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -9147,6 +9639,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getstatuses.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/status'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -9158,6 +9651,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getstatus.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/status/{idOrName}'.
     REPLACE ALL OCCURRENCES OF '{idOrName}' IN lv_uri WITH idorname.
     mi_client->request->set_method( 'GET' ).
@@ -9170,6 +9664,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getstatuscategories.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/statuscategory'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -9181,6 +9676,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getstatuscategory.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/statuscategory/{idOrKey}'.
     REPLACE ALL OCCURRENCES OF '{idOrKey}' IN lv_uri WITH idorkey.
     mi_client->request->set_method( 'GET' ).
@@ -9193,6 +9689,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~gettask.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/task/{taskId}'.
     REPLACE ALL OCCURRENCES OF '{taskId}' IN lv_uri WITH taskid.
     mi_client->request->set_method( 'GET' ).
@@ -9205,6 +9702,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~canceltask.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/task/{taskId}/cancel'.
     REPLACE ALL OCCURRENCES OF '{taskId}' IN lv_uri WITH taskid.
     mi_client->request->set_method( 'POST' ).
@@ -9217,6 +9715,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getavatars.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/universal_avatar/type/{type}/owner/{entityId}'.
     REPLACE ALL OCCURRENCES OF '{type}' IN lv_uri WITH type.
     REPLACE ALL OCCURRENCES OF '{entityId}' IN lv_uri WITH entityid.
@@ -9230,6 +9729,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~storeavatar.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/universal_avatar/type/{type}/owner/{entityId}'.
     REPLACE ALL OCCURRENCES OF '{type}' IN lv_uri WITH type.
     REPLACE ALL OCCURRENCES OF '{entityId}' IN lv_uri WITH entityid.
@@ -9250,10 +9750,13 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteavatar.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/universal_avatar/type/{type}/owner/{owningObjectId}/avatar/{id}'.
     REPLACE ALL OCCURRENCES OF '{type}' IN lv_uri WITH type.
     REPLACE ALL OCCURRENCES OF '{owningObjectId}' IN lv_uri WITH owningobjectid.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -9264,6 +9767,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getuser.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user'.
     IF accountid IS SUPPLIED.
       mi_client->request->set_form_field( name = 'accountId' value = accountid ).
@@ -9287,6 +9791,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createuser.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -9298,6 +9803,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~removeuser.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user'.
     mi_client->request->set_form_field( name = 'accountId' value = accountid ).
     IF username IS SUPPLIED.
@@ -9316,6 +9822,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~findbulkassignableusers.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/assignable/multiProjectSearch'.
     IF query IS SUPPLIED.
       mi_client->request->set_form_field( name = 'query' value = query ).
@@ -9343,6 +9850,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~findassignableusers.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/assignable/search'.
     IF query IS SUPPLIED.
       mi_client->request->set_form_field( name = 'query' value = query ).
@@ -9384,6 +9892,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~bulkgetusers.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/bulk'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -9408,6 +9917,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~bulkgetusersmigration.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/bulk/migration'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -9431,6 +9941,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getuserdefaultcolumns.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/columns'.
     IF accountid IS SUPPLIED.
       mi_client->request->set_form_field( name = 'accountId' value = accountid ).
@@ -9448,6 +9959,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setusercolumns.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/columns'.
     IF accountid IS SUPPLIED.
       mi_client->request->set_form_field( name = 'accountId' value = accountid ).
@@ -9462,6 +9974,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~resetusercolumns.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/columns'.
     IF accountid IS SUPPLIED.
       mi_client->request->set_form_field( name = 'accountId' value = accountid ).
@@ -9479,6 +9992,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getuseremail.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/email'.
     mi_client->request->set_form_field( name = 'accountId' value = accountid ).
     mi_client->request->set_method( 'GET' ).
@@ -9491,6 +10005,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getuseremailbulk.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/email/bulk'.
     mi_client->request->set_form_field( name = 'accountId' value = accountid ).
     mi_client->request->set_method( 'GET' ).
@@ -9503,6 +10018,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getusergroups.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/groups'.
     mi_client->request->set_form_field( name = 'accountId' value = accountid ).
     IF username IS SUPPLIED.
@@ -9521,6 +10037,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~finduserswithallpermissions.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/permission/search'.
     IF query IS SUPPLIED.
       mi_client->request->set_form_field( name = 'query' value = query ).
@@ -9554,6 +10071,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~findusersforpicker.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/picker'.
     mi_client->request->set_form_field( name = 'query' value = query ).
     IF maxresults IS SUPPLIED.
@@ -9584,6 +10102,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getuserpropertykeys.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/properties'.
     IF accountid IS SUPPLIED.
       mi_client->request->set_form_field( name = 'accountId' value = accountid ).
@@ -9604,6 +10123,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getuserproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
     IF accountid IS SUPPLIED.
@@ -9625,6 +10145,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setuserproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
     IF accountid IS SUPPLIED.
@@ -9646,6 +10167,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteuserproperty.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
     IF accountid IS SUPPLIED.
@@ -9667,6 +10189,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~findusers.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/search'.
     IF query IS SUPPLIED.
       mi_client->request->set_form_field( name = 'query' value = query ).
@@ -9696,6 +10219,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~findusersbyquery.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/search/query'.
     mi_client->request->set_form_field( name = 'query' value = query ).
     IF startat IS SUPPLIED.
@@ -9714,6 +10238,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~finduserkeysbyquery.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/search/query/key'.
     mi_client->request->set_form_field( name = 'query' value = query ).
     IF startat IS SUPPLIED.
@@ -9732,6 +10257,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~finduserswithbrowsepermission.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/user/viewissue/search'.
     IF query IS SUPPLIED.
       mi_client->request->set_form_field( name = 'query' value = query ).
@@ -9764,6 +10290,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallusersdefault.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/users'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -9781,6 +10308,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallusers.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/users/search'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -9798,6 +10326,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createversion.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/version'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -9809,6 +10338,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getversion.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/version/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     IF expand IS SUPPLIED.
@@ -9824,6 +10354,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateversion.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/version/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'PUT' ).
@@ -9836,6 +10367,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteversion.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/version/{id}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     IF movefixissuesto IS SUPPLIED.
@@ -9854,6 +10386,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~mergeversions.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/version/{id}/mergeto/{moveIssuesTo}'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     REPLACE ALL OCCURRENCES OF '{moveIssuesTo}' IN lv_uri WITH moveissuesto.
@@ -9867,6 +10400,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~moveversion.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/version/{id}/move'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'POST' ).
@@ -9879,6 +10413,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getversionrelatedissues.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/version/{id}/relatedIssueCounts'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'GET' ).
@@ -9891,6 +10426,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteandreplaceversion.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/version/{id}/removeAndSwap'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'POST' ).
@@ -9903,6 +10439,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getversionunresolvedissues.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/version/{id}/unresolvedIssueCount'.
     REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
     mi_client->request->set_method( 'GET' ).
@@ -9915,6 +10452,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getdynamicwebhooksforapp.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/webhook'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -9932,6 +10470,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~registerdynamicwebhooks.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/webhook'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -9943,6 +10482,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletewebhookbyid.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/webhook'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -9954,6 +10494,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getfailedwebhooks.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/webhook/failed'.
     IF maxresults IS SUPPLIED.
       mi_client->request->set_form_field( name = 'maxResults' value = maxresults ).
@@ -9971,6 +10512,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~refreshwebhooks.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/webhook/refresh'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -9982,6 +10524,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallworkflows.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflow'.
     IF workflowname IS SUPPLIED.
       mi_client->request->set_form_field( name = 'workflowName' value = workflowname ).
@@ -9996,6 +10539,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getworkflowtransitionruleconfi.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflow/rule/config'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -10020,6 +10564,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateworkflowtransitionruleco.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflow/rule/config'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -10031,6 +10576,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getworkflowspaginated.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflow/search'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -10054,8 +10600,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getworkflowtransitionpropertie.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflow/transitions/{transitionId}/properties'.
-    REPLACE ALL OCCURRENCES OF '{transitionId}' IN lv_uri WITH transitionid.
+    lv_temp = transitionid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{transitionId}' IN lv_uri WITH lv_temp.
     IF includereservedkeys IS SUPPLIED.
       mi_client->request->set_form_field( name = 'includeReservedKeys' value = includereservedkeys ).
     ENDIF.
@@ -10076,8 +10625,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateworkflowtransitionproper.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflow/transitions/{transitionId}/properties'.
-    REPLACE ALL OCCURRENCES OF '{transitionId}' IN lv_uri WITH transitionid.
+    lv_temp = transitionid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{transitionId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_form_field( name = 'key' value = key ).
     mi_client->request->set_form_field( name = 'workflowName' value = workflowname ).
     IF workflowmode IS SUPPLIED.
@@ -10093,8 +10645,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createworkflowtransitionproper.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflow/transitions/{transitionId}/properties'.
-    REPLACE ALL OCCURRENCES OF '{transitionId}' IN lv_uri WITH transitionid.
+    lv_temp = transitionid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{transitionId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_form_field( name = 'key' value = key ).
     mi_client->request->set_form_field( name = 'workflowName' value = workflowname ).
     IF workflowmode IS SUPPLIED.
@@ -10110,8 +10665,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteworkflowtransitionproper.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflow/transitions/{transitionId}/properties'.
-    REPLACE ALL OCCURRENCES OF '{transitionId}' IN lv_uri WITH transitionid.
+    lv_temp = transitionid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{transitionId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_form_field( name = 'key' value = key ).
     mi_client->request->set_form_field( name = 'workflowName' value = workflowname ).
     IF workflowmode IS SUPPLIED.
@@ -10127,6 +10685,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getallworkflowschemes.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme'.
     IF startat IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startAt' value = startat ).
@@ -10144,6 +10703,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createworkflowscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -10155,6 +10715,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getworkflowschemeprojectassoci.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/project'.
     mi_client->request->set_form_field( name = 'projectId' value = projectid ).
     mi_client->request->set_method( 'GET' ).
@@ -10167,6 +10728,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~associateschemewithproject.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/project'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -10178,8 +10740,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getworkflowscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     IF returndraftifexists IS SUPPLIED.
       mi_client->request->set_form_field( name = 'returnDraftIfExists' value = returndraftifexists ).
     ENDIF.
@@ -10193,8 +10758,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateworkflowscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10205,8 +10773,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteworkflowscheme.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10217,8 +10788,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~createworkflowschemedraftfromp.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/createdraft'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10229,8 +10803,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getdefaultworkflow.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/default'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     IF returndraftifexists IS SUPPLIED.
       mi_client->request->set_form_field( name = 'returnDraftIfExists' value = returndraftifexists ).
     ENDIF.
@@ -10244,8 +10821,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updatedefaultworkflow.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/default'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10256,8 +10836,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletedefaultworkflow.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/default'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     IF updatedraftifneeded IS SUPPLIED.
       mi_client->request->set_form_field( name = 'updateDraftIfNeeded' value = updatedraftifneeded ).
     ENDIF.
@@ -10271,8 +10854,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getworkflowschemedraft.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/draft'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10283,8 +10869,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateworkflowschemedraft.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/draft'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10295,8 +10884,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteworkflowschemedraft.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/draft'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10307,8 +10899,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getdraftdefaultworkflow.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/draft/default'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10319,8 +10914,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updatedraftdefaultworkflow.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/draft/default'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10331,8 +10929,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletedraftdefaultworkflow.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/draft/default'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10343,8 +10944,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getworkflowschemedraftissuetyp.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/draft/issuetype/{issueType}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     REPLACE ALL OCCURRENCES OF '{issueType}' IN lv_uri WITH issuetype.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -10356,8 +10960,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setworkflowschemedraftissuetyp.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/draft/issuetype/{issueType}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     REPLACE ALL OCCURRENCES OF '{issueType}' IN lv_uri WITH issuetype.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -10369,8 +10976,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteworkflowschemedraftissue.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/draft/issuetype/{issueType}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     REPLACE ALL OCCURRENCES OF '{issueType}' IN lv_uri WITH issuetype.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -10382,8 +10992,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getdraftworkflow.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/draft/workflow'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     IF workflowname IS SUPPLIED.
       mi_client->request->set_form_field( name = 'workflowName' value = workflowname ).
     ENDIF.
@@ -10397,8 +11010,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updatedraftworkflowmapping.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/draft/workflow'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_form_field( name = 'workflowName' value = workflowname ).
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -10410,8 +11026,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deletedraftworkflowmapping.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/draft/workflow'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_form_field( name = 'workflowName' value = workflowname ).
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -10423,8 +11042,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getworkflowschemeissuetype.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/issuetype/{issueType}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     REPLACE ALL OCCURRENCES OF '{issueType}' IN lv_uri WITH issuetype.
     IF returndraftifexists IS SUPPLIED.
       mi_client->request->set_form_field( name = 'returnDraftIfExists' value = returndraftifexists ).
@@ -10439,8 +11061,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~setworkflowschemeissuetype.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/issuetype/{issueType}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     REPLACE ALL OCCURRENCES OF '{issueType}' IN lv_uri WITH issuetype.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -10452,8 +11077,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteworkflowschemeissuetype.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/issuetype/{issueType}'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     REPLACE ALL OCCURRENCES OF '{issueType}' IN lv_uri WITH issuetype.
     IF updatedraftifneeded IS SUPPLIED.
       mi_client->request->set_form_field( name = 'updateDraftIfNeeded' value = updatedraftifneeded ).
@@ -10468,8 +11096,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getworkflow.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/workflow'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     IF workflowname IS SUPPLIED.
       mi_client->request->set_form_field( name = 'workflowName' value = workflowname ).
     ENDIF.
@@ -10486,8 +11117,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~updateworkflowmapping.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/workflow'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_form_field( name = 'workflowName' value = workflowname ).
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -10499,8 +11133,11 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~deleteworkflowmapping.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/workflowscheme/{id}/workflow'.
-    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH id.
+    lv_temp = id.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_form_field( name = 'workflowName' value = workflowname ).
     IF updatedraftifneeded IS SUPPLIED.
       mi_client->request->set_form_field( name = 'updateDraftIfNeeded' value = updatedraftifneeded ).
@@ -10515,6 +11152,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getidsofworklogsdeletedsince.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/worklog/deleted'.
     IF since IS SUPPLIED.
       mi_client->request->set_form_field( name = 'since' value = since ).
@@ -10529,6 +11167,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getworklogsforids.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/worklog/list'.
     IF expand IS SUPPLIED.
       mi_client->request->set_form_field( name = 'expand' value = expand ).
@@ -10543,6 +11182,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~getidsofworklogsmodifiedsince.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/api/3/worklog/updated'.
     IF since IS SUPPLIED.
       mi_client->request->set_form_field( name = 'since' value = since ).
@@ -10560,6 +11200,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addonpropertiesresource_getadd.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/atlassian-connect/1/addons/{addonKey}/properties'.
     REPLACE ALL OCCURRENCES OF '{addonKey}' IN lv_uri WITH addonkey.
     mi_client->request->set_method( 'GET' ).
@@ -10572,6 +11213,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addonpropertiesresource_geta01.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/atlassian-connect/1/addons/{addonKey}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{addonKey}' IN lv_uri WITH addonkey.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
@@ -10585,6 +11227,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addonpropertiesresource_putadd.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/atlassian-connect/1/addons/{addonKey}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{addonKey}' IN lv_uri WITH addonkey.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
@@ -10598,6 +11241,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~addonpropertiesresource_delete.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/atlassian-connect/1/addons/{addonKey}/properties/{propertyKey}'.
     REPLACE ALL OCCURRENCES OF '{addonKey}' IN lv_uri WITH addonkey.
     REPLACE ALL OCCURRENCES OF '{propertyKey}' IN lv_uri WITH propertykey.
@@ -10611,6 +11255,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~dynamicmodulesresource_getmodu.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/atlassian-connect/1/app/module/dynamic'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -10622,6 +11267,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~dynamicmodulesresource_registe.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/atlassian-connect/1/app/module/dynamic'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -10633,6 +11279,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD zif_jira~dynamicmodulesresource_removem.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/rest/atlassian-connect/1/app/module/dynamic'.
     IF modulekey IS SUPPLIED.
       mi_client->request->set_form_field( name = 'moduleKey' value = modulekey ).
