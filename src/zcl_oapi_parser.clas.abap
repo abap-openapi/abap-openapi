@@ -169,16 +169,17 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     DATA lv_member LIKE LINE OF lt_members.
     DATA ls_parameter LIKE LINE OF rt_parameters.
     DATA lo_names TYPE REF TO zcl_oapi_abap_name.
-    CREATE OBJECT lo_names.
 
     lt_members = mo_json->members( iv_prefix ).
     LOOP AT lt_members INTO lv_member.
       CLEAR ls_parameter.
+      ls_parameter-id = lv_member.
       ls_parameter-name = mo_json->value_string( iv_prefix && lv_member && '/name' ).
       IF ls_parameter-name IS NOT INITIAL.
         ls_parameter-in = mo_json->value_string( iv_prefix && lv_member && '/in' ).
         ls_parameter-description = mo_json->value_string( iv_prefix && lv_member && '/description' ).
         ls_parameter-required = mo_json->value_boolean( iv_prefix && lv_member && '/required' ).
+        CREATE OBJECT lo_names. " in this place the names are not connected
         ls_parameter-abap_name = lo_names->to_abap_name( ls_parameter-name ).
         ls_parameter-schema = parse_schema( iv_prefix && lv_member && '/schema' ).
         APPEND ls_parameter TO rt_parameters.

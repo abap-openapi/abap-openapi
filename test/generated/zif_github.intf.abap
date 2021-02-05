@@ -3424,49 +3424,67 @@ INTERFACE zif_github.
 
 * DELETE - "Delete an app authorization"
 * Operation id: apps/delete-authorization
+* Parameter: client_id, required, path
 * Response: 204
 * Response: 422
 * Body schema: object
   METHODS apps_delete_authorization
+    IMPORTING
+      client_id TYPE string
     RAISING cx_static_check.
 
 * DELETE - "Revoke a grant for an application"
 * Operation id: apps/revoke-grant-for-application
+* Parameter: client_id, required, path
+* Parameter: access_token, required, path
 * Response: 204
   METHODS apps_revoke_grant_for_applicat
+    IMPORTING
+      client_id TYPE string
+      access_token TYPE string
     RAISING cx_static_check.
 
 * POST - "Check a token"
 * Operation id: apps/check-token
+* Parameter: client_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/authorization
 * Response: 404
 * Response: 422
 * Body schema: object
   METHODS apps_check_token
+    IMPORTING
+      client_id TYPE string
     RETURNING VALUE(return_data) TYPE authorization
     RAISING cx_static_check.
 
 * PATCH - "Reset a token"
 * Operation id: apps/reset-token
+* Parameter: client_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/authorization
 * Response: 422
 * Body schema: object
   METHODS apps_reset_token
+    IMPORTING
+      client_id TYPE string
     RETURNING VALUE(return_data) TYPE authorization
     RAISING cx_static_check.
 
 * DELETE - "Delete an app token"
 * Operation id: apps/delete-token
+* Parameter: client_id, required, path
 * Response: 204
 * Response: 422
 * Body schema: object
   METHODS apps_delete_token
+    IMPORTING
+      client_id TYPE string
     RAISING cx_static_check.
 
 * POST - "Create a scoped access token"
 * Operation id: apps/scope-token
+* Parameter: client_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/authorization
 * Response: 401
@@ -3475,29 +3493,46 @@ INTERFACE zif_github.
 * Response: 422
 * Body schema: object
   METHODS apps_scope_token
+    IMPORTING
+      client_id TYPE string
     RETURNING VALUE(return_data) TYPE authorization
     RAISING cx_static_check.
 
 * GET - "Check an authorization"
 * Operation id: apps/check-authorization
+* Parameter: client_id, required, path
+* Parameter: access_token, required, path
 * Response: 200
 *     application/json, 
 * Response: 404
   METHODS apps_check_authorization
+    IMPORTING
+      client_id TYPE string
+      access_token TYPE string
     RAISING cx_static_check.
 
 * POST - "Reset an authorization"
 * Operation id: apps/reset-authorization
+* Parameter: client_id, required, path
+* Parameter: access_token, required, path
 * Response: 200
 *     application/json, #/components/schemas/authorization
   METHODS apps_reset_authorization
+    IMPORTING
+      client_id TYPE string
+      access_token TYPE string
     RETURNING VALUE(return_data) TYPE authorization
     RAISING cx_static_check.
 
 * DELETE - "Revoke an authorization for an application"
 * Operation id: apps/revoke-authorization-for-application
+* Parameter: client_id, required, path
+* Parameter: access_token, required, path
 * Response: 204
   METHODS apps_revoke_authorization_for_
+    IMPORTING
+      client_id TYPE string
+      access_token TYPE string
     RAISING cx_static_check.
 
 * GET - "Get an app"
@@ -3545,6 +3580,7 @@ INTERFACE zif_github.
 
 * PUT - "Get-or-create an authorization for a specific app"
 * Operation id: oauth-authorizations/get-or-create-authorization-for-app
+* Parameter: client_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/authorization
 * Response: 201
@@ -3555,12 +3591,15 @@ INTERFACE zif_github.
 * Response: 422
 * Body schema: object
   METHODS oauth_authorizations_get_or_cr
+    IMPORTING
+      client_id TYPE string
     RETURNING VALUE(return_data) TYPE authorization
     RAISING cx_static_check.
 
 * PUT - "Get-or-create an authorization for a specific app and fingerprint"
 * Operation id: oauth-authorizations/get-or-create-authorization-for-app-and-fingerprint
 * Parameter: fingerprint, required, path
+* Parameter: client_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/authorization
 * Response: 201
@@ -3570,6 +3609,7 @@ INTERFACE zif_github.
   METHODS oauth_authorizations_get_or_01
     IMPORTING
       fingerprint TYPE string
+      client_id TYPE string
     RETURNING VALUE(return_data) TYPE authorization
     RAISING cx_static_check.
 
@@ -3993,12 +4033,22 @@ INTERFACE zif_github.
 * GET - "Get the audit log for an enterprise"
 * Operation id: audit-log/get-audit-log
 * Parameter: enterprise, required, path
+* Parameter: phrase, optional, query
+* Parameter: include, optional, query
+* Parameter: after, optional, query
+* Parameter: before, optional, query
+* Parameter: order, optional, query
 * Parameter: per_page, optional, query
 * Response: 200
 *     application/json, array
   METHODS audit_log_get_audit_log
     IMPORTING
       enterprise TYPE string
+      phrase TYPE string OPTIONAL
+      include TYPE string OPTIONAL
+      after TYPE string OPTIONAL
+      before TYPE string OPTIONAL
+      order TYPE string OPTIONAL
       per_page TYPE i DEFAULT 30 OPTIONAL
     RAISING cx_static_check.
 
@@ -4697,12 +4747,14 @@ INTERFACE zif_github.
 
 * GET - "List organizations"
 * Operation id: orgs/list
+* Parameter: since, optional, query
 * Parameter: per_page, optional, query
 * Response: 200
 *     application/json, array
 * Response: 304
   METHODS orgs_list
     IMPORTING
+      since TYPE i OPTIONAL
       per_page TYPE i DEFAULT 30 OPTIONAL
     RAISING cx_static_check.
 
@@ -5176,12 +5228,22 @@ INTERFACE zif_github.
 * GET - "Get the audit log for an organization"
 * Operation id: orgs/get-audit-log
 * Parameter: org, required, path
+* Parameter: phrase, optional, query
+* Parameter: include, optional, query
+* Parameter: after, optional, query
+* Parameter: before, optional, query
+* Parameter: order, optional, query
 * Parameter: per_page, optional, query
 * Response: 200
 *     application/json, array
   METHODS orgs_get_audit_log
     IMPORTING
       org TYPE string
+      phrase TYPE string OPTIONAL
+      include TYPE string OPTIONAL
+      after TYPE string OPTIONAL
+      before TYPE string OPTIONAL
+      order TYPE string OPTIONAL
       per_page TYPE i DEFAULT 30 OPTIONAL
     RAISING cx_static_check.
 
@@ -5314,18 +5376,21 @@ INTERFACE zif_github.
 * GET - "Get an organization webhook"
 * Operation id: orgs/get-webhook
 * Parameter: org, required, path
+* Parameter: hook_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/org-hook
 * Response: 404
   METHODS orgs_get_webhook
     IMPORTING
       org TYPE string
+      hook_id TYPE i
     RETURNING VALUE(return_data) TYPE org_hook
     RAISING cx_static_check.
 
 * PATCH - "Update an organization webhook"
 * Operation id: orgs/update-webhook
 * Parameter: org, required, path
+* Parameter: hook_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/org-hook
 * Response: 404
@@ -5334,51 +5399,60 @@ INTERFACE zif_github.
   METHODS orgs_update_webhook
     IMPORTING
       org TYPE string
+      hook_id TYPE i
     RETURNING VALUE(return_data) TYPE org_hook
     RAISING cx_static_check.
 
 * DELETE - "Delete an organization webhook"
 * Operation id: orgs/delete-webhook
 * Parameter: org, required, path
+* Parameter: hook_id, required, path
 * Response: 204
 * Response: 404
 * Body schema: object
   METHODS orgs_delete_webhook
     IMPORTING
       org TYPE string
+      hook_id TYPE i
     RAISING cx_static_check.
 
 * GET - "Get a webhook configuration for an organization"
 * Operation id: orgs/get-webhook-config-for-org
 * Parameter: org, required, path
+* Parameter: hook_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/webhook-config
   METHODS orgs_get_webhook_config_for_or
     IMPORTING
       org TYPE string
+      hook_id TYPE i
     RETURNING VALUE(return_data) TYPE webhook_config
     RAISING cx_static_check.
 
 * PATCH - "Update a webhook configuration for an organization"
 * Operation id: orgs/update-webhook-config-for-org
 * Parameter: org, required, path
+* Parameter: hook_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/webhook-config
 * Body schema: object
   METHODS orgs_update_webhook_config_for
     IMPORTING
       org TYPE string
+      hook_id TYPE i
     RETURNING VALUE(return_data) TYPE webhook_config
     RAISING cx_static_check.
 
 * POST - "Ping an organization webhook"
 * Operation id: orgs/ping-webhook
 * Parameter: org, required, path
+* Parameter: hook_id, required, path
 * Response: 204
 * Response: 404
   METHODS orgs_ping_webhook
     IMPORTING
       org TYPE string
+      hook_id TYPE i
     RAISING cx_static_check.
 
 * GET - "Get an organization installation for the authenticated app"
@@ -6019,12 +6093,14 @@ INTERFACE zif_github.
 * Operation id: teams/get-discussion-in-org
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
+* Parameter: discussion_number, required, path
 * Response: 200
 *     application/json, #/components/schemas/team-discussion
   METHODS teams_get_discussion_in_org
     IMPORTING
       org TYPE string
       team_slug TYPE string
+      discussion_number TYPE i
     RETURNING VALUE(return_data) TYPE team_discussion
     RAISING cx_static_check.
 
@@ -6032,6 +6108,7 @@ INTERFACE zif_github.
 * Operation id: teams/update-discussion-in-org
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
+* Parameter: discussion_number, required, path
 * Response: 200
 *     application/json, #/components/schemas/team-discussion
 * Body schema: object
@@ -6039,6 +6116,7 @@ INTERFACE zif_github.
     IMPORTING
       org TYPE string
       team_slug TYPE string
+      discussion_number TYPE i
     RETURNING VALUE(return_data) TYPE team_discussion
     RAISING cx_static_check.
 
@@ -6046,18 +6124,21 @@ INTERFACE zif_github.
 * Operation id: teams/delete-discussion-in-org
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
+* Parameter: discussion_number, required, path
 * Response: 204
 * Body schema: object
   METHODS teams_delete_discussion_in_org
     IMPORTING
       org TYPE string
       team_slug TYPE string
+      discussion_number TYPE i
     RAISING cx_static_check.
 
 * GET - "List discussion comments"
 * Operation id: teams/list-discussion-comments-in-org
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
+* Parameter: discussion_number, required, path
 * Parameter: direction, optional, query
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
@@ -6067,6 +6148,7 @@ INTERFACE zif_github.
     IMPORTING
       org TYPE string
       team_slug TYPE string
+      discussion_number TYPE i
       direction TYPE string DEFAULT 'desc' OPTIONAL
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
@@ -6076,6 +6158,7 @@ INTERFACE zif_github.
 * Operation id: teams/create-discussion-comment-in-org
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
+* Parameter: discussion_number, required, path
 * Response: 201
 *     application/json, #/components/schemas/team-discussion-comment
 * Body schema: object
@@ -6083,18 +6166,23 @@ INTERFACE zif_github.
     IMPORTING
       org TYPE string
       team_slug TYPE string
+      discussion_number TYPE i
     RAISING cx_static_check.
 
 * GET - "Get a discussion comment"
 * Operation id: teams/get-discussion-comment-in-org
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
+* Parameter: discussion_number, required, path
+* Parameter: comment_number, required, path
 * Response: 200
 *     application/json, #/components/schemas/team-discussion-comment
   METHODS teams_get_discussion_comment_i
     IMPORTING
       org TYPE string
       team_slug TYPE string
+      discussion_number TYPE i
+      comment_number TYPE i
     RETURNING VALUE(return_data) TYPE team_discussion_comment
     RAISING cx_static_check.
 
@@ -6102,6 +6190,8 @@ INTERFACE zif_github.
 * Operation id: teams/update-discussion-comment-in-org
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
+* Parameter: discussion_number, required, path
+* Parameter: comment_number, required, path
 * Response: 200
 *     application/json, #/components/schemas/team-discussion-comment
 * Body schema: object
@@ -6109,6 +6199,8 @@ INTERFACE zif_github.
     IMPORTING
       org TYPE string
       team_slug TYPE string
+      discussion_number TYPE i
+      comment_number TYPE i
     RETURNING VALUE(return_data) TYPE team_discussion_comment
     RAISING cx_static_check.
 
@@ -6116,12 +6208,16 @@ INTERFACE zif_github.
 * Operation id: teams/delete-discussion-comment-in-org
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
+* Parameter: discussion_number, required, path
+* Parameter: comment_number, required, path
 * Response: 204
 * Body schema: object
   METHODS teams_delete_discussion_commen
     IMPORTING
       org TYPE string
       team_slug TYPE string
+      discussion_number TYPE i
+      comment_number TYPE i
     RAISING cx_static_check.
 
 * GET - "List reactions for a team discussion comment"
@@ -6129,6 +6225,8 @@ INTERFACE zif_github.
 * Parameter: content, optional, query
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
+* Parameter: discussion_number, required, path
+* Parameter: comment_number, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -6138,6 +6236,8 @@ INTERFACE zif_github.
       content TYPE string OPTIONAL
       org TYPE string
       team_slug TYPE string
+      discussion_number TYPE i
+      comment_number TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
@@ -6146,6 +6246,8 @@ INTERFACE zif_github.
 * Operation id: reactions/create-for-team-discussion-comment-in-org
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
+* Parameter: discussion_number, required, path
+* Parameter: comment_number, required, path
 * Response: 201
 *     application/json, #/components/schemas/reaction
 * Body schema: object
@@ -6153,17 +6255,25 @@ INTERFACE zif_github.
     IMPORTING
       org TYPE string
       team_slug TYPE string
+      discussion_number TYPE i
+      comment_number TYPE i
     RAISING cx_static_check.
 
 * DELETE - "Delete team discussion comment reaction"
 * Operation id: reactions/delete-for-team-discussion-comment
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
+* Parameter: discussion_number, required, path
+* Parameter: comment_number, required, path
+* Parameter: reaction_id, required, path
 * Response: 204
   METHODS reactions_delete_for_team_disc
     IMPORTING
       org TYPE string
       team_slug TYPE string
+      discussion_number TYPE i
+      comment_number TYPE i
+      reaction_id TYPE i
     RAISING cx_static_check.
 
 * GET - "List reactions for a team discussion"
@@ -6171,6 +6281,7 @@ INTERFACE zif_github.
 * Parameter: content, optional, query
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
+* Parameter: discussion_number, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -6180,6 +6291,7 @@ INTERFACE zif_github.
       content TYPE string OPTIONAL
       org TYPE string
       team_slug TYPE string
+      discussion_number TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
@@ -6188,6 +6300,7 @@ INTERFACE zif_github.
 * Operation id: reactions/create-for-team-discussion-in-org
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
+* Parameter: discussion_number, required, path
 * Response: 201
 *     application/json, #/components/schemas/reaction
 * Body schema: object
@@ -6195,17 +6308,22 @@ INTERFACE zif_github.
     IMPORTING
       org TYPE string
       team_slug TYPE string
+      discussion_number TYPE i
     RAISING cx_static_check.
 
 * DELETE - "Delete team discussion reaction"
 * Operation id: reactions/delete-for-team-discussion
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
+* Parameter: discussion_number, required, path
+* Parameter: reaction_id, required, path
 * Response: 204
   METHODS reactions_delete_for_team_di01
     IMPORTING
       org TYPE string
       team_slug TYPE string
+      discussion_number TYPE i
+      reaction_id TYPE i
     RAISING cx_static_check.
 
 * GET - "List pending team invitations"
@@ -6312,6 +6430,7 @@ INTERFACE zif_github.
 * Operation id: teams/check-permissions-for-project-in-org
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
+* Parameter: project_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/team-project
 * Response: 404
@@ -6319,6 +6438,7 @@ INTERFACE zif_github.
     IMPORTING
       org TYPE string
       team_slug TYPE string
+      project_id TYPE i
     RETURNING VALUE(return_data) TYPE team_project
     RAISING cx_static_check.
 
@@ -6326,6 +6446,7 @@ INTERFACE zif_github.
 * Operation id: teams/add-or-update-project-permissions-in-org
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
+* Parameter: project_id, required, path
 * Response: 204
 * Response: 403
 *     application/json, object
@@ -6334,18 +6455,21 @@ INTERFACE zif_github.
     IMPORTING
       org TYPE string
       team_slug TYPE string
+      project_id TYPE i
     RAISING cx_static_check.
 
 * DELETE - "Remove a project from a team"
 * Operation id: teams/remove-project-in-org
 * Parameter: org, required, path
 * Parameter: team_slug, required, path
+* Parameter: project_id, required, path
 * Response: 204
 * Body schema: object
   METHODS teams_remove_project_in_org
     IMPORTING
       org TYPE string
       team_slug TYPE string
+      project_id TYPE i
     RAISING cx_static_check.
 
 * GET - "List team repositories"
@@ -6619,17 +6743,21 @@ INTERFACE zif_github.
 
 * GET - "Get a project"
 * Operation id: projects/get
+* Parameter: project_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/project
 * Response: 304
 * Response: 401
 * Response: 403
   METHODS projects_get
+    IMPORTING
+      project_id TYPE i
     RETURNING VALUE(return_data) TYPE project
     RAISING cx_static_check.
 
 * PATCH - "Update a project"
 * Operation id: projects/update
+* Parameter: project_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/project
 * Response: 304
@@ -6641,11 +6769,14 @@ INTERFACE zif_github.
 * Response: 422
 * Body schema: object
   METHODS projects_update
+    IMPORTING
+      project_id TYPE i
     RETURNING VALUE(return_data) TYPE project
     RAISING cx_static_check.
 
 * DELETE - "Delete a project"
 * Operation id: projects/delete
+* Parameter: project_id, required, path
 * Response: 204
 * Response: 304
 * Response: 401
@@ -6655,11 +6786,14 @@ INTERFACE zif_github.
 * Response: 410
 * Body schema: object
   METHODS projects_delete
+    IMPORTING
+      project_id TYPE i
     RAISING cx_static_check.
 
 * GET - "List project collaborators"
 * Operation id: projects/list-collaborators
 * Parameter: affiliation, optional, query
+* Parameter: project_id, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -6673,12 +6807,14 @@ INTERFACE zif_github.
   METHODS projects_list_collaborators
     IMPORTING
       affiliation TYPE string DEFAULT 'all' OPTIONAL
+      project_id TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 
 * PUT - "Add project collaborator"
 * Operation id: projects/add-collaborator
+* Parameter: project_id, required, path
 * Parameter: username, required, path
 * Response: 204
 * Response: 304
@@ -6690,11 +6826,13 @@ INTERFACE zif_github.
 * Body schema: object
   METHODS projects_add_collaborator
     IMPORTING
+      project_id TYPE i
       username TYPE string
     RAISING cx_static_check.
 
 * DELETE - "Remove user as a collaborator"
 * Operation id: projects/remove-collaborator
+* Parameter: project_id, required, path
 * Parameter: username, required, path
 * Response: 204
 * Response: 304
@@ -6706,11 +6844,13 @@ INTERFACE zif_github.
 * Body schema: object
   METHODS projects_remove_collaborator
     IMPORTING
+      project_id TYPE i
       username TYPE string
     RAISING cx_static_check.
 
 * GET - "Get project permission for a user"
 * Operation id: projects/get-permission-for-user
+* Parameter: project_id, required, path
 * Parameter: username, required, path
 * Response: 200
 *     application/json, #/components/schemas/repository-collaborator-permission
@@ -6722,12 +6862,14 @@ INTERFACE zif_github.
 * Response: 422
   METHODS projects_get_permission_for_us
     IMPORTING
+      project_id TYPE i
       username TYPE string
     RETURNING VALUE(return_data) TYPE repository_collaborator_permis
     RAISING cx_static_check.
 
 * GET - "List project columns"
 * Operation id: projects/list-columns
+* Parameter: project_id, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -6737,12 +6879,14 @@ INTERFACE zif_github.
 * Response: 403
   METHODS projects_list_columns
     IMPORTING
+      project_id TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 
 * POST - "Create a project column"
 * Operation id: projects/create-column
+* Parameter: project_id, required, path
 * Response: 201
 *     application/json, #/components/schemas/project-column
 * Response: 304
@@ -6751,6 +6895,8 @@ INTERFACE zif_github.
 * Response: 422
 * Body schema: object
   METHODS projects_create_column
+    IMPORTING
+      project_id TYPE i
     RAISING cx_static_check.
 
 * GET - "Get rate limit status for the authenticated user"
@@ -6765,6 +6911,7 @@ INTERFACE zif_github.
 
 * DELETE - "Delete a reaction (Legacy)"
 * Operation id: reactions/delete-legacy
+* Parameter: reaction_id, required, path
 * Response: 204
 * Response: 304
 * Response: 401
@@ -6772,6 +6919,8 @@ INTERFACE zif_github.
 * Response: 410
 * Response: 415
   METHODS reactions_delete_legacy
+    IMPORTING
+      reaction_id TYPE i
     RAISING cx_static_check.
 
 * GET - "Get a repository"
@@ -7043,7 +7192,9 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Parameter: actor, optional, query
+* Parameter: branch, optional, query
 * Parameter: event, optional, query
+* Parameter: status, optional, query
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -7053,7 +7204,9 @@ INTERFACE zif_github.
       owner TYPE string
       repo TYPE string
       actor TYPE string OPTIONAL
+      branch TYPE string OPTIONAL
       event TYPE string OPTIONAL
+      status TYPE string OPTIONAL
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
@@ -7062,12 +7215,14 @@ INTERFACE zif_github.
 * Operation id: actions/get-workflow-run
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: run_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/workflow-run
   METHODS actions_get_workflow_run
     IMPORTING
       owner TYPE string
       repo TYPE string
+      run_id TYPE i
     RETURNING VALUE(return_data) TYPE workflow_run
     RAISING cx_static_check.
 
@@ -7075,17 +7230,20 @@ INTERFACE zif_github.
 * Operation id: actions/delete-workflow-run
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: run_id, required, path
 * Response: 204
   METHODS actions_delete_workflow_run
     IMPORTING
       owner TYPE string
       repo TYPE string
+      run_id TYPE i
     RAISING cx_static_check.
 
 * GET - "List workflow run artifacts"
 * Operation id: actions/list-workflow-run-artifacts
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: run_id, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -7094,6 +7252,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      run_id TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
@@ -7102,11 +7261,13 @@ INTERFACE zif_github.
 * Operation id: actions/cancel-workflow-run
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: run_id, required, path
 * Response: 202
   METHODS actions_cancel_workflow_run
     IMPORTING
       owner TYPE string
       repo TYPE string
+      run_id TYPE i
     RAISING cx_static_check.
 
 * GET - "List jobs for a workflow run"
@@ -7114,6 +7275,7 @@ INTERFACE zif_github.
 * Parameter: filter, optional, query
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: run_id, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -7123,6 +7285,7 @@ INTERFACE zif_github.
       filter TYPE string DEFAULT 'latest' OPTIONAL
       owner TYPE string
       repo TYPE string
+      run_id TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
@@ -7131,45 +7294,53 @@ INTERFACE zif_github.
 * Operation id: actions/download-workflow-run-logs
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: run_id, required, path
 * Response: 302
   METHODS actions_download_workflow_run_
     IMPORTING
       owner TYPE string
       repo TYPE string
+      run_id TYPE i
     RAISING cx_static_check.
 
 * DELETE - "Delete workflow run logs"
 * Operation id: actions/delete-workflow-run-logs
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: run_id, required, path
 * Response: 204
   METHODS actions_delete_workflow_run_lo
     IMPORTING
       owner TYPE string
       repo TYPE string
+      run_id TYPE i
     RAISING cx_static_check.
 
 * POST - "Re-run a workflow"
 * Operation id: actions/re-run-workflow
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: run_id, required, path
 * Response: 201
   METHODS actions_re_run_workflow
     IMPORTING
       owner TYPE string
       repo TYPE string
+      run_id TYPE i
     RAISING cx_static_check.
 
 * GET - "Get workflow run usage"
 * Operation id: actions/get-workflow-run-usage
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: run_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/workflow-run-usage
   METHODS actions_get_workflow_run_usage
     IMPORTING
       owner TYPE string
       repo TYPE string
+      run_id TYPE i
     RETURNING VALUE(return_data) TYPE workflow_run_usage
     RAISING cx_static_check.
 
@@ -7266,12 +7437,14 @@ INTERFACE zif_github.
 * Operation id: actions/get-workflow
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: workflow_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/workflow
   METHODS actions_get_workflow
     IMPORTING
       owner TYPE string
       repo TYPE string
+      workflow_id TYPE string
     RETURNING VALUE(return_data) TYPE workflow
     RAISING cx_static_check.
 
@@ -7279,42 +7452,51 @@ INTERFACE zif_github.
 * Operation id: actions/disable-workflow
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: workflow_id, required, path
 * Response: 204
   METHODS actions_disable_workflow
     IMPORTING
       owner TYPE string
       repo TYPE string
+      workflow_id TYPE string
     RAISING cx_static_check.
 
 * POST - "Create a workflow dispatch event"
 * Operation id: actions/create-workflow-dispatch
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: workflow_id, required, path
 * Response: 204
 * Body schema: object
   METHODS actions_create_workflow_dispat
     IMPORTING
       owner TYPE string
       repo TYPE string
+      workflow_id TYPE string
     RAISING cx_static_check.
 
 * PUT - "Enable a workflow"
 * Operation id: actions/enable-workflow
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: workflow_id, required, path
 * Response: 204
   METHODS actions_enable_workflow
     IMPORTING
       owner TYPE string
       repo TYPE string
+      workflow_id TYPE string
     RAISING cx_static_check.
 
 * GET - "List workflow runs"
 * Operation id: actions/list-workflow-runs
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: workflow_id, required, path
 * Parameter: actor, optional, query
+* Parameter: branch, optional, query
 * Parameter: event, optional, query
+* Parameter: status, optional, query
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -7323,8 +7505,11 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      workflow_id TYPE string
       actor TYPE string OPTIONAL
+      branch TYPE string OPTIONAL
       event TYPE string OPTIONAL
+      status TYPE string OPTIONAL
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
@@ -7333,12 +7518,14 @@ INTERFACE zif_github.
 * Operation id: actions/get-workflow-usage
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: workflow_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/workflow-usage
   METHODS actions_get_workflow_usage
     IMPORTING
       owner TYPE string
       repo TYPE string
+      workflow_id TYPE string
     RETURNING VALUE(return_data) TYPE workflow_usage
     RAISING cx_static_check.
 
@@ -7419,7 +7606,7 @@ INTERFACE zif_github.
 * Operation id: repos/get-branch
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, #/components/schemas/branch-with-protection
 * Response: 404
@@ -7428,7 +7615,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RETURNING VALUE(return_data) TYPE branch_with_protection
     RAISING cx_static_check.
 
@@ -7436,7 +7623,7 @@ INTERFACE zif_github.
 * Operation id: repos/get-branch-protection
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, #/components/schemas/branch-protection
 * Response: 404
@@ -7444,7 +7631,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RETURNING VALUE(return_data) TYPE branch_protection
     RAISING cx_static_check.
 
@@ -7452,7 +7639,7 @@ INTERFACE zif_github.
 * Operation id: repos/update-branch-protection
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, #/components/schemas/protected-branch
 * Response: 403
@@ -7464,7 +7651,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RETURNING VALUE(return_data) TYPE protected_branch
     RAISING cx_static_check.
 
@@ -7472,7 +7659,7 @@ INTERFACE zif_github.
 * Operation id: repos/delete-branch-protection
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 204
 * Response: 403
 * Body schema: object
@@ -7480,21 +7667,21 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * GET - "Get admin branch protection"
 * Operation id: repos/get-admin-branch-protection
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, #/components/schemas/protected-branch-admin-enforced
   METHODS repos_get_admin_branch_protect
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RETURNING VALUE(return_data) TYPE protected_branch_admin_enforce
     RAISING cx_static_check.
 
@@ -7502,14 +7689,14 @@ INTERFACE zif_github.
 * Operation id: repos/set-admin-branch-protection
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, #/components/schemas/protected-branch-admin-enforced
   METHODS repos_set_admin_branch_protect
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RETURNING VALUE(return_data) TYPE protected_branch_admin_enforce
     RAISING cx_static_check.
 
@@ -7517,35 +7704,35 @@ INTERFACE zif_github.
 * Operation id: repos/delete-admin-branch-protection
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 204
 * Response: 404
   METHODS repos_delete_admin_branch_prot
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * GET - "Get pull request review protection"
 * Operation id: repos/get-pull-request-review-protection
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/vnd.github.luke-cage-preview+json, #/components/schemas/protected-branch-pull-request-review
   METHODS repos_get_pull_request_review_
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * PATCH - "Update pull request review protection"
 * Operation id: repos/update-pull-request-review-protection
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, #/components/schemas/protected-branch-pull-request-review
 * Response: 422
@@ -7554,7 +7741,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RETURNING VALUE(return_data) TYPE protected_branch_pull_request_
     RAISING cx_static_check.
 
@@ -7562,7 +7749,7 @@ INTERFACE zif_github.
 * Operation id: repos/delete-pull-request-review-protection
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 204
 * Response: 404
 * Body schema: object
@@ -7570,14 +7757,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * GET - "Get commit signature protection"
 * Operation id: repos/get-commit-signature-protection
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, #/components/schemas/protected-branch-admin-enforced
 * Response: 404
@@ -7585,7 +7772,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RETURNING VALUE(return_data) TYPE protected_branch_admin_enforce
     RAISING cx_static_check.
 
@@ -7593,7 +7780,7 @@ INTERFACE zif_github.
 * Operation id: repos/create-commit-signature-protection
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, #/components/schemas/protected-branch-admin-enforced
 * Response: 404
@@ -7601,7 +7788,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RETURNING VALUE(return_data) TYPE protected_branch_admin_enforce
     RAISING cx_static_check.
 
@@ -7609,21 +7796,21 @@ INTERFACE zif_github.
 * Operation id: repos/delete-commit-signature-protection
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 204
 * Response: 404
   METHODS repos_delete_commit_signature_
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * GET - "Get status checks protection"
 * Operation id: repos/get-status-checks-protection
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, #/components/schemas/status-check-policy
 * Response: 404
@@ -7631,7 +7818,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RETURNING VALUE(return_data) TYPE status_check_policy
     RAISING cx_static_check.
 
@@ -7639,7 +7826,7 @@ INTERFACE zif_github.
 * Operation id: repos/update-status-check-protection
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, #/components/schemas/status-check-policy
 * Response: 404
@@ -7649,7 +7836,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RETURNING VALUE(return_data) TYPE status_check_policy
     RAISING cx_static_check.
 
@@ -7657,21 +7844,21 @@ INTERFACE zif_github.
 * Operation id: repos/remove-status-check-protection
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 204
 * Body schema: object
   METHODS repos_remove_status_check_prot
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * GET - "Get all status check contexts"
 * Operation id: repos/get-all-status-check-contexts
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, array
 * Response: 404
@@ -7679,14 +7866,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * POST - "Add status check contexts"
 * Operation id: repos/add-status-check-contexts
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, array
 * Response: 403
@@ -7697,14 +7884,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * PUT - "Set status check contexts"
 * Operation id: repos/set-status-check-contexts
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, array
 * Response: 404
@@ -7714,14 +7901,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * DELETE - "Remove status check contexts"
 * Operation id: repos/remove-status-check-contexts
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, array
 * Response: 404
@@ -7731,14 +7918,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * GET - "Get access restrictions"
 * Operation id: repos/get-access-restrictions
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, #/components/schemas/branch-restriction-policy
 * Response: 404
@@ -7746,7 +7933,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RETURNING VALUE(return_data) TYPE branch_restriction_policy
     RAISING cx_static_check.
 
@@ -7754,20 +7941,20 @@ INTERFACE zif_github.
 * Operation id: repos/delete-access-restrictions
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 204
   METHODS repos_delete_access_restrictio
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * GET - "Get apps with access to the protected branch"
 * Operation id: repos/get-apps-with-access-to-protected-branch
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, array
 * Response: 404
@@ -7775,14 +7962,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * POST - "Add app access restrictions"
 * Operation id: repos/add-app-access-restrictions
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, array
 * Response: 422
@@ -7791,14 +7978,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * PUT - "Set app access restrictions"
 * Operation id: repos/set-app-access-restrictions
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, array
 * Response: 422
@@ -7807,14 +7994,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * DELETE - "Remove app access restrictions"
 * Operation id: repos/remove-app-access-restrictions
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, array
 * Response: 422
@@ -7823,14 +8010,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * GET - "Get teams with access to the protected branch"
 * Operation id: repos/get-teams-with-access-to-protected-branch
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, array
 * Response: 404
@@ -7838,14 +8025,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * POST - "Add team access restrictions"
 * Operation id: repos/add-team-access-restrictions
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, array
 * Response: 422
@@ -7854,14 +8041,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * PUT - "Set team access restrictions"
 * Operation id: repos/set-team-access-restrictions
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, array
 * Response: 422
@@ -7870,14 +8057,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * DELETE - "Remove team access restrictions"
 * Operation id: repos/remove-team-access-restrictions
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, array
 * Response: 422
@@ -7886,14 +8073,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * GET - "Get users with access to the protected branch"
 * Operation id: repos/get-users-with-access-to-protected-branch
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, array
 * Response: 404
@@ -7901,14 +8088,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * POST - "Add user access restrictions"
 * Operation id: repos/add-user-access-restrictions
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, array
 * Response: 422
@@ -7917,14 +8104,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * PUT - "Set user access restrictions"
 * Operation id: repos/set-user-access-restrictions
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, array
 * Response: 422
@@ -7933,14 +8120,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * DELETE - "Remove user access restrictions"
 * Operation id: repos/remove-user-access-restrictions
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 200
 *     application/json, array
 * Response: 422
@@ -7949,14 +8136,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * POST - "Rename a branch"
 * Operation id: repos/rename-branch
 * Parameter: owner, required, path
 * Parameter: repo, required, path
-* Parameter: branch, optional, query
+* Parameter: branch, required, path
 * Response: 201
 *     application/json, #/components/schemas/branch-with-protection
 * Response: 403
@@ -7967,7 +8154,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      branch TYPE string OPTIONAL
+      branch TYPE string
     RAISING cx_static_check.
 
 * POST - "Create a check run"
@@ -8391,12 +8578,14 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Parameter: comment_id, required, path
+* Parameter: reaction_id, required, path
 * Response: 204
   METHODS reactions_delete_for_commit_co
     IMPORTING
       owner TYPE string
       repo TYPE string
       comment_id TYPE i
+      reaction_id TYPE i
     RAISING cx_static_check.
 
 * GET - "List commits"
@@ -9165,6 +9354,7 @@ INTERFACE zif_github.
 * Operation id: repos/get-webhook
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: hook_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/hook
 * Response: 404
@@ -9172,6 +9362,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      hook_id TYPE i
     RETURNING VALUE(return_data) TYPE hook
     RAISING cx_static_check.
 
@@ -9179,6 +9370,7 @@ INTERFACE zif_github.
 * Operation id: repos/update-webhook
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: hook_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/hook
 * Response: 404
@@ -9188,6 +9380,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      hook_id TYPE i
     RETURNING VALUE(return_data) TYPE hook
     RAISING cx_static_check.
 
@@ -9195,6 +9388,7 @@ INTERFACE zif_github.
 * Operation id: repos/delete-webhook
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: hook_id, required, path
 * Response: 204
 * Response: 404
 * Body schema: object
@@ -9202,18 +9396,21 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      hook_id TYPE i
     RAISING cx_static_check.
 
 * GET - "Get a webhook configuration for a repository"
 * Operation id: repos/get-webhook-config-for-repo
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: hook_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/webhook-config
   METHODS repos_get_webhook_config_for_r
     IMPORTING
       owner TYPE string
       repo TYPE string
+      hook_id TYPE i
     RETURNING VALUE(return_data) TYPE webhook_config
     RAISING cx_static_check.
 
@@ -9221,6 +9418,7 @@ INTERFACE zif_github.
 * Operation id: repos/update-webhook-config-for-repo
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: hook_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/webhook-config
 * Body schema: object
@@ -9228,6 +9426,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      hook_id TYPE i
     RETURNING VALUE(return_data) TYPE webhook_config
     RAISING cx_static_check.
 
@@ -9235,24 +9434,28 @@ INTERFACE zif_github.
 * Operation id: repos/ping-webhook
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: hook_id, required, path
 * Response: 204
 * Response: 404
   METHODS repos_ping_webhook
     IMPORTING
       owner TYPE string
       repo TYPE string
+      hook_id TYPE i
     RAISING cx_static_check.
 
 * POST - "Test the push repository webhook"
 * Operation id: repos/test-push-webhook
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: hook_id, required, path
 * Response: 204
 * Response: 404
   METHODS repos_test_push_webhook
     IMPORTING
       owner TYPE string
       repo TYPE string
+      hook_id TYPE i
     RAISING cx_static_check.
 
 * GET - "Get an import status"
@@ -9314,6 +9517,7 @@ INTERFACE zif_github.
 * Operation id: migrations/get-commit-authors
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: since, optional, query
 * Response: 200
 *     application/json, array
 * Response: 404
@@ -9321,6 +9525,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      since TYPE i OPTIONAL
     RAISING cx_static_check.
 
 * PATCH - "Map a commit author"
@@ -9642,12 +9847,14 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Parameter: comment_id, required, path
+* Parameter: reaction_id, required, path
 * Response: 204
   METHODS reactions_delete_for_issue_com
     IMPORTING
       owner TYPE string
       repo TYPE string
       comment_id TYPE i
+      reaction_id TYPE i
     RAISING cx_static_check.
 
 * GET - "List issue events for a repository"
@@ -9982,12 +10189,14 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Parameter: issue_number, required, path
+* Parameter: reaction_id, required, path
 * Response: 204
   METHODS reactions_delete_for_issue
     IMPORTING
       owner TYPE string
       repo TYPE string
       issue_number TYPE i
+      reaction_id TYPE i
     RAISING cx_static_check.
 
 * GET - "List timeline events for an issue"
@@ -10647,18 +10856,21 @@ INTERFACE zif_github.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Parameter: comment_id, required, path
+* Parameter: reaction_id, required, path
 * Response: 204
   METHODS reactions_delete_for_pull_requ
     IMPORTING
       owner TYPE string
       repo TYPE string
       comment_id TYPE i
+      reaction_id TYPE i
     RAISING cx_static_check.
 
 * GET - "Get a pull request"
 * Operation id: pulls/get
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Response: 200
 *     application/json, #/components/schemas/pull-request
 * Response: 304
@@ -10668,6 +10880,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
     RETURNING VALUE(return_data) TYPE pull_request
     RAISING cx_static_check.
 
@@ -10675,6 +10888,7 @@ INTERFACE zif_github.
 * Operation id: pulls/update
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Response: 200
 *     application/json, #/components/schemas/pull-request
 * Response: 403
@@ -10684,6 +10898,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
     RETURNING VALUE(return_data) TYPE pull_request
     RAISING cx_static_check.
 
@@ -10692,6 +10907,7 @@ INTERFACE zif_github.
 * Parameter: direction, optional, query
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Parameter: sort, optional, query
 * Parameter: since, optional, query
 * Parameter: per_page, optional, query
@@ -10703,6 +10919,7 @@ INTERFACE zif_github.
       direction TYPE string OPTIONAL
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
       sort TYPE string DEFAULT 'created' OPTIONAL
       since TYPE string OPTIONAL
       per_page TYPE i DEFAULT 30 OPTIONAL
@@ -10713,6 +10930,7 @@ INTERFACE zif_github.
 * Operation id: pulls/create-review-comment
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Response: 201
 *     application/json, #/components/schemas/pull-request-review-comment
 * Response: 403
@@ -10722,12 +10940,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
     RAISING cx_static_check.
 
 * POST - "Create a reply for a review comment"
 * Operation id: pulls/create-reply-for-review-comment
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Parameter: comment_id, required, path
 * Response: 201
 *     application/json, #/components/schemas/pull-request-review-comment
@@ -10737,6 +10957,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
       comment_id TYPE i
     RAISING cx_static_check.
 
@@ -10744,6 +10965,7 @@ INTERFACE zif_github.
 * Operation id: pulls/list-commits
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -10752,6 +10974,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
@@ -10760,6 +10983,7 @@ INTERFACE zif_github.
 * Operation id: pulls/list-files
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -10770,6 +10994,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
@@ -10778,18 +11003,21 @@ INTERFACE zif_github.
 * Operation id: pulls/check-if-merged
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Response: 204
 * Response: 404
   METHODS pulls_check_if_merged
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
     RAISING cx_static_check.
 
 * PUT - "Merge a pull request"
 * Operation id: pulls/merge
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Response: 200
 *     application/json, #/components/schemas/pull-request-merge-result
 * Response: 403
@@ -10804,6 +11032,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
     RETURNING VALUE(return_data) TYPE pull_request_merge_result
     RAISING cx_static_check.
 
@@ -10811,6 +11040,7 @@ INTERFACE zif_github.
 * Operation id: pulls/list-requested-reviewers
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -10819,6 +11049,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RETURNING VALUE(return_data) TYPE pull_request_review_request
@@ -10828,6 +11059,7 @@ INTERFACE zif_github.
 * Operation id: pulls/request-reviewers
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Response: 201
 *     application/json, #/components/schemas/pull-request-simple
 * Response: 403
@@ -10837,12 +11069,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
     RAISING cx_static_check.
 
 * DELETE - "Remove requested reviewers from a pull request"
 * Operation id: pulls/remove-requested-reviewers
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Response: 200
 * Response: 422
 * Body schema: object
@@ -10850,12 +11084,14 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
     RAISING cx_static_check.
 
 * GET - "List reviews for a pull request"
 * Operation id: pulls/list-reviews
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -10864,6 +11100,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
@@ -10872,6 +11109,7 @@ INTERFACE zif_github.
 * Operation id: pulls/create-review
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Response: 200
 *     application/json, #/components/schemas/pull-request-review
 * Response: 403
@@ -10881,6 +11119,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
     RETURNING VALUE(return_data) TYPE pull_request_review
     RAISING cx_static_check.
 
@@ -10888,6 +11127,7 @@ INTERFACE zif_github.
 * Operation id: pulls/get-review
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Parameter: review_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/pull-request-review
@@ -10896,6 +11136,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
       review_id TYPE i
     RETURNING VALUE(return_data) TYPE pull_request_review
     RAISING cx_static_check.
@@ -10904,6 +11145,7 @@ INTERFACE zif_github.
 * Operation id: pulls/update-review
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Parameter: review_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/pull-request-review
@@ -10913,6 +11155,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
       review_id TYPE i
     RETURNING VALUE(return_data) TYPE pull_request_review
     RAISING cx_static_check.
@@ -10921,6 +11164,7 @@ INTERFACE zif_github.
 * Operation id: pulls/delete-pending-review
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Parameter: review_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/pull-request-review
@@ -10931,6 +11175,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
       review_id TYPE i
     RETURNING VALUE(return_data) TYPE pull_request_review
     RAISING cx_static_check.
@@ -10939,6 +11184,7 @@ INTERFACE zif_github.
 * Operation id: pulls/list-comments-for-review
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Parameter: review_id, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
@@ -10949,6 +11195,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
       review_id TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
@@ -10958,6 +11205,7 @@ INTERFACE zif_github.
 * Operation id: pulls/dismiss-review
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Parameter: review_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/pull-request-review
@@ -10968,6 +11216,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
       review_id TYPE i
     RETURNING VALUE(return_data) TYPE pull_request_review
     RAISING cx_static_check.
@@ -10976,6 +11225,7 @@ INTERFACE zif_github.
 * Operation id: pulls/submit-review
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Parameter: review_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/pull-request-review
@@ -10987,6 +11237,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
       review_id TYPE i
     RETURNING VALUE(return_data) TYPE pull_request_review
     RAISING cx_static_check.
@@ -10995,6 +11246,7 @@ INTERFACE zif_github.
 * Operation id: pulls/update-branch
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: pull_number, required, path
 * Response: 202
 *     application/json, object
 * Response: 403
@@ -11005,6 +11257,7 @@ INTERFACE zif_github.
     IMPORTING
       owner TYPE string
       repo TYPE string
+      pull_number TYPE i
     RAISING cx_static_check.
 
 * GET - "Get a repository README"
@@ -11632,22 +11885,27 @@ INTERFACE zif_github.
 
 * GET - "List public repositories"
 * Operation id: repos/list-public
+* Parameter: since, optional, query
 * Response: 200
 *     application/json, array
 * Response: 304
 * Response: 422
   METHODS repos_list_public
+    IMPORTING
+      since TYPE i OPTIONAL
     RAISING cx_static_check.
 
 * GET - "List provisioned SCIM groups for an enterprise"
 * Operation id: enterprise-admin/list-provisioned-groups-enterprise
 * Parameter: enterprise, required, path
+* Parameter: startIndex, optional, query
 * Parameter: count, optional, query
 * Response: 200
 *     application/json, #/components/schemas/scim-group-list-enterprise
   METHODS enterprise_admin_list_provisio
     IMPORTING
       enterprise TYPE string
+      startindex TYPE i OPTIONAL
       count TYPE i OPTIONAL
     RETURNING VALUE(return_data) TYPE scim_group_list_enterprise
     RAISING cx_static_check.
@@ -11719,12 +11977,14 @@ INTERFACE zif_github.
 * GET - "List SCIM provisioned identities for an enterprise"
 * Operation id: enterprise-admin/list-provisioned-identities-enterprise
 * Parameter: enterprise, required, path
+* Parameter: startIndex, optional, query
 * Parameter: count, optional, query
 * Response: 200
 *     application/json, #/components/schemas/scim-user-list-enterprise
   METHODS enterprise_admin_list_provis01
     IMPORTING
       enterprise TYPE string
+      startindex TYPE i OPTIONAL
       count TYPE i OPTIONAL
     RETURNING VALUE(return_data) TYPE scim_user_list_enterprise
     RAISING cx_static_check.
@@ -11912,7 +12172,7 @@ INTERFACE zif_github.
     IMPORTING
       q TYPE string
       sort TYPE string OPTIONAL
-      order TYPE string OPTIONAL
+      order TYPE string DEFAULT 'desc' OPTIONAL
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
@@ -11932,7 +12192,7 @@ INTERFACE zif_github.
     IMPORTING
       q TYPE string
       sort TYPE string OPTIONAL
-      order TYPE string OPTIONAL
+      order TYPE string DEFAULT 'desc' OPTIONAL
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
@@ -11954,7 +12214,7 @@ INTERFACE zif_github.
     IMPORTING
       q TYPE string
       sort TYPE string OPTIONAL
-      order TYPE string OPTIONAL
+      order TYPE string DEFAULT 'desc' OPTIONAL
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
@@ -11976,7 +12236,7 @@ INTERFACE zif_github.
       repository_id TYPE i
       q TYPE string
       sort TYPE string OPTIONAL
-      order TYPE string OPTIONAL
+      order TYPE string DEFAULT 'desc' OPTIONAL
     RAISING cx_static_check.
 
 * GET - "Search repositories"
@@ -11995,7 +12255,7 @@ INTERFACE zif_github.
     IMPORTING
       q TYPE string
       sort TYPE string OPTIONAL
-      order TYPE string OPTIONAL
+      order TYPE string DEFAULT 'desc' OPTIONAL
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
@@ -12028,22 +12288,26 @@ INTERFACE zif_github.
     IMPORTING
       q TYPE string
       sort TYPE string OPTIONAL
-      order TYPE string OPTIONAL
+      order TYPE string DEFAULT 'desc' OPTIONAL
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 
 * GET - "Get a team (Legacy)"
 * Operation id: teams/get-legacy
+* Parameter: team_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/team-full
 * Response: 404
   METHODS teams_get_legacy
+    IMPORTING
+      team_id TYPE i
     RETURNING VALUE(return_data) TYPE team_full
     RAISING cx_static_check.
 
 * PATCH - "Update a team (Legacy)"
 * Operation id: teams/update-legacy
+* Parameter: team_id, required, path
 * Response: 201
 *     application/json, #/components/schemas/team-full
 * Response: 403
@@ -12051,19 +12315,25 @@ INTERFACE zif_github.
 * Response: 422
 * Body schema: object
   METHODS teams_update_legacy
+    IMPORTING
+      team_id TYPE i
     RAISING cx_static_check.
 
 * DELETE - "Delete a team (Legacy)"
 * Operation id: teams/delete-legacy
+* Parameter: team_id, required, path
 * Response: 204
 * Response: 404
 * Response: 422
 * Body schema: object
   METHODS teams_delete_legacy
+    IMPORTING
+      team_id TYPE i
     RAISING cx_static_check.
 
 * GET - "List discussions (Legacy)"
 * Operation id: teams/list-discussions-legacy
+* Parameter: team_id, required, path
 * Parameter: direction, optional, query
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
@@ -12071,6 +12341,7 @@ INTERFACE zif_github.
 *     application/json, array
   METHODS teams_list_discussions_legacy
     IMPORTING
+      team_id TYPE i
       direction TYPE string DEFAULT 'desc' OPTIONAL
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
@@ -12078,38 +12349,58 @@ INTERFACE zif_github.
 
 * POST - "Create a discussion (Legacy)"
 * Operation id: teams/create-discussion-legacy
+* Parameter: team_id, required, path
 * Response: 201
 *     application/json, #/components/schemas/team-discussion
 * Body schema: object
   METHODS teams_create_discussion_legacy
+    IMPORTING
+      team_id TYPE i
     RAISING cx_static_check.
 
 * GET - "Get a discussion (Legacy)"
 * Operation id: teams/get-discussion-legacy
+* Parameter: team_id, required, path
+* Parameter: discussion_number, required, path
 * Response: 200
 *     application/json, #/components/schemas/team-discussion
   METHODS teams_get_discussion_legacy
+    IMPORTING
+      team_id TYPE i
+      discussion_number TYPE i
     RETURNING VALUE(return_data) TYPE team_discussion
     RAISING cx_static_check.
 
 * PATCH - "Update a discussion (Legacy)"
 * Operation id: teams/update-discussion-legacy
+* Parameter: team_id, required, path
+* Parameter: discussion_number, required, path
 * Response: 200
 *     application/json, #/components/schemas/team-discussion
 * Body schema: object
   METHODS teams_update_discussion_legacy
+    IMPORTING
+      team_id TYPE i
+      discussion_number TYPE i
     RETURNING VALUE(return_data) TYPE team_discussion
     RAISING cx_static_check.
 
 * DELETE - "Delete a discussion (Legacy)"
 * Operation id: teams/delete-discussion-legacy
+* Parameter: team_id, required, path
+* Parameter: discussion_number, required, path
 * Response: 204
 * Body schema: object
   METHODS teams_delete_discussion_legacy
+    IMPORTING
+      team_id TYPE i
+      discussion_number TYPE i
     RAISING cx_static_check.
 
 * GET - "List discussion comments (Legacy)"
 * Operation id: teams/list-discussion-comments-legacy
+* Parameter: team_id, required, path
+* Parameter: discussion_number, required, path
 * Parameter: direction, optional, query
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
@@ -12117,6 +12408,8 @@ INTERFACE zif_github.
 *     application/json, array
   METHODS teams_list_discussion_commen01
     IMPORTING
+      team_id TYPE i
+      discussion_number TYPE i
       direction TYPE string DEFAULT 'desc' OPTIONAL
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
@@ -12124,39 +12417,68 @@ INTERFACE zif_github.
 
 * POST - "Create a discussion comment (Legacy)"
 * Operation id: teams/create-discussion-comment-legacy
+* Parameter: team_id, required, path
+* Parameter: discussion_number, required, path
 * Response: 201
 *     application/json, #/components/schemas/team-discussion-comment
 * Body schema: object
   METHODS teams_create_discussion_comm01
+    IMPORTING
+      team_id TYPE i
+      discussion_number TYPE i
     RAISING cx_static_check.
 
 * GET - "Get a discussion comment (Legacy)"
 * Operation id: teams/get-discussion-comment-legacy
+* Parameter: team_id, required, path
+* Parameter: discussion_number, required, path
+* Parameter: comment_number, required, path
 * Response: 200
 *     application/json, #/components/schemas/team-discussion-comment
   METHODS teams_get_discussion_comment_l
+    IMPORTING
+      team_id TYPE i
+      discussion_number TYPE i
+      comment_number TYPE i
     RETURNING VALUE(return_data) TYPE team_discussion_comment
     RAISING cx_static_check.
 
 * PATCH - "Update a discussion comment (Legacy)"
 * Operation id: teams/update-discussion-comment-legacy
+* Parameter: team_id, required, path
+* Parameter: discussion_number, required, path
+* Parameter: comment_number, required, path
 * Response: 200
 *     application/json, #/components/schemas/team-discussion-comment
 * Body schema: object
   METHODS teams_update_discussion_comm01
+    IMPORTING
+      team_id TYPE i
+      discussion_number TYPE i
+      comment_number TYPE i
     RETURNING VALUE(return_data) TYPE team_discussion_comment
     RAISING cx_static_check.
 
 * DELETE - "Delete a discussion comment (Legacy)"
 * Operation id: teams/delete-discussion-comment-legacy
+* Parameter: team_id, required, path
+* Parameter: discussion_number, required, path
+* Parameter: comment_number, required, path
 * Response: 204
 * Body schema: object
   METHODS teams_delete_discussion_comm01
+    IMPORTING
+      team_id TYPE i
+      discussion_number TYPE i
+      comment_number TYPE i
     RAISING cx_static_check.
 
 * GET - "List reactions for a team discussion comment (Legacy)"
 * Operation id: reactions/list-for-team-discussion-comment-legacy
 * Parameter: content, optional, query
+* Parameter: team_id, required, path
+* Parameter: discussion_number, required, path
+* Parameter: comment_number, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -12164,21 +12486,33 @@ INTERFACE zif_github.
   METHODS reactions_list_for_team_disc02
     IMPORTING
       content TYPE string OPTIONAL
+      team_id TYPE i
+      discussion_number TYPE i
+      comment_number TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 
 * POST - "Create reaction for a team discussion comment (Legacy)"
 * Operation id: reactions/create-for-team-discussion-comment-legacy
+* Parameter: team_id, required, path
+* Parameter: discussion_number, required, path
+* Parameter: comment_number, required, path
 * Response: 201
 *     application/json, #/components/schemas/reaction
 * Body schema: object
   METHODS reactions_create_for_team_di02
+    IMPORTING
+      team_id TYPE i
+      discussion_number TYPE i
+      comment_number TYPE i
     RAISING cx_static_check.
 
 * GET - "List reactions for a team discussion (Legacy)"
 * Operation id: reactions/list-for-team-discussion-legacy
 * Parameter: content, optional, query
+* Parameter: team_id, required, path
+* Parameter: discussion_number, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -12186,26 +12520,35 @@ INTERFACE zif_github.
   METHODS reactions_list_for_team_disc03
     IMPORTING
       content TYPE string OPTIONAL
+      team_id TYPE i
+      discussion_number TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 
 * POST - "Create reaction for a team discussion (Legacy)"
 * Operation id: reactions/create-for-team-discussion-legacy
+* Parameter: team_id, required, path
+* Parameter: discussion_number, required, path
 * Response: 201
 *     application/json, #/components/schemas/reaction
 * Body schema: object
   METHODS reactions_create_for_team_di03
+    IMPORTING
+      team_id TYPE i
+      discussion_number TYPE i
     RAISING cx_static_check.
 
 * GET - "List pending team invitations (Legacy)"
 * Operation id: teams/list-pending-invitations-legacy
+* Parameter: team_id, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
 *     application/json, array
   METHODS teams_list_pending_invitatio01
     IMPORTING
+      team_id TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
@@ -12213,6 +12556,7 @@ INTERFACE zif_github.
 * GET - "List team members (Legacy)"
 * Operation id: teams/list-members-legacy
 * Parameter: role, optional, query
+* Parameter: team_id, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -12221,22 +12565,26 @@ INTERFACE zif_github.
   METHODS teams_list_members_legacy
     IMPORTING
       role TYPE string DEFAULT 'all' OPTIONAL
+      team_id TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 
 * GET - "Get team member (Legacy)"
 * Operation id: teams/get-member-legacy
+* Parameter: team_id, required, path
 * Parameter: username, required, path
 * Response: 204
 * Response: 404
   METHODS teams_get_member_legacy
     IMPORTING
+      team_id TYPE i
       username TYPE string
     RAISING cx_static_check.
 
 * PUT - "Add team member (Legacy)"
 * Operation id: teams/add-member-legacy
+* Parameter: team_id, required, path
 * Parameter: username, required, path
 * Response: 204
 * Response: 403
@@ -12245,33 +12593,39 @@ INTERFACE zif_github.
 *     application/json, object
   METHODS teams_add_member_legacy
     IMPORTING
+      team_id TYPE i
       username TYPE string
     RAISING cx_static_check.
 
 * DELETE - "Remove team member (Legacy)"
 * Operation id: teams/remove-member-legacy
+* Parameter: team_id, required, path
 * Parameter: username, required, path
 * Response: 204
 * Response: 404
   METHODS teams_remove_member_legacy
     IMPORTING
+      team_id TYPE i
       username TYPE string
     RAISING cx_static_check.
 
 * GET - "Get team membership for a user (Legacy)"
 * Operation id: teams/get-membership-for-user-legacy
+* Parameter: team_id, required, path
 * Parameter: username, required, path
 * Response: 200
 *     application/json, #/components/schemas/team-membership
 * Response: 404
   METHODS teams_get_membership_for_use01
     IMPORTING
+      team_id TYPE i
       username TYPE string
     RETURNING VALUE(return_data) TYPE team_membership
     RAISING cx_static_check.
 
 * PUT - "Add or update team membership for a user (Legacy)"
 * Operation id: teams/add-or-update-membership-for-user-legacy
+* Parameter: team_id, required, path
 * Parameter: username, required, path
 * Response: 200
 *     application/json, #/components/schemas/team-membership
@@ -12282,23 +12636,27 @@ INTERFACE zif_github.
 * Body schema: object
   METHODS teams_add_or_update_membersh01
     IMPORTING
+      team_id TYPE i
       username TYPE string
     RETURNING VALUE(return_data) TYPE team_membership
     RAISING cx_static_check.
 
 * DELETE - "Remove team membership for a user (Legacy)"
 * Operation id: teams/remove-membership-for-user-legacy
+* Parameter: team_id, required, path
 * Parameter: username, required, path
 * Response: 204
 * Response: 403
 * Body schema: object
   METHODS teams_remove_membership_for_01
     IMPORTING
+      team_id TYPE i
       username TYPE string
     RAISING cx_static_check.
 
 * GET - "List team projects (Legacy)"
 * Operation id: teams/list-projects-legacy
+* Parameter: team_id, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -12307,22 +12665,30 @@ INTERFACE zif_github.
 * Response: 415
   METHODS teams_list_projects_legacy
     IMPORTING
+      team_id TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 
 * GET - "Check team permissions for a project (Legacy)"
 * Operation id: teams/check-permissions-for-project-legacy
+* Parameter: team_id, required, path
+* Parameter: project_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/team-project
 * Response: 404
 * Response: 415
   METHODS teams_check_permissions_for_01
+    IMPORTING
+      team_id TYPE i
+      project_id TYPE i
     RETURNING VALUE(return_data) TYPE team_project
     RAISING cx_static_check.
 
 * PUT - "Add or update team project permissions (Legacy)"
 * Operation id: teams/add-or-update-project-permissions-legacy
+* Parameter: team_id, required, path
+* Parameter: project_id, required, path
 * Response: 204
 * Response: 403
 *     application/json, object
@@ -12331,20 +12697,29 @@ INTERFACE zif_github.
 * Response: 422
 * Body schema: object
   METHODS teams_add_or_update_project_01
+    IMPORTING
+      team_id TYPE i
+      project_id TYPE i
     RAISING cx_static_check.
 
 * DELETE - "Remove a project from a team (Legacy)"
 * Operation id: teams/remove-project-legacy
+* Parameter: team_id, required, path
+* Parameter: project_id, required, path
 * Response: 204
 * Response: 404
 * Response: 415
 * Response: 422
 * Body schema: object
   METHODS teams_remove_project_legacy
+    IMPORTING
+      team_id TYPE i
+      project_id TYPE i
     RAISING cx_static_check.
 
 * GET - "List team repositories (Legacy)"
 * Operation id: teams/list-repos-legacy
+* Parameter: team_id, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -12352,12 +12727,14 @@ INTERFACE zif_github.
 * Response: 404
   METHODS teams_list_repos_legacy
     IMPORTING
+      team_id TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
 
 * GET - "Check team permissions for a repository (Legacy)"
 * Operation id: teams/check-permissions-for-repo-legacy
+* Parameter: team_id, required, path
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
@@ -12366,12 +12743,14 @@ INTERFACE zif_github.
 * Response: 404
   METHODS teams_check_permissions_for_02
     IMPORTING
+      team_id TYPE i
       owner TYPE string
       repo TYPE string
     RAISING cx_static_check.
 
 * PUT - "Add or update team repository permissions (Legacy)"
 * Operation id: teams/add-or-update-repo-permissions-legacy
+* Parameter: team_id, required, path
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 204
@@ -12380,45 +12759,55 @@ INTERFACE zif_github.
 * Body schema: object
   METHODS teams_add_or_update_repo_per01
     IMPORTING
+      team_id TYPE i
       owner TYPE string
       repo TYPE string
     RAISING cx_static_check.
 
 * DELETE - "Remove a repository from a team (Legacy)"
 * Operation id: teams/remove-repo-legacy
+* Parameter: team_id, required, path
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 204
 * Body schema: object
   METHODS teams_remove_repo_legacy
     IMPORTING
+      team_id TYPE i
       owner TYPE string
       repo TYPE string
     RAISING cx_static_check.
 
 * GET - "List IdP groups for a team (Legacy)"
 * Operation id: teams/list-idp-groups-for-legacy
+* Parameter: team_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/group-mapping
 * Response: 403
 * Response: 404
   METHODS teams_list_idp_groups_for_lega
+    IMPORTING
+      team_id TYPE i
     RETURNING VALUE(return_data) TYPE group_mapping
     RAISING cx_static_check.
 
 * PATCH - "Create or update IdP group connections (Legacy)"
 * Operation id: teams/create-or-update-idp-group-connections-legacy
+* Parameter: team_id, required, path
 * Response: 200
 *     application/json, #/components/schemas/group-mapping
 * Response: 403
 * Response: 422
 * Body schema: object
   METHODS teams_create_or_update_idp_g01
+    IMPORTING
+      team_id TYPE i
     RETURNING VALUE(return_data) TYPE group_mapping
     RAISING cx_static_check.
 
 * GET - "List child teams (Legacy)"
 * Operation id: teams/list-child-legacy
+* Parameter: team_id, required, path
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
@@ -12428,6 +12817,7 @@ INTERFACE zif_github.
 * Response: 422
   METHODS teams_list_child_legacy
     IMPORTING
+      team_id TYPE i
       per_page TYPE i DEFAULT 30 OPTIONAL
       page TYPE i DEFAULT 1 OPTIONAL
     RAISING cx_static_check.
@@ -13261,12 +13651,14 @@ INTERFACE zif_github.
 
 * GET - "List users"
 * Operation id: users/list
+* Parameter: since, optional, query
 * Parameter: per_page, optional, query
 * Response: 200
 *     application/json, array
 * Response: 304
   METHODS users_list
     IMPORTING
+      since TYPE i OPTIONAL
       per_page TYPE i DEFAULT 30 OPTIONAL
     RAISING cx_static_check.
 

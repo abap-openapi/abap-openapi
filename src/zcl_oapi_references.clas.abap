@@ -36,10 +36,13 @@ CLASS zcl_oapi_references IMPLEMENTATION.
     LOOP AT ms_spec-operations ASSIGNING <ls_operation>.
       LOOP AT <ls_operation>-parameters_ref INTO lv_ref.
         REPLACE FIRST OCCURRENCE OF '#/components/parameters/' IN lv_ref WITH ''.
-*        WRITE '@KERNEL console.dir(lv_ref.get());'.
-        READ TABLE ms_spec-components-parameters WITH KEY name = lv_ref INTO ls_parameter.
+        READ TABLE ms_spec-components-parameters WITH KEY id = lv_ref INTO ls_parameter.
         IF sy-subrc = 0.
           APPEND ls_parameter TO <ls_operation>-parameters.
+        ELSE.
+          ASSERT 0 = 1.
+*        ELSE.
+*          WRITE '@KERNEL console.dir(lv_ref.get() + "not found");'.
         ENDIF.
       ENDLOOP.
       CLEAR <ls_operation>-parameters_ref.

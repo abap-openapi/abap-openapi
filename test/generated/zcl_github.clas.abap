@@ -4243,6 +4243,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~apps_delete_authorization.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/grant'.
+    REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -4254,6 +4255,8 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~apps_revoke_grant_for_applicat.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/grants/{access_token}'.
+    REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
+    REPLACE ALL OCCURRENCES OF '{access_token}' IN lv_uri WITH access_token.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -4265,6 +4268,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~apps_check_token.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/token'.
+    REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -4276,6 +4280,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~apps_reset_token.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/token'.
+    REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -4287,6 +4292,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~apps_delete_token.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/token'.
+    REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -4298,6 +4304,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~apps_scope_token.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/token/scoped'.
+    REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -4309,6 +4316,8 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~apps_check_authorization.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/tokens/{access_token}'.
+    REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
+    REPLACE ALL OCCURRENCES OF '{access_token}' IN lv_uri WITH access_token.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -4320,6 +4329,8 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~apps_reset_authorization.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/tokens/{access_token}'.
+    REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
+    REPLACE ALL OCCURRENCES OF '{access_token}' IN lv_uri WITH access_token.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -4331,6 +4342,8 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~apps_revoke_authorization_for_.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/applications/{client_id}/tokens/{access_token}'.
+    REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
+    REPLACE ALL OCCURRENCES OF '{access_token}' IN lv_uri WITH access_token.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -4382,6 +4395,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~oauth_authorizations_get_or_cr.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/authorizations/clients/{client_id}'.
+    REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -4394,6 +4408,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/authorizations/clients/{client_id}/{fingerprint}'.
     REPLACE ALL OCCURRENCES OF '{fingerprint}' IN lv_uri WITH fingerprint.
+    REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -4861,6 +4876,21 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/audit-log'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
+    IF phrase IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'phrase' value = phrase ).
+    ENDIF.
+    IF include IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'include' value = include ).
+    ENDIF.
+    IF after IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'after' value = after ).
+    ENDIF.
+    IF before IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'before' value = before ).
+    ENDIF.
+    IF order IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'order' value = order ).
+    ENDIF.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
     ENDIF.
@@ -5611,6 +5641,9 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~orgs_list.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/organizations'.
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
     ENDIF.
@@ -6140,6 +6173,21 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/audit-log'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
+    IF phrase IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'phrase' value = phrase ).
+    ENDIF.
+    IF include IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'include' value = include ).
+    ENDIF.
+    IF after IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'after' value = after ).
+    ENDIF.
+    IF before IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'before' value = before ).
+    ENDIF.
+    IF order IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'order' value = order ).
+    ENDIF.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
     ENDIF.
@@ -6297,6 +6345,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/hooks/{hook_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
+    REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH hook_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -6309,6 +6358,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/hooks/{hook_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
+    REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH hook_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -6321,6 +6371,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/hooks/{hook_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
+    REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH hook_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -6333,6 +6384,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/hooks/{hook_id}/config'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
+    REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH hook_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -6345,6 +6397,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/hooks/{hook_id}/config'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
+    REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH hook_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -6357,6 +6410,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/hooks/{hook_id}/pings'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
+    REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH hook_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7059,6 +7113,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7072,6 +7127,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7085,6 +7141,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7098,6 +7155,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
     IF direction IS SUPPLIED.
       mi_client->request->set_form_field( name = 'direction' value = direction ).
     ENDIF.
@@ -7120,6 +7178,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7133,6 +7192,8 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
+    REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH comment_number.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7146,6 +7207,8 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
+    REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH comment_number.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7159,6 +7222,8 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
+    REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH comment_number.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7172,6 +7237,8 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
+    REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH comment_number.
     IF content IS SUPPLIED.
       mi_client->request->set_form_field( name = 'content' value = content ).
     ENDIF.
@@ -7194,6 +7261,8 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
+    REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH comment_number.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7207,6 +7276,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions/{reaction_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
+    REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH comment_number.
+    REPLACE ALL OCCURRENCES OF '{reaction_id}' IN lv_uri WITH reaction_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7220,6 +7292,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
     IF content IS SUPPLIED.
       mi_client->request->set_form_field( name = 'content' value = content ).
     ENDIF.
@@ -7242,6 +7315,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7255,6 +7329,8 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions/{reaction_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
+    REPLACE ALL OCCURRENCES OF '{reaction_id}' IN lv_uri WITH reaction_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7370,6 +7446,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/projects/{project_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
+    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH project_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7383,6 +7460,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/projects/{project_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
+    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH project_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7396,6 +7474,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams/{team_slug}/projects/{project_id}'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
+    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH project_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7645,6 +7724,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~projects_get.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}'.
+    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH project_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7656,6 +7736,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~projects_update.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}'.
+    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH project_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7667,6 +7748,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~projects_delete.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}'.
+    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH project_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7678,6 +7760,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~projects_list_collaborators.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}/collaborators'.
+    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH project_id.
     IF affiliation IS SUPPLIED.
       mi_client->request->set_form_field( name = 'affiliation' value = affiliation ).
     ENDIF.
@@ -7698,6 +7781,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~projects_add_collaborator.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}/collaborators/{username}'.
+    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH project_id.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7710,6 +7794,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~projects_remove_collaborator.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}/collaborators/{username}'.
+    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH project_id.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7722,6 +7807,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~projects_get_permission_for_us.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}/collaborators/{username}/permission'.
+    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH project_id.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -7734,6 +7820,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~projects_list_columns.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}/columns'.
+    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH project_id.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
     ENDIF.
@@ -7751,6 +7838,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~projects_create_column.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/projects/{project_id}/columns'.
+    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH project_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -7773,6 +7861,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~reactions_delete_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/reactions/{reaction_id}'.
+    REPLACE ALL OCCURRENCES OF '{reaction_id}' IN lv_uri WITH reaction_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8056,8 +8145,14 @@ CLASS zcl_github IMPLEMENTATION.
     IF actor IS SUPPLIED.
       mi_client->request->set_form_field( name = 'actor' value = actor ).
     ENDIF.
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     IF event IS SUPPLIED.
       mi_client->request->set_form_field( name = 'event' value = event ).
+    ENDIF.
+    IF status IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'status' value = status ).
     ENDIF.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -8078,6 +8173,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{run_id}' IN lv_uri WITH run_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8091,6 +8187,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{run_id}' IN lv_uri WITH run_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8104,6 +8201,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}/artifacts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{run_id}' IN lv_uri WITH run_id.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
     ENDIF.
@@ -8123,6 +8221,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}/cancel'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{run_id}' IN lv_uri WITH run_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8136,6 +8235,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}/jobs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{run_id}' IN lv_uri WITH run_id.
     IF filter IS SUPPLIED.
       mi_client->request->set_form_field( name = 'filter' value = filter ).
     ENDIF.
@@ -8158,6 +8258,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}/logs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{run_id}' IN lv_uri WITH run_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8171,6 +8272,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}/logs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{run_id}' IN lv_uri WITH run_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8184,6 +8286,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}/rerun'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{run_id}' IN lv_uri WITH run_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8197,6 +8300,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/runs/{run_id}/timing'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{run_id}' IN lv_uri WITH run_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8303,6 +8407,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8316,6 +8421,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8329,6 +8435,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8342,6 +8449,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/enable'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8355,11 +8463,18 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     IF actor IS SUPPLIED.
       mi_client->request->set_form_field( name = 'actor' value = actor ).
     ENDIF.
+    IF branch IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'branch' value = branch ).
+    ENDIF.
     IF event IS SUPPLIED.
       mi_client->request->set_form_field( name = 'event' value = event ).
+    ENDIF.
+    IF status IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'status' value = status ).
     ENDIF.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -8380,6 +8495,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8474,9 +8590,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8490,9 +8604,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8506,9 +8618,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8522,9 +8632,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8538,9 +8646,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8554,9 +8660,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8570,9 +8674,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8586,9 +8688,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8602,9 +8702,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8618,9 +8716,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8634,9 +8730,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8650,9 +8744,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8666,9 +8758,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8682,9 +8772,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8698,9 +8786,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8714,9 +8800,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8730,9 +8814,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8746,9 +8828,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8762,9 +8842,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8778,9 +8856,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8794,9 +8870,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8810,9 +8884,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8826,9 +8898,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8842,9 +8912,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8858,9 +8926,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8874,9 +8940,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8890,9 +8954,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8906,9 +8968,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8922,9 +8982,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8938,9 +8996,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8954,9 +9010,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8970,9 +9024,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -8986,9 +9038,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -9002,9 +9052,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -9018,9 +9066,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/branches/{branch}/rename'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    IF branch IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'branch' value = branch ).
-    ENDIF.
+    REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -9434,6 +9480,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
+    REPLACE ALL OCCURRENCES OF '{reaction_id}' IN lv_uri WITH reaction_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10166,6 +10213,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/hooks/{hook_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH hook_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10179,6 +10227,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/hooks/{hook_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH hook_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10192,6 +10241,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/hooks/{hook_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH hook_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10205,6 +10255,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/hooks/{hook_id}/config'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH hook_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10218,6 +10269,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/hooks/{hook_id}/config'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH hook_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10231,6 +10283,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/hooks/{hook_id}/pings'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH hook_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10244,6 +10297,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/hooks/{hook_id}/tests'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH hook_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10309,6 +10363,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/import/authors'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10628,6 +10685,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
+    REPLACE ALL OCCURRENCES OF '{reaction_id}' IN lv_uri WITH reaction_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -10930,6 +10988,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH issue_number.
+    REPLACE ALL OCCURRENCES OF '{reaction_id}' IN lv_uri WITH reaction_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -11584,6 +11643,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
+    REPLACE ALL OCCURRENCES OF '{reaction_id}' IN lv_uri WITH reaction_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -11597,6 +11657,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -11610,6 +11671,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -11623,6 +11685,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/comments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     IF direction IS SUPPLIED.
       mi_client->request->set_form_field( name = 'direction' value = direction ).
     ENDIF.
@@ -11651,6 +11714,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/comments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -11664,6 +11728,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/comments/{comment_id}/replies'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH comment_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -11678,6 +11743,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/commits'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
     ENDIF.
@@ -11697,6 +11763,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/files'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
     ENDIF.
@@ -11716,6 +11783,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/merge'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -11729,6 +11797,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/merge'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -11742,6 +11811,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
     ENDIF.
@@ -11761,6 +11831,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -11774,6 +11845,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -11787,6 +11859,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/reviews'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
     ENDIF.
@@ -11806,6 +11879,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/reviews'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -11819,6 +11893,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     REPLACE ALL OCCURRENCES OF '{review_id}' IN lv_uri WITH review_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -11833,6 +11908,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     REPLACE ALL OCCURRENCES OF '{review_id}' IN lv_uri WITH review_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -11847,6 +11923,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     REPLACE ALL OCCURRENCES OF '{review_id}' IN lv_uri WITH review_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -11861,6 +11938,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     REPLACE ALL OCCURRENCES OF '{review_id}' IN lv_uri WITH review_id.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
@@ -11881,6 +11959,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/dismissals'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     REPLACE ALL OCCURRENCES OF '{review_id}' IN lv_uri WITH review_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -11895,6 +11974,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/events'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     REPLACE ALL OCCURRENCES OF '{review_id}' IN lv_uri WITH review_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -11909,6 +11989,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/pulls/{pull_number}/update-branch'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
+    REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH pull_number.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -12540,6 +12621,9 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~repos_list_public.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/repositories'.
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -12552,6 +12636,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Groups'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
+    IF startindex IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'startIndex' value = startindex ).
+    ENDIF.
     IF count IS SUPPLIED.
       mi_client->request->set_form_field( name = 'count' value = count ).
     ENDIF.
@@ -12631,6 +12718,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Users'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
+    IF startindex IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'startIndex' value = startindex ).
+    ENDIF.
     IF count IS SUPPLIED.
       mi_client->request->set_form_field( name = 'count' value = count ).
     ENDIF.
@@ -12945,6 +13035,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_get_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -12956,6 +13047,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_update_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -12967,6 +13059,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_delete_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -12978,6 +13071,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_list_discussions_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     IF direction IS SUPPLIED.
       mi_client->request->set_form_field( name = 'direction' value = direction ).
     ENDIF.
@@ -12998,6 +13092,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_create_discussion_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -13009,6 +13104,8 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_get_discussion_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -13020,6 +13117,8 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_update_discussion_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -13031,6 +13130,8 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_delete_discussion_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -13042,6 +13143,8 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_list_discussion_commen01.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
     IF direction IS SUPPLIED.
       mi_client->request->set_form_field( name = 'direction' value = direction ).
     ENDIF.
@@ -13062,6 +13165,8 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_create_discussion_comm01.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -13073,6 +13178,9 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_get_discussion_comment_l.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
+    REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH comment_number.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -13084,6 +13192,9 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_update_discussion_comm01.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
+    REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH comment_number.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -13095,6 +13206,9 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_delete_discussion_comm01.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
+    REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH comment_number.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -13106,6 +13220,9 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~reactions_list_for_team_disc02.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
+    REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH comment_number.
     IF content IS SUPPLIED.
       mi_client->request->set_form_field( name = 'content' value = content ).
     ENDIF.
@@ -13126,6 +13243,9 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~reactions_create_for_team_di02.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
+    REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH comment_number.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -13137,6 +13257,8 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~reactions_list_for_team_disc03.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/reactions'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
     IF content IS SUPPLIED.
       mi_client->request->set_form_field( name = 'content' value = content ).
     ENDIF.
@@ -13157,6 +13279,8 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~reactions_create_for_team_di03.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/reactions'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
+    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH discussion_number.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -13168,6 +13292,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_list_pending_invitatio01.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/invitations'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
     ENDIF.
@@ -13185,6 +13310,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_list_members_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/members'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     IF role IS SUPPLIED.
       mi_client->request->set_form_field( name = 'role' value = role ).
     ENDIF.
@@ -13205,6 +13331,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_get_member_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/members/{username}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -13217,6 +13344,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_add_member_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/members/{username}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -13229,6 +13357,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_remove_member_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/members/{username}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -13241,6 +13370,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_get_membership_for_use01.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/memberships/{username}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -13253,6 +13383,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_add_or_update_membersh01.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/memberships/{username}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -13265,6 +13396,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_remove_membership_for_01.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/memberships/{username}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -13277,6 +13409,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_list_projects_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/projects'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
     ENDIF.
@@ -13294,6 +13427,8 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_check_permissions_for_01.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/projects/{project_id}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
+    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH project_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -13305,6 +13440,8 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_add_or_update_project_01.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/projects/{project_id}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
+    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH project_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -13316,6 +13453,8 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_remove_project_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/projects/{project_id}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
+    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH project_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -13327,6 +13466,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_list_repos_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/repos'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
     ENDIF.
@@ -13344,6 +13484,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_check_permissions_for_02.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/repos/{owner}/{repo}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'GET' ).
@@ -13357,6 +13498,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_add_or_update_repo_per01.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/repos/{owner}/{repo}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
@@ -13370,6 +13512,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_remove_repo_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/repos/{owner}/{repo}'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
@@ -13383,6 +13526,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_list_idp_groups_for_lega.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/team-sync/group-mappings'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -13394,6 +13538,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_create_or_update_idp_g01.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/team-sync/group-mappings'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -13405,6 +13550,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~teams_list_child_legacy.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/teams/{team_id}/teams'.
+    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH team_id.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
     ENDIF.
@@ -14251,6 +14397,9 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD zif_github~users_list.
     DATA lv_code TYPE i.
     DATA lv_uri TYPE string VALUE '/users'.
+    IF since IS SUPPLIED.
+      mi_client->request->set_form_field( name = 'since' value = since ).
+    ENDIF.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = per_page ).
     ENDIF.

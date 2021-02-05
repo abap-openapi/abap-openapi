@@ -3,6 +3,7 @@ INTERFACE zif_oapi_specification_v3 PUBLIC.
 * OpenAPI v3 specification
 
   TYPES: BEGIN OF ty_parameter,
+           id          TYPE string,
            name        TYPE string,
            abap_name   TYPE string,
            in          TYPE string,

@@ -8,97 +8,33 @@ CLASS zcl_jira DEFINITION PUBLIC.
     DATA mi_client TYPE REF TO if_http_client.
     DATA mo_json TYPE REF TO zcl_oapi_json.
     METHODS send_receive RETURNING VALUE(rv_code) TYPE i.
-    METHODS parse_propertykey
+    METHODS parse_applicationrole
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(propertykey) TYPE zif_jira=>propertykey
-      RAISING cx_static_check.
-    METHODS parse_propertykeys
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(propertykeys) TYPE zif_jira=>propertykeys
-      RAISING cx_static_check.
-    METHODS parse_entityproperty
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(entityproperty) TYPE zif_jira=>entityproperty
-      RAISING cx_static_check.
-    METHODS parse_issuesandjqlqueries
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuesandjqlqueries) TYPE zif_jira=>issuesandjqlqueries
-      RAISING cx_static_check.
-    METHODS parse_issuematches
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuematches) TYPE zif_jira=>issuematches
-      RAISING cx_static_check.
-    METHODS parse_issuematchesforjql
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuematchesforjql) TYPE zif_jira=>issuematchesforjql
-      RAISING cx_static_check.
-    METHODS parse_associateditembean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(associateditembean) TYPE zif_jira=>associateditembean
-      RAISING cx_static_check.
-    METHODS parse_auditrecordbean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(auditrecordbean) TYPE zif_jira=>auditrecordbean
-      RAISING cx_static_check.
-    METHODS parse_auditrecords
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(auditrecords) TYPE zif_jira=>auditrecords
-      RAISING cx_static_check.
-    METHODS parse_changedvaluebean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(changedvaluebean) TYPE zif_jira=>changedvaluebean
+      RETURNING VALUE(applicationrole) TYPE zif_jira=>applicationrole
       RAISING cx_static_check.
     METHODS parse_avatarurlsbean
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(avatarurlsbean) TYPE zif_jira=>avatarurlsbean
       RAISING cx_static_check.
-    METHODS parse_deprecatedworkflow
+    METHODS parse_component
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(deprecatedworkflow) TYPE zif_jira=>deprecatedworkflow
+      RETURNING VALUE(component) TYPE zif_jira=>component
       RAISING cx_static_check.
-    METHODS parse_projectforscope
+    METHODS parse_dashboard
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectforscope) TYPE zif_jira=>projectforscope
-      RAISING cx_static_check.
-    METHODS parse_scope
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(scope) TYPE zif_jira=>scope
-      RAISING cx_static_check.
-    METHODS parse_updatedprojectcategory
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(updatedprojectcategory) TYPE zif_jira=>updatedprojectcategory
-      RAISING cx_static_check.
-    METHODS parse_workflowtransitionproper
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowtransitionproperty) TYPE zif_jira=>workflowtransitionproperty
-      RAISING cx_static_check.
-    METHODS parse_columnitem
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(columnitem) TYPE zif_jira=>columnitem
-      RAISING cx_static_check.
-    METHODS parse_configuration
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(configuration) TYPE zif_jira=>configuration
-      RAISING cx_static_check.
-    METHODS parse_timetrackingconfiguratio
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(timetrackingconfiguration) TYPE zif_jira=>timetrackingconfiguration
-      RAISING cx_static_check.
-    METHODS parse_applicationproperty
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(applicationproperty) TYPE zif_jira=>applicationproperty
-      RAISING cx_static_check.
-    METHODS parse_simpleapplicationpropert
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(simpleapplicationpropertybean) TYPE zif_jira=>simpleapplicationpropertybean
-      RAISING cx_static_check.
-    METHODS parse_applicationrole
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(applicationrole) TYPE zif_jira=>applicationrole
+      RETURNING VALUE(dashboard) TYPE zif_jira=>dashboard
       RAISING cx_static_check.
     METHODS parse_groupname
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(groupname) TYPE zif_jira=>groupname
+      RAISING cx_static_check.
+    METHODS parse_hierarchy
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(hierarchy) TYPE zif_jira=>hierarchy
+      RAISING cx_static_check.
+    METHODS parse_hierarchylevel
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(hierarchylevel) TYPE zif_jira=>hierarchylevel
       RAISING cx_static_check.
     METHODS parse_issuetypedetails
       IMPORTING iv_prefix TYPE string
@@ -112,9 +48,57 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(listwrappercallbackgroupname) TYPE zif_jira=>listwrappercallbackgroupname
       RAISING cx_static_check.
-    METHODS parse_pagebeanworkflowscheme
+    METHODS parse_pageofdashboards
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanworkflowscheme) TYPE zif_jira=>pagebeanworkflowscheme
+      RETURNING VALUE(pageofdashboards) TYPE zif_jira=>pageofdashboards
+      RAISING cx_static_check.
+    METHODS parse_project
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(project) TYPE zif_jira=>project
+      RAISING cx_static_check.
+    METHODS parse_projectcategory
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectcategory) TYPE zif_jira=>projectcategory
+      RAISING cx_static_check.
+    METHODS parse_projectforscope
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectforscope) TYPE zif_jira=>projectforscope
+      RAISING cx_static_check.
+    METHODS parse_projectinsight
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectinsight) TYPE zif_jira=>projectinsight
+      RAISING cx_static_check.
+    METHODS parse_projectpermissions
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectpermissions) TYPE zif_jira=>projectpermissions
+      RAISING cx_static_check.
+    METHODS parse_projectrole
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectrole) TYPE zif_jira=>projectrole
+      RAISING cx_static_check.
+    METHODS parse_projectrolegroup
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectrolegroup) TYPE zif_jira=>projectrolegroup
+      RAISING cx_static_check.
+    METHODS parse_projectroleuser
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectroleuser) TYPE zif_jira=>projectroleuser
+      RAISING cx_static_check.
+    METHODS parse_roleactor
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(roleactor) TYPE zif_jira=>roleactor
+      RAISING cx_static_check.
+    METHODS parse_scope
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(scope) TYPE zif_jira=>scope
+      RAISING cx_static_check.
+    METHODS parse_sharepermission
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(sharepermission) TYPE zif_jira=>sharepermission
+      RAISING cx_static_check.
+    METHODS parse_simplelink
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(simplelink) TYPE zif_jira=>simplelink
       RAISING cx_static_check.
     METHODS parse_simplelistwrapperapplica
       IMPORTING iv_prefix TYPE string
@@ -124,137 +108,65 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(simplelistwrappergroupname) TYPE zif_jira=>simplelistwrappergroupname
       RAISING cx_static_check.
+    METHODS parse_updatedprojectcategory
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(updatedprojectcategory) TYPE zif_jira=>updatedprojectcategory
+      RAISING cx_static_check.
     METHODS parse_user
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(user) TYPE zif_jira=>user
       RAISING cx_static_check.
-    METHODS parse_workflowscheme
+    METHODS parse_userbean
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowscheme) TYPE zif_jira=>workflowscheme
+      RETURNING VALUE(userbean) TYPE zif_jira=>userbean
       RAISING cx_static_check.
-    METHODS parse_issuetypesworkflowmappin
+    METHODS parse_userbeanavatarurls
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypesworkflowmapping) TYPE zif_jira=>issuetypesworkflowmapping
+      RETURNING VALUE(userbeanavatarurls) TYPE zif_jira=>userbeanavatarurls
       RAISING cx_static_check.
-    METHODS parse_issuetypeworkflowmapping
+    METHODS parse_version
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeworkflowmapping) TYPE zif_jira=>issuetypeworkflowmapping
+      RETURNING VALUE(version) TYPE zif_jira=>version
       RAISING cx_static_check.
-    METHODS parse_defaultworkflow
+    METHODS parse_versionissuesstatus
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(defaultworkflow) TYPE zif_jira=>defaultworkflow
-      RAISING cx_static_check.
-    METHODS parse_containerofworkflowschem
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(containerofworkflowschemeassoc) TYPE zif_jira=>containerofworkflowschemeassoc
-      RAISING cx_static_check.
-    METHODS parse_workflowschemeassociatio
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowschemeassociations) TYPE zif_jira=>workflowschemeassociations
-      RAISING cx_static_check.
-    METHODS parse_workflowschemeprojectass
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowschemeprojectassociati) TYPE zif_jira=>workflowschemeprojectassociati
-      RAISING cx_static_check.
-    METHODS parse_pagebeanworkflow
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanworkflow) TYPE zif_jira=>pagebeanworkflow
-      RAISING cx_static_check.
-    METHODS parse_publishedworkflowid
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(publishedworkflowid) TYPE zif_jira=>publishedworkflowid
-      RAISING cx_static_check.
-    METHODS parse_screenid
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(screenid) TYPE zif_jira=>screenid
-      RAISING cx_static_check.
-    METHODS parse_transition
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(transition) TYPE zif_jira=>transition
-      RAISING cx_static_check.
-    METHODS parse_workflow
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflow) TYPE zif_jira=>workflow
-      RAISING cx_static_check.
-    METHODS parse_workflowrules
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowrules) TYPE zif_jira=>workflowrules
-      RAISING cx_static_check.
-    METHODS parse_workflowstatus
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowstatus) TYPE zif_jira=>workflowstatus
-      RAISING cx_static_check.
-    METHODS parse_workflowstatusproperties
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowstatusproperties) TYPE zif_jira=>workflowstatusproperties
-      RAISING cx_static_check.
-    METHODS parse_workflowtransitionrule
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowtransitionrule) TYPE zif_jira=>workflowtransitionrule
+      RETURNING VALUE(versionissuesstatus) TYPE zif_jira=>versionissuesstatus
       RAISING cx_static_check.
     METHODS parse_errorcollection
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(errorcollection) TYPE zif_jira=>errorcollection
       RAISING cx_static_check.
-    METHODS parse_connectworkflowtransitio
+    METHODS parse_pagebeandashboard
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(connectworkflowtransitionrule) TYPE zif_jira=>connectworkflowtransitionrule
+      RETURNING VALUE(pagebeandashboard) TYPE zif_jira=>pagebeandashboard
       RAISING cx_static_check.
-    METHODS parse_pagebeanworkflowtransiti
+    METHODS parse_dashboarddetails
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanworkflowtransitionrule) TYPE zif_jira=>pagebeanworkflowtransitionrule
+      RETURNING VALUE(dashboarddetails) TYPE zif_jira=>dashboarddetails
       RAISING cx_static_check.
-    METHODS parse_ruleconfiguration
+    METHODS parse_propertykey
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(ruleconfiguration) TYPE zif_jira=>ruleconfiguration
+      RETURNING VALUE(propertykey) TYPE zif_jira=>propertykey
       RAISING cx_static_check.
-    METHODS parse_workflowid
+    METHODS parse_propertykeys
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowid) TYPE zif_jira=>workflowid
+      RETURNING VALUE(propertykeys) TYPE zif_jira=>propertykeys
       RAISING cx_static_check.
-    METHODS parse_workflowtransition
+    METHODS parse_entityproperty
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowtransition) TYPE zif_jira=>workflowtransition
+      RETURNING VALUE(entityproperty) TYPE zif_jira=>entityproperty
       RAISING cx_static_check.
-    METHODS parse_workflowtransitionrules
+    METHODS parse_projectissuesecurityleve
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowtransitionrules) TYPE zif_jira=>workflowtransitionrules
+      RETURNING VALUE(projectissuesecuritylevels) TYPE zif_jira=>projectissuesecuritylevels
       RAISING cx_static_check.
-    METHODS parse_workflowtransitionrulesu
+    METHODS parse_securitylevel
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowtransitionrulesupdate) TYPE zif_jira=>workflowtransitionrulesupdate
+      RETURNING VALUE(securitylevel) TYPE zif_jira=>securitylevel
       RAISING cx_static_check.
-    METHODS parse_workflowtransitionrule01
+    METHODS parse_pagebeanstring
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowtransitionrulesupdatee) TYPE zif_jira=>workflowtransitionrulesupdatee
-      RAISING cx_static_check.
-    METHODS parse_workflowtransitionrule02
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(workflowtransitionrulesupdat01) TYPE zif_jira=>workflowtransitionrulesupdat01
-      RAISING cx_static_check.
-    METHODS parse_timetrackingprovider
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(timetrackingprovider) TYPE zif_jira=>timetrackingprovider
-      RAISING cx_static_check.
-    METHODS parse_permissiongrant
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(permissiongrant) TYPE zif_jira=>permissiongrant
-      RAISING cx_static_check.
-    METHODS parse_permissionholder
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(permissionholder) TYPE zif_jira=>permissionholder
-      RAISING cx_static_check.
-    METHODS parse_permissionscheme
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(permissionscheme) TYPE zif_jira=>permissionscheme
-      RAISING cx_static_check.
-    METHODS parse_permissionschemes
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(permissionschemes) TYPE zif_jira=>permissionschemes
-      RAISING cx_static_check.
-    METHODS parse_permissiongrants
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(permissiongrants) TYPE zif_jira=>permissiongrants
+      RETURNING VALUE(pagebeanstring) TYPE zif_jira=>pagebeanstring
       RAISING cx_static_check.
     METHODS parse_pagebeanuserkey
       IMPORTING iv_prefix TYPE string
@@ -324,10 +236,6 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(searchresults) TYPE zif_jira=>searchresults
       RAISING cx_static_check.
-    METHODS parse_simplelink
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(simplelink) TYPE zif_jira=>simplelink
-      RAISING cx_static_check.
     METHODS parse_statuscategory
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(statuscategory) TYPE zif_jira=>statuscategory
@@ -376,10 +284,6 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(jqlquerywithunknownusers) TYPE zif_jira=>jqlquerywithunknownusers
       RAISING cx_static_check.
-    METHODS parse_component
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(component) TYPE zif_jira=>component
-      RAISING cx_static_check.
     METHODS parse_filter
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(filter) TYPE zif_jira=>filter
@@ -392,61 +296,9 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(filtersubscriptionslist) TYPE zif_jira=>filtersubscriptionslist
       RAISING cx_static_check.
-    METHODS parse_hierarchy
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(hierarchy) TYPE zif_jira=>hierarchy
-      RAISING cx_static_check.
-    METHODS parse_hierarchylevel
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(hierarchylevel) TYPE zif_jira=>hierarchylevel
-      RAISING cx_static_check.
-    METHODS parse_project
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(project) TYPE zif_jira=>project
-      RAISING cx_static_check.
-    METHODS parse_projectcategory
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectcategory) TYPE zif_jira=>projectcategory
-      RAISING cx_static_check.
-    METHODS parse_projectinsight
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectinsight) TYPE zif_jira=>projectinsight
-      RAISING cx_static_check.
-    METHODS parse_projectpermissions
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectpermissions) TYPE zif_jira=>projectpermissions
-      RAISING cx_static_check.
-    METHODS parse_projectrole
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectrole) TYPE zif_jira=>projectrole
-      RAISING cx_static_check.
-    METHODS parse_projectrolegroup
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectrolegroup) TYPE zif_jira=>projectrolegroup
-      RAISING cx_static_check.
-    METHODS parse_projectroleuser
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectroleuser) TYPE zif_jira=>projectroleuser
-      RAISING cx_static_check.
-    METHODS parse_roleactor
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(roleactor) TYPE zif_jira=>roleactor
-      RAISING cx_static_check.
-    METHODS parse_sharepermission
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(sharepermission) TYPE zif_jira=>sharepermission
-      RAISING cx_static_check.
     METHODS parse_userlist
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(userlist) TYPE zif_jira=>userlist
-      RAISING cx_static_check.
-    METHODS parse_version
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(version) TYPE zif_jira=>version
-      RAISING cx_static_check.
-    METHODS parse_versionissuesstatus
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(versionissuesstatus) TYPE zif_jira=>versionissuesstatus
       RAISING cx_static_check.
     METHODS parse_filterdetails
       IMPORTING iv_prefix TYPE string
@@ -460,37 +312,85 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(defaultsharescope) TYPE zif_jira=>defaultsharescope
       RAISING cx_static_check.
+    METHODS parse_columnitem
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(columnitem) TYPE zif_jira=>columnitem
+      RAISING cx_static_check.
     METHODS parse_sharepermissioninputbean
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(sharepermissioninputbean) TYPE zif_jira=>sharepermissioninputbean
       RAISING cx_static_check.
-    METHODS parse_taskprogressbeanobject
+    METHODS parse_idbean
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(taskprogressbeanobject) TYPE zif_jira=>taskprogressbeanobject
+      RETURNING VALUE(idbean) TYPE zif_jira=>idbean
       RAISING cx_static_check.
-    METHODS parse_dashboard
+    METHODS parse_permissiongrant
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(dashboard) TYPE zif_jira=>dashboard
+      RETURNING VALUE(permissiongrant) TYPE zif_jira=>permissiongrant
       RAISING cx_static_check.
-    METHODS parse_pageofdashboards
+    METHODS parse_permissionholder
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pageofdashboards) TYPE zif_jira=>pageofdashboards
+      RETURNING VALUE(permissionholder) TYPE zif_jira=>permissionholder
       RAISING cx_static_check.
-    METHODS parse_userbean
+    METHODS parse_permissionscheme
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(userbean) TYPE zif_jira=>userbean
+      RETURNING VALUE(permissionscheme) TYPE zif_jira=>permissionscheme
       RAISING cx_static_check.
-    METHODS parse_userbeanavatarurls
+    METHODS parse_permissions
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(userbeanavatarurls) TYPE zif_jira=>userbeanavatarurls
+      RETURNING VALUE(permissions) TYPE zif_jira=>permissions
       RAISING cx_static_check.
-    METHODS parse_pagebeandashboard
+    METHODS parse_userpermission
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeandashboard) TYPE zif_jira=>pagebeandashboard
+      RETURNING VALUE(userpermission) TYPE zif_jira=>userpermission
       RAISING cx_static_check.
-    METHODS parse_dashboarddetails
+    METHODS parse_bulkpermissionsrequestbe
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(dashboarddetails) TYPE zif_jira=>dashboarddetails
+      RETURNING VALUE(bulkpermissionsrequestbean) TYPE zif_jira=>bulkpermissionsrequestbean
+      RAISING cx_static_check.
+    METHODS parse_bulkprojectpermissions
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(bulkprojectpermissions) TYPE zif_jira=>bulkprojectpermissions
+      RAISING cx_static_check.
+    METHODS parse_bulkpermissiongrants
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(bulkpermissiongrants) TYPE zif_jira=>bulkpermissiongrants
+      RAISING cx_static_check.
+    METHODS parse_bulkprojectpermissiongra
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(bulkprojectpermissiongrants) TYPE zif_jira=>bulkprojectpermissiongrants
+      RAISING cx_static_check.
+    METHODS parse_permissionskeysbean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(permissionskeysbean) TYPE zif_jira=>permissionskeysbean
+      RAISING cx_static_check.
+    METHODS parse_permittedprojects
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(permittedprojects) TYPE zif_jira=>permittedprojects
+      RAISING cx_static_check.
+    METHODS parse_projectidentifierbean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectidentifierbean) TYPE zif_jira=>projectidentifierbean
+      RAISING cx_static_check.
+    METHODS parse_bulkissuepropertyupdater
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(bulkissuepropertyupdaterequest) TYPE zif_jira=>bulkissuepropertyupdaterequest
+      RAISING cx_static_check.
+    METHODS parse_issuefilterforbulkproper
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuefilterforbulkpropertyset) TYPE zif_jira=>issuefilterforbulkpropertyset
+      RAISING cx_static_check.
+    METHODS parse_issuefilterforbulkprop01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuefilterforbulkpropertydele) TYPE zif_jira=>issuefilterforbulkpropertydele
+      RAISING cx_static_check.
+    METHODS parse_issueentityproperties
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issueentityproperties) TYPE zif_jira=>issueentityproperties
+      RAISING cx_static_check.
+    METHODS parse_jsonnode
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(jsonnode) TYPE zif_jira=>jsonnode
       RAISING cx_static_check.
     METHODS parse_customfieldreplacement
       IMPORTING iv_prefix TYPE string
@@ -580,6 +480,10 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(projectidentifiers) TYPE zif_jira=>projectidentifiers
       RAISING cx_static_check.
+    METHODS parse_taskprogressbeanobject
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(taskprogressbeanobject) TYPE zif_jira=>taskprogressbeanobject
+      RAISING cx_static_check.
     METHODS parse_pagebeanversion
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(pagebeanversion) TYPE zif_jira=>pagebeanversion
@@ -607,10 +511,6 @@ CLASS zcl_jira DEFINITION PUBLIC.
     METHODS parse_issuetypewithstatus
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(issuetypewithstatus) TYPE zif_jira=>issuetypewithstatus
-      RAISING cx_static_check.
-    METHODS parse_securitylevel
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(securitylevel) TYPE zif_jira=>securitylevel
       RAISING cx_static_check.
     METHODS parse_securityscheme
       IMPORTING iv_prefix TYPE string
@@ -948,6 +848,66 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(systemavatars) TYPE zif_jira=>systemavatars
       RAISING cx_static_check.
+    METHODS parse_issuetypescheme
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypescheme) TYPE zif_jira=>issuetypescheme
+      RAISING cx_static_check.
+    METHODS parse_pagebeanissuetypescheme
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanissuetypescheme) TYPE zif_jira=>pagebeanissuetypescheme
+      RAISING cx_static_check.
+    METHODS parse_issuetypeschemeprojects
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeschemeprojects) TYPE zif_jira=>issuetypeschemeprojects
+      RAISING cx_static_check.
+    METHODS parse_pagebeanissuetypeschemep
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanissuetypeschemeproject) TYPE zif_jira=>pagebeanissuetypeschemeproject
+      RAISING cx_static_check.
+    METHODS parse_issuetypeschememapping
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeschememapping) TYPE zif_jira=>issuetypeschememapping
+      RAISING cx_static_check.
+    METHODS parse_pagebeanissuetypeschemem
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanissuetypeschememapping) TYPE zif_jira=>pagebeanissuetypeschememapping
+      RAISING cx_static_check.
+    METHODS parse_issuetypeschemeprojectas
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeschemeprojectassociat) TYPE zif_jira=>issuetypeschemeprojectassociat
+      RAISING cx_static_check.
+    METHODS parse_issuetypeschemedetails
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeschemedetails) TYPE zif_jira=>issuetypeschemedetails
+      RAISING cx_static_check.
+    METHODS parse_issuetypeschemeid
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeschemeid) TYPE zif_jira=>issuetypeschemeid
+      RAISING cx_static_check.
+    METHODS parse_issuetypeids
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeids) TYPE zif_jira=>issuetypeids
+      RAISING cx_static_check.
+    METHODS parse_issuetypeschemeupdatedet
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeschemeupdatedetails) TYPE zif_jira=>issuetypeschemeupdatedetails
+      RAISING cx_static_check.
+    METHODS parse_orderofissuetypes
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(orderofissuetypes) TYPE zif_jira=>orderofissuetypes
+      RAISING cx_static_check.
+    METHODS parse_changedworklog
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(changedworklog) TYPE zif_jira=>changedworklog
+      RAISING cx_static_check.
+    METHODS parse_changedworklogs
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(changedworklogs) TYPE zif_jira=>changedworklogs
+      RAISING cx_static_check.
+    METHODS parse_worklogidsrequestbean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(worklogidsrequestbean) TYPE zif_jira=>worklogidsrequestbean
+      RAISING cx_static_check.
     METHODS parse_globalscopebean
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(globalscopebean) TYPE zif_jira=>globalscopebean
@@ -1044,6 +1004,54 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(pagebeanfieldconfigurationitem) TYPE zif_jira=>pagebeanfieldconfigurationitem
       RAISING cx_static_check.
+    METHODS parse_attachmentmetadata
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(attachmentmetadata) TYPE zif_jira=>attachmentmetadata
+      RAISING cx_static_check.
+    METHODS parse_attachmentsettings
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(attachmentsettings) TYPE zif_jira=>attachmentsettings
+      RAISING cx_static_check.
+    METHODS parse_attachmentarchiveentry
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(attachmentarchiveentry) TYPE zif_jira=>attachmentarchiveentry
+      RAISING cx_static_check.
+    METHODS parse_attachmentarchiveimpl
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(attachmentarchiveimpl) TYPE zif_jira=>attachmentarchiveimpl
+      RAISING cx_static_check.
+    METHODS parse_attachmentarchive
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(attachmentarchive) TYPE zif_jira=>attachmentarchive
+      RAISING cx_static_check.
+    METHODS parse_attachmentarchiveitemrea
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(attachmentarchiveitemreadable) TYPE zif_jira=>attachmentarchiveitemreadable
+      RAISING cx_static_check.
+    METHODS parse_attachmentarchivemetadat
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(attachmentarchivemetadatareada) TYPE zif_jira=>attachmentarchivemetadatareada
+      RAISING cx_static_check.
+    METHODS parse_createupdaterolerequestb
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(createupdaterolerequestbean) TYPE zif_jira=>createupdaterolerequestbean
+      RAISING cx_static_check.
+    METHODS parse_actorinputbean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(actorinputbean) TYPE zif_jira=>actorinputbean
+      RAISING cx_static_check.
+    METHODS parse_projectroleactorsupdateb
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectroleactorsupdatebean) TYPE zif_jira=>projectroleactorsupdatebean
+      RAISING cx_static_check.
+    METHODS parse_actorsmap
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(actorsmap) TYPE zif_jira=>actorsmap
+      RAISING cx_static_check.
+    METHODS parse_projectroledetail
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectroledetail) TYPE zif_jira=>projectroledetail
+      RAISING cx_static_check.
     METHODS parse_pagebeanscreenscheme
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(pagebeanscreenscheme) TYPE zif_jira=>pagebeanscreenscheme
@@ -1072,81 +1080,65 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(updatescreentypes) TYPE zif_jira=>updatescreentypes
       RAISING cx_static_check.
-    METHODS parse_issuetypescheme
+    METHODS parse_customfieldoption
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypescheme) TYPE zif_jira=>issuetypescheme
+      RETURNING VALUE(customfieldoption) TYPE zif_jira=>customfieldoption
       RAISING cx_static_check.
-    METHODS parse_pagebeanissuetypescheme
+    METHODS parse_customfieldcontextprojec
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanissuetypescheme) TYPE zif_jira=>pagebeanissuetypescheme
+      RETURNING VALUE(customfieldcontextprojectmappi) TYPE zif_jira=>customfieldcontextprojectmappi
       RAISING cx_static_check.
-    METHODS parse_issuetypeschemeprojects
+    METHODS parse_pagebeancustomfieldcon01
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeschemeprojects) TYPE zif_jira=>issuetypeschemeprojects
+      RETURNING VALUE(pagebeancustomfieldcontextproj) TYPE zif_jira=>pagebeancustomfieldcontextproj
       RAISING cx_static_check.
-    METHODS parse_pagebeanissuetypeschemep
+    METHODS parse_customfieldcontext
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanissuetypeschemeproject) TYPE zif_jira=>pagebeanissuetypeschemeproject
+      RETURNING VALUE(customfieldcontext) TYPE zif_jira=>customfieldcontext
       RAISING cx_static_check.
-    METHODS parse_issuetypeschememapping
+    METHODS parse_pagebeancustomfieldcon02
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeschememapping) TYPE zif_jira=>issuetypeschememapping
+      RETURNING VALUE(pagebeancustomfieldcontext) TYPE zif_jira=>pagebeancustomfieldcontext
       RAISING cx_static_check.
-    METHODS parse_pagebeanissuetypeschemem
+    METHODS parse_createcustomfieldcontext
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanissuetypeschememapping) TYPE zif_jira=>pagebeanissuetypeschememapping
+      RETURNING VALUE(createcustomfieldcontext) TYPE zif_jira=>createcustomfieldcontext
       RAISING cx_static_check.
-    METHODS parse_issuetypeschemeprojectas
+    METHODS parse_projectids
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeschemeprojectassociat) TYPE zif_jira=>issuetypeschemeprojectassociat
+      RETURNING VALUE(projectids) TYPE zif_jira=>projectids
       RAISING cx_static_check.
-    METHODS parse_issuetypeschemedetails
+    METHODS parse_customfieldcontextupdate
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeschemedetails) TYPE zif_jira=>issuetypeschemedetails
+      RETURNING VALUE(customfieldcontextupdatedetail) TYPE zif_jira=>customfieldcontextupdatedetail
       RAISING cx_static_check.
-    METHODS parse_issuetypeschemeid
+    METHODS parse_issuetypeids01
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeschemeid) TYPE zif_jira=>issuetypeschemeid
+      RETURNING VALUE(issuetypeids01) TYPE zif_jira=>issuetypeids01
       RAISING cx_static_check.
-    METHODS parse_issuetypeids
+    METHODS parse_projectissuetypemapping
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeids) TYPE zif_jira=>issuetypeids
+      RETURNING VALUE(projectissuetypemapping) TYPE zif_jira=>projectissuetypemapping
       RAISING cx_static_check.
-    METHODS parse_issuetypeschemeupdatedet
+    METHODS parse_projectissuetypemappings
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeschemeupdatedetails) TYPE zif_jira=>issuetypeschemeupdatedetails
+      RETURNING VALUE(projectissuetypemappings) TYPE zif_jira=>projectissuetypemappings
       RAISING cx_static_check.
-    METHODS parse_orderofissuetypes
+    METHODS parse_contextforprojectandissu
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(orderofissuetypes) TYPE zif_jira=>orderofissuetypes
+      RETURNING VALUE(contextforprojectandissuetype) TYPE zif_jira=>contextforprojectandissuetype
       RAISING cx_static_check.
-    METHODS parse_attachmentmetadata
+    METHODS parse_pagebeancontextforprojec
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(attachmentmetadata) TYPE zif_jira=>attachmentmetadata
+      RETURNING VALUE(pagebeancontextforprojectandis) TYPE zif_jira=>pagebeancontextforprojectandis
       RAISING cx_static_check.
-    METHODS parse_attachmentsettings
+    METHODS parse_issuetypetocontextmappin
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(attachmentsettings) TYPE zif_jira=>attachmentsettings
+      RETURNING VALUE(issuetypetocontextmapping) TYPE zif_jira=>issuetypetocontextmapping
       RAISING cx_static_check.
-    METHODS parse_attachmentarchiveentry
+    METHODS parse_pagebeanissuetypetoconte
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(attachmentarchiveentry) TYPE zif_jira=>attachmentarchiveentry
-      RAISING cx_static_check.
-    METHODS parse_attachmentarchiveimpl
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(attachmentarchiveimpl) TYPE zif_jira=>attachmentarchiveimpl
-      RAISING cx_static_check.
-    METHODS parse_attachmentarchive
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(attachmentarchive) TYPE zif_jira=>attachmentarchive
-      RAISING cx_static_check.
-    METHODS parse_attachmentarchiveitemrea
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(attachmentarchiveitemreadable) TYPE zif_jira=>attachmentarchiveitemreadable
-      RAISING cx_static_check.
-    METHODS parse_attachmentarchivemetadat
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(attachmentarchivemetadatareada) TYPE zif_jira=>attachmentarchivemetadatareada
+      RETURNING VALUE(pagebeanissuetypetocontextmapp) TYPE zif_jira=>pagebeanissuetypetocontextmapp
       RAISING cx_static_check.
     METHODS parse_issuetypescreenschemeite
       IMPORTING iv_prefix TYPE string
@@ -1200,97 +1192,77 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(updatedefaultscreenscheme) TYPE zif_jira=>updatedefaultscreenscheme
       RAISING cx_static_check.
-    METHODS parse_issuetypeids01
+    METHODS parse_idorkeybean
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypeids01) TYPE zif_jira=>issuetypeids01
+      RETURNING VALUE(idorkeybean) TYPE zif_jira=>idorkeybean
       RAISING cx_static_check.
-    METHODS parse_createupdaterolerequestb
+    METHODS parse_jexpissues
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(createupdaterolerequestbean) TYPE zif_jira=>createupdaterolerequestbean
+      RETURNING VALUE(jexpissues) TYPE zif_jira=>jexpissues
       RAISING cx_static_check.
-    METHODS parse_actorinputbean
+    METHODS parse_jexpjqlissues
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(actorinputbean) TYPE zif_jira=>actorinputbean
+      RETURNING VALUE(jexpjqlissues) TYPE zif_jira=>jexpjqlissues
       RAISING cx_static_check.
-    METHODS parse_projectroleactorsupdateb
+    METHODS parse_jiraexpressionevalcontex
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectroleactorsupdatebean) TYPE zif_jira=>projectroleactorsupdatebean
+      RETURNING VALUE(jiraexpressionevalcontextbean) TYPE zif_jira=>jiraexpressionevalcontextbean
       RAISING cx_static_check.
-    METHODS parse_actorsmap
+    METHODS parse_jiraexpressionevalreques
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(actorsmap) TYPE zif_jira=>actorsmap
+      RETURNING VALUE(jiraexpressionevalrequestbean) TYPE zif_jira=>jiraexpressionevalrequestbean
       RAISING cx_static_check.
-    METHODS parse_projectroledetail
+    METHODS parse_issuesjqlmetadatabean
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectroledetail) TYPE zif_jira=>projectroledetail
+      RETURNING VALUE(issuesjqlmetadatabean) TYPE zif_jira=>issuesjqlmetadatabean
       RAISING cx_static_check.
-    METHODS parse_customfieldoption
+    METHODS parse_issuesmetabean
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(customfieldoption) TYPE zif_jira=>customfieldoption
+      RETURNING VALUE(issuesmetabean) TYPE zif_jira=>issuesmetabean
       RAISING cx_static_check.
-    METHODS parse_customfieldcontextprojec
+    METHODS parse_jiraexpressionevaluation
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(customfieldcontextprojectmappi) TYPE zif_jira=>customfieldcontextprojectmappi
+      RETURNING VALUE(jiraexpressionevaluationmetada) TYPE zif_jira=>jiraexpressionevaluationmetada
       RAISING cx_static_check.
-    METHODS parse_pagebeancustomfieldcon01
+    METHODS parse_jiraexpressionresult
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeancustomfieldcontextproj) TYPE zif_jira=>pagebeancustomfieldcontextproj
+      RETURNING VALUE(jiraexpressionresult) TYPE zif_jira=>jiraexpressionresult
       RAISING cx_static_check.
-    METHODS parse_customfieldcontext
+    METHODS parse_jiraexpressionscomplexit
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(customfieldcontext) TYPE zif_jira=>customfieldcontext
+      RETURNING VALUE(jiraexpressionscomplexitybean) TYPE zif_jira=>jiraexpressionscomplexitybean
       RAISING cx_static_check.
-    METHODS parse_pagebeancustomfieldcon02
+    METHODS parse_jiraexpressionscomplex01
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeancustomfieldcontext) TYPE zif_jira=>pagebeancustomfieldcontext
+      RETURNING VALUE(jiraexpressionscomplexityvalue) TYPE zif_jira=>jiraexpressionscomplexityvalue
       RAISING cx_static_check.
-    METHODS parse_createcustomfieldcontext
+    METHODS parse_jiraexpressionforanalysi
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(createcustomfieldcontext) TYPE zif_jira=>createcustomfieldcontext
+      RETURNING VALUE(jiraexpressionforanalysis) TYPE zif_jira=>jiraexpressionforanalysis
       RAISING cx_static_check.
-    METHODS parse_projectids
+    METHODS parse_jiraexpressionanalysis
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectids) TYPE zif_jira=>projectids
+      RETURNING VALUE(jiraexpressionanalysis) TYPE zif_jira=>jiraexpressionanalysis
       RAISING cx_static_check.
-    METHODS parse_customfieldcontextupdate
+    METHODS parse_jiraexpressioncomplexity
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(customfieldcontextupdatedetail) TYPE zif_jira=>customfieldcontextupdatedetail
+      RETURNING VALUE(jiraexpressioncomplexity) TYPE zif_jira=>jiraexpressioncomplexity
       RAISING cx_static_check.
-    METHODS parse_projectissuetypemapping
+    METHODS parse_jiraexpressionvalidation
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectissuetypemapping) TYPE zif_jira=>projectissuetypemapping
+      RETURNING VALUE(jiraexpressionvalidationerror) TYPE zif_jira=>jiraexpressionvalidationerror
       RAISING cx_static_check.
-    METHODS parse_projectissuetypemappings
+    METHODS parse_jiraexpressionsanalysis
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectissuetypemappings) TYPE zif_jira=>projectissuetypemappings
+      RETURNING VALUE(jiraexpressionsanalysis) TYPE zif_jira=>jiraexpressionsanalysis
       RAISING cx_static_check.
-    METHODS parse_contextforprojectandissu
+    METHODS parse_healthcheckresult
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(contextforprojectandissuetype) TYPE zif_jira=>contextforprojectandissuetype
+      RETURNING VALUE(healthcheckresult) TYPE zif_jira=>healthcheckresult
       RAISING cx_static_check.
-    METHODS parse_pagebeancontextforprojec
+    METHODS parse_serverinformation
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeancontextforprojectandis) TYPE zif_jira=>pagebeancontextforprojectandis
-      RAISING cx_static_check.
-    METHODS parse_issuetypetocontextmappin
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuetypetocontextmapping) TYPE zif_jira=>issuetypetocontextmapping
-      RAISING cx_static_check.
-    METHODS parse_pagebeanissuetypetoconte
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanissuetypetocontextmapp) TYPE zif_jira=>pagebeanissuetypetocontextmapp
-      RAISING cx_static_check.
-    METHODS parse_changedworklog
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(changedworklog) TYPE zif_jira=>changedworklog
-      RAISING cx_static_check.
-    METHODS parse_changedworklogs
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(changedworklogs) TYPE zif_jira=>changedworklogs
-      RAISING cx_static_check.
-    METHODS parse_worklogidsrequestbean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(worklogidsrequestbean) TYPE zif_jira=>worklogidsrequestbean
+      RETURNING VALUE(serverinformation) TYPE zif_jira=>serverinformation
       RAISING cx_static_check.
     METHODS parse_usermigrationbean
       IMPORTING iv_prefix TYPE string
@@ -1299,6 +1271,174 @@ CLASS zcl_jira DEFINITION PUBLIC.
     METHODS parse_unrestricteduseremail
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(unrestricteduseremail) TYPE zif_jira=>unrestricteduseremail
+      RAISING cx_static_check.
+    METHODS parse_deprecatedworkflow
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(deprecatedworkflow) TYPE zif_jira=>deprecatedworkflow
+      RAISING cx_static_check.
+    METHODS parse_workflowtransitionproper
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowtransitionproperty) TYPE zif_jira=>workflowtransitionproperty
+      RAISING cx_static_check.
+    METHODS parse_configuration
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(configuration) TYPE zif_jira=>configuration
+      RAISING cx_static_check.
+    METHODS parse_timetrackingconfiguratio
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(timetrackingconfiguration) TYPE zif_jira=>timetrackingconfiguration
+      RAISING cx_static_check.
+    METHODS parse_applicationproperty
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(applicationproperty) TYPE zif_jira=>applicationproperty
+      RAISING cx_static_check.
+    METHODS parse_simpleapplicationpropert
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(simpleapplicationpropertybean) TYPE zif_jira=>simpleapplicationpropertybean
+      RAISING cx_static_check.
+    METHODS parse_pagebeanworkflowscheme
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanworkflowscheme) TYPE zif_jira=>pagebeanworkflowscheme
+      RAISING cx_static_check.
+    METHODS parse_workflowscheme
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowscheme) TYPE zif_jira=>workflowscheme
+      RAISING cx_static_check.
+    METHODS parse_issuetypesworkflowmappin
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypesworkflowmapping) TYPE zif_jira=>issuetypesworkflowmapping
+      RAISING cx_static_check.
+    METHODS parse_issuetypeworkflowmapping
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(issuetypeworkflowmapping) TYPE zif_jira=>issuetypeworkflowmapping
+      RAISING cx_static_check.
+    METHODS parse_defaultworkflow
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(defaultworkflow) TYPE zif_jira=>defaultworkflow
+      RAISING cx_static_check.
+    METHODS parse_containerofworkflowschem
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(containerofworkflowschemeassoc) TYPE zif_jira=>containerofworkflowschemeassoc
+      RAISING cx_static_check.
+    METHODS parse_workflowschemeassociatio
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowschemeassociations) TYPE zif_jira=>workflowschemeassociations
+      RAISING cx_static_check.
+    METHODS parse_workflowschemeprojectass
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowschemeprojectassociati) TYPE zif_jira=>workflowschemeprojectassociati
+      RAISING cx_static_check.
+    METHODS parse_associateditembean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(associateditembean) TYPE zif_jira=>associateditembean
+      RAISING cx_static_check.
+    METHODS parse_auditrecordbean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(auditrecordbean) TYPE zif_jira=>auditrecordbean
+      RAISING cx_static_check.
+    METHODS parse_auditrecords
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(auditrecords) TYPE zif_jira=>auditrecords
+      RAISING cx_static_check.
+    METHODS parse_changedvaluebean
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(changedvaluebean) TYPE zif_jira=>changedvaluebean
+      RAISING cx_static_check.
+    METHODS parse_permissionschemes
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(permissionschemes) TYPE zif_jira=>permissionschemes
+      RAISING cx_static_check.
+    METHODS parse_permissiongrants
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(permissiongrants) TYPE zif_jira=>permissiongrants
+      RAISING cx_static_check.
+    METHODS parse_timetrackingprovider
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(timetrackingprovider) TYPE zif_jira=>timetrackingprovider
+      RAISING cx_static_check.
+    METHODS parse_pagebeanworkflow
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanworkflow) TYPE zif_jira=>pagebeanworkflow
+      RAISING cx_static_check.
+    METHODS parse_publishedworkflowid
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(publishedworkflowid) TYPE zif_jira=>publishedworkflowid
+      RAISING cx_static_check.
+    METHODS parse_screenid
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(screenid) TYPE zif_jira=>screenid
+      RAISING cx_static_check.
+    METHODS parse_transition
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(transition) TYPE zif_jira=>transition
+      RAISING cx_static_check.
+    METHODS parse_workflow
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflow) TYPE zif_jira=>workflow
+      RAISING cx_static_check.
+    METHODS parse_workflowrules
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowrules) TYPE zif_jira=>workflowrules
+      RAISING cx_static_check.
+    METHODS parse_workflowstatus
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowstatus) TYPE zif_jira=>workflowstatus
+      RAISING cx_static_check.
+    METHODS parse_workflowstatusproperties
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowstatusproperties) TYPE zif_jira=>workflowstatusproperties
+      RAISING cx_static_check.
+    METHODS parse_workflowtransitionrule
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowtransitionrule) TYPE zif_jira=>workflowtransitionrule
+      RAISING cx_static_check.
+    METHODS parse_connectworkflowtransitio
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(connectworkflowtransitionrule) TYPE zif_jira=>connectworkflowtransitionrule
+      RAISING cx_static_check.
+    METHODS parse_pagebeanworkflowtransiti
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(pagebeanworkflowtransitionrule) TYPE zif_jira=>pagebeanworkflowtransitionrule
+      RAISING cx_static_check.
+    METHODS parse_ruleconfiguration
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(ruleconfiguration) TYPE zif_jira=>ruleconfiguration
+      RAISING cx_static_check.
+    METHODS parse_workflowid
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowid) TYPE zif_jira=>workflowid
+      RAISING cx_static_check.
+    METHODS parse_workflowtransition
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowtransition) TYPE zif_jira=>workflowtransition
+      RAISING cx_static_check.
+    METHODS parse_workflowtransitionrules
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowtransitionrules) TYPE zif_jira=>workflowtransitionrules
+      RAISING cx_static_check.
+    METHODS parse_workflowtransitionrulesu
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowtransitionrulesupdate) TYPE zif_jira=>workflowtransitionrulesupdate
+      RAISING cx_static_check.
+    METHODS parse_workflowtransitionrule01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowtransitionrulesupdatee) TYPE zif_jira=>workflowtransitionrulesupdatee
+      RAISING cx_static_check.
+    METHODS parse_workflowtransitionrule02
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(workflowtransitionrulesupdat01) TYPE zif_jira=>workflowtransitionrulesupdat01
+      RAISING cx_static_check.
+    METHODS parse_locale
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(locale) TYPE zif_jira=>locale
+      RAISING cx_static_check.
+    METHODS parse_projectemailaddress
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projectemailaddress) TYPE zif_jira=>projectemailaddress
+      RAISING cx_static_check.
+    METHODS parse_projecttype
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(projecttype) TYPE zif_jira=>projecttype
       RAISING cx_static_check.
     METHODS parse_failedwebhook
       IMPORTING iv_prefix TYPE string
@@ -1340,26 +1480,6 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(webhooksexpirationdate) TYPE zif_jira=>webhooksexpirationdate
       RAISING cx_static_check.
-    METHODS parse_bulkissuepropertyupdater
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(bulkissuepropertyupdaterequest) TYPE zif_jira=>bulkissuepropertyupdaterequest
-      RAISING cx_static_check.
-    METHODS parse_issuefilterforbulkproper
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuefilterforbulkpropertyset) TYPE zif_jira=>issuefilterforbulkpropertyset
-      RAISING cx_static_check.
-    METHODS parse_issuefilterforbulkprop01
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuefilterforbulkpropertydele) TYPE zif_jira=>issuefilterforbulkpropertydele
-      RAISING cx_static_check.
-    METHODS parse_issueentityproperties
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issueentityproperties) TYPE zif_jira=>issueentityproperties
-      RAISING cx_static_check.
-    METHODS parse_jsonnode
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jsonnode) TYPE zif_jira=>jsonnode
-      RAISING cx_static_check.
     METHODS parse_groupdetails
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(groupdetails) TYPE zif_jira=>groupdetails
@@ -1368,77 +1488,17 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(pagebeangroupdetails) TYPE zif_jira=>pagebeangroupdetails
       RAISING cx_static_check.
-    METHODS parse_locale
+    METHODS parse_issuesandjqlqueries
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(locale) TYPE zif_jira=>locale
+      RETURNING VALUE(issuesandjqlqueries) TYPE zif_jira=>issuesandjqlqueries
       RAISING cx_static_check.
-    METHODS parse_healthcheckresult
+    METHODS parse_issuematches
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(healthcheckresult) TYPE zif_jira=>healthcheckresult
+      RETURNING VALUE(issuematches) TYPE zif_jira=>issuematches
       RAISING cx_static_check.
-    METHODS parse_serverinformation
+    METHODS parse_issuematchesforjql
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(serverinformation) TYPE zif_jira=>serverinformation
-      RAISING cx_static_check.
-    METHODS parse_eventnotification
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(eventnotification) TYPE zif_jira=>eventnotification
-      RAISING cx_static_check.
-    METHODS parse_notificationevent
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(notificationevent) TYPE zif_jira=>notificationevent
-      RAISING cx_static_check.
-    METHODS parse_notificationscheme
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(notificationscheme) TYPE zif_jira=>notificationscheme
-      RAISING cx_static_check.
-    METHODS parse_notificationschemeevent
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(notificationschemeevent) TYPE zif_jira=>notificationschemeevent
-      RAISING cx_static_check.
-    METHODS parse_pagebeannotificationsche
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeannotificationscheme) TYPE zif_jira=>pagebeannotificationscheme
-      RAISING cx_static_check.
-    METHODS parse_idbean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(idbean) TYPE zif_jira=>idbean
-      RAISING cx_static_check.
-    METHODS parse_permissions
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(permissions) TYPE zif_jira=>permissions
-      RAISING cx_static_check.
-    METHODS parse_userpermission
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(userpermission) TYPE zif_jira=>userpermission
-      RAISING cx_static_check.
-    METHODS parse_bulkpermissionsrequestbe
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(bulkpermissionsrequestbean) TYPE zif_jira=>bulkpermissionsrequestbean
-      RAISING cx_static_check.
-    METHODS parse_bulkprojectpermissions
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(bulkprojectpermissions) TYPE zif_jira=>bulkprojectpermissions
-      RAISING cx_static_check.
-    METHODS parse_bulkpermissiongrants
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(bulkpermissiongrants) TYPE zif_jira=>bulkpermissiongrants
-      RAISING cx_static_check.
-    METHODS parse_bulkprojectpermissiongra
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(bulkprojectpermissiongrants) TYPE zif_jira=>bulkprojectpermissiongrants
-      RAISING cx_static_check.
-    METHODS parse_permissionskeysbean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(permissionskeysbean) TYPE zif_jira=>permissionskeysbean
-      RAISING cx_static_check.
-    METHODS parse_permittedprojects
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(permittedprojects) TYPE zif_jira=>permittedprojects
-      RAISING cx_static_check.
-    METHODS parse_projectidentifierbean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectidentifierbean) TYPE zif_jira=>projectidentifierbean
+      RETURNING VALUE(issuematchesforjql) TYPE zif_jira=>issuematchesforjql
       RAISING cx_static_check.
     METHODS parse_jqlqueriestoparse
       IMPORTING iv_prefix TYPE string
@@ -1520,81 +1580,25 @@ CLASS zcl_jira DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(valueoperand) TYPE zif_jira=>valueoperand
       RAISING cx_static_check.
-    METHODS parse_projectemailaddress
+    METHODS parse_eventnotification
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectemailaddress) TYPE zif_jira=>projectemailaddress
+      RETURNING VALUE(eventnotification) TYPE zif_jira=>eventnotification
       RAISING cx_static_check.
-    METHODS parse_projecttype
+    METHODS parse_notificationevent
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projecttype) TYPE zif_jira=>projecttype
+      RETURNING VALUE(notificationevent) TYPE zif_jira=>notificationevent
       RAISING cx_static_check.
-    METHODS parse_idorkeybean
+    METHODS parse_notificationscheme
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(idorkeybean) TYPE zif_jira=>idorkeybean
+      RETURNING VALUE(notificationscheme) TYPE zif_jira=>notificationscheme
       RAISING cx_static_check.
-    METHODS parse_jexpissues
+    METHODS parse_notificationschemeevent
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jexpissues) TYPE zif_jira=>jexpissues
+      RETURNING VALUE(notificationschemeevent) TYPE zif_jira=>notificationschemeevent
       RAISING cx_static_check.
-    METHODS parse_jexpjqlissues
+    METHODS parse_pagebeannotificationsche
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jexpjqlissues) TYPE zif_jira=>jexpjqlissues
-      RAISING cx_static_check.
-    METHODS parse_jiraexpressionevalcontex
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jiraexpressionevalcontextbean) TYPE zif_jira=>jiraexpressionevalcontextbean
-      RAISING cx_static_check.
-    METHODS parse_jiraexpressionevalreques
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jiraexpressionevalrequestbean) TYPE zif_jira=>jiraexpressionevalrequestbean
-      RAISING cx_static_check.
-    METHODS parse_issuesjqlmetadatabean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuesjqlmetadatabean) TYPE zif_jira=>issuesjqlmetadatabean
-      RAISING cx_static_check.
-    METHODS parse_issuesmetabean
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(issuesmetabean) TYPE zif_jira=>issuesmetabean
-      RAISING cx_static_check.
-    METHODS parse_jiraexpressionevaluation
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jiraexpressionevaluationmetada) TYPE zif_jira=>jiraexpressionevaluationmetada
-      RAISING cx_static_check.
-    METHODS parse_jiraexpressionresult
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jiraexpressionresult) TYPE zif_jira=>jiraexpressionresult
-      RAISING cx_static_check.
-    METHODS parse_jiraexpressionscomplexit
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jiraexpressionscomplexitybean) TYPE zif_jira=>jiraexpressionscomplexitybean
-      RAISING cx_static_check.
-    METHODS parse_jiraexpressionscomplex01
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jiraexpressionscomplexityvalue) TYPE zif_jira=>jiraexpressionscomplexityvalue
-      RAISING cx_static_check.
-    METHODS parse_jiraexpressionforanalysi
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jiraexpressionforanalysis) TYPE zif_jira=>jiraexpressionforanalysis
-      RAISING cx_static_check.
-    METHODS parse_jiraexpressionanalysis
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jiraexpressionanalysis) TYPE zif_jira=>jiraexpressionanalysis
-      RAISING cx_static_check.
-    METHODS parse_jiraexpressioncomplexity
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jiraexpressioncomplexity) TYPE zif_jira=>jiraexpressioncomplexity
-      RAISING cx_static_check.
-    METHODS parse_jiraexpressionvalidation
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jiraexpressionvalidationerror) TYPE zif_jira=>jiraexpressionvalidationerror
-      RAISING cx_static_check.
-    METHODS parse_jiraexpressionsanalysis
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(jiraexpressionsanalysis) TYPE zif_jira=>jiraexpressionsanalysis
-      RAISING cx_static_check.
-    METHODS parse_projectissuesecurityleve
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(projectissuesecuritylevels) TYPE zif_jira=>projectissuesecuritylevels
+      RETURNING VALUE(pagebeannotificationscheme) TYPE zif_jira=>pagebeannotificationscheme
       RAISING cx_static_check.
     METHODS parse_issuetypeinfo
       IMPORTING iv_prefix TYPE string
@@ -1607,10 +1611,6 @@ CLASS zcl_jira DEFINITION PUBLIC.
     METHODS parse_projectissuetypeshierarc
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(projectissuetypeshierarchyleve) TYPE zif_jira=>projectissuetypeshierarchyleve
-      RAISING cx_static_check.
-    METHODS parse_pagebeanstring
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(pagebeanstring) TYPE zif_jira=>pagebeanstring
       RAISING cx_static_check.
     METHODS parse_operationmessage
       IMPORTING iv_prefix TYPE string
@@ -1641,156 +1641,6 @@ CLASS zcl_jira IMPLEMENTATION.
     mi_client->response->get_status( IMPORTING code = rv_code ).
   ENDMETHOD.
 
-  METHOD parse_propertykey.
-    propertykey-self = mo_json->value_string( iv_prefix && '/self' ).
-    propertykey-key = mo_json->value_string( iv_prefix && '/key' ).
-  ENDMETHOD.
-
-  METHOD parse_propertykeys.
-* todo, object, keys, array
-  ENDMETHOD.
-
-  METHOD parse_entityproperty.
-    entityproperty-key = mo_json->value_string( iv_prefix && '/key' ).
-* todo, object, value, 
-  ENDMETHOD.
-
-  METHOD parse_issuesandjqlqueries.
-* todo, object, jqls, array
-* todo, object, issueids, array
-  ENDMETHOD.
-
-  METHOD parse_issuematches.
-* todo, object, matches, array
-  ENDMETHOD.
-
-  METHOD parse_issuematchesforjql.
-* todo, object, matchedissues, array
-* todo, object, errors, array
-  ENDMETHOD.
-
-  METHOD parse_associateditembean.
-    associateditembean-id = mo_json->value_string( iv_prefix && '/id' ).
-    associateditembean-name = mo_json->value_string( iv_prefix && '/name' ).
-    associateditembean-typename = mo_json->value_string( iv_prefix && '/typeName' ).
-    associateditembean-parentid = mo_json->value_string( iv_prefix && '/parentId' ).
-    associateditembean-parentname = mo_json->value_string( iv_prefix && '/parentName' ).
-  ENDMETHOD.
-
-  METHOD parse_auditrecordbean.
-    auditrecordbean-id = mo_json->value_string( iv_prefix && '/id' ).
-    auditrecordbean-summary = mo_json->value_string( iv_prefix && '/summary' ).
-    auditrecordbean-remoteaddress = mo_json->value_string( iv_prefix && '/remoteAddress' ).
-    auditrecordbean-authorkey = mo_json->value_string( iv_prefix && '/authorKey' ).
-    auditrecordbean-created = mo_json->value_string( iv_prefix && '/created' ).
-    auditrecordbean-category = mo_json->value_string( iv_prefix && '/category' ).
-    auditrecordbean-eventsource = mo_json->value_string( iv_prefix && '/eventSource' ).
-    auditrecordbean-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, objectitem, 
-* todo, object, changedvalues, array
-* todo, object, associateditems, array
-  ENDMETHOD.
-
-  METHOD parse_auditrecords.
-    auditrecords-offset = mo_json->value_string( iv_prefix && '/offset' ).
-    auditrecords-limit = mo_json->value_string( iv_prefix && '/limit' ).
-    auditrecords-total = mo_json->value_string( iv_prefix && '/total' ).
-* todo, object, records, array
-  ENDMETHOD.
-
-  METHOD parse_changedvaluebean.
-    changedvaluebean-fieldname = mo_json->value_string( iv_prefix && '/fieldName' ).
-    changedvaluebean-changedfrom = mo_json->value_string( iv_prefix && '/changedFrom' ).
-    changedvaluebean-changedto = mo_json->value_string( iv_prefix && '/changedTo' ).
-  ENDMETHOD.
-
-  METHOD parse_avatarurlsbean.
-    avatarurlsbean-16x16 = mo_json->value_string( iv_prefix && '/16x16' ).
-    avatarurlsbean-24x24 = mo_json->value_string( iv_prefix && '/24x24' ).
-    avatarurlsbean-32x32 = mo_json->value_string( iv_prefix && '/32x32' ).
-    avatarurlsbean-48x48 = mo_json->value_string( iv_prefix && '/48x48' ).
-  ENDMETHOD.
-
-  METHOD parse_deprecatedworkflow.
-    deprecatedworkflow-name = mo_json->value_string( iv_prefix && '/name' ).
-    deprecatedworkflow-description = mo_json->value_string( iv_prefix && '/description' ).
-    deprecatedworkflow-lastmodifieddate = mo_json->value_string( iv_prefix && '/lastModifiedDate' ).
-    deprecatedworkflow-lastmodifieduser = mo_json->value_string( iv_prefix && '/lastModifiedUser' ).
-    deprecatedworkflow-lastmodifieduseraccountid = mo_json->value_string( iv_prefix && '/lastModifiedUserAccountId' ).
-    deprecatedworkflow-steps = mo_json->value_string( iv_prefix && '/steps' ).
-* todo, object, scope, 
-    deprecatedworkflow-default = mo_json->value_boolean( iv_prefix && '/default' ).
-  ENDMETHOD.
-
-  METHOD parse_projectforscope.
-    projectforscope-self = mo_json->value_string( iv_prefix && '/self' ).
-    projectforscope-id = mo_json->value_string( iv_prefix && '/id' ).
-    projectforscope-key = mo_json->value_string( iv_prefix && '/key' ).
-    projectforscope-name = mo_json->value_string( iv_prefix && '/name' ).
-    projectforscope-projecttypekey = mo_json->value_string( iv_prefix && '/projectTypeKey' ).
-    projectforscope-simplified = mo_json->value_boolean( iv_prefix && '/simplified' ).
-* todo, object, avatarurls, 
-* todo, object, projectcategory, 
-  ENDMETHOD.
-
-  METHOD parse_scope.
-    scope-type = mo_json->value_string( iv_prefix && '/type' ).
-* todo, object, project, 
-  ENDMETHOD.
-
-  METHOD parse_updatedprojectcategory.
-    updatedprojectcategory-self = mo_json->value_string( iv_prefix && '/self' ).
-    updatedprojectcategory-id = mo_json->value_string( iv_prefix && '/id' ).
-    updatedprojectcategory-description = mo_json->value_string( iv_prefix && '/description' ).
-    updatedprojectcategory-name = mo_json->value_string( iv_prefix && '/name' ).
-  ENDMETHOD.
-
-  METHOD parse_workflowtransitionproper.
-    workflowtransitionproperty-key = mo_json->value_string( iv_prefix && '/key' ).
-    workflowtransitionproperty-value = mo_json->value_string( iv_prefix && '/value' ).
-    workflowtransitionproperty-id = mo_json->value_string( iv_prefix && '/id' ).
-  ENDMETHOD.
-
-  METHOD parse_columnitem.
-    columnitem-label = mo_json->value_string( iv_prefix && '/label' ).
-    columnitem-value = mo_json->value_string( iv_prefix && '/value' ).
-  ENDMETHOD.
-
-  METHOD parse_configuration.
-    configuration-votingenabled = mo_json->value_boolean( iv_prefix && '/votingEnabled' ).
-    configuration-watchingenabled = mo_json->value_boolean( iv_prefix && '/watchingEnabled' ).
-    configuration-unassignedissuesallowed = mo_json->value_boolean( iv_prefix && '/unassignedIssuesAllowed' ).
-    configuration-subtasksenabled = mo_json->value_boolean( iv_prefix && '/subTasksEnabled' ).
-    configuration-issuelinkingenabled = mo_json->value_boolean( iv_prefix && '/issueLinkingEnabled' ).
-    configuration-timetrackingenabled = mo_json->value_boolean( iv_prefix && '/timeTrackingEnabled' ).
-    configuration-attachmentsenabled = mo_json->value_boolean( iv_prefix && '/attachmentsEnabled' ).
-* todo, object, timetrackingconfiguration, 
-  ENDMETHOD.
-
-  METHOD parse_timetrackingconfiguratio.
-* todo, object, workinghoursperday, number
-* todo, object, workingdaysperweek, number
-    timetrackingconfiguration-timeformat = mo_json->value_string( iv_prefix && '/timeFormat' ).
-    timetrackingconfiguration-defaultunit = mo_json->value_string( iv_prefix && '/defaultUnit' ).
-  ENDMETHOD.
-
-  METHOD parse_applicationproperty.
-    applicationproperty-id = mo_json->value_string( iv_prefix && '/id' ).
-    applicationproperty-key = mo_json->value_string( iv_prefix && '/key' ).
-    applicationproperty-value = mo_json->value_string( iv_prefix && '/value' ).
-    applicationproperty-name = mo_json->value_string( iv_prefix && '/name' ).
-    applicationproperty-desc = mo_json->value_string( iv_prefix && '/desc' ).
-    applicationproperty-type = mo_json->value_string( iv_prefix && '/type' ).
-    applicationproperty-defaultvalue = mo_json->value_string( iv_prefix && '/defaultValue' ).
-    applicationproperty-example = mo_json->value_string( iv_prefix && '/example' ).
-* todo, object, allowedvalues, array
-  ENDMETHOD.
-
-  METHOD parse_simpleapplicationpropert.
-    simpleapplicationpropertybean-id = mo_json->value_string( iv_prefix && '/id' ).
-    simpleapplicationpropertybean-value = mo_json->value_string( iv_prefix && '/value' ).
-  ENDMETHOD.
-
   METHOD parse_applicationrole.
     applicationrole-key = mo_json->value_string( iv_prefix && '/key' ).
 * todo, object, groups, array
@@ -1806,9 +1656,62 @@ CLASS zcl_jira IMPLEMENTATION.
     applicationrole-platform = mo_json->value_boolean( iv_prefix && '/platform' ).
   ENDMETHOD.
 
+  METHOD parse_avatarurlsbean.
+    avatarurlsbean-16x16 = mo_json->value_string( iv_prefix && '/16x16' ).
+    avatarurlsbean-24x24 = mo_json->value_string( iv_prefix && '/24x24' ).
+    avatarurlsbean-32x32 = mo_json->value_string( iv_prefix && '/32x32' ).
+    avatarurlsbean-48x48 = mo_json->value_string( iv_prefix && '/48x48' ).
+  ENDMETHOD.
+
+  METHOD parse_component.
+    component-self = mo_json->value_string( iv_prefix && '/self' ).
+    component-id = mo_json->value_string( iv_prefix && '/id' ).
+    component-name = mo_json->value_string( iv_prefix && '/name' ).
+    component-description = mo_json->value_string( iv_prefix && '/description' ).
+* todo, object, lead, 
+    component-leadusername = mo_json->value_string( iv_prefix && '/leadUserName' ).
+    component-leadaccountid = mo_json->value_string( iv_prefix && '/leadAccountId' ).
+    component-assigneetype = mo_json->value_string( iv_prefix && '/assigneeType' ).
+* todo, object, assignee, 
+    component-realassigneetype = mo_json->value_string( iv_prefix && '/realAssigneeType' ).
+* todo, object, realassignee, 
+    component-isassigneetypevalid = mo_json->value_boolean( iv_prefix && '/isAssigneeTypeValid' ).
+    component-project = mo_json->value_string( iv_prefix && '/project' ).
+    component-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
+  ENDMETHOD.
+
+  METHOD parse_dashboard.
+    dashboard-description = mo_json->value_string( iv_prefix && '/description' ).
+    dashboard-id = mo_json->value_string( iv_prefix && '/id' ).
+    dashboard-isfavourite = mo_json->value_boolean( iv_prefix && '/isFavourite' ).
+    dashboard-name = mo_json->value_string( iv_prefix && '/name' ).
+* todo, object, owner, 
+    dashboard-popularity = mo_json->value_string( iv_prefix && '/popularity' ).
+    dashboard-rank = mo_json->value_string( iv_prefix && '/rank' ).
+    dashboard-self = mo_json->value_string( iv_prefix && '/self' ).
+* todo, object, sharepermissions, array
+    dashboard-view = mo_json->value_string( iv_prefix && '/view' ).
+  ENDMETHOD.
+
   METHOD parse_groupname.
     groupname-name = mo_json->value_string( iv_prefix && '/name' ).
     groupname-self = mo_json->value_string( iv_prefix && '/self' ).
+  ENDMETHOD.
+
+  METHOD parse_hierarchy.
+* todo, object, level, array
+  ENDMETHOD.
+
+  METHOD parse_hierarchylevel.
+    hierarchylevel-id = mo_json->value_string( iv_prefix && '/id' ).
+    hierarchylevel-name = mo_json->value_string( iv_prefix && '/name' ).
+    hierarchylevel-abovelevelid = mo_json->value_string( iv_prefix && '/aboveLevelId' ).
+    hierarchylevel-belowlevelid = mo_json->value_string( iv_prefix && '/belowLevelId' ).
+    hierarchylevel-projectconfigurationid = mo_json->value_string( iv_prefix && '/projectConfigurationId' ).
+    hierarchylevel-level = mo_json->value_string( iv_prefix && '/level' ).
+* todo, object, issuetypeids, array
+    hierarchylevel-externaluuid = mo_json->value_string( iv_prefix && '/externalUuid' ).
+    hierarchylevel-globalhierarchylevel = mo_json->value_string( iv_prefix && '/globalHierarchyLevel' ).
   ENDMETHOD.
 
   METHOD parse_issuetypedetails.
@@ -1830,14 +1733,132 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_listwrappercallbackgroup.
   ENDMETHOD.
 
-  METHOD parse_pagebeanworkflowscheme.
-    pagebeanworkflowscheme-self = mo_json->value_string( iv_prefix && '/self' ).
-    pagebeanworkflowscheme-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
-    pagebeanworkflowscheme-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-    pagebeanworkflowscheme-startat = mo_json->value_string( iv_prefix && '/startAt' ).
-    pagebeanworkflowscheme-total = mo_json->value_string( iv_prefix && '/total' ).
-    pagebeanworkflowscheme-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+  METHOD parse_pageofdashboards.
+    pageofdashboards-startat = mo_json->value_string( iv_prefix && '/startAt' ).
+    pageofdashboards-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    pageofdashboards-total = mo_json->value_string( iv_prefix && '/total' ).
+    pageofdashboards-prev = mo_json->value_string( iv_prefix && '/prev' ).
+    pageofdashboards-next = mo_json->value_string( iv_prefix && '/next' ).
+* todo, object, dashboards, array
+  ENDMETHOD.
+
+  METHOD parse_project.
+    project-expand = mo_json->value_string( iv_prefix && '/expand' ).
+    project-self = mo_json->value_string( iv_prefix && '/self' ).
+    project-id = mo_json->value_string( iv_prefix && '/id' ).
+    project-key = mo_json->value_string( iv_prefix && '/key' ).
+    project-description = mo_json->value_string( iv_prefix && '/description' ).
+* todo, object, lead, 
+* todo, object, components, array
+* todo, object, issuetypes, array
+    project-url = mo_json->value_string( iv_prefix && '/url' ).
+    project-email = mo_json->value_string( iv_prefix && '/email' ).
+    project-assigneetype = mo_json->value_string( iv_prefix && '/assigneeType' ).
+* todo, object, versions, array
+    project-name = mo_json->value_string( iv_prefix && '/name' ).
+* todo, object, roles, object
+* todo, object, avatarurls, 
+* todo, object, projectcategory, 
+    project-projecttypekey = mo_json->value_string( iv_prefix && '/projectTypeKey' ).
+    project-simplified = mo_json->value_boolean( iv_prefix && '/simplified' ).
+    project-style = mo_json->value_string( iv_prefix && '/style' ).
+    project-favourite = mo_json->value_boolean( iv_prefix && '/favourite' ).
+    project-isprivate = mo_json->value_boolean( iv_prefix && '/isPrivate' ).
+* todo, object, issuetypehierarchy, 
+* todo, object, permissions, 
+* todo, object, properties, object
+    project-uuid = mo_json->value_string( iv_prefix && '/uuid' ).
+* todo, object, insight, 
+    project-deleted = mo_json->value_boolean( iv_prefix && '/deleted' ).
+    project-retentiontilldate = mo_json->value_string( iv_prefix && '/retentionTillDate' ).
+    project-deleteddate = mo_json->value_string( iv_prefix && '/deletedDate' ).
+* todo, object, deletedby, 
+    project-archived = mo_json->value_boolean( iv_prefix && '/archived' ).
+    project-archiveddate = mo_json->value_string( iv_prefix && '/archivedDate' ).
+* todo, object, archivedby, 
+  ENDMETHOD.
+
+  METHOD parse_projectcategory.
+    projectcategory-self = mo_json->value_string( iv_prefix && '/self' ).
+    projectcategory-id = mo_json->value_string( iv_prefix && '/id' ).
+    projectcategory-name = mo_json->value_string( iv_prefix && '/name' ).
+    projectcategory-description = mo_json->value_string( iv_prefix && '/description' ).
+  ENDMETHOD.
+
+  METHOD parse_projectforscope.
+    projectforscope-self = mo_json->value_string( iv_prefix && '/self' ).
+    projectforscope-id = mo_json->value_string( iv_prefix && '/id' ).
+    projectforscope-key = mo_json->value_string( iv_prefix && '/key' ).
+    projectforscope-name = mo_json->value_string( iv_prefix && '/name' ).
+    projectforscope-projecttypekey = mo_json->value_string( iv_prefix && '/projectTypeKey' ).
+    projectforscope-simplified = mo_json->value_boolean( iv_prefix && '/simplified' ).
+* todo, object, avatarurls, 
+* todo, object, projectcategory, 
+  ENDMETHOD.
+
+  METHOD parse_projectinsight.
+    projectinsight-totalissuecount = mo_json->value_string( iv_prefix && '/totalIssueCount' ).
+    projectinsight-lastissueupdatetime = mo_json->value_string( iv_prefix && '/lastIssueUpdateTime' ).
+  ENDMETHOD.
+
+  METHOD parse_projectpermissions.
+    projectpermissions-canedit = mo_json->value_boolean( iv_prefix && '/canEdit' ).
+  ENDMETHOD.
+
+  METHOD parse_projectrole.
+    projectrole-self = mo_json->value_string( iv_prefix && '/self' ).
+    projectrole-name = mo_json->value_string( iv_prefix && '/name' ).
+    projectrole-id = mo_json->value_string( iv_prefix && '/id' ).
+    projectrole-description = mo_json->value_string( iv_prefix && '/description' ).
+* todo, object, actors, array
+* todo, object, scope, 
+    projectrole-translatedname = mo_json->value_string( iv_prefix && '/translatedName' ).
+    projectrole-currentuserrole = mo_json->value_boolean( iv_prefix && '/currentUserRole' ).
+    projectrole-admin = mo_json->value_boolean( iv_prefix && '/admin' ).
+    projectrole-roleconfigurable = mo_json->value_boolean( iv_prefix && '/roleConfigurable' ).
+    projectrole-default = mo_json->value_boolean( iv_prefix && '/default' ).
+  ENDMETHOD.
+
+  METHOD parse_projectrolegroup.
+    projectrolegroup-displayname = mo_json->value_string( iv_prefix && '/displayName' ).
+    projectrolegroup-name = mo_json->value_string( iv_prefix && '/name' ).
+  ENDMETHOD.
+
+  METHOD parse_projectroleuser.
+    projectroleuser-accountid = mo_json->value_string( iv_prefix && '/accountId' ).
+  ENDMETHOD.
+
+  METHOD parse_roleactor.
+    roleactor-id = mo_json->value_string( iv_prefix && '/id' ).
+    roleactor-displayname = mo_json->value_string( iv_prefix && '/displayName' ).
+    roleactor-type = mo_json->value_string( iv_prefix && '/type' ).
+    roleactor-name = mo_json->value_string( iv_prefix && '/name' ).
+    roleactor-avatarurl = mo_json->value_string( iv_prefix && '/avatarUrl' ).
+* todo, object, actoruser, 
+* todo, object, actorgroup, 
+  ENDMETHOD.
+
+  METHOD parse_scope.
+    scope-type = mo_json->value_string( iv_prefix && '/type' ).
+* todo, object, project, 
+  ENDMETHOD.
+
+  METHOD parse_sharepermission.
+    sharepermission-id = mo_json->value_string( iv_prefix && '/id' ).
+    sharepermission-type = mo_json->value_string( iv_prefix && '/type' ).
+* todo, object, project, 
+* todo, object, role, 
+* todo, object, group, 
+  ENDMETHOD.
+
+  METHOD parse_simplelink.
+    simplelink-id = mo_json->value_string( iv_prefix && '/id' ).
+    simplelink-styleclass = mo_json->value_string( iv_prefix && '/styleClass' ).
+    simplelink-iconclass = mo_json->value_string( iv_prefix && '/iconClass' ).
+    simplelink-label = mo_json->value_string( iv_prefix && '/label' ).
+    simplelink-title = mo_json->value_string( iv_prefix && '/title' ).
+    simplelink-href = mo_json->value_string( iv_prefix && '/href' ).
+    simplelink-weight = mo_json->value_string( iv_prefix && '/weight' ).
   ENDMETHOD.
 
   METHOD parse_simplelistwrapperapplica.
@@ -1854,6 +1875,13 @@ CLASS zcl_jira IMPLEMENTATION.
 * todo, object, pagingcallback, 
 * todo, object, callback, 
     simplelistwrappergroupname-max_results = mo_json->value_string( iv_prefix && '/max-results' ).
+  ENDMETHOD.
+
+  METHOD parse_updatedprojectcategory.
+    updatedprojectcategory-self = mo_json->value_string( iv_prefix && '/self' ).
+    updatedprojectcategory-id = mo_json->value_string( iv_prefix && '/id' ).
+    updatedprojectcategory-description = mo_json->value_string( iv_prefix && '/description' ).
+    updatedprojectcategory-name = mo_json->value_string( iv_prefix && '/name' ).
   ENDMETHOD.
 
   METHOD parse_user.
@@ -1873,109 +1901,48 @@ CLASS zcl_jira IMPLEMENTATION.
     user-expand = mo_json->value_string( iv_prefix && '/expand' ).
   ENDMETHOD.
 
-  METHOD parse_workflowscheme.
-    workflowscheme-id = mo_json->value_string( iv_prefix && '/id' ).
-    workflowscheme-name = mo_json->value_string( iv_prefix && '/name' ).
-    workflowscheme-description = mo_json->value_string( iv_prefix && '/description' ).
-    workflowscheme-defaultworkflow = mo_json->value_string( iv_prefix && '/defaultWorkflow' ).
-* todo, object, issuetypemappings, object
-    workflowscheme-originaldefaultworkflow = mo_json->value_string( iv_prefix && '/originalDefaultWorkflow' ).
-* todo, object, originalissuetypemappings, object
-    workflowscheme-draft = mo_json->value_boolean( iv_prefix && '/draft' ).
-* todo, object, lastmodifieduser, 
-    workflowscheme-lastmodified = mo_json->value_string( iv_prefix && '/lastModified' ).
-    workflowscheme-self = mo_json->value_string( iv_prefix && '/self' ).
-    workflowscheme-updatedraftifneeded = mo_json->value_boolean( iv_prefix && '/updateDraftIfNeeded' ).
-* todo, object, issuetypes, object
+  METHOD parse_userbean.
+    userbean-key = mo_json->value_string( iv_prefix && '/key' ).
+    userbean-self = mo_json->value_string( iv_prefix && '/self' ).
+    userbean-name = mo_json->value_string( iv_prefix && '/name' ).
+    userbean-displayname = mo_json->value_string( iv_prefix && '/displayName' ).
+    userbean-active = mo_json->value_boolean( iv_prefix && '/active' ).
+    userbean-accountid = mo_json->value_string( iv_prefix && '/accountId' ).
+* todo, object, avatarurls, 
   ENDMETHOD.
 
-  METHOD parse_issuetypesworkflowmappin.
-    issuetypesworkflowmapping-workflow = mo_json->value_string( iv_prefix && '/workflow' ).
-* todo, object, issuetypes, array
-    issuetypesworkflowmapping-defaultmapping = mo_json->value_boolean( iv_prefix && '/defaultMapping' ).
-    issuetypesworkflowmapping-updatedraftifneeded = mo_json->value_boolean( iv_prefix && '/updateDraftIfNeeded' ).
+  METHOD parse_userbeanavatarurls.
+    userbeanavatarurls-24x24 = mo_json->value_string( iv_prefix && '/24x24' ).
+    userbeanavatarurls-32x32 = mo_json->value_string( iv_prefix && '/32x32' ).
+    userbeanavatarurls-48x48 = mo_json->value_string( iv_prefix && '/48x48' ).
+    userbeanavatarurls-16x16 = mo_json->value_string( iv_prefix && '/16x16' ).
   ENDMETHOD.
 
-  METHOD parse_issuetypeworkflowmapping.
-    issuetypeworkflowmapping-issuetype = mo_json->value_string( iv_prefix && '/issueType' ).
-    issuetypeworkflowmapping-workflow = mo_json->value_string( iv_prefix && '/workflow' ).
-    issuetypeworkflowmapping-updatedraftifneeded = mo_json->value_boolean( iv_prefix && '/updateDraftIfNeeded' ).
+  METHOD parse_version.
+    version-expand = mo_json->value_string( iv_prefix && '/expand' ).
+    version-self = mo_json->value_string( iv_prefix && '/self' ).
+    version-id = mo_json->value_string( iv_prefix && '/id' ).
+    version-description = mo_json->value_string( iv_prefix && '/description' ).
+    version-name = mo_json->value_string( iv_prefix && '/name' ).
+    version-archived = mo_json->value_boolean( iv_prefix && '/archived' ).
+    version-released = mo_json->value_boolean( iv_prefix && '/released' ).
+    version-startdate = mo_json->value_string( iv_prefix && '/startDate' ).
+    version-releasedate = mo_json->value_string( iv_prefix && '/releaseDate' ).
+    version-overdue = mo_json->value_boolean( iv_prefix && '/overdue' ).
+    version-userstartdate = mo_json->value_string( iv_prefix && '/userStartDate' ).
+    version-userreleasedate = mo_json->value_string( iv_prefix && '/userReleaseDate' ).
+    version-project = mo_json->value_string( iv_prefix && '/project' ).
+    version-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
+    version-moveunfixedissuesto = mo_json->value_string( iv_prefix && '/moveUnfixedIssuesTo' ).
+* todo, object, operations, array
+* todo, object, issuesstatusforfixversion, 
   ENDMETHOD.
 
-  METHOD parse_defaultworkflow.
-    defaultworkflow-workflow = mo_json->value_string( iv_prefix && '/workflow' ).
-    defaultworkflow-updatedraftifneeded = mo_json->value_boolean( iv_prefix && '/updateDraftIfNeeded' ).
-  ENDMETHOD.
-
-  METHOD parse_containerofworkflowschem.
-* todo, object, values, array
-  ENDMETHOD.
-
-  METHOD parse_workflowschemeassociatio.
-* todo, object, projectids, array
-* todo, object, workflowscheme, 
-  ENDMETHOD.
-
-  METHOD parse_workflowschemeprojectass.
-    workflowschemeprojectassociati-workflowschemeid = mo_json->value_string( iv_prefix && '/workflowSchemeId' ).
-    workflowschemeprojectassociati-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
-  ENDMETHOD.
-
-  METHOD parse_pagebeanworkflow.
-    pagebeanworkflow-self = mo_json->value_string( iv_prefix && '/self' ).
-    pagebeanworkflow-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
-    pagebeanworkflow-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-    pagebeanworkflow-startat = mo_json->value_string( iv_prefix && '/startAt' ).
-    pagebeanworkflow-total = mo_json->value_string( iv_prefix && '/total' ).
-    pagebeanworkflow-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
-  ENDMETHOD.
-
-  METHOD parse_publishedworkflowid.
-    publishedworkflowid-name = mo_json->value_string( iv_prefix && '/name' ).
-  ENDMETHOD.
-
-  METHOD parse_screenid.
-    screenid-id = mo_json->value_string( iv_prefix && '/id' ).
-  ENDMETHOD.
-
-  METHOD parse_transition.
-    transition-id = mo_json->value_string( iv_prefix && '/id' ).
-    transition-name = mo_json->value_string( iv_prefix && '/name' ).
-    transition-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, from, array
-    transition-to = mo_json->value_string( iv_prefix && '/to' ).
-    transition-type = mo_json->value_string( iv_prefix && '/type' ).
-* todo, object, screen, 
-* todo, object, rules, 
-  ENDMETHOD.
-
-  METHOD parse_workflow.
-* todo, object, id, 
-    workflow-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, transitions, array
-* todo, object, statuses, array
-  ENDMETHOD.
-
-  METHOD parse_workflowrules.
-* todo, object, conditions, array
-* todo, object, validators, array
-* todo, object, postfunctions, array
-  ENDMETHOD.
-
-  METHOD parse_workflowstatus.
-    workflowstatus-id = mo_json->value_string( iv_prefix && '/id' ).
-    workflowstatus-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, properties, 
-  ENDMETHOD.
-
-  METHOD parse_workflowstatusproperties.
-    workflowstatusproperties-issueeditable = mo_json->value_boolean( iv_prefix && '/issueEditable' ).
-  ENDMETHOD.
-
-  METHOD parse_workflowtransitionrule.
-    workflowtransitionrule-type = mo_json->value_string( iv_prefix && '/type' ).
-* todo, object, configuration, 
+  METHOD parse_versionissuesstatus.
+    versionissuesstatus-unmapped = mo_json->value_string( iv_prefix && '/unmapped' ).
+    versionissuesstatus-todo = mo_json->value_string( iv_prefix && '/toDo' ).
+    versionissuesstatus-inprogress = mo_json->value_string( iv_prefix && '/inProgress' ).
+    versionissuesstatus-done = mo_json->value_string( iv_prefix && '/done' ).
   ENDMETHOD.
 
   METHOD parse_errorcollection.
@@ -1984,94 +1951,55 @@ CLASS zcl_jira IMPLEMENTATION.
     errorcollection-status = mo_json->value_string( iv_prefix && '/status' ).
   ENDMETHOD.
 
-  METHOD parse_connectworkflowtransitio.
-    connectworkflowtransitionrule-id = mo_json->value_string( iv_prefix && '/id' ).
-    connectworkflowtransitionrule-key = mo_json->value_string( iv_prefix && '/key' ).
-* todo, object, configuration, 
-* todo, object, transition, 
-  ENDMETHOD.
-
-  METHOD parse_pagebeanworkflowtransiti.
-    pagebeanworkflowtransitionrule-self = mo_json->value_string( iv_prefix && '/self' ).
-    pagebeanworkflowtransitionrule-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
-    pagebeanworkflowtransitionrule-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-    pagebeanworkflowtransitionrule-startat = mo_json->value_string( iv_prefix && '/startAt' ).
-    pagebeanworkflowtransitionrule-total = mo_json->value_string( iv_prefix && '/total' ).
-    pagebeanworkflowtransitionrule-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
+  METHOD parse_pagebeandashboard.
+    pagebeandashboard-self = mo_json->value_string( iv_prefix && '/self' ).
+    pagebeandashboard-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
+    pagebeandashboard-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    pagebeandashboard-startat = mo_json->value_string( iv_prefix && '/startAt' ).
+    pagebeandashboard-total = mo_json->value_string( iv_prefix && '/total' ).
+    pagebeandashboard-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
 * todo, object, values, array
   ENDMETHOD.
 
-  METHOD parse_ruleconfiguration.
-    ruleconfiguration-value = mo_json->value_string( iv_prefix && '/value' ).
+  METHOD parse_dashboarddetails.
+    dashboarddetails-name = mo_json->value_string( iv_prefix && '/name' ).
+    dashboarddetails-description = mo_json->value_string( iv_prefix && '/description' ).
+* todo, object, sharepermissions, array
   ENDMETHOD.
 
-  METHOD parse_workflowid.
-    workflowid-name = mo_json->value_string( iv_prefix && '/name' ).
-    workflowid-draft = mo_json->value_boolean( iv_prefix && '/draft' ).
+  METHOD parse_propertykey.
+    propertykey-self = mo_json->value_string( iv_prefix && '/self' ).
+    propertykey-key = mo_json->value_string( iv_prefix && '/key' ).
   ENDMETHOD.
 
-  METHOD parse_workflowtransition.
-    workflowtransition-id = mo_json->value_string( iv_prefix && '/id' ).
-    workflowtransition-name = mo_json->value_string( iv_prefix && '/name' ).
+  METHOD parse_propertykeys.
+* todo, object, keys, array
   ENDMETHOD.
 
-  METHOD parse_workflowtransitionrules.
-* todo, object, workflowid, 
-* todo, object, postfunctions, array
-* todo, object, conditions, array
-* todo, object, validators, array
+  METHOD parse_entityproperty.
+    entityproperty-key = mo_json->value_string( iv_prefix && '/key' ).
+* todo, object, value, 
   ENDMETHOD.
 
-  METHOD parse_workflowtransitionrulesu.
-* todo, object, workflows, array
+  METHOD parse_projectissuesecurityleve.
+* todo, object, levels, array
   ENDMETHOD.
 
-  METHOD parse_workflowtransitionrule01.
-* todo, object, workflowid, 
-* todo, object, ruleupdateerrors, object
-* todo, object, updateerrors, array
+  METHOD parse_securitylevel.
+    securitylevel-self = mo_json->value_string( iv_prefix && '/self' ).
+    securitylevel-id = mo_json->value_string( iv_prefix && '/id' ).
+    securitylevel-description = mo_json->value_string( iv_prefix && '/description' ).
+    securitylevel-name = mo_json->value_string( iv_prefix && '/name' ).
   ENDMETHOD.
 
-  METHOD parse_workflowtransitionrule02.
-* todo, object, updateresults, array
-  ENDMETHOD.
-
-  METHOD parse_timetrackingprovider.
-    timetrackingprovider-key = mo_json->value_string( iv_prefix && '/key' ).
-    timetrackingprovider-name = mo_json->value_string( iv_prefix && '/name' ).
-    timetrackingprovider-url = mo_json->value_string( iv_prefix && '/url' ).
-  ENDMETHOD.
-
-  METHOD parse_permissiongrant.
-    permissiongrant-id = mo_json->value_string( iv_prefix && '/id' ).
-    permissiongrant-self = mo_json->value_string( iv_prefix && '/self' ).
-* todo, object, holder, 
-    permissiongrant-permission = mo_json->value_string( iv_prefix && '/permission' ).
-  ENDMETHOD.
-
-  METHOD parse_permissionholder.
-    permissionholder-type = mo_json->value_string( iv_prefix && '/type' ).
-    permissionholder-parameter = mo_json->value_string( iv_prefix && '/parameter' ).
-    permissionholder-expand = mo_json->value_string( iv_prefix && '/expand' ).
-  ENDMETHOD.
-
-  METHOD parse_permissionscheme.
-    permissionscheme-expand = mo_json->value_string( iv_prefix && '/expand' ).
-    permissionscheme-id = mo_json->value_string( iv_prefix && '/id' ).
-    permissionscheme-self = mo_json->value_string( iv_prefix && '/self' ).
-    permissionscheme-name = mo_json->value_string( iv_prefix && '/name' ).
-    permissionscheme-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, scope, 
-* todo, object, permissions, array
-  ENDMETHOD.
-
-  METHOD parse_permissionschemes.
-* todo, object, permissionschemes, array
-  ENDMETHOD.
-
-  METHOD parse_permissiongrants.
-* todo, object, permissions, array
-    permissiongrants-expand = mo_json->value_string( iv_prefix && '/expand' ).
+  METHOD parse_pagebeanstring.
+    pagebeanstring-self = mo_json->value_string( iv_prefix && '/self' ).
+    pagebeanstring-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
+    pagebeanstring-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    pagebeanstring-startat = mo_json->value_string( iv_prefix && '/startAt' ).
+    pagebeanstring-total = mo_json->value_string( iv_prefix && '/total' ).
+    pagebeanstring-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
+* todo, object, values, array
   ENDMETHOD.
 
   METHOD parse_pagebeanuserkey.
@@ -2234,16 +2162,6 @@ CLASS zcl_jira IMPLEMENTATION.
 * todo, object, schema, object
   ENDMETHOD.
 
-  METHOD parse_simplelink.
-    simplelink-id = mo_json->value_string( iv_prefix && '/id' ).
-    simplelink-styleclass = mo_json->value_string( iv_prefix && '/styleClass' ).
-    simplelink-iconclass = mo_json->value_string( iv_prefix && '/iconClass' ).
-    simplelink-label = mo_json->value_string( iv_prefix && '/label' ).
-    simplelink-title = mo_json->value_string( iv_prefix && '/title' ).
-    simplelink-href = mo_json->value_string( iv_prefix && '/href' ).
-    simplelink-weight = mo_json->value_string( iv_prefix && '/weight' ).
-  ENDMETHOD.
-
   METHOD parse_statuscategory.
     statuscategory-self = mo_json->value_string( iv_prefix && '/self' ).
     statuscategory-id = mo_json->value_string( iv_prefix && '/id' ).
@@ -2332,23 +2250,6 @@ CLASS zcl_jira IMPLEMENTATION.
     jqlquerywithunknownusers-convertedquery = mo_json->value_string( iv_prefix && '/convertedQuery' ).
   ENDMETHOD.
 
-  METHOD parse_component.
-    component-self = mo_json->value_string( iv_prefix && '/self' ).
-    component-id = mo_json->value_string( iv_prefix && '/id' ).
-    component-name = mo_json->value_string( iv_prefix && '/name' ).
-    component-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, lead, 
-    component-leadusername = mo_json->value_string( iv_prefix && '/leadUserName' ).
-    component-leadaccountid = mo_json->value_string( iv_prefix && '/leadAccountId' ).
-    component-assigneetype = mo_json->value_string( iv_prefix && '/assigneeType' ).
-* todo, object, assignee, 
-    component-realassigneetype = mo_json->value_string( iv_prefix && '/realAssigneeType' ).
-* todo, object, realassignee, 
-    component-isassigneetypevalid = mo_json->value_boolean( iv_prefix && '/isAssigneeTypeValid' ).
-    component-project = mo_json->value_string( iv_prefix && '/project' ).
-    component-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
-  ENDMETHOD.
-
   METHOD parse_filter.
     filter-self = mo_json->value_string( iv_prefix && '/self' ).
     filter-id = mo_json->value_string( iv_prefix && '/id' ).
@@ -2379,148 +2280,12 @@ CLASS zcl_jira IMPLEMENTATION.
     filtersubscriptionslist-end_index = mo_json->value_string( iv_prefix && '/end-index' ).
   ENDMETHOD.
 
-  METHOD parse_hierarchy.
-* todo, object, level, array
-  ENDMETHOD.
-
-  METHOD parse_hierarchylevel.
-    hierarchylevel-id = mo_json->value_string( iv_prefix && '/id' ).
-    hierarchylevel-name = mo_json->value_string( iv_prefix && '/name' ).
-    hierarchylevel-abovelevelid = mo_json->value_string( iv_prefix && '/aboveLevelId' ).
-    hierarchylevel-belowlevelid = mo_json->value_string( iv_prefix && '/belowLevelId' ).
-    hierarchylevel-projectconfigurationid = mo_json->value_string( iv_prefix && '/projectConfigurationId' ).
-    hierarchylevel-level = mo_json->value_string( iv_prefix && '/level' ).
-* todo, object, issuetypeids, array
-    hierarchylevel-externaluuid = mo_json->value_string( iv_prefix && '/externalUuid' ).
-    hierarchylevel-globalhierarchylevel = mo_json->value_string( iv_prefix && '/globalHierarchyLevel' ).
-  ENDMETHOD.
-
-  METHOD parse_project.
-    project-expand = mo_json->value_string( iv_prefix && '/expand' ).
-    project-self = mo_json->value_string( iv_prefix && '/self' ).
-    project-id = mo_json->value_string( iv_prefix && '/id' ).
-    project-key = mo_json->value_string( iv_prefix && '/key' ).
-    project-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, lead, 
-* todo, object, components, array
-* todo, object, issuetypes, array
-    project-url = mo_json->value_string( iv_prefix && '/url' ).
-    project-email = mo_json->value_string( iv_prefix && '/email' ).
-    project-assigneetype = mo_json->value_string( iv_prefix && '/assigneeType' ).
-* todo, object, versions, array
-    project-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, roles, object
-* todo, object, avatarurls, 
-* todo, object, projectcategory, 
-    project-projecttypekey = mo_json->value_string( iv_prefix && '/projectTypeKey' ).
-    project-simplified = mo_json->value_boolean( iv_prefix && '/simplified' ).
-    project-style = mo_json->value_string( iv_prefix && '/style' ).
-    project-favourite = mo_json->value_boolean( iv_prefix && '/favourite' ).
-    project-isprivate = mo_json->value_boolean( iv_prefix && '/isPrivate' ).
-* todo, object, issuetypehierarchy, 
-* todo, object, permissions, 
-* todo, object, properties, object
-    project-uuid = mo_json->value_string( iv_prefix && '/uuid' ).
-* todo, object, insight, 
-    project-deleted = mo_json->value_boolean( iv_prefix && '/deleted' ).
-    project-retentiontilldate = mo_json->value_string( iv_prefix && '/retentionTillDate' ).
-    project-deleteddate = mo_json->value_string( iv_prefix && '/deletedDate' ).
-* todo, object, deletedby, 
-    project-archived = mo_json->value_boolean( iv_prefix && '/archived' ).
-    project-archiveddate = mo_json->value_string( iv_prefix && '/archivedDate' ).
-* todo, object, archivedby, 
-  ENDMETHOD.
-
-  METHOD parse_projectcategory.
-    projectcategory-self = mo_json->value_string( iv_prefix && '/self' ).
-    projectcategory-id = mo_json->value_string( iv_prefix && '/id' ).
-    projectcategory-name = mo_json->value_string( iv_prefix && '/name' ).
-    projectcategory-description = mo_json->value_string( iv_prefix && '/description' ).
-  ENDMETHOD.
-
-  METHOD parse_projectinsight.
-    projectinsight-totalissuecount = mo_json->value_string( iv_prefix && '/totalIssueCount' ).
-    projectinsight-lastissueupdatetime = mo_json->value_string( iv_prefix && '/lastIssueUpdateTime' ).
-  ENDMETHOD.
-
-  METHOD parse_projectpermissions.
-    projectpermissions-canedit = mo_json->value_boolean( iv_prefix && '/canEdit' ).
-  ENDMETHOD.
-
-  METHOD parse_projectrole.
-    projectrole-self = mo_json->value_string( iv_prefix && '/self' ).
-    projectrole-name = mo_json->value_string( iv_prefix && '/name' ).
-    projectrole-id = mo_json->value_string( iv_prefix && '/id' ).
-    projectrole-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, actors, array
-* todo, object, scope, 
-    projectrole-translatedname = mo_json->value_string( iv_prefix && '/translatedName' ).
-    projectrole-currentuserrole = mo_json->value_boolean( iv_prefix && '/currentUserRole' ).
-    projectrole-admin = mo_json->value_boolean( iv_prefix && '/admin' ).
-    projectrole-roleconfigurable = mo_json->value_boolean( iv_prefix && '/roleConfigurable' ).
-    projectrole-default = mo_json->value_boolean( iv_prefix && '/default' ).
-  ENDMETHOD.
-
-  METHOD parse_projectrolegroup.
-    projectrolegroup-displayname = mo_json->value_string( iv_prefix && '/displayName' ).
-    projectrolegroup-name = mo_json->value_string( iv_prefix && '/name' ).
-  ENDMETHOD.
-
-  METHOD parse_projectroleuser.
-    projectroleuser-accountid = mo_json->value_string( iv_prefix && '/accountId' ).
-  ENDMETHOD.
-
-  METHOD parse_roleactor.
-    roleactor-id = mo_json->value_string( iv_prefix && '/id' ).
-    roleactor-displayname = mo_json->value_string( iv_prefix && '/displayName' ).
-    roleactor-type = mo_json->value_string( iv_prefix && '/type' ).
-    roleactor-name = mo_json->value_string( iv_prefix && '/name' ).
-    roleactor-avatarurl = mo_json->value_string( iv_prefix && '/avatarUrl' ).
-* todo, object, actoruser, 
-* todo, object, actorgroup, 
-  ENDMETHOD.
-
-  METHOD parse_sharepermission.
-    sharepermission-id = mo_json->value_string( iv_prefix && '/id' ).
-    sharepermission-type = mo_json->value_string( iv_prefix && '/type' ).
-* todo, object, project, 
-* todo, object, role, 
-* todo, object, group, 
-  ENDMETHOD.
-
   METHOD parse_userlist.
     userlist-size = mo_json->value_string( iv_prefix && '/size' ).
 * todo, object, items, array
     userlist-max_results = mo_json->value_string( iv_prefix && '/max-results' ).
     userlist-start_index = mo_json->value_string( iv_prefix && '/start-index' ).
     userlist-end_index = mo_json->value_string( iv_prefix && '/end-index' ).
-  ENDMETHOD.
-
-  METHOD parse_version.
-    version-expand = mo_json->value_string( iv_prefix && '/expand' ).
-    version-self = mo_json->value_string( iv_prefix && '/self' ).
-    version-id = mo_json->value_string( iv_prefix && '/id' ).
-    version-description = mo_json->value_string( iv_prefix && '/description' ).
-    version-name = mo_json->value_string( iv_prefix && '/name' ).
-    version-archived = mo_json->value_boolean( iv_prefix && '/archived' ).
-    version-released = mo_json->value_boolean( iv_prefix && '/released' ).
-    version-startdate = mo_json->value_string( iv_prefix && '/startDate' ).
-    version-releasedate = mo_json->value_string( iv_prefix && '/releaseDate' ).
-    version-overdue = mo_json->value_boolean( iv_prefix && '/overdue' ).
-    version-userstartdate = mo_json->value_string( iv_prefix && '/userStartDate' ).
-    version-userreleasedate = mo_json->value_string( iv_prefix && '/userReleaseDate' ).
-    version-project = mo_json->value_string( iv_prefix && '/project' ).
-    version-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
-    version-moveunfixedissuesto = mo_json->value_string( iv_prefix && '/moveUnfixedIssuesTo' ).
-* todo, object, operations, array
-* todo, object, issuesstatusforfixversion, 
-  ENDMETHOD.
-
-  METHOD parse_versionissuesstatus.
-    versionissuesstatus-unmapped = mo_json->value_string( iv_prefix && '/unmapped' ).
-    versionissuesstatus-todo = mo_json->value_string( iv_prefix && '/toDo' ).
-    versionissuesstatus-inprogress = mo_json->value_string( iv_prefix && '/inProgress' ).
-    versionissuesstatus-done = mo_json->value_string( iv_prefix && '/done' ).
   ENDMETHOD.
 
   METHOD parse_filterdetails.
@@ -2552,6 +2317,11 @@ CLASS zcl_jira IMPLEMENTATION.
     defaultsharescope-scope = mo_json->value_string( iv_prefix && '/scope' ).
   ENDMETHOD.
 
+  METHOD parse_columnitem.
+    columnitem-label = mo_json->value_string( iv_prefix && '/label' ).
+    columnitem-value = mo_json->value_string( iv_prefix && '/value' ).
+  ENDMETHOD.
+
   METHOD parse_sharepermissioninputbean.
     sharepermissioninputbean-type = mo_json->value_string( iv_prefix && '/type' ).
     sharepermissioninputbean-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
@@ -2559,75 +2329,142 @@ CLASS zcl_jira IMPLEMENTATION.
     sharepermissioninputbean-projectroleid = mo_json->value_string( iv_prefix && '/projectRoleId' ).
   ENDMETHOD.
 
-  METHOD parse_taskprogressbeanobject.
-    taskprogressbeanobject-self = mo_json->value_string( iv_prefix && '/self' ).
-    taskprogressbeanobject-id = mo_json->value_string( iv_prefix && '/id' ).
-    taskprogressbeanobject-description = mo_json->value_string( iv_prefix && '/description' ).
-    taskprogressbeanobject-status = mo_json->value_string( iv_prefix && '/status' ).
-    taskprogressbeanobject-message = mo_json->value_string( iv_prefix && '/message' ).
-* todo, object, result, 
-    taskprogressbeanobject-submittedby = mo_json->value_string( iv_prefix && '/submittedBy' ).
-    taskprogressbeanobject-progress = mo_json->value_string( iv_prefix && '/progress' ).
-    taskprogressbeanobject-elapsedruntime = mo_json->value_string( iv_prefix && '/elapsedRuntime' ).
-    taskprogressbeanobject-submitted = mo_json->value_string( iv_prefix && '/submitted' ).
-    taskprogressbeanobject-started = mo_json->value_string( iv_prefix && '/started' ).
-    taskprogressbeanobject-finished = mo_json->value_string( iv_prefix && '/finished' ).
-    taskprogressbeanobject-lastupdate = mo_json->value_string( iv_prefix && '/lastUpdate' ).
+  METHOD parse_idbean.
+    idbean-id = mo_json->value_string( iv_prefix && '/id' ).
   ENDMETHOD.
 
-  METHOD parse_dashboard.
-    dashboard-description = mo_json->value_string( iv_prefix && '/description' ).
-    dashboard-id = mo_json->value_string( iv_prefix && '/id' ).
-    dashboard-isfavourite = mo_json->value_boolean( iv_prefix && '/isFavourite' ).
-    dashboard-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, owner, 
-    dashboard-popularity = mo_json->value_string( iv_prefix && '/popularity' ).
-    dashboard-rank = mo_json->value_string( iv_prefix && '/rank' ).
-    dashboard-self = mo_json->value_string( iv_prefix && '/self' ).
-* todo, object, sharepermissions, array
-    dashboard-view = mo_json->value_string( iv_prefix && '/view' ).
+  METHOD parse_permissiongrant.
+    permissiongrant-id = mo_json->value_string( iv_prefix && '/id' ).
+    permissiongrant-self = mo_json->value_string( iv_prefix && '/self' ).
+* todo, object, holder, 
+    permissiongrant-permission = mo_json->value_string( iv_prefix && '/permission' ).
   ENDMETHOD.
 
-  METHOD parse_pageofdashboards.
-    pageofdashboards-startat = mo_json->value_string( iv_prefix && '/startAt' ).
-    pageofdashboards-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-    pageofdashboards-total = mo_json->value_string( iv_prefix && '/total' ).
-    pageofdashboards-prev = mo_json->value_string( iv_prefix && '/prev' ).
-    pageofdashboards-next = mo_json->value_string( iv_prefix && '/next' ).
-* todo, object, dashboards, array
+  METHOD parse_permissionholder.
+    permissionholder-type = mo_json->value_string( iv_prefix && '/type' ).
+    permissionholder-parameter = mo_json->value_string( iv_prefix && '/parameter' ).
+    permissionholder-expand = mo_json->value_string( iv_prefix && '/expand' ).
   ENDMETHOD.
 
-  METHOD parse_userbean.
-    userbean-key = mo_json->value_string( iv_prefix && '/key' ).
-    userbean-self = mo_json->value_string( iv_prefix && '/self' ).
-    userbean-name = mo_json->value_string( iv_prefix && '/name' ).
-    userbean-displayname = mo_json->value_string( iv_prefix && '/displayName' ).
-    userbean-active = mo_json->value_boolean( iv_prefix && '/active' ).
-    userbean-accountid = mo_json->value_string( iv_prefix && '/accountId' ).
-* todo, object, avatarurls, 
+  METHOD parse_permissionscheme.
+    permissionscheme-expand = mo_json->value_string( iv_prefix && '/expand' ).
+    permissionscheme-id = mo_json->value_string( iv_prefix && '/id' ).
+    permissionscheme-self = mo_json->value_string( iv_prefix && '/self' ).
+    permissionscheme-name = mo_json->value_string( iv_prefix && '/name' ).
+    permissionscheme-description = mo_json->value_string( iv_prefix && '/description' ).
+* todo, object, scope, 
+* todo, object, permissions, array
   ENDMETHOD.
 
-  METHOD parse_userbeanavatarurls.
-    userbeanavatarurls-24x24 = mo_json->value_string( iv_prefix && '/24x24' ).
-    userbeanavatarurls-32x32 = mo_json->value_string( iv_prefix && '/32x32' ).
-    userbeanavatarurls-16x16 = mo_json->value_string( iv_prefix && '/16x16' ).
-    userbeanavatarurls-48x48 = mo_json->value_string( iv_prefix && '/48x48' ).
+  METHOD parse_permissions.
+* todo, object, permissions, object
   ENDMETHOD.
 
-  METHOD parse_pagebeandashboard.
-    pagebeandashboard-self = mo_json->value_string( iv_prefix && '/self' ).
-    pagebeandashboard-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
-    pagebeandashboard-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-    pagebeandashboard-startat = mo_json->value_string( iv_prefix && '/startAt' ).
-    pagebeandashboard-total = mo_json->value_string( iv_prefix && '/total' ).
-    pagebeandashboard-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
+  METHOD parse_userpermission.
+    userpermission-id = mo_json->value_string( iv_prefix && '/id' ).
+    userpermission-key = mo_json->value_string( iv_prefix && '/key' ).
+    userpermission-name = mo_json->value_string( iv_prefix && '/name' ).
+    userpermission-type = mo_json->value_string( iv_prefix && '/type' ).
+    userpermission-description = mo_json->value_string( iv_prefix && '/description' ).
+    userpermission-havepermission = mo_json->value_boolean( iv_prefix && '/havePermission' ).
+    userpermission-deprecatedkey = mo_json->value_boolean( iv_prefix && '/deprecatedKey' ).
   ENDMETHOD.
 
-  METHOD parse_dashboarddetails.
-    dashboarddetails-name = mo_json->value_string( iv_prefix && '/name' ).
-    dashboarddetails-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, sharepermissions, array
+  METHOD parse_bulkpermissionsrequestbe.
+* todo, object, projectpermissions, array
+* todo, object, globalpermissions, array
+    bulkpermissionsrequestbean-accountid = mo_json->value_string( iv_prefix && '/accountId' ).
+  ENDMETHOD.
+
+  METHOD parse_bulkprojectpermissions.
+* todo, object, issues, array
+* todo, object, projects, array
+* todo, object, permissions, array
+  ENDMETHOD.
+
+  METHOD parse_bulkpermissiongrants.
+* todo, object, projectpermissions, array
+* todo, object, globalpermissions, array
+  ENDMETHOD.
+
+  METHOD parse_bulkprojectpermissiongra.
+    bulkprojectpermissiongrants-permission = mo_json->value_string( iv_prefix && '/permission' ).
+* todo, object, issues, array
+* todo, object, projects, array
+  ENDMETHOD.
+
+  METHOD parse_permissionskeysbean.
+* todo, object, permissions, array
+  ENDMETHOD.
+
+  METHOD parse_permittedprojects.
+* todo, object, projects, array
+  ENDMETHOD.
+
+  METHOD parse_projectidentifierbean.
+    projectidentifierbean-id = mo_json->value_string( iv_prefix && '/id' ).
+    projectidentifierbean-key = mo_json->value_string( iv_prefix && '/key' ).
+  ENDMETHOD.
+
+  METHOD parse_bulkissuepropertyupdater.
+* todo, object, value, 
+    bulkissuepropertyupdaterequest-expression = mo_json->value_string( iv_prefix && '/expression' ).
+* todo, object, filter, 
+  ENDMETHOD.
+
+  METHOD parse_issuefilterforbulkproper.
+* todo, object, entityids, array
+* todo, object, currentvalue, 
+    issuefilterforbulkpropertyset-hasproperty = mo_json->value_boolean( iv_prefix && '/hasProperty' ).
+  ENDMETHOD.
+
+  METHOD parse_issuefilterforbulkprop01.
+* todo, object, entityids, array
+* todo, object, currentvalue, 
+  ENDMETHOD.
+
+  METHOD parse_issueentityproperties.
+* todo, object, entitiesids, array
+* todo, object, properties, object
+  ENDMETHOD.
+
+  METHOD parse_jsonnode.
+* todo, object, elements, object
+    jsonnode-floatingpointnumber = mo_json->value_boolean( iv_prefix && '/floatingPointNumber' ).
+    jsonnode-pojo = mo_json->value_boolean( iv_prefix && '/pojo' ).
+    jsonnode-containernode = mo_json->value_boolean( iv_prefix && '/containerNode' ).
+    jsonnode-missingnode = mo_json->value_boolean( iv_prefix && '/missingNode' ).
+    jsonnode-object = mo_json->value_boolean( iv_prefix && '/object' ).
+    jsonnode-valuenode = mo_json->value_boolean( iv_prefix && '/valueNode' ).
+    jsonnode-number = mo_json->value_boolean( iv_prefix && '/number' ).
+    jsonnode-integralnumber = mo_json->value_boolean( iv_prefix && '/integralNumber' ).
+    jsonnode-int = mo_json->value_boolean( iv_prefix && '/int' ).
+    jsonnode-long = mo_json->value_boolean( iv_prefix && '/long' ).
+    jsonnode-double = mo_json->value_boolean( iv_prefix && '/double' ).
+    jsonnode-bigdecimal = mo_json->value_boolean( iv_prefix && '/bigDecimal' ).
+    jsonnode-biginteger = mo_json->value_boolean( iv_prefix && '/bigInteger' ).
+    jsonnode-textual = mo_json->value_boolean( iv_prefix && '/textual' ).
+    jsonnode-boolean = mo_json->value_boolean( iv_prefix && '/boolean' ).
+    jsonnode-binary = mo_json->value_boolean( iv_prefix && '/binary' ).
+* todo, object, numbervalue, number
+    jsonnode-numbertype = mo_json->value_string( iv_prefix && '/numberType' ).
+    jsonnode-intvalue = mo_json->value_string( iv_prefix && '/intValue' ).
+    jsonnode-longvalue = mo_json->value_string( iv_prefix && '/longValue' ).
+    jsonnode-bigintegervalue = mo_json->value_string( iv_prefix && '/bigIntegerValue' ).
+* todo, object, doublevalue, number
+* todo, object, decimalvalue, number
+    jsonnode-booleanvalue = mo_json->value_boolean( iv_prefix && '/booleanValue' ).
+* todo, object, binaryvalue, array
+    jsonnode-valueasint = mo_json->value_string( iv_prefix && '/valueAsInt' ).
+    jsonnode-valueaslong = mo_json->value_string( iv_prefix && '/valueAsLong' ).
+* todo, object, valueasdouble, number
+    jsonnode-valueasboolean = mo_json->value_boolean( iv_prefix && '/valueAsBoolean' ).
+    jsonnode-textvalue = mo_json->value_string( iv_prefix && '/textValue' ).
+    jsonnode-valueastext = mo_json->value_string( iv_prefix && '/valueAsText' ).
+* todo, object, fieldnames, object
+    jsonnode-array = mo_json->value_boolean( iv_prefix && '/array' ).
+* todo, object, fields, object
+    jsonnode-null = mo_json->value_boolean( iv_prefix && '/null' ).
   ENDMETHOD.
 
   METHOD parse_customfieldreplacement.
@@ -2783,6 +2620,22 @@ CLASS zcl_jira IMPLEMENTATION.
     projectidentifiers-key = mo_json->value_string( iv_prefix && '/key' ).
   ENDMETHOD.
 
+  METHOD parse_taskprogressbeanobject.
+    taskprogressbeanobject-self = mo_json->value_string( iv_prefix && '/self' ).
+    taskprogressbeanobject-id = mo_json->value_string( iv_prefix && '/id' ).
+    taskprogressbeanobject-description = mo_json->value_string( iv_prefix && '/description' ).
+    taskprogressbeanobject-status = mo_json->value_string( iv_prefix && '/status' ).
+    taskprogressbeanobject-message = mo_json->value_string( iv_prefix && '/message' ).
+* todo, object, result, 
+    taskprogressbeanobject-submittedby = mo_json->value_string( iv_prefix && '/submittedBy' ).
+    taskprogressbeanobject-progress = mo_json->value_string( iv_prefix && '/progress' ).
+    taskprogressbeanobject-elapsedruntime = mo_json->value_string( iv_prefix && '/elapsedRuntime' ).
+    taskprogressbeanobject-submitted = mo_json->value_string( iv_prefix && '/submitted' ).
+    taskprogressbeanobject-started = mo_json->value_string( iv_prefix && '/started' ).
+    taskprogressbeanobject-finished = mo_json->value_string( iv_prefix && '/finished' ).
+    taskprogressbeanobject-lastupdate = mo_json->value_string( iv_prefix && '/lastUpdate' ).
+  ENDMETHOD.
+
   METHOD parse_pagebeanversion.
     pagebeanversion-self = mo_json->value_string( iv_prefix && '/self' ).
     pagebeanversion-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
@@ -2795,16 +2648,16 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD parse_componentwithissuecount.
     componentwithissuecount-issuecount = mo_json->value_string( iv_prefix && '/issueCount' ).
-    componentwithissuecount-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
-    componentwithissuecount-description = mo_json->value_string( iv_prefix && '/description' ).
-    componentwithissuecount-self = mo_json->value_string( iv_prefix && '/self' ).
-    componentwithissuecount-project = mo_json->value_string( iv_prefix && '/project' ).
-    componentwithissuecount-assigneetype = mo_json->value_string( iv_prefix && '/assigneeType' ).
-* todo, object, lead, 
-* todo, object, assignee, 
 * todo, object, realassignee, 
     componentwithissuecount-isassigneetypevalid = mo_json->value_boolean( iv_prefix && '/isAssigneeTypeValid' ).
+* todo, object, assignee, 
     componentwithissuecount-realassigneetype = mo_json->value_string( iv_prefix && '/realAssigneeType' ).
+    componentwithissuecount-assigneetype = mo_json->value_string( iv_prefix && '/assigneeType' ).
+* todo, object, lead, 
+    componentwithissuecount-description = mo_json->value_string( iv_prefix && '/description' ).
+    componentwithissuecount-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
+    componentwithissuecount-project = mo_json->value_string( iv_prefix && '/project' ).
+    componentwithissuecount-self = mo_json->value_string( iv_prefix && '/self' ).
     componentwithissuecount-name = mo_json->value_string( iv_prefix && '/name' ).
     componentwithissuecount-id = mo_json->value_string( iv_prefix && '/id' ).
   ENDMETHOD.
@@ -2843,13 +2696,6 @@ CLASS zcl_jira IMPLEMENTATION.
     issuetypewithstatus-name = mo_json->value_string( iv_prefix && '/name' ).
     issuetypewithstatus-subtask = mo_json->value_boolean( iv_prefix && '/subtask' ).
 * todo, object, statuses, array
-  ENDMETHOD.
-
-  METHOD parse_securitylevel.
-    securitylevel-self = mo_json->value_string( iv_prefix && '/self' ).
-    securitylevel-id = mo_json->value_string( iv_prefix && '/id' ).
-    securitylevel-description = mo_json->value_string( iv_prefix && '/description' ).
-    securitylevel-name = mo_json->value_string( iv_prefix && '/name' ).
   ENDMETHOD.
 
   METHOD parse_securityscheme.
@@ -2917,8 +2763,8 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_richtext.
-    richtext-finalised = mo_json->value_boolean( iv_prefix && '/finalised' ).
     richtext-emptyadf = mo_json->value_boolean( iv_prefix && '/emptyAdf' ).
+    richtext-finalised = mo_json->value_boolean( iv_prefix && '/finalised' ).
     richtext-valueset = mo_json->value_boolean( iv_prefix && '/valueSet' ).
   ENDMETHOD.
 
@@ -3203,8 +3049,8 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_paginatedresponsecomment.
     paginatedresponsecomment-total = mo_json->value_string( iv_prefix && '/total' ).
 * todo, object, results, array
-    paginatedresponsecomment-startat = mo_json->value_string( iv_prefix && '/startAt' ).
     paginatedresponsecomment-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    paginatedresponsecomment-startat = mo_json->value_string( iv_prefix && '/startAt' ).
   ENDMETHOD.
 
   METHOD parse_issuecommentlistrequestb.
@@ -3437,6 +3283,105 @@ CLASS zcl_jira IMPLEMENTATION.
 * todo, object, system, array
   ENDMETHOD.
 
+  METHOD parse_issuetypescheme.
+    issuetypescheme-id = mo_json->value_string( iv_prefix && '/id' ).
+    issuetypescheme-name = mo_json->value_string( iv_prefix && '/name' ).
+    issuetypescheme-description = mo_json->value_string( iv_prefix && '/description' ).
+    issuetypescheme-defaultissuetypeid = mo_json->value_string( iv_prefix && '/defaultIssueTypeId' ).
+    issuetypescheme-isdefault = mo_json->value_boolean( iv_prefix && '/isDefault' ).
+  ENDMETHOD.
+
+  METHOD parse_pagebeanissuetypescheme.
+    pagebeanissuetypescheme-self = mo_json->value_string( iv_prefix && '/self' ).
+    pagebeanissuetypescheme-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
+    pagebeanissuetypescheme-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    pagebeanissuetypescheme-startat = mo_json->value_string( iv_prefix && '/startAt' ).
+    pagebeanissuetypescheme-total = mo_json->value_string( iv_prefix && '/total' ).
+    pagebeanissuetypescheme-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
+* todo, object, values, array
+  ENDMETHOD.
+
+  METHOD parse_issuetypeschemeprojects.
+* todo, object, issuetypescheme, 
+* todo, object, projectids, array
+  ENDMETHOD.
+
+  METHOD parse_pagebeanissuetypeschemep.
+    pagebeanissuetypeschemeproject-self = mo_json->value_string( iv_prefix && '/self' ).
+    pagebeanissuetypeschemeproject-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
+    pagebeanissuetypeschemeproject-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    pagebeanissuetypeschemeproject-startat = mo_json->value_string( iv_prefix && '/startAt' ).
+    pagebeanissuetypeschemeproject-total = mo_json->value_string( iv_prefix && '/total' ).
+    pagebeanissuetypeschemeproject-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
+* todo, object, values, array
+  ENDMETHOD.
+
+  METHOD parse_issuetypeschememapping.
+    issuetypeschememapping-issuetypeschemeid = mo_json->value_string( iv_prefix && '/issueTypeSchemeId' ).
+    issuetypeschememapping-issuetypeid = mo_json->value_string( iv_prefix && '/issueTypeId' ).
+  ENDMETHOD.
+
+  METHOD parse_pagebeanissuetypeschemem.
+    pagebeanissuetypeschememapping-self = mo_json->value_string( iv_prefix && '/self' ).
+    pagebeanissuetypeschememapping-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
+    pagebeanissuetypeschememapping-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    pagebeanissuetypeschememapping-startat = mo_json->value_string( iv_prefix && '/startAt' ).
+    pagebeanissuetypeschememapping-total = mo_json->value_string( iv_prefix && '/total' ).
+    pagebeanissuetypeschememapping-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
+* todo, object, values, array
+  ENDMETHOD.
+
+  METHOD parse_issuetypeschemeprojectas.
+    issuetypeschemeprojectassociat-issuetypeschemeid = mo_json->value_string( iv_prefix && '/issueTypeSchemeId' ).
+    issuetypeschemeprojectassociat-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
+  ENDMETHOD.
+
+  METHOD parse_issuetypeschemedetails.
+    issuetypeschemedetails-name = mo_json->value_string( iv_prefix && '/name' ).
+    issuetypeschemedetails-description = mo_json->value_string( iv_prefix && '/description' ).
+    issuetypeschemedetails-defaultissuetypeid = mo_json->value_string( iv_prefix && '/defaultIssueTypeId' ).
+* todo, object, issuetypeids, array
+  ENDMETHOD.
+
+  METHOD parse_issuetypeschemeid.
+    issuetypeschemeid-issuetypeschemeid = mo_json->value_string( iv_prefix && '/issueTypeSchemeId' ).
+  ENDMETHOD.
+
+  METHOD parse_issuetypeids.
+* todo, object, issuetypeids, array
+  ENDMETHOD.
+
+  METHOD parse_issuetypeschemeupdatedet.
+    issuetypeschemeupdatedetails-name = mo_json->value_string( iv_prefix && '/name' ).
+    issuetypeschemeupdatedetails-description = mo_json->value_string( iv_prefix && '/description' ).
+    issuetypeschemeupdatedetails-defaultissuetypeid = mo_json->value_string( iv_prefix && '/defaultIssueTypeId' ).
+  ENDMETHOD.
+
+  METHOD parse_orderofissuetypes.
+* todo, object, issuetypeids, array
+    orderofissuetypes-after = mo_json->value_string( iv_prefix && '/after' ).
+    orderofissuetypes-position = mo_json->value_string( iv_prefix && '/position' ).
+  ENDMETHOD.
+
+  METHOD parse_changedworklog.
+    changedworklog-worklogid = mo_json->value_string( iv_prefix && '/worklogId' ).
+    changedworklog-updatedtime = mo_json->value_string( iv_prefix && '/updatedTime' ).
+* todo, object, properties, array
+  ENDMETHOD.
+
+  METHOD parse_changedworklogs.
+* todo, object, values, array
+    changedworklogs-since = mo_json->value_string( iv_prefix && '/since' ).
+    changedworklogs-until = mo_json->value_string( iv_prefix && '/until' ).
+    changedworklogs-self = mo_json->value_string( iv_prefix && '/self' ).
+    changedworklogs-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
+    changedworklogs-lastpage = mo_json->value_boolean( iv_prefix && '/lastPage' ).
+  ENDMETHOD.
+
+  METHOD parse_worklogidsrequestbean.
+* todo, object, ids, array
+  ENDMETHOD.
+
   METHOD parse_globalscopebean.
 * todo, object, attributes, array
   ENDMETHOD.
@@ -3621,6 +3566,92 @@ CLASS zcl_jira IMPLEMENTATION.
 * todo, object, values, array
   ENDMETHOD.
 
+  METHOD parse_attachmentmetadata.
+    attachmentmetadata-id = mo_json->value_string( iv_prefix && '/id' ).
+    attachmentmetadata-self = mo_json->value_string( iv_prefix && '/self' ).
+    attachmentmetadata-filename = mo_json->value_string( iv_prefix && '/filename' ).
+* todo, object, author, 
+    attachmentmetadata-created = mo_json->value_string( iv_prefix && '/created' ).
+    attachmentmetadata-size = mo_json->value_string( iv_prefix && '/size' ).
+    attachmentmetadata-mimetype = mo_json->value_string( iv_prefix && '/mimeType' ).
+* todo, object, properties, object
+    attachmentmetadata-content = mo_json->value_string( iv_prefix && '/content' ).
+    attachmentmetadata-thumbnail = mo_json->value_string( iv_prefix && '/thumbnail' ).
+  ENDMETHOD.
+
+  METHOD parse_attachmentsettings.
+    attachmentsettings-enabled = mo_json->value_boolean( iv_prefix && '/enabled' ).
+    attachmentsettings-uploadlimit = mo_json->value_string( iv_prefix && '/uploadLimit' ).
+  ENDMETHOD.
+
+  METHOD parse_attachmentarchiveentry.
+    attachmentarchiveentry-entryindex = mo_json->value_string( iv_prefix && '/entryIndex' ).
+    attachmentarchiveentry-abbreviatedname = mo_json->value_string( iv_prefix && '/abbreviatedName' ).
+    attachmentarchiveentry-mediatype = mo_json->value_string( iv_prefix && '/mediaType' ).
+    attachmentarchiveentry-name = mo_json->value_string( iv_prefix && '/name' ).
+    attachmentarchiveentry-size = mo_json->value_string( iv_prefix && '/size' ).
+  ENDMETHOD.
+
+  METHOD parse_attachmentarchiveimpl.
+* todo, object, entries, array
+    attachmentarchiveimpl-totalentrycount = mo_json->value_string( iv_prefix && '/totalEntryCount' ).
+  ENDMETHOD.
+
+  METHOD parse_attachmentarchive.
+    attachmentarchive-moreavailable = mo_json->value_boolean( iv_prefix && '/moreAvailable' ).
+    attachmentarchive-totalnumberofentriesavailable = mo_json->value_string( iv_prefix && '/totalNumberOfEntriesAvailable' ).
+    attachmentarchive-totalentrycount = mo_json->value_string( iv_prefix && '/totalEntryCount' ).
+* todo, object, entries, array
+  ENDMETHOD.
+
+  METHOD parse_attachmentarchiveitemrea.
+    attachmentarchiveitemreadable-path = mo_json->value_string( iv_prefix && '/path' ).
+    attachmentarchiveitemreadable-index = mo_json->value_string( iv_prefix && '/index' ).
+    attachmentarchiveitemreadable-size = mo_json->value_string( iv_prefix && '/size' ).
+    attachmentarchiveitemreadable-mediatype = mo_json->value_string( iv_prefix && '/mediaType' ).
+    attachmentarchiveitemreadable-label = mo_json->value_string( iv_prefix && '/label' ).
+  ENDMETHOD.
+
+  METHOD parse_attachmentarchivemetadat.
+    attachmentarchivemetadatareada-id = mo_json->value_string( iv_prefix && '/id' ).
+    attachmentarchivemetadatareada-name = mo_json->value_string( iv_prefix && '/name' ).
+* todo, object, entries, array
+    attachmentarchivemetadatareada-totalentrycount = mo_json->value_string( iv_prefix && '/totalEntryCount' ).
+    attachmentarchivemetadatareada-mediatype = mo_json->value_string( iv_prefix && '/mediaType' ).
+  ENDMETHOD.
+
+  METHOD parse_createupdaterolerequestb.
+    createupdaterolerequestbean-name = mo_json->value_string( iv_prefix && '/name' ).
+    createupdaterolerequestbean-description = mo_json->value_string( iv_prefix && '/description' ).
+  ENDMETHOD.
+
+  METHOD parse_actorinputbean.
+* todo, object, user, array
+* todo, object, group, array
+  ENDMETHOD.
+
+  METHOD parse_projectroleactorsupdateb.
+    projectroleactorsupdatebean-id = mo_json->value_string( iv_prefix && '/id' ).
+* todo, object, categorisedactors, object
+  ENDMETHOD.
+
+  METHOD parse_actorsmap.
+* todo, object, user, array
+* todo, object, group, array
+  ENDMETHOD.
+
+  METHOD parse_projectroledetail.
+    projectroledetail-self = mo_json->value_string( iv_prefix && '/self' ).
+    projectroledetail-name = mo_json->value_string( iv_prefix && '/name' ).
+    projectroledetail-id = mo_json->value_string( iv_prefix && '/id' ).
+    projectroledetail-description = mo_json->value_string( iv_prefix && '/description' ).
+    projectroledetail-admin = mo_json->value_boolean( iv_prefix && '/admin' ).
+* todo, object, scope, 
+    projectroledetail-roleconfigurable = mo_json->value_boolean( iv_prefix && '/roleConfigurable' ).
+    projectroledetail-translatedname = mo_json->value_string( iv_prefix && '/translatedName' ).
+    projectroledetail-default = mo_json->value_boolean( iv_prefix && '/default' ).
+  ENDMETHOD.
+
   METHOD parse_pagebeanscreenscheme.
     pagebeanscreenscheme-self = mo_json->value_string( iv_prefix && '/self' ).
     pagebeanscreenscheme-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
@@ -3668,138 +3699,105 @@ CLASS zcl_jira IMPLEMENTATION.
     updatescreentypes-default = mo_json->value_string( iv_prefix && '/default' ).
   ENDMETHOD.
 
-  METHOD parse_issuetypescheme.
-    issuetypescheme-id = mo_json->value_string( iv_prefix && '/id' ).
-    issuetypescheme-name = mo_json->value_string( iv_prefix && '/name' ).
-    issuetypescheme-description = mo_json->value_string( iv_prefix && '/description' ).
-    issuetypescheme-defaultissuetypeid = mo_json->value_string( iv_prefix && '/defaultIssueTypeId' ).
-    issuetypescheme-isdefault = mo_json->value_boolean( iv_prefix && '/isDefault' ).
+  METHOD parse_customfieldoption.
+    customfieldoption-self = mo_json->value_string( iv_prefix && '/self' ).
+    customfieldoption-value = mo_json->value_string( iv_prefix && '/value' ).
   ENDMETHOD.
 
-  METHOD parse_pagebeanissuetypescheme.
-    pagebeanissuetypescheme-self = mo_json->value_string( iv_prefix && '/self' ).
-    pagebeanissuetypescheme-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
-    pagebeanissuetypescheme-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-    pagebeanissuetypescheme-startat = mo_json->value_string( iv_prefix && '/startAt' ).
-    pagebeanissuetypescheme-total = mo_json->value_string( iv_prefix && '/total' ).
-    pagebeanissuetypescheme-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
+  METHOD parse_customfieldcontextprojec.
+    customfieldcontextprojectmappi-contextid = mo_json->value_string( iv_prefix && '/contextId' ).
+    customfieldcontextprojectmappi-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
+    customfieldcontextprojectmappi-isglobalcontext = mo_json->value_boolean( iv_prefix && '/isGlobalContext' ).
+  ENDMETHOD.
+
+  METHOD parse_pagebeancustomfieldcon01.
+    pagebeancustomfieldcontextproj-self = mo_json->value_string( iv_prefix && '/self' ).
+    pagebeancustomfieldcontextproj-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
+    pagebeancustomfieldcontextproj-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    pagebeancustomfieldcontextproj-startat = mo_json->value_string( iv_prefix && '/startAt' ).
+    pagebeancustomfieldcontextproj-total = mo_json->value_string( iv_prefix && '/total' ).
+    pagebeancustomfieldcontextproj-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
 * todo, object, values, array
   ENDMETHOD.
 
-  METHOD parse_issuetypeschemeprojects.
-* todo, object, issuetypescheme, 
+  METHOD parse_customfieldcontext.
+    customfieldcontext-id = mo_json->value_string( iv_prefix && '/id' ).
+    customfieldcontext-name = mo_json->value_string( iv_prefix && '/name' ).
+    customfieldcontext-description = mo_json->value_string( iv_prefix && '/description' ).
+    customfieldcontext-isglobalcontext = mo_json->value_boolean( iv_prefix && '/isGlobalContext' ).
+    customfieldcontext-isanyissuetype = mo_json->value_boolean( iv_prefix && '/isAnyIssueType' ).
+  ENDMETHOD.
+
+  METHOD parse_pagebeancustomfieldcon02.
+    pagebeancustomfieldcontext-self = mo_json->value_string( iv_prefix && '/self' ).
+    pagebeancustomfieldcontext-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
+    pagebeancustomfieldcontext-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    pagebeancustomfieldcontext-startat = mo_json->value_string( iv_prefix && '/startAt' ).
+    pagebeancustomfieldcontext-total = mo_json->value_string( iv_prefix && '/total' ).
+    pagebeancustomfieldcontext-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
+* todo, object, values, array
+  ENDMETHOD.
+
+  METHOD parse_createcustomfieldcontext.
+    createcustomfieldcontext-id = mo_json->value_string( iv_prefix && '/id' ).
+    createcustomfieldcontext-name = mo_json->value_string( iv_prefix && '/name' ).
+    createcustomfieldcontext-description = mo_json->value_string( iv_prefix && '/description' ).
+* todo, object, projectids, array
+* todo, object, issuetypeids, array
+  ENDMETHOD.
+
+  METHOD parse_projectids.
 * todo, object, projectids, array
   ENDMETHOD.
 
-  METHOD parse_pagebeanissuetypeschemep.
-    pagebeanissuetypeschemeproject-self = mo_json->value_string( iv_prefix && '/self' ).
-    pagebeanissuetypeschemeproject-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
-    pagebeanissuetypeschemeproject-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-    pagebeanissuetypeschemeproject-startat = mo_json->value_string( iv_prefix && '/startAt' ).
-    pagebeanissuetypeschemeproject-total = mo_json->value_string( iv_prefix && '/total' ).
-    pagebeanissuetypeschemeproject-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
+  METHOD parse_customfieldcontextupdate.
+    customfieldcontextupdatedetail-name = mo_json->value_string( iv_prefix && '/name' ).
+    customfieldcontextupdatedetail-description = mo_json->value_string( iv_prefix && '/description' ).
+  ENDMETHOD.
+
+  METHOD parse_issuetypeids01.
+* todo, object, issuetypeids, array
+  ENDMETHOD.
+
+  METHOD parse_projectissuetypemapping.
+    projectissuetypemapping-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
+    projectissuetypemapping-issuetypeid = mo_json->value_string( iv_prefix && '/issueTypeId' ).
+  ENDMETHOD.
+
+  METHOD parse_projectissuetypemappings.
+* todo, object, mappings, array
+  ENDMETHOD.
+
+  METHOD parse_contextforprojectandissu.
+    contextforprojectandissuetype-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
+    contextforprojectandissuetype-issuetypeid = mo_json->value_string( iv_prefix && '/issueTypeId' ).
+    contextforprojectandissuetype-contextid = mo_json->value_string( iv_prefix && '/contextId' ).
+  ENDMETHOD.
+
+  METHOD parse_pagebeancontextforprojec.
+    pagebeancontextforprojectandis-self = mo_json->value_string( iv_prefix && '/self' ).
+    pagebeancontextforprojectandis-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
+    pagebeancontextforprojectandis-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    pagebeancontextforprojectandis-startat = mo_json->value_string( iv_prefix && '/startAt' ).
+    pagebeancontextforprojectandis-total = mo_json->value_string( iv_prefix && '/total' ).
+    pagebeancontextforprojectandis-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
 * todo, object, values, array
   ENDMETHOD.
 
-  METHOD parse_issuetypeschememapping.
-    issuetypeschememapping-issuetypeschemeid = mo_json->value_string( iv_prefix && '/issueTypeSchemeId' ).
-    issuetypeschememapping-issuetypeid = mo_json->value_string( iv_prefix && '/issueTypeId' ).
+  METHOD parse_issuetypetocontextmappin.
+    issuetypetocontextmapping-contextid = mo_json->value_string( iv_prefix && '/contextId' ).
+    issuetypetocontextmapping-issuetypeid = mo_json->value_string( iv_prefix && '/issueTypeId' ).
+    issuetypetocontextmapping-isanyissuetype = mo_json->value_boolean( iv_prefix && '/isAnyIssueType' ).
   ENDMETHOD.
 
-  METHOD parse_pagebeanissuetypeschemem.
-    pagebeanissuetypeschememapping-self = mo_json->value_string( iv_prefix && '/self' ).
-    pagebeanissuetypeschememapping-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
-    pagebeanissuetypeschememapping-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-    pagebeanissuetypeschememapping-startat = mo_json->value_string( iv_prefix && '/startAt' ).
-    pagebeanissuetypeschememapping-total = mo_json->value_string( iv_prefix && '/total' ).
-    pagebeanissuetypeschememapping-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
+  METHOD parse_pagebeanissuetypetoconte.
+    pagebeanissuetypetocontextmapp-self = mo_json->value_string( iv_prefix && '/self' ).
+    pagebeanissuetypetocontextmapp-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
+    pagebeanissuetypetocontextmapp-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    pagebeanissuetypetocontextmapp-startat = mo_json->value_string( iv_prefix && '/startAt' ).
+    pagebeanissuetypetocontextmapp-total = mo_json->value_string( iv_prefix && '/total' ).
+    pagebeanissuetypetocontextmapp-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
 * todo, object, values, array
-  ENDMETHOD.
-
-  METHOD parse_issuetypeschemeprojectas.
-    issuetypeschemeprojectassociat-issuetypeschemeid = mo_json->value_string( iv_prefix && '/issueTypeSchemeId' ).
-    issuetypeschemeprojectassociat-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
-  ENDMETHOD.
-
-  METHOD parse_issuetypeschemedetails.
-    issuetypeschemedetails-name = mo_json->value_string( iv_prefix && '/name' ).
-    issuetypeschemedetails-description = mo_json->value_string( iv_prefix && '/description' ).
-    issuetypeschemedetails-defaultissuetypeid = mo_json->value_string( iv_prefix && '/defaultIssueTypeId' ).
-* todo, object, issuetypeids, array
-  ENDMETHOD.
-
-  METHOD parse_issuetypeschemeid.
-    issuetypeschemeid-issuetypeschemeid = mo_json->value_string( iv_prefix && '/issueTypeSchemeId' ).
-  ENDMETHOD.
-
-  METHOD parse_issuetypeids.
-* todo, object, issuetypeids, array
-  ENDMETHOD.
-
-  METHOD parse_issuetypeschemeupdatedet.
-    issuetypeschemeupdatedetails-name = mo_json->value_string( iv_prefix && '/name' ).
-    issuetypeschemeupdatedetails-description = mo_json->value_string( iv_prefix && '/description' ).
-    issuetypeschemeupdatedetails-defaultissuetypeid = mo_json->value_string( iv_prefix && '/defaultIssueTypeId' ).
-  ENDMETHOD.
-
-  METHOD parse_orderofissuetypes.
-* todo, object, issuetypeids, array
-    orderofissuetypes-after = mo_json->value_string( iv_prefix && '/after' ).
-    orderofissuetypes-position = mo_json->value_string( iv_prefix && '/position' ).
-  ENDMETHOD.
-
-  METHOD parse_attachmentmetadata.
-    attachmentmetadata-id = mo_json->value_string( iv_prefix && '/id' ).
-    attachmentmetadata-self = mo_json->value_string( iv_prefix && '/self' ).
-    attachmentmetadata-filename = mo_json->value_string( iv_prefix && '/filename' ).
-* todo, object, author, 
-    attachmentmetadata-created = mo_json->value_string( iv_prefix && '/created' ).
-    attachmentmetadata-size = mo_json->value_string( iv_prefix && '/size' ).
-    attachmentmetadata-mimetype = mo_json->value_string( iv_prefix && '/mimeType' ).
-* todo, object, properties, object
-    attachmentmetadata-content = mo_json->value_string( iv_prefix && '/content' ).
-    attachmentmetadata-thumbnail = mo_json->value_string( iv_prefix && '/thumbnail' ).
-  ENDMETHOD.
-
-  METHOD parse_attachmentsettings.
-    attachmentsettings-enabled = mo_json->value_boolean( iv_prefix && '/enabled' ).
-    attachmentsettings-uploadlimit = mo_json->value_string( iv_prefix && '/uploadLimit' ).
-  ENDMETHOD.
-
-  METHOD parse_attachmentarchiveentry.
-    attachmentarchiveentry-mediatype = mo_json->value_string( iv_prefix && '/mediaType' ).
-    attachmentarchiveentry-abbreviatedname = mo_json->value_string( iv_prefix && '/abbreviatedName' ).
-    attachmentarchiveentry-entryindex = mo_json->value_string( iv_prefix && '/entryIndex' ).
-    attachmentarchiveentry-name = mo_json->value_string( iv_prefix && '/name' ).
-    attachmentarchiveentry-size = mo_json->value_string( iv_prefix && '/size' ).
-  ENDMETHOD.
-
-  METHOD parse_attachmentarchiveimpl.
-* todo, object, entries, array
-    attachmentarchiveimpl-totalentrycount = mo_json->value_string( iv_prefix && '/totalEntryCount' ).
-  ENDMETHOD.
-
-  METHOD parse_attachmentarchive.
-    attachmentarchive-moreavailable = mo_json->value_boolean( iv_prefix && '/moreAvailable' ).
-    attachmentarchive-totalnumberofentriesavailable = mo_json->value_string( iv_prefix && '/totalNumberOfEntriesAvailable' ).
-    attachmentarchive-totalentrycount = mo_json->value_string( iv_prefix && '/totalEntryCount' ).
-* todo, object, entries, array
-  ENDMETHOD.
-
-  METHOD parse_attachmentarchiveitemrea.
-    attachmentarchiveitemreadable-path = mo_json->value_string( iv_prefix && '/path' ).
-    attachmentarchiveitemreadable-index = mo_json->value_string( iv_prefix && '/index' ).
-    attachmentarchiveitemreadable-size = mo_json->value_string( iv_prefix && '/size' ).
-    attachmentarchiveitemreadable-mediatype = mo_json->value_string( iv_prefix && '/mediaType' ).
-    attachmentarchiveitemreadable-label = mo_json->value_string( iv_prefix && '/label' ).
-  ENDMETHOD.
-
-  METHOD parse_attachmentarchivemetadat.
-    attachmentarchivemetadatareada-id = mo_json->value_string( iv_prefix && '/id' ).
-    attachmentarchivemetadatareada-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, entries, array
-    attachmentarchivemetadatareada-totalentrycount = mo_json->value_string( iv_prefix && '/totalEntryCount' ).
-    attachmentarchivemetadatareada-mediatype = mo_json->value_string( iv_prefix && '/mediaType' ).
   ENDMETHOD.
 
   METHOD parse_issuetypescreenschemeite.
@@ -3880,530 +3878,6 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD parse_updatedefaultscreenschem.
     updatedefaultscreenscheme-screenschemeid = mo_json->value_string( iv_prefix && '/screenSchemeId' ).
-  ENDMETHOD.
-
-  METHOD parse_issuetypeids01.
-* todo, object, issuetypeids, array
-  ENDMETHOD.
-
-  METHOD parse_createupdaterolerequestb.
-    createupdaterolerequestbean-name = mo_json->value_string( iv_prefix && '/name' ).
-    createupdaterolerequestbean-description = mo_json->value_string( iv_prefix && '/description' ).
-  ENDMETHOD.
-
-  METHOD parse_actorinputbean.
-* todo, object, user, array
-* todo, object, group, array
-  ENDMETHOD.
-
-  METHOD parse_projectroleactorsupdateb.
-    projectroleactorsupdatebean-id = mo_json->value_string( iv_prefix && '/id' ).
-* todo, object, categorisedactors, object
-  ENDMETHOD.
-
-  METHOD parse_actorsmap.
-* todo, object, user, array
-* todo, object, group, array
-  ENDMETHOD.
-
-  METHOD parse_projectroledetail.
-    projectroledetail-self = mo_json->value_string( iv_prefix && '/self' ).
-    projectroledetail-name = mo_json->value_string( iv_prefix && '/name' ).
-    projectroledetail-id = mo_json->value_string( iv_prefix && '/id' ).
-    projectroledetail-description = mo_json->value_string( iv_prefix && '/description' ).
-    projectroledetail-admin = mo_json->value_boolean( iv_prefix && '/admin' ).
-* todo, object, scope, 
-    projectroledetail-roleconfigurable = mo_json->value_boolean( iv_prefix && '/roleConfigurable' ).
-    projectroledetail-translatedname = mo_json->value_string( iv_prefix && '/translatedName' ).
-    projectroledetail-default = mo_json->value_boolean( iv_prefix && '/default' ).
-  ENDMETHOD.
-
-  METHOD parse_customfieldoption.
-    customfieldoption-self = mo_json->value_string( iv_prefix && '/self' ).
-    customfieldoption-value = mo_json->value_string( iv_prefix && '/value' ).
-  ENDMETHOD.
-
-  METHOD parse_customfieldcontextprojec.
-    customfieldcontextprojectmappi-contextid = mo_json->value_string( iv_prefix && '/contextId' ).
-    customfieldcontextprojectmappi-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
-    customfieldcontextprojectmappi-isglobalcontext = mo_json->value_boolean( iv_prefix && '/isGlobalContext' ).
-  ENDMETHOD.
-
-  METHOD parse_pagebeancustomfieldcon01.
-    pagebeancustomfieldcontextproj-self = mo_json->value_string( iv_prefix && '/self' ).
-    pagebeancustomfieldcontextproj-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
-    pagebeancustomfieldcontextproj-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-    pagebeancustomfieldcontextproj-startat = mo_json->value_string( iv_prefix && '/startAt' ).
-    pagebeancustomfieldcontextproj-total = mo_json->value_string( iv_prefix && '/total' ).
-    pagebeancustomfieldcontextproj-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
-  ENDMETHOD.
-
-  METHOD parse_customfieldcontext.
-    customfieldcontext-id = mo_json->value_string( iv_prefix && '/id' ).
-    customfieldcontext-name = mo_json->value_string( iv_prefix && '/name' ).
-    customfieldcontext-description = mo_json->value_string( iv_prefix && '/description' ).
-    customfieldcontext-isglobalcontext = mo_json->value_boolean( iv_prefix && '/isGlobalContext' ).
-    customfieldcontext-isanyissuetype = mo_json->value_boolean( iv_prefix && '/isAnyIssueType' ).
-  ENDMETHOD.
-
-  METHOD parse_pagebeancustomfieldcon02.
-    pagebeancustomfieldcontext-self = mo_json->value_string( iv_prefix && '/self' ).
-    pagebeancustomfieldcontext-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
-    pagebeancustomfieldcontext-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-    pagebeancustomfieldcontext-startat = mo_json->value_string( iv_prefix && '/startAt' ).
-    pagebeancustomfieldcontext-total = mo_json->value_string( iv_prefix && '/total' ).
-    pagebeancustomfieldcontext-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
-  ENDMETHOD.
-
-  METHOD parse_createcustomfieldcontext.
-    createcustomfieldcontext-id = mo_json->value_string( iv_prefix && '/id' ).
-    createcustomfieldcontext-name = mo_json->value_string( iv_prefix && '/name' ).
-    createcustomfieldcontext-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, projectids, array
-* todo, object, issuetypeids, array
-  ENDMETHOD.
-
-  METHOD parse_projectids.
-* todo, object, projectids, array
-  ENDMETHOD.
-
-  METHOD parse_customfieldcontextupdate.
-    customfieldcontextupdatedetail-name = mo_json->value_string( iv_prefix && '/name' ).
-    customfieldcontextupdatedetail-description = mo_json->value_string( iv_prefix && '/description' ).
-  ENDMETHOD.
-
-  METHOD parse_projectissuetypemapping.
-    projectissuetypemapping-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
-    projectissuetypemapping-issuetypeid = mo_json->value_string( iv_prefix && '/issueTypeId' ).
-  ENDMETHOD.
-
-  METHOD parse_projectissuetypemappings.
-* todo, object, mappings, array
-  ENDMETHOD.
-
-  METHOD parse_contextforprojectandissu.
-    contextforprojectandissuetype-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
-    contextforprojectandissuetype-issuetypeid = mo_json->value_string( iv_prefix && '/issueTypeId' ).
-    contextforprojectandissuetype-contextid = mo_json->value_string( iv_prefix && '/contextId' ).
-  ENDMETHOD.
-
-  METHOD parse_pagebeancontextforprojec.
-    pagebeancontextforprojectandis-self = mo_json->value_string( iv_prefix && '/self' ).
-    pagebeancontextforprojectandis-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
-    pagebeancontextforprojectandis-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-    pagebeancontextforprojectandis-startat = mo_json->value_string( iv_prefix && '/startAt' ).
-    pagebeancontextforprojectandis-total = mo_json->value_string( iv_prefix && '/total' ).
-    pagebeancontextforprojectandis-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
-  ENDMETHOD.
-
-  METHOD parse_issuetypetocontextmappin.
-    issuetypetocontextmapping-contextid = mo_json->value_string( iv_prefix && '/contextId' ).
-    issuetypetocontextmapping-issuetypeid = mo_json->value_string( iv_prefix && '/issueTypeId' ).
-    issuetypetocontextmapping-isanyissuetype = mo_json->value_boolean( iv_prefix && '/isAnyIssueType' ).
-  ENDMETHOD.
-
-  METHOD parse_pagebeanissuetypetoconte.
-    pagebeanissuetypetocontextmapp-self = mo_json->value_string( iv_prefix && '/self' ).
-    pagebeanissuetypetocontextmapp-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
-    pagebeanissuetypetocontextmapp-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-    pagebeanissuetypetocontextmapp-startat = mo_json->value_string( iv_prefix && '/startAt' ).
-    pagebeanissuetypetocontextmapp-total = mo_json->value_string( iv_prefix && '/total' ).
-    pagebeanissuetypetocontextmapp-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
-  ENDMETHOD.
-
-  METHOD parse_changedworklog.
-    changedworklog-worklogid = mo_json->value_string( iv_prefix && '/worklogId' ).
-    changedworklog-updatedtime = mo_json->value_string( iv_prefix && '/updatedTime' ).
-* todo, object, properties, array
-  ENDMETHOD.
-
-  METHOD parse_changedworklogs.
-* todo, object, values, array
-    changedworklogs-since = mo_json->value_string( iv_prefix && '/since' ).
-    changedworklogs-until = mo_json->value_string( iv_prefix && '/until' ).
-    changedworklogs-self = mo_json->value_string( iv_prefix && '/self' ).
-    changedworklogs-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
-    changedworklogs-lastpage = mo_json->value_boolean( iv_prefix && '/lastPage' ).
-  ENDMETHOD.
-
-  METHOD parse_worklogidsrequestbean.
-* todo, object, ids, array
-  ENDMETHOD.
-
-  METHOD parse_usermigrationbean.
-    usermigrationbean-key = mo_json->value_string( iv_prefix && '/key' ).
-    usermigrationbean-username = mo_json->value_string( iv_prefix && '/username' ).
-    usermigrationbean-accountid = mo_json->value_string( iv_prefix && '/accountId' ).
-  ENDMETHOD.
-
-  METHOD parse_unrestricteduseremail.
-    unrestricteduseremail-accountid = mo_json->value_string( iv_prefix && '/accountId' ).
-    unrestricteduseremail-email = mo_json->value_string( iv_prefix && '/email' ).
-  ENDMETHOD.
-
-  METHOD parse_failedwebhook.
-    failedwebhook-id = mo_json->value_string( iv_prefix && '/id' ).
-    failedwebhook-body = mo_json->value_string( iv_prefix && '/body' ).
-    failedwebhook-url = mo_json->value_string( iv_prefix && '/url' ).
-    failedwebhook-failuretime = mo_json->value_string( iv_prefix && '/failureTime' ).
-  ENDMETHOD.
-
-  METHOD parse_failedwebhooks.
-* todo, object, values, array
-    failedwebhooks-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-    failedwebhooks-next = mo_json->value_string( iv_prefix && '/next' ).
-  ENDMETHOD.
-
-  METHOD parse_webhookdetails.
-    webhookdetails-jqlfilter = mo_json->value_string( iv_prefix && '/jqlFilter' ).
-* todo, object, events, array
-  ENDMETHOD.
-
-  METHOD parse_webhookregistrationdetai.
-* todo, object, webhooks, array
-    webhookregistrationdetails-url = mo_json->value_string( iv_prefix && '/url' ).
-  ENDMETHOD.
-
-  METHOD parse_containerforregisteredwe.
-* todo, object, webhookregistrationresult, array
-  ENDMETHOD.
-
-  METHOD parse_registeredwebhook.
-    registeredwebhook-createdwebhookid = mo_json->value_string( iv_prefix && '/createdWebhookId' ).
-* todo, object, errors, array
-  ENDMETHOD.
-
-  METHOD parse_pagebeanwebhook.
-    pagebeanwebhook-self = mo_json->value_string( iv_prefix && '/self' ).
-    pagebeanwebhook-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
-    pagebeanwebhook-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-    pagebeanwebhook-startat = mo_json->value_string( iv_prefix && '/startAt' ).
-    pagebeanwebhook-total = mo_json->value_string( iv_prefix && '/total' ).
-    pagebeanwebhook-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
-  ENDMETHOD.
-
-  METHOD parse_webhook.
-    webhook-id = mo_json->value_string( iv_prefix && '/id' ).
-    webhook-jqlfilter = mo_json->value_string( iv_prefix && '/jqlFilter' ).
-* todo, object, events, array
-    webhook-expirationdate = mo_json->value_string( iv_prefix && '/expirationDate' ).
-  ENDMETHOD.
-
-  METHOD parse_containerforwebhookids.
-* todo, object, webhookids, array
-  ENDMETHOD.
-
-  METHOD parse_webhooksexpirationdate.
-    webhooksexpirationdate-expirationdate = mo_json->value_string( iv_prefix && '/expirationDate' ).
-  ENDMETHOD.
-
-  METHOD parse_bulkissuepropertyupdater.
-* todo, object, value, 
-    bulkissuepropertyupdaterequest-expression = mo_json->value_string( iv_prefix && '/expression' ).
-* todo, object, filter, 
-  ENDMETHOD.
-
-  METHOD parse_issuefilterforbulkproper.
-* todo, object, entityids, array
-* todo, object, currentvalue, 
-    issuefilterforbulkpropertyset-hasproperty = mo_json->value_boolean( iv_prefix && '/hasProperty' ).
-  ENDMETHOD.
-
-  METHOD parse_issuefilterforbulkprop01.
-* todo, object, entityids, array
-* todo, object, currentvalue, 
-  ENDMETHOD.
-
-  METHOD parse_issueentityproperties.
-* todo, object, entitiesids, array
-* todo, object, properties, object
-  ENDMETHOD.
-
-  METHOD parse_jsonnode.
-* todo, object, elements, object
-    jsonnode-pojo = mo_json->value_boolean( iv_prefix && '/pojo' ).
-    jsonnode-containernode = mo_json->value_boolean( iv_prefix && '/containerNode' ).
-    jsonnode-missingnode = mo_json->value_boolean( iv_prefix && '/missingNode' ).
-    jsonnode-object = mo_json->value_boolean( iv_prefix && '/object' ).
-    jsonnode-valuenode = mo_json->value_boolean( iv_prefix && '/valueNode' ).
-    jsonnode-number = mo_json->value_boolean( iv_prefix && '/number' ).
-    jsonnode-integralnumber = mo_json->value_boolean( iv_prefix && '/integralNumber' ).
-    jsonnode-floatingpointnumber = mo_json->value_boolean( iv_prefix && '/floatingPointNumber' ).
-    jsonnode-int = mo_json->value_boolean( iv_prefix && '/int' ).
-    jsonnode-long = mo_json->value_boolean( iv_prefix && '/long' ).
-    jsonnode-double = mo_json->value_boolean( iv_prefix && '/double' ).
-    jsonnode-bigdecimal = mo_json->value_boolean( iv_prefix && '/bigDecimal' ).
-    jsonnode-biginteger = mo_json->value_boolean( iv_prefix && '/bigInteger' ).
-    jsonnode-textual = mo_json->value_boolean( iv_prefix && '/textual' ).
-    jsonnode-boolean = mo_json->value_boolean( iv_prefix && '/boolean' ).
-    jsonnode-binary = mo_json->value_boolean( iv_prefix && '/binary' ).
-* todo, object, numbervalue, number
-    jsonnode-numbertype = mo_json->value_string( iv_prefix && '/numberType' ).
-    jsonnode-intvalue = mo_json->value_string( iv_prefix && '/intValue' ).
-    jsonnode-longvalue = mo_json->value_string( iv_prefix && '/longValue' ).
-    jsonnode-bigintegervalue = mo_json->value_string( iv_prefix && '/bigIntegerValue' ).
-* todo, object, doublevalue, number
-* todo, object, decimalvalue, number
-    jsonnode-booleanvalue = mo_json->value_boolean( iv_prefix && '/booleanValue' ).
-* todo, object, binaryvalue, array
-    jsonnode-valueasint = mo_json->value_string( iv_prefix && '/valueAsInt' ).
-    jsonnode-valueaslong = mo_json->value_string( iv_prefix && '/valueAsLong' ).
-* todo, object, valueasdouble, number
-    jsonnode-valueasboolean = mo_json->value_boolean( iv_prefix && '/valueAsBoolean' ).
-    jsonnode-textvalue = mo_json->value_string( iv_prefix && '/textValue' ).
-    jsonnode-valueastext = mo_json->value_string( iv_prefix && '/valueAsText' ).
-* todo, object, fieldnames, object
-    jsonnode-array = mo_json->value_boolean( iv_prefix && '/array' ).
-* todo, object, fields, object
-    jsonnode-null = mo_json->value_boolean( iv_prefix && '/null' ).
-  ENDMETHOD.
-
-  METHOD parse_groupdetails.
-    groupdetails-name = mo_json->value_string( iv_prefix && '/name' ).
-    groupdetails-groupid = mo_json->value_string( iv_prefix && '/groupId' ).
-  ENDMETHOD.
-
-  METHOD parse_pagebeangroupdetails.
-    pagebeangroupdetails-self = mo_json->value_string( iv_prefix && '/self' ).
-    pagebeangroupdetails-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
-    pagebeangroupdetails-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-    pagebeangroupdetails-startat = mo_json->value_string( iv_prefix && '/startAt' ).
-    pagebeangroupdetails-total = mo_json->value_string( iv_prefix && '/total' ).
-    pagebeangroupdetails-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
-  ENDMETHOD.
-
-  METHOD parse_locale.
-    locale-locale = mo_json->value_string( iv_prefix && '/locale' ).
-  ENDMETHOD.
-
-  METHOD parse_healthcheckresult.
-    healthcheckresult-name = mo_json->value_string( iv_prefix && '/name' ).
-    healthcheckresult-description = mo_json->value_string( iv_prefix && '/description' ).
-    healthcheckresult-passed = mo_json->value_boolean( iv_prefix && '/passed' ).
-  ENDMETHOD.
-
-  METHOD parse_serverinformation.
-    serverinformation-baseurl = mo_json->value_string( iv_prefix && '/baseUrl' ).
-    serverinformation-version = mo_json->value_string( iv_prefix && '/version' ).
-* todo, object, versionnumbers, array
-    serverinformation-deploymenttype = mo_json->value_string( iv_prefix && '/deploymentType' ).
-    serverinformation-buildnumber = mo_json->value_string( iv_prefix && '/buildNumber' ).
-    serverinformation-builddate = mo_json->value_string( iv_prefix && '/buildDate' ).
-    serverinformation-servertime = mo_json->value_string( iv_prefix && '/serverTime' ).
-    serverinformation-scminfo = mo_json->value_string( iv_prefix && '/scmInfo' ).
-    serverinformation-servertitle = mo_json->value_string( iv_prefix && '/serverTitle' ).
-* todo, object, healthchecks, array
-  ENDMETHOD.
-
-  METHOD parse_eventnotification.
-    eventnotification-expand = mo_json->value_string( iv_prefix && '/expand' ).
-    eventnotification-id = mo_json->value_string( iv_prefix && '/id' ).
-    eventnotification-notificationtype = mo_json->value_string( iv_prefix && '/notificationType' ).
-    eventnotification-parameter = mo_json->value_string( iv_prefix && '/parameter' ).
-* todo, object, group, 
-* todo, object, field, 
-    eventnotification-emailaddress = mo_json->value_string( iv_prefix && '/emailAddress' ).
-* todo, object, projectrole, 
-* todo, object, user, 
-  ENDMETHOD.
-
-  METHOD parse_notificationevent.
-    notificationevent-id = mo_json->value_string( iv_prefix && '/id' ).
-    notificationevent-name = mo_json->value_string( iv_prefix && '/name' ).
-    notificationevent-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, templateevent, 
-  ENDMETHOD.
-
-  METHOD parse_notificationscheme.
-    notificationscheme-expand = mo_json->value_string( iv_prefix && '/expand' ).
-    notificationscheme-id = mo_json->value_string( iv_prefix && '/id' ).
-    notificationscheme-self = mo_json->value_string( iv_prefix && '/self' ).
-    notificationscheme-name = mo_json->value_string( iv_prefix && '/name' ).
-    notificationscheme-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, notificationschemeevents, array
-* todo, object, scope, 
-  ENDMETHOD.
-
-  METHOD parse_notificationschemeevent.
-* todo, object, event, 
-* todo, object, notifications, array
-  ENDMETHOD.
-
-  METHOD parse_pagebeannotificationsche.
-    pagebeannotificationscheme-self = mo_json->value_string( iv_prefix && '/self' ).
-    pagebeannotificationscheme-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
-    pagebeannotificationscheme-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-    pagebeannotificationscheme-startat = mo_json->value_string( iv_prefix && '/startAt' ).
-    pagebeannotificationscheme-total = mo_json->value_string( iv_prefix && '/total' ).
-    pagebeannotificationscheme-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
-  ENDMETHOD.
-
-  METHOD parse_idbean.
-    idbean-id = mo_json->value_string( iv_prefix && '/id' ).
-  ENDMETHOD.
-
-  METHOD parse_permissions.
-* todo, object, permissions, object
-  ENDMETHOD.
-
-  METHOD parse_userpermission.
-    userpermission-id = mo_json->value_string( iv_prefix && '/id' ).
-    userpermission-key = mo_json->value_string( iv_prefix && '/key' ).
-    userpermission-name = mo_json->value_string( iv_prefix && '/name' ).
-    userpermission-type = mo_json->value_string( iv_prefix && '/type' ).
-    userpermission-description = mo_json->value_string( iv_prefix && '/description' ).
-    userpermission-havepermission = mo_json->value_boolean( iv_prefix && '/havePermission' ).
-    userpermission-deprecatedkey = mo_json->value_boolean( iv_prefix && '/deprecatedKey' ).
-  ENDMETHOD.
-
-  METHOD parse_bulkpermissionsrequestbe.
-* todo, object, projectpermissions, array
-* todo, object, globalpermissions, array
-    bulkpermissionsrequestbean-accountid = mo_json->value_string( iv_prefix && '/accountId' ).
-  ENDMETHOD.
-
-  METHOD parse_bulkprojectpermissions.
-* todo, object, issues, array
-* todo, object, projects, array
-* todo, object, permissions, array
-  ENDMETHOD.
-
-  METHOD parse_bulkpermissiongrants.
-* todo, object, projectpermissions, array
-* todo, object, globalpermissions, array
-  ENDMETHOD.
-
-  METHOD parse_bulkprojectpermissiongra.
-    bulkprojectpermissiongrants-permission = mo_json->value_string( iv_prefix && '/permission' ).
-* todo, object, issues, array
-* todo, object, projects, array
-  ENDMETHOD.
-
-  METHOD parse_permissionskeysbean.
-* todo, object, permissions, array
-  ENDMETHOD.
-
-  METHOD parse_permittedprojects.
-* todo, object, projects, array
-  ENDMETHOD.
-
-  METHOD parse_projectidentifierbean.
-    projectidentifierbean-id = mo_json->value_string( iv_prefix && '/id' ).
-    projectidentifierbean-key = mo_json->value_string( iv_prefix && '/key' ).
-  ENDMETHOD.
-
-  METHOD parse_jqlqueriestoparse.
-* todo, object, queries, array
-  ENDMETHOD.
-
-  METHOD parse_compoundclause.
-* todo, object, clauses, array
-    compoundclause-operator = mo_json->value_string( iv_prefix && '/operator' ).
-  ENDMETHOD.
-
-  METHOD parse_fieldchangedclause.
-* todo, object, field, 
-    fieldchangedclause-operator = mo_json->value_string( iv_prefix && '/operator' ).
-* todo, object, predicates, array
-  ENDMETHOD.
-
-  METHOD parse_fieldvalueclause.
-* todo, object, field, 
-    fieldvalueclause-operator = mo_json->value_string( iv_prefix && '/operator' ).
-* todo, object, operand, 
-  ENDMETHOD.
-
-  METHOD parse_fieldwasclause.
-* todo, object, field, 
-    fieldwasclause-operator = mo_json->value_string( iv_prefix && '/operator' ).
-* todo, object, operand, 
-* todo, object, predicates, array
-  ENDMETHOD.
-
-  METHOD parse_functionoperand.
-    functionoperand-function = mo_json->value_string( iv_prefix && '/function' ).
-* todo, object, arguments, array
-  ENDMETHOD.
-
-  METHOD parse_jqlquery.
-* todo, object, where, 
-* todo, object, orderby, 
-  ENDMETHOD.
-
-  METHOD parse_jqlqueryclause.
-  ENDMETHOD.
-
-  METHOD parse_jqlqueryclauseoperand.
-  ENDMETHOD.
-
-  METHOD parse_jqlqueryclausetimepredic.
-    jqlqueryclausetimepredicate-operator = mo_json->value_string( iv_prefix && '/operator' ).
-* todo, object, operand, 
-  ENDMETHOD.
-
-  METHOD parse_jqlqueryfield.
-    jqlqueryfield-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, property, array
-  ENDMETHOD.
-
-  METHOD parse_jqlqueryfieldentityprope.
-    jqlqueryfieldentityproperty-entity = mo_json->value_string( iv_prefix && '/entity' ).
-    jqlqueryfieldentityproperty-key = mo_json->value_string( iv_prefix && '/key' ).
-    jqlqueryfieldentityproperty-path = mo_json->value_string( iv_prefix && '/path' ).
-    jqlqueryfieldentityproperty-type = mo_json->value_string( iv_prefix && '/type' ).
-  ENDMETHOD.
-
-  METHOD parse_jqlqueryorderbyclause.
-* todo, object, fields, array
-  ENDMETHOD.
-
-  METHOD parse_jqlqueryorderbyclauseele.
-* todo, object, field, 
-    jqlqueryorderbyclauseelement-direction = mo_json->value_string( iv_prefix && '/direction' ).
-  ENDMETHOD.
-
-  METHOD parse_jqlqueryunitaryoperand.
-  ENDMETHOD.
-
-  METHOD parse_keywordoperand.
-    keywordoperand-keyword = mo_json->value_string( iv_prefix && '/keyword' ).
-  ENDMETHOD.
-
-  METHOD parse_listoperand.
-* todo, object, values, array
-  ENDMETHOD.
-
-  METHOD parse_parsedjqlqueries.
-* todo, object, queries, array
-  ENDMETHOD.
-
-  METHOD parse_parsedjqlquery.
-    parsedjqlquery-query = mo_json->value_string( iv_prefix && '/query' ).
-* todo, object, structure, 
-* todo, object, errors, array
-  ENDMETHOD.
-
-  METHOD parse_valueoperand.
-    valueoperand-value = mo_json->value_string( iv_prefix && '/value' ).
-  ENDMETHOD.
-
-  METHOD parse_projectemailaddress.
-    projectemailaddress-emailaddress = mo_json->value_string( iv_prefix && '/emailAddress' ).
-  ENDMETHOD.
-
-  METHOD parse_projecttype.
-    projecttype-key = mo_json->value_string( iv_prefix && '/key' ).
-    projecttype-formattedkey = mo_json->value_string( iv_prefix && '/formattedKey' ).
-    projecttype-descriptioni18nkey = mo_json->value_string( iv_prefix && '/descriptionI18nKey' ).
-    projecttype-icon = mo_json->value_string( iv_prefix && '/icon' ).
-    projecttype-color = mo_json->value_string( iv_prefix && '/color' ).
   ENDMETHOD.
 
   METHOD parse_idorkeybean.
@@ -4501,8 +3975,544 @@ CLASS zcl_jira IMPLEMENTATION.
 * todo, object, results, array
   ENDMETHOD.
 
-  METHOD parse_projectissuesecurityleve.
-* todo, object, levels, array
+  METHOD parse_healthcheckresult.
+    healthcheckresult-name = mo_json->value_string( iv_prefix && '/name' ).
+    healthcheckresult-description = mo_json->value_string( iv_prefix && '/description' ).
+    healthcheckresult-passed = mo_json->value_boolean( iv_prefix && '/passed' ).
+  ENDMETHOD.
+
+  METHOD parse_serverinformation.
+    serverinformation-baseurl = mo_json->value_string( iv_prefix && '/baseUrl' ).
+    serverinformation-version = mo_json->value_string( iv_prefix && '/version' ).
+* todo, object, versionnumbers, array
+    serverinformation-deploymenttype = mo_json->value_string( iv_prefix && '/deploymentType' ).
+    serverinformation-buildnumber = mo_json->value_string( iv_prefix && '/buildNumber' ).
+    serverinformation-builddate = mo_json->value_string( iv_prefix && '/buildDate' ).
+    serverinformation-servertime = mo_json->value_string( iv_prefix && '/serverTime' ).
+    serverinformation-scminfo = mo_json->value_string( iv_prefix && '/scmInfo' ).
+    serverinformation-servertitle = mo_json->value_string( iv_prefix && '/serverTitle' ).
+* todo, object, healthchecks, array
+  ENDMETHOD.
+
+  METHOD parse_usermigrationbean.
+    usermigrationbean-key = mo_json->value_string( iv_prefix && '/key' ).
+    usermigrationbean-username = mo_json->value_string( iv_prefix && '/username' ).
+    usermigrationbean-accountid = mo_json->value_string( iv_prefix && '/accountId' ).
+  ENDMETHOD.
+
+  METHOD parse_unrestricteduseremail.
+    unrestricteduseremail-accountid = mo_json->value_string( iv_prefix && '/accountId' ).
+    unrestricteduseremail-email = mo_json->value_string( iv_prefix && '/email' ).
+  ENDMETHOD.
+
+  METHOD parse_deprecatedworkflow.
+    deprecatedworkflow-name = mo_json->value_string( iv_prefix && '/name' ).
+    deprecatedworkflow-description = mo_json->value_string( iv_prefix && '/description' ).
+    deprecatedworkflow-lastmodifieddate = mo_json->value_string( iv_prefix && '/lastModifiedDate' ).
+    deprecatedworkflow-lastmodifieduser = mo_json->value_string( iv_prefix && '/lastModifiedUser' ).
+    deprecatedworkflow-lastmodifieduseraccountid = mo_json->value_string( iv_prefix && '/lastModifiedUserAccountId' ).
+    deprecatedworkflow-steps = mo_json->value_string( iv_prefix && '/steps' ).
+* todo, object, scope, 
+    deprecatedworkflow-default = mo_json->value_boolean( iv_prefix && '/default' ).
+  ENDMETHOD.
+
+  METHOD parse_workflowtransitionproper.
+    workflowtransitionproperty-key = mo_json->value_string( iv_prefix && '/key' ).
+    workflowtransitionproperty-value = mo_json->value_string( iv_prefix && '/value' ).
+    workflowtransitionproperty-id = mo_json->value_string( iv_prefix && '/id' ).
+  ENDMETHOD.
+
+  METHOD parse_configuration.
+    configuration-votingenabled = mo_json->value_boolean( iv_prefix && '/votingEnabled' ).
+    configuration-watchingenabled = mo_json->value_boolean( iv_prefix && '/watchingEnabled' ).
+    configuration-unassignedissuesallowed = mo_json->value_boolean( iv_prefix && '/unassignedIssuesAllowed' ).
+    configuration-subtasksenabled = mo_json->value_boolean( iv_prefix && '/subTasksEnabled' ).
+    configuration-issuelinkingenabled = mo_json->value_boolean( iv_prefix && '/issueLinkingEnabled' ).
+    configuration-timetrackingenabled = mo_json->value_boolean( iv_prefix && '/timeTrackingEnabled' ).
+    configuration-attachmentsenabled = mo_json->value_boolean( iv_prefix && '/attachmentsEnabled' ).
+* todo, object, timetrackingconfiguration, 
+  ENDMETHOD.
+
+  METHOD parse_timetrackingconfiguratio.
+* todo, object, workinghoursperday, number
+* todo, object, workingdaysperweek, number
+    timetrackingconfiguration-timeformat = mo_json->value_string( iv_prefix && '/timeFormat' ).
+    timetrackingconfiguration-defaultunit = mo_json->value_string( iv_prefix && '/defaultUnit' ).
+  ENDMETHOD.
+
+  METHOD parse_applicationproperty.
+    applicationproperty-id = mo_json->value_string( iv_prefix && '/id' ).
+    applicationproperty-key = mo_json->value_string( iv_prefix && '/key' ).
+    applicationproperty-value = mo_json->value_string( iv_prefix && '/value' ).
+    applicationproperty-name = mo_json->value_string( iv_prefix && '/name' ).
+    applicationproperty-desc = mo_json->value_string( iv_prefix && '/desc' ).
+    applicationproperty-type = mo_json->value_string( iv_prefix && '/type' ).
+    applicationproperty-defaultvalue = mo_json->value_string( iv_prefix && '/defaultValue' ).
+    applicationproperty-example = mo_json->value_string( iv_prefix && '/example' ).
+* todo, object, allowedvalues, array
+  ENDMETHOD.
+
+  METHOD parse_simpleapplicationpropert.
+    simpleapplicationpropertybean-id = mo_json->value_string( iv_prefix && '/id' ).
+    simpleapplicationpropertybean-value = mo_json->value_string( iv_prefix && '/value' ).
+  ENDMETHOD.
+
+  METHOD parse_pagebeanworkflowscheme.
+    pagebeanworkflowscheme-self = mo_json->value_string( iv_prefix && '/self' ).
+    pagebeanworkflowscheme-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
+    pagebeanworkflowscheme-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    pagebeanworkflowscheme-startat = mo_json->value_string( iv_prefix && '/startAt' ).
+    pagebeanworkflowscheme-total = mo_json->value_string( iv_prefix && '/total' ).
+    pagebeanworkflowscheme-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
+* todo, object, values, array
+  ENDMETHOD.
+
+  METHOD parse_workflowscheme.
+    workflowscheme-id = mo_json->value_string( iv_prefix && '/id' ).
+    workflowscheme-name = mo_json->value_string( iv_prefix && '/name' ).
+    workflowscheme-description = mo_json->value_string( iv_prefix && '/description' ).
+    workflowscheme-defaultworkflow = mo_json->value_string( iv_prefix && '/defaultWorkflow' ).
+* todo, object, issuetypemappings, object
+    workflowscheme-originaldefaultworkflow = mo_json->value_string( iv_prefix && '/originalDefaultWorkflow' ).
+* todo, object, originalissuetypemappings, object
+    workflowscheme-draft = mo_json->value_boolean( iv_prefix && '/draft' ).
+* todo, object, lastmodifieduser, 
+    workflowscheme-lastmodified = mo_json->value_string( iv_prefix && '/lastModified' ).
+    workflowscheme-self = mo_json->value_string( iv_prefix && '/self' ).
+    workflowscheme-updatedraftifneeded = mo_json->value_boolean( iv_prefix && '/updateDraftIfNeeded' ).
+* todo, object, issuetypes, object
+  ENDMETHOD.
+
+  METHOD parse_issuetypesworkflowmappin.
+    issuetypesworkflowmapping-workflow = mo_json->value_string( iv_prefix && '/workflow' ).
+* todo, object, issuetypes, array
+    issuetypesworkflowmapping-defaultmapping = mo_json->value_boolean( iv_prefix && '/defaultMapping' ).
+    issuetypesworkflowmapping-updatedraftifneeded = mo_json->value_boolean( iv_prefix && '/updateDraftIfNeeded' ).
+  ENDMETHOD.
+
+  METHOD parse_issuetypeworkflowmapping.
+    issuetypeworkflowmapping-issuetype = mo_json->value_string( iv_prefix && '/issueType' ).
+    issuetypeworkflowmapping-workflow = mo_json->value_string( iv_prefix && '/workflow' ).
+    issuetypeworkflowmapping-updatedraftifneeded = mo_json->value_boolean( iv_prefix && '/updateDraftIfNeeded' ).
+  ENDMETHOD.
+
+  METHOD parse_defaultworkflow.
+    defaultworkflow-workflow = mo_json->value_string( iv_prefix && '/workflow' ).
+    defaultworkflow-updatedraftifneeded = mo_json->value_boolean( iv_prefix && '/updateDraftIfNeeded' ).
+  ENDMETHOD.
+
+  METHOD parse_containerofworkflowschem.
+* todo, object, values, array
+  ENDMETHOD.
+
+  METHOD parse_workflowschemeassociatio.
+* todo, object, projectids, array
+* todo, object, workflowscheme, 
+  ENDMETHOD.
+
+  METHOD parse_workflowschemeprojectass.
+    workflowschemeprojectassociati-workflowschemeid = mo_json->value_string( iv_prefix && '/workflowSchemeId' ).
+    workflowschemeprojectassociati-projectid = mo_json->value_string( iv_prefix && '/projectId' ).
+  ENDMETHOD.
+
+  METHOD parse_associateditembean.
+    associateditembean-id = mo_json->value_string( iv_prefix && '/id' ).
+    associateditembean-name = mo_json->value_string( iv_prefix && '/name' ).
+    associateditembean-typename = mo_json->value_string( iv_prefix && '/typeName' ).
+    associateditembean-parentid = mo_json->value_string( iv_prefix && '/parentId' ).
+    associateditembean-parentname = mo_json->value_string( iv_prefix && '/parentName' ).
+  ENDMETHOD.
+
+  METHOD parse_auditrecordbean.
+    auditrecordbean-id = mo_json->value_string( iv_prefix && '/id' ).
+    auditrecordbean-summary = mo_json->value_string( iv_prefix && '/summary' ).
+    auditrecordbean-remoteaddress = mo_json->value_string( iv_prefix && '/remoteAddress' ).
+    auditrecordbean-authorkey = mo_json->value_string( iv_prefix && '/authorKey' ).
+    auditrecordbean-created = mo_json->value_string( iv_prefix && '/created' ).
+    auditrecordbean-category = mo_json->value_string( iv_prefix && '/category' ).
+    auditrecordbean-eventsource = mo_json->value_string( iv_prefix && '/eventSource' ).
+    auditrecordbean-description = mo_json->value_string( iv_prefix && '/description' ).
+* todo, object, objectitem, 
+* todo, object, changedvalues, array
+* todo, object, associateditems, array
+  ENDMETHOD.
+
+  METHOD parse_auditrecords.
+    auditrecords-offset = mo_json->value_string( iv_prefix && '/offset' ).
+    auditrecords-limit = mo_json->value_string( iv_prefix && '/limit' ).
+    auditrecords-total = mo_json->value_string( iv_prefix && '/total' ).
+* todo, object, records, array
+  ENDMETHOD.
+
+  METHOD parse_changedvaluebean.
+    changedvaluebean-fieldname = mo_json->value_string( iv_prefix && '/fieldName' ).
+    changedvaluebean-changedfrom = mo_json->value_string( iv_prefix && '/changedFrom' ).
+    changedvaluebean-changedto = mo_json->value_string( iv_prefix && '/changedTo' ).
+  ENDMETHOD.
+
+  METHOD parse_permissionschemes.
+* todo, object, permissionschemes, array
+  ENDMETHOD.
+
+  METHOD parse_permissiongrants.
+* todo, object, permissions, array
+    permissiongrants-expand = mo_json->value_string( iv_prefix && '/expand' ).
+  ENDMETHOD.
+
+  METHOD parse_timetrackingprovider.
+    timetrackingprovider-key = mo_json->value_string( iv_prefix && '/key' ).
+    timetrackingprovider-name = mo_json->value_string( iv_prefix && '/name' ).
+    timetrackingprovider-url = mo_json->value_string( iv_prefix && '/url' ).
+  ENDMETHOD.
+
+  METHOD parse_pagebeanworkflow.
+    pagebeanworkflow-self = mo_json->value_string( iv_prefix && '/self' ).
+    pagebeanworkflow-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
+    pagebeanworkflow-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    pagebeanworkflow-startat = mo_json->value_string( iv_prefix && '/startAt' ).
+    pagebeanworkflow-total = mo_json->value_string( iv_prefix && '/total' ).
+    pagebeanworkflow-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
+* todo, object, values, array
+  ENDMETHOD.
+
+  METHOD parse_publishedworkflowid.
+    publishedworkflowid-name = mo_json->value_string( iv_prefix && '/name' ).
+  ENDMETHOD.
+
+  METHOD parse_screenid.
+    screenid-id = mo_json->value_string( iv_prefix && '/id' ).
+  ENDMETHOD.
+
+  METHOD parse_transition.
+    transition-id = mo_json->value_string( iv_prefix && '/id' ).
+    transition-name = mo_json->value_string( iv_prefix && '/name' ).
+    transition-description = mo_json->value_string( iv_prefix && '/description' ).
+* todo, object, from, array
+    transition-to = mo_json->value_string( iv_prefix && '/to' ).
+    transition-type = mo_json->value_string( iv_prefix && '/type' ).
+* todo, object, screen, 
+* todo, object, rules, 
+  ENDMETHOD.
+
+  METHOD parse_workflow.
+* todo, object, id, 
+    workflow-description = mo_json->value_string( iv_prefix && '/description' ).
+* todo, object, transitions, array
+* todo, object, statuses, array
+  ENDMETHOD.
+
+  METHOD parse_workflowrules.
+* todo, object, conditions, array
+* todo, object, validators, array
+* todo, object, postfunctions, array
+  ENDMETHOD.
+
+  METHOD parse_workflowstatus.
+    workflowstatus-id = mo_json->value_string( iv_prefix && '/id' ).
+    workflowstatus-name = mo_json->value_string( iv_prefix && '/name' ).
+* todo, object, properties, 
+  ENDMETHOD.
+
+  METHOD parse_workflowstatusproperties.
+    workflowstatusproperties-issueeditable = mo_json->value_boolean( iv_prefix && '/issueEditable' ).
+  ENDMETHOD.
+
+  METHOD parse_workflowtransitionrule.
+    workflowtransitionrule-type = mo_json->value_string( iv_prefix && '/type' ).
+* todo, object, configuration, 
+  ENDMETHOD.
+
+  METHOD parse_connectworkflowtransitio.
+    connectworkflowtransitionrule-id = mo_json->value_string( iv_prefix && '/id' ).
+    connectworkflowtransitionrule-key = mo_json->value_string( iv_prefix && '/key' ).
+* todo, object, configuration, 
+* todo, object, transition, 
+  ENDMETHOD.
+
+  METHOD parse_pagebeanworkflowtransiti.
+    pagebeanworkflowtransitionrule-self = mo_json->value_string( iv_prefix && '/self' ).
+    pagebeanworkflowtransitionrule-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
+    pagebeanworkflowtransitionrule-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    pagebeanworkflowtransitionrule-startat = mo_json->value_string( iv_prefix && '/startAt' ).
+    pagebeanworkflowtransitionrule-total = mo_json->value_string( iv_prefix && '/total' ).
+    pagebeanworkflowtransitionrule-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
+* todo, object, values, array
+  ENDMETHOD.
+
+  METHOD parse_ruleconfiguration.
+    ruleconfiguration-value = mo_json->value_string( iv_prefix && '/value' ).
+  ENDMETHOD.
+
+  METHOD parse_workflowid.
+    workflowid-name = mo_json->value_string( iv_prefix && '/name' ).
+    workflowid-draft = mo_json->value_boolean( iv_prefix && '/draft' ).
+  ENDMETHOD.
+
+  METHOD parse_workflowtransition.
+    workflowtransition-id = mo_json->value_string( iv_prefix && '/id' ).
+    workflowtransition-name = mo_json->value_string( iv_prefix && '/name' ).
+  ENDMETHOD.
+
+  METHOD parse_workflowtransitionrules.
+* todo, object, workflowid, 
+* todo, object, postfunctions, array
+* todo, object, conditions, array
+* todo, object, validators, array
+  ENDMETHOD.
+
+  METHOD parse_workflowtransitionrulesu.
+* todo, object, workflows, array
+  ENDMETHOD.
+
+  METHOD parse_workflowtransitionrule01.
+* todo, object, workflowid, 
+* todo, object, ruleupdateerrors, object
+* todo, object, updateerrors, array
+  ENDMETHOD.
+
+  METHOD parse_workflowtransitionrule02.
+* todo, object, updateresults, array
+  ENDMETHOD.
+
+  METHOD parse_locale.
+    locale-locale = mo_json->value_string( iv_prefix && '/locale' ).
+  ENDMETHOD.
+
+  METHOD parse_projectemailaddress.
+    projectemailaddress-emailaddress = mo_json->value_string( iv_prefix && '/emailAddress' ).
+  ENDMETHOD.
+
+  METHOD parse_projecttype.
+    projecttype-key = mo_json->value_string( iv_prefix && '/key' ).
+    projecttype-formattedkey = mo_json->value_string( iv_prefix && '/formattedKey' ).
+    projecttype-descriptioni18nkey = mo_json->value_string( iv_prefix && '/descriptionI18nKey' ).
+    projecttype-icon = mo_json->value_string( iv_prefix && '/icon' ).
+    projecttype-color = mo_json->value_string( iv_prefix && '/color' ).
+  ENDMETHOD.
+
+  METHOD parse_failedwebhook.
+    failedwebhook-id = mo_json->value_string( iv_prefix && '/id' ).
+    failedwebhook-body = mo_json->value_string( iv_prefix && '/body' ).
+    failedwebhook-url = mo_json->value_string( iv_prefix && '/url' ).
+    failedwebhook-failuretime = mo_json->value_string( iv_prefix && '/failureTime' ).
+  ENDMETHOD.
+
+  METHOD parse_failedwebhooks.
+* todo, object, values, array
+    failedwebhooks-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    failedwebhooks-next = mo_json->value_string( iv_prefix && '/next' ).
+  ENDMETHOD.
+
+  METHOD parse_webhookdetails.
+    webhookdetails-jqlfilter = mo_json->value_string( iv_prefix && '/jqlFilter' ).
+* todo, object, events, array
+  ENDMETHOD.
+
+  METHOD parse_webhookregistrationdetai.
+* todo, object, webhooks, array
+    webhookregistrationdetails-url = mo_json->value_string( iv_prefix && '/url' ).
+  ENDMETHOD.
+
+  METHOD parse_containerforregisteredwe.
+* todo, object, webhookregistrationresult, array
+  ENDMETHOD.
+
+  METHOD parse_registeredwebhook.
+    registeredwebhook-createdwebhookid = mo_json->value_string( iv_prefix && '/createdWebhookId' ).
+* todo, object, errors, array
+  ENDMETHOD.
+
+  METHOD parse_pagebeanwebhook.
+    pagebeanwebhook-self = mo_json->value_string( iv_prefix && '/self' ).
+    pagebeanwebhook-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
+    pagebeanwebhook-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    pagebeanwebhook-startat = mo_json->value_string( iv_prefix && '/startAt' ).
+    pagebeanwebhook-total = mo_json->value_string( iv_prefix && '/total' ).
+    pagebeanwebhook-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
+* todo, object, values, array
+  ENDMETHOD.
+
+  METHOD parse_webhook.
+    webhook-id = mo_json->value_string( iv_prefix && '/id' ).
+    webhook-jqlfilter = mo_json->value_string( iv_prefix && '/jqlFilter' ).
+* todo, object, events, array
+    webhook-expirationdate = mo_json->value_string( iv_prefix && '/expirationDate' ).
+  ENDMETHOD.
+
+  METHOD parse_containerforwebhookids.
+* todo, object, webhookids, array
+  ENDMETHOD.
+
+  METHOD parse_webhooksexpirationdate.
+    webhooksexpirationdate-expirationdate = mo_json->value_string( iv_prefix && '/expirationDate' ).
+  ENDMETHOD.
+
+  METHOD parse_groupdetails.
+    groupdetails-name = mo_json->value_string( iv_prefix && '/name' ).
+    groupdetails-groupid = mo_json->value_string( iv_prefix && '/groupId' ).
+  ENDMETHOD.
+
+  METHOD parse_pagebeangroupdetails.
+    pagebeangroupdetails-self = mo_json->value_string( iv_prefix && '/self' ).
+    pagebeangroupdetails-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
+    pagebeangroupdetails-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    pagebeangroupdetails-startat = mo_json->value_string( iv_prefix && '/startAt' ).
+    pagebeangroupdetails-total = mo_json->value_string( iv_prefix && '/total' ).
+    pagebeangroupdetails-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
+* todo, object, values, array
+  ENDMETHOD.
+
+  METHOD parse_issuesandjqlqueries.
+* todo, object, jqls, array
+* todo, object, issueids, array
+  ENDMETHOD.
+
+  METHOD parse_issuematches.
+* todo, object, matches, array
+  ENDMETHOD.
+
+  METHOD parse_issuematchesforjql.
+* todo, object, matchedissues, array
+* todo, object, errors, array
+  ENDMETHOD.
+
+  METHOD parse_jqlqueriestoparse.
+* todo, object, queries, array
+  ENDMETHOD.
+
+  METHOD parse_compoundclause.
+* todo, object, clauses, array
+    compoundclause-operator = mo_json->value_string( iv_prefix && '/operator' ).
+  ENDMETHOD.
+
+  METHOD parse_fieldchangedclause.
+* todo, object, field, 
+    fieldchangedclause-operator = mo_json->value_string( iv_prefix && '/operator' ).
+* todo, object, predicates, array
+  ENDMETHOD.
+
+  METHOD parse_fieldvalueclause.
+* todo, object, field, 
+    fieldvalueclause-operator = mo_json->value_string( iv_prefix && '/operator' ).
+* todo, object, operand, 
+  ENDMETHOD.
+
+  METHOD parse_fieldwasclause.
+* todo, object, field, 
+    fieldwasclause-operator = mo_json->value_string( iv_prefix && '/operator' ).
+* todo, object, operand, 
+* todo, object, predicates, array
+  ENDMETHOD.
+
+  METHOD parse_functionoperand.
+    functionoperand-function = mo_json->value_string( iv_prefix && '/function' ).
+* todo, object, arguments, array
+  ENDMETHOD.
+
+  METHOD parse_jqlquery.
+* todo, object, where, 
+* todo, object, orderby, 
+  ENDMETHOD.
+
+  METHOD parse_jqlqueryclause.
+  ENDMETHOD.
+
+  METHOD parse_jqlqueryclauseoperand.
+  ENDMETHOD.
+
+  METHOD parse_jqlqueryclausetimepredic.
+    jqlqueryclausetimepredicate-operator = mo_json->value_string( iv_prefix && '/operator' ).
+* todo, object, operand, 
+  ENDMETHOD.
+
+  METHOD parse_jqlqueryfield.
+    jqlqueryfield-name = mo_json->value_string( iv_prefix && '/name' ).
+* todo, object, property, array
+  ENDMETHOD.
+
+  METHOD parse_jqlqueryfieldentityprope.
+    jqlqueryfieldentityproperty-entity = mo_json->value_string( iv_prefix && '/entity' ).
+    jqlqueryfieldentityproperty-key = mo_json->value_string( iv_prefix && '/key' ).
+    jqlqueryfieldentityproperty-path = mo_json->value_string( iv_prefix && '/path' ).
+    jqlqueryfieldentityproperty-type = mo_json->value_string( iv_prefix && '/type' ).
+  ENDMETHOD.
+
+  METHOD parse_jqlqueryorderbyclause.
+* todo, object, fields, array
+  ENDMETHOD.
+
+  METHOD parse_jqlqueryorderbyclauseele.
+* todo, object, field, 
+    jqlqueryorderbyclauseelement-direction = mo_json->value_string( iv_prefix && '/direction' ).
+  ENDMETHOD.
+
+  METHOD parse_jqlqueryunitaryoperand.
+  ENDMETHOD.
+
+  METHOD parse_keywordoperand.
+    keywordoperand-keyword = mo_json->value_string( iv_prefix && '/keyword' ).
+  ENDMETHOD.
+
+  METHOD parse_listoperand.
+* todo, object, values, array
+  ENDMETHOD.
+
+  METHOD parse_parsedjqlqueries.
+* todo, object, queries, array
+  ENDMETHOD.
+
+  METHOD parse_parsedjqlquery.
+    parsedjqlquery-query = mo_json->value_string( iv_prefix && '/query' ).
+* todo, object, structure, 
+* todo, object, errors, array
+  ENDMETHOD.
+
+  METHOD parse_valueoperand.
+    valueoperand-value = mo_json->value_string( iv_prefix && '/value' ).
+  ENDMETHOD.
+
+  METHOD parse_eventnotification.
+    eventnotification-expand = mo_json->value_string( iv_prefix && '/expand' ).
+    eventnotification-id = mo_json->value_string( iv_prefix && '/id' ).
+    eventnotification-notificationtype = mo_json->value_string( iv_prefix && '/notificationType' ).
+    eventnotification-parameter = mo_json->value_string( iv_prefix && '/parameter' ).
+* todo, object, group, 
+* todo, object, field, 
+    eventnotification-emailaddress = mo_json->value_string( iv_prefix && '/emailAddress' ).
+* todo, object, projectrole, 
+* todo, object, user, 
+  ENDMETHOD.
+
+  METHOD parse_notificationevent.
+    notificationevent-id = mo_json->value_string( iv_prefix && '/id' ).
+    notificationevent-name = mo_json->value_string( iv_prefix && '/name' ).
+    notificationevent-description = mo_json->value_string( iv_prefix && '/description' ).
+* todo, object, templateevent, 
+  ENDMETHOD.
+
+  METHOD parse_notificationscheme.
+    notificationscheme-expand = mo_json->value_string( iv_prefix && '/expand' ).
+    notificationscheme-id = mo_json->value_string( iv_prefix && '/id' ).
+    notificationscheme-self = mo_json->value_string( iv_prefix && '/self' ).
+    notificationscheme-name = mo_json->value_string( iv_prefix && '/name' ).
+    notificationscheme-description = mo_json->value_string( iv_prefix && '/description' ).
+* todo, object, notificationschemeevents, array
+* todo, object, scope, 
+  ENDMETHOD.
+
+  METHOD parse_notificationschemeevent.
+* todo, object, event, 
+* todo, object, notifications, array
+  ENDMETHOD.
+
+  METHOD parse_pagebeannotificationsche.
+    pagebeannotificationscheme-self = mo_json->value_string( iv_prefix && '/self' ).
+    pagebeannotificationscheme-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
+    pagebeannotificationscheme-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
+    pagebeannotificationscheme-startat = mo_json->value_string( iv_prefix && '/startAt' ).
+    pagebeannotificationscheme-total = mo_json->value_string( iv_prefix && '/total' ).
+    pagebeannotificationscheme-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
+* todo, object, values, array
   ENDMETHOD.
 
   METHOD parse_issuetypeinfo.
@@ -4521,16 +4531,6 @@ CLASS zcl_jira IMPLEMENTATION.
     projectissuetypeshierarchyleve-level = mo_json->value_string( iv_prefix && '/level' ).
     projectissuetypeshierarchyleve-name = mo_json->value_string( iv_prefix && '/name' ).
 * todo, object, issuetypes, array
-  ENDMETHOD.
-
-  METHOD parse_pagebeanstring.
-    pagebeanstring-self = mo_json->value_string( iv_prefix && '/self' ).
-    pagebeanstring-nextpage = mo_json->value_string( iv_prefix && '/nextPage' ).
-    pagebeanstring-maxresults = mo_json->value_string( iv_prefix && '/maxResults' ).
-    pagebeanstring-startat = mo_json->value_string( iv_prefix && '/startAt' ).
-    pagebeanstring-total = mo_json->value_string( iv_prefix && '/total' ).
-    pagebeanstring-islast = mo_json->value_boolean( iv_prefix && '/isLast' ).
-* todo, object, values, array
   ENDMETHOD.
 
   METHOD parse_operationmessage.
