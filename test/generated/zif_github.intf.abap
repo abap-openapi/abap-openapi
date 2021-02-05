@@ -3923,7 +3923,7 @@ INTERFACE zif_github PUBLIC.
          END OF code_search_result_item.
 
 * Component schema: commit-search-result-item, object
-  TYPES commit_search_result_item_co01 TYPE string. "   todo
+  TYPES commit_search_result_item_co04 TYPE string. "   todo
   TYPES commit_search_result_item_auth TYPE string. "   todo
   TYPES: BEGIN OF commit_search_result_item_co03,
            sha TYPE string,
@@ -3951,7 +3951,7 @@ INTERFACE zif_github PUBLIC.
            comments_url TYPE string,
            commit TYPE commit_search_result_item_comm,
            author TYPE commit_search_result_item_auth,
-           committer TYPE commit_search_result_item_co01,
+           committer TYPE commit_search_result_item_co04,
            parents TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            repository TYPE minimal_repository,
            score TYPE i,

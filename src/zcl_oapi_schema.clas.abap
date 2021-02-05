@@ -38,9 +38,12 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
     DATA lv_count TYPE i.
     DATA lv_name TYPE string.
     DATA lo_names TYPE REF TO zcl_oapi_abap_name.
-    CREATE OBJECT lo_names.
+    lo_names = io_names.
+    IF lo_names IS INITIAL.
+      CREATE OBJECT lo_names.
+      lo_names->add_used( iv_name ).
+    ENDIF.
 
-    lo_names->add_used( iv_name ).
     IF zif_oapi_schema~type = 'object'.
       rv_abap = rv_abap && |  TYPES: BEGIN OF { iv_name },\n|.
       lv_count = 0.
@@ -56,13 +59,16 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
         ELSE.
 * todo, there is a change that this clashes with something else
           lv_name = lo_names->to_abap_name( iv_name && '_' && ls_property-abap_name ).
-          rv_abap = ls_property-schema->build_type_definition( iv_name = lv_name it_refs = it_refs ) && rv_abap && lv_name && |,\n|.
+          rv_abap = ls_property-schema->build_type_definition(
+            iv_name  = lv_name
+            io_names = lo_names
+            it_refs  = it_refs ) && rv_abap && lv_name && |,\n|.
 *          rv_abap = rv_abap && |string, " not simple, { ls_property-schema->type }, todo\n|.
         ENDIF.
         lv_count = lv_count + 1.
       ENDLOOP.
       IF lv_count = 0. " temporary workaround
-        rv_abap = rv_abap && |           dummy TYPE i,\n|.
+        rv_abap = rv_abap && |           dummy_workaround TYPE i,\n|.
       ENDIF.
       rv_abap = rv_abap && |         END OF { iv_name }.\n|.
     ELSEIF zif_oapi_schema~is_simple_type( ) = abap_true.
