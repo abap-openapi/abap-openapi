@@ -30,15 +30,15 @@ INTERFACE zif_github.
            id TYPE i,
            slug TYPE string,
            node_id TYPE string,
-           owner TYPE string,
+           owner TYPE string, " not simple, todo
            name TYPE string,
            description TYPE string,
            external_url TYPE string,
            html_url TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
-           permissions TYPE string,
-           events TYPE string,
+           permissions TYPE string, " not simple, todo
+           events TYPE string, " not simple, todo
            installations_count TYPE i,
            client_id TYPE string,
            client_secret TYPE string,
@@ -56,7 +56,7 @@ INTERFACE zif_github.
   TYPES: BEGIN OF validation_error_simple,
            message TYPE string,
            documentation_url TYPE string,
-           errors TYPE string,
+           errors TYPE string, " not simple, todo
          END OF validation_error_simple.
 
 * Component schema: webhook-config-url, string
@@ -73,10 +73,10 @@ INTERFACE zif_github.
 
 * Component schema: webhook-config, object
   TYPES: BEGIN OF webhook_config,
-           url TYPE string,
-           content_type TYPE string,
-           secret TYPE string,
-           insecure_ssl TYPE string,
+           url TYPE string, " not simple, todo
+           content_type TYPE string, " not simple, todo
+           secret TYPE string, " not simple, todo
+           insecure_ssl TYPE string, " not simple, todo
          END OF webhook_config.
 
 * Component schema: enterprise, object
@@ -96,7 +96,7 @@ INTERFACE zif_github.
 * Component schema: installation, object
   TYPES: BEGIN OF installation,
            id TYPE i,
-           account TYPE string,
+           account TYPE string, " not simple, todo
            repository_selection TYPE string,
            access_tokens_url TYPE string,
            repositories_url TYPE string,
@@ -104,15 +104,15 @@ INTERFACE zif_github.
            app_id TYPE i,
            target_id TYPE i,
            target_type TYPE string,
-           permissions TYPE string,
-           events TYPE string,
+           permissions TYPE string, " not simple, todo
+           events TYPE string, " not simple, todo
            created_at TYPE string,
            updated_at TYPE string,
            single_file_name TYPE string,
            has_multiple_single_files TYPE abap_bool,
-           single_file_paths TYPE string,
+           single_file_paths TYPE string, " not simple, todo
            app_slug TYPE string,
-           suspended_by TYPE string,
+           suspended_by TYPE string, " not simple, todo
            suspended_at TYPE string,
            contact_email TYPE string,
          END OF installation.
@@ -167,10 +167,10 @@ INTERFACE zif_github.
            node_id TYPE string,
            name TYPE string,
            full_name TYPE string,
-           license TYPE string,
+           license TYPE string, " not simple, todo
            forks TYPE i,
-           permissions TYPE string,
-           owner TYPE string,
+           permissions TYPE string, " not simple, todo
+           owner TYPE string, " not simple, todo
            private TYPE abap_bool,
            html_url TYPE string,
            description TYPE string,
@@ -226,7 +226,7 @@ INTERFACE zif_github.
            default_branch TYPE string,
            open_issues_count TYPE i,
            is_template TYPE abap_bool,
-           topics TYPE string,
+           topics TYPE string, " not simple, todo
            has_issues TYPE abap_bool,
            has_projects TYPE abap_bool,
            has_wiki TYPE abap_bool,
@@ -239,7 +239,7 @@ INTERFACE zif_github.
            created_at TYPE string,
            updated_at TYPE string,
            allow_rebase_merge TYPE abap_bool,
-           template_repository TYPE string,
+           template_repository TYPE string, " not simple, todo
            temp_clone_token TYPE string,
            allow_squash_merge TYPE abap_bool,
            delete_branch_on_merge TYPE abap_bool,
@@ -256,59 +256,59 @@ INTERFACE zif_github.
   TYPES: BEGIN OF installation_token,
            token TYPE string,
            expires_at TYPE string,
-           permissions TYPE string,
+           permissions TYPE string, " not simple, todo
            repository_selection TYPE string,
-           repositories TYPE string,
+           repositories TYPE string, " not simple, todo
            single_file TYPE string,
            has_multiple_single_files TYPE abap_bool,
-           single_file_paths TYPE string,
+           single_file_paths TYPE string, " not simple, todo
          END OF installation_token.
 
 * Component schema: validation-error, object
   TYPES: BEGIN OF validation_error,
            message TYPE string,
            documentation_url TYPE string,
-           errors TYPE string,
+           errors TYPE string, " not simple, todo
          END OF validation_error.
 
 * Component schema: application-grant, object
   TYPES: BEGIN OF application_grant,
            id TYPE i,
            url TYPE string,
-           app TYPE string,
+           app TYPE string, " not simple, todo
            created_at TYPE string,
            updated_at TYPE string,
-           scopes TYPE string,
-           user TYPE string,
+           scopes TYPE string, " not simple, todo
+           user TYPE string, " not simple, todo
          END OF application_grant.
 
 * Component schema: scoped-installation, object
   TYPES: BEGIN OF scoped_installation,
-           permissions TYPE string,
+           permissions TYPE string, " not simple, todo
            repository_selection TYPE string,
            single_file_name TYPE string,
            has_multiple_single_files TYPE abap_bool,
-           single_file_paths TYPE string,
+           single_file_paths TYPE string, " not simple, todo
            repositories_url TYPE string,
-           account TYPE string,
+           account TYPE string, " not simple, todo
          END OF scoped_installation.
 
 * Component schema: authorization, object
   TYPES: BEGIN OF authorization,
            id TYPE i,
            url TYPE string,
-           scopes TYPE string,
+           scopes TYPE string, " not simple, todo
            token TYPE string,
            token_last_eight TYPE string,
            hashed_token TYPE string,
-           app TYPE string,
+           app TYPE string, " not simple, todo
            note TYPE string,
            note_url TYPE string,
            updated_at TYPE string,
            created_at TYPE string,
            fingerprint TYPE string,
-           user TYPE string,
-           installation TYPE string,
+           user TYPE string, " not simple, todo
+           installation TYPE string, " not simple, todo
          END OF authorization.
 
 * Component schema: code-of-conduct, object
@@ -339,10 +339,10 @@ INTERFACE zif_github.
 
 * Component schema: actions-enterprise-permissions, object
   TYPES: BEGIN OF actions_enterprise_permissions,
-           enabled_organizations TYPE string,
+           enabled_organizations TYPE string, " not simple, todo
            selected_organizations_url TYPE string,
-           allowed_actions TYPE string,
-           selected_actions_url TYPE string,
+           allowed_actions TYPE string, " not simple, todo
+           selected_actions_url TYPE string, " not simple, todo
          END OF actions_enterprise_permissions.
 
 * Component schema: organization-simple, object
@@ -365,7 +365,7 @@ INTERFACE zif_github.
   TYPES: BEGIN OF selected_actions,
            github_owned_allowed TYPE abap_bool,
            verified_allowed TYPE abap_bool,
-           patterns_allowed TYPE string,
+           patterns_allowed TYPE string, " not simple, todo
          END OF selected_actions.
 
 * Component schema: runner-groups-enterprise, object
@@ -386,7 +386,7 @@ INTERFACE zif_github.
            os TYPE string,
            status TYPE string,
            busy TYPE abap_bool,
-           labels TYPE string,
+           labels TYPE string, " not simple, todo
          END OF runner.
 
 * Component schema: runner-application, object
@@ -401,8 +401,8 @@ INTERFACE zif_github.
   TYPES: BEGIN OF authentication_token,
            token TYPE string,
            expires_at TYPE string,
-           permissions TYPE string,
-           repositories TYPE string,
+           permissions TYPE string, " not simple, todo
+           repositories TYPE string, " not simple, todo
            single_file TYPE string,
            repository_selection TYPE string,
          END OF authentication_token.
@@ -416,14 +416,14 @@ INTERFACE zif_github.
            actor TYPE string,
            blocked_user TYPE string,
            business TYPE string,
-           config TYPE string,
-           config_was TYPE string,
+           config TYPE string, " not simple, todo
+           config_was TYPE string, " not simple, todo
            content_type TYPE string,
            created_at TYPE i,
            deploy_key_fingerprint TYPE string,
            emoji TYPE string,
-           events TYPE string,
-           events_were TYPE string,
+           events TYPE string, " not simple, todo
+           events_were TYPE string, " not simple, todo
            explanation TYPE string,
            fingerprint TYPE string,
            hook_id TYPE i,
@@ -451,7 +451,7 @@ INTERFACE zif_github.
            total_minutes_used TYPE i,
            total_paid_minutes_used TYPE i,
            included_minutes TYPE i,
-           minutes_used_breakdown TYPE string,
+           minutes_used_breakdown TYPE string, " not simple, todo
          END OF actions_billing_usage.
 
 * Component schema: packages-billing-usage, object
@@ -500,7 +500,7 @@ INTERFACE zif_github.
            state TYPE string,
            title TYPE string,
            description TYPE string,
-           creator TYPE string,
+           creator TYPE string, " not simple, todo
            open_issues TYPE i,
            closed_issues TYPE i,
            created_at TYPE string,
@@ -526,24 +526,24 @@ INTERFACE zif_github.
            state TYPE string,
            title TYPE string,
            body TYPE string,
-           user TYPE string,
-           labels TYPE string,
-           assignee TYPE string,
-           assignees TYPE string,
-           milestone TYPE string,
+           user TYPE string, " not simple, todo
+           labels TYPE string, " not simple, todo
+           assignee TYPE string, " not simple, todo
+           assignees TYPE string, " not simple, todo
+           milestone TYPE string, " not simple, todo
            locked TYPE abap_bool,
            active_lock_reason TYPE string,
            comments TYPE i,
-           pull_request TYPE string,
+           pull_request TYPE string, " not simple, todo
            closed_at TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
-           author_association TYPE string,
+           author_association TYPE string, " not simple, todo
            body_html TYPE string,
            body_text TYPE string,
            timeline_url TYPE string,
-           repository TYPE string,
-           performed_via_github_app TYPE string,
+           repository TYPE string, " not simple, todo
+           performed_via_github_app TYPE string, " not simple, todo
          END OF issue_simple.
 
 * Component schema: reaction-rollup, object
@@ -569,23 +569,23 @@ INTERFACE zif_github.
            body_text TYPE string,
            body_html TYPE string,
            html_url TYPE string,
-           user TYPE string,
+           user TYPE string, " not simple, todo
            created_at TYPE string,
            updated_at TYPE string,
            issue_url TYPE string,
-           author_association TYPE string,
-           performed_via_github_app TYPE string,
-           reactions TYPE string,
+           author_association TYPE string, " not simple, todo
+           performed_via_github_app TYPE string, " not simple, todo
+           reactions TYPE string, " not simple, todo
          END OF issue_comment.
 
 * Component schema: event, object
   TYPES: BEGIN OF event,
            id TYPE string,
            type TYPE string,
-           actor TYPE string,
-           repo TYPE string,
-           org TYPE string,
-           payload TYPE string,
+           actor TYPE string, " not simple, todo
+           repo TYPE string, " not simple, todo
+           org TYPE string, " not simple, todo
+           payload TYPE string, " not simple, todo
            public TYPE abap_bool,
            created_at TYPE string,
          END OF event.
@@ -604,9 +604,9 @@ INTERFACE zif_github.
            current_user_url TYPE string,
            current_user_actor_url TYPE string,
            current_user_organization_url TYPE string,
-           current_user_organization_urls TYPE string,
+           current_user_organization_urls TYPE string, " not simple, todo
            security_advisories_url TYPE string,
-           _links TYPE string,
+           _links TYPE string, " not simple, todo
          END OF feed.
 
 * Component schema: base-gist, object
@@ -619,18 +619,18 @@ INTERFACE zif_github.
            git_pull_url TYPE string,
            git_push_url TYPE string,
            html_url TYPE string,
-           files TYPE string,
+           files TYPE string, " not simple, todo
            public TYPE abap_bool,
            created_at TYPE string,
            updated_at TYPE string,
            description TYPE string,
            comments TYPE i,
-           user TYPE string,
+           user TYPE string, " not simple, todo
            comments_url TYPE string,
-           owner TYPE string,
+           owner TYPE string, " not simple, todo
            truncated TYPE abap_bool,
-           forks TYPE string,
-           history TYPE string,
+           forks TYPE string, " not simple, todo
+           history TYPE string, " not simple, todo
          END OF base_gist.
 
 * Component schema: gist-simple, object
@@ -643,7 +643,7 @@ INTERFACE zif_github.
            git_pull_url TYPE string,
            git_push_url TYPE string,
            html_url TYPE string,
-           files TYPE string,
+           files TYPE string, " not simple, todo
            public TYPE abap_bool,
            created_at TYPE string,
            updated_at TYPE string,
@@ -651,7 +651,7 @@ INTERFACE zif_github.
            comments TYPE i,
            user TYPE string,
            comments_url TYPE string,
-           owner TYPE string,
+           owner TYPE string, " not simple, todo
            truncated TYPE abap_bool,
          END OF gist_simple.
 
@@ -661,18 +661,18 @@ INTERFACE zif_github.
            node_id TYPE string,
            url TYPE string,
            body TYPE string,
-           user TYPE string,
+           user TYPE string, " not simple, todo
            created_at TYPE string,
            updated_at TYPE string,
-           author_association TYPE string,
+           author_association TYPE string, " not simple, todo
          END OF gist_comment.
 
 * Component schema: gist-commit, object
   TYPES: BEGIN OF gist_commit,
            url TYPE string,
            version TYPE string,
-           user TYPE string,
-           change_status TYPE string,
+           user TYPE string, " not simple, todo
+           change_status TYPE string, " not simple, todo
            committed_at TYPE string,
          END OF gist_commit.
 
@@ -696,26 +696,26 @@ INTERFACE zif_github.
            state TYPE string,
            title TYPE string,
            body TYPE string,
-           user TYPE string,
-           labels TYPE string,
-           assignee TYPE string,
-           assignees TYPE string,
-           milestone TYPE string,
+           user TYPE string, " not simple, todo
+           labels TYPE string, " not simple, todo
+           assignee TYPE string, " not simple, todo
+           assignees TYPE string, " not simple, todo
+           milestone TYPE string, " not simple, todo
            locked TYPE abap_bool,
            active_lock_reason TYPE string,
            comments TYPE i,
-           pull_request TYPE string,
+           pull_request TYPE string, " not simple, todo
            closed_at TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
-           closed_by TYPE string,
+           closed_by TYPE string, " not simple, todo
            body_html TYPE string,
            body_text TYPE string,
            timeline_url TYPE string,
-           repository TYPE string,
-           performed_via_github_app TYPE string,
-           author_association TYPE string,
-           reactions TYPE string,
+           repository TYPE string, " not simple, todo
+           performed_via_github_app TYPE string, " not simple, todo
+           author_association TYPE string, " not simple, todo
+           reactions TYPE string, " not simple, todo
          END OF issue.
 
 * Component schema: license, object
@@ -728,9 +728,9 @@ INTERFACE zif_github.
            html_url TYPE string,
            description TYPE string,
            implementation TYPE string,
-           permissions TYPE string,
-           conditions TYPE string,
-           limitations TYPE string,
+           permissions TYPE string, " not simple, todo
+           conditions TYPE string, " not simple, todo
+           limitations TYPE string, " not simple, todo
            body TYPE string,
            featured TYPE abap_bool,
          END OF license.
@@ -749,7 +749,7 @@ INTERFACE zif_github.
            has_free_trial TYPE abap_bool,
            unit_name TYPE string,
            state TYPE string,
-           bullets TYPE string,
+           bullets TYPE string, " not simple, todo
          END OF marketplace_listing_plan.
 
 * Component schema: marketplace-purchase, object
@@ -759,21 +759,21 @@ INTERFACE zif_github.
            id TYPE i,
            login TYPE string,
            organization_billing_email TYPE string,
-           marketplace_pending_change TYPE string,
-           marketplace_purchase TYPE string,
+           marketplace_pending_change TYPE string, " not simple, todo
+           marketplace_purchase TYPE string, " not simple, todo
          END OF marketplace_purchase.
 
 * Component schema: api-overview, object
   TYPES: BEGIN OF api_overview,
            verifiable_password_authentica TYPE abap_bool,
-           ssh_key_fingerprints TYPE string,
-           hooks TYPE string,
-           web TYPE string,
-           api TYPE string,
-           git TYPE string,
-           pages TYPE string,
-           importer TYPE string,
-           actions TYPE string,
+           ssh_key_fingerprints TYPE string, " not simple, todo
+           hooks TYPE string, " not simple, todo
+           web TYPE string, " not simple, todo
+           api TYPE string, " not simple, todo
+           git TYPE string, " not simple, todo
+           pages TYPE string, " not simple, todo
+           importer TYPE string, " not simple, todo
+           actions TYPE string, " not simple, todo
          END OF api_overview.
 
 * Component schema: minimal-repository, object
@@ -782,7 +782,7 @@ INTERFACE zif_github.
            node_id TYPE string,
            name TYPE string,
            full_name TYPE string,
-           owner TYPE string,
+           owner TYPE string, " not simple, todo
            private TYPE abap_bool,
            html_url TYPE string,
            description TYPE string,
@@ -838,7 +838,7 @@ INTERFACE zif_github.
            default_branch TYPE string,
            open_issues_count TYPE i,
            is_template TYPE abap_bool,
-           topics TYPE string,
+           topics TYPE string, " not simple, todo
            has_issues TYPE abap_bool,
            has_projects TYPE abap_bool,
            has_wiki TYPE abap_bool,
@@ -850,13 +850,13 @@ INTERFACE zif_github.
            pushed_at TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
-           permissions TYPE string,
-           template_repository TYPE string,
+           permissions TYPE string, " not simple, todo
+           template_repository TYPE string, " not simple, todo
            temp_clone_token TYPE string,
            delete_branch_on_merge TYPE abap_bool,
            subscribers_count TYPE i,
            network_count TYPE i,
-           license TYPE string,
+           license TYPE string, " not simple, todo
            forks TYPE i,
            open_issues TYPE i,
            watchers TYPE i,
@@ -865,8 +865,8 @@ INTERFACE zif_github.
 * Component schema: thread, object
   TYPES: BEGIN OF thread,
            id TYPE string,
-           repository TYPE string,
-           subject TYPE string,
+           repository TYPE string, " not simple, todo
+           subject TYPE string, " not simple, todo
            reason TYPE string,
            unread TYPE abap_bool,
            updated_at TYPE string,
@@ -922,7 +922,7 @@ INTERFACE zif_github.
            disk_usage TYPE i,
            collaborators TYPE i,
            billing_email TYPE string,
-           plan TYPE string,
+           plan TYPE string, " not simple, todo
            default_repository_permission TYPE string,
            members_can_create_repositorie TYPE abap_bool,
            two_factor_requirement_enabled TYPE abap_bool,
@@ -939,10 +939,10 @@ INTERFACE zif_github.
 
 * Component schema: actions-organization-permissions, object
   TYPES: BEGIN OF actions_organization_permissio,
-           enabled_repositories TYPE string,
+           enabled_repositories TYPE string, " not simple, todo
            selected_repositories_url TYPE string,
-           allowed_actions TYPE string,
-           selected_actions_url TYPE string,
+           allowed_actions TYPE string, " not simple, todo
+           selected_actions_url TYPE string, " not simple, todo
          END OF actions_organization_permissio.
 
 * Component schema: runner-groups-org, object
@@ -984,7 +984,7 @@ INTERFACE zif_github.
            credential_type TYPE string,
            token_last_eight TYPE string,
            credential_authorized_at TYPE string,
-           scopes TYPE string,
+           scopes TYPE string, " not simple, todo
            fingerprint TYPE string,
            credential_accessed_at TYPE string,
            authorized_credential_id TYPE i,
@@ -1001,7 +1001,7 @@ INTERFACE zif_github.
            created_at TYPE string,
            failed_at TYPE string,
            failed_reason TYPE string,
-           inviter TYPE string,
+           inviter TYPE string, " not simple, todo
            team_count TYPE i,
            invitation_team_url TYPE string,
            node_id TYPE string,
@@ -1014,9 +1014,9 @@ INTERFACE zif_github.
            url TYPE string,
            ping_url TYPE string,
            name TYPE string,
-           events TYPE string,
+           events TYPE string, " not simple, todo
            active TYPE abap_bool,
-           config TYPE string,
+           config TYPE string, " not simple, todo
            updated_at TYPE string,
            created_at TYPE string,
            type TYPE string,
@@ -1027,7 +1027,7 @@ INTERFACE zif_github.
 
 * Component schema: interaction-limit-response, object
   TYPES: BEGIN OF interaction_limit_response,
-           limit TYPE string,
+           limit TYPE string, " not simple, todo
            origin TYPE string,
            expires_at TYPE string,
          END OF interaction_limit_response.
@@ -1037,8 +1037,8 @@ INTERFACE zif_github.
 
 * Component schema: interaction-limit, object
   TYPES: BEGIN OF interaction_limit,
-           limit TYPE string,
-           expiry TYPE string,
+           limit TYPE string, " not simple, todo
+           expiry TYPE string, " not simple, todo
          END OF interaction_limit.
 
 * Component schema: team-simple, object
@@ -1070,7 +1070,7 @@ INTERFACE zif_github.
            html_url TYPE string,
            members_url TYPE string,
            repositories_url TYPE string,
-           parent TYPE string,
+           parent TYPE string, " not simple, todo
          END OF team.
 
 * Component schema: org-membership, object
@@ -1079,26 +1079,26 @@ INTERFACE zif_github.
            state TYPE string,
            role TYPE string,
            organization_url TYPE string,
-           organization TYPE string,
-           user TYPE string,
-           permissions TYPE string,
+           organization TYPE string, " not simple, todo
+           user TYPE string, " not simple, todo
+           permissions TYPE string, " not simple, todo
          END OF org_membership.
 
 * Component schema: migration, object
   TYPES: BEGIN OF migration,
            id TYPE i,
-           owner TYPE string,
+           owner TYPE string, " not simple, todo
            guid TYPE string,
            state TYPE string,
            lock_repositories TYPE abap_bool,
            exclude_attachments TYPE abap_bool,
-           repositories TYPE string,
+           repositories TYPE string, " not simple, todo
            url TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
            node_id TYPE string,
            archive_url TYPE string,
-           exclude TYPE string,
+           exclude TYPE string, " not simple, todo
          END OF migration.
 
 * Component schema: project, object
@@ -1113,7 +1113,7 @@ INTERFACE zif_github.
            body TYPE string,
            number TYPE i,
            state TYPE string,
-           creator TYPE string,
+           creator TYPE string, " not simple, todo
            created_at TYPE string,
            updated_at TYPE string,
            organization_permission TYPE string,
@@ -1122,7 +1122,7 @@ INTERFACE zif_github.
 
 * Component schema: group-mapping, object
   TYPES: BEGIN OF group_mapping,
-           groups TYPE string,
+           groups TYPE string, " not simple, todo
            group_id TYPE string,
            group_name TYPE string,
            group_description TYPE string,
@@ -1143,18 +1143,18 @@ INTERFACE zif_github.
            permission TYPE string,
            members_url TYPE string,
            repositories_url TYPE string,
-           parent TYPE string,
+           parent TYPE string, " not simple, todo
            members_count TYPE i,
            repos_count TYPE i,
            created_at TYPE string,
            updated_at TYPE string,
-           organization TYPE string,
+           organization TYPE string, " not simple, todo
            ldap_dn TYPE string,
          END OF team_full.
 
 * Component schema: team-discussion, object
   TYPES: BEGIN OF team_discussion,
-           author TYPE string,
+           author TYPE string, " not simple, todo
            body TYPE string,
            body_html TYPE string,
            body_version TYPE string,
@@ -1171,12 +1171,12 @@ INTERFACE zif_github.
            title TYPE string,
            updated_at TYPE string,
            url TYPE string,
-           reactions TYPE string,
+           reactions TYPE string, " not simple, todo
          END OF team_discussion.
 
 * Component schema: team-discussion-comment, object
   TYPES: BEGIN OF team_discussion_comment,
-           author TYPE string,
+           author TYPE string, " not simple, todo
            body TYPE string,
            body_html TYPE string,
            body_version TYPE string,
@@ -1188,14 +1188,14 @@ INTERFACE zif_github.
            number TYPE i,
            updated_at TYPE string,
            url TYPE string,
-           reactions TYPE string,
+           reactions TYPE string, " not simple, todo
          END OF team_discussion_comment.
 
 * Component schema: reaction, object
   TYPES: BEGIN OF reaction,
            id TYPE i,
            node_id TYPE string,
-           user TYPE string,
+           user TYPE string, " not simple, todo
            content TYPE string,
            created_at TYPE string,
          END OF reaction.
@@ -1219,12 +1219,12 @@ INTERFACE zif_github.
            body TYPE string,
            number TYPE i,
            state TYPE string,
-           creator TYPE string,
+           creator TYPE string, " not simple, todo
            created_at TYPE string,
            updated_at TYPE string,
            organization_permission TYPE string,
            private TYPE abap_bool,
-           permissions TYPE string,
+           permissions TYPE string, " not simple, todo
          END OF team_project.
 
 * Component schema: team-repository, object
@@ -1233,10 +1233,10 @@ INTERFACE zif_github.
            node_id TYPE string,
            name TYPE string,
            full_name TYPE string,
-           license TYPE string,
+           license TYPE string, " not simple, todo
            forks TYPE i,
-           permissions TYPE string,
-           owner TYPE string,
+           permissions TYPE string, " not simple, todo
+           owner TYPE string, " not simple, todo
            private TYPE abap_bool,
            html_url TYPE string,
            description TYPE string,
@@ -1292,7 +1292,7 @@ INTERFACE zif_github.
            default_branch TYPE string,
            open_issues_count TYPE i,
            is_template TYPE abap_bool,
-           topics TYPE string,
+           topics TYPE string, " not simple, todo
            has_issues TYPE abap_bool,
            has_projects TYPE abap_bool,
            has_wiki TYPE abap_bool,
@@ -1305,7 +1305,7 @@ INTERFACE zif_github.
            created_at TYPE string,
            updated_at TYPE string,
            allow_rebase_merge TYPE abap_bool,
-           template_repository TYPE string,
+           template_repository TYPE string, " not simple, todo
            temp_clone_token TYPE string,
            allow_squash_merge TYPE abap_bool,
            delete_branch_on_merge TYPE abap_bool,
@@ -1323,7 +1323,7 @@ INTERFACE zif_github.
            id TYPE i,
            node_id TYPE string,
            note TYPE string,
-           creator TYPE string,
+           creator TYPE string, " not simple, todo
            created_at TYPE string,
            updated_at TYPE string,
            archived TYPE abap_bool,
@@ -1347,7 +1347,7 @@ INTERFACE zif_github.
 * Component schema: repository-collaborator-permission, object
   TYPES: BEGIN OF repository_collaborator_permis,
            permission TYPE string,
-           user TYPE string,
+           user TYPE string, " not simple, todo
          END OF repository_collaborator_permis.
 
 * Component schema: rate-limit, object
@@ -1359,8 +1359,8 @@ INTERFACE zif_github.
 
 * Component schema: rate-limit-overview, object
   TYPES: BEGIN OF rate_limit_overview,
-           resources TYPE string,
-           rate TYPE string,
+           resources TYPE string, " not simple, todo
+           rate TYPE string, " not simple, todo
          END OF rate_limit_overview.
 
 * Component schema: full-repository, object
@@ -1369,7 +1369,7 @@ INTERFACE zif_github.
            node_id TYPE string,
            name TYPE string,
            full_name TYPE string,
-           owner TYPE string,
+           owner TYPE string, " not simple, todo
            private TYPE abap_bool,
            html_url TYPE string,
            description TYPE string,
@@ -1425,7 +1425,7 @@ INTERFACE zif_github.
            default_branch TYPE string,
            open_issues_count TYPE i,
            is_template TYPE abap_bool,
-           topics TYPE string,
+           topics TYPE string, " not simple, todo
            has_issues TYPE abap_bool,
            has_projects TYPE abap_bool,
            has_wiki TYPE abap_bool,
@@ -1437,19 +1437,19 @@ INTERFACE zif_github.
            pushed_at TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
-           permissions TYPE string,
+           permissions TYPE string, " not simple, todo
            allow_rebase_merge TYPE abap_bool,
-           template_repository TYPE string,
+           template_repository TYPE string, " not simple, todo
            temp_clone_token TYPE string,
            allow_squash_merge TYPE abap_bool,
            delete_branch_on_merge TYPE abap_bool,
            allow_merge_commit TYPE abap_bool,
            subscribers_count TYPE i,
            network_count TYPE i,
-           license TYPE string,
-           organization TYPE string,
-           parent TYPE string,
-           source TYPE string,
+           license TYPE string, " not simple, todo
+           organization TYPE string, " not simple, todo
+           parent TYPE string, " not simple, todo
+           source TYPE string, " not simple, todo
            forks TYPE i,
            master_branch TYPE string,
            open_issues TYPE i,
@@ -1485,7 +1485,7 @@ INTERFACE zif_github.
            started_at TYPE string,
            completed_at TYPE string,
            name TYPE string,
-           steps TYPE string,
+           steps TYPE string, " not simple, todo
            check_run_url TYPE string,
          END OF job.
 
@@ -1494,9 +1494,9 @@ INTERFACE zif_github.
 
 * Component schema: actions-repository-permissions, object
   TYPES: BEGIN OF actions_repository_permissions,
-           enabled TYPE string,
-           allowed_actions TYPE string,
-           selected_actions_url TYPE string,
+           enabled TYPE string, " not simple, todo
+           allowed_actions TYPE string, " not simple, todo
+           selected_actions_url TYPE string, " not simple, todo
          END OF actions_repository_permissions.
 
 * Component schema: pull-request-minimal, object
@@ -1504,8 +1504,8 @@ INTERFACE zif_github.
            id TYPE i,
            number TYPE i,
            url TYPE string,
-           head TYPE string,
-           base TYPE string,
+           head TYPE string, " not simple, todo
+           base TYPE string, " not simple, todo
          END OF pull_request_minimal.
 
 * Component schema: simple-commit, object
@@ -1514,8 +1514,8 @@ INTERFACE zif_github.
            tree_id TYPE string,
            message TYPE string,
            timestamp TYPE string,
-           author TYPE string,
-           committer TYPE string,
+           author TYPE string, " not simple, todo
+           committer TYPE string, " not simple, todo
          END OF simple_commit.
 
 * Component schema: workflow-run, object
@@ -1532,7 +1532,7 @@ INTERFACE zif_github.
            workflow_id TYPE i,
            url TYPE string,
            html_url TYPE string,
-           pull_requests TYPE string,
+           pull_requests TYPE string, " not simple, todo
            created_at TYPE string,
            updated_at TYPE string,
            jobs_url TYPE string,
@@ -1542,15 +1542,15 @@ INTERFACE zif_github.
            cancel_url TYPE string,
            rerun_url TYPE string,
            workflow_url TYPE string,
-           head_commit TYPE string,
-           repository TYPE string,
-           head_repository TYPE string,
+           head_commit TYPE string, " not simple, todo
+           repository TYPE string, " not simple, todo
+           head_repository TYPE string, " not simple, todo
            head_repository_id TYPE i,
          END OF workflow_run.
 
 * Component schema: workflow-run-usage, object
   TYPES: BEGIN OF workflow_run_usage,
-           billable TYPE string,
+           billable TYPE string, " not simple, todo
            run_duration_ms TYPE i,
          END OF workflow_run_usage.
 
@@ -1578,7 +1578,7 @@ INTERFACE zif_github.
 
 * Component schema: workflow-usage, object
   TYPES: BEGIN OF workflow_usage,
-           billable TYPE string,
+           billable TYPE string, " not simple, todo
          END OF workflow_usage.
 
 * Component schema: protected-branch-admin-enforced, object
@@ -1590,7 +1590,7 @@ INTERFACE zif_github.
 * Component schema: protected-branch-pull-request-review, object
   TYPES: BEGIN OF protected_branch_pull_request_,
            url TYPE string,
-           dismissal_restrictions TYPE string,
+           dismissal_restrictions TYPE string, " not simple, todo
            dismiss_stale_reviews TYPE abap_bool,
            require_code_owner_reviews TYPE abap_bool,
            required_approving_review_coun TYPE i,
@@ -1602,21 +1602,21 @@ INTERFACE zif_github.
            users_url TYPE string,
            teams_url TYPE string,
            apps_url TYPE string,
-           users TYPE string,
-           teams TYPE string,
-           apps TYPE string,
+           users TYPE string, " not simple, todo
+           teams TYPE string, " not simple, todo
+           apps TYPE string, " not simple, todo
          END OF branch_restriction_policy.
 
 * Component schema: branch-protection, object
   TYPES: BEGIN OF branch_protection,
            url TYPE string,
-           required_status_checks TYPE string,
-           enforce_admins TYPE string,
-           required_pull_request_reviews TYPE string,
-           restrictions TYPE string,
-           required_linear_history TYPE string,
-           allow_force_pushes TYPE string,
-           allow_deletions TYPE string,
+           required_status_checks TYPE string, " not simple, todo
+           enforce_admins TYPE string, " not simple, todo
+           required_pull_request_reviews TYPE string, " not simple, todo
+           restrictions TYPE string, " not simple, todo
+           required_linear_history TYPE string, " not simple, todo
+           allow_force_pushes TYPE string, " not simple, todo
+           allow_deletions TYPE string, " not simple, todo
            enabled TYPE abap_bool,
            name TYPE string,
            protection_url TYPE string,
@@ -1625,9 +1625,9 @@ INTERFACE zif_github.
 * Component schema: short-branch, object
   TYPES: BEGIN OF short_branch,
            name TYPE string,
-           commit TYPE string,
+           commit TYPE string, " not simple, todo
            protected TYPE abap_bool,
-           protection TYPE string,
+           protection TYPE string, " not simple, todo
            protection_url TYPE string,
          END OF short_branch.
 
@@ -1653,21 +1653,21 @@ INTERFACE zif_github.
            node_id TYPE string,
            html_url TYPE string,
            comments_url TYPE string,
-           commit TYPE string,
-           author TYPE string,
-           committer TYPE string,
-           parents TYPE string,
-           stats TYPE string,
-           files TYPE string,
+           commit TYPE string, " not simple, todo
+           author TYPE string, " not simple, todo
+           committer TYPE string, " not simple, todo
+           parents TYPE string, " not simple, todo
+           stats TYPE string, " not simple, todo
+           files TYPE string, " not simple, todo
          END OF commit.
 
 * Component schema: branch-with-protection, object
   TYPES: BEGIN OF branch_with_protection,
            name TYPE string,
-           commit TYPE string,
-           _links TYPE string,
+           commit TYPE string, " not simple, todo
+           _links TYPE string, " not simple, todo
            protected TYPE abap_bool,
-           protection TYPE string,
+           protection TYPE string, " not simple, todo
            protection_url TYPE string,
            pattern TYPE string,
            required_approving_review_coun TYPE i,
@@ -1677,21 +1677,21 @@ INTERFACE zif_github.
   TYPES: BEGIN OF status_check_policy,
            url TYPE string,
            strict TYPE abap_bool,
-           contexts TYPE string,
+           contexts TYPE string, " not simple, todo
            contexts_url TYPE string,
          END OF status_check_policy.
 
 * Component schema: protected-branch, object
   TYPES: BEGIN OF protected_branch,
            url TYPE string,
-           required_status_checks TYPE string,
-           required_pull_request_reviews TYPE string,
-           required_signatures TYPE string,
-           enforce_admins TYPE string,
-           required_linear_history TYPE string,
-           allow_force_pushes TYPE string,
-           allow_deletions TYPE string,
-           restrictions TYPE string,
+           required_status_checks TYPE string, " not simple, todo
+           required_pull_request_reviews TYPE string, " not simple, todo
+           required_signatures TYPE string, " not simple, todo
+           enforce_admins TYPE string, " not simple, todo
+           required_linear_history TYPE string, " not simple, todo
+           allow_force_pushes TYPE string, " not simple, todo
+           allow_deletions TYPE string, " not simple, todo
+           restrictions TYPE string, " not simple, todo
          END OF protected_branch.
 
 * Component schema: check-run, object
@@ -1707,11 +1707,11 @@ INTERFACE zif_github.
            conclusion TYPE string,
            started_at TYPE string,
            completed_at TYPE string,
-           output TYPE string,
+           output TYPE string, " not simple, todo
            name TYPE string,
-           check_suite TYPE string,
-           app TYPE string,
-           pull_requests TYPE string,
+           check_suite TYPE string, " not simple, todo
+           app TYPE string, " not simple, todo
+           pull_requests TYPE string, " not simple, todo
          END OF check_run.
 
 * Component schema: check-annotation, object
@@ -1739,20 +1739,20 @@ INTERFACE zif_github.
            url TYPE string,
            before TYPE string,
            after TYPE string,
-           pull_requests TYPE string,
-           app TYPE string,
-           repository TYPE string,
+           pull_requests TYPE string, " not simple, todo
+           app TYPE string, " not simple, todo
+           repository TYPE string, " not simple, todo
            created_at TYPE string,
            updated_at TYPE string,
-           head_commit TYPE string,
+           head_commit TYPE string, " not simple, todo
            latest_check_runs_count TYPE i,
            check_runs_url TYPE string,
          END OF check_suite.
 
 * Component schema: check-suite-preference, object
   TYPES: BEGIN OF check_suite_preference,
-           preferences TYPE string,
-           repository TYPE string,
+           preferences TYPE string, " not simple, todo
+           repository TYPE string, " not simple, todo
          END OF check_suite_preference.
 
 * Component schema: code-scanning-alert-state, string
@@ -1791,22 +1791,22 @@ INTERFACE zif_github.
 
 * Component schema: code-scanning-analysis-tool, object
   TYPES: BEGIN OF code_scanning_analysis_tool,
-           name TYPE string,
+           name TYPE string, " not simple, todo
            version TYPE string,
          END OF code_scanning_analysis_tool.
 
 * Component schema: code-scanning-alert-code-scanning-alert-items, object
   TYPES: BEGIN OF code_scanning_alert_code_scann,
-           number TYPE string,
-           created_at TYPE string,
-           url TYPE string,
-           html_url TYPE string,
-           state TYPE string,
-           dismissed_by TYPE string,
-           dismissed_at TYPE string,
-           dismissed_reason TYPE string,
-           rule TYPE string,
-           tool TYPE string,
+           number TYPE string, " not simple, todo
+           created_at TYPE string, " not simple, todo
+           url TYPE string, " not simple, todo
+           html_url TYPE string, " not simple, todo
+           state TYPE string, " not simple, todo
+           dismissed_by TYPE string, " not simple, todo
+           dismissed_at TYPE string, " not simple, todo
+           dismissed_reason TYPE string, " not simple, todo
+           rule TYPE string, " not simple, todo
+           tool TYPE string, " not simple, todo
          END OF code_scanning_alert_code_scann.
 
 * Component schema: code-scanning-analysis-analysis-key, string
@@ -1820,17 +1820,17 @@ INTERFACE zif_github.
 
 * Component schema: code-scanning-alert-code-scanning-alert, object
   TYPES: BEGIN OF code_scanning_alert_code_sca01,
-           number TYPE string,
-           created_at TYPE string,
-           url TYPE string,
-           html_url TYPE string,
-           instances TYPE string,
-           state TYPE string,
-           dismissed_by TYPE string,
-           dismissed_at TYPE string,
-           dismissed_reason TYPE string,
-           rule TYPE string,
-           tool TYPE string,
+           number TYPE string, " not simple, todo
+           created_at TYPE string, " not simple, todo
+           url TYPE string, " not simple, todo
+           html_url TYPE string, " not simple, todo
+           instances TYPE string, " not simple, todo
+           state TYPE string, " not simple, todo
+           dismissed_by TYPE string, " not simple, todo
+           dismissed_at TYPE string, " not simple, todo
+           dismissed_reason TYPE string, " not simple, todo
+           rule TYPE string, " not simple, todo
+           tool TYPE string, " not simple, todo
          END OF code_scanning_alert_code_sca01.
 
 * Component schema: code-scanning-alert-set-state, string
@@ -1850,13 +1850,13 @@ INTERFACE zif_github.
 
 * Component schema: code-scanning-analysis-code-scanning-analysis, object
   TYPES: BEGIN OF code_scanning_analysis_code_sc,
-           commit_sha TYPE string,
-           ref TYPE string,
-           analysis_key TYPE string,
-           created_at TYPE string,
-           tool_name TYPE string,
+           commit_sha TYPE string, " not simple, todo
+           ref TYPE string, " not simple, todo
+           analysis_key TYPE string, " not simple, todo
+           created_at TYPE string, " not simple, todo
+           tool_name TYPE string, " not simple, todo
            error TYPE string,
-           environment TYPE string,
+           environment TYPE string, " not simple, todo
          END OF code_scanning_analysis_code_sc.
 
 * Component schema: code-scanning-analysis-sarif-file, string
@@ -1882,15 +1882,15 @@ INTERFACE zif_github.
            received_events_url TYPE string,
            type TYPE string,
            site_admin TYPE abap_bool,
-           permissions TYPE string,
+           permissions TYPE string, " not simple, todo
          END OF collaborator.
 
 * Component schema: repository-invitation, object
   TYPES: BEGIN OF repository_invitation,
            id TYPE i,
-           repository TYPE string,
-           invitee TYPE string,
-           inviter TYPE string,
+           repository TYPE string, " not simple, todo
+           invitee TYPE string, " not simple, todo
+           inviter TYPE string, " not simple, todo
            permissions TYPE string,
            created_at TYPE string,
            expired TYPE abap_bool,
@@ -1910,11 +1910,11 @@ INTERFACE zif_github.
            position TYPE i,
            line TYPE i,
            commit_id TYPE string,
-           user TYPE string,
+           user TYPE string, " not simple, todo
            created_at TYPE string,
            updated_at TYPE string,
-           author_association TYPE string,
-           reactions TYPE string,
+           author_association TYPE string, " not simple, todo
+           reactions TYPE string, " not simple, todo
          END OF commit_comment.
 
 * Component schema: scim-error, object
@@ -1924,13 +1924,13 @@ INTERFACE zif_github.
            detail TYPE string,
            status TYPE i,
            scimtype TYPE string,
-           schemas TYPE string,
+           schemas TYPE string, " not simple, todo
          END OF scim_error.
 
 * Component schema: branch-short, object
   TYPES: BEGIN OF branch_short,
            name TYPE string,
-           commit TYPE string,
+           commit TYPE string, " not simple, todo
            protected TYPE abap_bool,
          END OF branch_short.
 
@@ -1941,7 +1941,7 @@ INTERFACE zif_github.
 
 * Component schema: auto_merge, object
   TYPES: BEGIN OF auto_merge,
-           enabled_by TYPE string,
+           enabled_by TYPE string, " not simple, todo
            merge_method TYPE string,
            commit_title TYPE string,
            commit_message TYPE string,
@@ -1965,25 +1965,25 @@ INTERFACE zif_github.
            state TYPE string,
            locked TYPE abap_bool,
            title TYPE string,
-           user TYPE string,
+           user TYPE string, " not simple, todo
            body TYPE string,
-           labels TYPE string,
-           milestone TYPE string,
+           labels TYPE string, " not simple, todo
+           milestone TYPE string, " not simple, todo
            active_lock_reason TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
            closed_at TYPE string,
            merged_at TYPE string,
            merge_commit_sha TYPE string,
-           assignee TYPE string,
-           assignees TYPE string,
-           requested_reviewers TYPE string,
-           requested_teams TYPE string,
-           head TYPE string,
-           base TYPE string,
-           _links TYPE string,
-           author_association TYPE string,
-           auto_merge TYPE string,
+           assignee TYPE string, " not simple, todo
+           assignees TYPE string, " not simple, todo
+           requested_reviewers TYPE string, " not simple, todo
+           requested_teams TYPE string, " not simple, todo
+           head TYPE string, " not simple, todo
+           base TYPE string, " not simple, todo
+           _links TYPE string, " not simple, todo
+           author_association TYPE string, " not simple, todo
+           auto_merge TYPE string, " not simple, todo
            draft TYPE abap_bool,
          END OF pull_request_simple.
 
@@ -2005,10 +2005,10 @@ INTERFACE zif_github.
 * Component schema: combined-commit-status, object
   TYPES: BEGIN OF combined_commit_status,
            state TYPE string,
-           statuses TYPE string,
+           statuses TYPE string, " not simple, todo
            sha TYPE string,
            total_count TYPE i,
-           repository TYPE string,
+           repository TYPE string, " not simple, todo
            commit_url TYPE string,
            url TYPE string,
          END OF combined_commit_status.
@@ -2025,7 +2025,7 @@ INTERFACE zif_github.
            context TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
-           creator TYPE string,
+           creator TYPE string, " not simple, todo
          END OF status.
 
 * Component schema: code-of-conduct-simple, object
@@ -2047,7 +2047,7 @@ INTERFACE zif_github.
            health_percentage TYPE i,
            description TYPE string,
            documentation TYPE string,
-           files TYPE string,
+           files TYPE string, " not simple, todo
            updated_at TYPE string,
            content_reports_enabled TYPE abap_bool,
          END OF community_profile.
@@ -2074,14 +2074,14 @@ INTERFACE zif_github.
            permalink_url TYPE string,
            diff_url TYPE string,
            patch_url TYPE string,
-           base_commit TYPE string,
-           merge_base_commit TYPE string,
+           base_commit TYPE string, " not simple, todo
+           merge_base_commit TYPE string, " not simple, todo
            status TYPE string,
            ahead_by TYPE i,
            behind_by TYPE i,
            total_commits TYPE i,
-           commits TYPE string,
-           files TYPE string,
+           commits TYPE string, " not simple, todo
+           files TYPE string, " not simple, todo
          END OF commit_comparison.
 
 * Component schema: content-tree, object
@@ -2095,8 +2095,8 @@ INTERFACE zif_github.
            git_url TYPE string,
            html_url TYPE string,
            download_url TYPE string,
-           entries TYPE string,
-           _links TYPE string,
+           entries TYPE string, " not simple, todo
+           _links TYPE string, " not simple, todo
          END OF content_tree.
 
 * Component schema: content-directory, array
@@ -2115,7 +2115,7 @@ INTERFACE zif_github.
            git_url TYPE string,
            html_url TYPE string,
            download_url TYPE string,
-           _links TYPE string,
+           _links TYPE string, " not simple, todo
            target TYPE string,
            submodule_git_url TYPE string,
          END OF content_file.
@@ -2132,7 +2132,7 @@ INTERFACE zif_github.
            git_url TYPE string,
            html_url TYPE string,
            download_url TYPE string,
-           _links TYPE string,
+           _links TYPE string, " not simple, todo
          END OF content_symlink.
 
 * Component schema: content-submodule, object
@@ -2147,13 +2147,13 @@ INTERFACE zif_github.
            git_url TYPE string,
            html_url TYPE string,
            download_url TYPE string,
-           _links TYPE string,
+           _links TYPE string, " not simple, todo
          END OF content_submodule.
 
 * Component schema: file-commit, object
   TYPES: BEGIN OF file_commit,
-           content TYPE string,
-           commit TYPE string,
+           content TYPE string, " not simple, todo
+           commit TYPE string, " not simple, todo
          END OF file_commit.
 
 * Component schema: contributor, object
@@ -2189,18 +2189,18 @@ INTERFACE zif_github.
            sha TYPE string,
            ref TYPE string,
            task TYPE string,
-           payload TYPE string,
+           payload TYPE string, " not simple, todo
            original_environment TYPE string,
            environment TYPE string,
            description TYPE string,
-           creator TYPE string,
+           creator TYPE string, " not simple, todo
            created_at TYPE string,
            updated_at TYPE string,
            statuses_url TYPE string,
            repository_url TYPE string,
            transient_environment TYPE abap_bool,
            production_environment TYPE abap_bool,
-           performed_via_github_app TYPE string,
+           performed_via_github_app TYPE string, " not simple, todo
          END OF deployment.
 
 * Component schema: deployment-status, object
@@ -2209,7 +2209,7 @@ INTERFACE zif_github.
            id TYPE i,
            node_id TYPE string,
            state TYPE string,
-           creator TYPE string,
+           creator TYPE string, " not simple, todo
            description TYPE string,
            environment TYPE string,
            target_url TYPE string,
@@ -2219,7 +2219,7 @@ INTERFACE zif_github.
            repository_url TYPE string,
            environment_url TYPE string,
            log_url TYPE string,
-           performed_via_github_app TYPE string,
+           performed_via_github_app TYPE string, " not simple, todo
          END OF deployment_status.
 
 * Component schema: short-blob, object
@@ -2244,12 +2244,12 @@ INTERFACE zif_github.
            sha TYPE string,
            node_id TYPE string,
            url TYPE string,
-           author TYPE string,
-           committer TYPE string,
+           author TYPE string, " not simple, todo
+           committer TYPE string, " not simple, todo
            message TYPE string,
-           tree TYPE string,
-           parents TYPE string,
-           verification TYPE string,
+           tree TYPE string, " not simple, todo
+           parents TYPE string, " not simple, todo
+           verification TYPE string, " not simple, todo
            html_url TYPE string,
          END OF git_commit.
 
@@ -2258,7 +2258,7 @@ INTERFACE zif_github.
            ref TYPE string,
            node_id TYPE string,
            url TYPE string,
-           object TYPE string,
+           object TYPE string, " not simple, todo
          END OF git_ref.
 
 * Component schema: git-tag, object
@@ -2268,9 +2268,9 @@ INTERFACE zif_github.
            sha TYPE string,
            url TYPE string,
            message TYPE string,
-           tagger TYPE string,
-           object TYPE string,
-           verification TYPE string,
+           tagger TYPE string, " not simple, todo
+           object TYPE string, " not simple, todo
+           verification TYPE string, " not simple, todo
          END OF git_tag.
 
 * Component schema: git-tree, object
@@ -2278,7 +2278,7 @@ INTERFACE zif_github.
            sha TYPE string,
            url TYPE string,
            truncated TYPE abap_bool,
-           tree TYPE string,
+           tree TYPE string, " not simple, todo
          END OF git_tree.
 
 * Component schema: hook-response, object
@@ -2294,14 +2294,14 @@ INTERFACE zif_github.
            id TYPE i,
            name TYPE string,
            active TYPE abap_bool,
-           events TYPE string,
-           config TYPE string,
+           events TYPE string, " not simple, todo
+           config TYPE string, " not simple, todo
            updated_at TYPE string,
            created_at TYPE string,
            url TYPE string,
            test_url TYPE string,
            ping_url TYPE string,
-           last_response TYPE string,
+           last_response TYPE string, " not simple, todo
          END OF hook.
 
 * Component schema: import, object
@@ -2321,7 +2321,7 @@ INTERFACE zif_github.
            has_large_files TYPE abap_bool,
            large_files_size TYPE i,
            large_files_count TYPE i,
-           project_choices TYPE string,
+           project_choices TYPE string, " not simple, todo
            message TYPE string,
            authors_count TYPE i,
            url TYPE string,
@@ -2390,23 +2390,23 @@ INTERFACE zif_github.
            id TYPE i,
            node_id TYPE string,
            url TYPE string,
-           actor TYPE string,
+           actor TYPE string, " not simple, todo
            event TYPE string,
            commit_id TYPE string,
            commit_url TYPE string,
            created_at TYPE string,
-           issue TYPE string,
-           label TYPE string,
-           assignee TYPE string,
-           assigner TYPE string,
-           review_requester TYPE string,
-           requested_reviewer TYPE string,
-           requested_team TYPE string,
-           dismissed_review TYPE string,
-           milestone TYPE string,
-           project_card TYPE string,
-           rename TYPE string,
-           author_association TYPE string,
+           issue TYPE string, " not simple, todo
+           label TYPE string, " not simple, todo
+           assignee TYPE string, " not simple, todo
+           assigner TYPE string, " not simple, todo
+           review_requester TYPE string, " not simple, todo
+           requested_reviewer TYPE string, " not simple, todo
+           requested_team TYPE string, " not simple, todo
+           dismissed_review TYPE string, " not simple, todo
+           milestone TYPE string, " not simple, todo
+           project_card TYPE string, " not simple, todo
+           rename TYPE string, " not simple, todo
+           author_association TYPE string, " not simple, todo
            lock_reason TYPE string,
          END OF issue_event.
 
@@ -2415,7 +2415,7 @@ INTERFACE zif_github.
            id TYPE i,
            node_id TYPE string,
            url TYPE string,
-           actor TYPE string,
+           actor TYPE string, " not simple, todo
            event TYPE string,
            commit_id TYPE string,
            commit_url TYPE string,
@@ -2425,7 +2425,7 @@ INTERFACE zif_github.
            message TYPE string,
            issue_url TYPE string,
            updated_at TYPE string,
-           author_association TYPE string,
+           author_association TYPE string, " not simple, todo
            body TYPE string,
            lock_reason TYPE string,
            submitted_at TYPE string,
@@ -2464,8 +2464,8 @@ INTERFACE zif_github.
            type TYPE string,
            content TYPE string,
            encoding TYPE string,
-           _links TYPE string,
-           license TYPE string,
+           _links TYPE string, " not simple, todo
+           license TYPE string, " not simple, todo
          END OF license_content.
 
 * Component schema: pages-source-hash, object
@@ -2481,7 +2481,7 @@ INTERFACE zif_github.
            cname TYPE string,
            custom_404 TYPE abap_bool,
            html_url TYPE string,
-           source TYPE string,
+           source TYPE string, " not simple, todo
            public TYPE abap_bool,
          END OF page.
 
@@ -2489,8 +2489,8 @@ INTERFACE zif_github.
   TYPES: BEGIN OF page_build,
            url TYPE string,
            status TYPE string,
-           error TYPE string,
-           pusher TYPE string,
+           error TYPE string, " not simple, todo
+           pusher TYPE string, " not simple, todo
            commit TYPE string,
            duration TYPE i,
            created_at TYPE string,
@@ -2521,31 +2521,31 @@ INTERFACE zif_github.
            state TYPE string,
            locked TYPE abap_bool,
            title TYPE string,
-           user TYPE string,
+           user TYPE string, " not simple, todo
            body TYPE string,
-           labels TYPE string,
-           milestone TYPE string,
+           labels TYPE string, " not simple, todo
+           milestone TYPE string, " not simple, todo
            active_lock_reason TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
            closed_at TYPE string,
            merged_at TYPE string,
            merge_commit_sha TYPE string,
-           assignee TYPE string,
-           assignees TYPE string,
-           requested_reviewers TYPE string,
-           requested_teams TYPE string,
-           head TYPE string,
-           base TYPE string,
-           _links TYPE string,
-           author_association TYPE string,
-           auto_merge TYPE string,
+           assignee TYPE string, " not simple, todo
+           assignees TYPE string, " not simple, todo
+           requested_reviewers TYPE string, " not simple, todo
+           requested_teams TYPE string, " not simple, todo
+           head TYPE string, " not simple, todo
+           base TYPE string, " not simple, todo
+           _links TYPE string, " not simple, todo
+           author_association TYPE string, " not simple, todo
+           auto_merge TYPE string, " not simple, todo
            draft TYPE abap_bool,
            merged TYPE abap_bool,
            mergeable TYPE abap_bool,
            rebaseable TYPE abap_bool,
            mergeable_state TYPE string,
-           merged_by TYPE string,
+           merged_by TYPE string, " not simple, todo
            comments TYPE i,
            review_comments TYPE i,
            maintainer_can_modify TYPE abap_bool,
@@ -2568,21 +2568,21 @@ INTERFACE zif_github.
            commit_id TYPE string,
            original_commit_id TYPE string,
            in_reply_to_id TYPE i,
-           user TYPE string,
+           user TYPE string, " not simple, todo
            body TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
            html_url TYPE string,
            pull_request_url TYPE string,
-           author_association TYPE string,
-           _links TYPE string,
+           author_association TYPE string, " not simple, todo
+           _links TYPE string, " not simple, todo
            start_line TYPE i,
            original_start_line TYPE i,
            start_side TYPE string,
            line TYPE i,
            original_line TYPE i,
            side TYPE string,
-           reactions TYPE string,
+           reactions TYPE string, " not simple, todo
            body_html TYPE string,
            body_text TYPE string,
          END OF pull_request_review_comment.
@@ -2596,25 +2596,25 @@ INTERFACE zif_github.
 
 * Component schema: pull-request-review-request, object
   TYPES: BEGIN OF pull_request_review_request,
-           users TYPE string,
-           teams TYPE string,
+           users TYPE string, " not simple, todo
+           teams TYPE string, " not simple, todo
          END OF pull_request_review_request.
 
 * Component schema: pull-request-review, object
   TYPES: BEGIN OF pull_request_review,
            id TYPE i,
            node_id TYPE string,
-           user TYPE string,
+           user TYPE string, " not simple, todo
            body TYPE string,
            state TYPE string,
            html_url TYPE string,
            pull_request_url TYPE string,
-           _links TYPE string,
+           _links TYPE string, " not simple, todo
            submitted_at TYPE string,
            commit_id TYPE string,
            body_html TYPE string,
            body_text TYPE string,
-           author_association TYPE string,
+           author_association TYPE string, " not simple, todo
          END OF pull_request_review.
 
 * Component schema: review-comment, object
@@ -2630,14 +2630,14 @@ INTERFACE zif_github.
            commit_id TYPE string,
            original_commit_id TYPE string,
            in_reply_to_id TYPE i,
-           user TYPE string,
+           user TYPE string, " not simple, todo
            body TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
            html_url TYPE string,
            pull_request_url TYPE string,
-           author_association TYPE string,
-           _links TYPE string,
+           author_association TYPE string, " not simple, todo
+           _links TYPE string, " not simple, todo
            body_text TYPE string,
            body_html TYPE string,
            side TYPE string,
@@ -2662,7 +2662,7 @@ INTERFACE zif_github.
            download_count TYPE i,
            created_at TYPE string,
            updated_at TYPE string,
-           uploader TYPE string,
+           uploader TYPE string, " not simple, todo
          END OF release_asset.
 
 * Component schema: release, object
@@ -2683,8 +2683,8 @@ INTERFACE zif_github.
            prerelease TYPE abap_bool,
            created_at TYPE string,
            published_at TYPE string,
-           author TYPE string,
-           assets TYPE string,
+           author TYPE string, " not simple, todo
+           assets TYPE string, " not simple, todo
            body_html TYPE string,
            body_text TYPE string,
          END OF release.
@@ -2697,14 +2697,14 @@ INTERFACE zif_github.
 
 * Component schema: secret-scanning-alert, object
   TYPES: BEGIN OF secret_scanning_alert,
-           number TYPE string,
-           created_at TYPE string,
-           url TYPE string,
-           html_url TYPE string,
-           state TYPE string,
-           resolution TYPE string,
+           number TYPE string, " not simple, todo
+           created_at TYPE string, " not simple, todo
+           url TYPE string, " not simple, todo
+           html_url TYPE string, " not simple, todo
+           state TYPE string, " not simple, todo
+           resolution TYPE string, " not simple, todo
            resolved_at TYPE string,
-           resolved_by TYPE string,
+           resolved_by TYPE string, " not simple, todo
            secret_type TYPE string,
            secret TYPE string,
          END OF secret_scanning_alert.
@@ -2712,7 +2712,7 @@ INTERFACE zif_github.
 * Component schema: stargazer, object
   TYPES: BEGIN OF stargazer,
            starred_at TYPE string,
-           user TYPE string,
+           user TYPE string, " not simple, todo
          END OF stargazer.
 
 * Component schema: code-frequency-stat, array
@@ -2720,22 +2720,22 @@ INTERFACE zif_github.
 
 * Component schema: commit-activity, object
   TYPES: BEGIN OF commit_activity,
-           days TYPE string,
+           days TYPE string, " not simple, todo
            total TYPE i,
            week TYPE i,
          END OF commit_activity.
 
 * Component schema: contributor-activity, object
   TYPES: BEGIN OF contributor_activity,
-           author TYPE string,
+           author TYPE string, " not simple, todo
            total TYPE i,
-           weeks TYPE string,
+           weeks TYPE string, " not simple, todo
          END OF contributor_activity.
 
 * Component schema: participation-stats, object
   TYPES: BEGIN OF participation_stats,
-           all TYPE string,
-           owner TYPE string,
+           all TYPE string, " not simple, todo
+           owner TYPE string, " not simple, todo
          END OF participation_stats.
 
 * Component schema: repository-subscription, object
@@ -2751,7 +2751,7 @@ INTERFACE zif_github.
 * Component schema: tag, object
   TYPES: BEGIN OF tag,
            name TYPE string,
-           commit TYPE string,
+           commit TYPE string, " not simple, todo
            zipball_url TYPE string,
            tarball_url TYPE string,
            node_id TYPE string,
@@ -2759,7 +2759,7 @@ INTERFACE zif_github.
 
 * Component schema: topic, object
   TYPES: BEGIN OF topic,
-           names TYPE string,
+           names TYPE string, " not simple, todo
          END OF topic.
 
 * Component schema: traffic, object
@@ -2773,7 +2773,7 @@ INTERFACE zif_github.
   TYPES: BEGIN OF clone_traffic,
            count TYPE i,
            uniques TYPE i,
-           clones TYPE string,
+           clones TYPE string, " not simple, todo
          END OF clone_traffic.
 
 * Component schema: content-traffic, object
@@ -2795,73 +2795,73 @@ INTERFACE zif_github.
   TYPES: BEGIN OF view_traffic,
            count TYPE i,
            uniques TYPE i,
-           views TYPE string,
+           views TYPE string, " not simple, todo
          END OF view_traffic.
 
 * Component schema: scim-group-list-enterprise, object
   TYPES: BEGIN OF scim_group_list_enterprise,
-           schemas TYPE string,
+           schemas TYPE string, " not simple, todo
            totalresults TYPE f,
            itemsperpage TYPE f,
            startindex TYPE f,
-           resources TYPE string,
+           resources TYPE string, " not simple, todo
          END OF scim_group_list_enterprise.
 
 * Component schema: scim-enterprise-group, object
   TYPES: BEGIN OF scim_enterprise_group,
-           schemas TYPE string,
+           schemas TYPE string, " not simple, todo
            id TYPE string,
            externalid TYPE string,
            displayname TYPE string,
-           members TYPE string,
-           meta TYPE string,
+           members TYPE string, " not simple, todo
+           meta TYPE string, " not simple, todo
          END OF scim_enterprise_group.
 
 * Component schema: scim-user-list-enterprise, object
   TYPES: BEGIN OF scim_user_list_enterprise,
-           schemas TYPE string,
+           schemas TYPE string, " not simple, todo
            totalresults TYPE f,
            itemsperpage TYPE f,
            startindex TYPE f,
-           resources TYPE string,
+           resources TYPE string, " not simple, todo
          END OF scim_user_list_enterprise.
 
 * Component schema: scim-enterprise-user, object
   TYPES: BEGIN OF scim_enterprise_user,
-           schemas TYPE string,
+           schemas TYPE string, " not simple, todo
            id TYPE string,
            externalid TYPE string,
            username TYPE string,
-           name TYPE string,
-           emails TYPE string,
-           groups TYPE string,
+           name TYPE string, " not simple, todo
+           emails TYPE string, " not simple, todo
+           groups TYPE string, " not simple, todo
            active TYPE abap_bool,
-           meta TYPE string,
+           meta TYPE string, " not simple, todo
          END OF scim_enterprise_user.
 
 * Component schema: scim-user, object
   TYPES: BEGIN OF scim_user,
-           schemas TYPE string,
+           schemas TYPE string, " not simple, todo
            id TYPE string,
            externalid TYPE string,
            username TYPE string,
            displayname TYPE string,
-           name TYPE string,
-           emails TYPE string,
+           name TYPE string, " not simple, todo
+           emails TYPE string, " not simple, todo
            active TYPE abap_bool,
-           meta TYPE string,
+           meta TYPE string, " not simple, todo
            organization_id TYPE i,
-           operations TYPE string,
-           groups TYPE string,
+           operations TYPE string, " not simple, todo
+           groups TYPE string, " not simple, todo
          END OF scim_user.
 
 * Component schema: scim-user-list, object
   TYPES: BEGIN OF scim_user_list,
-           schemas TYPE string,
+           schemas TYPE string, " not simple, todo
            totalresults TYPE i,
            itemsperpage TYPE i,
            startindex TYPE i,
-           resources TYPE string,
+           resources TYPE string, " not simple, todo
          END OF scim_user_list.
 
 * Component schema: search-result-text-matches, array
@@ -2875,13 +2875,13 @@ INTERFACE zif_github.
            url TYPE string,
            git_url TYPE string,
            html_url TYPE string,
-           repository TYPE string,
+           repository TYPE string, " not simple, todo
            score TYPE i,
            file_size TYPE i,
            language TYPE string,
            last_modified_at TYPE string,
-           line_numbers TYPE string,
-           text_matches TYPE string,
+           line_numbers TYPE string, " not simple, todo
+           text_matches TYPE string, " not simple, todo
          END OF code_search_result_item.
 
 * Component schema: commit-search-result-item, object
@@ -2890,14 +2890,14 @@ INTERFACE zif_github.
            sha TYPE string,
            html_url TYPE string,
            comments_url TYPE string,
-           commit TYPE string,
-           author TYPE string,
-           committer TYPE string,
-           parents TYPE string,
-           repository TYPE string,
+           commit TYPE string, " not simple, todo
+           author TYPE string, " not simple, todo
+           committer TYPE string, " not simple, todo
+           parents TYPE string, " not simple, todo
+           repository TYPE string, " not simple, todo
            score TYPE i,
            node_id TYPE string,
-           text_matches TYPE string,
+           text_matches TYPE string, " not simple, todo
          END OF commit_search_result_item.
 
 * Component schema: issue-search-result-item, object
@@ -2914,27 +2914,27 @@ INTERFACE zif_github.
            title TYPE string,
            locked TYPE abap_bool,
            active_lock_reason TYPE string,
-           assignees TYPE string,
-           user TYPE string,
-           labels TYPE string,
+           assignees TYPE string, " not simple, todo
+           user TYPE string, " not simple, todo
+           labels TYPE string, " not simple, todo
            state TYPE string,
-           assignee TYPE string,
-           milestone TYPE string,
+           assignee TYPE string, " not simple, todo
+           milestone TYPE string, " not simple, todo
            comments TYPE i,
            created_at TYPE string,
            updated_at TYPE string,
            closed_at TYPE string,
-           text_matches TYPE string,
-           pull_request TYPE string,
+           text_matches TYPE string, " not simple, todo
+           pull_request TYPE string, " not simple, todo
            body TYPE string,
            score TYPE i,
-           author_association TYPE string,
+           author_association TYPE string, " not simple, todo
            draft TYPE abap_bool,
-           repository TYPE string,
+           repository TYPE string, " not simple, todo
            body_html TYPE string,
            body_text TYPE string,
            timeline_url TYPE string,
-           performed_via_github_app TYPE string,
+           performed_via_github_app TYPE string, " not simple, todo
          END OF issue_search_result_item.
 
 * Component schema: label-search-result-item, object
@@ -2947,7 +2947,7 @@ INTERFACE zif_github.
            default TYPE abap_bool,
            description TYPE string,
            score TYPE i,
-           text_matches TYPE string,
+           text_matches TYPE string, " not simple, todo
          END OF label_search_result_item.
 
 * Component schema: repo-search-result-item, object
@@ -2956,7 +2956,7 @@ INTERFACE zif_github.
            node_id TYPE string,
            name TYPE string,
            full_name TYPE string,
-           owner TYPE string,
+           owner TYPE string, " not simple, todo
            private TYPE abap_bool,
            html_url TYPE string,
            description TYPE string,
@@ -3018,7 +3018,7 @@ INTERFACE zif_github.
            forks TYPE i,
            open_issues TYPE i,
            watchers TYPE i,
-           topics TYPE string,
+           topics TYPE string, " not simple, todo
            mirror_url TYPE string,
            has_issues TYPE abap_bool,
            has_projects TYPE abap_bool,
@@ -3027,9 +3027,9 @@ INTERFACE zif_github.
            has_downloads TYPE abap_bool,
            archived TYPE abap_bool,
            disabled TYPE abap_bool,
-           license TYPE string,
-           permissions TYPE string,
-           text_matches TYPE string,
+           license TYPE string, " not simple, todo
+           permissions TYPE string, " not simple, todo
+           text_matches TYPE string, " not simple, todo
            temp_clone_token TYPE string,
            allow_merge_commit TYPE abap_bool,
            allow_squash_merge TYPE abap_bool,
@@ -3052,9 +3052,9 @@ INTERFACE zif_github.
            score TYPE i,
            repository_count TYPE i,
            logo_url TYPE string,
-           text_matches TYPE string,
-           related TYPE string,
-           aliases TYPE string,
+           text_matches TYPE string, " not simple, todo
+           related TYPE string, " not simple, todo
+           aliases TYPE string, " not simple, todo
          END OF topic_search_result_item.
 
 * Component schema: user-search-result-item, object
@@ -3089,7 +3089,7 @@ INTERFACE zif_github.
            location TYPE string,
            site_admin TYPE abap_bool,
            hireable TYPE abap_bool,
-           text_matches TYPE string,
+           text_matches TYPE string, " not simple, todo
            blog TYPE string,
            company TYPE string,
            suspended_at TYPE string,
@@ -3135,7 +3135,7 @@ INTERFACE zif_github.
            disk_usage TYPE i,
            collaborators TYPE i,
            two_factor_authentication TYPE abap_bool,
-           plan TYPE string,
+           plan TYPE string, " not simple, todo
            suspended_at TYPE string,
            business_plus TYPE abap_bool,
            ldap_dn TYPE string,
@@ -3175,7 +3175,7 @@ INTERFACE zif_github.
            following TYPE i,
            created_at TYPE string,
            updated_at TYPE string,
-           plan TYPE string,
+           plan TYPE string, " not simple, todo
            suspended_at TYPE string,
            private_gists TYPE i,
            total_private_repos TYPE i,
@@ -3198,8 +3198,8 @@ INTERFACE zif_github.
            primary_key_id TYPE i,
            key_id TYPE string,
            public_key TYPE string,
-           emails TYPE string,
-           subkeys TYPE string,
+           emails TYPE string, " not simple, todo
+           subkeys TYPE string, " not simple, todo
            can_sign TYPE abap_bool,
            can_encrypt_comms TYPE abap_bool,
            can_encrypt_storage TYPE abap_bool,
@@ -3240,19 +3240,19 @@ INTERFACE zif_github.
            on_free_trial TYPE abap_bool,
            free_trial_ends_on TYPE string,
            updated_at TYPE string,
-           account TYPE string,
-           plan TYPE string,
+           account TYPE string, " not simple, todo
+           plan TYPE string, " not simple, todo
          END OF user_marketplace_purchase.
 
 * Component schema: starred-repository, object
   TYPES: BEGIN OF starred_repository,
            starred_at TYPE string,
-           repo TYPE string,
+           repo TYPE string, " not simple, todo
          END OF starred_repository.
 
 * Component schema: hovercard, object
   TYPES: BEGIN OF hovercard,
-           contexts TYPE string,
+           contexts TYPE string, " not simple, todo
          END OF hovercard.
 
 * Component schema: key-simple, object

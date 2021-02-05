@@ -93,6 +93,12 @@ CLASS ltcl_github IMPLEMENTATION.
       act = ls_pull_request-url
       exp = 'https://api.github.com/repos/abapGit-tests/VIEW/pulls/1' ).
 
+    cl_abap_unit_assert=>assert_equals(
+      act = ls_pull_request-mergeable_state
+      exp = 'clean' ).
+
+* todo,    ls_pull_request-head-ref
+
   ENDMETHOD.
 
   METHOD pulls_list.

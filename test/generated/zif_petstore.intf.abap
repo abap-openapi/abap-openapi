@@ -16,7 +16,7 @@ INTERFACE zif_petstore.
   TYPES: BEGIN OF customer,
            id TYPE i,
            username TYPE string,
-           address TYPE string,
+           address TYPE string, " not simple, todo
          END OF customer.
 
 * Component schema: Address, object
@@ -55,9 +55,9 @@ INTERFACE zif_petstore.
   TYPES: BEGIN OF pet,
            id TYPE i,
            name TYPE string,
-           category TYPE string,
-           photourls TYPE string,
-           tags TYPE string,
+           category TYPE string, " not simple, todo
+           photourls TYPE string, " not simple, todo
+           tags TYPE string, " not simple, todo
            status TYPE string,
          END OF pet.
 

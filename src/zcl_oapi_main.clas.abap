@@ -43,10 +43,6 @@ CLASS zcl_oapi_main DEFINITION PUBLIC.
     METHODS dump_parser_methods
       RETURNING VALUE(rv_abap) TYPE string.
 
-    METHODS dump_basic_type
-      IMPORTING ii_schema TYPE REF TO zif_oapi_schema
-      RETURNING VALUE(rv_type) TYPE string.
-
     METHODS find_uri_prefix
       IMPORTING is_servers LIKE ms_specification-servers
       RETURNING VALUE(rv_prefix) TYPE string.
@@ -167,7 +163,11 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         rv_abap = rv_abap && |  TYPES: BEGIN OF { ls_schema-abap_name },\n|.
         lv_count = 0.
         LOOP AT ls_schema-schema->properties INTO ls_property.
-          rv_abap = rv_abap && |           | && ls_property-abap_name && | TYPE | && dump_basic_type( ls_property-schema ) && |,\n|.
+          IF ls_property-schema->is_simple_type( ) = abap_true.
+            rv_abap = rv_abap && |           | && ls_property-abap_name && | TYPE | && ls_property-schema->get_simple_type( ) && |,\n|.
+          ELSE.
+            rv_abap = rv_abap && |           | && ls_property-abap_name && | TYPE string, " not simple, todo\n|.
+          ENDIF.
           lv_count = lv_count + 1.
         ENDLOOP.
         IF lv_count = 0. " temporary workaround
@@ -334,29 +334,6 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
   ENDMETHOD.
 
-  METHOD dump_basic_type.
-
-    IF ii_schema IS NOT INITIAL.
-      rv_type = ii_schema->type.
-    ENDIF.
-
-    CASE rv_type.
-      WHEN 'array'.
-        rv_type = 'string'. " todo
-      WHEN 'object'.
-        rv_type = 'string'. " todo
-      WHEN 'integer'.
-        rv_type = 'i'.
-      WHEN 'number'.
-        rv_type = 'f'.
-      WHEN 'boolean'.
-        rv_type = 'abap_bool'.
-      WHEN ''.
-        rv_type = 'string'.
-    ENDCASE.
-
-  ENDMETHOD.
-
   METHOD parameters_to_abap.
 
     DATA ls_parameter LIKE LINE OF it_parameters.
@@ -370,7 +347,10 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
       LOOP AT it_parameters INTO ls_parameter.
 
-        lv_type = dump_basic_type( ls_parameter-schema ).
+        lv_type = ls_parameter-schema->get_simple_type( ).
+        IF lv_type IS INITIAL.
+          lv_type = 'string'. " todo, at this point there should only be simple or referenced types?
+        ENDIF.
 
         CLEAR lv_default.
         IF ls_parameter-schema IS NOT INITIAL AND ls_parameter-schema->default IS NOT INITIAL.

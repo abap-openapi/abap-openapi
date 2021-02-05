@@ -7,6 +7,7 @@ ABAP [OpenAPI](https://www.openapis.org) Client Generator in ABAP
 - one self-contained global class + interface per OpenAPI definition
 - eventually possible to run on ABAP stack
 - eventually OpenAPI v2 and v3 support
+- only JSON support
 
 prerequsites = [NodeJS](https://nodejs.org) 12+
 

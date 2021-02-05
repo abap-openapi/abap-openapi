@@ -11,4 +11,7 @@ INTERFACE zif_oapi_schema PUBLIC.
     default    TYPE string,
     properties TYPE STANDARD TABLE OF ty_property WITH DEFAULT KEY.
 
+  METHODS is_simple_type RETURNING VALUE(rv_simple) TYPE abap_bool.
+  METHODS get_simple_type RETURNING VALUE(rv_simple) TYPE string.
+
 ENDINTERFACE.
