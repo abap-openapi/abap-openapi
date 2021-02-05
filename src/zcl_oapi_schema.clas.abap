@@ -41,13 +41,14 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
       rv_abap = rv_abap && |  TYPES: BEGIN OF { iv_name },\n|.
       lv_count = 0.
       LOOP AT zif_oapi_schema~properties INTO ls_property.
+        rv_abap = rv_abap && |           | && ls_property-abap_name && | TYPE |.
         IF ls_property-schema IS INITIAL.
           ls_ref = lookup_ref( iv_name = ls_property-ref it_refs = it_refs ).
-          rv_abap = rv_abap && |           | && ls_property-abap_name && | TYPE | && ls_ref-abap_name && |,\n|.
+          rv_abap = rv_abap && ls_ref-abap_name && |,\n|.
         ELSEIF ls_property-schema->is_simple_type( ) = abap_true.
-          rv_abap = rv_abap && |           | && ls_property-abap_name && | TYPE | && ls_property-schema->get_simple_type( ) && |,\n|.
+          rv_abap = rv_abap && ls_property-schema->get_simple_type( ) && |,\n|.
         ELSE.
-          rv_abap = rv_abap && |           | && ls_property-abap_name && | TYPE string, " not simple, todo\n|.
+          rv_abap = rv_abap && |string, " not simple, { ls_property-schema->type }, todo\n|.
         ENDIF.
         lv_count = lv_count + 1.
       ENDLOOP.

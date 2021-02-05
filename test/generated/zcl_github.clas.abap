@@ -4129,10 +4129,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'outdated' value = outdated ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -4227,10 +4229,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/applications/grants'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -4411,10 +4415,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/authorizations'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -4594,10 +4600,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/permissions/organizations'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -4686,10 +4694,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runner-groups'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -4771,10 +4781,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -4849,10 +4861,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -4924,10 +4938,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/enterprises/{enterprise}/actions/runners'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -5031,6 +5047,7 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'order' value = order ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
@@ -5086,10 +5103,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/events'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -5121,10 +5140,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'since' value = since ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -5156,10 +5177,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'since' value = since ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -5179,10 +5202,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'since' value = since ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -5239,10 +5264,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/comments'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -5321,10 +5348,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/commits'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -5342,10 +5371,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/gists/{gist_id}/forks'.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -5453,10 +5484,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/installation/repositories'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -5494,18 +5527,22 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'sort' value = sort ).
     ENDIF.
     lv_temp = collab.
+    CONDENSE lv_temp.
     IF collab IS SUPPLIED.
       mi_client->request->set_form_field( name = 'collab' value = lv_temp ).
     ENDIF.
     lv_temp = orgs.
+    CONDENSE lv_temp.
     IF orgs IS SUPPLIED.
       mi_client->request->set_form_field( name = 'orgs' value = lv_temp ).
     ENDIF.
     lv_temp = owned.
+    CONDENSE lv_temp.
     IF owned IS SUPPLIED.
       mi_client->request->set_form_field( name = 'owned' value = lv_temp ).
     ENDIF.
     lv_temp = pulls.
+    CONDENSE lv_temp.
     IF pulls IS SUPPLIED.
       mi_client->request->set_form_field( name = 'pulls' value = lv_temp ).
     ENDIF.
@@ -5519,10 +5556,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'since' value = since ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -5539,10 +5578,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/licenses'.
     lv_temp = featured.
+    CONDENSE lv_temp.
     IF featured IS SUPPLIED.
       mi_client->request->set_form_field( name = 'featured' value = lv_temp ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
@@ -5611,10 +5652,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/marketplace_listing/plans'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -5640,10 +5683,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'sort' value = sort ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -5675,10 +5720,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/marketplace_listing/stubbed/plans'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -5704,10 +5751,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'sort' value = sort ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -5738,10 +5787,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -5758,10 +5809,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/notifications'.
     lv_temp = all.
+    CONDENSE lv_temp.
     IF all IS SUPPLIED.
       mi_client->request->set_form_field( name = 'all' value = lv_temp ).
     ENDIF.
     lv_temp = participating.
+    CONDENSE lv_temp.
     IF participating IS SUPPLIED.
       mi_client->request->set_form_field( name = 'participating' value = lv_temp ).
     ENDIF.
@@ -5772,10 +5825,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'before' value = before ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -5894,10 +5949,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/organizations'.
     lv_temp = since.
+    CONDENSE lv_temp.
     IF since IS SUPPLIED.
       mi_client->request->set_form_field( name = 'since' value = lv_temp ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
@@ -5967,10 +6024,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/permissions/repositories'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -6059,10 +6118,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runner-groups'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -6214,10 +6275,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -6289,10 +6352,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/runners'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -6381,10 +6446,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/actions/secrets'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -6534,6 +6601,7 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'order' value = order ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
@@ -6635,10 +6703,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/events'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -6656,10 +6726,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/failed_invitations'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -6677,10 +6749,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/hooks'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -6820,10 +6894,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/installations'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -6880,10 +6956,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/invitations'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -6933,10 +7011,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{invitation_id}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -6972,10 +7052,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'since' value = since ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -6999,10 +7081,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'role' value = role ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -7090,10 +7174,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/migrations'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -7192,10 +7278,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{migration_id}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -7216,10 +7304,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'filter' value = filter ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -7268,10 +7358,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'state' value = state ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -7302,10 +7394,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/public_members'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -7374,10 +7468,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'direction' value = direction ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -7447,10 +7543,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/team-sync/groups'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -7468,10 +7566,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/orgs/{org}/teams'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -7548,10 +7648,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'direction' value = direction ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -7641,10 +7743,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'direction' value = direction ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -7749,10 +7853,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'content' value = content ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -7820,10 +7926,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'content' value = content ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -7879,10 +7987,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -7904,10 +8014,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'role' value = role ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -7971,10 +8083,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -8044,10 +8158,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -8142,10 +8258,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -8273,10 +8391,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'archived_state' value = archived_state ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -8374,10 +8494,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'affiliation' value = affiliation ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -8445,10 +8567,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -8551,10 +8675,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -8715,10 +8841,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -8825,10 +8953,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'status' value = status ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -8884,10 +9014,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{run_id}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -8929,10 +9061,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'filter' value = filter ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -9019,10 +9153,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -9100,10 +9236,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -9205,10 +9343,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'status' value = status ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -9244,10 +9384,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -9309,14 +9451,17 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = protected.
+    CONDENSE lv_temp.
     IF protected IS SUPPLIED.
       mi_client->request->set_form_field( name = 'protected' value = lv_temp ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -9911,10 +10056,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{check_run_id}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -9990,10 +10137,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'status' value = status ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -10029,10 +10178,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = state.
+    CONDENSE lv_temp.
     IF state IS SUPPLIED.
       mi_client->request->set_form_field( name = 'state' value = lv_temp ).
     ENDIF.
     lv_temp = ref.
+    CONDENSE lv_temp.
     IF ref IS SUPPLIED.
       mi_client->request->set_form_field( name = 'ref' value = lv_temp ).
     ENDIF.
@@ -10085,10 +10236,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = ref.
+    CONDENSE lv_temp.
     IF ref IS SUPPLIED.
       mi_client->request->set_form_field( name = 'ref' value = lv_temp ).
     ENDIF.
     lv_temp = tool_name.
+    CONDENSE lv_temp.
     IF tool_name IS SUPPLIED.
       mi_client->request->set_form_field( name = 'tool_name' value = lv_temp ).
     ENDIF.
@@ -10124,10 +10277,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'affiliation' value = affiliation ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -10206,10 +10361,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -10285,10 +10442,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'content' value = content ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -10359,10 +10518,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'since' value = since ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -10397,10 +10558,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{commit_sha}' IN lv_uri WITH commit_sha.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -10435,10 +10598,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     REPLACE ALL OCCURRENCES OF '{commit_sha}' IN lv_uri WITH commit_sha.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -10482,10 +10647,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'status' value = status ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -10505,6 +10672,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = app_id.
+    CONDENSE lv_temp.
     IF app_id IS SUPPLIED.
       mi_client->request->set_form_field( name = 'app_id' value = lv_temp ).
     ENDIF.
@@ -10512,10 +10680,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'check_name' value = check_name ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -10550,10 +10720,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -10667,10 +10839,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'anon' value = anon ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -10701,10 +10875,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'environment' value = environment ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -10774,10 +10950,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{deployment_id}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -10847,10 +11025,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -10872,10 +11052,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'sort' value = sort ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -10967,10 +11149,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -11109,10 +11293,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -11320,6 +11506,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = since.
+    CONDENSE lv_temp.
     IF since IS SUPPLIED.
       mi_client->request->set_form_field( name = 'since' value = lv_temp ).
     ENDIF.
@@ -11439,10 +11626,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -11522,10 +11711,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'since' value = since ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -11567,10 +11758,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'since' value = since ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -11646,10 +11839,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'content' value = content ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -11705,10 +11900,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -11818,10 +12015,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'since' value = since ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -11860,10 +12059,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -11885,10 +12086,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -12016,10 +12219,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'content' value = content ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -12078,10 +12283,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -12100,10 +12307,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -12170,10 +12379,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -12302,10 +12513,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'direction' value = direction ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -12392,10 +12605,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{milestone_number}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -12414,10 +12629,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = all.
+    CONDENSE lv_temp.
     IF all IS SUPPLIED.
       mi_client->request->set_form_field( name = 'all' value = lv_temp ).
     ENDIF.
     lv_temp = participating.
+    CONDENSE lv_temp.
     IF participating IS SUPPLIED.
       mi_client->request->set_form_field( name = 'participating' value = lv_temp ).
     ENDIF.
@@ -12428,10 +12645,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'before' value = before ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -12520,10 +12739,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -12590,10 +12811,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'state' value = state ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -12641,10 +12864,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'direction' value = direction ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -12686,10 +12911,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'since' value = since ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -12765,10 +12992,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'content' value = content ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -12870,10 +13099,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'since' value = since ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -12932,10 +13163,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -12957,10 +13190,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -13016,10 +13251,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -13075,10 +13312,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -13180,10 +13419,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{review_id}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -13276,10 +13517,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -13446,10 +13689,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{release_id}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -13494,10 +13739,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'state' value = state ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
@@ -13550,10 +13797,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -13657,10 +13906,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -13721,10 +13972,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -13758,10 +14011,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -13953,6 +14208,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/repositories'.
     lv_temp = since.
+    CONDENSE lv_temp.
     IF since IS SUPPLIED.
       mi_client->request->set_form_field( name = 'since' value = lv_temp ).
     ENDIF.
@@ -13970,10 +14226,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Groups'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     lv_temp = startindex.
+    CONDENSE lv_temp.
     IF startindex IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startIndex' value = lv_temp ).
     ENDIF.
     lv_temp = count.
+    CONDENSE lv_temp.
     IF count IS SUPPLIED.
       mi_client->request->set_form_field( name = 'count' value = lv_temp ).
     ENDIF.
@@ -14060,10 +14318,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/scim/v2/enterprises/{enterprise}/Users'.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     lv_temp = startindex.
+    CONDENSE lv_temp.
     IF startindex IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startIndex' value = lv_temp ).
     ENDIF.
     lv_temp = count.
+    CONDENSE lv_temp.
     IF count IS SUPPLIED.
       mi_client->request->set_form_field( name = 'count' value = lv_temp ).
     ENDIF.
@@ -14150,10 +14410,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/scim/v2/organizations/{org}/Users'.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     lv_temp = startindex.
+    CONDENSE lv_temp.
     IF startindex IS SUPPLIED.
       mi_client->request->set_form_field( name = 'startIndex' value = lv_temp ).
     ENDIF.
     lv_temp = count.
+    CONDENSE lv_temp.
     IF count IS SUPPLIED.
       mi_client->request->set_form_field( name = 'count' value = lv_temp ).
     ENDIF.
@@ -14249,10 +14511,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'order' value = order ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -14276,10 +14540,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'order' value = order ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -14303,10 +14569,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'order' value = order ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -14323,6 +14591,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/search/labels'.
     lv_temp = repository_id.
+    CONDENSE lv_temp.
     mi_client->request->set_form_field( name = 'repository_id' value = lv_temp ).
     mi_client->request->set_form_field( name = 'q' value = q ).
     IF sort IS SUPPLIED.
@@ -14351,10 +14620,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'order' value = order ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -14391,10 +14662,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'order' value = order ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -14462,10 +14735,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'direction' value = direction ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -14560,10 +14835,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'direction' value = direction ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -14673,10 +14950,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'content' value = content ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -14723,10 +15002,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'content' value = content ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -14764,10 +15045,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -14790,10 +15073,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'role' value = role ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -14909,10 +15194,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -14986,10 +15273,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15090,10 +15379,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15197,10 +15488,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/user/emails'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15241,10 +15534,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/user/followers'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15261,10 +15556,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/user/following'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15320,10 +15617,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/user/gpg_keys'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15382,10 +15681,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/user/installations'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15405,10 +15706,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{installation_id}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15515,10 +15818,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'since' value = since ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15535,10 +15840,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/user/keys'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15597,10 +15904,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/user/marketplace_purchases'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15617,10 +15926,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/user/marketplace_purchases/stubbed'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15640,10 +15951,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'state' value = state ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15686,10 +15999,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/user/migrations'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15721,6 +16036,7 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{migration_id}' IN lv_uri WITH lv_temp.
     lv_temp = exclude.
+    CONDENSE lv_temp.
     IF exclude IS SUPPLIED.
       mi_client->request->set_form_field( name = 'exclude' value = lv_temp ).
     ENDIF.
@@ -15786,10 +16102,12 @@ CLASS zcl_github IMPLEMENTATION.
     CONDENSE lv_temp.
     REPLACE ALL OCCURRENCES OF '{migration_id}' IN lv_uri WITH lv_temp.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15806,10 +16124,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/user/orgs'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15838,10 +16158,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/user/public_emails'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15873,10 +16195,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'direction' value = direction ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15911,10 +16235,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/user/repository_invitations'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -15967,10 +16293,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'direction' value = direction ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -16029,10 +16357,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/user/subscriptions'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -16049,10 +16379,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/user/teams'.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -16069,10 +16401,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/users'.
     lv_temp = since.
+    CONDENSE lv_temp.
     IF since IS SUPPLIED.
       mi_client->request->set_form_field( name = 'since' value = lv_temp ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
@@ -16103,10 +16437,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/users/{username}/events'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -16125,10 +16461,12 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -16146,10 +16484,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/users/{username}/events/public'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -16167,10 +16507,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/users/{username}/followers'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -16188,10 +16530,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/users/{username}/following'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -16226,10 +16570,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'since' value = since ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -16247,10 +16593,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/users/{username}/gpg_keys'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -16300,10 +16648,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/users/{username}/keys'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -16321,10 +16671,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/users/{username}/orgs'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -16345,10 +16697,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'state' value = state ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -16366,10 +16720,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/users/{username}/received_events'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -16387,10 +16743,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/users/{username}/received_events/public'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -16417,10 +16775,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'direction' value = direction ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -16483,10 +16843,12 @@ CLASS zcl_github IMPLEMENTATION.
       mi_client->request->set_form_field( name = 'direction' value = direction ).
     ENDIF.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.
@@ -16504,10 +16866,12 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/users/{username}/subscriptions'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     lv_temp = per_page.
+    CONDENSE lv_temp.
     IF per_page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
     ENDIF.
     lv_temp = page.
+    CONDENSE lv_temp.
     IF page IS SUPPLIED.
       mi_client->request->set_form_field( name = 'page' value = lv_temp ).
     ENDIF.

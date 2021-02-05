@@ -144,6 +144,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
         ls_operation-method = lv_method.
         lv_prefix = '/paths/' && lv_path && '/' && lv_method.
         ls_operation-summary = mo_json->value_string( lv_prefix && '/summary' ).
+        ls_operation-deprecated = mo_json->value_boolean( lv_prefix && '/deprecated' ).
         ls_operation-description = mo_json->value_string( lv_prefix && '/description' ).
         ls_operation-operation_id = mo_json->value_string( lv_prefix && '/operationId' ).
         ls_operation-parameters = parse_parameters( lv_prefix && '/parameters/' ).

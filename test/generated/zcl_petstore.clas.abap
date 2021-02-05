@@ -155,6 +155,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/findByTags'.
     lv_temp = tags.
+    CONDENSE lv_temp.
     IF tags IS SUPPLIED.
       mi_client->request->set_form_field( name = 'tags' value = lv_temp ).
     ENDIF.
