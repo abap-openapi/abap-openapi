@@ -94,6 +94,10 @@ CLASS ltcl_github IMPLEMENTATION.
       exp = 'https://api.github.com/repos/abapGit-tests/VIEW/pulls/1' ).
 
     cl_abap_unit_assert=>assert_equals(
+      act = ls_pull_request-html_url
+      exp = 'https://github.com/abapGit-tests/VIEW/pull/1' ).
+
+    cl_abap_unit_assert=>assert_equals(
       act = ls_pull_request-mergeable_state
       exp = 'clean' ).
 

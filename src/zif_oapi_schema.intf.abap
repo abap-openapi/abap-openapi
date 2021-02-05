@@ -19,6 +19,7 @@ INTERFACE zif_oapi_schema PUBLIC.
     RETURNING VALUE(rv_simple) TYPE string.
   METHODS build_type_definition
     IMPORTING iv_name TYPE string
+              it_refs TYPE zif_oapi_specification_v3=>ty_schemas
     RETURNING VALUE(rv_abap) TYPE string.
 
 ENDINTERFACE.

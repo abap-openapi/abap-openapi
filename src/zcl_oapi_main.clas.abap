@@ -163,7 +163,9 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
     LOOP AT ms_specification-components-schemas INTO ls_schema.
       rv_abap = rv_abap && |* Component schema: { ls_schema-name }, { ls_schema-schema->type }\n|.
-      rv_abap = rv_abap && ls_schema-schema->build_type_definition( ls_schema-abap_name ).
+      rv_abap = rv_abap && ls_schema-schema->build_type_definition(
+        iv_name = ls_schema-abap_name
+        it_refs = ms_specification-components-schemas ).
       rv_abap = rv_abap && |\n|.
     ENDLOOP.
 
