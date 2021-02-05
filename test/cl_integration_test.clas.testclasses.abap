@@ -46,6 +46,8 @@ CLASS ltcl_github DEFINITION FOR TESTING RISK LEVEL HARMLESS DURATION SHORT FINA
     METHODS gists_get FOR TESTING RAISING cx_static_check.
     METHODS pulls_list FOR TESTING RAISING cx_static_check.
     METHODS pulls_get FOR TESTING RAISING cx_static_check.
+    METHODS pulls_create FOR TESTING RAISING cx_static_check.
+    METHODS pulls_update FOR TESTING RAISING cx_static_check.
     DATA mi_github TYPE REF TO zif_github.
 ENDCLASS.
 
@@ -105,11 +107,22 @@ CLASS ltcl_github IMPLEMENTATION.
 
   ENDMETHOD.
 
+  METHOD pulls_create.
+    " mi_github->pulls_create(
+    "    owner       = 'abapGit-tests'
+    "    repo        = 'VIEW' ).
+  ENDMETHOD.
+
+  METHOD pulls_update.
+    " mi_github->pulls_update(
+    "   owner       = 'abapGit-tests'
+    "   repo        = 'VIEW' ).
+  ENDMETHOD.
+
   METHOD pulls_list.
     " mi_github->pulls_list(
-    "   owner = 'abapGit'
-    "   repo  = 'abapGit' ).
-
+    "  owner       = 'abapGit-tests'
+    "  repo        = 'VIEW' ).
   ENDMETHOD.
 
 ENDCLASS.
