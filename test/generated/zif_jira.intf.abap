@@ -251,8 +251,8 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF simplelistwrapperapplicationro,
            size TYPE i,
            items TYPE string, " not simple, todo
-* todo, pagingcallback, ref?
-* todo, callback, ref?
+* todo, #/components/schemas/ListWrapperCallbackApplicationRole, pagingcallback, ref?
+* todo, #/components/schemas/ListWrapperCallbackApplicationRole, callback, ref?
            max_results TYPE i,
          END OF simplelistwrapperapplicationro.
 
@@ -260,8 +260,8 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF simplelistwrappergroupname,
            size TYPE i,
            items TYPE string, " not simple, todo
-* todo, pagingcallback, ref?
-* todo, callback, ref?
+* todo, #/components/schemas/ListWrapperCallbackGroupName, pagingcallback, ref?
+* todo, #/components/schemas/ListWrapperCallbackGroupName, callback, ref?
            max_results TYPE i,
          END OF simplelistwrappergroupname.
 
@@ -513,7 +513,7 @@ INTERFACE zif_jira.
            editmeta TYPE string, " not simple, todo
            changelog TYPE string, " not simple, todo
            versionedrepresentations TYPE string, " not simple, todo
-* todo, fieldstoinclude, ref?
+* todo, #/components/schemas/IncludedFields, fieldstoinclude, ref?
            fields TYPE string, " not simple, todo
          END OF issuebean.
 
@@ -551,7 +551,7 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF linkgroup,
            id TYPE string,
            styleclass TYPE string,
-* todo, header, ref?
+* todo, #/components/schemas/SimpleLink, header, ref?
            weight TYPE i,
            links TYPE string, " not simple, todo
            groups TYPE string, " not simple, todo
@@ -1230,7 +1230,7 @@ INTERFACE zif_jira.
            priority TYPE string, " not simple, todo
            assignee TYPE string, " not simple, todo
            timetracking TYPE string, " not simple, todo
-* todo, issuetype, ref?
+* todo, #/components/schemas/IssueTypeDetails, issuetype, ref?
            issuetype01 TYPE string, " not simple, todo
          END OF fields.
 
@@ -1245,10 +1245,10 @@ INTERFACE zif_jira.
 
 * Component schema: LinkIssueRequestJsonBean, object
   TYPES: BEGIN OF linkissuerequestjsonbean,
-* todo, type, ref?
-* todo, inwardissue, ref?
-* todo, outwardissue, ref?
-* todo, comment, ref?
+* todo, #/components/schemas/IssueLinkType, type, ref?
+* todo, #/components/schemas/LinkedIssue, inwardissue, ref?
+* todo, #/components/schemas/LinkedIssue, outwardissue, ref?
+* todo, #/components/schemas/Comment, comment, ref?
            dummy TYPE i,
          END OF linkissuerequestjsonbean.
 
@@ -1428,7 +1428,7 @@ INTERFACE zif_jira.
 * Component schema: NestedResponse, object
   TYPES: BEGIN OF nestedresponse,
            status TYPE i,
-* todo, errorcollection, ref?
+* todo, #/components/schemas/ErrorCollection, errorcollection, ref?
          END OF nestedresponse.
 
 * Component schema: IssuesUpdateBean, object
@@ -1439,7 +1439,7 @@ INTERFACE zif_jira.
 * Component schema: BulkOperationErrorResult, object
   TYPES: BEGIN OF bulkoperationerrorresult,
            status TYPE i,
-* todo, elementerrors, ref?
+* todo, #/components/schemas/ErrorCollection, elementerrors, ref?
            failedelementnumber TYPE i,
          END OF bulkoperationerrorresult.
 
@@ -1696,8 +1696,8 @@ INTERFACE zif_jira.
 
 * Component schema: FoundUsersAndGroups, object
   TYPES: BEGIN OF foundusersandgroups,
-* todo, users, ref?
-* todo, groups, ref?
+* todo, #/components/schemas/FoundUsers, users, ref?
+* todo, #/components/schemas/FoundGroups, groups, ref?
            dummy TYPE i,
          END OF foundusersandgroups.
 
@@ -1983,7 +1983,7 @@ INTERFACE zif_jira.
            id TYPE i,
            value TYPE string,
            properties TYPE string, " not simple, todo
-* todo, config, ref?
+* todo, #/components/schemas/IssueFieldOptionConfiguration, config, ref?
          END OF issuefieldoption.
 
 * Component schema: IssueFieldOptionConfiguration, object
@@ -2020,7 +2020,7 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF issuefieldoptioncreatebean,
            value TYPE string,
            properties TYPE string, " not simple, todo
-* todo, config, ref?
+* todo, #/components/schemas/IssueFieldOptionConfiguration, config, ref?
          END OF issuefieldoptioncreatebean.
 
 * Component schema: RemoveOptionFromIssuesResult, object
@@ -2058,13 +2058,13 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF field,
            id TYPE string,
            name TYPE string,
-* todo, schema, ref?
+* todo, #/components/schemas/JsonTypeBean, schema, ref?
            description TYPE string,
            key TYPE string,
            islocked TYPE abap_bool,
            screenscount TYPE i,
            contextscount TYPE i,
-* todo, lastused, ref?
+* todo, #/components/schemas/FieldLastUsed, lastused, ref?
          END OF field.
 
 * Component schema: FieldLastUsed, object
@@ -2122,7 +2122,7 @@ INTERFACE zif_jira.
 
 * Component schema: FieldConfigurationSchemeProjects, object
   TYPES: BEGIN OF fieldconfigurationschemeprojec,
-* todo, fieldconfigurationscheme, ref?
+* todo, #/components/schemas/FieldConfigurationScheme, fieldconfigurationscheme, ref?
            projectids TYPE string, " not simple, todo
          END OF fieldconfigurationschemeprojec.
 
@@ -2589,7 +2589,7 @@ INTERFACE zif_jira.
 
 * Component schema: IssuesMetaBean, object
   TYPES: BEGIN OF issuesmetabean,
-* todo, jql, ref?
+* todo, #/components/schemas/IssuesJqlMetaDataBean, jql, ref?
            dummy TYPE i,
          END OF issuesmetabean.
 
@@ -2631,7 +2631,7 @@ INTERFACE zif_jira.
            errors TYPE string, " not simple, todo
            valid TYPE abap_bool,
            type TYPE string,
-* todo, complexity, ref?
+* todo, #/components/schemas/JiraExpressionComplexity, complexity, ref?
          END OF jiraexpressionanalysis.
 
 * Component schema: JiraExpressionComplexity, object
@@ -2831,7 +2831,7 @@ INTERFACE zif_jira.
            category TYPE string,
            eventsource TYPE string,
            description TYPE string,
-* todo, objectitem, ref?
+* todo, #/components/schemas/AssociatedItemBean, objectitem, ref?
            changedvalues TYPE string, " not simple, todo
            associateditems TYPE string, " not simple, todo
          END OF auditrecordbean.
@@ -2898,13 +2898,13 @@ INTERFACE zif_jira.
            from TYPE string, " not simple, todo
            to TYPE string,
            type TYPE string,
-* todo, screen, ref?
-* todo, rules, ref?
+* todo, #/components/schemas/ScreenID, screen, ref?
+* todo, #/components/schemas/WorkflowRules, rules, ref?
          END OF transition.
 
 * Component schema: Workflow, object
   TYPES: BEGIN OF workflow,
-* todo, id, ref?
+* todo, #/components/schemas/PublishedWorkflowId, id, ref?
            description TYPE string,
            transitions TYPE string, " not simple, todo
            statuses TYPE string, " not simple, todo
@@ -2921,7 +2921,7 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF workflowstatus,
            id TYPE string,
            name TYPE string,
-* todo, properties, ref?
+* todo, #/components/schemas/WorkflowStatusProperties, properties, ref?
          END OF workflowstatus.
 
 * Component schema: WorkflowStatusProperties, object
@@ -2939,7 +2939,7 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF connectworkflowtransitionrule,
            id TYPE string,
            key TYPE string,
-* todo, configuration, ref?
+* todo, #/components/schemas/RuleConfiguration, configuration, ref?
            transition TYPE string, " not simple, todo
          END OF connectworkflowtransitionrule.
 
@@ -2973,7 +2973,7 @@ INTERFACE zif_jira.
 
 * Component schema: WorkflowTransitionRules, object
   TYPES: BEGIN OF workflowtransitionrules,
-* todo, workflowid, ref?
+* todo, #/components/schemas/WorkflowId, workflowid, ref?
            postfunctions TYPE string, " not simple, todo
            conditions TYPE string, " not simple, todo
            validators TYPE string, " not simple, todo
@@ -2986,7 +2986,7 @@ INTERFACE zif_jira.
 
 * Component schema: WorkflowTransitionRulesUpdateErrorDetails, object
   TYPES: BEGIN OF workflowtransitionrulesupdatee,
-* todo, workflowid, ref?
+* todo, #/components/schemas/WorkflowId, workflowid, ref?
            ruleupdateerrors TYPE string, " not simple, todo
            updateerrors TYPE string, " not simple, todo
          END OF workflowtransitionrulesupdatee.
@@ -3129,23 +3129,23 @@ INTERFACE zif_jira.
 
 * Component schema: FieldChangedClause, object
   TYPES: BEGIN OF fieldchangedclause,
-* todo, field, ref?
+* todo, #/components/schemas/JqlQueryField, field, ref?
            operator TYPE string,
            predicates TYPE string, " not simple, todo
          END OF fieldchangedclause.
 
 * Component schema: FieldValueClause, object
   TYPES: BEGIN OF fieldvalueclause,
-* todo, field, ref?
+* todo, #/components/schemas/JqlQueryField, field, ref?
            operator TYPE string,
-* todo, operand, ref?
+* todo, #/components/schemas/JqlQueryClauseOperand, operand, ref?
          END OF fieldvalueclause.
 
 * Component schema: FieldWasClause, object
   TYPES: BEGIN OF fieldwasclause,
-* todo, field, ref?
+* todo, #/components/schemas/JqlQueryField, field, ref?
            operator TYPE string,
-* todo, operand, ref?
+* todo, #/components/schemas/JqlQueryClauseOperand, operand, ref?
            predicates TYPE string, " not simple, todo
          END OF fieldwasclause.
 
@@ -3157,8 +3157,8 @@ INTERFACE zif_jira.
 
 * Component schema: JqlQuery, object
   TYPES: BEGIN OF jqlquery,
-* todo, where, ref?
-* todo, orderby, ref?
+* todo, #/components/schemas/JqlQueryClause, where, ref?
+* todo, #/components/schemas/JqlQueryOrderByClause, orderby, ref?
            dummy TYPE i,
          END OF jqlquery.
 
@@ -3175,7 +3175,7 @@ INTERFACE zif_jira.
 * Component schema: JqlQueryClauseTimePredicate, object
   TYPES: BEGIN OF jqlqueryclausetimepredicate,
            operator TYPE string,
-* todo, operand, ref?
+* todo, #/components/schemas/JqlQueryClauseOperand, operand, ref?
          END OF jqlqueryclausetimepredicate.
 
 * Component schema: JqlQueryField, object
@@ -3199,7 +3199,7 @@ INTERFACE zif_jira.
 
 * Component schema: JqlQueryOrderByClauseElement, object
   TYPES: BEGIN OF jqlqueryorderbyclauseelement,
-* todo, field, ref?
+* todo, #/components/schemas/JqlQueryField, field, ref?
            direction TYPE string,
          END OF jqlqueryorderbyclauseelement.
 
@@ -3269,7 +3269,7 @@ INTERFACE zif_jira.
 
 * Component schema: NotificationSchemeEvent, object
   TYPES: BEGIN OF notificationschemeevent,
-* todo, event, ref?
+* todo, #/components/schemas/NotificationEvent, event, ref?
            notifications TYPE string, " not simple, todo
          END OF notificationschemeevent.
 
