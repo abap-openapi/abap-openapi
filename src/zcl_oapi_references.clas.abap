@@ -25,6 +25,9 @@ CLASS zcl_oapi_references IMPLEMENTATION.
 * if response schema is not simple, move to schema ref
 * todo
 
+* sort component schemas so they are ordered with references being defined before used
+* todo, use the jira spec for testing, https://developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json
+
     rs_spec = ms_spec.
   ENDMETHOD.
 
