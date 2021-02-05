@@ -70,13 +70,17 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     CREATE OBJECT ri_schema TYPE zcl_oapi_schema.
     ri_schema->type = mo_json->value_string( iv_prefix && '/type' ).
     ri_schema->default = mo_json->value_string( iv_prefix && '/default' ).
+    ri_schema->items_ref = mo_json->value_string( iv_prefix && '/items/$ref' ).
 
     lt_names = mo_json->members( iv_prefix && '/properties/' ).
     LOOP AT lt_names INTO lv_name.
       CLEAR ls_property.
       ls_property-name = lv_name.
       ls_property-abap_name = lo_names->to_abap_name( lv_name ).
-      ls_property-schema = parse_schema( iv_prefix && '/properties/' && lv_name ).
+      ls_property-ref = mo_json->value_string( iv_prefix && '/properties/' && lv_name && '/$ref' ).
+      IF ls_property-ref IS INITIAL.
+        ls_property-schema = parse_schema( iv_prefix && '/properties/' && lv_name ).
+      ENDIF.
       APPEND ls_property TO ri_schema->properties.
     ENDLOOP.
   ENDMETHOD.
@@ -140,6 +144,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
         ls_operation-method = lv_method.
         lv_prefix = '/paths/' && lv_path && '/' && lv_method.
         ls_operation-summary = mo_json->value_string( lv_prefix && '/summary' ).
+        ls_operation-deprecated = mo_json->value_boolean( lv_prefix && '/deprecated' ).
         ls_operation-description = mo_json->value_string( lv_prefix && '/description' ).
         ls_operation-operation_id = mo_json->value_string( lv_prefix && '/operationId' ).
         ls_operation-parameters = parse_parameters( lv_prefix && '/parameters/' ).
@@ -169,16 +174,17 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     DATA lv_member LIKE LINE OF lt_members.
     DATA ls_parameter LIKE LINE OF rt_parameters.
     DATA lo_names TYPE REF TO zcl_oapi_abap_name.
-    CREATE OBJECT lo_names.
 
     lt_members = mo_json->members( iv_prefix ).
     LOOP AT lt_members INTO lv_member.
       CLEAR ls_parameter.
+      ls_parameter-id = lv_member.
       ls_parameter-name = mo_json->value_string( iv_prefix && lv_member && '/name' ).
       IF ls_parameter-name IS NOT INITIAL.
         ls_parameter-in = mo_json->value_string( iv_prefix && lv_member && '/in' ).
         ls_parameter-description = mo_json->value_string( iv_prefix && lv_member && '/description' ).
         ls_parameter-required = mo_json->value_boolean( iv_prefix && lv_member && '/required' ).
+        CREATE OBJECT lo_names. " in this place the names are not connected
         ls_parameter-abap_name = lo_names->to_abap_name( ls_parameter-name ).
         ls_parameter-schema = parse_schema( iv_prefix && lv_member && '/schema' ).
         APPEND ls_parameter TO rt_parameters.

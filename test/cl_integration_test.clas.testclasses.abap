@@ -45,6 +45,9 @@ CLASS ltcl_github DEFINITION FOR TESTING RISK LEVEL HARMLESS DURATION SHORT FINA
     METHODS setup.
     METHODS gists_get FOR TESTING RAISING cx_static_check.
     METHODS pulls_list FOR TESTING RAISING cx_static_check.
+    METHODS pulls_get FOR TESTING RAISING cx_static_check.
+    METHODS pulls_create FOR TESTING RAISING cx_static_check.
+    METHODS pulls_update FOR TESTING RAISING cx_static_check.
     DATA mi_github TYPE REF TO zif_github.
 ENDCLASS.
 
@@ -79,11 +82,47 @@ CLASS ltcl_github IMPLEMENTATION.
 
   ENDMETHOD.
 
-  METHOD pulls_list.
-    " li_github->pulls_list(
-    "   owner = 'abapGit'
-    "   repo  = 'abapGit' ).
+  METHOD pulls_get.
 
+    DATA ls_pull_request TYPE zif_github=>pull_request.
+
+    ls_pull_request = mi_github->pulls_get(
+       owner       = 'abapGit-tests'
+       repo        = 'VIEW'
+       pull_number = 1 ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = ls_pull_request-url
+      exp = 'https://api.github.com/repos/abapGit-tests/VIEW/pulls/1' ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = ls_pull_request-html_url
+      exp = 'https://github.com/abapGit-tests/VIEW/pull/1' ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = ls_pull_request-mergeable_state
+      exp = 'clean' ).
+
+* todo,    ls_pull_request-head-ref
+
+  ENDMETHOD.
+
+  METHOD pulls_create.
+    " mi_github->pulls_create(
+    "    owner       = 'abapGit-tests'
+    "    repo        = 'VIEW' ).
+  ENDMETHOD.
+
+  METHOD pulls_update.
+    " mi_github->pulls_update(
+    "   owner       = 'abapGit-tests'
+    "   repo        = 'VIEW' ).
+  ENDMETHOD.
+
+  METHOD pulls_list.
+    " mi_github->pulls_list(
+    "  owner       = 'abapGit-tests'
+    "  repo        = 'VIEW' ).
   ENDMETHOD.
 
 ENDCLASS.

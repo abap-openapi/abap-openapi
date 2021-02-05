@@ -65,7 +65,7 @@ CLASS zcl_petstore IMPLEMENTATION.
   METHOD parse_customer.
     customer-id = mo_json->value_string( iv_prefix && '/id' ).
     customer-username = mo_json->value_string( iv_prefix && '/username' ).
-* todo, object, address, array
+* todo, array, address
   ENDMETHOD.
 
   METHOD parse_address.
@@ -99,9 +99,9 @@ CLASS zcl_petstore IMPLEMENTATION.
   METHOD parse_pet.
     pet-id = mo_json->value_string( iv_prefix && '/id' ).
     pet-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, category,
-* todo, object, photourls, array
-* todo, object, tags, array
+* todo, #/components/schemas/Category, ref?
+* todo, array, photourls
+* todo, array, tags
     pet-status = mo_json->value_string( iv_prefix && '/status' ).
   ENDMETHOD.
 
@@ -113,6 +113,7 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~updatepet.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/pet'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -124,6 +125,7 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~addpet.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/pet'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -135,6 +137,7 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~findpetsbystatus.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/findByStatus'.
     IF status IS SUPPLIED.
       mi_client->request->set_form_field( name = 'status' value = status ).
@@ -149,9 +152,12 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~findpetsbytags.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/findByTags'.
+    lv_temp = tags.
+    CONDENSE lv_temp.
     IF tags IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'tags' value = tags ).
+      mi_client->request->set_form_field( name = 'tags' value = lv_temp ).
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -163,8 +169,11 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~getpetbyid.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/{petId}'.
-    REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH petid.
+    lv_temp = petid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -175,8 +184,11 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~updatepetwithform.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/{petId}'.
-    REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH petid.
+    lv_temp = petid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH lv_temp.
     IF name IS SUPPLIED.
       mi_client->request->set_form_field( name = 'name' value = name ).
     ENDIF.
@@ -193,8 +205,11 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~deletepet.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/{petId}'.
-    REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH petid.
+    lv_temp = petid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -205,8 +220,11 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~uploadfile.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/{petId}/uploadImage'.
-    REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH petid.
+    lv_temp = petid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH lv_temp.
     IF additionalmetadata IS SUPPLIED.
       mi_client->request->set_form_field( name = 'additionalMetadata' value = additionalmetadata ).
     ENDIF.
@@ -220,6 +238,7 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~getinventory.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/store/inventory'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -231,6 +250,7 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~placeorder.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/store/order'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -242,8 +262,11 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~getorderbyid.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/store/order/{orderId}'.
-    REPLACE ALL OCCURRENCES OF '{orderId}' IN lv_uri WITH orderid.
+    lv_temp = orderid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{orderId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -254,8 +277,11 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~deleteorder.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/store/order/{orderId}'.
-    REPLACE ALL OCCURRENCES OF '{orderId}' IN lv_uri WITH orderid.
+    lv_temp = orderid.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{orderId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -266,6 +292,7 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~createuser.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/user'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -277,6 +304,7 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~createuserswithlistinput.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/user/createWithList'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -288,6 +316,7 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~loginuser.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/user/login'.
     IF username IS SUPPLIED.
       mi_client->request->set_form_field( name = 'username' value = username ).
@@ -305,6 +334,7 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~logoutuser.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/user/logout'.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -316,6 +346,7 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~getuserbyname.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/user/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'GET' ).
@@ -328,6 +359,7 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~updateuser.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/user/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
@@ -340,6 +372,7 @@ CLASS zcl_petstore IMPLEMENTATION.
 
   METHOD zif_petstore~deleteuser.
     DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/user/{username}'.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
