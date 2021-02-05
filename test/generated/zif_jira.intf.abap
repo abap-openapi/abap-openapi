@@ -5,9 +5,9 @@ INTERFACE zif_jira.
 * Component schema: ApplicationRole, object
   TYPES: BEGIN OF applicationrole,
            key TYPE string,
-           groups TYPE string,
+           groups TYPE string, " not simple, todo
            name TYPE string,
-           defaultgroups TYPE string,
+           defaultgroups TYPE string, " not simple, todo
            selectedbydefault TYPE abap_bool,
            defined TYPE abap_bool,
            numberofseats TYPE i,
@@ -32,13 +32,13 @@ INTERFACE zif_jira.
            id TYPE string,
            name TYPE string,
            description TYPE string,
-           lead TYPE string,
+           lead TYPE string, " not simple, todo
            leadusername TYPE string,
            leadaccountid TYPE string,
            assigneetype TYPE string,
-           assignee TYPE string,
+           assignee TYPE string, " not simple, todo
            realassigneetype TYPE string,
-           realassignee TYPE string,
+           realassignee TYPE string, " not simple, todo
            isassigneetypevalid TYPE abap_bool,
            project TYPE string,
            projectid TYPE i,
@@ -50,11 +50,11 @@ INTERFACE zif_jira.
            id TYPE string,
            isfavourite TYPE abap_bool,
            name TYPE string,
-           owner TYPE string,
+           owner TYPE string, " not simple, todo
            popularity TYPE i,
            rank TYPE i,
            self TYPE string,
-           sharepermissions TYPE string,
+           sharepermissions TYPE string, " not simple, todo
            view TYPE string,
          END OF dashboard.
 
@@ -66,7 +66,7 @@ INTERFACE zif_jira.
 
 * Component schema: Hierarchy, object
   TYPES: BEGIN OF hierarchy,
-           level TYPE string,
+           level TYPE string, " not simple, todo
          END OF hierarchy.
 
 * Component schema: HierarchyLevel, object
@@ -77,7 +77,7 @@ INTERFACE zif_jira.
            belowlevelid TYPE i,
            projectconfigurationid TYPE i,
            level TYPE i,
-           issuetypeids TYPE string,
+           issuetypeids TYPE string, " not simple, todo
            externaluuid TYPE string,
            globalhierarchylevel TYPE string,
          END OF hierarchylevel.
@@ -93,7 +93,7 @@ INTERFACE zif_jira.
            avatarid TYPE i,
            entityid TYPE string,
            hierarchylevel TYPE i,
-           scope TYPE string,
+           scope TYPE string, " not simple, todo
          END OF issuetypedetails.
 
 * Component schema: ListWrapperCallbackApplicationRole, object
@@ -113,7 +113,7 @@ INTERFACE zif_jira.
            total TYPE i,
            prev TYPE string,
            next TYPE string,
-           dashboards TYPE string,
+           dashboards TYPE string, " not simple, todo
          END OF pageofdashboards.
 
 * Component schema: Project, object
@@ -123,34 +123,34 @@ INTERFACE zif_jira.
            id TYPE string,
            key TYPE string,
            description TYPE string,
-           lead TYPE string,
-           components TYPE string,
-           issuetypes TYPE string,
+           lead TYPE string, " not simple, todo
+           components TYPE string, " not simple, todo
+           issuetypes TYPE string, " not simple, todo
            url TYPE string,
            email TYPE string,
            assigneetype TYPE string,
-           versions TYPE string,
+           versions TYPE string, " not simple, todo
            name TYPE string,
-           roles TYPE string,
-           avatarurls TYPE string,
-           projectcategory TYPE string,
+           roles TYPE string, " not simple, todo
+           avatarurls TYPE string, " not simple, todo
+           projectcategory TYPE string, " not simple, todo
            projecttypekey TYPE string,
            simplified TYPE abap_bool,
            style TYPE string,
            favourite TYPE abap_bool,
            isprivate TYPE abap_bool,
-           issuetypehierarchy TYPE string,
-           permissions TYPE string,
-           properties TYPE string,
+           issuetypehierarchy TYPE string, " not simple, todo
+           permissions TYPE string, " not simple, todo
+           properties TYPE string, " not simple, todo
            uuid TYPE string,
-           insight TYPE string,
+           insight TYPE string, " not simple, todo
            deleted TYPE abap_bool,
            retentiontilldate TYPE string,
            deleteddate TYPE string,
-           deletedby TYPE string,
+           deletedby TYPE string, " not simple, todo
            archived TYPE abap_bool,
            archiveddate TYPE string,
-           archivedby TYPE string,
+           archivedby TYPE string, " not simple, todo
          END OF project.
 
 * Component schema: ProjectCategory, object
@@ -169,8 +169,8 @@ INTERFACE zif_jira.
            name TYPE string,
            projecttypekey TYPE string,
            simplified TYPE abap_bool,
-           avatarurls TYPE string,
-           projectcategory TYPE string,
+           avatarurls TYPE string, " not simple, todo
+           projectcategory TYPE string, " not simple, todo
          END OF projectforscope.
 
 * Component schema: ProjectInsight, object
@@ -190,8 +190,8 @@ INTERFACE zif_jira.
            name TYPE string,
            id TYPE i,
            description TYPE string,
-           actors TYPE string,
-           scope TYPE string,
+           actors TYPE string, " not simple, todo
+           scope TYPE string, " not simple, todo
            translatedname TYPE string,
            currentuserrole TYPE abap_bool,
            admin TYPE abap_bool,
@@ -217,23 +217,23 @@ INTERFACE zif_jira.
            type TYPE string,
            name TYPE string,
            avatarurl TYPE string,
-           actoruser TYPE string,
-           actorgroup TYPE string,
+           actoruser TYPE string, " not simple, todo
+           actorgroup TYPE string, " not simple, todo
          END OF roleactor.
 
 * Component schema: Scope, object
   TYPES: BEGIN OF scope,
            type TYPE string,
-           project TYPE string,
+           project TYPE string, " not simple, todo
          END OF scope.
 
 * Component schema: SharePermission, object
   TYPES: BEGIN OF sharepermission,
            id TYPE i,
            type TYPE string,
-           project TYPE string,
-           role TYPE string,
-           group TYPE string,
+           project TYPE string, " not simple, todo
+           role TYPE string, " not simple, todo
+           group TYPE string, " not simple, todo
          END OF sharepermission.
 
 * Component schema: SimpleLink, object
@@ -250,18 +250,18 @@ INTERFACE zif_jira.
 * Component schema: SimpleListWrapperApplicationRole, object
   TYPES: BEGIN OF simplelistwrapperapplicationro,
            size TYPE i,
-           items TYPE string,
-           pagingcallback TYPE string,
-           callback TYPE string,
+           items TYPE string, " not simple, todo
+* todo, pagingcallback, ref?
+* todo, callback, ref?
            max_results TYPE i,
          END OF simplelistwrapperapplicationro.
 
 * Component schema: SimpleListWrapperGroupName, object
   TYPES: BEGIN OF simplelistwrappergroupname,
            size TYPE i,
-           items TYPE string,
-           pagingcallback TYPE string,
-           callback TYPE string,
+           items TYPE string, " not simple, todo
+* todo, pagingcallback, ref?
+* todo, callback, ref?
            max_results TYPE i,
          END OF simplelistwrappergroupname.
 
@@ -281,13 +281,13 @@ INTERFACE zif_jira.
            accounttype TYPE string,
            name TYPE string,
            emailaddress TYPE string,
-           avatarurls TYPE string,
+           avatarurls TYPE string, " not simple, todo
            displayname TYPE string,
            active TYPE abap_bool,
            timezone TYPE string,
            locale TYPE string,
-           groups TYPE string,
-           applicationroles TYPE string,
+           groups TYPE string, " not simple, todo
+           applicationroles TYPE string, " not simple, todo
            expand TYPE string,
          END OF user.
 
@@ -299,7 +299,7 @@ INTERFACE zif_jira.
            displayname TYPE string,
            active TYPE abap_bool,
            accountid TYPE string,
-           avatarurls TYPE string,
+           avatarurls TYPE string, " not simple, todo
          END OF userbean.
 
 * Component schema: UserBeanAvatarUrls, object
@@ -327,8 +327,8 @@ INTERFACE zif_jira.
            project TYPE string,
            projectid TYPE i,
            moveunfixedissuesto TYPE string,
-           operations TYPE string,
-           issuesstatusforfixversion TYPE string,
+           operations TYPE string, " not simple, todo
+           issuesstatusforfixversion TYPE string, " not simple, todo
          END OF version.
 
 * Component schema: VersionIssuesStatus, object
@@ -341,8 +341,8 @@ INTERFACE zif_jira.
 
 * Component schema: ErrorCollection, object
   TYPES: BEGIN OF errorcollection,
-           errormessages TYPE string,
-           errors TYPE string,
+           errormessages TYPE string, " not simple, todo
+           errors TYPE string, " not simple, todo
            status TYPE i,
          END OF errorcollection.
 
@@ -354,14 +354,14 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeandashboard.
 
 * Component schema: DashboardDetails, object
   TYPES: BEGIN OF dashboarddetails,
            name TYPE string,
            description TYPE string,
-           sharepermissions TYPE string,
+           sharepermissions TYPE string, " not simple, todo
          END OF dashboarddetails.
 
 * Component schema: PropertyKey, object
@@ -372,18 +372,18 @@ INTERFACE zif_jira.
 
 * Component schema: PropertyKeys, object
   TYPES: BEGIN OF propertykeys,
-           keys TYPE string,
+           keys TYPE string, " not simple, todo
          END OF propertykeys.
 
 * Component schema: EntityProperty, object
   TYPES: BEGIN OF entityproperty,
            key TYPE string,
-           value TYPE string,
+           value TYPE string, " not simple, todo
          END OF entityproperty.
 
 * Component schema: ProjectIssueSecurityLevels, object
   TYPES: BEGIN OF projectissuesecuritylevels,
-           levels TYPE string,
+           levels TYPE string, " not simple, todo
          END OF projectissuesecuritylevels.
 
 * Component schema: SecurityLevel, object
@@ -402,7 +402,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanstring.
 
 * Component schema: PageBeanUserKey, object
@@ -413,7 +413,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanuserkey.
 
 * Component schema: UserKey, object
@@ -430,7 +430,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanuser.
 
 * Component schema: ChangeDetails, object
@@ -447,23 +447,23 @@ INTERFACE zif_jira.
 * Component schema: Changelog, object
   TYPES: BEGIN OF changelog,
            id TYPE string,
-           author TYPE string,
+           author TYPE string, " not simple, todo
            created TYPE string,
-           items TYPE string,
-           historymetadata TYPE string,
+           items TYPE string, " not simple, todo
+           historymetadata TYPE string, " not simple, todo
          END OF changelog.
 
 * Component schema: FieldMetadata, object
   TYPES: BEGIN OF fieldmetadata,
            required TYPE abap_bool,
-           schema TYPE string,
+           schema TYPE string, " not simple, todo
            name TYPE string,
            key TYPE string,
            autocompleteurl TYPE string,
            hasdefaultvalue TYPE abap_bool,
-           operations TYPE string,
-           allowedvalues TYPE string,
-           defaultvalue TYPE string,
+           operations TYPE string, " not simple, todo
+           allowedvalues TYPE string, " not simple, todo
+           defaultvalue TYPE string, " not simple, todo
          END OF fieldmetadata.
 
 * Component schema: HistoryMetadata, object
@@ -475,10 +475,10 @@ INTERFACE zif_jira.
            activitydescriptionkey TYPE string,
            emaildescription TYPE string,
            emaildescriptionkey TYPE string,
-           actor TYPE string,
-           generator TYPE string,
-           cause TYPE string,
-           extradata TYPE string,
+           actor TYPE string, " not simple, todo
+           generator TYPE string, " not simple, todo
+           cause TYPE string, " not simple, todo
+           extradata TYPE string, " not simple, todo
          END OF historymetadata.
 
 * Component schema: HistoryMetadataParticipant, object
@@ -493,9 +493,9 @@ INTERFACE zif_jira.
 
 * Component schema: IncludedFields, object
   TYPES: BEGIN OF includedfields,
-           included TYPE string,
-           excluded TYPE string,
-           actuallyincluded TYPE string,
+           included TYPE string, " not simple, todo
+           excluded TYPE string, " not simple, todo
+           actuallyincluded TYPE string, " not simple, todo
          END OF includedfields.
 
 * Component schema: IssueBean, object
@@ -504,37 +504,37 @@ INTERFACE zif_jira.
            id TYPE string,
            self TYPE string,
            key TYPE string,
-           renderedfields TYPE string,
-           properties TYPE string,
-           names TYPE string,
-           schema TYPE string,
-           transitions TYPE string,
-           operations TYPE string,
-           editmeta TYPE string,
-           changelog TYPE string,
-           versionedrepresentations TYPE string,
-           fieldstoinclude TYPE string,
-           fields TYPE string,
+           renderedfields TYPE string, " not simple, todo
+           properties TYPE string, " not simple, todo
+           names TYPE string, " not simple, todo
+           schema TYPE string, " not simple, todo
+           transitions TYPE string, " not simple, todo
+           operations TYPE string, " not simple, todo
+           editmeta TYPE string, " not simple, todo
+           changelog TYPE string, " not simple, todo
+           versionedrepresentations TYPE string, " not simple, todo
+* todo, fieldstoinclude, ref?
+           fields TYPE string, " not simple, todo
          END OF issuebean.
 
 * Component schema: IssueTransition, object
   TYPES: BEGIN OF issuetransition,
            id TYPE string,
            name TYPE string,
-           to TYPE string,
+           to TYPE string, " not simple, todo
            hasscreen TYPE abap_bool,
            isglobal TYPE abap_bool,
            isinitial TYPE abap_bool,
            isavailable TYPE abap_bool,
            isconditional TYPE abap_bool,
-           fields TYPE string,
+           fields TYPE string, " not simple, todo
            expand TYPE string,
            looped TYPE abap_bool,
          END OF issuetransition.
 
 * Component schema: IssueUpdateMetadata, object
   TYPES: BEGIN OF issueupdatemetadata,
-           fields TYPE string,
+           fields TYPE string, " not simple, todo
          END OF issueupdatemetadata.
 
 * Component schema: JsonTypeBean, object
@@ -544,22 +544,22 @@ INTERFACE zif_jira.
            system TYPE string,
            custom TYPE string,
            customid TYPE i,
-           configuration TYPE string,
+           configuration TYPE string, " not simple, todo
          END OF jsontypebean.
 
 * Component schema: LinkGroup, object
   TYPES: BEGIN OF linkgroup,
            id TYPE string,
            styleclass TYPE string,
-           header TYPE string,
+* todo, header, ref?
            weight TYPE i,
-           links TYPE string,
-           groups TYPE string,
+           links TYPE string, " not simple, todo
+           groups TYPE string, " not simple, todo
          END OF linkgroup.
 
 * Component schema: Operations, object
   TYPES: BEGIN OF operations,
-           linkgroups TYPE string,
+           linkgroups TYPE string, " not simple, todo
          END OF operations.
 
 * Component schema: PageOfChangelogs, object
@@ -567,7 +567,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            maxresults TYPE i,
            total TYPE i,
-           histories TYPE string,
+           histories TYPE string, " not simple, todo
          END OF pageofchangelogs.
 
 * Component schema: SearchResults, object
@@ -576,10 +576,10 @@ INTERFACE zif_jira.
            startat TYPE i,
            maxresults TYPE i,
            total TYPE i,
-           issues TYPE string,
-           warningmessages TYPE string,
-           names TYPE string,
-           schema TYPE string,
+           issues TYPE string, " not simple, todo
+           warningmessages TYPE string, " not simple, todo
+           names TYPE string, " not simple, todo
+           schema TYPE string, " not simple, todo
          END OF searchresults.
 
 * Component schema: StatusCategory, object
@@ -598,7 +598,7 @@ INTERFACE zif_jira.
            iconurl TYPE string,
            name TYPE string,
            id TYPE string,
-           statuscategory TYPE string,
+           statuscategory TYPE string, " not simple, todo
          END OF statusdetails.
 
 * Component schema: UserDetails, object
@@ -608,7 +608,7 @@ INTERFACE zif_jira.
            key TYPE string,
            accountid TYPE string,
            emailaddress TYPE string,
-           avatarurls TYPE string,
+           avatarurls TYPE string, " not simple, todo
            displayname TYPE string,
            active TYPE abap_bool,
            timezone TYPE string,
@@ -620,10 +620,10 @@ INTERFACE zif_jira.
            jql TYPE string,
            startat TYPE i,
            maxresults TYPE i,
-           fields TYPE string,
+           fields TYPE string, " not simple, todo
            validatequery TYPE string,
-           expand TYPE string,
-           properties TYPE string,
+           expand TYPE string, " not simple, todo
+           properties TYPE string, " not simple, todo
            fieldsbykeys TYPE abap_bool,
          END OF searchrequestbean.
 
@@ -635,8 +635,8 @@ INTERFACE zif_jira.
            searchable TYPE string,
            auto TYPE string,
            cfid TYPE string,
-           operators TYPE string,
-           types TYPE string,
+           operators TYPE string, " not simple, todo
+           types TYPE string, " not simple, todo
          END OF fieldreferencedata.
 
 * Component schema: FunctionReferenceData, object
@@ -644,14 +644,14 @@ INTERFACE zif_jira.
            value TYPE string,
            displayname TYPE string,
            islist TYPE string,
-           types TYPE string,
+           types TYPE string, " not simple, todo
          END OF functionreferencedata.
 
 * Component schema: JQLReferenceData, object
   TYPES: BEGIN OF jqlreferencedata,
-           visiblefieldnames TYPE string,
-           visiblefunctionnames TYPE string,
-           jqlreservedwords TYPE string,
+           visiblefieldnames TYPE string, " not simple, todo
+           visiblefunctionnames TYPE string, " not simple, todo
+           jqlreservedwords TYPE string, " not simple, todo
          END OF jqlreferencedata.
 
 * Component schema: AutoCompleteSuggestion, object
@@ -662,18 +662,18 @@ INTERFACE zif_jira.
 
 * Component schema: AutoCompleteSuggestions, object
   TYPES: BEGIN OF autocompletesuggestions,
-           results TYPE string,
+           results TYPE string, " not simple, todo
          END OF autocompletesuggestions.
 
 * Component schema: JQLPersonalDataMigrationRequest, object
   TYPES: BEGIN OF jqlpersonaldatamigrationreques,
-           querystrings TYPE string,
+           querystrings TYPE string, " not simple, todo
          END OF jqlpersonaldatamigrationreques.
 
 * Component schema: ConvertedJQLQueries, object
   TYPES: BEGIN OF convertedjqlqueries,
-           querystrings TYPE string,
-           querieswithunknownusers TYPE string,
+           querystrings TYPE string, " not simple, todo
+           querieswithunknownusers TYPE string, " not simple, todo
          END OF convertedjqlqueries.
 
 * Component schema: JQLQueryWithUnknownUsers, object
@@ -688,28 +688,28 @@ INTERFACE zif_jira.
            id TYPE string,
            name TYPE string,
            description TYPE string,
-           owner TYPE string,
+           owner TYPE string, " not simple, todo
            jql TYPE string,
            viewurl TYPE string,
            searchurl TYPE string,
            favourite TYPE abap_bool,
            favouritedcount TYPE i,
-           sharepermissions TYPE string,
-           sharedusers TYPE string,
-           subscriptions TYPE string,
+           sharepermissions TYPE string, " not simple, todo
+           sharedusers TYPE string, " not simple, todo
+           subscriptions TYPE string, " not simple, todo
          END OF filter.
 
 * Component schema: FilterSubscription, object
   TYPES: BEGIN OF filtersubscription,
            id TYPE i,
-           user TYPE string,
-           group TYPE string,
+           user TYPE string, " not simple, todo
+           group TYPE string, " not simple, todo
          END OF filtersubscription.
 
 * Component schema: FilterSubscriptionsList, object
   TYPES: BEGIN OF filtersubscriptionslist,
            size TYPE i,
-           items TYPE string,
+           items TYPE string, " not simple, todo
            max_results TYPE i,
            start_index TYPE i,
            end_index TYPE i,
@@ -718,7 +718,7 @@ INTERFACE zif_jira.
 * Component schema: UserList, object
   TYPES: BEGIN OF userlist,
            size TYPE i,
-           items TYPE string,
+           items TYPE string, " not simple, todo
            max_results TYPE i,
            start_index TYPE i,
            end_index TYPE i,
@@ -730,14 +730,14 @@ INTERFACE zif_jira.
            id TYPE string,
            name TYPE string,
            description TYPE string,
-           owner TYPE string,
+           owner TYPE string, " not simple, todo
            jql TYPE string,
            viewurl TYPE string,
            searchurl TYPE string,
            favourite TYPE abap_bool,
            favouritedcount TYPE i,
-           sharepermissions TYPE string,
-           subscriptions TYPE string,
+           sharepermissions TYPE string, " not simple, todo
+           subscriptions TYPE string, " not simple, todo
          END OF filterdetails.
 
 * Component schema: PageBeanFilterDetails, object
@@ -748,7 +748,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanfilterdetails.
 
 * Component schema: DefaultShareScope, object
@@ -779,7 +779,7 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF permissiongrant,
            id TYPE i,
            self TYPE string,
-           holder TYPE string,
+           holder TYPE string, " not simple, todo
            permission TYPE string,
          END OF permissiongrant.
 
@@ -797,13 +797,13 @@ INTERFACE zif_jira.
            self TYPE string,
            name TYPE string,
            description TYPE string,
-           scope TYPE string,
-           permissions TYPE string,
+           scope TYPE string, " not simple, todo
+           permissions TYPE string, " not simple, todo
          END OF permissionscheme.
 
 * Component schema: Permissions, object
   TYPES: BEGIN OF permissions,
-           permissions TYPE string,
+           permissions TYPE string, " not simple, todo
          END OF permissions.
 
 * Component schema: UserPermission, object
@@ -819,39 +819,39 @@ INTERFACE zif_jira.
 
 * Component schema: BulkPermissionsRequestBean, object
   TYPES: BEGIN OF bulkpermissionsrequestbean,
-           projectpermissions TYPE string,
-           globalpermissions TYPE string,
+           projectpermissions TYPE string, " not simple, todo
+           globalpermissions TYPE string, " not simple, todo
            accountid TYPE string,
          END OF bulkpermissionsrequestbean.
 
 * Component schema: BulkProjectPermissions, object
   TYPES: BEGIN OF bulkprojectpermissions,
-           issues TYPE string,
-           projects TYPE string,
-           permissions TYPE string,
+           issues TYPE string, " not simple, todo
+           projects TYPE string, " not simple, todo
+           permissions TYPE string, " not simple, todo
          END OF bulkprojectpermissions.
 
 * Component schema: BulkPermissionGrants, object
   TYPES: BEGIN OF bulkpermissiongrants,
-           projectpermissions TYPE string,
-           globalpermissions TYPE string,
+           projectpermissions TYPE string, " not simple, todo
+           globalpermissions TYPE string, " not simple, todo
          END OF bulkpermissiongrants.
 
 * Component schema: BulkProjectPermissionGrants, object
   TYPES: BEGIN OF bulkprojectpermissiongrants,
            permission TYPE string,
-           issues TYPE string,
-           projects TYPE string,
+           issues TYPE string, " not simple, todo
+           projects TYPE string, " not simple, todo
          END OF bulkprojectpermissiongrants.
 
 * Component schema: PermissionsKeysBean, object
   TYPES: BEGIN OF permissionskeysbean,
-           permissions TYPE string,
+           permissions TYPE string, " not simple, todo
          END OF permissionskeysbean.
 
 * Component schema: PermittedProjects, object
   TYPES: BEGIN OF permittedprojects,
-           projects TYPE string,
+           projects TYPE string, " not simple, todo
          END OF permittedprojects.
 
 * Component schema: ProjectIdentifierBean, object
@@ -862,33 +862,33 @@ INTERFACE zif_jira.
 
 * Component schema: BulkIssuePropertyUpdateRequest, object
   TYPES: BEGIN OF bulkissuepropertyupdaterequest,
-           value TYPE string,
+           value TYPE string, " not simple, todo
            expression TYPE string,
-           filter TYPE string,
+           filter TYPE string, " not simple, todo
          END OF bulkissuepropertyupdaterequest.
 
 * Component schema: IssueFilterForBulkPropertySet, object
   TYPES: BEGIN OF issuefilterforbulkpropertyset,
-           entityids TYPE string,
-           currentvalue TYPE string,
+           entityids TYPE string, " not simple, todo
+           currentvalue TYPE string, " not simple, todo
            hasproperty TYPE abap_bool,
          END OF issuefilterforbulkpropertyset.
 
 * Component schema: IssueFilterForBulkPropertyDelete, object
   TYPES: BEGIN OF issuefilterforbulkpropertydele,
-           entityids TYPE string,
-           currentvalue TYPE string,
+           entityids TYPE string, " not simple, todo
+           currentvalue TYPE string, " not simple, todo
          END OF issuefilterforbulkpropertydele.
 
 * Component schema: IssueEntityProperties, object
   TYPES: BEGIN OF issueentityproperties,
-           entitiesids TYPE string,
-           properties TYPE string,
+           entitiesids TYPE string, " not simple, todo
+           properties TYPE string, " not simple, todo
          END OF issueentityproperties.
 
 * Component schema: JsonNode, object
   TYPES: BEGIN OF jsonnode,
-           elements TYPE string,
+           elements TYPE string, " not simple, todo
            floatingpointnumber TYPE abap_bool,
            pojo TYPE abap_bool,
            containernode TYPE abap_bool,
@@ -913,16 +913,16 @@ INTERFACE zif_jira.
            doublevalue TYPE f,
            decimalvalue TYPE f,
            booleanvalue TYPE abap_bool,
-           binaryvalue TYPE string,
+           binaryvalue TYPE string, " not simple, todo
            valueasint TYPE i,
            valueaslong TYPE i,
            valueasdouble TYPE f,
            valueasboolean TYPE abap_bool,
            textvalue TYPE string,
            valueastext TYPE string,
-           fieldnames TYPE string,
+           fieldnames TYPE string, " not simple, todo
            array TYPE abap_bool,
-           fields TYPE string,
+           fields TYPE string, " not simple, todo
            null TYPE abap_bool,
          END OF jsonnode.
 
@@ -936,7 +936,7 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF deleteandreplaceversionbean,
            movefixissuesto TYPE i,
            moveaffectedissuesto TYPE i,
-           customfieldreplacementlist TYPE string,
+           customfieldreplacementlist TYPE string, " not simple, todo
          END OF deleteandreplaceversionbean.
 
 * Component schema: VersionIssueCounts, object
@@ -945,7 +945,7 @@ INTERFACE zif_jira.
            issuesfixedcount TYPE i,
            issuesaffectedcount TYPE i,
            issuecountwithcustomfieldsshow TYPE i,
-           customfieldusage TYPE string,
+           customfieldusage TYPE string, " not simple, todo
          END OF versionissuecounts.
 
 * Component schema: VersionUsageInCustomField, object
@@ -970,7 +970,7 @@ INTERFACE zif_jira.
 
 * Component schema: FoundUsers, object
   TYPES: BEGIN OF foundusers,
-           users TYPE string,
+           users TYPE string, " not simple, todo
            total TYPE i,
            header TYPE string,
          END OF foundusers.
@@ -994,7 +994,7 @@ INTERFACE zif_jira.
            emailaddress TYPE string,
            displayname TYPE string,
            notification TYPE string,
-           applicationkeys TYPE string,
+           applicationkeys TYPE string, " not simple, todo
          END OF userwritebean.
 
 * Component schema: Avatar, object
@@ -1005,13 +1005,13 @@ INTERFACE zif_jira.
            isselected TYPE abap_bool,
            isdeletable TYPE abap_bool,
            filename TYPE string,
-           urls TYPE string,
+           urls TYPE string, " not simple, todo
          END OF avatar.
 
 * Component schema: Avatars, object
   TYPES: BEGIN OF avatars,
-           system TYPE string,
-           custom TYPE string,
+           system TYPE string, " not simple, todo
+           custom TYPE string, " not simple, todo
          END OF avatars.
 
 * Component schema: ScreenableTab, object
@@ -1028,7 +1028,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanscreen.
 
 * Component schema: Screen, object
@@ -1036,7 +1036,7 @@ INTERFACE zif_jira.
            id TYPE i,
            name TYPE string,
            description TYPE string,
-           scope TYPE string,
+           scope TYPE string, " not simple, todo
          END OF screen.
 
 * Component schema: ScreenableField, object
@@ -1108,7 +1108,7 @@ INTERFACE zif_jira.
            description TYPE string,
            status TYPE string,
            message TYPE string,
-           result TYPE string,
+           result TYPE string, " not simple, todo
            submittedby TYPE i,
            progress TYPE i,
            elapsedruntime TYPE i,
@@ -1126,18 +1126,18 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanversion.
 
 * Component schema: ComponentWithIssueCount, object
   TYPES: BEGIN OF componentwithissuecount,
            issuecount TYPE i,
-           realassignee TYPE string,
+           realassignee TYPE string, " not simple, todo
            isassigneetypevalid TYPE abap_bool,
-           assignee TYPE string,
+           assignee TYPE string, " not simple, todo
            realassigneetype TYPE string,
            assigneetype TYPE string,
-           lead TYPE string,
+           lead TYPE string, " not simple, todo
            description TYPE string,
            projectid TYPE i,
            project TYPE string,
@@ -1154,7 +1154,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeancomponentwithissuecoun.
 
 * Component schema: StringList, object
@@ -1170,13 +1170,13 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanproject.
 
 * Component schema: ProjectAvatars, object
   TYPES: BEGIN OF projectavatars,
-           system TYPE string,
-           custom TYPE string,
+           system TYPE string, " not simple, todo
+           custom TYPE string, " not simple, todo
          END OF projectavatars.
 
 * Component schema: IssueTypeWithStatus, object
@@ -1185,7 +1185,7 @@ INTERFACE zif_jira.
            id TYPE string,
            name TYPE string,
            subtask TYPE abap_bool,
-           statuses TYPE string,
+           statuses TYPE string, " not simple, todo
          END OF issuetypewithstatus.
 
 * Component schema: SecurityScheme, object
@@ -1195,7 +1195,7 @@ INTERFACE zif_jira.
            name TYPE string,
            description TYPE string,
            defaultsecuritylevelid TYPE i,
-           levels TYPE string,
+           levels TYPE string, " not simple, todo
          END OF securityscheme.
 
 * Component schema: Priority, object
@@ -1212,26 +1212,26 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF comment,
            self TYPE string,
            id TYPE string,
-           author TYPE string,
-           body TYPE string,
+           author TYPE string, " not simple, todo
+           body TYPE string, " not simple, todo
            renderedbody TYPE string,
-           updateauthor TYPE string,
+           updateauthor TYPE string, " not simple, todo
            created TYPE string,
            updated TYPE string,
-           visibility TYPE string,
+           visibility TYPE string, " not simple, todo
            jsdpublic TYPE abap_bool,
-           properties TYPE string,
+           properties TYPE string, " not simple, todo
          END OF comment.
 
 * Component schema: Fields, object
   TYPES: BEGIN OF fields,
            summary TYPE string,
-           status TYPE string,
-           priority TYPE string,
-           assignee TYPE string,
-           timetracking TYPE string,
-           issuetype TYPE string,
-           issuetype01 TYPE string,
+           status TYPE string, " not simple, todo
+           priority TYPE string, " not simple, todo
+           assignee TYPE string, " not simple, todo
+           timetracking TYPE string, " not simple, todo
+* todo, issuetype, ref?
+           issuetype01 TYPE string, " not simple, todo
          END OF fields.
 
 * Component schema: IssueLinkType, object
@@ -1245,10 +1245,11 @@ INTERFACE zif_jira.
 
 * Component schema: LinkIssueRequestJsonBean, object
   TYPES: BEGIN OF linkissuerequestjsonbean,
-           type TYPE string,
-           inwardissue TYPE string,
-           outwardissue TYPE string,
-           comment TYPE string,
+* todo, type, ref?
+* todo, inwardissue, ref?
+* todo, outwardissue, ref?
+* todo, comment, ref?
+           dummy TYPE i,
          END OF linkissuerequestjsonbean.
 
 * Component schema: LinkedIssue, object
@@ -1256,7 +1257,7 @@ INTERFACE zif_jira.
            id TYPE string,
            key TYPE string,
            self TYPE string,
-           fields TYPE string,
+           fields TYPE string, " not simple, todo
          END OF linkedissue.
 
 * Component schema: RichText, object
@@ -1286,9 +1287,9 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF issuelink,
            id TYPE string,
            self TYPE string,
-           type TYPE string,
-           inwardissue TYPE string,
-           outwardissue TYPE string,
+           type TYPE string, " not simple, todo
+           inwardissue TYPE string, " not simple, todo
+           outwardissue TYPE string, " not simple, todo
          END OF issuelink.
 
 * Component schema: PageOfWorklogs, object
@@ -1296,24 +1297,24 @@ INTERFACE zif_jira.
            startat TYPE i,
            maxresults TYPE i,
            total TYPE i,
-           worklogs TYPE string,
+           worklogs TYPE string, " not simple, todo
          END OF pageofworklogs.
 
 * Component schema: Worklog, object
   TYPES: BEGIN OF worklog,
            self TYPE string,
-           author TYPE string,
-           updateauthor TYPE string,
-           comment TYPE string,
+           author TYPE string, " not simple, todo
+           updateauthor TYPE string, " not simple, todo
+           comment TYPE string, " not simple, todo
            created TYPE string,
            updated TYPE string,
-           visibility TYPE string,
+           visibility TYPE string, " not simple, todo
            started TYPE string,
            timespent TYPE string,
            timespentseconds TYPE i,
            id TYPE string,
            issueid TYPE string,
-           properties TYPE string,
+           properties TYPE string, " not simple, todo
          END OF worklog.
 
 * Component schema: IssueTypeCreateBean, object
@@ -1332,14 +1333,14 @@ INTERFACE zif_jira.
 
 * Component schema: SecuritySchemes, object
   TYPES: BEGIN OF securityschemes,
-           issuesecurityschemes TYPE string,
+           issuesecurityschemes TYPE string, " not simple, todo
          END OF securityschemes.
 
 * Component schema: IssueSecurityLevelMember, object
   TYPES: BEGIN OF issuesecuritylevelmember,
            id TYPE i,
            issuesecuritylevelid TYPE i,
-           holder TYPE string,
+           holder TYPE string, " not simple, todo
          END OF issuesecuritylevelmember.
 
 * Component schema: PageBeanIssueSecurityLevelMember, object
@@ -1350,18 +1351,18 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanissuesecuritylevelmemb.
 
 * Component schema: Transitions, object
   TYPES: BEGIN OF transitions,
            expand TYPE string,
-           transitions TYPE string,
+           transitions TYPE string, " not simple, todo
          END OF transitions.
 
 * Component schema: IssuePickerSuggestions, object
   TYPES: BEGIN OF issuepickersuggestions,
-           sections TYPE string,
+           sections TYPE string, " not simple, todo
          END OF issuepickersuggestions.
 
 * Component schema: IssuePickerSuggestionsIssueType, object
@@ -1370,7 +1371,7 @@ INTERFACE zif_jira.
            sub TYPE string,
            id TYPE string,
            msg TYPE string,
-           issues TYPE string,
+           issues TYPE string, " not simple, todo
          END OF issuepickersuggestionsissuetyp.
 
 * Component schema: SuggestedIssue, object
@@ -1385,19 +1386,19 @@ INTERFACE zif_jira.
 
 * Component schema: FieldUpdateOperation, object
   TYPES: BEGIN OF fieldupdateoperation,
-           add TYPE string,
-           set TYPE string,
-           remove TYPE string,
-           edit TYPE string,
+           add TYPE string, " not simple, todo
+           set TYPE string, " not simple, todo
+           remove TYPE string, " not simple, todo
+           edit TYPE string, " not simple, todo
          END OF fieldupdateoperation.
 
 * Component schema: IssueUpdateDetails, object
   TYPES: BEGIN OF issueupdatedetails,
-           transition TYPE string,
-           fields TYPE string,
-           update TYPE string,
-           historymetadata TYPE string,
-           properties TYPE string,
+           transition TYPE string, " not simple, todo
+           fields TYPE string, " not simple, todo
+           update TYPE string, " not simple, todo
+           historymetadata TYPE string, " not simple, todo
+           properties TYPE string, " not simple, todo
          END OF issueupdatedetails.
 
 * Component schema: Votes, object
@@ -1405,7 +1406,7 @@ INTERFACE zif_jira.
            self TYPE string,
            votes TYPE i,
            hasvoted TYPE abap_bool,
-           voters TYPE string,
+           voters TYPE string, " not simple, todo
          END OF votes.
 
 * Component schema: Watchers, object
@@ -1413,7 +1414,7 @@ INTERFACE zif_jira.
            self TYPE string,
            iswatching TYPE abap_bool,
            watchcount TYPE i,
-           watchers TYPE string,
+           watchers TYPE string, " not simple, todo
          END OF watchers.
 
 * Component schema: CreatedIssue, object
@@ -1421,37 +1422,37 @@ INTERFACE zif_jira.
            id TYPE string,
            key TYPE string,
            self TYPE string,
-           transition TYPE string,
+           transition TYPE string, " not simple, todo
          END OF createdissue.
 
 * Component schema: NestedResponse, object
   TYPES: BEGIN OF nestedresponse,
            status TYPE i,
-           errorcollection TYPE string,
+* todo, errorcollection, ref?
          END OF nestedresponse.
 
 * Component schema: IssuesUpdateBean, object
   TYPES: BEGIN OF issuesupdatebean,
-           issueupdates TYPE string,
+           issueupdates TYPE string, " not simple, todo
          END OF issuesupdatebean.
 
 * Component schema: BulkOperationErrorResult, object
   TYPES: BEGIN OF bulkoperationerrorresult,
            status TYPE i,
-           elementerrors TYPE string,
+* todo, elementerrors, ref?
            failedelementnumber TYPE i,
          END OF bulkoperationerrorresult.
 
 * Component schema: CreatedIssues, object
   TYPES: BEGIN OF createdissues,
-           issues TYPE string,
-           errors TYPE string,
+           issues TYPE string, " not simple, todo
+           errors TYPE string, " not simple, todo
          END OF createdissues.
 
 * Component schema: IssueCreateMetadata, object
   TYPES: BEGIN OF issuecreatemetadata,
            expand TYPE string,
-           projects TYPE string,
+           projects TYPE string, " not simple, todo
          END OF issuecreatemetadata.
 
 * Component schema: IssueTypeIssueCreateMetadata, object
@@ -1465,9 +1466,9 @@ INTERFACE zif_jira.
            avatarid TYPE i,
            entityid TYPE string,
            hierarchylevel TYPE i,
-           scope TYPE string,
+           scope TYPE string, " not simple, todo
            expand TYPE string,
-           fields TYPE string,
+           fields TYPE string, " not simple, todo
          END OF issuetypeissuecreatemetadata.
 
 * Component schema: ProjectIssueCreateMetadata, object
@@ -1477,8 +1478,8 @@ INTERFACE zif_jira.
            id TYPE string,
            key TYPE string,
            name TYPE string,
-           avatarurls TYPE string,
-           issuetypes TYPE string,
+           avatarurls TYPE string, " not simple, todo
+           issuetypes TYPE string, " not simple, todo
          END OF projectissuecreatemetadata.
 
 * Component schema: Application, object
@@ -1499,9 +1500,9 @@ INTERFACE zif_jira.
            id TYPE i,
            self TYPE string,
            globalid TYPE string,
-           application TYPE string,
+           application TYPE string, " not simple, todo
            relationship TYPE string,
-           object TYPE string,
+           object TYPE string, " not simple, todo
          END OF remoteissuelink.
 
 * Component schema: RemoteObject, object
@@ -1509,14 +1510,14 @@ INTERFACE zif_jira.
            url TYPE string,
            title TYPE string,
            summary TYPE string,
-           icon TYPE string,
-           status TYPE string,
+           icon TYPE string, " not simple, todo
+           status TYPE string, " not simple, todo
          END OF remoteobject.
 
 * Component schema: Status, object
   TYPES: BEGIN OF status,
            resolved TYPE abap_bool,
-           icon TYPE string,
+           icon TYPE string, " not simple, todo
          END OF status.
 
 * Component schema: Icon, object
@@ -1529,9 +1530,9 @@ INTERFACE zif_jira.
 * Component schema: RemoteIssueLinkRequest, object
   TYPES: BEGIN OF remoteissuelinkrequest,
            globalid TYPE string,
-           application TYPE string,
+           application TYPE string, " not simple, todo
            relationship TYPE string,
-           object TYPE string,
+           object TYPE string, " not simple, todo
          END OF remoteissuelinkrequest.
 
 * Component schema: RemoteIssueLinkIdentifies, object
@@ -1545,8 +1546,8 @@ INTERFACE zif_jira.
            subject TYPE string,
            textbody TYPE string,
            htmlbody TYPE string,
-           to TYPE string,
-           restrict TYPE string,
+           to TYPE string, " not simple, todo
+           restrict TYPE string, " not simple, todo
          END OF notification.
 
 * Component schema: NotificationRecipients, object
@@ -1555,14 +1556,14 @@ INTERFACE zif_jira.
            assignee TYPE abap_bool,
            watchers TYPE abap_bool,
            voters TYPE abap_bool,
-           users TYPE string,
-           groups TYPE string,
+           users TYPE string, " not simple, todo
+           groups TYPE string, " not simple, todo
          END OF notificationrecipients.
 
 * Component schema: NotificationRecipientsRestrictions, object
   TYPES: BEGIN OF notificationrecipientsrestrict,
-           groups TYPE string,
-           permissions TYPE string,
+           groups TYPE string, " not simple, todo
+           permissions TYPE string, " not simple, todo
          END OF notificationrecipientsrestrict.
 
 * Component schema: RestrictedPermission, object
@@ -1573,7 +1574,7 @@ INTERFACE zif_jira.
 
 * Component schema: IssueLinkTypes, object
   TYPES: BEGIN OF issuelinktypes,
-           issuelinktypes TYPE string,
+           issuelinktypes TYPE string, " not simple, todo
          END OF issuelinktypes.
 
 * Component schema: PageOfComments, object
@@ -1581,20 +1582,20 @@ INTERFACE zif_jira.
            startat TYPE i,
            maxresults TYPE i,
            total TYPE i,
-           comments TYPE string,
+           comments TYPE string, " not simple, todo
          END OF pageofcomments.
 
 * Component schema: PaginatedResponseComment, object
   TYPES: BEGIN OF paginatedresponsecomment,
            total TYPE i,
-           results TYPE string,
+           results TYPE string, " not simple, todo
            maxresults TYPE i,
            startat TYPE i,
          END OF paginatedresponsecomment.
 
 * Component schema: IssueCommentListRequestBean, object
   TYPES: BEGIN OF issuecommentlistrequestbean,
-           ids TYPE string,
+           ids TYPE string, " not simple, todo
          END OF issuecommentlistrequestbean.
 
 * Component schema: PageBeanComment, object
@@ -1605,7 +1606,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeancomment.
 
 * Component schema: PageBeanChangelog, object
@@ -1616,7 +1617,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanchangelog.
 
 * Component schema: Attachment, object
@@ -1624,7 +1625,7 @@ INTERFACE zif_jira.
            self TYPE string,
            id TYPE string,
            filename TYPE string,
-           author TYPE string,
+           author TYPE string, " not simple, todo
            created TYPE string,
            size TYPE i,
            mimetype TYPE string,
@@ -1636,14 +1637,14 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF group,
            name TYPE string,
            self TYPE string,
-           users TYPE string,
+           users TYPE string, " not simple, todo
            expand TYPE string,
          END OF group.
 
 * Component schema: PagedListUserDetailsApplicationUser, object
   TYPES: BEGIN OF pagedlistuserdetailsapplicatio,
            size TYPE i,
-           items TYPE string,
+           items TYPE string, " not simple, todo
            max_results TYPE i,
            start_index TYPE i,
            end_index TYPE i,
@@ -1657,7 +1658,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanuserdetails.
 
 * Component schema: AddGroupBean, object
@@ -1675,7 +1676,7 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF foundgroup,
            name TYPE string,
            html TYPE string,
-           labels TYPE string,
+           labels TYPE string, " not simple, todo
            groupid TYPE string,
          END OF foundgroup.
 
@@ -1683,7 +1684,7 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF foundgroups,
            header TYPE string,
            total TYPE i,
-           groups TYPE string,
+           groups TYPE string, " not simple, todo
          END OF foundgroups.
 
 * Component schema: GroupLabel, object
@@ -1695,8 +1696,9 @@ INTERFACE zif_jira.
 
 * Component schema: FoundUsersAndGroups, object
   TYPES: BEGIN OF foundusersandgroups,
-           users TYPE string,
-           groups TYPE string,
+* todo, users, ref?
+* todo, groups, ref?
+           dummy TYPE i,
          END OF foundusersandgroups.
 
 * Component schema: FieldDetails, object
@@ -1708,9 +1710,9 @@ INTERFACE zif_jira.
            orderable TYPE abap_bool,
            navigable TYPE abap_bool,
            searchable TYPE abap_bool,
-           clausenames TYPE string,
-           scope TYPE string,
-           schema TYPE string,
+           clausenames TYPE string, " not simple, todo
+           scope TYPE string, " not simple, todo
+           schema TYPE string, " not simple, todo
          END OF fielddetails.
 
 * Component schema: CustomFieldDefinitionJsonBean, object
@@ -1725,7 +1727,7 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF context,
            id TYPE i,
            name TYPE string,
-           scope TYPE string,
+           scope TYPE string, " not simple, todo
          END OF context.
 
 * Component schema: PageBeanContext, object
@@ -1736,7 +1738,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeancontext.
 
 * Component schema: CustomFieldContextOption, object
@@ -1755,12 +1757,12 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeancustomfieldcontextopti.
 
 * Component schema: BulkCustomFieldOptionCreateRequest, object
   TYPES: BEGIN OF bulkcustomfieldoptioncreatereq,
-           options TYPE string,
+           options TYPE string, " not simple, todo
          END OF bulkcustomfieldoptioncreatereq.
 
 * Component schema: CustomFieldOptionCreate, object
@@ -1772,19 +1774,19 @@ INTERFACE zif_jira.
 
 * Component schema: CustomFieldCreatedContextOptionsList, object
   TYPES: BEGIN OF customfieldcreatedcontextoptio,
-           options TYPE string,
+           options TYPE string, " not simple, todo
          END OF customfieldcreatedcontextoptio.
 
 * Component schema: OrderOfCustomFieldOptions, object
   TYPES: BEGIN OF orderofcustomfieldoptions,
-           customfieldoptionids TYPE string,
+           customfieldoptionids TYPE string, " not simple, todo
            after TYPE string,
            position TYPE string,
          END OF orderofcustomfieldoptions.
 
 * Component schema: BulkCustomFieldOptionUpdateRequest, object
   TYPES: BEGIN OF bulkcustomfieldoptionupdatereq,
-           options TYPE string,
+           options TYPE string, " not simple, todo
          END OF bulkcustomfieldoptionupdatereq.
 
 * Component schema: CustomFieldOptionUpdate, object
@@ -1796,7 +1798,7 @@ INTERFACE zif_jira.
 
 * Component schema: CustomFieldUpdatedContextOptionsList, object
   TYPES: BEGIN OF customfieldupdatedcontextoptio,
-           options TYPE string,
+           options TYPE string, " not simple, todo
          END OF customfieldupdatedcontextoptio.
 
 * Component schema: ComponentIssuesCount, object
@@ -1807,13 +1809,13 @@ INTERFACE zif_jira.
 
 * Component schema: BulkCreateCustomFieldOptionRequest, object
   TYPES: BEGIN OF bulkcreatecustomfieldoptionreq,
-           options TYPE string,
+           options TYPE string, " not simple, todo
          END OF bulkcreatecustomfieldoptionreq.
 
 * Component schema: CustomFieldOptionValue, object
   TYPES: BEGIN OF customfieldoptionvalue,
            value TYPE string,
-           cascadingoptions TYPE string,
+           cascadingoptions TYPE string, " not simple, todo
          END OF customfieldoptionvalue.
 
 * Component schema: RenamedCascadingOption, object
@@ -1826,19 +1828,19 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF renamedoption,
            value TYPE string,
            newvalue TYPE string,
-           cascadingoptions TYPE string,
+           cascadingoptions TYPE string, " not simple, todo
          END OF renamedoption.
 
 * Component schema: UpdateCustomFieldOption, object
   TYPES: BEGIN OF updatecustomfieldoption,
-           options TYPE string,
+           options TYPE string, " not simple, todo
          END OF updatecustomfieldoption.
 
 * Component schema: CustomFieldOptionDetails, object
   TYPES: BEGIN OF customfieldoptiondetails,
            id TYPE i,
            value TYPE string,
-           cascadingoptions TYPE string,
+           cascadingoptions TYPE string, " not simple, todo
          END OF customfieldoptiondetails.
 
 * Component schema: PageBeanCustomFieldOptionDetails, object
@@ -1849,12 +1851,12 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeancustomfieldoptiondetai.
 
 * Component schema: SystemAvatars, object
   TYPES: BEGIN OF systemavatars,
-           system TYPE string,
+           system TYPE string, " not simple, todo
          END OF systemavatars.
 
 * Component schema: IssueTypeScheme, object
@@ -1874,13 +1876,13 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanissuetypescheme.
 
 * Component schema: IssueTypeSchemeProjects, object
   TYPES: BEGIN OF issuetypeschemeprojects,
-           issuetypescheme TYPE string,
-           projectids TYPE string,
+           issuetypescheme TYPE string, " not simple, todo
+           projectids TYPE string, " not simple, todo
          END OF issuetypeschemeprojects.
 
 * Component schema: PageBeanIssueTypeSchemeProjects, object
@@ -1891,7 +1893,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanissuetypeschemeproject.
 
 * Component schema: IssueTypeSchemeMapping, object
@@ -1908,7 +1910,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanissuetypeschememapping.
 
 * Component schema: IssueTypeSchemeProjectAssociation, object
@@ -1922,7 +1924,7 @@ INTERFACE zif_jira.
            name TYPE string,
            description TYPE string,
            defaultissuetypeid TYPE string,
-           issuetypeids TYPE string,
+           issuetypeids TYPE string, " not simple, todo
          END OF issuetypeschemedetails.
 
 * Component schema: IssueTypeSchemeID, object
@@ -1932,7 +1934,7 @@ INTERFACE zif_jira.
 
 * Component schema: IssueTypeIDs, object
   TYPES: BEGIN OF issuetypeids,
-           issuetypeids TYPE string,
+           issuetypeids TYPE string, " not simple, todo
          END OF issuetypeids.
 
 * Component schema: IssueTypeSchemeUpdateDetails, object
@@ -1944,7 +1946,7 @@ INTERFACE zif_jira.
 
 * Component schema: OrderOfIssueTypes, object
   TYPES: BEGIN OF orderofissuetypes,
-           issuetypeids TYPE string,
+           issuetypeids TYPE string, " not simple, todo
            after TYPE string,
            position TYPE string,
          END OF orderofissuetypes.
@@ -1953,12 +1955,12 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF changedworklog,
            worklogid TYPE i,
            updatedtime TYPE i,
-           properties TYPE string,
+           properties TYPE string, " not simple, todo
          END OF changedworklog.
 
 * Component schema: ChangedWorklogs, object
   TYPES: BEGIN OF changedworklogs,
-           values TYPE string,
+           values TYPE string, " not simple, todo
            since TYPE i,
            until TYPE i,
            self TYPE string,
@@ -1968,33 +1970,33 @@ INTERFACE zif_jira.
 
 * Component schema: WorklogIdsRequestBean, object
   TYPES: BEGIN OF worklogidsrequestbean,
-           ids TYPE string,
+           ids TYPE string, " not simple, todo
          END OF worklogidsrequestbean.
 
 * Component schema: GlobalScopeBean, object
   TYPES: BEGIN OF globalscopebean,
-           attributes TYPE string,
+           attributes TYPE string, " not simple, todo
          END OF globalscopebean.
 
 * Component schema: IssueFieldOption, object
   TYPES: BEGIN OF issuefieldoption,
            id TYPE i,
            value TYPE string,
-           properties TYPE string,
-           config TYPE string,
+           properties TYPE string, " not simple, todo
+* todo, config, ref?
          END OF issuefieldoption.
 
 * Component schema: IssueFieldOptionConfiguration, object
   TYPES: BEGIN OF issuefieldoptionconfiguration,
-           scope TYPE string,
-           attributes TYPE string,
+           scope TYPE string, " not simple, todo
+           attributes TYPE string, " not simple, todo
          END OF issuefieldoptionconfiguration.
 
 * Component schema: IssueFieldOptionScopeBean, object
   TYPES: BEGIN OF issuefieldoptionscopebean,
-           projects TYPE string,
-           projects2 TYPE string,
-           global TYPE string,
+           projects TYPE string, " not simple, todo
+           projects2 TYPE string, " not simple, todo
+           global TYPE string, " not simple, todo
          END OF issuefieldoptionscopebean.
 
 * Component schema: PageBeanIssueFieldOption, object
@@ -2005,33 +2007,33 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanissuefieldoption.
 
 * Component schema: ProjectScopeBean, object
   TYPES: BEGIN OF projectscopebean,
            id TYPE i,
-           attributes TYPE string,
+           attributes TYPE string, " not simple, todo
          END OF projectscopebean.
 
 * Component schema: IssueFieldOptionCreateBean, object
   TYPES: BEGIN OF issuefieldoptioncreatebean,
            value TYPE string,
-           properties TYPE string,
-           config TYPE string,
+           properties TYPE string, " not simple, todo
+* todo, config, ref?
          END OF issuefieldoptioncreatebean.
 
 * Component schema: RemoveOptionFromIssuesResult, object
   TYPES: BEGIN OF removeoptionfromissuesresult,
-           modifiedissues TYPE string,
-           unmodifiedissues TYPE string,
-           errors TYPE string,
+           modifiedissues TYPE string, " not simple, todo
+           unmodifiedissues TYPE string, " not simple, todo
+           errors TYPE string, " not simple, todo
          END OF removeoptionfromissuesresult.
 
 * Component schema: SimpleErrorCollection, object
   TYPES: BEGIN OF simpleerrorcollection,
-           errors TYPE string,
-           errormessages TYPE string,
+           errors TYPE string, " not simple, todo
+           errormessages TYPE string, " not simple, todo
            httpstatuscode TYPE i,
          END OF simpleerrorcollection.
 
@@ -2042,7 +2044,7 @@ INTERFACE zif_jira.
            description TYPE string,
            status TYPE string,
            message TYPE string,
-           result TYPE string,
+           result TYPE string, " not simple, todo
            submittedby TYPE i,
            progress TYPE i,
            elapsedruntime TYPE i,
@@ -2056,13 +2058,13 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF field,
            id TYPE string,
            name TYPE string,
-           schema TYPE string,
+* todo, schema, ref?
            description TYPE string,
            key TYPE string,
            islocked TYPE abap_bool,
            screenscount TYPE i,
            contextscount TYPE i,
-           lastused TYPE string,
+* todo, lastused, ref?
          END OF field.
 
 * Component schema: FieldLastUsed, object
@@ -2079,7 +2081,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanfield.
 
 * Component schema: FieldConfigurationScheme, object
@@ -2097,7 +2099,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanfieldconfigurationsche.
 
 * Component schema: FieldConfigurationIssueTypeItem, object
@@ -2115,13 +2117,13 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanfieldconfigurationissu.
 
 * Component schema: FieldConfigurationSchemeProjects, object
   TYPES: BEGIN OF fieldconfigurationschemeprojec,
-           fieldconfigurationscheme TYPE string,
-           projectids TYPE string,
+* todo, fieldconfigurationscheme, ref?
+           projectids TYPE string, " not simple, todo
          END OF fieldconfigurationschemeprojec.
 
 * Component schema: PageBeanFieldConfigurationSchemeProjects, object
@@ -2132,7 +2134,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanfieldconfigurationsc01.
 
 * Component schema: FieldConfigurationSchemeProjectAssociation, object
@@ -2157,7 +2159,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanfieldconfiguration.
 
 * Component schema: FieldConfigurationItem, object
@@ -2176,7 +2178,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanfieldconfigurationitem.
 
 * Component schema: AttachmentMetadata, object
@@ -2184,11 +2186,11 @@ INTERFACE zif_jira.
            id TYPE i,
            self TYPE string,
            filename TYPE string,
-           author TYPE string,
+           author TYPE string, " not simple, todo
            created TYPE string,
            size TYPE i,
            mimetype TYPE string,
-           properties TYPE string,
+           properties TYPE string, " not simple, todo
            content TYPE string,
            thumbnail TYPE string,
          END OF attachmentmetadata.
@@ -2210,7 +2212,7 @@ INTERFACE zif_jira.
 
 * Component schema: AttachmentArchiveImpl, object
   TYPES: BEGIN OF attachmentarchiveimpl,
-           entries TYPE string,
+           entries TYPE string, " not simple, todo
            totalentrycount TYPE i,
          END OF attachmentarchiveimpl.
 
@@ -2219,7 +2221,7 @@ INTERFACE zif_jira.
            moreavailable TYPE abap_bool,
            totalnumberofentriesavailable TYPE i,
            totalentrycount TYPE i,
-           entries TYPE string,
+           entries TYPE string, " not simple, todo
          END OF attachmentarchive.
 
 * Component schema: AttachmentArchiveItemReadable, object
@@ -2235,7 +2237,7 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF attachmentarchivemetadatareada,
            id TYPE i,
            name TYPE string,
-           entries TYPE string,
+           entries TYPE string, " not simple, todo
            totalentrycount TYPE i,
            mediatype TYPE string,
          END OF attachmentarchivemetadatareada.
@@ -2248,20 +2250,20 @@ INTERFACE zif_jira.
 
 * Component schema: ActorInputBean, object
   TYPES: BEGIN OF actorinputbean,
-           user TYPE string,
-           group TYPE string,
+           user TYPE string, " not simple, todo
+           group TYPE string, " not simple, todo
          END OF actorinputbean.
 
 * Component schema: ProjectRoleActorsUpdateBean, object
   TYPES: BEGIN OF projectroleactorsupdatebean,
            id TYPE i,
-           categorisedactors TYPE string,
+           categorisedactors TYPE string, " not simple, todo
          END OF projectroleactorsupdatebean.
 
 * Component schema: ActorsMap, object
   TYPES: BEGIN OF actorsmap,
-           user TYPE string,
-           group TYPE string,
+           user TYPE string, " not simple, todo
+           group TYPE string, " not simple, todo
          END OF actorsmap.
 
 * Component schema: ProjectRoleDetail, object
@@ -2271,7 +2273,7 @@ INTERFACE zif_jira.
            id TYPE i,
            description TYPE string,
            admin TYPE abap_bool,
-           scope TYPE string,
+           scope TYPE string, " not simple, todo
            roleconfigurable TYPE abap_bool,
            translatedname TYPE string,
            default TYPE abap_bool,
@@ -2285,7 +2287,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanscreenscheme.
 
 * Component schema: ScreenScheme, object
@@ -2293,7 +2295,7 @@ INTERFACE zif_jira.
            id TYPE i,
            name TYPE string,
            description TYPE string,
-           screens TYPE string,
+           screens TYPE string, " not simple, todo
          END OF screenscheme.
 
 * Component schema: ScreenTypes, object
@@ -2308,7 +2310,7 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF screenschemedetails,
            name TYPE string,
            description TYPE string,
-           screens TYPE string,
+           screens TYPE string, " not simple, todo
          END OF screenschemedetails.
 
 * Component schema: ScreenSchemeId, object
@@ -2320,7 +2322,7 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF updatescreenschemedetails,
            name TYPE string,
            description TYPE string,
-           screens TYPE string,
+           screens TYPE string, " not simple, todo
          END OF updatescreenschemedetails.
 
 * Component schema: UpdateScreenTypes, object
@@ -2352,7 +2354,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeancustomfieldcontextproj.
 
 * Component schema: CustomFieldContext, object
@@ -2372,7 +2374,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeancustomfieldcontext.
 
 * Component schema: CreateCustomFieldContext, object
@@ -2380,13 +2382,13 @@ INTERFACE zif_jira.
            id TYPE string,
            name TYPE string,
            description TYPE string,
-           projectids TYPE string,
-           issuetypeids TYPE string,
+           projectids TYPE string, " not simple, todo
+           issuetypeids TYPE string, " not simple, todo
          END OF createcustomfieldcontext.
 
 * Component schema: ProjectIds, object
   TYPES: BEGIN OF projectids,
-           projectids TYPE string,
+           projectids TYPE string, " not simple, todo
          END OF projectids.
 
 * Component schema: CustomFieldContextUpdateDetails, object
@@ -2397,7 +2399,7 @@ INTERFACE zif_jira.
 
 * Component schema: IssueTypeIds, object
   TYPES: BEGIN OF issuetypeids01,
-           issuetypeids TYPE string,
+           issuetypeids TYPE string, " not simple, todo
          END OF issuetypeids01.
 
 * Component schema: ProjectIssueTypeMapping, object
@@ -2408,7 +2410,7 @@ INTERFACE zif_jira.
 
 * Component schema: ProjectIssueTypeMappings, object
   TYPES: BEGIN OF projectissuetypemappings,
-           mappings TYPE string,
+           mappings TYPE string, " not simple, todo
          END OF projectissuetypemappings.
 
 * Component schema: ContextForProjectAndIssueType, object
@@ -2426,7 +2428,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeancontextforprojectandis.
 
 * Component schema: IssueTypeToContextMapping, object
@@ -2444,7 +2446,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanissuetypetocontextmapp.
 
 * Component schema: IssueTypeScreenSchemeItem, object
@@ -2462,7 +2464,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanissuetypescreenschemei.
 
 * Component schema: IssueTypeScreenScheme, object
@@ -2474,8 +2476,8 @@ INTERFACE zif_jira.
 
 * Component schema: IssueTypeScreenSchemesProjects, object
   TYPES: BEGIN OF issuetypescreenschemesprojects,
-           issuetypescreenscheme TYPE string,
-           projectids TYPE string,
+           issuetypescreenscheme TYPE string, " not simple, todo
+           projectids TYPE string, " not simple, todo
          END OF issuetypescreenschemesprojects.
 
 * Component schema: PageBeanIssueTypeScreenSchemesProjects, object
@@ -2486,7 +2488,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanissuetypescreenschemes.
 
 * Component schema: PageBeanIssueTypeScreenScheme, object
@@ -2497,7 +2499,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanissuetypescreenscheme.
 
 * Component schema: IssueTypeScreenSchemeProjectAssociation, object
@@ -2510,7 +2512,7 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF issuetypescreenschemedetails,
            name TYPE string,
            description TYPE string,
-           issuetypemappings TYPE string,
+           issuetypemappings TYPE string, " not simple, todo
          END OF issuetypescreenschemedetails.
 
 * Component schema: IssueTypeScreenSchemeMapping, object
@@ -2532,7 +2534,7 @@ INTERFACE zif_jira.
 
 * Component schema: IssueTypeScreenSchemeMappingDetails, object
   TYPES: BEGIN OF issuetypescreenschememappingde,
-           issuetypemappings TYPE string,
+           issuetypemappings TYPE string, " not simple, todo
          END OF issuetypescreenschememappingde.
 
 * Component schema: UpdateDefaultScreenScheme, object
@@ -2548,7 +2550,7 @@ INTERFACE zif_jira.
 
 * Component schema: JexpIssues, object
   TYPES: BEGIN OF jexpissues,
-           jql TYPE string,
+           jql TYPE string, " not simple, todo
          END OF jexpissues.
 
 * Component schema: JexpJqlIssues, object
@@ -2561,9 +2563,9 @@ INTERFACE zif_jira.
 
 * Component schema: JiraExpressionEvalContextBean, object
   TYPES: BEGIN OF jiraexpressionevalcontextbean,
-           issue TYPE string,
-           issues TYPE string,
-           project TYPE string,
+           issue TYPE string, " not simple, todo
+           issues TYPE string, " not simple, todo
+           project TYPE string, " not simple, todo
            sprint TYPE i,
            board TYPE i,
            servicedesk TYPE i,
@@ -2573,7 +2575,7 @@ INTERFACE zif_jira.
 * Component schema: JiraExpressionEvalRequestBean, object
   TYPES: BEGIN OF jiraexpressionevalrequestbean,
            expression TYPE string,
-           context TYPE string,
+           context TYPE string, " not simple, todo
          END OF jiraexpressionevalrequestbean.
 
 * Component schema: IssuesJqlMetaDataBean, object
@@ -2582,32 +2584,33 @@ INTERFACE zif_jira.
            maxresults TYPE i,
            count TYPE i,
            totalcount TYPE i,
-           validationwarnings TYPE string,
+           validationwarnings TYPE string, " not simple, todo
          END OF issuesjqlmetadatabean.
 
 * Component schema: IssuesMetaBean, object
   TYPES: BEGIN OF issuesmetabean,
-           jql TYPE string,
+* todo, jql, ref?
+           dummy TYPE i,
          END OF issuesmetabean.
 
 * Component schema: JiraExpressionEvaluationMetaDataBean, object
   TYPES: BEGIN OF jiraexpressionevaluationmetada,
-           complexity TYPE string,
-           issues TYPE string,
+           complexity TYPE string, " not simple, todo
+           issues TYPE string, " not simple, todo
          END OF jiraexpressionevaluationmetada.
 
 * Component schema: JiraExpressionResult, object
   TYPES: BEGIN OF jiraexpressionresult,
-           value TYPE string,
-           meta TYPE string,
+           value TYPE string, " not simple, todo
+           meta TYPE string, " not simple, todo
          END OF jiraexpressionresult.
 
 * Component schema: JiraExpressionsComplexityBean, object
   TYPES: BEGIN OF jiraexpressionscomplexitybean,
-           steps TYPE string,
-           expensiveoperations TYPE string,
-           beans TYPE string,
-           primitivevalues TYPE string,
+           steps TYPE string, " not simple, todo
+           expensiveoperations TYPE string, " not simple, todo
+           beans TYPE string, " not simple, todo
+           primitivevalues TYPE string, " not simple, todo
          END OF jiraexpressionscomplexitybean.
 
 * Component schema: JiraExpressionsComplexityValueBean, object
@@ -2618,23 +2621,23 @@ INTERFACE zif_jira.
 
 * Component schema: JiraExpressionForAnalysis, object
   TYPES: BEGIN OF jiraexpressionforanalysis,
-           expressions TYPE string,
-           contextvariables TYPE string,
+           expressions TYPE string, " not simple, todo
+           contextvariables TYPE string, " not simple, todo
          END OF jiraexpressionforanalysis.
 
 * Component schema: JiraExpressionAnalysis, object
   TYPES: BEGIN OF jiraexpressionanalysis,
            expression TYPE string,
-           errors TYPE string,
+           errors TYPE string, " not simple, todo
            valid TYPE abap_bool,
            type TYPE string,
-           complexity TYPE string,
+* todo, complexity, ref?
          END OF jiraexpressionanalysis.
 
 * Component schema: JiraExpressionComplexity, object
   TYPES: BEGIN OF jiraexpressioncomplexity,
            expensiveoperations TYPE string,
-           variables TYPE string,
+           variables TYPE string, " not simple, todo
          END OF jiraexpressioncomplexity.
 
 * Component schema: JiraExpressionValidationError, object
@@ -2648,7 +2651,7 @@ INTERFACE zif_jira.
 
 * Component schema: JiraExpressionsAnalysis, object
   TYPES: BEGIN OF jiraexpressionsanalysis,
-           results TYPE string,
+           results TYPE string, " not simple, todo
          END OF jiraexpressionsanalysis.
 
 * Component schema: HealthCheckResult, object
@@ -2662,14 +2665,14 @@ INTERFACE zif_jira.
   TYPES: BEGIN OF serverinformation,
            baseurl TYPE string,
            version TYPE string,
-           versionnumbers TYPE string,
+           versionnumbers TYPE string, " not simple, todo
            deploymenttype TYPE string,
            buildnumber TYPE i,
            builddate TYPE string,
            servertime TYPE string,
            scminfo TYPE string,
            servertitle TYPE string,
-           healthchecks TYPE string,
+           healthchecks TYPE string, " not simple, todo
          END OF serverinformation.
 
 * Component schema: UserMigrationBean, object
@@ -2693,7 +2696,7 @@ INTERFACE zif_jira.
            lastmodifieduser TYPE string,
            lastmodifieduseraccountid TYPE string,
            steps TYPE i,
-           scope TYPE string,
+           scope TYPE string, " not simple, todo
            default TYPE abap_bool,
          END OF deprecatedworkflow.
 
@@ -2713,7 +2716,7 @@ INTERFACE zif_jira.
            issuelinkingenabled TYPE abap_bool,
            timetrackingenabled TYPE abap_bool,
            attachmentsenabled TYPE abap_bool,
-           timetrackingconfiguration TYPE string,
+           timetrackingconfiguration TYPE string, " not simple, todo
          END OF configuration.
 
 * Component schema: TimeTrackingConfiguration, object
@@ -2734,7 +2737,7 @@ INTERFACE zif_jira.
            type TYPE string,
            defaultvalue TYPE string,
            example TYPE string,
-           allowedvalues TYPE string,
+           allowedvalues TYPE string, " not simple, todo
          END OF applicationproperty.
 
 * Component schema: SimpleApplicationPropertyBean, object
@@ -2751,7 +2754,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanworkflowscheme.
 
 * Component schema: WorkflowScheme, object
@@ -2760,21 +2763,21 @@ INTERFACE zif_jira.
            name TYPE string,
            description TYPE string,
            defaultworkflow TYPE string,
-           issuetypemappings TYPE string,
+           issuetypemappings TYPE string, " not simple, todo
            originaldefaultworkflow TYPE string,
-           originalissuetypemappings TYPE string,
+           originalissuetypemappings TYPE string, " not simple, todo
            draft TYPE abap_bool,
-           lastmodifieduser TYPE string,
+           lastmodifieduser TYPE string, " not simple, todo
            lastmodified TYPE string,
            self TYPE string,
            updatedraftifneeded TYPE abap_bool,
-           issuetypes TYPE string,
+           issuetypes TYPE string, " not simple, todo
          END OF workflowscheme.
 
 * Component schema: IssueTypesWorkflowMapping, object
   TYPES: BEGIN OF issuetypesworkflowmapping,
            workflow TYPE string,
-           issuetypes TYPE string,
+           issuetypes TYPE string, " not simple, todo
            defaultmapping TYPE abap_bool,
            updatedraftifneeded TYPE abap_bool,
          END OF issuetypesworkflowmapping.
@@ -2794,13 +2797,13 @@ INTERFACE zif_jira.
 
 * Component schema: ContainerOfWorkflowSchemeAssociations, object
   TYPES: BEGIN OF containerofworkflowschemeassoc,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF containerofworkflowschemeassoc.
 
 * Component schema: WorkflowSchemeAssociations, object
   TYPES: BEGIN OF workflowschemeassociations,
-           projectids TYPE string,
-           workflowscheme TYPE string,
+           projectids TYPE string, " not simple, todo
+           workflowscheme TYPE string, " not simple, todo
          END OF workflowschemeassociations.
 
 * Component schema: WorkflowSchemeProjectAssociation, object
@@ -2828,9 +2831,9 @@ INTERFACE zif_jira.
            category TYPE string,
            eventsource TYPE string,
            description TYPE string,
-           objectitem TYPE string,
-           changedvalues TYPE string,
-           associateditems TYPE string,
+* todo, objectitem, ref?
+           changedvalues TYPE string, " not simple, todo
+           associateditems TYPE string, " not simple, todo
          END OF auditrecordbean.
 
 * Component schema: AuditRecords, object
@@ -2838,7 +2841,7 @@ INTERFACE zif_jira.
            offset TYPE i,
            limit TYPE i,
            total TYPE i,
-           records TYPE string,
+           records TYPE string, " not simple, todo
          END OF auditrecords.
 
 * Component schema: ChangedValueBean, object
@@ -2850,12 +2853,12 @@ INTERFACE zif_jira.
 
 * Component schema: PermissionSchemes, object
   TYPES: BEGIN OF permissionschemes,
-           permissionschemes TYPE string,
+           permissionschemes TYPE string, " not simple, todo
          END OF permissionschemes.
 
 * Component schema: PermissionGrants, object
   TYPES: BEGIN OF permissiongrants,
-           permissions TYPE string,
+           permissions TYPE string, " not simple, todo
            expand TYPE string,
          END OF permissiongrants.
 
@@ -2874,7 +2877,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanworkflow.
 
 * Component schema: PublishedWorkflowId, object
@@ -2892,33 +2895,33 @@ INTERFACE zif_jira.
            id TYPE string,
            name TYPE string,
            description TYPE string,
-           from TYPE string,
+           from TYPE string, " not simple, todo
            to TYPE string,
            type TYPE string,
-           screen TYPE string,
-           rules TYPE string,
+* todo, screen, ref?
+* todo, rules, ref?
          END OF transition.
 
 * Component schema: Workflow, object
   TYPES: BEGIN OF workflow,
-           id TYPE string,
+* todo, id, ref?
            description TYPE string,
-           transitions TYPE string,
-           statuses TYPE string,
+           transitions TYPE string, " not simple, todo
+           statuses TYPE string, " not simple, todo
          END OF workflow.
 
 * Component schema: WorkflowRules, object
   TYPES: BEGIN OF workflowrules,
-           conditions TYPE string,
-           validators TYPE string,
-           postfunctions TYPE string,
+           conditions TYPE string, " not simple, todo
+           validators TYPE string, " not simple, todo
+           postfunctions TYPE string, " not simple, todo
          END OF workflowrules.
 
 * Component schema: WorkflowStatus, object
   TYPES: BEGIN OF workflowstatus,
            id TYPE string,
            name TYPE string,
-           properties TYPE string,
+* todo, properties, ref?
          END OF workflowstatus.
 
 * Component schema: WorkflowStatusProperties, object
@@ -2929,15 +2932,15 @@ INTERFACE zif_jira.
 * Component schema: WorkflowTransitionRule, object
   TYPES: BEGIN OF workflowtransitionrule,
            type TYPE string,
-           configuration TYPE string,
+           configuration TYPE string, " not simple, todo
          END OF workflowtransitionrule.
 
 * Component schema: ConnectWorkflowTransitionRule, object
   TYPES: BEGIN OF connectworkflowtransitionrule,
            id TYPE string,
            key TYPE string,
-           configuration TYPE string,
-           transition TYPE string,
+* todo, configuration, ref?
+           transition TYPE string, " not simple, todo
          END OF connectworkflowtransitionrule.
 
 * Component schema: PageBeanWorkflowTransitionRules, object
@@ -2948,7 +2951,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanworkflowtransitionrule.
 
 * Component schema: RuleConfiguration, object
@@ -2970,27 +2973,27 @@ INTERFACE zif_jira.
 
 * Component schema: WorkflowTransitionRules, object
   TYPES: BEGIN OF workflowtransitionrules,
-           workflowid TYPE string,
-           postfunctions TYPE string,
-           conditions TYPE string,
-           validators TYPE string,
+* todo, workflowid, ref?
+           postfunctions TYPE string, " not simple, todo
+           conditions TYPE string, " not simple, todo
+           validators TYPE string, " not simple, todo
          END OF workflowtransitionrules.
 
 * Component schema: WorkflowTransitionRulesUpdate, object
   TYPES: BEGIN OF workflowtransitionrulesupdate,
-           workflows TYPE string,
+           workflows TYPE string, " not simple, todo
          END OF workflowtransitionrulesupdate.
 
 * Component schema: WorkflowTransitionRulesUpdateErrorDetails, object
   TYPES: BEGIN OF workflowtransitionrulesupdatee,
-           workflowid TYPE string,
-           ruleupdateerrors TYPE string,
-           updateerrors TYPE string,
+* todo, workflowid, ref?
+           ruleupdateerrors TYPE string, " not simple, todo
+           updateerrors TYPE string, " not simple, todo
          END OF workflowtransitionrulesupdatee.
 
 * Component schema: WorkflowTransitionRulesUpdateErrors, object
   TYPES: BEGIN OF workflowtransitionrulesupdat01,
-           updateresults TYPE string,
+           updateresults TYPE string, " not simple, todo
          END OF workflowtransitionrulesupdat01.
 
 * Component schema: Locale, object
@@ -3022,7 +3025,7 @@ INTERFACE zif_jira.
 
 * Component schema: FailedWebhooks, object
   TYPES: BEGIN OF failedwebhooks,
-           values TYPE string,
+           values TYPE string, " not simple, todo
            maxresults TYPE i,
            next TYPE string,
          END OF failedwebhooks.
@@ -3030,24 +3033,24 @@ INTERFACE zif_jira.
 * Component schema: WebhookDetails, object
   TYPES: BEGIN OF webhookdetails,
            jqlfilter TYPE string,
-           events TYPE string,
+           events TYPE string, " not simple, todo
          END OF webhookdetails.
 
 * Component schema: WebhookRegistrationDetails, object
   TYPES: BEGIN OF webhookregistrationdetails,
-           webhooks TYPE string,
+           webhooks TYPE string, " not simple, todo
            url TYPE string,
          END OF webhookregistrationdetails.
 
 * Component schema: ContainerForRegisteredWebhooks, object
   TYPES: BEGIN OF containerforregisteredwebhooks,
-           webhookregistrationresult TYPE string,
+           webhookregistrationresult TYPE string, " not simple, todo
          END OF containerforregisteredwebhooks.
 
 * Component schema: RegisteredWebhook, object
   TYPES: BEGIN OF registeredwebhook,
            createdwebhookid TYPE i,
-           errors TYPE string,
+           errors TYPE string, " not simple, todo
          END OF registeredwebhook.
 
 * Component schema: PageBeanWebhook, object
@@ -3058,20 +3061,20 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeanwebhook.
 
 * Component schema: Webhook, object
   TYPES: BEGIN OF webhook,
            id TYPE i,
            jqlfilter TYPE string,
-           events TYPE string,
+           events TYPE string, " not simple, todo
            expirationdate TYPE i,
          END OF webhook.
 
 * Component schema: ContainerForWebhookIDs, object
   TYPES: BEGIN OF containerforwebhookids,
-           webhookids TYPE string,
+           webhookids TYPE string, " not simple, todo
          END OF containerforwebhookids.
 
 * Component schema: WebhooksExpirationDate, object
@@ -3093,69 +3096,70 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeangroupdetails.
 
 * Component schema: IssuesAndJQLQueries, object
   TYPES: BEGIN OF issuesandjqlqueries,
-           jqls TYPE string,
-           issueids TYPE string,
+           jqls TYPE string, " not simple, todo
+           issueids TYPE string, " not simple, todo
          END OF issuesandjqlqueries.
 
 * Component schema: IssueMatches, object
   TYPES: BEGIN OF issuematches,
-           matches TYPE string,
+           matches TYPE string, " not simple, todo
          END OF issuematches.
 
 * Component schema: IssueMatchesForJQL, object
   TYPES: BEGIN OF issuematchesforjql,
-           matchedissues TYPE string,
-           errors TYPE string,
+           matchedissues TYPE string, " not simple, todo
+           errors TYPE string, " not simple, todo
          END OF issuematchesforjql.
 
 * Component schema: JqlQueriesToParse, object
   TYPES: BEGIN OF jqlqueriestoparse,
-           queries TYPE string,
+           queries TYPE string, " not simple, todo
          END OF jqlqueriestoparse.
 
 * Component schema: CompoundClause, object
   TYPES: BEGIN OF compoundclause,
-           clauses TYPE string,
+           clauses TYPE string, " not simple, todo
            operator TYPE string,
          END OF compoundclause.
 
 * Component schema: FieldChangedClause, object
   TYPES: BEGIN OF fieldchangedclause,
-           field TYPE string,
+* todo, field, ref?
            operator TYPE string,
-           predicates TYPE string,
+           predicates TYPE string, " not simple, todo
          END OF fieldchangedclause.
 
 * Component schema: FieldValueClause, object
   TYPES: BEGIN OF fieldvalueclause,
-           field TYPE string,
+* todo, field, ref?
            operator TYPE string,
-           operand TYPE string,
+* todo, operand, ref?
          END OF fieldvalueclause.
 
 * Component schema: FieldWasClause, object
   TYPES: BEGIN OF fieldwasclause,
-           field TYPE string,
+* todo, field, ref?
            operator TYPE string,
-           operand TYPE string,
-           predicates TYPE string,
+* todo, operand, ref?
+           predicates TYPE string, " not simple, todo
          END OF fieldwasclause.
 
 * Component schema: FunctionOperand, object
   TYPES: BEGIN OF functionoperand,
            function TYPE string,
-           arguments TYPE string,
+           arguments TYPE string, " not simple, todo
          END OF functionoperand.
 
 * Component schema: JqlQuery, object
   TYPES: BEGIN OF jqlquery,
-           where TYPE string,
-           orderby TYPE string,
+* todo, where, ref?
+* todo, orderby, ref?
+           dummy TYPE i,
          END OF jqlquery.
 
 * Component schema: JqlQueryClause, object
@@ -3171,13 +3175,13 @@ INTERFACE zif_jira.
 * Component schema: JqlQueryClauseTimePredicate, object
   TYPES: BEGIN OF jqlqueryclausetimepredicate,
            operator TYPE string,
-           operand TYPE string,
+* todo, operand, ref?
          END OF jqlqueryclausetimepredicate.
 
 * Component schema: JqlQueryField, object
   TYPES: BEGIN OF jqlqueryfield,
            name TYPE string,
-           property TYPE string,
+           property TYPE string, " not simple, todo
          END OF jqlqueryfield.
 
 * Component schema: JqlQueryFieldEntityProperty, object
@@ -3190,12 +3194,12 @@ INTERFACE zif_jira.
 
 * Component schema: JqlQueryOrderByClause, object
   TYPES: BEGIN OF jqlqueryorderbyclause,
-           fields TYPE string,
+           fields TYPE string, " not simple, todo
          END OF jqlqueryorderbyclause.
 
 * Component schema: JqlQueryOrderByClauseElement, object
   TYPES: BEGIN OF jqlqueryorderbyclauseelement,
-           field TYPE string,
+* todo, field, ref?
            direction TYPE string,
          END OF jqlqueryorderbyclauseelement.
 
@@ -3211,19 +3215,19 @@ INTERFACE zif_jira.
 
 * Component schema: ListOperand, object
   TYPES: BEGIN OF listoperand,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF listoperand.
 
 * Component schema: ParsedJqlQueries, object
   TYPES: BEGIN OF parsedjqlqueries,
-           queries TYPE string,
+           queries TYPE string, " not simple, todo
          END OF parsedjqlqueries.
 
 * Component schema: ParsedJqlQuery, object
   TYPES: BEGIN OF parsedjqlquery,
            query TYPE string,
-           structure TYPE string,
-           errors TYPE string,
+           structure TYPE string, " not simple, todo
+           errors TYPE string, " not simple, todo
          END OF parsedjqlquery.
 
 * Component schema: ValueOperand, object
@@ -3237,11 +3241,11 @@ INTERFACE zif_jira.
            id TYPE i,
            notificationtype TYPE string,
            parameter TYPE string,
-           group TYPE string,
-           field TYPE string,
+           group TYPE string, " not simple, todo
+           field TYPE string, " not simple, todo
            emailaddress TYPE string,
-           projectrole TYPE string,
-           user TYPE string,
+           projectrole TYPE string, " not simple, todo
+           user TYPE string, " not simple, todo
          END OF eventnotification.
 
 * Component schema: NotificationEvent, object
@@ -3249,7 +3253,7 @@ INTERFACE zif_jira.
            id TYPE i,
            name TYPE string,
            description TYPE string,
-           templateevent TYPE string,
+           templateevent TYPE string, " not simple, todo
          END OF notificationevent.
 
 * Component schema: NotificationScheme, object
@@ -3259,14 +3263,14 @@ INTERFACE zif_jira.
            self TYPE string,
            name TYPE string,
            description TYPE string,
-           notificationschemeevents TYPE string,
-           scope TYPE string,
+           notificationschemeevents TYPE string, " not simple, todo
+           scope TYPE string, " not simple, todo
          END OF notificationscheme.
 
 * Component schema: NotificationSchemeEvent, object
   TYPES: BEGIN OF notificationschemeevent,
-           event TYPE string,
-           notifications TYPE string,
+* todo, event, ref?
+           notifications TYPE string, " not simple, todo
          END OF notificationschemeevent.
 
 * Component schema: PageBeanNotificationScheme, object
@@ -3277,7 +3281,7 @@ INTERFACE zif_jira.
            startat TYPE i,
            total TYPE i,
            islast TYPE abap_bool,
-           values TYPE string,
+           values TYPE string, " not simple, todo
          END OF pagebeannotificationscheme.
 
 * Component schema: IssueTypeInfo, object
@@ -3290,7 +3294,7 @@ INTERFACE zif_jira.
 * Component schema: ProjectIssueTypeHierarchy, object
   TYPES: BEGIN OF projectissuetypehierarchy,
            projectid TYPE i,
-           hierarchy TYPE string,
+           hierarchy TYPE string, " not simple, todo
          END OF projectissuetypehierarchy.
 
 * Component schema: ProjectIssueTypesHierarchyLevel, object
@@ -3298,7 +3302,7 @@ INTERFACE zif_jira.
            entityid TYPE string,
            level TYPE i,
            name TYPE string,
-           issuetypes TYPE string,
+           issuetypes TYPE string, " not simple, todo
          END OF projectissuetypeshierarchyleve.
 
 * Component schema: OperationMessage, object
@@ -3314,7 +3318,7 @@ INTERFACE zif_jira.
 
 * Component schema: ConnectModules, object
   TYPES: BEGIN OF connectmodules,
-           modules TYPE string,
+           modules TYPE string, " not simple, todo
          END OF connectmodules.
 
 * Component schema: ConnectModule, object

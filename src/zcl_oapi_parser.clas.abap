@@ -70,13 +70,17 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     CREATE OBJECT ri_schema TYPE zcl_oapi_schema.
     ri_schema->type = mo_json->value_string( iv_prefix && '/type' ).
     ri_schema->default = mo_json->value_string( iv_prefix && '/default' ).
+    ri_schema->items_ref = mo_json->value_string( iv_prefix && '/items/$ref' ).
 
     lt_names = mo_json->members( iv_prefix && '/properties/' ).
     LOOP AT lt_names INTO lv_name.
       CLEAR ls_property.
       ls_property-name = lv_name.
       ls_property-abap_name = lo_names->to_abap_name( lv_name ).
-      ls_property-schema = parse_schema( iv_prefix && '/properties/' && lv_name ).
+      ls_property-ref = mo_json->value_string( iv_prefix && '/properties/' && lv_name && '/$ref' ).
+      IF ls_property-ref IS INITIAL.
+        ls_property-schema = parse_schema( iv_prefix && '/properties/' && lv_name ).
+      ENDIF.
       APPEND ls_property TO ri_schema->properties.
     ENDLOOP.
   ENDMETHOD.

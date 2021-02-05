@@ -1864,16 +1864,16 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_simplelistwrapperapplica.
     simplelistwrapperapplicationro-size = mo_json->value_string( iv_prefix && '/size' ).
 * todo, object, array, items
-* todo, object, , pagingcallback
-* todo, object, , callback
+* todo, ref?
+* todo, ref?
     simplelistwrapperapplicationro-max_results = mo_json->value_string( iv_prefix && '/max-results' ).
   ENDMETHOD.
 
   METHOD parse_simplelistwrappergroupna.
     simplelistwrappergroupname-size = mo_json->value_string( iv_prefix && '/size' ).
 * todo, object, array, items
-* todo, object, , pagingcallback
-* todo, object, , callback
+* todo, ref?
+* todo, ref?
     simplelistwrappergroupname-max_results = mo_json->value_string( iv_prefix && '/max-results' ).
   ENDMETHOD.
 
@@ -2100,7 +2100,7 @@ CLASS zcl_jira IMPLEMENTATION.
 * todo, object, , editmeta
 * todo, object, , changelog
 * todo, object, object, versionedrepresentations
-* todo, object, , fieldstoinclude
+* todo, ref?
 * todo, object, object, fields
   ENDMETHOD.
 
@@ -2134,7 +2134,7 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_linkgroup.
     linkgroup-id = mo_json->value_string( iv_prefix && '/id' ).
     linkgroup-styleclass = mo_json->value_string( iv_prefix && '/styleClass' ).
-* todo, object, , header
+* todo, ref?
     linkgroup-weight = mo_json->value_string( iv_prefix && '/weight' ).
 * todo, object, array, links
 * todo, object, array, groups
@@ -2736,7 +2736,7 @@ CLASS zcl_jira IMPLEMENTATION.
 * todo, object, , priority
 * todo, object, , assignee
 * todo, object, , timetracking
-* todo, object, , issuetype
+* todo, ref?
 * todo, object, , issuetype01
   ENDMETHOD.
 
@@ -2749,10 +2749,10 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_linkissuerequestjsonbean.
-* todo, object, , type
-* todo, object, , inwardissue
-* todo, object, , outwardissue
-* todo, object, , comment
+* todo, ref?
+* todo, ref?
+* todo, ref?
+* todo, ref?
   ENDMETHOD.
 
   METHOD parse_linkedissue.
@@ -2909,7 +2909,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD parse_nestedresponse.
     nestedresponse-status = mo_json->value_string( iv_prefix && '/status' ).
-* todo, object, , errorcollection
+* todo, ref?
   ENDMETHOD.
 
   METHOD parse_issuesupdatebean.
@@ -2918,7 +2918,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD parse_bulkoperationerrorresult.
     bulkoperationerrorresult-status = mo_json->value_string( iv_prefix && '/status' ).
-* todo, object, , elementerrors
+* todo, ref?
     bulkoperationerrorresult-failedelementnumber = mo_json->value_string( iv_prefix && '/failedElementNumber' ).
   ENDMETHOD.
 
@@ -3143,8 +3143,8 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_foundusersandgroups.
-* todo, object, , users
-* todo, object, , groups
+* todo, ref?
+* todo, ref?
   ENDMETHOD.
 
   METHOD parse_fielddetails.
@@ -3390,7 +3390,7 @@ CLASS zcl_jira IMPLEMENTATION.
     issuefieldoption-id = mo_json->value_string( iv_prefix && '/id' ).
     issuefieldoption-value = mo_json->value_string( iv_prefix && '/value' ).
 * todo, object, object, properties
-* todo, object, , config
+* todo, ref?
   ENDMETHOD.
 
   METHOD parse_issuefieldoptionconfigur.
@@ -3422,7 +3422,7 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_issuefieldoptioncreatebe.
     issuefieldoptioncreatebean-value = mo_json->value_string( iv_prefix && '/value' ).
 * todo, object, object, properties
-* todo, object, , config
+* todo, ref?
   ENDMETHOD.
 
   METHOD parse_removeoptionfromissuesre.
@@ -3456,13 +3456,13 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_field.
     field-id = mo_json->value_string( iv_prefix && '/id' ).
     field-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, , schema
+* todo, ref?
     field-description = mo_json->value_string( iv_prefix && '/description' ).
     field-key = mo_json->value_string( iv_prefix && '/key' ).
     field-islocked = mo_json->value_boolean( iv_prefix && '/isLocked' ).
     field-screenscount = mo_json->value_string( iv_prefix && '/screensCount' ).
     field-contextscount = mo_json->value_string( iv_prefix && '/contextsCount' ).
-* todo, object, , lastused
+* todo, ref?
   ENDMETHOD.
 
   METHOD parse_fieldlastused.
@@ -3513,7 +3513,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_fieldconfigurationsche01.
-* todo, object, , fieldconfigurationscheme
+* todo, ref?
 * todo, object, array, projectids
   ENDMETHOD.
 
@@ -3920,7 +3920,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_issuesmetabean.
-* todo, object, , jql
+* todo, ref?
   ENDMETHOD.
 
   METHOD parse_jiraexpressionevaluation.
@@ -3955,7 +3955,7 @@ CLASS zcl_jira IMPLEMENTATION.
 * todo, object, array, errors
     jiraexpressionanalysis-valid = mo_json->value_boolean( iv_prefix && '/valid' ).
     jiraexpressionanalysis-type = mo_json->value_string( iv_prefix && '/type' ).
-* todo, object, , complexity
+* todo, ref?
   ENDMETHOD.
 
   METHOD parse_jiraexpressioncomplexity.
@@ -4132,7 +4132,7 @@ CLASS zcl_jira IMPLEMENTATION.
     auditrecordbean-category = mo_json->value_string( iv_prefix && '/category' ).
     auditrecordbean-eventsource = mo_json->value_string( iv_prefix && '/eventSource' ).
     auditrecordbean-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, object, , objectitem
+* todo, ref?
 * todo, object, array, changedvalues
 * todo, object, array, associateditems
   ENDMETHOD.
@@ -4190,12 +4190,12 @@ CLASS zcl_jira IMPLEMENTATION.
 * todo, object, array, from
     transition-to = mo_json->value_string( iv_prefix && '/to' ).
     transition-type = mo_json->value_string( iv_prefix && '/type' ).
-* todo, object, , screen
-* todo, object, , rules
+* todo, ref?
+* todo, ref?
   ENDMETHOD.
 
   METHOD parse_workflow.
-* todo, object, , id
+* todo, ref?
     workflow-description = mo_json->value_string( iv_prefix && '/description' ).
 * todo, object, array, transitions
 * todo, object, array, statuses
@@ -4210,7 +4210,7 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_workflowstatus.
     workflowstatus-id = mo_json->value_string( iv_prefix && '/id' ).
     workflowstatus-name = mo_json->value_string( iv_prefix && '/name' ).
-* todo, object, , properties
+* todo, ref?
   ENDMETHOD.
 
   METHOD parse_workflowstatusproperties.
@@ -4225,7 +4225,7 @@ CLASS zcl_jira IMPLEMENTATION.
   METHOD parse_connectworkflowtransitio.
     connectworkflowtransitionrule-id = mo_json->value_string( iv_prefix && '/id' ).
     connectworkflowtransitionrule-key = mo_json->value_string( iv_prefix && '/key' ).
-* todo, object, , configuration
+* todo, ref?
 * todo, object, , transition
   ENDMETHOD.
 
@@ -4254,7 +4254,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_workflowtransitionrules.
-* todo, object, , workflowid
+* todo, ref?
 * todo, object, array, postfunctions
 * todo, object, array, conditions
 * todo, object, array, validators
@@ -4265,7 +4265,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_workflowtransitionrule01.
-* todo, object, , workflowid
+* todo, ref?
 * todo, object, object, ruleupdateerrors
 * todo, object, array, updateerrors
   ENDMETHOD.
@@ -4386,21 +4386,21 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_fieldchangedclause.
-* todo, object, , field
+* todo, ref?
     fieldchangedclause-operator = mo_json->value_string( iv_prefix && '/operator' ).
 * todo, object, array, predicates
   ENDMETHOD.
 
   METHOD parse_fieldvalueclause.
-* todo, object, , field
+* todo, ref?
     fieldvalueclause-operator = mo_json->value_string( iv_prefix && '/operator' ).
-* todo, object, , operand
+* todo, ref?
   ENDMETHOD.
 
   METHOD parse_fieldwasclause.
-* todo, object, , field
+* todo, ref?
     fieldwasclause-operator = mo_json->value_string( iv_prefix && '/operator' ).
-* todo, object, , operand
+* todo, ref?
 * todo, object, array, predicates
   ENDMETHOD.
 
@@ -4410,8 +4410,8 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_jqlquery.
-* todo, object, , where
-* todo, object, , orderby
+* todo, ref?
+* todo, ref?
   ENDMETHOD.
 
   METHOD parse_jqlqueryclause.
@@ -4422,7 +4422,7 @@ CLASS zcl_jira IMPLEMENTATION.
 
   METHOD parse_jqlqueryclausetimepredic.
     jqlqueryclausetimepredicate-operator = mo_json->value_string( iv_prefix && '/operator' ).
-* todo, object, , operand
+* todo, ref?
   ENDMETHOD.
 
   METHOD parse_jqlqueryfield.
@@ -4442,7 +4442,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_jqlqueryorderbyclauseele.
-* todo, object, , field
+* todo, ref?
     jqlqueryorderbyclauseelement-direction = mo_json->value_string( iv_prefix && '/direction' ).
   ENDMETHOD.
 
@@ -4501,7 +4501,7 @@ CLASS zcl_jira IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_notificationschemeevent.
-* todo, object, , event
+* todo, ref?
 * todo, object, array, notifications
   ENDMETHOD.
 

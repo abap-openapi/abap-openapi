@@ -5,8 +5,8 @@ ABAP [OpenAPI](https://www.openapis.org) Client Generator in ABAP
 - possibility to run via command line(NodeJS)
 - possibility to generate for different ABAP versions(ie. Steampunk)
 - one self-contained global class + interface per OpenAPI definition
-- eventually possible to run on ABAP stack
-- eventually OpenAPI v2 and v3 support
+- possible to run on ABAP stack
+- eventually OpenAPI v2 support
 - only JSON support
 
 prerequsites = [NodeJS](https://nodejs.org) 12+

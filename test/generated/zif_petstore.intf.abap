@@ -55,7 +55,7 @@ INTERFACE zif_petstore.
   TYPES: BEGIN OF pet,
            id TYPE i,
            name TYPE string,
-           category TYPE string, " not simple, todo
+* todo, #/components/schemas/Category, category, ref?
            photourls TYPE string, " not simple, todo
            tags TYPE string, " not simple, todo
            status TYPE string,

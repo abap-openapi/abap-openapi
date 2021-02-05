@@ -134,6 +134,10 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       CASE ls_schema-schema->type.
         WHEN 'object'.
           LOOP AT ls_schema-schema->properties INTO ls_property.
+            IF ls_property-schema IS INITIAL.
+              rv_abap = rv_abap && |* todo, ref?\n|.
+              CONTINUE.
+            ENDIF.
             IF ls_property-schema->type = 'string'
                 OR ls_property-schema->type = 'integer'.
               rv_abap = rv_abap && |    { ls_schema-abap_name }-{ ls_property-abap_name } = mo_json->value_string( iv_prefix && '/{ ls_property-name }' ).\n|.
@@ -159,24 +163,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
     LOOP AT ms_specification-components-schemas INTO ls_schema.
       rv_abap = rv_abap && |* Component schema: { ls_schema-name }, { ls_schema-schema->type }\n|.
-      IF ls_schema-schema->type = 'object'.
-        rv_abap = rv_abap && |  TYPES: BEGIN OF { ls_schema-abap_name },\n|.
-        lv_count = 0.
-        LOOP AT ls_schema-schema->properties INTO ls_property.
-          IF ls_property-schema->is_simple_type( ) = abap_true.
-            rv_abap = rv_abap && |           | && ls_property-abap_name && | TYPE | && ls_property-schema->get_simple_type( ) && |,\n|.
-          ELSE.
-            rv_abap = rv_abap && |           | && ls_property-abap_name && | TYPE string, " not simple, todo\n|.
-          ENDIF.
-          lv_count = lv_count + 1.
-        ENDLOOP.
-        IF lv_count = 0. " temporary workaround
-          rv_abap = rv_abap && |           dummy TYPE i,\n|.
-        ENDIF.
-        rv_abap = rv_abap && |         END OF { ls_schema-abap_name }.\n|.
-      ELSE.
-        rv_abap = rv_abap && |  TYPES { ls_schema-abap_name } TYPE string.\n|.
-      ENDIF.
+      rv_abap = rv_abap && ls_schema-schema->build_type_definition( ls_schema-abap_name ).
       rv_abap = rv_abap && |\n|.
     ENDLOOP.
 
