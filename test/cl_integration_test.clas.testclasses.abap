@@ -103,7 +103,9 @@ CLASS ltcl_github IMPLEMENTATION.
       act = ls_pull_request-mergeable_state
       exp = 'clean' ).
 
-* todo,    ls_pull_request-head-ref
+    cl_abap_unit_assert=>assert_equals(
+      act = ls_pull_request-head-ref
+      exp = 'hvam/test1' ).
 
   ENDMETHOD.
 

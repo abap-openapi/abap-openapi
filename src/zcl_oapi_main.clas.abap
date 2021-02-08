@@ -43,6 +43,16 @@ CLASS zcl_oapi_main DEFINITION PUBLIC.
     METHODS dump_parser_methods
       RETURNING VALUE(rv_abap) TYPE string.
 
+    METHODS find_parser_method
+      IMPORTING iv_name TYPE string
+      RETURNING VALUE(rv_method) TYPE string.
+
+    METHODS dump_parser
+      IMPORTING ii_schema TYPE REF TO zif_oapi_schema
+                iv_abap_name TYPE string
+                iv_hard_prefix TYPE string OPTIONAL
+      RETURNING VALUE(rv_abap) TYPE string.
+
     METHODS find_uri_prefix
       IMPORTING is_servers LIKE ms_specification-servers
       RETURNING VALUE(rv_prefix) TYPE string.
@@ -126,33 +136,65 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 * note: the parser methods might be called recursively, as the structures can be nested
 
     DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
-    DATA ls_property TYPE zif_oapi_schema=>ty_property.
+
 
     LOOP AT ms_specification-components-schemas INTO ls_schema.
       rv_abap = rv_abap &&
         |  METHOD { ls_schema-abap_parser_method }.\n|.
-      CASE ls_schema-schema->type.
-        WHEN 'object'.
-          LOOP AT ls_schema-schema->properties INTO ls_property.
-            IF ls_property-schema IS INITIAL.
-              rv_abap = rv_abap && |* todo, { ls_property-ref }, ref?\n|.
-              CONTINUE.
-            ENDIF.
-            IF ls_property-schema->type = 'string'
-                OR ls_property-schema->type = 'integer'.
-              rv_abap = rv_abap && |    { ls_schema-abap_name }-{ ls_property-abap_name } = mo_json->value_string( iv_prefix && '/{ ls_property-name }' ).\n|.
-            ELSEIF ls_property-schema->type = 'boolean'.
-              rv_abap = rv_abap && |    { ls_schema-abap_name }-{ ls_property-abap_name } = mo_json->value_boolean( iv_prefix && '/{ ls_property-name }' ).\n|.
-            ELSE.
-              rv_abap = rv_abap && |* todo, { ls_property-schema->type }, { ls_property-abap_name }\n|.
-            ENDIF.
-          ENDLOOP.
-        WHEN OTHERS.
-          rv_abap = rv_abap && |* todo, handle type { ls_schema-schema->type }\n|.
-      ENDCASE.
+      rv_abap = rv_abap && dump_parser(
+        ii_schema    = ls_schema-schema
+        iv_abap_name = ls_schema-abap_name ).
       rv_abap = rv_abap && |  ENDMETHOD.\n\n|.
     ENDLOOP.
 
+  ENDMETHOD.
+
+  METHOD find_parser_method.
+
+    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
+    DATA lv_name TYPE string.
+
+    lv_name = iv_name.
+
+    REPLACE FIRST OCCURRENCE OF '#/components/schemas/' IN lv_name WITH ''.
+    READ TABLE ms_specification-components-schemas INTO ls_schema WITH KEY name = lv_name.
+    IF sy-subrc = 0.
+      rv_method = ls_schema-abap_parser_method.
+    ELSE.
+      rv_method = 'unknown_not_found'.
+    ENDIF.
+
+  ENDMETHOD.
+
+  METHOD dump_parser.
+    DATA ls_property TYPE zif_oapi_schema=>ty_property.
+    DATA lv_method TYPE string.
+
+    CASE ii_schema->type.
+      WHEN 'object'.
+        LOOP AT ii_schema->properties INTO ls_property.
+          IF ls_property-schema IS INITIAL AND ls_property-ref IS NOT INITIAL.
+            lv_method = find_parser_method( ls_property-ref ).
+            rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = { lv_method }( iv_prefix ).\n|.
+          ELSEIF ls_property-schema IS INITIAL.
+            rv_abap = rv_abap && |* todo initial, hmm\n|.
+          ELSEIF ls_property-schema->type = 'string'
+              OR ls_property-schema->type = 'integer'.
+            rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = mo_json->value_string( iv_prefix && '{ iv_hard_prefix }/{ ls_property-name }' ).\n|.
+          ELSEIF ls_property-schema->type = 'boolean'.
+            rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = mo_json->value_boolean( iv_prefix && '{ iv_hard_prefix }/{ ls_property-name }' ).\n|.
+          ELSEIF ls_property-schema->type = 'object'.
+            rv_abap = rv_abap && dump_parser(
+              ii_schema    = ls_property-schema
+              iv_hard_prefix = iv_hard_prefix && '/' && ls_property-name
+              iv_abap_name = |{ iv_abap_name }-{ ls_property-abap_name }| ).
+          ELSE.
+            rv_abap = rv_abap && |* todo, { ls_property-schema->type }, { ls_property-abap_name }\n|.
+          ENDIF.
+        ENDLOOP.
+      WHEN OTHERS.
+        rv_abap = rv_abap && |* todo, handle type { ii_schema->type }\n|.
+    ENDCASE.
   ENDMETHOD.
 
   METHOD dump_types.
