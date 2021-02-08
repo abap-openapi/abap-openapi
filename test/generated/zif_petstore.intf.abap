@@ -16,7 +16,7 @@ INTERFACE zif_petstore PUBLIC.
   TYPES: BEGIN OF customer,
            id TYPE i,
            username TYPE string,
-           address TYPE string, " not simple, array, todo
+           address TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF customer.
 
 * Component schema: Address, object
@@ -56,8 +56,8 @@ INTERFACE zif_petstore PUBLIC.
            id TYPE i,
            name TYPE string,
            category TYPE category,
-           photourls TYPE string, " not simple, array, todo
-           tags TYPE string, " not simple, array, todo
+           photourls TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           tags TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            status TYPE string,
          END OF pet.
 
