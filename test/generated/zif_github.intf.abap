@@ -554,7 +554,7 @@ INTERFACE zif_github PUBLIC.
 
 * Component schema: authentication-token, object
   TYPES: BEGIN OF authentication_token_permissio,
-           dummy TYPE i,
+           dummy_workaround TYPE i,
          END OF authentication_token_permissio.
   TYPES: BEGIN OF authentication_token,
            token TYPE string,
@@ -811,7 +811,7 @@ INTERFACE zif_github PUBLIC.
   TYPES base_gist_owner TYPE string. "   todo
   TYPES base_gist_user TYPE string. "   todo
   TYPES: BEGIN OF base_gist_files,
-           dummy TYPE i,
+           dummy_workaround TYPE i,
          END OF base_gist_files.
   TYPES: BEGIN OF base_gist,
            url TYPE string,
@@ -838,7 +838,7 @@ INTERFACE zif_github PUBLIC.
 
 * Component schema: gist-simple, object
   TYPES: BEGIN OF gist_simple_files,
-           dummy TYPE i,
+           dummy_workaround TYPE i,
          END OF gist_simple_files.
   TYPES: BEGIN OF gist_simple,
            url TYPE string,
@@ -1031,7 +1031,7 @@ INTERFACE zif_github PUBLIC.
            node_id TYPE string,
          END OF minimal_repository_license.
   TYPES: BEGIN OF minimal_repository_template_re,
-           dummy TYPE i,
+           dummy_workaround TYPE i,
          END OF minimal_repository_template_re.
   TYPES: BEGIN OF minimal_repository_permissions,
            admin TYPE abap_bool,
@@ -1039,7 +1039,7 @@ INTERFACE zif_github PUBLIC.
            pull TYPE abap_bool,
          END OF minimal_repository_permissions.
   TYPES: BEGIN OF minimal_repository_owner,
-           dummy TYPE i,
+           dummy_workaround TYPE i,
          END OF minimal_repository_owner.
   TYPES: BEGIN OF minimal_repository,
            id TYPE i,
@@ -1528,7 +1528,7 @@ INTERFACE zif_github PUBLIC.
 
 * Component schema: team-repository, object
   TYPES: BEGIN OF team_repository_template_repos,
-           dummy TYPE i,
+           dummy_workaround TYPE i,
          END OF team_repository_template_repos.
   TYPES team_repository_owner TYPE string. "   todo
   TYPES: BEGIN OF team_repository_permissions,
@@ -1688,7 +1688,7 @@ INTERFACE zif_github PUBLIC.
   TYPES full_repository_organization TYPE string. "   todo
   TYPES full_repository_license TYPE string. "   todo
   TYPES: BEGIN OF full_repository_template_repos,
-           dummy TYPE i,
+           dummy_workaround TYPE i,
          END OF full_repository_template_repos.
   TYPES: BEGIN OF full_repository_permissions,
            admin TYPE abap_bool,
@@ -2799,7 +2799,7 @@ INTERFACE zif_github PUBLIC.
   TYPES deployment_performed_via_githu TYPE string. "   todo
   TYPES deployment_creator TYPE string. "   todo
   TYPES: BEGIN OF deployment_payload,
-           dummy TYPE i,
+           dummy_workaround TYPE i,
          END OF deployment_payload.
   TYPES: BEGIN OF deployment,
            url TYPE string,
@@ -3121,7 +3121,7 @@ INTERFACE zif_github PUBLIC.
 
 * Component schema: language, object
   TYPES: BEGIN OF language,
-           dummy TYPE i,
+           dummy_workaround TYPE i,
          END OF language.
 
 * Component schema: license-content, object
