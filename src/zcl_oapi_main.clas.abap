@@ -27,8 +27,8 @@ CLASS zcl_oapi_main DEFINITION PUBLIC.
       IMPORTING is_operation TYPE zif_oapi_specification_v3=>ty_operation
       RETURNING VALUE(rs_type) TYPE zif_oapi_specification_v3=>ty_component_schema.
 
-    METHODS parameters_to_abap
-      IMPORTING it_parameters TYPE zif_oapi_specification_v3=>ty_parameters
+    METHODS build_abap_parameters
+      IMPORTING is_operation TYPE zif_oapi_specification_v3=>ty_operation
       RETURNING VALUE(rv_abap) TYPE string.
 
     METHODS build_class
@@ -46,6 +46,10 @@ CLASS zcl_oapi_main DEFINITION PUBLIC.
     METHODS find_parser_method
       IMPORTING iv_name TYPE string
       RETURNING VALUE(rv_method) TYPE string.
+
+    METHODS find_schema
+      IMPORTING iv_name TYPE string
+      RETURNING VALUE(rs_schema) TYPE zif_oapi_specification_v3=>ty_component_schema.
 
     METHODS dump_parser
       IMPORTING ii_schema TYPE REF TO zif_oapi_schema
@@ -99,7 +103,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |    DATA mo_json TYPE REF TO zcl_oapi_json.\n| &&
       |    METHODS send_receive RETURNING VALUE(rv_code) TYPE i.\n|.
 
-    LOOP AT ms_specification-components-schemas INTO ls_schema.
+    LOOP AT ms_specification-components-schemas INTO ls_schema WHERE abap_parser_method IS NOT INITIAL.
       rv_abap = rv_abap &&
         |    METHODS { ls_schema-abap_parser_method }\n| &&
         |      IMPORTING iv_prefix TYPE string\n| &&
@@ -138,7 +142,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
 
 
-    LOOP AT ms_specification-components-schemas INTO ls_schema.
+    LOOP AT ms_specification-components-schemas INTO ls_schema WHERE abap_parser_method IS NOT INITIAL.
       rv_abap = rv_abap &&
         |  METHOD { ls_schema-abap_parser_method }.\n|.
       rv_abap = rv_abap && dump_parser(
@@ -149,7 +153,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
   ENDMETHOD.
 
-  METHOD find_parser_method.
+  METHOD find_schema.
 
     DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
     DATA lv_name TYPE string.
@@ -157,8 +161,16 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     lv_name = iv_name.
 
     REPLACE FIRST OCCURRENCE OF '#/components/schemas/' IN lv_name WITH ''.
-    READ TABLE ms_specification-components-schemas INTO ls_schema WITH KEY name = lv_name.
-    IF sy-subrc = 0.
+    READ TABLE ms_specification-components-schemas INTO rs_schema WITH KEY name = lv_name. "#EC CI_SUBRC
+
+  ENDMETHOD.
+
+  METHOD find_parser_method.
+
+    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
+
+    ls_schema = find_schema( iv_name ).
+    IF ls_schema IS NOT INITIAL.
       rv_method = ls_schema-abap_parser_method.
     ELSE.
       rv_method = 'unknown_not_found'.
@@ -261,13 +273,12 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       IF ls_operation-body_schema_ref IS NOT INITIAL.
         rv_abap = rv_abap &&
           |* Body ref: { ls_operation-body_schema_ref }\n|.
-      ENDIF.
-      IF ls_operation-body_schema IS NOT INITIAL.
+      ELSEIF ls_operation-body_schema IS NOT INITIAL.
         rv_abap = rv_abap &&
           |* Body schema: { ls_operation-body_schema->type }\n|.
       ENDIF.
       rv_abap = rv_abap &&
-        |  METHODS { ls_operation-abap_name }{ parameters_to_abap( ls_operation-parameters ) }|.
+        |  METHODS { ls_operation-abap_name }{ build_abap_parameters( ls_operation ) }|.
       ls_return = find_return( ls_operation ).
       IF ls_return IS NOT INITIAL.
         rv_abap = rv_abap && |    RETURNING VALUE(return_data) TYPE { ls_return-abap_name }\n|.
@@ -362,9 +373,8 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       IF ls_response-code = '200'.
         READ TABLE ls_response-content INTO ls_content WITH KEY type = 'application/json'.
         IF sy-subrc = 0 AND ls_content-schema_ref IS NOT INITIAL.
-          REPLACE FIRST OCCURRENCE OF '#/components/schemas/' IN ls_content-schema_ref WITH ''.
-          READ TABLE ms_specification-components-schemas INTO rs_type WITH KEY name = ls_content-schema_ref.
-          IF sy-subrc = 0.
+          rs_type = find_schema( ls_content-schema_ref ).
+          IF rs_type IS NOT INITIAL.
             RETURN.
           ENDIF.
         ENDIF.
@@ -373,47 +383,60 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
   ENDMETHOD.
 
-  METHOD parameters_to_abap.
+  METHOD build_abap_parameters.
 
-    DATA ls_parameter LIKE LINE OF it_parameters.
+    DATA ls_parameter TYPE zif_oapi_specification_v3=>ty_parameter.
     DATA lt_tab TYPE string_table.
+    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
     DATA lv_type TYPE string.
     DATA lv_text TYPE string.
     DATA lv_default TYPE string.
 
-    IF lines( it_parameters ) > 0.
-      rv_abap = |\n    IMPORTING\n|.
+    LOOP AT is_operation-parameters INTO ls_parameter.
+      lv_type = ls_parameter-schema->get_simple_type( ).
+      IF lv_type IS INITIAL.
+        lv_type = 'string'. " todo, at this point there should only be simple or referenced types?
+      ENDIF.
 
-      LOOP AT it_parameters INTO ls_parameter.
-
-        lv_type = ls_parameter-schema->get_simple_type( ).
-        IF lv_type IS INITIAL.
-          lv_type = 'string'. " todo, at this point there should only be simple or referenced types?
+      CLEAR lv_default.
+      IF ls_parameter-schema IS NOT INITIAL AND ls_parameter-schema->default IS NOT INITIAL.
+        IF ls_parameter-schema->default CO '0123456789'.
+          lv_default = | DEFAULT { ls_parameter-schema->default }|.
+        ELSEIF ls_parameter-schema->type = 'boolean'.
+          lv_default = | DEFAULT abap_{ ls_parameter-schema->default }|.
+        ELSE.
+          lv_default = | DEFAULT '{ ls_parameter-schema->default }'|.
         ENDIF.
+      ENDIF.
 
-        CLEAR lv_default.
-        IF ls_parameter-schema IS NOT INITIAL AND ls_parameter-schema->default IS NOT INITIAL.
-          IF ls_parameter-schema->default CO '0123456789'.
-            lv_default = | DEFAULT { ls_parameter-schema->default }|.
-          ELSEIF ls_parameter-schema->type = 'boolean'.
-            lv_default = | DEFAULT abap_{ ls_parameter-schema->default }|.
-          ELSE.
-            lv_default = | DEFAULT '{ ls_parameter-schema->default }'|.
-          ENDIF.
-        ENDIF.
+      lv_text = |      | && ls_parameter-abap_name && | TYPE | && lv_type && lv_default.
+      IF ls_parameter-required = abap_false AND lv_default IS INITIAL.
+        lv_text = lv_text && | OPTIONAL|.
+      ENDIF.
+      APPEND lv_text TO lt_tab.
+    ENDLOOP.
 
-        lv_text = |      | && ls_parameter-abap_name && | TYPE | && lv_type && lv_default.
-        IF ls_parameter-required = abap_false AND lv_default IS INITIAL.
-          lv_text = lv_text && | OPTIONAL|.
-        ENDIF.
-        APPEND lv_text TO lt_tab.
-      ENDLOOP.
-
+    IF lines( lt_tab ) > 0.
       lv_text = concat_lines_of( table = lt_tab
                                  sep = |\n| ).
     ENDIF.
 
-    rv_abap = rv_abap && lv_text && |\n|.
+    IF is_operation-body_schema_ref IS NOT INITIAL.
+      ls_schema = find_schema( is_operation-body_schema_ref ).
+      IF ls_schema IS NOT INITIAL.
+        IF lv_text IS NOT INITIAL.
+          lv_text = lv_text && |\n|.
+        ENDIF.
+        lv_text = lv_text &&
+          |      body TYPE { ls_schema-abap_name }|.
+      ENDIF.
+    ENDIF.
+
+    IF lv_text IS NOT INITIAL.
+      rv_abap = |\n    IMPORTING\n| && lv_text && |\n|.
+    ELSE.
+      rv_abap = |\n|.
+    ENDIF.
 
   ENDMETHOD.
 
