@@ -4713,6 +4713,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/app/hook/config'.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyapps_update_webhook_config, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -4786,6 +4787,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{installation_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyapps_create_installation_a, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -4881,6 +4883,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyapps_delete_authorization, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -4908,6 +4911,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyapps_check_token, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -4921,6 +4925,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyapps_reset_token, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -4934,6 +4939,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyapps_delete_token, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -4947,6 +4953,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyapps_scope_token, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -5036,6 +5043,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/authorizations'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyoauth_authorizations_creat, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -5049,6 +5057,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyoauth_authorizations_get_o, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -5063,6 +5072,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyoauth_authorizations_get01, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -5093,6 +5103,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{authorization_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyoauth_authorizations_updat, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -5108,6 +5119,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{authorization_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyoauth_authorizations_delet, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -5148,6 +5160,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{content_reference_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyapps_create_content_attach, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -5186,6 +5199,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyenterprise_admin_set_githu, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -5222,6 +5236,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyenterprise_admin_set_selec, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -5280,6 +5295,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/selected-actions, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -5316,6 +5332,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyenterprise_admin_create_se, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -5348,6 +5365,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyenterprise_admin_update_se, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -5364,6 +5382,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyenterprise_admin_delete_se, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -5406,6 +5425,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyenterprise_admin_set_org_a, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -5486,6 +5506,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyenterprise_admin_set_self_, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -5761,6 +5782,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/gists'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodygists_create, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -5837,6 +5859,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodygists_update, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -5850,6 +5873,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodygists_delete, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -5886,6 +5910,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{gist_id}' IN lv_uri WITH gist_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodygists_create_comment, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -5918,6 +5943,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodygists_update_comment, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -5934,6 +5960,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodygists_delete_comment, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -6212,6 +6239,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/markdown'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodymarkdown_render, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -6446,6 +6474,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/notifications'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactivity_mark_notification, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -6506,6 +6535,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{thread_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactivity_set_thread_subscr, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -6521,6 +6551,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{thread_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactivity_delete_thread_sub, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -6584,6 +6615,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyorgs_update, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -6610,6 +6642,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactions_set_github_actions, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -6646,6 +6679,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactions_set_selected_repos, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -6704,6 +6738,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/selected-actions, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -6740,6 +6775,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactions_create_self_hosted, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -6772,6 +6808,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactions_update_self_hosted, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -6788,6 +6825,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactions_delete_self_hosted, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -6820,6 +6858,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactions_set_repo_access_to, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -6900,6 +6939,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{runner_group_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactions_set_self_hosted_ru, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -7096,6 +7136,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{secret_name}' IN lv_uri WITH secret_name.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactions_create_or_update_o, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -7110,6 +7151,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{secret_name}' IN lv_uri WITH secret_name.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactions_delete_org_secret, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -7138,6 +7180,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{secret_name}' IN lv_uri WITH secret_name.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactions_set_selected_rep01, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -7371,6 +7414,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyorgs_create_webhook, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -7403,6 +7447,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyorgs_update_webhook, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -7419,6 +7464,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyorgs_delete_webhook, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -7451,6 +7497,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyorgs_update_webhook_config, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -7529,6 +7576,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/interaction-limit, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -7578,6 +7626,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyorgs_create_invitation, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -7746,6 +7795,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyorgs_set_membership_for_us, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -7760,6 +7810,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyorgs_remove_membership_for, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -7796,6 +7847,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodymigrations_start_for_org, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -7980,6 +8032,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyprojects_create_for_org, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -8090,6 +8143,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_create_in_org, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -8188,6 +8242,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_create, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -8216,6 +8271,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_update_in_org, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -8230,6 +8286,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_delete_in_org, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -8271,6 +8328,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_create_discussion_in, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -8305,6 +8363,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_update_discussion_in, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -8322,6 +8381,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_delete_discussion_in, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -8369,6 +8429,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_create_discussion_co, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -8409,6 +8470,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_update_discussion_co, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -8429,6 +8491,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_delete_discussion_co, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -8482,6 +8545,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyreactions_create_for_team_, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -8552,6 +8616,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyreactions_create_for_tea01, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -8653,6 +8718,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_add_or_update_member, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -8668,6 +8734,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_remove_membership_fo, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -8726,6 +8793,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_add_or_update_projec, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -8743,6 +8811,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_remove_project_in_or, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -8799,6 +8868,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_add_or_update_repo_p, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -8815,6 +8885,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_remove_repo_in_org, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -8843,6 +8914,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{team_slug}' IN lv_uri WITH team_slug.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_create_or_update_idp, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -8897,6 +8969,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{card_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyprojects_update_card, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -8912,6 +8985,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{card_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyprojects_delete_card, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -8927,6 +9001,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{card_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyprojects_move_card, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -8957,6 +9032,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{column_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyprojects_update_column, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -8972,6 +9048,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{column_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyprojects_delete_column, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -9015,6 +9092,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{column_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyprojects_create_card, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -9030,6 +9108,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{column_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyprojects_move_column, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -9060,6 +9139,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyprojects_update, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -9075,6 +9155,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyprojects_delete, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -9119,6 +9200,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyprojects_add_collaborator, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -9135,6 +9217,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyprojects_remove_collaborat, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -9191,6 +9274,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyprojects_create_column, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -9246,6 +9330,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_update, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -9260,6 +9345,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_delete, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -9398,6 +9484,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactions_set_github_actio01, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -9426,6 +9513,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/selected-actions, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -9806,6 +9894,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{secret_name}' IN lv_uri WITH secret_name.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactions_create_or_update_r, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -9821,6 +9910,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{secret_name}' IN lv_uri WITH secret_name.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactions_delete_repo_secret, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -9896,6 +9986,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactions_create_workflow_di, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -10110,6 +10201,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_update_branch_protec, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -10125,6 +10217,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_delete_branch_protec, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -10200,6 +10293,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_update_pull_request_, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -10215,6 +10309,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_delete_pull_request_, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -10290,6 +10385,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_update_status_check_, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -10305,6 +10401,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_remove_status_check_, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -10335,6 +10432,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_add_status_check_con, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -10350,6 +10448,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_set_status_check_con, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -10365,6 +10464,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_remove_status_chec01, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -10425,6 +10525,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_add_app_access_restr, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -10440,6 +10541,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_set_app_access_restr, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -10455,6 +10557,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_remove_app_access_re, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -10485,6 +10588,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_add_team_access_rest, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -10500,6 +10604,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_set_team_access_rest, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -10515,6 +10620,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_remove_team_access_r, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -10545,6 +10651,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_add_user_access_rest, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -10560,6 +10667,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_set_user_access_rest, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -10575,6 +10683,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_remove_user_access_r, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -10590,6 +10699,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_rename_branch, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -10604,6 +10714,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodychecks_create, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -10638,6 +10749,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{check_run_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodychecks_update, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -10679,6 +10791,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodychecks_create_suite, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -10693,6 +10806,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodychecks_set_suites_preferen, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -10821,6 +10935,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodycode_scanning_update_alert, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -10859,6 +10974,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodycode_scanning_upload_sarif, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -10916,6 +11032,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_add_collaborator, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -10931,6 +11048,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_remove_collaborator, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -11004,6 +11122,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_update_commit_commen, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -11021,6 +11140,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_delete_commit_commen, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -11068,6 +11188,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyreactions_create_for_commi, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -11182,6 +11303,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{commit_sha}' IN lv_uri WITH commit_sha.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_create_commit_commen, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -11406,6 +11528,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_create_or_update_fil, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -11421,6 +11544,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_delete_file, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -11498,6 +11622,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_create_deployment, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -11576,6 +11701,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{deployment_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_create_deployment_st, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -11610,6 +11736,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_create_dispatch_even, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -11675,6 +11802,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_create_fork, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -11689,6 +11817,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodygit_create_blob, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -11718,6 +11847,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodygit_create_commit, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -11787,6 +11917,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodygit_create_ref, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -11802,6 +11933,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodygit_update_ref, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -11817,6 +11949,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodygit_delete_ref, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -11831,6 +11964,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodygit_create_tag, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -11860,6 +11994,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodygit_create_tree, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -11916,6 +12051,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_create_webhook, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -11950,6 +12086,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_update_webhook, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -11967,6 +12104,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_delete_webhook, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -12001,6 +12139,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{hook_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_update_webhook_confi, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -12063,6 +12202,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodymigrations_start_import, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -12077,6 +12217,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodymigrations_update_import, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -12091,6 +12232,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodymigrations_cancel_import, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -12127,6 +12269,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodymigrations_map_commit_auth, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -12155,6 +12298,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodymigrations_set_lfs_prefere, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -12197,6 +12341,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/interaction-limit, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -12252,6 +12397,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{invitation_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_update_invitation, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -12269,6 +12415,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{invitation_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_delete_invitation, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -12334,6 +12481,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_create, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -12401,6 +12549,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_update_comment, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -12418,6 +12567,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_delete_comment, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -12465,6 +12615,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyreactions_create_for_issue, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -12560,6 +12711,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_update, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -12577,6 +12729,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_add_assignees, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -12594,6 +12747,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_remove_assignees, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -12641,6 +12795,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_create_comment, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -12712,6 +12867,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_add_labels, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -12729,6 +12885,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_set_labels, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -12746,6 +12903,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_remove_all_labels, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -12781,6 +12939,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_lock, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -12798,6 +12957,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_unlock, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -12845,6 +13005,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyreactions_create_for_iss01, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -12930,6 +13091,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_create_deploy_key, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13002,6 +13164,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_create_label, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13032,6 +13195,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_update_label, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13047,6 +13211,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_delete_label, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -13089,6 +13254,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_merge, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13136,6 +13302,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_create_milestone, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13170,6 +13337,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{milestone_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_update_milestone, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13187,6 +13355,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{milestone_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyissues_delete_milestone, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -13268,6 +13437,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactivity_mark_repo_notific, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -13296,6 +13466,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_create_pages_site, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13310,6 +13481,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_update_information_a, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -13324,6 +13496,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_delete_pages_site, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -13434,6 +13607,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyprojects_create_for_repo, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13487,6 +13661,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodypulls_create, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13554,6 +13729,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodypulls_update_review_commen, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13571,6 +13747,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodypulls_delete_review_commen, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -13618,6 +13795,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyreactions_create_for_pull_, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13672,6 +13850,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodypulls_update, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13725,6 +13904,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodypulls_create_review_commen, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13745,6 +13925,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodypulls_create_reply_for_rev, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13833,6 +14014,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodypulls_merge, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13877,6 +14059,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodypulls_request_reviewers, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13894,6 +14077,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodypulls_remove_requested_rev, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -13938,6 +14122,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodypulls_create_review, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13978,6 +14163,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{review_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodypulls_update_review, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -13998,6 +14184,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{review_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodypulls_delete_pending_revie, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14048,6 +14235,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{review_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodypulls_dismiss_review, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14068,6 +14256,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{review_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodypulls_submit_review, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14085,6 +14274,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{pull_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodypulls_update_branch, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -14140,6 +14330,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_create_release, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14174,6 +14365,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{asset_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_update_release_asset, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14191,6 +14383,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{asset_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_delete_release_asset, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -14254,6 +14447,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{release_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_update_release, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14271,6 +14465,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{release_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_delete_release, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -14382,6 +14577,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodysecret_scanning_update_ale, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14491,6 +14687,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_create_commit_status, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14543,6 +14740,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactivity_set_repo_subscrip, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14557,6 +14755,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyactivity_delete_repo_subsc, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -14648,6 +14847,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_replace_all_topics, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14724,6 +14924,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_transfer, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -14795,6 +14996,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{template_repo}' IN lv_uri WITH template_repo.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_create_using_templat, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14848,6 +15050,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyenterprise_admin_provision, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14876,6 +15079,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{scim_group_id}' IN lv_uri WITH scim_group_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyenterprise_admin_set_infor, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14890,6 +15094,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{scim_group_id}' IN lv_uri WITH scim_group_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyenterprise_admin_update_at, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14904,6 +15109,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{scim_group_id}' IN lv_uri WITH scim_group_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyenterprise_admin_delete_sc, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -14940,6 +15146,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyenterprise_admin_provisi01, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14968,6 +15175,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{scim_user_id}' IN lv_uri WITH scim_user_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyenterprise_admin_set_inf01, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14982,6 +15190,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{scim_user_id}' IN lv_uri WITH scim_user_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyenterprise_admin_update_01, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14996,6 +15205,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{scim_user_id}' IN lv_uri WITH scim_user_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyenterprise_admin_delete_us, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -15035,6 +15245,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyscim_provision_and_invite_, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -15063,6 +15274,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{scim_user_id}' IN lv_uri WITH scim_user_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyscim_set_information_for_p, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -15077,6 +15289,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{scim_user_id}' IN lv_uri WITH scim_user_id.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyscim_update_attribute_for_, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -15091,6 +15304,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{scim_user_id}' IN lv_uri WITH scim_user_id.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyscim_delete_user_from_org, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -15301,6 +15515,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_update_legacy, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -15316,6 +15531,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_delete_legacy, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -15359,6 +15575,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_create_discussion_le, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -15395,6 +15612,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_update_discussion_le, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -15413,6 +15631,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_delete_discussion_le, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -15462,6 +15681,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_create_discussion_01, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -15504,6 +15724,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_update_discussion_01, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -15525,6 +15746,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_delete_discussion_01, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -15580,6 +15802,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyreactions_create_for_tea02, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -15629,6 +15852,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyreactions_create_for_tea03, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -15762,6 +15986,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_add_or_update_memb01, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -15778,6 +16003,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_remove_membership_01, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -15839,6 +16065,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_add_or_update_proj01, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -15857,6 +16084,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_remove_project_legac, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -15916,6 +16144,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_add_or_update_repo01, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -15933,6 +16162,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_remove_repo_legacy, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -15963,6 +16193,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyteams_create_or_update_i01, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -16012,6 +16243,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user'.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyusers_update_authenticated, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -16075,6 +16307,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/email/visibility'.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyusers_set_primary_email_vi, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -16109,6 +16342,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/emails'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyusers_add_email_for_authen, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -16121,6 +16355,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/emails'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyusers_delete_email_for_aut, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -16238,6 +16473,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/gpg_keys'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyusers_create_gpg_key_for_a, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -16375,6 +16611,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/interaction-limits'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/interaction-limit, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -16461,6 +16698,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/keys'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyusers_create_public_ssh_ke, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -16586,6 +16824,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyorgs_update_membership_for, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -16620,6 +16859,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/migrations'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodymigrations_start_for_authe, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -16745,6 +16985,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/projects'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyprojects_create_for_authen, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -16822,6 +17063,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/repos'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+* todo, #/components/schemas/bodyrepos_create_for_authentic, mi_client->request->set_cdata( to_json( body ) )
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).

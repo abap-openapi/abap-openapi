@@ -47,6 +47,10 @@ CLASS zcl_oapi_main DEFINITION PUBLIC.
       IMPORTING iv_name TYPE string
       RETURNING VALUE(rv_method) TYPE string.
 
+    METHODS abap_schema_to_json
+      IMPORTING iv_name TYPE string
+      RETURNING VALUE(rv_abap) TYPE string.
+
     METHODS find_schema
       IMPORTING iv_name TYPE string
       RETURNING VALUE(rs_schema) TYPE zif_oapi_specification_v3=>ty_component_schema.
@@ -344,9 +348,15 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
     rv_abap = rv_abap &&
       |    mi_client->request->set_method( '{ to_upper( is_operation-method ) }' ).\n| &&
-      |    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).\n| &&
+      |    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).\n|.
 *      |    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).\n| &&
 *      |    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).\n| &&
+
+    IF is_operation-body_schema_ref IS NOT INITIAL.
+      rv_abap = rv_abap && abap_schema_to_json( is_operation-body_schema_ref ).
+    ENDIF.
+
+    rv_abap = rv_abap &&
       |    lv_code = send_receive( ).\n| &&
       |    WRITE / lv_code.\n|.
 * todo, accept and check content types
@@ -362,6 +372,11 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         |* todo, handle more responses\n|.
     ENDIF.
 
+  ENDMETHOD.
+
+  METHOD abap_schema_to_json.
+*      ls_schema = find_schema( iv_name ).
+    rv_abap = |* todo, { iv_name }, mi_client->request->set_cdata( to_json( body ) )\n|.
   ENDMETHOD.
 
   METHOD find_return.
@@ -432,6 +447,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         lv_text = lv_text &&
           |      body TYPE { ls_schema-abap_name }|.
       ENDIF.
+* else: todo, basic type
     ENDIF.
 
     IF lv_text IS NOT INITIAL.

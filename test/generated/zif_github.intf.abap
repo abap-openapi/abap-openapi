@@ -4882,7 +4882,7 @@ INTERFACE zif_github PUBLIC.
            name TYPE string,
          END OF bodyprojects_delete_column.
 
-* Component schema: bodyprojects_create_card,
+* Component schema: bodyprojects_create_card, 
   TYPES bodyprojects_create_card TYPE string. "   todo
 
 * Component schema: bodyprojects_move_column, object
@@ -6102,10 +6102,10 @@ INTERFACE zif_github PUBLIC.
            visibility TYPE string,
          END OF bodyusers_set_primary_email_vi.
 
-* Component schema: bodyusers_add_email_for_authen,
+* Component schema: bodyusers_add_email_for_authen, 
   TYPES bodyusers_add_email_for_authen TYPE string. "   todo
 
-* Component schema: bodyusers_delete_email_for_aut,
+* Component schema: bodyusers_delete_email_for_aut, 
   TYPES bodyusers_delete_email_for_aut TYPE string. "   todo
 
 * Component schema: bodyusers_create_gpg_key_for_a, object
@@ -6178,7 +6178,7 @@ INTERFACE zif_github PUBLIC.
 * Operation id: apps/create-from-manifest
 * Parameter: code, required, path
 * Response: 201
-*     application/json,
+*     application/json, 
 * Response: 404
 * Response: 422
   METHODS apps_create_from_manifest
@@ -6410,7 +6410,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: client_id, required, path
 * Parameter: access_token, required, path
 * Response: 200
-*     application/json,
+*     application/json, 
 * Response: 404
   METHODS apps_check_authorization
     IMPORTING
@@ -7720,7 +7720,7 @@ INTERFACE zif_github PUBLIC.
 * Response: 409
 * Response: 415
 * Response: 422
-*     application/json,
+*     application/json, 
 * Body ref: #/components/schemas/bodyorgs_update
   METHODS orgs_update
     IMPORTING
@@ -9719,7 +9719,7 @@ INTERFACE zif_github PUBLIC.
 * Response: 401
 * Response: 403
 * Response: 422
-*     application/json,
+*     application/json, 
 * Response: 503
 *     application/json, object
 * Body ref: #/components/schemas/bodyprojects_create_card
@@ -11896,7 +11896,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Response: 200
 *     application/vnd.github.v3.object, #/components/schemas/content-tree
-*     application/json,
+*     application/json, 
 * Response: 302
 * Response: 403
 * Response: 404
@@ -16025,7 +16025,7 @@ INTERFACE zif_github PUBLIC.
 * GET - "Get the authenticated user"
 * Operation id: users/get-authenticated
 * Response: 200
-*     application/json,
+*     application/json, 
 * Response: 304
 * Response: 401
 * Response: 403
@@ -16892,7 +16892,7 @@ INTERFACE zif_github PUBLIC.
 * Operation id: users/get-by-username
 * Parameter: username, required, path
 * Response: 200
-*     application/json,
+*     application/json, 
 * Response: 404
   METHODS users_get_by_username
     IMPORTING
