@@ -49,6 +49,7 @@ CLASS ltcl_github DEFINITION FOR TESTING RISK LEVEL HARMLESS DURATION SHORT FINA
     METHODS pulls_create FOR TESTING RAISING cx_static_check.
     METHODS pulls_update FOR TESTING RAISING cx_static_check.
     DATA mi_github TYPE REF TO zif_github.
+    DATA mv_token TYPE string.
 ENDCLASS.
 
 CLASS ltcl_github IMPLEMENTATION.
@@ -63,6 +64,13 @@ CLASS ltcl_github IMPLEMENTATION.
         ssl_id = 'ANONYM'
       IMPORTING
         client = li_client ).
+
+    WRITE '@KERNEL this.mv_token.set(process.env.GITHUB_TOKEN || "");'.
+    IF mv_token IS NOT INITIAL.
+      li_client->authenticate(
+        username = 'dummy'
+        password = mv_token ).
+    ENDIF.
 
     CREATE OBJECT mi_github TYPE zcl_github
       EXPORTING
@@ -110,15 +118,46 @@ CLASS ltcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD pulls_create.
-    " mi_github->pulls_create(
-    "    owner       = 'abapGit-tests'
-    "    repo        = 'VIEW' ).
+
+    " DATA ls_body TYPE zif_github=>bodypulls_create.
+    " DATA ls_created TYPE zif_github=>pull_request.
+
+    " IF mv_token IS INITIAL.
+    "   RETURN.
+    " ENDIF.
+
+    " ls_created = mi_github->pulls_create(
+    "   owner = 'larshp'
+    "   repo  = 'testing-test'
+    "   body  = ls_body ).
+
+    " cl_abap_unit_assert=>assert_not_initial( ls_created ).
+
   ENDMETHOD.
 
   METHOD pulls_update.
-    " mi_github->pulls_update(
-    "   owner       = 'abapGit-tests'
-    "   repo        = 'VIEW' ).
+    DATA ls_body TYPE zif_github=>bodypulls_update.
+    DATA ls_pull_request TYPE zif_github=>pull_request.
+
+    IF mv_token IS INITIAL.
+      RETURN.
+    ENDIF.
+
+    ls_body-title = 'abc_title'.
+    ls_body-body  = 'abc_body'.
+    ls_body-state = 'open'.
+    ls_body-base  = 'sdfsdf'.
+    ls_body-maintainer_can_modify = abap_true.
+
+    ls_pull_request = mi_github->pulls_update(
+      owner       = 'larshp'
+      repo        = 'testing-test'
+      pull_number = 2
+      body        = ls_body ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = ls_pull_request-url
+      exp = 'https://api.github.com/repos/larshp/testing-test/pulls/2' ).
   ENDMETHOD.
 
   METHOD pulls_list.

@@ -4788,8 +4788,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_installation_token( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_suspend_installation.
@@ -5038,8 +5038,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_authorization( '' ).
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_get_or_cr.
@@ -5318,8 +5318,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_runner_groups_enterprise( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_get_self_host.
@@ -5575,8 +5575,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_authentication_token( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_create_remove.
@@ -5588,8 +5588,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_authentication_token( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_get_self_ho01.
@@ -5763,8 +5763,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gist_simple( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_list_public.
@@ -5888,8 +5888,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gist_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_get_comment.
@@ -5995,8 +5995,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_base_gist( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_check_is_starred.
@@ -6742,8 +6742,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_runner_groups_org( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_get_self_hosted_runner.
@@ -6989,8 +6989,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_authentication_token( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_create_remove_token_fo.
@@ -7002,8 +7002,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_authentication_token( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_get_self_hosted_runn01.
@@ -7373,8 +7373,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_org_hook( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_get_webhook.
@@ -7580,8 +7580,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_organization_invitation( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_cancel_invitation.
@@ -7798,8 +7798,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_migration( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_get_status_for_org.
@@ -7982,8 +7982,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_project( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_public_members.
@@ -8092,8 +8092,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repository( '' ).
   ENDMETHOD.
 
   METHOD zif_github~billing_get_github_actions_b01.
@@ -8190,8 +8190,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_full( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_get_by_name.
@@ -8218,8 +8218,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_full( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_delete_in_org.
@@ -8273,8 +8273,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_discussion( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_get_discussion_in_org.
@@ -8371,8 +8371,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_discussion_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_get_discussion_comment_i.
@@ -8484,8 +8484,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_reaction( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_delete_for_team_disc.
@@ -8554,8 +8554,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_reaction( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_delete_for_team_di01.
@@ -9017,8 +9017,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_project_card( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_move_column.
@@ -9193,8 +9193,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_project_column( '' ).
   ENDMETHOD.
 
   METHOD zif_github~rate_limit_get.
@@ -9480,8 +9480,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_authentication_token( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_create_remove_token_01.
@@ -9494,8 +9494,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_authentication_token( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_get_self_hosted_runn02.
@@ -10592,8 +10592,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_branch_with_protection( '' ).
   ENDMETHOD.
 
   METHOD zif_github~checks_create.
@@ -10606,8 +10606,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_check_run( '' ).
   ENDMETHOD.
 
   METHOD zif_github~checks_get.
@@ -10681,8 +10681,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_check_suite( '' ).
   ENDMETHOD.
 
   METHOD zif_github~checks_set_suites_preferences.
@@ -10918,8 +10918,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repository_invitation( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_remove_collaborator.
@@ -11184,8 +11184,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_commit_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_pull_requests_assoc.
@@ -11500,8 +11500,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_deployment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_deployment.
@@ -11578,8 +11578,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_deployment_status( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_deployment_status.
@@ -11691,8 +11691,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_short_blob( '' ).
   ENDMETHOD.
 
   METHOD zif_github~git_get_blob.
@@ -11720,8 +11720,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_git_commit( '' ).
   ENDMETHOD.
 
   METHOD zif_github~git_get_commit.
@@ -11789,8 +11789,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_git_ref( '' ).
   ENDMETHOD.
 
   METHOD zif_github~git_update_ref.
@@ -11833,8 +11833,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_git_tag( '' ).
   ENDMETHOD.
 
   METHOD zif_github~git_get_tag.
@@ -11862,8 +11862,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_git_tree( '' ).
   ENDMETHOD.
 
   METHOD zif_github~git_get_tree.
@@ -11918,8 +11918,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_hook( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_webhook.
@@ -12065,8 +12065,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_import( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_update_import.
@@ -12336,8 +12336,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issue( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_list_comments_for_repo.
@@ -12579,8 +12579,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issue_simple( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_remove_assignees.
@@ -12643,8 +12643,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issue_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_list_events.
@@ -12847,8 +12847,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_reaction( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_delete_for_issue.
@@ -12932,8 +12932,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_deploy_key( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_deploy_key.
@@ -13004,8 +13004,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_label( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_get_label.
@@ -13091,8 +13091,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_commit( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_list_milestones.
@@ -13138,8 +13138,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_milestone( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_get_milestone.
@@ -13298,8 +13298,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_page( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update_information_about.
@@ -13364,8 +13364,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_page_build_status( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_latest_pages_build.
@@ -13436,8 +13436,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_project( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_list.
@@ -13489,8 +13489,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pull_request( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_list_review_comments_for.
@@ -13727,8 +13727,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pull_request_review_comm( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_create_reply_for_review_.
@@ -13747,8 +13747,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pull_request_review_comm( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_list_commits.
@@ -13879,8 +13879,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pull_request_simple( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_remove_requested_reviewe.
@@ -14142,8 +14142,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_release( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_release_asset.
@@ -14323,8 +14323,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_release_asset( '' ).
   ENDMETHOD.
 
   METHOD zif_github~secret_scanning_list_alerts_fo.
@@ -14493,8 +14493,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_status( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_list_watchers_for_rep.
@@ -14797,8 +14797,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repository( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_public.
@@ -14850,8 +14850,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_scim_enterprise_group( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_get_provision.
@@ -14942,8 +14942,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_scim_enterprise_user( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_get_provisi01.
@@ -15303,8 +15303,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_full( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_delete_legacy.
@@ -15361,8 +15361,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_discussion( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_get_discussion_legacy.
@@ -15464,8 +15464,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_team_discussion_comment( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_get_discussion_comment_l.
@@ -15582,8 +15582,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_reaction( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_list_for_team_disc03.
@@ -15631,8 +15631,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_reaction( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_list_pending_invitatio01.
@@ -16240,8 +16240,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gpg_key( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_get_gpg_key_for_authenti.
@@ -16463,8 +16463,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_key( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_get_public_ssh_key_for_a.
@@ -16622,8 +16622,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_migration( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_get_status_for_auth.
@@ -16747,8 +16747,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_project( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_list_public_emails_for_a.
@@ -16824,8 +16824,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repository( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_invitations_for_aut.

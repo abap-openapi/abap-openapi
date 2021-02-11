@@ -370,7 +370,9 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     DATA ls_content LIKE LINE OF ls_response-content.
 
     LOOP AT is_operation-responses INTO ls_response.
-      IF ls_response-code = '200'.
+      IF ls_response-code = '200'
+          OR ls_response-code = '201'
+          OR ls_response-code = '204'.
         READ TABLE ls_response-content INTO ls_content WITH KEY type = 'application/json'.
         IF sy-subrc = 0 AND ls_content-schema_ref IS NOT INITIAL.
           rs_type = find_schema( ls_content-schema_ref ).

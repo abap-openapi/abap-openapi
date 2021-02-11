@@ -4882,7 +4882,7 @@ INTERFACE zif_github PUBLIC.
            name TYPE string,
          END OF bodyprojects_delete_column.
 
-* Component schema: bodyprojects_create_card, 
+* Component schema: bodyprojects_create_card,
   TYPES bodyprojects_create_card TYPE string. "   todo
 
 * Component schema: bodyprojects_move_column, object
@@ -6102,10 +6102,10 @@ INTERFACE zif_github PUBLIC.
            visibility TYPE string,
          END OF bodyusers_set_primary_email_vi.
 
-* Component schema: bodyusers_add_email_for_authen, 
+* Component schema: bodyusers_add_email_for_authen,
   TYPES bodyusers_add_email_for_authen TYPE string. "   todo
 
-* Component schema: bodyusers_delete_email_for_aut, 
+* Component schema: bodyusers_delete_email_for_aut,
   TYPES bodyusers_delete_email_for_aut TYPE string. "   todo
 
 * Component schema: bodyusers_create_gpg_key_for_a, object
@@ -6163,20 +6163,22 @@ INTERFACE zif_github PUBLIC.
 * Operation id: meta/root
 * Response: 200
 *     application/json, object
-  METHODS meta_root    RAISING cx_static_check.
+  METHODS meta_root
+    RAISING cx_static_check.
 
 * GET - "Get the authenticated app"
 * Operation id: apps/get-authenticated
 * Response: 200
 *     application/json, #/components/schemas/integration
-  METHODS apps_get_authenticated    RETURNING VALUE(return_data) TYPE integration
+  METHODS apps_get_authenticated
+    RETURNING VALUE(return_data) TYPE integration
     RAISING cx_static_check.
 
 * POST - "Create a GitHub App from a manifest"
 * Operation id: apps/create-from-manifest
 * Parameter: code, required, path
 * Response: 201
-*     application/json, 
+*     application/json,
 * Response: 404
 * Response: 422
   METHODS apps_create_from_manifest
@@ -6188,7 +6190,8 @@ INTERFACE zif_github PUBLIC.
 * Operation id: apps/get-webhook-config-for-app
 * Response: 200
 *     application/json, #/components/schemas/webhook-config
-  METHODS apps_get_webhook_config_for_ap    RETURNING VALUE(return_data) TYPE webhook_config
+  METHODS apps_get_webhook_config_for_ap
+    RETURNING VALUE(return_data) TYPE webhook_config
     RAISING cx_static_check.
 
 * PATCH - "Update a webhook configuration for an app"
@@ -6256,6 +6259,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       installation_id TYPE i
       body TYPE bodyapps_create_installation_a
+    RETURNING VALUE(return_data) TYPE installation_token
     RAISING cx_static_check.
 
 * PUT - "Suspend an app installation"
@@ -6406,7 +6410,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: client_id, required, path
 * Parameter: access_token, required, path
 * Response: 200
-*     application/json, 
+*     application/json,
 * Response: 404
   METHODS apps_check_authorization
     IMPORTING
@@ -6481,6 +6485,7 @@ INTERFACE zif_github PUBLIC.
   METHODS oauth_authorizations_create_au
     IMPORTING
       body TYPE bodyoauth_authorizations_creat
+    RETURNING VALUE(return_data) TYPE authorization
     RAISING cx_static_check.
 
 * PUT - "Get-or-create an authorization for a specific app"
@@ -6568,7 +6573,8 @@ INTERFACE zif_github PUBLIC.
 *     application/json, array
 * Response: 304
 * Response: 415
-  METHODS codes_of_conduct_get_all_codes    RAISING cx_static_check.
+  METHODS codes_of_conduct_get_all_codes
+    RAISING cx_static_check.
 
 * GET - "Get a code of conduct"
 * Operation id: codes-of-conduct/get-conduct-code
@@ -6608,7 +6614,8 @@ INTERFACE zif_github PUBLIC.
 * Response: 200
 *     application/json, object
 * Response: 304
-  METHODS emojis_get    RAISING cx_static_check.
+  METHODS emojis_get
+    RAISING cx_static_check.
 
 * GET - "Get GitHub Actions permissions for an enterprise"
 * Operation id: enterprise-admin/get-github-actions-permissions-enterprise
@@ -6725,6 +6732,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       enterprise TYPE string
       body TYPE bodyenterprise_admin_create_se
+    RETURNING VALUE(return_data) TYPE runner_groups_enterprise
     RAISING cx_static_check.
 
 * GET - "Get a self-hosted runner group for an enterprise"
@@ -6910,6 +6918,7 @@ INTERFACE zif_github PUBLIC.
   METHODS enterprise_admin_create_regist
     IMPORTING
       enterprise TYPE string
+    RETURNING VALUE(return_data) TYPE authentication_token
     RAISING cx_static_check.
 
 * POST - "Create a remove token for an enterprise"
@@ -6920,6 +6929,7 @@ INTERFACE zif_github PUBLIC.
   METHODS enterprise_admin_create_remove
     IMPORTING
       enterprise TYPE string
+    RETURNING VALUE(return_data) TYPE authentication_token
     RAISING cx_static_check.
 
 * GET - "Get a self-hosted runner for an enterprise"
@@ -7020,7 +7030,8 @@ INTERFACE zif_github PUBLIC.
 * Operation id: activity/get-feeds
 * Response: 200
 *     application/json, #/components/schemas/feed
-  METHODS activity_get_feeds    RETURNING VALUE(return_data) TYPE feed
+  METHODS activity_get_feeds
+    RETURNING VALUE(return_data) TYPE feed
     RAISING cx_static_check.
 
 * GET - "List gists for the authenticated user"
@@ -7051,6 +7062,7 @@ INTERFACE zif_github PUBLIC.
   METHODS gists_create
     IMPORTING
       body TYPE bodygists_create
+    RETURNING VALUE(return_data) TYPE gist_simple
     RAISING cx_static_check.
 
 * GET - "List public gists"
@@ -7160,6 +7172,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       gist_id TYPE string
       body TYPE bodygists_create_comment
+    RETURNING VALUE(return_data) TYPE gist_comment
     RAISING cx_static_check.
 
 * GET - "Get a gist comment"
@@ -7256,6 +7269,7 @@ INTERFACE zif_github PUBLIC.
   METHODS gists_fork
     IMPORTING
       gist_id TYPE string
+    RETURNING VALUE(return_data) TYPE base_gist
     RAISING cx_static_check.
 
 * GET - "Check if a gist is starred"
@@ -7316,7 +7330,8 @@ INTERFACE zif_github PUBLIC.
 * Response: 200
 *     application/json, array
 * Response: 304
-  METHODS gitignore_get_all_templates    RAISING cx_static_check.
+  METHODS gitignore_get_all_templates
+    RAISING cx_static_check.
 
 * GET - "Get a gitignore template"
 * Operation id: gitignore/get-template
@@ -7348,7 +7363,8 @@ INTERFACE zif_github PUBLIC.
 * DELETE - "Revoke an installation access token"
 * Operation id: apps/revoke-installation-access-token
 * Response: 204
-  METHODS apps_revoke_installation_acces    RAISING cx_static_check.
+  METHODS apps_revoke_installation_acces
+    RAISING cx_static_check.
 
 * GET - "List issues assigned to the authenticated user"
 * Operation id: issues/list
@@ -7428,7 +7444,8 @@ INTERFACE zif_github PUBLIC.
 * Response: 200
 *     text/html, string
 * Response: 304
-  METHODS markdown_render_raw    RAISING cx_static_check.
+  METHODS markdown_render_raw
+    RAISING cx_static_check.
 
 * GET - "Get a subscription plan for an account"
 * Operation id: apps/get-subscription-plan-for-account
@@ -7529,7 +7546,8 @@ INTERFACE zif_github PUBLIC.
 * Response: 200
 *     application/json, #/components/schemas/api-overview
 * Response: 304
-  METHODS meta_get    RETURNING VALUE(return_data) TYPE api_overview
+  METHODS meta_get
+    RETURNING VALUE(return_data) TYPE api_overview
     RAISING cx_static_check.
 
 * GET - "List public events for a network of repositories"
@@ -7702,7 +7720,7 @@ INTERFACE zif_github PUBLIC.
 * Response: 409
 * Response: 415
 * Response: 422
-*     application/json, 
+*     application/json,
 * Body ref: #/components/schemas/bodyorgs_update
   METHODS orgs_update
     IMPORTING
@@ -7826,6 +7844,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       org TYPE string
       body TYPE bodyactions_create_self_hosted
+    RETURNING VALUE(return_data) TYPE runner_groups_org
     RAISING cx_static_check.
 
 * GET - "Get a self-hosted runner group for an organization"
@@ -8007,6 +8026,7 @@ INTERFACE zif_github PUBLIC.
   METHODS actions_create_registration_to
     IMPORTING
       org TYPE string
+    RETURNING VALUE(return_data) TYPE authentication_token
     RAISING cx_static_check.
 
 * POST - "Create a remove token for an organization"
@@ -8017,6 +8037,7 @@ INTERFACE zif_github PUBLIC.
   METHODS actions_create_remove_token_fo
     IMPORTING
       org TYPE string
+    RETURNING VALUE(return_data) TYPE authentication_token
     RAISING cx_static_check.
 
 * GET - "Get a self-hosted runner for an organization"
@@ -8308,6 +8329,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       org TYPE string
       body TYPE bodyorgs_create_webhook
+    RETURNING VALUE(return_data) TYPE org_hook
     RAISING cx_static_check.
 
 * GET - "Get an organization webhook"
@@ -8481,6 +8503,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       org TYPE string
       body TYPE bodyorgs_create_invitation
+    RETURNING VALUE(return_data) TYPE organization_invitation
     RAISING cx_static_check.
 
 * DELETE - "Cancel an organization invitation"
@@ -8658,6 +8681,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       org TYPE string
       body TYPE bodymigrations_start_for_org
+    RETURNING VALUE(return_data) TYPE migration
     RAISING cx_static_check.
 
 * GET - "Get an organization migration status"
@@ -8805,6 +8829,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       org TYPE string
       body TYPE bodyprojects_create_for_org
+    RETURNING VALUE(return_data) TYPE project
     RAISING cx_static_check.
 
 * GET - "List public organization members"
@@ -8888,6 +8913,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       org TYPE string
       body TYPE bodyrepos_create_in_org
+    RETURNING VALUE(return_data) TYPE repository
     RAISING cx_static_check.
 
 * GET - "Get GitHub Actions billing for an organization"
@@ -8965,6 +8991,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       org TYPE string
       body TYPE bodyteams_create
+    RETURNING VALUE(return_data) TYPE team_full
     RAISING cx_static_check.
 
 * GET - "Get a team by name"
@@ -8993,6 +9020,7 @@ INTERFACE zif_github PUBLIC.
       org TYPE string
       team_slug TYPE string
       body TYPE bodyteams_update_in_org
+    RETURNING VALUE(return_data) TYPE team_full
     RAISING cx_static_check.
 
 * DELETE - "Delete a team"
@@ -9038,6 +9066,7 @@ INTERFACE zif_github PUBLIC.
       org TYPE string
       team_slug TYPE string
       body TYPE bodyteams_create_discussion_in
+    RETURNING VALUE(return_data) TYPE team_discussion
     RAISING cx_static_check.
 
 * GET - "Get a discussion"
@@ -9121,6 +9150,7 @@ INTERFACE zif_github PUBLIC.
       team_slug TYPE string
       discussion_number TYPE i
       body TYPE bodyteams_create_discussion_co
+    RETURNING VALUE(return_data) TYPE team_discussion_comment
     RAISING cx_static_check.
 
 * GET - "Get a discussion comment"
@@ -9214,6 +9244,7 @@ INTERFACE zif_github PUBLIC.
       discussion_number TYPE i
       comment_number TYPE i
       body TYPE bodyreactions_create_for_team_
+    RETURNING VALUE(return_data) TYPE reaction
     RAISING cx_static_check.
 
 * DELETE - "Delete team discussion comment reaction"
@@ -9267,6 +9298,7 @@ INTERFACE zif_github PUBLIC.
       team_slug TYPE string
       discussion_number TYPE i
       body TYPE bodyreactions_create_for_tea01
+    RETURNING VALUE(return_data) TYPE reaction
     RAISING cx_static_check.
 
 * DELETE - "Delete team discussion reaction"
@@ -9687,7 +9719,7 @@ INTERFACE zif_github PUBLIC.
 * Response: 401
 * Response: 403
 * Response: 422
-*     application/json, 
+*     application/json,
 * Response: 503
 *     application/json, object
 * Body ref: #/components/schemas/bodyprojects_create_card
@@ -9695,6 +9727,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       column_id TYPE i
       body TYPE bodyprojects_create_card
+    RETURNING VALUE(return_data) TYPE project_card
     RAISING cx_static_check.
 
 * POST - "Move a project column"
@@ -9874,6 +9907,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       project_id TYPE i
       body TYPE bodyprojects_create_column
+    RETURNING VALUE(return_data) TYPE project_column
     RAISING cx_static_check.
 
 * GET - "Get rate limit status for the authenticated user"
@@ -9882,7 +9916,8 @@ INTERFACE zif_github PUBLIC.
 *     application/json, #/components/schemas/rate-limit-overview
 * Response: 304
 * Response: 404
-  METHODS rate_limit_get    RETURNING VALUE(return_data) TYPE rate_limit_overview
+  METHODS rate_limit_get
+    RETURNING VALUE(return_data) TYPE rate_limit_overview
     RAISING cx_static_check.
 
 * DELETE - "Delete a reaction (Legacy)"
@@ -10125,6 +10160,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       owner TYPE string
       repo TYPE string
+    RETURNING VALUE(return_data) TYPE authentication_token
     RAISING cx_static_check.
 
 * POST - "Create a remove token for a repository"
@@ -10137,6 +10173,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       owner TYPE string
       repo TYPE string
+    RETURNING VALUE(return_data) TYPE authentication_token
     RAISING cx_static_check.
 
 * GET - "Get a self-hosted runner for a repository"
@@ -11157,6 +11194,7 @@ INTERFACE zif_github PUBLIC.
       repo TYPE string
       branch TYPE string
       body TYPE bodyrepos_rename_branch
+    RETURNING VALUE(return_data) TYPE branch_with_protection
     RAISING cx_static_check.
 
 * POST - "Create a check run"
@@ -11171,6 +11209,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodychecks_create
+    RETURNING VALUE(return_data) TYPE check_run
     RAISING cx_static_check.
 
 * GET - "Get a check run"
@@ -11235,6 +11274,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodychecks_create_suite
+    RETURNING VALUE(return_data) TYPE check_suite
     RAISING cx_static_check.
 
 * PATCH - "Update repository preferences for check suites"
@@ -11444,6 +11484,7 @@ INTERFACE zif_github PUBLIC.
       repo TYPE string
       username TYPE string
       body TYPE bodyrepos_add_collaborator
+    RETURNING VALUE(return_data) TYPE repository_invitation
     RAISING cx_static_check.
 
 * DELETE - "Remove a repository collaborator"
@@ -11681,6 +11722,7 @@ INTERFACE zif_github PUBLIC.
       repo TYPE string
       commit_sha TYPE string
       body TYPE bodyrepos_create_commit_commen
+    RETURNING VALUE(return_data) TYPE commit_comment
     RAISING cx_static_check.
 
 * GET - "List pull requests associated with a commit"
@@ -11854,7 +11896,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Response: 200
 *     application/vnd.github.v3.object, #/components/schemas/content-tree
-*     application/json, 
+*     application/json,
 * Response: 302
 * Response: 403
 * Response: 404
@@ -11971,6 +12013,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodyrepos_create_deployment
+    RETURNING VALUE(return_data) TYPE deployment
     RAISING cx_static_check.
 
 * GET - "Get a deployment"
@@ -12038,6 +12081,7 @@ INTERFACE zif_github PUBLIC.
       repo TYPE string
       deployment_id TYPE i
       body TYPE bodyrepos_create_deployment_st
+    RETURNING VALUE(return_data) TYPE deployment_status
     RAISING cx_static_check.
 
 * GET - "Get a deployment status"
@@ -12142,6 +12186,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodygit_create_blob
+    RETURNING VALUE(return_data) TYPE short_blob
     RAISING cx_static_check.
 
 * GET - "Get a blob"
@@ -12176,6 +12221,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodygit_create_commit
+    RETURNING VALUE(return_data) TYPE git_commit
     RAISING cx_static_check.
 
 * GET - "Get a commit"
@@ -12241,6 +12287,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodygit_create_ref
+    RETURNING VALUE(return_data) TYPE git_ref
     RAISING cx_static_check.
 
 * PATCH - "Update a reference"
@@ -12290,6 +12337,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodygit_create_tag
+    RETURNING VALUE(return_data) TYPE git_tag
     RAISING cx_static_check.
 
 * GET - "Get a tag"
@@ -12323,6 +12371,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodygit_create_tree
+    RETURNING VALUE(return_data) TYPE git_tree
     RAISING cx_static_check.
 
 * GET - "Get a tree"
@@ -12376,6 +12425,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodyrepos_create_webhook
+    RETURNING VALUE(return_data) TYPE hook
     RAISING cx_static_check.
 
 * GET - "Get a repository webhook"
@@ -12517,6 +12567,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodymigrations_start_import
+    RETURNING VALUE(return_data) TYPE import
     RAISING cx_static_check.
 
 * PATCH - "Update an import"
@@ -12767,6 +12818,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodyissues_create
+    RETURNING VALUE(return_data) TYPE issue
     RAISING cx_static_check.
 
 * GET - "List issue comments for a repository"
@@ -12991,6 +13043,7 @@ INTERFACE zif_github PUBLIC.
       repo TYPE string
       issue_number TYPE i
       body TYPE bodyissues_add_assignees
+    RETURNING VALUE(return_data) TYPE issue_simple
     RAISING cx_static_check.
 
 * DELETE - "Remove assignees from an issue"
@@ -13050,6 +13103,7 @@ INTERFACE zif_github PUBLIC.
       repo TYPE string
       issue_number TYPE i
       body TYPE bodyissues_create_comment
+    RETURNING VALUE(return_data) TYPE issue_comment
     RAISING cx_static_check.
 
 * GET - "List issue events"
@@ -13235,6 +13289,7 @@ INTERFACE zif_github PUBLIC.
       repo TYPE string
       issue_number TYPE i
       body TYPE bodyreactions_create_for_iss01
+    RETURNING VALUE(return_data) TYPE reaction
     RAISING cx_static_check.
 
 * DELETE - "Delete an issue reaction"
@@ -13302,6 +13357,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodyrepos_create_deploy_key
+    RETURNING VALUE(return_data) TYPE deploy_key
     RAISING cx_static_check.
 
 * GET - "Get a deploy key"
@@ -13364,6 +13420,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodyissues_create_label
+    RETURNING VALUE(return_data) TYPE label
     RAISING cx_static_check.
 
 * GET - "Get a label"
@@ -13458,6 +13515,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodyrepos_merge
+    RETURNING VALUE(return_data) TYPE commit
     RAISING cx_static_check.
 
 * GET - "List milestones"
@@ -13497,6 +13555,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodyissues_create_milestone
+    RETURNING VALUE(return_data) TYPE milestone
     RAISING cx_static_check.
 
 * GET - "Get a milestone"
@@ -13632,6 +13691,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodyrepos_create_pages_site
+    RETURNING VALUE(return_data) TYPE page
     RAISING cx_static_check.
 
 * PUT - "Update information about a GitHub Pages site"
@@ -13691,6 +13751,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       owner TYPE string
       repo TYPE string
+    RETURNING VALUE(return_data) TYPE page_build_status
     RAISING cx_static_check.
 
 * GET - "Get latest Pages build"
@@ -13761,6 +13822,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodyprojects_create_for_repo
+    RETURNING VALUE(return_data) TYPE project
     RAISING cx_static_check.
 
 * GET - "List pull requests"
@@ -13805,6 +13867,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodypulls_create
+    RETURNING VALUE(return_data) TYPE pull_request
     RAISING cx_static_check.
 
 * GET - "List review comments in a repository"
@@ -14013,6 +14076,7 @@ INTERFACE zif_github PUBLIC.
       repo TYPE string
       pull_number TYPE i
       body TYPE bodypulls_create_review_commen
+    RETURNING VALUE(return_data) TYPE pull_request_review_comment
     RAISING cx_static_check.
 
 * POST - "Create a reply for a review comment"
@@ -14032,6 +14096,7 @@ INTERFACE zif_github PUBLIC.
       pull_number TYPE i
       comment_id TYPE i
       body TYPE bodypulls_create_reply_for_rev
+    RETURNING VALUE(return_data) TYPE pull_request_review_comment
     RAISING cx_static_check.
 
 * GET - "List commits on a pull request"
@@ -14145,6 +14210,7 @@ INTERFACE zif_github PUBLIC.
       repo TYPE string
       pull_number TYPE i
       body TYPE bodypulls_request_reviewers
+    RETURNING VALUE(return_data) TYPE pull_request_simple
     RAISING cx_static_check.
 
 * DELETE - "Remove requested reviewers from a pull request"
@@ -14389,6 +14455,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodyrepos_create_release
+    RETURNING VALUE(return_data) TYPE release
     RAISING cx_static_check.
 
 * GET - "Get a release asset"
@@ -14552,6 +14619,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       release_id TYPE i
+    RETURNING VALUE(return_data) TYPE release_asset
     RAISING cx_static_check.
 
 * GET - "List secret scanning alerts for a repository"
@@ -14705,6 +14773,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       body TYPE bodyrepos_create_commit_status
+    RETURNING VALUE(return_data) TYPE status
     RAISING cx_static_check.
 
 * GET - "List watchers"
@@ -14975,6 +15044,7 @@ INTERFACE zif_github PUBLIC.
       template_owner TYPE string
       template_repo TYPE string
       body TYPE bodyrepos_create_using_templat
+    RETURNING VALUE(return_data) TYPE repository
     RAISING cx_static_check.
 
 * GET - "List public repositories"
@@ -15014,6 +15084,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       enterprise TYPE string
       body TYPE bodyenterprise_admin_provision
+    RETURNING VALUE(return_data) TYPE scim_enterprise_group
     RAISING cx_static_check.
 
 * GET - "Get SCIM provisioning information for an enterprise group"
@@ -15097,6 +15168,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       enterprise TYPE string
       body TYPE bodyenterprise_admin_provisi01
+    RETURNING VALUE(return_data) TYPE scim_enterprise_user
     RAISING cx_static_check.
 
 * GET - "Get SCIM provisioning information for an enterprise user"
@@ -15424,6 +15496,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       team_id TYPE i
       body TYPE bodyteams_update_legacy
+    RETURNING VALUE(return_data) TYPE team_full
     RAISING cx_static_check.
 
 * DELETE - "Delete a team (Legacy)"
@@ -15465,6 +15538,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       team_id TYPE i
       body TYPE bodyteams_create_discussion_le
+    RETURNING VALUE(return_data) TYPE team_discussion
     RAISING cx_static_check.
 
 * GET - "Get a discussion (Legacy)"
@@ -15538,6 +15612,7 @@ INTERFACE zif_github PUBLIC.
       team_id TYPE i
       discussion_number TYPE i
       body TYPE bodyteams_create_discussion_01
+    RETURNING VALUE(return_data) TYPE team_discussion_comment
     RAISING cx_static_check.
 
 * GET - "Get a discussion comment (Legacy)"
@@ -15621,6 +15696,7 @@ INTERFACE zif_github PUBLIC.
       discussion_number TYPE i
       comment_number TYPE i
       body TYPE bodyreactions_create_for_tea02
+    RETURNING VALUE(return_data) TYPE reaction
     RAISING cx_static_check.
 
 * GET - "List reactions for a team discussion (Legacy)"
@@ -15653,6 +15729,7 @@ INTERFACE zif_github PUBLIC.
       team_id TYPE i
       discussion_number TYPE i
       body TYPE bodyreactions_create_for_tea03
+    RETURNING VALUE(return_data) TYPE reaction
     RAISING cx_static_check.
 
 * GET - "List pending team invitations (Legacy)"
@@ -15948,11 +16025,12 @@ INTERFACE zif_github PUBLIC.
 * GET - "Get the authenticated user"
 * Operation id: users/get-authenticated
 * Response: 200
-*     application/json, 
+*     application/json,
 * Response: 304
 * Response: 401
 * Response: 403
-  METHODS users_get_authenticated    RAISING cx_static_check.
+  METHODS users_get_authenticated
+    RAISING cx_static_check.
 
 * PATCH - "Update the authenticated user"
 * Operation id: users/update-authenticated
@@ -15979,7 +16057,8 @@ INTERFACE zif_github PUBLIC.
 * Response: 403
 * Response: 404
 * Response: 415
-  METHODS users_list_blocked_by_authenti    RAISING cx_static_check.
+  METHODS users_list_blocked_by_authenti
+    RAISING cx_static_check.
 
 * GET - "Check if a user is blocked by the authenticated user"
 * Operation id: users/check-blocked
@@ -16181,6 +16260,7 @@ INTERFACE zif_github PUBLIC.
   METHODS users_create_gpg_key_for_authe
     IMPORTING
       body TYPE bodyusers_create_gpg_key_for_a
+    RETURNING VALUE(return_data) TYPE gpg_key
     RAISING cx_static_check.
 
 * GET - "Get a GPG key for the authenticated user"
@@ -16277,7 +16357,8 @@ INTERFACE zif_github PUBLIC.
 * Operation id: interactions/get-restrictions-for-authenticated-user
 * Response: 200
 *     application/json, #/components/schemas/interaction-limit-response
-  METHODS interactions_get_restriction02    RETURNING VALUE(return_data) TYPE interaction_limit_response
+  METHODS interactions_get_restriction02
+    RETURNING VALUE(return_data) TYPE interaction_limit_response
     RAISING cx_static_check.
 
 * PUT - "Set interaction restrictions for your public repositories"
@@ -16295,7 +16376,8 @@ INTERFACE zif_github PUBLIC.
 * DELETE - "Remove interaction restrictions from your public repositories"
 * Operation id: interactions/remove-restrictions-for-authenticated-user
 * Response: 204
-  METHODS interactions_remove_restrict02    RAISING cx_static_check.
+  METHODS interactions_remove_restrict02
+    RAISING cx_static_check.
 
 * GET - "List user account issues assigned to the authenticated user"
 * Operation id: issues/list-for-authenticated-user
@@ -16352,6 +16434,7 @@ INTERFACE zif_github PUBLIC.
   METHODS users_create_public_ssh_key_fo
     IMPORTING
       body TYPE bodyusers_create_public_ssh_ke
+    RETURNING VALUE(return_data) TYPE key
     RAISING cx_static_check.
 
 * GET - "Get a public SSH key for the authenticated user"
@@ -16485,6 +16568,7 @@ INTERFACE zif_github PUBLIC.
   METHODS migrations_start_for_authentic
     IMPORTING
       body TYPE bodymigrations_start_for_authe
+    RETURNING VALUE(return_data) TYPE migration
     RAISING cx_static_check.
 
 * GET - "Get a user migration status"
@@ -16587,6 +16671,7 @@ INTERFACE zif_github PUBLIC.
   METHODS projects_create_for_authentica
     IMPORTING
       body TYPE bodyprojects_create_for_authen
+    RETURNING VALUE(return_data) TYPE project
     RAISING cx_static_check.
 
 * GET - "List public email addresses for the authenticated user"
@@ -16649,6 +16734,7 @@ INTERFACE zif_github PUBLIC.
   METHODS repos_create_for_authenticated
     IMPORTING
       body TYPE bodyrepos_create_for_authentic
+    RETURNING VALUE(return_data) TYPE repository
     RAISING cx_static_check.
 
 * GET - "List repository invitations for the authenticated user"
@@ -16806,7 +16892,7 @@ INTERFACE zif_github PUBLIC.
 * Operation id: users/get-by-username
 * Parameter: username, required, path
 * Response: 200
-*     application/json, 
+*     application/json,
 * Response: 404
   METHODS users_get_by_username
     IMPORTING
@@ -17120,6 +17206,7 @@ INTERFACE zif_github PUBLIC.
 * Operation id: meta/get-zen
 * Response: 200
 *     text/plain, string
-  METHODS meta_get_zen    RAISING cx_static_check.
+  METHODS meta_get_zen
+    RAISING cx_static_check.
 
 ENDINTERFACE.
