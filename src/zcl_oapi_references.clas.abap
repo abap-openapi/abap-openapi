@@ -45,6 +45,7 @@ CLASS zcl_oapi_references IMPLEMENTATION.
 
         ls_new-name = lo_names->to_abap_name( |body{ <ls_operation>-abap_name }| ).
         ls_new-abap_name = ls_new-name.
+        ls_new-abap_json_method = lo_names->to_abap_name( |json_{ <ls_operation>-abap_name }| ).
         CLEAR ls_new-abap_parser_method. " parser method is not needed for body which is input
         ls_new-schema = <ls_operation>-body_schema.
         APPEND ls_new TO ms_spec-components-schemas.

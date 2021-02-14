@@ -43,6 +43,9 @@ CLASS zcl_oapi_main DEFINITION PUBLIC.
     METHODS dump_parser_methods
       RETURNING VALUE(rv_abap) TYPE string.
 
+    METHODS dump_json_methods
+      RETURNING VALUE(rv_abap) TYPE string.
+
     METHODS find_parser_method
       IMPORTING iv_name TYPE string
       RETURNING VALUE(rv_method) TYPE string.
@@ -107,12 +110,21 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |    DATA mo_json TYPE REF TO zcl_oapi_json.\n| &&
       |    METHODS send_receive RETURNING VALUE(rv_code) TYPE i.\n|.
 
-    LOOP AT ms_specification-components-schemas INTO ls_schema WHERE abap_parser_method IS NOT INITIAL.
-      rv_abap = rv_abap &&
-        |    METHODS { ls_schema-abap_parser_method }\n| &&
-        |      IMPORTING iv_prefix TYPE string\n| &&
-        |      RETURNING VALUE({ ls_schema-abap_name }) TYPE { ms_input-interface_name }=>{ ls_schema-abap_name }\n| &&
-        |      RAISING cx_static_check.\n|.
+    LOOP AT ms_specification-components-schemas INTO ls_schema.
+      IF ls_schema-abap_parser_method IS NOT INITIAL.
+        rv_abap = rv_abap &&
+          |    METHODS { ls_schema-abap_parser_method }\n| &&
+          |      IMPORTING iv_prefix TYPE string\n| &&
+          |      RETURNING VALUE({ ls_schema-abap_name }) TYPE { ms_input-interface_name }=>{ ls_schema-abap_name }\n| &&
+          |      RAISING cx_static_check.\n|.
+      ENDIF.
+      IF ls_schema-abap_json_method IS NOT INITIAL.
+        rv_abap = rv_abap &&
+          |    METHODS { ls_schema-abap_json_method }\n| &&
+          |      IMPORTING data TYPE { ms_input-interface_name }=>{ ls_schema-abap_name }\n| &&
+          |      RETURNING VALUE(json) TYPE string\n| &&
+          |      RAISING cx_static_check.\n|.
+      ENDIF.
     ENDLOOP.
 
     rv_abap = rv_abap &&
@@ -127,7 +139,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |    mi_client->response->get_status( IMPORTING code = rv_code ).\n| &&
       |  ENDMETHOD.\n\n|.
 
-    rv_abap = rv_abap && dump_parser_methods( ).
+    rv_abap = rv_abap && dump_parser_methods( ) && dump_json_methods( ).
 
     LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
@@ -137,6 +149,20 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     ENDLOOP.
 
     rv_abap = rv_abap && |ENDCLASS.|.
+
+  ENDMETHOD.
+
+  METHOD dump_json_methods.
+* note: the parser methods might be called recursively, as the structures can be nested
+
+    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
+
+
+    LOOP AT ms_specification-components-schemas INTO ls_schema WHERE abap_json_method IS NOT INITIAL.
+      rv_abap = rv_abap && |  METHOD { ls_schema-abap_json_method }.\n|.
+      rv_abap = rv_abap && |* todo\n|.
+      rv_abap = rv_abap && |  ENDMETHOD.\n\n|.
+    ENDLOOP.
 
   ENDMETHOD.
 
@@ -375,8 +401,15 @@ CLASS zcl_oapi_main IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD abap_schema_to_json.
-*      ls_schema = find_schema( iv_name ).
-    rv_abap = |* todo, { iv_name }, mi_client->request->set_cdata( to_json( body ) )\n|.
+    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
+    ls_schema = find_schema( iv_name ).
+    IF ls_schema IS NOT INITIAL.
+      IF ls_schema-abap_json_method IS NOT INITIAL.
+        rv_abap = |    mi_client->request->set_cdata( { ls_schema-abap_json_method }( body ) ).\n|.
+      ELSE.
+        rv_abap = |* todo body, { iv_name }\n|.
+      ENDIF.
+    ENDIF.
   ENDMETHOD.
 
   METHOD find_return.
