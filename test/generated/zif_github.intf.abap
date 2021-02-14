@@ -33,12 +33,11 @@ INTERFACE zif_github PUBLIC.
            contents TYPE string,
            deployments TYPE string,
          END OF integration_permissions.
-  TYPES integration_owner TYPE string. "   todo
   TYPES: BEGIN OF integration,
            id TYPE i,
            slug TYPE string,
            node_id TYPE string,
-           owner TYPE integration_owner,
+           owner TYPE string,
            name TYPE string,
            description TYPE string,
            external_url TYPE string,
@@ -102,7 +101,6 @@ INTERFACE zif_github PUBLIC.
          END OF enterprise.
 
 * Component schema: installation, object
-  TYPES installation_suspended_by TYPE string. "   todo
   TYPES: BEGIN OF installation_permissions,
            deployments TYPE string,
            checks TYPE string,
@@ -113,10 +111,9 @@ INTERFACE zif_github PUBLIC.
            issues TYPE string,
            organization_administration TYPE string,
          END OF installation_permissions.
-  TYPES installation_account TYPE string. "   todo
   TYPES: BEGIN OF installation,
            id TYPE i,
-           account TYPE installation_account,
+           account TYPE string,
            repository_selection TYPE string,
            access_tokens_url TYPE string,
            repositories_url TYPE string,
@@ -132,7 +129,7 @@ INTERFACE zif_github PUBLIC.
            has_multiple_single_files TYPE abap_bool,
            single_file_paths TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            app_slug TYPE string,
-           suspended_by TYPE installation_suspended_by,
+           suspended_by TYPE string,
            suspended_at TYPE string,
            contact_email TYPE string,
          END OF installation.
@@ -289,7 +286,6 @@ INTERFACE zif_github PUBLIC.
            subscribers_count TYPE i,
            network_count TYPE i,
          END OF repository_template_repository.
-  TYPES repository_owner TYPE string. "   todo
   TYPES: BEGIN OF repository_permissions,
            admin TYPE abap_bool,
            pull TYPE abap_bool,
@@ -297,16 +293,15 @@ INTERFACE zif_github PUBLIC.
            push TYPE abap_bool,
            maintain TYPE abap_bool,
          END OF repository_permissions.
-  TYPES repository_license TYPE string. "   todo
   TYPES: BEGIN OF repository,
            id TYPE i,
            node_id TYPE string,
            name TYPE string,
            full_name TYPE string,
-           license TYPE repository_license,
+           license TYPE string,
            forks TYPE i,
            permissions TYPE repository_permissions,
-           owner TYPE repository_owner,
+           owner TYPE string,
            private TYPE abap_bool,
            html_url TYPE string,
            description TYPE string,
@@ -414,7 +409,6 @@ INTERFACE zif_github PUBLIC.
          END OF validation_error.
 
 * Component schema: application-grant, object
-  TYPES application_grant_user TYPE string. "   todo
   TYPES: BEGIN OF application_grant_app,
            client_id TYPE string,
            name TYPE string,
@@ -427,7 +421,7 @@ INTERFACE zif_github PUBLIC.
            created_at TYPE string,
            updated_at TYPE string,
            scopes TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-           user TYPE application_grant_user,
+           user TYPE string,
          END OF application_grant.
 
 * Component schema: scoped-installation, object
@@ -442,8 +436,6 @@ INTERFACE zif_github PUBLIC.
          END OF scoped_installation.
 
 * Component schema: authorization, object
-  TYPES authorization_installation TYPE string. "   todo
-  TYPES authorization_user TYPE string. "   todo
   TYPES: BEGIN OF authorization_app,
            client_id TYPE string,
            name TYPE string,
@@ -462,8 +454,8 @@ INTERFACE zif_github PUBLIC.
            updated_at TYPE string,
            created_at TYPE string,
            fingerprint TYPE string,
-           user TYPE authorization_user,
-           installation TYPE authorization_installation,
+           user TYPE string,
+           installation TYPE string,
          END OF authorization.
 
 * Component schema: code-of-conduct, object
@@ -653,7 +645,6 @@ INTERFACE zif_github PUBLIC.
          END OF label.
 
 * Component schema: milestone, object
-  TYPES milestone_creator TYPE string. "   todo
   TYPES: BEGIN OF milestone,
            url TYPE string,
            html_url TYPE string,
@@ -664,7 +655,7 @@ INTERFACE zif_github PUBLIC.
            state TYPE string,
            title TYPE string,
            description TYPE string,
-           creator TYPE milestone_creator,
+           creator TYPE string,
            open_issues TYPE i,
            closed_issues TYPE i,
            created_at TYPE string,
@@ -677,7 +668,6 @@ INTERFACE zif_github PUBLIC.
   TYPES author_association TYPE string.
 
 * Component schema: issue-simple, object
-  TYPES issue_simple_performed_via_git TYPE string. "   todo
   TYPES: BEGIN OF issue_simple_pull_request,
            merged_at TYPE string,
            diff_url TYPE string,
@@ -685,9 +675,6 @@ INTERFACE zif_github PUBLIC.
            patch_url TYPE string,
            url TYPE string,
          END OF issue_simple_pull_request.
-  TYPES issue_simple_milestone TYPE string. "   todo
-  TYPES issue_simple_assignee TYPE string. "   todo
-  TYPES issue_simple_user TYPE string. "   todo
   TYPES: BEGIN OF issue_simple,
            id TYPE i,
            node_id TYPE string,
@@ -701,11 +688,11 @@ INTERFACE zif_github PUBLIC.
            state TYPE string,
            title TYPE string,
            body TYPE string,
-           user TYPE issue_simple_user,
+           user TYPE string,
            labels TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-           assignee TYPE issue_simple_assignee,
+           assignee TYPE string,
            assignees TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-           milestone TYPE issue_simple_milestone,
+           milestone TYPE string,
            locked TYPE abap_bool,
            active_lock_reason TYPE string,
            comments TYPE i,
@@ -718,7 +705,7 @@ INTERFACE zif_github PUBLIC.
            body_text TYPE string,
            timeline_url TYPE string,
            repository TYPE repository,
-           performed_via_github_app TYPE issue_simple_performed_via_git,
+           performed_via_github_app TYPE string,
          END OF issue_simple.
 
 * Component schema: reaction-rollup, object
@@ -736,8 +723,6 @@ INTERFACE zif_github PUBLIC.
          END OF reaction_rollup.
 
 * Component schema: issue-comment, object
-  TYPES issue_comment_performed_via_gi TYPE string. "   todo
-  TYPES issue_comment_user TYPE string. "   todo
   TYPES: BEGIN OF issue_comment,
            id TYPE i,
            node_id TYPE string,
@@ -746,12 +731,12 @@ INTERFACE zif_github PUBLIC.
            body_text TYPE string,
            body_html TYPE string,
            html_url TYPE string,
-           user TYPE issue_comment_user,
+           user TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
            issue_url TYPE string,
            author_association TYPE author_association,
-           performed_via_github_app TYPE issue_comment_performed_via_gi,
+           performed_via_github_app TYPE string,
            reactions TYPE reaction_rollup,
          END OF issue_comment.
 
@@ -808,8 +793,6 @@ INTERFACE zif_github PUBLIC.
          END OF feed.
 
 * Component schema: base-gist, object
-  TYPES base_gist_owner TYPE string. "   todo
-  TYPES base_gist_user TYPE string. "   todo
   TYPES: BEGIN OF base_gist_files,
            dummy_workaround TYPE i,
          END OF base_gist_files.
@@ -828,9 +811,9 @@ INTERFACE zif_github PUBLIC.
            updated_at TYPE string,
            description TYPE string,
            comments TYPE i,
-           user TYPE base_gist_user,
+           user TYPE string,
            comments_url TYPE string,
-           owner TYPE base_gist_owner,
+           owner TYPE string,
            truncated TYPE abap_bool,
            forks TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            history TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
@@ -862,13 +845,12 @@ INTERFACE zif_github PUBLIC.
          END OF gist_simple.
 
 * Component schema: gist-comment, object
-  TYPES gist_comment_user TYPE string. "   todo
   TYPES: BEGIN OF gist_comment,
            id TYPE i,
            node_id TYPE string,
            url TYPE string,
            body TYPE string,
-           user TYPE gist_comment_user,
+           user TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
            author_association TYPE author_association,
@@ -880,11 +862,10 @@ INTERFACE zif_github PUBLIC.
            additions TYPE i,
            deletions TYPE i,
          END OF gist_commit_change_status.
-  TYPES gist_commit_user TYPE string. "   todo
   TYPES: BEGIN OF gist_commit,
            url TYPE string,
            version TYPE string,
-           user TYPE gist_commit_user,
+           user TYPE string,
            change_status TYPE gist_commit_change_status,
            committed_at TYPE string,
          END OF gist_commit.
@@ -896,8 +877,6 @@ INTERFACE zif_github PUBLIC.
          END OF gitignore_template.
 
 * Component schema: issue, object
-  TYPES issue_performed_via_github_app TYPE string. "   todo
-  TYPES issue_closed_by TYPE string. "   todo
   TYPES: BEGIN OF issue_pull_request,
            merged_at TYPE string,
            diff_url TYPE string,
@@ -905,9 +884,6 @@ INTERFACE zif_github PUBLIC.
            patch_url TYPE string,
            url TYPE string,
          END OF issue_pull_request.
-  TYPES issue_milestone TYPE string. "   todo
-  TYPES issue_assignee TYPE string. "   todo
-  TYPES issue_user TYPE string. "   todo
   TYPES: BEGIN OF issue,
            id TYPE i,
            node_id TYPE string,
@@ -921,11 +897,11 @@ INTERFACE zif_github PUBLIC.
            state TYPE string,
            title TYPE string,
            body TYPE string,
-           user TYPE issue_user,
+           user TYPE string,
            labels TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-           assignee TYPE issue_assignee,
+           assignee TYPE string,
            assignees TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-           milestone TYPE issue_milestone,
+           milestone TYPE string,
            locked TYPE abap_bool,
            active_lock_reason TYPE string,
            comments TYPE i,
@@ -933,12 +909,12 @@ INTERFACE zif_github PUBLIC.
            closed_at TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
-           closed_by TYPE issue_closed_by,
+           closed_by TYPE string,
            body_html TYPE string,
            body_text TYPE string,
            timeline_url TYPE string,
            repository TYPE repository,
-           performed_via_github_app TYPE issue_performed_via_github_app,
+           performed_via_github_app TYPE string,
            author_association TYPE author_association,
            reactions TYPE reaction_rollup,
          END OF issue.
@@ -1341,7 +1317,6 @@ INTERFACE zif_github PUBLIC.
          END OF team_simple.
 
 * Component schema: team, object
-  TYPES team_parent TYPE string. "   todo
   TYPES: BEGIN OF team,
            id TYPE i,
            node_id TYPE string,
@@ -1354,29 +1329,27 @@ INTERFACE zif_github PUBLIC.
            html_url TYPE string,
            members_url TYPE string,
            repositories_url TYPE string,
-           parent TYPE team_parent,
+           parent TYPE string,
          END OF team.
 
 * Component schema: org-membership, object
   TYPES: BEGIN OF org_membership_permissions,
            can_create_repository TYPE abap_bool,
          END OF org_membership_permissions.
-  TYPES org_membership_user TYPE string. "   todo
   TYPES: BEGIN OF org_membership,
            url TYPE string,
            state TYPE string,
            role TYPE string,
            organization_url TYPE string,
            organization TYPE organization_simple,
-           user TYPE org_membership_user,
+           user TYPE string,
            permissions TYPE org_membership_permissions,
          END OF org_membership.
 
 * Component schema: migration, object
-  TYPES migration_owner TYPE string. "   todo
   TYPES: BEGIN OF migration,
            id TYPE i,
-           owner TYPE migration_owner,
+           owner TYPE string,
            guid TYPE string,
            state TYPE string,
            lock_repositories TYPE abap_bool,
@@ -1391,7 +1364,6 @@ INTERFACE zif_github PUBLIC.
          END OF migration.
 
 * Component schema: project, object
-  TYPES project_creator TYPE string. "   todo
   TYPES: BEGIN OF project,
            owner_url TYPE string,
            url TYPE string,
@@ -1403,7 +1375,7 @@ INTERFACE zif_github PUBLIC.
            body TYPE string,
            number TYPE i,
            state TYPE string,
-           creator TYPE project_creator,
+           creator TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
            organization_permission TYPE string,
@@ -1421,7 +1393,6 @@ INTERFACE zif_github PUBLIC.
          END OF group_mapping.
 
 * Component schema: team-full, object
-  TYPES team_full_parent TYPE string. "   todo
   TYPES: BEGIN OF team_full,
            id TYPE i,
            node_id TYPE string,
@@ -1434,7 +1405,7 @@ INTERFACE zif_github PUBLIC.
            permission TYPE string,
            members_url TYPE string,
            repositories_url TYPE string,
-           parent TYPE team_full_parent,
+           parent TYPE string,
            members_count TYPE i,
            repos_count TYPE i,
            created_at TYPE string,
@@ -1444,9 +1415,8 @@ INTERFACE zif_github PUBLIC.
          END OF team_full.
 
 * Component schema: team-discussion, object
-  TYPES team_discussion_author TYPE string. "   todo
   TYPES: BEGIN OF team_discussion,
-           author TYPE team_discussion_author,
+           author TYPE string,
            body TYPE string,
            body_html TYPE string,
            body_version TYPE string,
@@ -1467,9 +1437,8 @@ INTERFACE zif_github PUBLIC.
          END OF team_discussion.
 
 * Component schema: team-discussion-comment, object
-  TYPES team_discussion_comment_author TYPE string. "   todo
   TYPES: BEGIN OF team_discussion_comment,
-           author TYPE team_discussion_comment_author,
+           author TYPE string,
            body TYPE string,
            body_html TYPE string,
            body_version TYPE string,
@@ -1485,11 +1454,10 @@ INTERFACE zif_github PUBLIC.
          END OF team_discussion_comment.
 
 * Component schema: reaction, object
-  TYPES reaction_user TYPE string. "   todo
   TYPES: BEGIN OF reaction,
            id TYPE i,
            node_id TYPE string,
-           user TYPE reaction_user,
+           user TYPE string,
            content TYPE string,
            created_at TYPE string,
          END OF reaction.
@@ -1530,7 +1498,6 @@ INTERFACE zif_github PUBLIC.
   TYPES: BEGIN OF team_repository_template_repos,
            dummy_workaround TYPE i,
          END OF team_repository_template_repos.
-  TYPES team_repository_owner TYPE string. "   todo
   TYPES: BEGIN OF team_repository_permissions,
            admin TYPE abap_bool,
            pull TYPE abap_bool,
@@ -1538,16 +1505,15 @@ INTERFACE zif_github PUBLIC.
            push TYPE abap_bool,
            maintain TYPE abap_bool,
          END OF team_repository_permissions.
-  TYPES team_repository_license TYPE string. "   todo
   TYPES: BEGIN OF team_repository,
            id TYPE i,
            node_id TYPE string,
            name TYPE string,
            full_name TYPE string,
-           license TYPE team_repository_license,
+           license TYPE string,
            forks TYPE i,
            permissions TYPE team_repository_permissions,
-           owner TYPE team_repository_owner,
+           owner TYPE string,
            private TYPE abap_bool,
            html_url TYPE string,
            description TYPE string,
@@ -1629,13 +1595,12 @@ INTERFACE zif_github PUBLIC.
          END OF team_repository.
 
 * Component schema: project-card, object
-  TYPES project_card_creator TYPE string. "   todo
   TYPES: BEGIN OF project_card,
            url TYPE string,
            id TYPE i,
            node_id TYPE string,
            note TYPE string,
-           creator TYPE project_card_creator,
+           creator TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
            archived TYPE abap_bool,
@@ -1657,10 +1622,9 @@ INTERFACE zif_github PUBLIC.
          END OF project_column.
 
 * Component schema: repository-collaborator-permission, object
-  TYPES repository_collaborator_perm01 TYPE string. "   todo
   TYPES: BEGIN OF repository_collaborator_permis,
            permission TYPE string,
-           user TYPE repository_collaborator_perm01,
+           user TYPE string,
          END OF repository_collaborator_permis.
 
 * Component schema: rate-limit, object
@@ -1685,8 +1649,6 @@ INTERFACE zif_github PUBLIC.
          END OF rate_limit_overview.
 
 * Component schema: full-repository, object
-  TYPES full_repository_organization TYPE string. "   todo
-  TYPES full_repository_license TYPE string. "   todo
   TYPES: BEGIN OF full_repository_template_repos,
            dummy_workaround TYPE i,
          END OF full_repository_template_repos.
@@ -1695,13 +1657,12 @@ INTERFACE zif_github PUBLIC.
            pull TYPE abap_bool,
            push TYPE abap_bool,
          END OF full_repository_permissions.
-  TYPES full_repository_owner TYPE string. "   todo
   TYPES: BEGIN OF full_repository,
            id TYPE i,
            node_id TYPE string,
            name TYPE string,
            full_name TYPE string,
-           owner TYPE full_repository_owner,
+           owner TYPE string,
            private TYPE abap_bool,
            html_url TYPE string,
            description TYPE string,
@@ -1778,8 +1739,8 @@ INTERFACE zif_github PUBLIC.
            allow_merge_commit TYPE abap_bool,
            subscribers_count TYPE i,
            network_count TYPE i,
-           license TYPE full_repository_license,
-           organization TYPE full_repository_organization,
+           license TYPE string,
+           organization TYPE string,
            parent TYPE repository,
            source TYPE repository,
            forks TYPE i,
@@ -2069,18 +2030,14 @@ INTERFACE zif_github PUBLIC.
            deletions TYPE i,
            total TYPE i,
          END OF commit_stats.
-  TYPES commit_committer TYPE string. "   todo
-  TYPES commit_author TYPE string. "   todo
   TYPES: BEGIN OF commit_commit_tree,
            sha TYPE string,
            url TYPE string,
          END OF commit_commit_tree.
-  TYPES commit_commit_committer TYPE string. "   todo
-  TYPES commit_commit_author TYPE string. "   todo
   TYPES: BEGIN OF commit_commit,
            url TYPE string,
-           author TYPE commit_commit_author,
-           committer TYPE commit_commit_committer,
+           author TYPE string,
+           committer TYPE string,
            message TYPE string,
            comment_count TYPE i,
            tree TYPE commit_commit_tree,
@@ -2093,8 +2050,8 @@ INTERFACE zif_github PUBLIC.
            html_url TYPE string,
            comments_url TYPE string,
            commit TYPE commit_commit,
-           author TYPE commit_author,
-           committer TYPE commit_committer,
+           author TYPE string,
+           committer TYPE string,
            parents TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            stats TYPE commit_stats,
            files TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
@@ -2169,8 +2126,6 @@ INTERFACE zif_github PUBLIC.
          END OF protected_branch.
 
 * Component schema: check-run, object
-  TYPES check_run_pull_requests TYPE string. "  #/components/schemas/pull-request-minimal todo
-  TYPES check_run_app TYPE string. "   todo
   TYPES: BEGIN OF check_run_check_suite,
            id TYPE i,
          END OF check_run_check_suite.
@@ -2196,8 +2151,8 @@ INTERFACE zif_github PUBLIC.
            output TYPE check_run_output,
            name TYPE string,
            check_suite TYPE check_run_check_suite,
-           app TYPE check_run_app,
-           pull_requests TYPE check_run_pull_requests,
+           app TYPE string,
+           pull_requests TYPE string,
          END OF check_run.
 
 * Component schema: check-annotation, object
@@ -2215,7 +2170,6 @@ INTERFACE zif_github PUBLIC.
          END OF check_annotation.
 
 * Component schema: check-suite, object
-  TYPES check_suite_app TYPE string. "   todo
   TYPES: BEGIN OF check_suite,
            id TYPE i,
            node_id TYPE string,
@@ -2227,7 +2181,7 @@ INTERFACE zif_github PUBLIC.
            before TYPE string,
            after TYPE string,
            pull_requests TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-           app TYPE check_suite_app,
+           app TYPE string,
            repository TYPE minimal_repository,
            created_at TYPE string,
            updated_at TYPE string,
@@ -2381,13 +2335,11 @@ INTERFACE zif_github PUBLIC.
          END OF collaborator.
 
 * Component schema: repository-invitation, object
-  TYPES repository_invitation_inviter TYPE string. "   todo
-  TYPES repository_invitation_invitee TYPE string. "   todo
   TYPES: BEGIN OF repository_invitation,
            id TYPE i,
            repository TYPE minimal_repository,
-           invitee TYPE repository_invitation_invitee,
-           inviter TYPE repository_invitation_inviter,
+           invitee TYPE string,
+           inviter TYPE string,
            permissions TYPE string,
            created_at TYPE string,
            expired TYPE abap_bool,
@@ -2397,7 +2349,6 @@ INTERFACE zif_github PUBLIC.
          END OF repository_invitation.
 
 * Component schema: commit-comment, object
-  TYPES commit_comment_user TYPE string. "   todo
   TYPES: BEGIN OF commit_comment,
            html_url TYPE string,
            url TYPE string,
@@ -2408,7 +2359,7 @@ INTERFACE zif_github PUBLIC.
            position TYPE i,
            line TYPE i,
            commit_id TYPE string,
-           user TYPE commit_comment_user,
+           user TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
            author_association TYPE author_association,
@@ -2460,25 +2411,20 @@ INTERFACE zif_github PUBLIC.
            review_comment TYPE link,
            self TYPE link,
          END OF pull_request_simple__links.
-  TYPES pull_request_simple_base_user TYPE string. "   todo
   TYPES: BEGIN OF pull_request_simple_base,
            label TYPE string,
            ref TYPE string,
            repo TYPE repository,
            sha TYPE string,
-           user TYPE pull_request_simple_base_user,
+           user TYPE string,
          END OF pull_request_simple_base.
-  TYPES pull_request_simple_head_user TYPE string. "   todo
   TYPES: BEGIN OF pull_request_simple_head,
            label TYPE string,
            ref TYPE string,
            repo TYPE repository,
            sha TYPE string,
-           user TYPE pull_request_simple_head_user,
+           user TYPE string,
          END OF pull_request_simple_head.
-  TYPES pull_request_simple_assignee TYPE string. "   todo
-  TYPES pull_request_simple_milestone TYPE string. "   todo
-  TYPES pull_request_simple_user TYPE string. "   todo
   TYPES: BEGIN OF pull_request_simple,
            url TYPE string,
            id TYPE i,
@@ -2496,17 +2442,17 @@ INTERFACE zif_github PUBLIC.
            state TYPE string,
            locked TYPE abap_bool,
            title TYPE string,
-           user TYPE pull_request_simple_user,
+           user TYPE string,
            body TYPE string,
            labels TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-           milestone TYPE pull_request_simple_milestone,
+           milestone TYPE string,
            active_lock_reason TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
            closed_at TYPE string,
            merged_at TYPE string,
            merge_commit_sha TYPE string,
-           assignee TYPE pull_request_simple_assignee,
+           assignee TYPE string,
            assignees TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            requested_reviewers TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            requested_teams TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
@@ -2574,19 +2520,13 @@ INTERFACE zif_github PUBLIC.
          END OF community_health_file.
 
 * Component schema: community-profile, object
-  TYPES community_profile_files_pull_r TYPE string. "   todo
-  TYPES community_profile_files_issue_ TYPE string. "   todo
-  TYPES community_profile_files_readme TYPE string. "   todo
-  TYPES community_profile_files_contri TYPE string. "   todo
-  TYPES community_profile_files_licens TYPE string. "   todo
-  TYPES community_profile_files_code_o TYPE string. "   todo
   TYPES: BEGIN OF community_profile_files,
-           code_of_conduct TYPE community_profile_files_code_o,
-           license TYPE community_profile_files_licens,
-           contributing TYPE community_profile_files_contri,
-           readme TYPE community_profile_files_readme,
-           issue_template TYPE community_profile_files_issue_,
-           pull_request_template TYPE community_profile_files_pull_r,
+           code_of_conduct TYPE string,
+           license TYPE string,
+           contributing TYPE string,
+           readme TYPE string,
+           issue_template TYPE string,
+           pull_request_template TYPE string,
          END OF community_profile_files.
   TYPES: BEGIN OF community_profile,
            health_percentage TYPE i,
@@ -2796,8 +2736,6 @@ INTERFACE zif_github PUBLIC.
          END OF contributor.
 
 * Component schema: deployment, object
-  TYPES deployment_performed_via_githu TYPE string. "   todo
-  TYPES deployment_creator TYPE string. "   todo
   TYPES: BEGIN OF deployment_payload,
            dummy_workaround TYPE i,
          END OF deployment_payload.
@@ -2812,25 +2750,23 @@ INTERFACE zif_github PUBLIC.
            original_environment TYPE string,
            environment TYPE string,
            description TYPE string,
-           creator TYPE deployment_creator,
+           creator TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
            statuses_url TYPE string,
            repository_url TYPE string,
            transient_environment TYPE abap_bool,
            production_environment TYPE abap_bool,
-           performed_via_github_app TYPE deployment_performed_via_githu,
+           performed_via_github_app TYPE string,
          END OF deployment.
 
 * Component schema: deployment-status, object
-  TYPES deployment_status_performed_vi TYPE string. "   todo
-  TYPES deployment_status_creator TYPE string. "   todo
   TYPES: BEGIN OF deployment_status,
            url TYPE string,
            id TYPE i,
            node_id TYPE string,
            state TYPE string,
-           creator TYPE deployment_status_creator,
+           creator TYPE string,
            description TYPE string,
            environment TYPE string,
            target_url TYPE string,
@@ -2840,7 +2776,7 @@ INTERFACE zif_github PUBLIC.
            repository_url TYPE string,
            environment_url TYPE string,
            log_url TYPE string,
-           performed_via_github_app TYPE deployment_status_performed_vi,
+           performed_via_github_app TYPE string,
          END OF deployment_status.
 
 * Component schema: short-blob, object
@@ -3054,26 +2990,21 @@ INTERFACE zif_github PUBLIC.
          END OF issue_event_rename.
 
 * Component schema: issue-event, object
-  TYPES issue_event_requested_reviewer TYPE string. "   todo
-  TYPES issue_event_review_requester TYPE string. "   todo
-  TYPES issue_event_assigner TYPE string. "   todo
-  TYPES issue_event_assignee TYPE string. "   todo
-  TYPES issue_event_actor TYPE string. "   todo
   TYPES: BEGIN OF issue_event,
            id TYPE i,
            node_id TYPE string,
            url TYPE string,
-           actor TYPE issue_event_actor,
+           actor TYPE string,
            event TYPE string,
            commit_id TYPE string,
            commit_url TYPE string,
            created_at TYPE string,
            issue TYPE issue_simple,
            label TYPE issue_event_label,
-           assignee TYPE issue_event_assignee,
-           assigner TYPE issue_event_assigner,
-           review_requester TYPE issue_event_review_requester,
-           requested_reviewer TYPE issue_event_requested_reviewer,
+           assignee TYPE string,
+           assigner TYPE string,
+           review_requester TYPE string,
+           requested_reviewer TYPE string,
            requested_team TYPE team,
            dismissed_review TYPE issue_event_dismissed_review,
            milestone TYPE issue_event_milestone,
@@ -3125,7 +3056,6 @@ INTERFACE zif_github PUBLIC.
          END OF language.
 
 * Component schema: license-content, object
-  TYPES license_content_license TYPE string. "   todo
   TYPES: BEGIN OF license_content__links,
            git TYPE string,
            html TYPE string,
@@ -3144,7 +3074,7 @@ INTERFACE zif_github PUBLIC.
            content TYPE string,
            encoding TYPE string,
            _links TYPE license_content__links,
-           license TYPE license_content_license,
+           license TYPE string,
          END OF license_content.
 
 * Component schema: pages-source-hash, object
@@ -3165,7 +3095,6 @@ INTERFACE zif_github PUBLIC.
          END OF page.
 
 * Component schema: page-build, object
-  TYPES page_build_pusher TYPE string. "   todo
   TYPES: BEGIN OF page_build_error,
            message TYPE string,
          END OF page_build_error.
@@ -3173,7 +3102,7 @@ INTERFACE zif_github PUBLIC.
            url TYPE string,
            status TYPE string,
            error TYPE page_build_error,
-           pusher TYPE page_build_pusher,
+           pusher TYPE string,
            commit TYPE string,
            duration TYPE i,
            created_at TYPE string,
@@ -3187,7 +3116,6 @@ INTERFACE zif_github PUBLIC.
          END OF page_build_status.
 
 * Component schema: pull-request, object
-  TYPES pull_request_merged_by TYPE string. "   todo
   TYPES: BEGIN OF pull_request__links,
            comments TYPE link,
            commits TYPE link,
@@ -3218,7 +3146,6 @@ INTERFACE zif_github PUBLIC.
            type TYPE string,
            url TYPE string,
          END OF pull_request_base_user.
-  TYPES pull_request_base_repo_license TYPE string. "   todo
   TYPES: BEGIN OF pull_request_base_repo_permiss,
            admin TYPE abap_bool,
            pull TYPE abap_bool,
@@ -3314,7 +3241,7 @@ INTERFACE zif_github PUBLIC.
            allow_merge_commit TYPE abap_bool,
            allow_squash_merge TYPE abap_bool,
            allow_rebase_merge TYPE abap_bool,
-           license TYPE pull_request_base_repo_license,
+           license TYPE string,
            pushed_at TYPE string,
            size TYPE i,
            ssh_url TYPE string,
@@ -3474,9 +3401,6 @@ INTERFACE zif_github PUBLIC.
            sha TYPE string,
            user TYPE pull_request_head_user,
          END OF pull_request_head.
-  TYPES pull_request_assignee TYPE string. "   todo
-  TYPES pull_request_milestone TYPE string. "   todo
-  TYPES pull_request_user TYPE string. "   todo
   TYPES: BEGIN OF pull_request,
            url TYPE string,
            id TYPE i,
@@ -3494,17 +3418,17 @@ INTERFACE zif_github PUBLIC.
            state TYPE string,
            locked TYPE abap_bool,
            title TYPE string,
-           user TYPE pull_request_user,
+           user TYPE string,
            body TYPE string,
            labels TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-           milestone TYPE pull_request_milestone,
+           milestone TYPE string,
            active_lock_reason TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
            closed_at TYPE string,
            merged_at TYPE string,
            merge_commit_sha TYPE string,
-           assignee TYPE pull_request_assignee,
+           assignee TYPE string,
            assignees TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            requested_reviewers TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            requested_teams TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
@@ -3518,7 +3442,7 @@ INTERFACE zif_github PUBLIC.
            mergeable TYPE abap_bool,
            rebaseable TYPE abap_bool,
            mergeable_state TYPE string,
-           merged_by TYPE pull_request_merged_by,
+           merged_by TYPE string,
            comments TYPE i,
            review_comments TYPE i,
            maintainer_can_modify TYPE abap_bool,
@@ -3598,11 +3522,10 @@ INTERFACE zif_github PUBLIC.
            html TYPE pull_request_review__links_htm,
            pull_request TYPE pull_request_review__links_pul,
          END OF pull_request_review__links.
-  TYPES pull_request_review_user TYPE string. "   todo
   TYPES: BEGIN OF pull_request_review,
            id TYPE i,
            node_id TYPE string,
-           user TYPE pull_request_review_user,
+           user TYPE string,
            body TYPE string,
            state TYPE string,
            html_url TYPE string,
@@ -3621,7 +3544,6 @@ INTERFACE zif_github PUBLIC.
            html TYPE link,
            pull_request TYPE link,
          END OF review_comment__links.
-  TYPES review_comment_user TYPE string. "   todo
   TYPES: BEGIN OF review_comment,
            url TYPE string,
            pull_request_review_id TYPE i,
@@ -3634,7 +3556,7 @@ INTERFACE zif_github PUBLIC.
            commit_id TYPE string,
            original_commit_id TYPE string,
            in_reply_to_id TYPE i,
-           user TYPE review_comment_user,
+           user TYPE string,
            body TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
@@ -3653,7 +3575,6 @@ INTERFACE zif_github PUBLIC.
          END OF review_comment.
 
 * Component schema: release-asset, object
-  TYPES release_asset_uploader TYPE string. "   todo
   TYPES: BEGIN OF release_asset,
            url TYPE string,
            browser_download_url TYPE string,
@@ -3667,7 +3588,7 @@ INTERFACE zif_github PUBLIC.
            download_count TYPE i,
            created_at TYPE string,
            updated_at TYPE string,
-           uploader TYPE release_asset_uploader,
+           uploader TYPE string,
          END OF release_asset.
 
 * Component schema: release, object
@@ -3715,10 +3636,9 @@ INTERFACE zif_github PUBLIC.
          END OF secret_scanning_alert.
 
 * Component schema: stargazer, object
-  TYPES stargazer_user TYPE string. "   todo
   TYPES: BEGIN OF stargazer,
            starred_at TYPE string,
-           user TYPE stargazer_user,
+           user TYPE string,
          END OF stargazer.
 
 * Component schema: code-frequency-stat, array
@@ -3732,9 +3652,8 @@ INTERFACE zif_github PUBLIC.
          END OF commit_activity.
 
 * Component schema: contributor-activity, object
-  TYPES contributor_activity_author TYPE string. "   todo
   TYPES: BEGIN OF contributor_activity,
-           author TYPE contributor_activity_author,
+           author TYPE string,
            total TYPE i,
            weeks TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF contributor_activity.
@@ -3923,13 +3842,10 @@ INTERFACE zif_github PUBLIC.
          END OF code_search_result_item.
 
 * Component schema: commit-search-result-item, object
-  TYPES commit_search_result_item_co04 TYPE string. "   todo
-  TYPES commit_search_result_item_auth TYPE string. "   todo
-  TYPES: BEGIN OF commit_search_result_item_co03,
+  TYPES: BEGIN OF commit_search_result_item_co02,
            sha TYPE string,
            url TYPE string,
-         END OF commit_search_result_item_co03.
-  TYPES commit_search_result_item_co02 TYPE string. "   todo
+         END OF commit_search_result_item_co02.
   TYPES: BEGIN OF commit_search_result_item_co01,
            name TYPE string,
            email TYPE string,
@@ -3937,10 +3853,10 @@ INTERFACE zif_github PUBLIC.
          END OF commit_search_result_item_co01.
   TYPES: BEGIN OF commit_search_result_item_comm,
            author TYPE commit_search_result_item_co01,
-           committer TYPE commit_search_result_item_co02,
+           committer TYPE string,
            comment_count TYPE i,
            message TYPE string,
-           tree TYPE commit_search_result_item_co03,
+           tree TYPE commit_search_result_item_co02,
            url TYPE string,
            verification TYPE verification,
          END OF commit_search_result_item_comm.
@@ -3950,8 +3866,8 @@ INTERFACE zif_github PUBLIC.
            html_url TYPE string,
            comments_url TYPE string,
            commit TYPE commit_search_result_item_comm,
-           author TYPE commit_search_result_item_auth,
-           committer TYPE commit_search_result_item_co04,
+           author TYPE string,
+           committer TYPE string,
            parents TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            repository TYPE minimal_repository,
            score TYPE i,
@@ -3960,7 +3876,6 @@ INTERFACE zif_github PUBLIC.
          END OF commit_search_result_item.
 
 * Component schema: issue-search-result-item, object
-  TYPES issue_search_result_item_perfo TYPE string. "   todo
   TYPES: BEGIN OF issue_search_result_item_pull_,
            merged_at TYPE string,
            diff_url TYPE string,
@@ -3968,9 +3883,6 @@ INTERFACE zif_github PUBLIC.
            patch_url TYPE string,
            url TYPE string,
          END OF issue_search_result_item_pull_.
-  TYPES issue_search_result_item_miles TYPE string. "   todo
-  TYPES issue_search_result_item_assig TYPE string. "   todo
-  TYPES issue_search_result_item_user TYPE string. "   todo
   TYPES: BEGIN OF issue_search_result_item,
            url TYPE string,
            repository_url TYPE string,
@@ -3985,11 +3897,11 @@ INTERFACE zif_github PUBLIC.
            locked TYPE abap_bool,
            active_lock_reason TYPE string,
            assignees TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-           user TYPE issue_search_result_item_user,
+           user TYPE string,
            labels TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            state TYPE string,
-           assignee TYPE issue_search_result_item_assig,
-           milestone TYPE issue_search_result_item_miles,
+           assignee TYPE string,
+           milestone TYPE string,
            comments TYPE i,
            created_at TYPE string,
            updated_at TYPE string,
@@ -4004,7 +3916,7 @@ INTERFACE zif_github PUBLIC.
            body_html TYPE string,
            body_text TYPE string,
            timeline_url TYPE string,
-           performed_via_github_app TYPE issue_search_result_item_perfo,
+           performed_via_github_app TYPE string,
          END OF issue_search_result_item.
 
 * Component schema: label-search-result-item, object
@@ -4026,14 +3938,12 @@ INTERFACE zif_github PUBLIC.
            pull TYPE abap_bool,
            push TYPE abap_bool,
          END OF repo_search_result_item_permis.
-  TYPES repo_search_result_item_licens TYPE string. "   todo
-  TYPES repo_search_result_item_owner TYPE string. "   todo
   TYPES: BEGIN OF repo_search_result_item,
            id TYPE i,
            node_id TYPE string,
            name TYPE string,
            full_name TYPE string,
-           owner TYPE repo_search_result_item_owner,
+           owner TYPE string,
            private TYPE abap_bool,
            html_url TYPE string,
            description TYPE string,
@@ -4104,7 +4014,7 @@ INTERFACE zif_github PUBLIC.
            has_downloads TYPE abap_bool,
            archived TYPE abap_bool,
            disabled TYPE abap_bool,
-           license TYPE repo_search_result_item_licens,
+           license TYPE string,
            permissions TYPE repo_search_result_item_permis,
            text_matches TYPE search_result_text_matches,
            temp_clone_token TYPE string,
@@ -4490,14 +4400,13 @@ INTERFACE zif_github PUBLIC.
          END OF bodyenterprise_admin_set_self_.
 
 * Component schema: bodygists_create, object
-  TYPES bodygists_create_public TYPE string. "   todo
   TYPES: BEGIN OF bodygists_create_files,
            dummy_workaround TYPE i,
          END OF bodygists_create_files.
   TYPES: BEGIN OF bodygists_create,
            description TYPE string,
            files TYPE bodygists_create_files,
-           public TYPE bodygists_create_public,
+           public TYPE string,
          END OF bodygists_create.
 
 * Component schema: bodygists_update, object
@@ -4881,9 +4790,6 @@ INTERFACE zif_github PUBLIC.
   TYPES: BEGIN OF bodyprojects_delete_column,
            name TYPE string,
          END OF bodyprojects_delete_column.
-
-* Component schema: bodyprojects_create_card, 
-  TYPES bodyprojects_create_card TYPE string. "   todo
 
 * Component schema: bodyprojects_move_column, object
   TYPES: BEGIN OF bodyprojects_move_column,
@@ -5289,13 +5195,12 @@ INTERFACE zif_github PUBLIC.
          END OF bodyrepos_delete_file.
 
 * Component schema: bodyrepos_create_deployment, object
-  TYPES bodyrepos_create_deployment_pa TYPE string. "   todo
   TYPES: BEGIN OF bodyrepos_create_deployment,
            ref TYPE string,
            task TYPE string,
            auto_merge TYPE abap_bool,
            required_contexts TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-           payload TYPE bodyrepos_create_deployment_pa,
+           payload TYPE string,
            environment TYPE string,
            description TYPE string,
            transient_environment TYPE abap_bool,
@@ -5499,13 +5404,11 @@ INTERFACE zif_github PUBLIC.
          END OF bodyrepos_delete_invitation.
 
 * Component schema: bodyissues_create, object
-  TYPES bodyissues_create_milestone TYPE string. "   todo
-  TYPES bodyissues_create_title TYPE string. "   todo
   TYPES: BEGIN OF bodyissues_create,
-           title TYPE bodyissues_create_title,
+           title TYPE string,
            body TYPE string,
            assignee TYPE string,
-           milestone TYPE bodyissues_create_milestone,
+           milestone TYPE string,
            labels TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            assignees TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF bodyissues_create.
@@ -5526,14 +5429,12 @@ INTERFACE zif_github PUBLIC.
          END OF bodyreactions_create_for_issue.
 
 * Component schema: bodyissues_update, object
-  TYPES bodyissues_update_milestone TYPE string. "   todo
-  TYPES bodyissues_update_title TYPE string. "   todo
   TYPES: BEGIN OF bodyissues_update,
-           title TYPE bodyissues_update_title,
+           title TYPE string,
            body TYPE string,
            assignee TYPE string,
            state TYPE string,
-           milestone TYPE bodyissues_update_milestone,
+           milestone TYPE string,
            labels TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            assignees TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF bodyissues_update.
@@ -5657,19 +5558,17 @@ INTERFACE zif_github PUBLIC.
          END OF bodyrepos_create_pages_site.
 
 * Component schema: bodyrepos_update_information_a, object
-  TYPES bodyrepos_update_information01 TYPE string. "   todo
   TYPES: BEGIN OF bodyrepos_update_information_a,
            cname TYPE string,
            public TYPE abap_bool,
-           source TYPE bodyrepos_update_information01,
+           source TYPE string,
          END OF bodyrepos_update_information_a.
 
 * Component schema: bodyrepos_delete_pages_site, object
-  TYPES bodyrepos_delete_pages_site_so TYPE string. "   todo
   TYPES: BEGIN OF bodyrepos_delete_pages_site,
            cname TYPE string,
            public TYPE abap_bool,
-           source TYPE bodyrepos_delete_pages_site_so,
+           source TYPE string,
          END OF bodyrepos_delete_pages_site.
 
 * Component schema: bodyprojects_create_for_repo, object
@@ -6102,12 +6001,6 @@ INTERFACE zif_github PUBLIC.
            visibility TYPE string,
          END OF bodyusers_set_primary_email_vi.
 
-* Component schema: bodyusers_add_email_for_authen, 
-  TYPES bodyusers_add_email_for_authen TYPE string. "   todo
-
-* Component schema: bodyusers_delete_email_for_aut, 
-  TYPES bodyusers_delete_email_for_aut TYPE string. "   todo
-
 * Component schema: bodyusers_create_gpg_key_for_a, object
   TYPES: BEGIN OF bodyusers_create_gpg_key_for_a,
            armored_public_key TYPE string,
@@ -6178,7 +6071,7 @@ INTERFACE zif_github PUBLIC.
 * Operation id: apps/create-from-manifest
 * Parameter: code, required, path
 * Response: 201
-*     application/json, 
+*     application/json, string
 * Response: 404
 * Response: 422
   METHODS apps_create_from_manifest
@@ -6410,7 +6303,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: client_id, required, path
 * Parameter: access_token, required, path
 * Response: 200
-*     application/json, 
+*     application/json, string
 * Response: 404
   METHODS apps_check_authorization
     IMPORTING
@@ -7720,7 +7613,7 @@ INTERFACE zif_github PUBLIC.
 * Response: 409
 * Response: 415
 * Response: 422
-*     application/json, 
+*     application/json, string
 * Body ref: #/components/schemas/bodyorgs_update
   METHODS orgs_update
     IMPORTING
@@ -9719,14 +9612,13 @@ INTERFACE zif_github PUBLIC.
 * Response: 401
 * Response: 403
 * Response: 422
-*     application/json, 
+*     application/json, string
 * Response: 503
 *     application/json, object
-* Body ref: #/components/schemas/bodyprojects_create_card
+* Body schema: string
   METHODS projects_create_card
     IMPORTING
       column_id TYPE i
-      body TYPE bodyprojects_create_card
     RETURNING VALUE(return_data) TYPE project_card
     RAISING cx_static_check.
 
@@ -11896,7 +11788,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Response: 200
 *     application/vnd.github.v3.object, #/components/schemas/content-tree
-*     application/json, 
+*     application/json, string
 * Response: 302
 * Response: 403
 * Response: 404
@@ -16025,7 +15917,7 @@ INTERFACE zif_github PUBLIC.
 * GET - "Get the authenticated user"
 * Operation id: users/get-authenticated
 * Response: 200
-*     application/json, 
+*     application/json, string
 * Response: 304
 * Response: 401
 * Response: 403
@@ -16141,10 +16033,8 @@ INTERFACE zif_github PUBLIC.
 * Response: 403
 * Response: 404
 * Response: 422
-* Body ref: #/components/schemas/bodyusers_add_email_for_authen
+* Body schema: string
   METHODS users_add_email_for_authentica
-    IMPORTING
-      body TYPE bodyusers_add_email_for_authen
     RAISING cx_static_check.
 
 * DELETE - "Delete an email address for the authenticated user"
@@ -16155,10 +16045,8 @@ INTERFACE zif_github PUBLIC.
 * Response: 403
 * Response: 404
 * Response: 422
-* Body ref: #/components/schemas/bodyusers_delete_email_for_aut
+* Body schema: string
   METHODS users_delete_email_for_authent
-    IMPORTING
-      body TYPE bodyusers_delete_email_for_aut
     RAISING cx_static_check.
 
 * GET - "List followers of the authenticated user"
@@ -16892,7 +16780,7 @@ INTERFACE zif_github PUBLIC.
 * Operation id: users/get-by-username
 * Parameter: username, required, path
 * Response: 200
-*     application/json, 
+*     application/json, string
 * Response: 404
   METHODS users_get_by_username
     IMPORTING

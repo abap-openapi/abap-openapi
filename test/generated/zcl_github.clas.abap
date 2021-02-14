@@ -1252,10 +1252,6 @@ CLASS zcl_github DEFINITION PUBLIC.
       IMPORTING data TYPE zif_github=>bodyprojects_delete_column
       RETURNING VALUE(json) TYPE string
       RAISING cx_static_check.
-    METHODS json_projects_create_card
-      IMPORTING data TYPE zif_github=>bodyprojects_create_card
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
     METHODS json_projects_move_column
       IMPORTING data TYPE zif_github=>bodyprojects_move_column
       RETURNING VALUE(json) TYPE string
@@ -1868,14 +1864,6 @@ CLASS zcl_github DEFINITION PUBLIC.
       IMPORTING data TYPE zif_github=>bodyusers_set_primary_email_vi
       RETURNING VALUE(json) TYPE string
       RAISING cx_static_check.
-    METHODS json_users_add_email_for_authe
-      IMPORTING data TYPE zif_github=>bodyusers_add_email_for_authen
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_users_delete_email_for_au
-      IMPORTING data TYPE zif_github=>bodyusers_delete_email_for_aut
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
     METHODS json_users_create_gpg_key_for_
       IMPORTING data TYPE zif_github=>bodyusers_create_gpg_key_for_a
       RETURNING VALUE(json) TYPE string
@@ -1939,7 +1927,7 @@ CLASS zcl_github IMPLEMENTATION.
     integration-id = mo_json->value_string( iv_prefix && '/id' ).
     integration-slug = mo_json->value_string( iv_prefix && '/slug' ).
     integration-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
-* todo, , owner
+    integration-owner = mo_json->value_string( iv_prefix && '/owner' ).
     integration-name = mo_json->value_string( iv_prefix && '/name' ).
     integration-description = mo_json->value_string( iv_prefix && '/description' ).
     integration-external_url = mo_json->value_string( iv_prefix && '/external_url' ).
@@ -2008,7 +1996,7 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD parse_installation.
     installation-id = mo_json->value_string( iv_prefix && '/id' ).
-* todo, , account
+    installation-account = mo_json->value_string( iv_prefix && '/account' ).
     installation-repository_selection = mo_json->value_string( iv_prefix && '/repository_selection' ).
     installation-access_tokens_url = mo_json->value_string( iv_prefix && '/access_tokens_url' ).
     installation-repositories_url = mo_json->value_string( iv_prefix && '/repositories_url' ).
@@ -2031,7 +2019,7 @@ CLASS zcl_github IMPLEMENTATION.
     installation-has_multiple_single_files = mo_json->value_boolean( iv_prefix && '/has_multiple_single_files' ).
 * todo, array, single_file_paths
     installation-app_slug = mo_json->value_string( iv_prefix && '/app_slug' ).
-* todo, , suspended_by
+    installation-suspended_by = mo_json->value_string( iv_prefix && '/suspended_by' ).
     installation-suspended_at = mo_json->value_string( iv_prefix && '/suspended_at' ).
     installation-contact_email = mo_json->value_string( iv_prefix && '/contact_email' ).
   ENDMETHOD.
@@ -2083,14 +2071,14 @@ CLASS zcl_github IMPLEMENTATION.
     repository-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
     repository-name = mo_json->value_string( iv_prefix && '/name' ).
     repository-full_name = mo_json->value_string( iv_prefix && '/full_name' ).
-* todo, , license
+    repository-license = mo_json->value_string( iv_prefix && '/license' ).
     repository-forks = mo_json->value_string( iv_prefix && '/forks' ).
     repository-permissions-admin = mo_json->value_boolean( iv_prefix && '/permissions/admin' ).
     repository-permissions-pull = mo_json->value_boolean( iv_prefix && '/permissions/pull' ).
     repository-permissions-triage = mo_json->value_boolean( iv_prefix && '/permissions/triage' ).
     repository-permissions-push = mo_json->value_boolean( iv_prefix && '/permissions/push' ).
     repository-permissions-maintain = mo_json->value_boolean( iv_prefix && '/permissions/maintain' ).
-* todo, , owner
+    repository-owner = mo_json->value_string( iv_prefix && '/owner' ).
     repository-private = mo_json->value_boolean( iv_prefix && '/private' ).
     repository-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
     repository-description = mo_json->value_string( iv_prefix && '/description' ).
@@ -2299,7 +2287,7 @@ CLASS zcl_github IMPLEMENTATION.
     application_grant-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     application_grant-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
 * todo, array, scopes
-* todo, , user
+    application_grant-user = mo_json->value_string( iv_prefix && '/user' ).
   ENDMETHOD.
 
   METHOD parse_scoped_installation.
@@ -2327,8 +2315,8 @@ CLASS zcl_github IMPLEMENTATION.
     authorization-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     authorization-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     authorization-fingerprint = mo_json->value_string( iv_prefix && '/fingerprint' ).
-* todo, , user
-* todo, , installation
+    authorization-user = mo_json->value_string( iv_prefix && '/user' ).
+    authorization-installation = mo_json->value_string( iv_prefix && '/installation' ).
   ENDMETHOD.
 
   METHOD parse_code_of_conduct.
@@ -2508,7 +2496,7 @@ CLASS zcl_github IMPLEMENTATION.
     milestone-state = mo_json->value_string( iv_prefix && '/state' ).
     milestone-title = mo_json->value_string( iv_prefix && '/title' ).
     milestone-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, , creator
+    milestone-creator = mo_json->value_string( iv_prefix && '/creator' ).
     milestone-open_issues = mo_json->value_string( iv_prefix && '/open_issues' ).
     milestone-closed_issues = mo_json->value_string( iv_prefix && '/closed_issues' ).
     milestone-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
@@ -2534,11 +2522,11 @@ CLASS zcl_github IMPLEMENTATION.
     issue_simple-state = mo_json->value_string( iv_prefix && '/state' ).
     issue_simple-title = mo_json->value_string( iv_prefix && '/title' ).
     issue_simple-body = mo_json->value_string( iv_prefix && '/body' ).
-* todo, , user
+    issue_simple-user = mo_json->value_string( iv_prefix && '/user' ).
 * todo, array, labels
-* todo, , assignee
+    issue_simple-assignee = mo_json->value_string( iv_prefix && '/assignee' ).
 * todo, array, assignees
-* todo, , milestone
+    issue_simple-milestone = mo_json->value_string( iv_prefix && '/milestone' ).
     issue_simple-locked = mo_json->value_boolean( iv_prefix && '/locked' ).
     issue_simple-active_lock_reason = mo_json->value_string( iv_prefix && '/active_lock_reason' ).
     issue_simple-comments = mo_json->value_string( iv_prefix && '/comments' ).
@@ -2555,7 +2543,7 @@ CLASS zcl_github IMPLEMENTATION.
     issue_simple-body_text = mo_json->value_string( iv_prefix && '/body_text' ).
     issue_simple-timeline_url = mo_json->value_string( iv_prefix && '/timeline_url' ).
     issue_simple-repository = parse_repository( iv_prefix ).
-* todo, , performed_via_github_app
+    issue_simple-performed_via_github_app = mo_json->value_string( iv_prefix && '/performed_via_github_app' ).
   ENDMETHOD.
 
   METHOD parse_reaction_rollup.
@@ -2579,12 +2567,12 @@ CLASS zcl_github IMPLEMENTATION.
     issue_comment-body_text = mo_json->value_string( iv_prefix && '/body_text' ).
     issue_comment-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
     issue_comment-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
-* todo, , user
+    issue_comment-user = mo_json->value_string( iv_prefix && '/user' ).
     issue_comment-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     issue_comment-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     issue_comment-issue_url = mo_json->value_string( iv_prefix && '/issue_url' ).
     issue_comment-author_association = parse_author_association( iv_prefix ).
-* todo, , performed_via_github_app
+    issue_comment-performed_via_github_app = mo_json->value_string( iv_prefix && '/performed_via_github_app' ).
     issue_comment-reactions = parse_reaction_rollup( iv_prefix ).
   ENDMETHOD.
 
@@ -2642,9 +2630,9 @@ CLASS zcl_github IMPLEMENTATION.
     base_gist-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     base_gist-description = mo_json->value_string( iv_prefix && '/description' ).
     base_gist-comments = mo_json->value_string( iv_prefix && '/comments' ).
-* todo, , user
+    base_gist-user = mo_json->value_string( iv_prefix && '/user' ).
     base_gist-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
-* todo, , owner
+    base_gist-owner = mo_json->value_string( iv_prefix && '/owner' ).
     base_gist-truncated = mo_json->value_boolean( iv_prefix && '/truncated' ).
 * todo, array, forks
 * todo, array, history
@@ -2675,7 +2663,7 @@ CLASS zcl_github IMPLEMENTATION.
     gist_comment-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
     gist_comment-url = mo_json->value_string( iv_prefix && '/url' ).
     gist_comment-body = mo_json->value_string( iv_prefix && '/body' ).
-* todo, , user
+    gist_comment-user = mo_json->value_string( iv_prefix && '/user' ).
     gist_comment-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     gist_comment-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     gist_comment-author_association = parse_author_association( iv_prefix ).
@@ -2684,7 +2672,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD parse_gist_commit.
     gist_commit-url = mo_json->value_string( iv_prefix && '/url' ).
     gist_commit-version = mo_json->value_string( iv_prefix && '/version' ).
-* todo, , user
+    gist_commit-user = mo_json->value_string( iv_prefix && '/user' ).
     gist_commit-change_status-total = mo_json->value_string( iv_prefix && '/change_status/total' ).
     gist_commit-change_status-additions = mo_json->value_string( iv_prefix && '/change_status/additions' ).
     gist_commit-change_status-deletions = mo_json->value_string( iv_prefix && '/change_status/deletions' ).
@@ -2709,11 +2697,11 @@ CLASS zcl_github IMPLEMENTATION.
     issue-state = mo_json->value_string( iv_prefix && '/state' ).
     issue-title = mo_json->value_string( iv_prefix && '/title' ).
     issue-body = mo_json->value_string( iv_prefix && '/body' ).
-* todo, , user
+    issue-user = mo_json->value_string( iv_prefix && '/user' ).
 * todo, array, labels
-* todo, , assignee
+    issue-assignee = mo_json->value_string( iv_prefix && '/assignee' ).
 * todo, array, assignees
-* todo, , milestone
+    issue-milestone = mo_json->value_string( iv_prefix && '/milestone' ).
     issue-locked = mo_json->value_boolean( iv_prefix && '/locked' ).
     issue-active_lock_reason = mo_json->value_string( iv_prefix && '/active_lock_reason' ).
     issue-comments = mo_json->value_string( iv_prefix && '/comments' ).
@@ -2725,12 +2713,12 @@ CLASS zcl_github IMPLEMENTATION.
     issue-closed_at = mo_json->value_string( iv_prefix && '/closed_at' ).
     issue-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     issue-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
-* todo, , closed_by
+    issue-closed_by = mo_json->value_string( iv_prefix && '/closed_by' ).
     issue-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
     issue-body_text = mo_json->value_string( iv_prefix && '/body_text' ).
     issue-timeline_url = mo_json->value_string( iv_prefix && '/timeline_url' ).
     issue-repository = parse_repository( iv_prefix ).
-* todo, , performed_via_github_app
+    issue-performed_via_github_app = mo_json->value_string( iv_prefix && '/performed_via_github_app' ).
     issue-author_association = parse_author_association( iv_prefix ).
     issue-reactions = parse_reaction_rollup( iv_prefix ).
   ENDMETHOD.
@@ -3097,7 +3085,7 @@ CLASS zcl_github IMPLEMENTATION.
     team-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
     team-members_url = mo_json->value_string( iv_prefix && '/members_url' ).
     team-repositories_url = mo_json->value_string( iv_prefix && '/repositories_url' ).
-* todo, , parent
+    team-parent = mo_json->value_string( iv_prefix && '/parent' ).
   ENDMETHOD.
 
   METHOD parse_org_membership.
@@ -3106,13 +3094,13 @@ CLASS zcl_github IMPLEMENTATION.
     org_membership-role = mo_json->value_string( iv_prefix && '/role' ).
     org_membership-organization_url = mo_json->value_string( iv_prefix && '/organization_url' ).
     org_membership-organization = parse_organization_simple( iv_prefix ).
-* todo, , user
+    org_membership-user = mo_json->value_string( iv_prefix && '/user' ).
     org_membership-permissions-can_create_repository = mo_json->value_boolean( iv_prefix && '/permissions/can_create_repository' ).
   ENDMETHOD.
 
   METHOD parse_migration.
     migration-id = mo_json->value_string( iv_prefix && '/id' ).
-* todo, , owner
+    migration-owner = mo_json->value_string( iv_prefix && '/owner' ).
     migration-guid = mo_json->value_string( iv_prefix && '/guid' ).
     migration-state = mo_json->value_string( iv_prefix && '/state' ).
     migration-lock_repositories = mo_json->value_boolean( iv_prefix && '/lock_repositories' ).
@@ -3137,7 +3125,7 @@ CLASS zcl_github IMPLEMENTATION.
     project-body = mo_json->value_string( iv_prefix && '/body' ).
     project-number = mo_json->value_string( iv_prefix && '/number' ).
     project-state = mo_json->value_string( iv_prefix && '/state' ).
-* todo, , creator
+    project-creator = mo_json->value_string( iv_prefix && '/creator' ).
     project-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     project-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     project-organization_permission = mo_json->value_string( iv_prefix && '/organization_permission' ).
@@ -3165,7 +3153,7 @@ CLASS zcl_github IMPLEMENTATION.
     team_full-permission = mo_json->value_string( iv_prefix && '/permission' ).
     team_full-members_url = mo_json->value_string( iv_prefix && '/members_url' ).
     team_full-repositories_url = mo_json->value_string( iv_prefix && '/repositories_url' ).
-* todo, , parent
+    team_full-parent = mo_json->value_string( iv_prefix && '/parent' ).
     team_full-members_count = mo_json->value_string( iv_prefix && '/members_count' ).
     team_full-repos_count = mo_json->value_string( iv_prefix && '/repos_count' ).
     team_full-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
@@ -3175,7 +3163,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_team_discussion.
-* todo, , author
+    team_discussion-author = mo_json->value_string( iv_prefix && '/author' ).
     team_discussion-body = mo_json->value_string( iv_prefix && '/body' ).
     team_discussion-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
     team_discussion-body_version = mo_json->value_string( iv_prefix && '/body_version' ).
@@ -3196,7 +3184,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_team_discussion_comment.
-* todo, , author
+    team_discussion_comment-author = mo_json->value_string( iv_prefix && '/author' ).
     team_discussion_comment-body = mo_json->value_string( iv_prefix && '/body' ).
     team_discussion_comment-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
     team_discussion_comment-body_version = mo_json->value_string( iv_prefix && '/body_version' ).
@@ -3214,7 +3202,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD parse_reaction.
     reaction-id = mo_json->value_string( iv_prefix && '/id' ).
     reaction-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
-* todo, , user
+    reaction-user = mo_json->value_string( iv_prefix && '/user' ).
     reaction-content = mo_json->value_string( iv_prefix && '/content' ).
     reaction-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
   ENDMETHOD.
@@ -3251,14 +3239,14 @@ CLASS zcl_github IMPLEMENTATION.
     team_repository-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
     team_repository-name = mo_json->value_string( iv_prefix && '/name' ).
     team_repository-full_name = mo_json->value_string( iv_prefix && '/full_name' ).
-* todo, , license
+    team_repository-license = mo_json->value_string( iv_prefix && '/license' ).
     team_repository-forks = mo_json->value_string( iv_prefix && '/forks' ).
     team_repository-permissions-admin = mo_json->value_boolean( iv_prefix && '/permissions/admin' ).
     team_repository-permissions-pull = mo_json->value_boolean( iv_prefix && '/permissions/pull' ).
     team_repository-permissions-triage = mo_json->value_boolean( iv_prefix && '/permissions/triage' ).
     team_repository-permissions-push = mo_json->value_boolean( iv_prefix && '/permissions/push' ).
     team_repository-permissions-maintain = mo_json->value_boolean( iv_prefix && '/permissions/maintain' ).
-* todo, , owner
+    team_repository-owner = mo_json->value_string( iv_prefix && '/owner' ).
     team_repository-private = mo_json->value_boolean( iv_prefix && '/private' ).
     team_repository-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
     team_repository-description = mo_json->value_string( iv_prefix && '/description' ).
@@ -3343,7 +3331,7 @@ CLASS zcl_github IMPLEMENTATION.
     project_card-id = mo_json->value_string( iv_prefix && '/id' ).
     project_card-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
     project_card-note = mo_json->value_string( iv_prefix && '/note' ).
-* todo, , creator
+    project_card-creator = mo_json->value_string( iv_prefix && '/creator' ).
     project_card-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     project_card-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     project_card-archived = mo_json->value_boolean( iv_prefix && '/archived' ).
@@ -3365,7 +3353,7 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD parse_repository_collaborator_.
     repository_collaborator_permis-permission = mo_json->value_string( iv_prefix && '/permission' ).
-* todo, , user
+    repository_collaborator_permis-user = mo_json->value_string( iv_prefix && '/user' ).
   ENDMETHOD.
 
   METHOD parse_rate_limit.
@@ -3389,7 +3377,7 @@ CLASS zcl_github IMPLEMENTATION.
     full_repository-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
     full_repository-name = mo_json->value_string( iv_prefix && '/name' ).
     full_repository-full_name = mo_json->value_string( iv_prefix && '/full_name' ).
-* todo, , owner
+    full_repository-owner = mo_json->value_string( iv_prefix && '/owner' ).
     full_repository-private = mo_json->value_boolean( iv_prefix && '/private' ).
     full_repository-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
     full_repository-description = mo_json->value_string( iv_prefix && '/description' ).
@@ -3467,8 +3455,8 @@ CLASS zcl_github IMPLEMENTATION.
     full_repository-allow_merge_commit = mo_json->value_boolean( iv_prefix && '/allow_merge_commit' ).
     full_repository-subscribers_count = mo_json->value_string( iv_prefix && '/subscribers_count' ).
     full_repository-network_count = mo_json->value_string( iv_prefix && '/network_count' ).
-* todo, , license
-* todo, , organization
+    full_repository-license = mo_json->value_string( iv_prefix && '/license' ).
+    full_repository-organization = mo_json->value_string( iv_prefix && '/organization' ).
     full_repository-parent = parse_repository( iv_prefix ).
     full_repository-source = parse_repository( iv_prefix ).
     full_repository-forks = mo_json->value_string( iv_prefix && '/forks' ).
@@ -3683,15 +3671,15 @@ CLASS zcl_github IMPLEMENTATION.
     commit-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
     commit-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
     commit-commit-url = mo_json->value_string( iv_prefix && '/commit/url' ).
-* todo, , author
-* todo, , committer
+    commit-commit-author = mo_json->value_string( iv_prefix && '/commit/author' ).
+    commit-commit-committer = mo_json->value_string( iv_prefix && '/commit/committer' ).
     commit-commit-message = mo_json->value_string( iv_prefix && '/commit/message' ).
     commit-commit-comment_count = mo_json->value_string( iv_prefix && '/commit/comment_count' ).
     commit-commit-tree-sha = mo_json->value_string( iv_prefix && '/commit/tree/sha' ).
     commit-commit-tree-url = mo_json->value_string( iv_prefix && '/commit/tree/url' ).
     commit-commit-verification = parse_verification( iv_prefix ).
-* todo, , author
-* todo, , committer
+    commit-author = mo_json->value_string( iv_prefix && '/author' ).
+    commit-committer = mo_json->value_string( iv_prefix && '/committer' ).
 * todo, array, parents
     commit-stats-additions = mo_json->value_string( iv_prefix && '/stats/additions' ).
     commit-stats-deletions = mo_json->value_string( iv_prefix && '/stats/deletions' ).
@@ -3759,8 +3747,8 @@ CLASS zcl_github IMPLEMENTATION.
     check_run-output-annotations_url = mo_json->value_string( iv_prefix && '/output/annotations_url' ).
     check_run-name = mo_json->value_string( iv_prefix && '/name' ).
     check_run-check_suite-id = mo_json->value_string( iv_prefix && '/check_suite/id' ).
-* todo, , app
-* todo, , pull_requests
+    check_run-app = mo_json->value_string( iv_prefix && '/app' ).
+    check_run-pull_requests = mo_json->value_string( iv_prefix && '/pull_requests' ).
   ENDMETHOD.
 
   METHOD parse_check_annotation.
@@ -3787,7 +3775,7 @@ CLASS zcl_github IMPLEMENTATION.
     check_suite-before = mo_json->value_string( iv_prefix && '/before' ).
     check_suite-after = mo_json->value_string( iv_prefix && '/after' ).
 * todo, array, pull_requests
-* todo, , app
+    check_suite-app = mo_json->value_string( iv_prefix && '/app' ).
     check_suite-repository = parse_minimal_repository( iv_prefix ).
     check_suite-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     check_suite-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
@@ -3948,8 +3936,8 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD parse_repository_invitation.
     repository_invitation-id = mo_json->value_string( iv_prefix && '/id' ).
     repository_invitation-repository = parse_minimal_repository( iv_prefix ).
-* todo, , invitee
-* todo, , inviter
+    repository_invitation-invitee = mo_json->value_string( iv_prefix && '/invitee' ).
+    repository_invitation-inviter = mo_json->value_string( iv_prefix && '/inviter' ).
     repository_invitation-permissions = mo_json->value_string( iv_prefix && '/permissions' ).
     repository_invitation-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     repository_invitation-expired = mo_json->value_boolean( iv_prefix && '/expired' ).
@@ -3968,7 +3956,7 @@ CLASS zcl_github IMPLEMENTATION.
     commit_comment-position = mo_json->value_string( iv_prefix && '/position' ).
     commit_comment-line = mo_json->value_string( iv_prefix && '/line' ).
     commit_comment-commit_id = mo_json->value_string( iv_prefix && '/commit_id' ).
-* todo, , user
+    commit_comment-user = mo_json->value_string( iv_prefix && '/user' ).
     commit_comment-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     commit_comment-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     commit_comment-author_association = parse_author_association( iv_prefix ).
@@ -4019,17 +4007,17 @@ CLASS zcl_github IMPLEMENTATION.
     pull_request_simple-state = mo_json->value_string( iv_prefix && '/state' ).
     pull_request_simple-locked = mo_json->value_boolean( iv_prefix && '/locked' ).
     pull_request_simple-title = mo_json->value_string( iv_prefix && '/title' ).
-* todo, , user
+    pull_request_simple-user = mo_json->value_string( iv_prefix && '/user' ).
     pull_request_simple-body = mo_json->value_string( iv_prefix && '/body' ).
 * todo, array, labels
-* todo, , milestone
+    pull_request_simple-milestone = mo_json->value_string( iv_prefix && '/milestone' ).
     pull_request_simple-active_lock_reason = mo_json->value_string( iv_prefix && '/active_lock_reason' ).
     pull_request_simple-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     pull_request_simple-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     pull_request_simple-closed_at = mo_json->value_string( iv_prefix && '/closed_at' ).
     pull_request_simple-merged_at = mo_json->value_string( iv_prefix && '/merged_at' ).
     pull_request_simple-merge_commit_sha = mo_json->value_string( iv_prefix && '/merge_commit_sha' ).
-* todo, , assignee
+    pull_request_simple-assignee = mo_json->value_string( iv_prefix && '/assignee' ).
 * todo, array, assignees
 * todo, array, requested_reviewers
 * todo, array, requested_teams
@@ -4037,12 +4025,12 @@ CLASS zcl_github IMPLEMENTATION.
     pull_request_simple-head-ref = mo_json->value_string( iv_prefix && '/head/ref' ).
     pull_request_simple-head-repo = parse_repository( iv_prefix ).
     pull_request_simple-head-sha = mo_json->value_string( iv_prefix && '/head/sha' ).
-* todo, , user
+    pull_request_simple-head-user = mo_json->value_string( iv_prefix && '/head/user' ).
     pull_request_simple-base-label = mo_json->value_string( iv_prefix && '/base/label' ).
     pull_request_simple-base-ref = mo_json->value_string( iv_prefix && '/base/ref' ).
     pull_request_simple-base-repo = parse_repository( iv_prefix ).
     pull_request_simple-base-sha = mo_json->value_string( iv_prefix && '/base/sha' ).
-* todo, , user
+    pull_request_simple-base-user = mo_json->value_string( iv_prefix && '/base/user' ).
     pull_request_simple-_links-comments = parse_link( iv_prefix ).
     pull_request_simple-_links-commits = parse_link( iv_prefix ).
     pull_request_simple-_links-statuses = parse_link( iv_prefix ).
@@ -4110,12 +4098,12 @@ CLASS zcl_github IMPLEMENTATION.
     community_profile-health_percentage = mo_json->value_string( iv_prefix && '/health_percentage' ).
     community_profile-description = mo_json->value_string( iv_prefix && '/description' ).
     community_profile-documentation = mo_json->value_string( iv_prefix && '/documentation' ).
-* todo, , code_of_conduct
-* todo, , license
-* todo, , contributing
-* todo, , readme
-* todo, , issue_template
-* todo, , pull_request_template
+    community_profile-files-code_of_conduct = mo_json->value_string( iv_prefix && '/files/code_of_conduct' ).
+    community_profile-files-license = mo_json->value_string( iv_prefix && '/files/license' ).
+    community_profile-files-contributing = mo_json->value_string( iv_prefix && '/files/contributing' ).
+    community_profile-files-readme = mo_json->value_string( iv_prefix && '/files/readme' ).
+    community_profile-files-issue_template = mo_json->value_string( iv_prefix && '/files/issue_template' ).
+    community_profile-files-pull_request_template = mo_json->value_string( iv_prefix && '/files/pull_request_template' ).
     community_profile-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     community_profile-content_reports_enabled = mo_json->value_boolean( iv_prefix && '/content_reports_enabled' ).
   ENDMETHOD.
@@ -4288,14 +4276,14 @@ CLASS zcl_github IMPLEMENTATION.
     deployment-original_environment = mo_json->value_string( iv_prefix && '/original_environment' ).
     deployment-environment = mo_json->value_string( iv_prefix && '/environment' ).
     deployment-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, , creator
+    deployment-creator = mo_json->value_string( iv_prefix && '/creator' ).
     deployment-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     deployment-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     deployment-statuses_url = mo_json->value_string( iv_prefix && '/statuses_url' ).
     deployment-repository_url = mo_json->value_string( iv_prefix && '/repository_url' ).
     deployment-transient_environment = mo_json->value_boolean( iv_prefix && '/transient_environment' ).
     deployment-production_environment = mo_json->value_boolean( iv_prefix && '/production_environment' ).
-* todo, , performed_via_github_app
+    deployment-performed_via_github_app = mo_json->value_string( iv_prefix && '/performed_via_github_app' ).
   ENDMETHOD.
 
   METHOD parse_deployment_status.
@@ -4303,7 +4291,7 @@ CLASS zcl_github IMPLEMENTATION.
     deployment_status-id = mo_json->value_string( iv_prefix && '/id' ).
     deployment_status-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
     deployment_status-state = mo_json->value_string( iv_prefix && '/state' ).
-* todo, , creator
+    deployment_status-creator = mo_json->value_string( iv_prefix && '/creator' ).
     deployment_status-description = mo_json->value_string( iv_prefix && '/description' ).
     deployment_status-environment = mo_json->value_string( iv_prefix && '/environment' ).
     deployment_status-target_url = mo_json->value_string( iv_prefix && '/target_url' ).
@@ -4313,7 +4301,7 @@ CLASS zcl_github IMPLEMENTATION.
     deployment_status-repository_url = mo_json->value_string( iv_prefix && '/repository_url' ).
     deployment_status-environment_url = mo_json->value_string( iv_prefix && '/environment_url' ).
     deployment_status-log_url = mo_json->value_string( iv_prefix && '/log_url' ).
-* todo, , performed_via_github_app
+    deployment_status-performed_via_github_app = mo_json->value_string( iv_prefix && '/performed_via_github_app' ).
   ENDMETHOD.
 
   METHOD parse_short_blob.
@@ -4490,17 +4478,17 @@ CLASS zcl_github IMPLEMENTATION.
     issue_event-id = mo_json->value_string( iv_prefix && '/id' ).
     issue_event-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
     issue_event-url = mo_json->value_string( iv_prefix && '/url' ).
-* todo, , actor
+    issue_event-actor = mo_json->value_string( iv_prefix && '/actor' ).
     issue_event-event = mo_json->value_string( iv_prefix && '/event' ).
     issue_event-commit_id = mo_json->value_string( iv_prefix && '/commit_id' ).
     issue_event-commit_url = mo_json->value_string( iv_prefix && '/commit_url' ).
     issue_event-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     issue_event-issue = parse_issue_simple( iv_prefix ).
     issue_event-label = parse_issue_event_label( iv_prefix ).
-* todo, , assignee
-* todo, , assigner
-* todo, , review_requester
-* todo, , requested_reviewer
+    issue_event-assignee = mo_json->value_string( iv_prefix && '/assignee' ).
+    issue_event-assigner = mo_json->value_string( iv_prefix && '/assigner' ).
+    issue_event-review_requester = mo_json->value_string( iv_prefix && '/review_requester' ).
+    issue_event-requested_reviewer = mo_json->value_string( iv_prefix && '/requested_reviewer' ).
     issue_event-requested_team = parse_team( iv_prefix ).
     issue_event-dismissed_review = parse_issue_event_dismissed_re( iv_prefix ).
     issue_event-milestone = parse_issue_event_milestone( iv_prefix ).
@@ -4562,7 +4550,7 @@ CLASS zcl_github IMPLEMENTATION.
     license_content-_links-git = mo_json->value_string( iv_prefix && '/_links/git' ).
     license_content-_links-html = mo_json->value_string( iv_prefix && '/_links/html' ).
     license_content-_links-self = mo_json->value_string( iv_prefix && '/_links/self' ).
-* todo, , license
+    license_content-license = mo_json->value_string( iv_prefix && '/license' ).
   ENDMETHOD.
 
   METHOD parse_pages_source_hash.
@@ -4584,7 +4572,7 @@ CLASS zcl_github IMPLEMENTATION.
     page_build-url = mo_json->value_string( iv_prefix && '/url' ).
     page_build-status = mo_json->value_string( iv_prefix && '/status' ).
     page_build-error-message = mo_json->value_string( iv_prefix && '/error/message' ).
-* todo, , pusher
+    page_build-pusher = mo_json->value_string( iv_prefix && '/pusher' ).
     page_build-commit = mo_json->value_string( iv_prefix && '/commit' ).
     page_build-duration = mo_json->value_string( iv_prefix && '/duration' ).
     page_build-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
@@ -4613,17 +4601,17 @@ CLASS zcl_github IMPLEMENTATION.
     pull_request-state = mo_json->value_string( iv_prefix && '/state' ).
     pull_request-locked = mo_json->value_boolean( iv_prefix && '/locked' ).
     pull_request-title = mo_json->value_string( iv_prefix && '/title' ).
-* todo, , user
+    pull_request-user = mo_json->value_string( iv_prefix && '/user' ).
     pull_request-body = mo_json->value_string( iv_prefix && '/body' ).
 * todo, array, labels
-* todo, , milestone
+    pull_request-milestone = mo_json->value_string( iv_prefix && '/milestone' ).
     pull_request-active_lock_reason = mo_json->value_string( iv_prefix && '/active_lock_reason' ).
     pull_request-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     pull_request-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     pull_request-closed_at = mo_json->value_string( iv_prefix && '/closed_at' ).
     pull_request-merged_at = mo_json->value_string( iv_prefix && '/merged_at' ).
     pull_request-merge_commit_sha = mo_json->value_string( iv_prefix && '/merge_commit_sha' ).
-* todo, , assignee
+    pull_request-assignee = mo_json->value_string( iv_prefix && '/assignee' ).
 * todo, array, assignees
 * todo, array, requested_reviewers
 * todo, array, requested_teams
@@ -4841,7 +4829,7 @@ CLASS zcl_github IMPLEMENTATION.
     pull_request-base-repo-allow_merge_commit = mo_json->value_boolean( iv_prefix && '/base/repo/allow_merge_commit' ).
     pull_request-base-repo-allow_squash_merge = mo_json->value_boolean( iv_prefix && '/base/repo/allow_squash_merge' ).
     pull_request-base-repo-allow_rebase_merge = mo_json->value_boolean( iv_prefix && '/base/repo/allow_rebase_merge' ).
-* todo, , license
+    pull_request-base-repo-license = mo_json->value_string( iv_prefix && '/base/repo/license' ).
     pull_request-base-repo-pushed_at = mo_json->value_string( iv_prefix && '/base/repo/pushed_at' ).
     pull_request-base-repo-size = mo_json->value_string( iv_prefix && '/base/repo/size' ).
     pull_request-base-repo-ssh_url = mo_json->value_string( iv_prefix && '/base/repo/ssh_url' ).
@@ -4886,7 +4874,7 @@ CLASS zcl_github IMPLEMENTATION.
     pull_request-mergeable = mo_json->value_boolean( iv_prefix && '/mergeable' ).
     pull_request-rebaseable = mo_json->value_boolean( iv_prefix && '/rebaseable' ).
     pull_request-mergeable_state = mo_json->value_string( iv_prefix && '/mergeable_state' ).
-* todo, , merged_by
+    pull_request-merged_by = mo_json->value_string( iv_prefix && '/merged_by' ).
     pull_request-comments = mo_json->value_string( iv_prefix && '/comments' ).
     pull_request-review_comments = mo_json->value_string( iv_prefix && '/review_comments' ).
     pull_request-maintainer_can_modify = mo_json->value_boolean( iv_prefix && '/maintainer_can_modify' ).
@@ -4943,7 +4931,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD parse_pull_request_review.
     pull_request_review-id = mo_json->value_string( iv_prefix && '/id' ).
     pull_request_review-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
-* todo, , user
+    pull_request_review-user = mo_json->value_string( iv_prefix && '/user' ).
     pull_request_review-body = mo_json->value_string( iv_prefix && '/body' ).
     pull_request_review-state = mo_json->value_string( iv_prefix && '/state' ).
     pull_request_review-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
@@ -4969,7 +4957,7 @@ CLASS zcl_github IMPLEMENTATION.
     review_comment-commit_id = mo_json->value_string( iv_prefix && '/commit_id' ).
     review_comment-original_commit_id = mo_json->value_string( iv_prefix && '/original_commit_id' ).
     review_comment-in_reply_to_id = mo_json->value_string( iv_prefix && '/in_reply_to_id' ).
-* todo, , user
+    review_comment-user = mo_json->value_string( iv_prefix && '/user' ).
     review_comment-body = mo_json->value_string( iv_prefix && '/body' ).
     review_comment-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     review_comment-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
@@ -5002,7 +4990,7 @@ CLASS zcl_github IMPLEMENTATION.
     release_asset-download_count = mo_json->value_string( iv_prefix && '/download_count' ).
     release_asset-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     release_asset-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
-* todo, , uploader
+    release_asset-uploader = mo_json->value_string( iv_prefix && '/uploader' ).
   ENDMETHOD.
 
   METHOD parse_release.
@@ -5051,7 +5039,7 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD parse_stargazer.
     stargazer-starred_at = mo_json->value_string( iv_prefix && '/starred_at' ).
-* todo, , user
+    stargazer-user = mo_json->value_string( iv_prefix && '/user' ).
   ENDMETHOD.
 
   METHOD parse_code_frequency_stat.
@@ -5065,7 +5053,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_contributor_activity.
-* todo, , author
+    contributor_activity-author = mo_json->value_string( iv_prefix && '/author' ).
     contributor_activity-total = mo_json->value_string( iv_prefix && '/total' ).
 * todo, array, weeks
   ENDMETHOD.
@@ -5228,15 +5216,15 @@ CLASS zcl_github IMPLEMENTATION.
     commit_search_result_item-commit-author-name = mo_json->value_string( iv_prefix && '/commit/author/name' ).
     commit_search_result_item-commit-author-email = mo_json->value_string( iv_prefix && '/commit/author/email' ).
     commit_search_result_item-commit-author-date = mo_json->value_string( iv_prefix && '/commit/author/date' ).
-* todo, , committer
+    commit_search_result_item-commit-committer = mo_json->value_string( iv_prefix && '/commit/committer' ).
     commit_search_result_item-commit-comment_count = mo_json->value_string( iv_prefix && '/commit/comment_count' ).
     commit_search_result_item-commit-message = mo_json->value_string( iv_prefix && '/commit/message' ).
     commit_search_result_item-commit-tree-sha = mo_json->value_string( iv_prefix && '/commit/tree/sha' ).
     commit_search_result_item-commit-tree-url = mo_json->value_string( iv_prefix && '/commit/tree/url' ).
     commit_search_result_item-commit-url = mo_json->value_string( iv_prefix && '/commit/url' ).
     commit_search_result_item-commit-verification = parse_verification( iv_prefix ).
-* todo, , author
-* todo, , committer
+    commit_search_result_item-author = mo_json->value_string( iv_prefix && '/author' ).
+    commit_search_result_item-committer = mo_json->value_string( iv_prefix && '/committer' ).
 * todo, array, parents
     commit_search_result_item-repository = parse_minimal_repository( iv_prefix ).
     commit_search_result_item-score = mo_json->value_string( iv_prefix && '/score' ).
@@ -5258,11 +5246,11 @@ CLASS zcl_github IMPLEMENTATION.
     issue_search_result_item-locked = mo_json->value_boolean( iv_prefix && '/locked' ).
     issue_search_result_item-active_lock_reason = mo_json->value_string( iv_prefix && '/active_lock_reason' ).
 * todo, array, assignees
-* todo, , user
+    issue_search_result_item-user = mo_json->value_string( iv_prefix && '/user' ).
 * todo, array, labels
     issue_search_result_item-state = mo_json->value_string( iv_prefix && '/state' ).
-* todo, , assignee
-* todo, , milestone
+    issue_search_result_item-assignee = mo_json->value_string( iv_prefix && '/assignee' ).
+    issue_search_result_item-milestone = mo_json->value_string( iv_prefix && '/milestone' ).
     issue_search_result_item-comments = mo_json->value_string( iv_prefix && '/comments' ).
     issue_search_result_item-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     issue_search_result_item-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
@@ -5281,7 +5269,7 @@ CLASS zcl_github IMPLEMENTATION.
     issue_search_result_item-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
     issue_search_result_item-body_text = mo_json->value_string( iv_prefix && '/body_text' ).
     issue_search_result_item-timeline_url = mo_json->value_string( iv_prefix && '/timeline_url' ).
-* todo, , performed_via_github_app
+    issue_search_result_item-performed_via_github_app = mo_json->value_string( iv_prefix && '/performed_via_github_app' ).
   ENDMETHOD.
 
   METHOD parse_label_search_result_item.
@@ -5301,7 +5289,7 @@ CLASS zcl_github IMPLEMENTATION.
     repo_search_result_item-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
     repo_search_result_item-name = mo_json->value_string( iv_prefix && '/name' ).
     repo_search_result_item-full_name = mo_json->value_string( iv_prefix && '/full_name' ).
-* todo, , owner
+    repo_search_result_item-owner = mo_json->value_string( iv_prefix && '/owner' ).
     repo_search_result_item-private = mo_json->value_boolean( iv_prefix && '/private' ).
     repo_search_result_item-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
     repo_search_result_item-description = mo_json->value_string( iv_prefix && '/description' ).
@@ -5372,7 +5360,7 @@ CLASS zcl_github IMPLEMENTATION.
     repo_search_result_item-has_downloads = mo_json->value_boolean( iv_prefix && '/has_downloads' ).
     repo_search_result_item-archived = mo_json->value_boolean( iv_prefix && '/archived' ).
     repo_search_result_item-disabled = mo_json->value_boolean( iv_prefix && '/disabled' ).
-* todo, , license
+    repo_search_result_item-license = mo_json->value_string( iv_prefix && '/license' ).
     repo_search_result_item-permissions-admin = mo_json->value_boolean( iv_prefix && '/permissions/admin' ).
     repo_search_result_item-permissions-pull = mo_json->value_boolean( iv_prefix && '/permissions/pull' ).
     repo_search_result_item-permissions-push = mo_json->value_boolean( iv_prefix && '/permissions/push' ).
@@ -5603,947 +5591,2087 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD json_apps_update_webhook_confi.
-* todo
+    json = json && '{'.
+*  json = json && '"url":' not simple.
+*  json = json && '"content_type":' not simple.
+*  json = json && '"secret":' not simple.
+*  json = json && '"insecure_ssl":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_apps_create_installation_.
-* todo
+    json = json && '{'.
+*  json = json && '"repositories":' not simple.
+*  json = json && '"repository_ids":' not simple.
+*  json = json && '"permissions":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_apps_delete_authorization.
-* todo
+    json = json && '{'.
+    json = json && |"access_token": "{ data-access_token }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_apps_check_token.
-* todo
+    json = json && '{'.
+    json = json && |"access_token": "{ data-access_token }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_apps_reset_token.
-* todo
+    json = json && '{'.
+    json = json && |"access_token": "{ data-access_token }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_apps_delete_token.
-* todo
+    json = json && '{'.
+    json = json && |"access_token": "{ data-access_token }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_apps_scope_token.
-* todo
+    json = json && '{'.
+    json = json && |"access_token": "{ data-access_token }",|.
+    json = json && |"target": "{ data-target }",|.
+    json = json && |"target_id": "{ data-target_id }",|.
+*  json = json && '"repositories":' not simple.
+*  json = json && '"repository_ids":' not simple.
+*  json = json && '"permissions":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_oauth_authorizations_crea.
-* todo
+    json = json && '{'.
+*  json = json && '"scopes":' not simple.
+    json = json && |"note": "{ data-note }",|.
+    json = json && |"note_url": "{ data-note_url }",|.
+    json = json && |"client_id": "{ data-client_id }",|.
+    json = json && |"client_secret": "{ data-client_secret }",|.
+    json = json && |"fingerprint": "{ data-fingerprint }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_oauth_authorizations_get_.
-* todo
+    json = json && '{'.
+    json = json && |"client_secret": "{ data-client_secret }",|.
+*  json = json && '"scopes":' not simple.
+    json = json && |"note": "{ data-note }",|.
+    json = json && |"note_url": "{ data-note_url }",|.
+    json = json && |"fingerprint": "{ data-fingerprint }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_oauth_authorizations_ge01.
-* todo
+    json = json && '{'.
+    json = json && |"client_secret": "{ data-client_secret }",|.
+*  json = json && '"scopes":' not simple.
+    json = json && |"note": "{ data-note }",|.
+    json = json && |"note_url": "{ data-note_url }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_oauth_authorizations_upda.
-* todo
+    json = json && '{'.
+*  json = json && '"scopes":' not simple.
+*  json = json && '"add_scopes":' not simple.
+*  json = json && '"remove_scopes":' not simple.
+    json = json && |"note": "{ data-note }",|.
+    json = json && |"note_url": "{ data-note_url }",|.
+    json = json && |"fingerprint": "{ data-fingerprint }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_oauth_authorizations_dele.
-* todo
+    json = json && '{'.
+*  json = json && '"scopes":' not simple.
+*  json = json && '"add_scopes":' not simple.
+*  json = json && '"remove_scopes":' not simple.
+    json = json && |"note": "{ data-note }",|.
+    json = json && |"note_url": "{ data-note_url }",|.
+    json = json && |"fingerprint": "{ data-fingerprint }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_apps_create_content_attac.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_set_gith.
-* todo
+    json = json && '{'.
+*  json = json && '"enabled_organizations":' not simple.
+*  json = json && '"allowed_actions":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_set_sele.
-* todo
+    json = json && '{'.
+*  json = json && '"selected_organization_ids":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_create_s.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+*  json = json && '"selected_organization_ids":' not simple.
+*  json = json && '"runners":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_update_s.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_delete_s.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_set_org_.
-* todo
+    json = json && '{'.
+*  json = json && '"selected_organization_ids":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_set_self.
-* todo
+    json = json && '{'.
+*  json = json && '"runners":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_gists_create.
-* todo
+    json = json && '{'.
+    json = json && |"description": "{ data-description }",|.
+*  json = json && '"files":' not simple.
+    json = json && |"public": "{ data-public }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_gists_update.
-* todo
+    json = json && '{'.
+    json = json && |"description": "{ data-description }",|.
+*  json = json && '"files":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_gists_delete.
-* todo
+    json = json && '{'.
+    json = json && |"description": "{ data-description }",|.
+*  json = json && '"files":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_gists_create_comment.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_gists_update_comment.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_gists_delete_comment.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_markdown_render.
-* todo
+    json = json && '{'.
+    json = json && |"text": "{ data-text }",|.
+    json = json && |"mode": "{ data-mode }",|.
+    json = json && |"context": "{ data-context }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_activity_mark_notificatio.
-* todo
+    json = json && '{'.
+    json = json && |"last_read_at": "{ data-last_read_at }",|.
+    json = json && |"read": "{ data-read }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_activity_set_thread_subsc.
-* todo
+    json = json && '{'.
+    json = json && |"ignored": "{ data-ignored }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_activity_delete_thread_su.
-* todo
+    json = json && '{'.
+    json = json && |"ignored": "{ data-ignored }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_update.
-* todo
+    json = json && '{'.
+    json = json && |"billing_email": "{ data-billing_email }",|.
+    json = json && |"company": "{ data-company }",|.
+    json = json && |"email": "{ data-email }",|.
+    json = json && |"twitter_username": "{ data-twitter_username }",|.
+    json = json && |"location": "{ data-location }",|.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"has_organization_projects": "{ data-has_organization_projects }",|.
+    json = json && |"has_repository_projects": "{ data-has_repository_projects }",|.
+    json = json && |"default_repository_permission": "{ data-default_repository_permission }",|.
+    json = json && |"members_can_create_repositories": "{ data-members_can_create_repositorie }",|.
+    json = json && |"members_can_create_internal_repositories": "{ data-members_can_create_internal_re }",|.
+    json = json && |"members_can_create_private_repositories": "{ data-members_can_create_private_rep }",|.
+    json = json && |"members_can_create_public_repositories": "{ data-members_can_create_public_repo }",|.
+    json = json && |"members_allowed_repository_creation_type": "{ data-members_allowed_repository_cre }",|.
+    json = json && |"members_can_create_pages": "{ data-members_can_create_pages }",|.
+    json = json && |"members_can_create_public_pages": "{ data-members_can_create_public_page }",|.
+    json = json && |"members_can_create_private_pages": "{ data-members_can_create_private_pag }",|.
+    json = json && |"blog": "{ data-blog }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_set_github_action.
-* todo
+    json = json && '{'.
+*  json = json && '"enabled_repositories":' not simple.
+*  json = json && '"allowed_actions":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_set_selected_repo.
-* todo
+    json = json && '{'.
+*  json = json && '"selected_repository_ids":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_create_self_hoste.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+*  json = json && '"selected_repository_ids":' not simple.
+*  json = json && '"runners":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_update_self_hoste.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_delete_self_hoste.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_set_repo_access_t.
-* todo
+    json = json && '{'.
+*  json = json && '"selected_repository_ids":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_set_self_hosted_r.
-* todo
+    json = json && '{'.
+*  json = json && '"runners":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_create_or_update_.
-* todo
+    json = json && '{'.
+    json = json && |"encrypted_value": "{ data-encrypted_value }",|.
+    json = json && |"key_id": "{ data-key_id }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+*  json = json && '"selected_repository_ids":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_delete_org_secret.
-* todo
+    json = json && '{'.
+    json = json && |"encrypted_value": "{ data-encrypted_value }",|.
+    json = json && |"key_id": "{ data-key_id }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+*  json = json && '"selected_repository_ids":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_set_selected_re01.
-* todo
+    json = json && '{'.
+*  json = json && '"selected_repository_ids":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_create_webhook.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+*  json = json && '"config":' not simple.
+*  json = json && '"events":' not simple.
+    json = json && |"active": "{ data-active }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_update_webhook.
-* todo
+    json = json && '{'.
+*  json = json && '"config":' not simple.
+*  json = json && '"events":' not simple.
+    json = json && |"active": "{ data-active }",|.
+    json = json && |"name": "{ data-name }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_delete_webhook.
-* todo
+    json = json && '{'.
+*  json = json && '"config":' not simple.
+*  json = json && '"events":' not simple.
+    json = json && |"active": "{ data-active }",|.
+    json = json && |"name": "{ data-name }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_update_webhook_confi.
-* todo
+    json = json && '{'.
+*  json = json && '"url":' not simple.
+*  json = json && '"content_type":' not simple.
+*  json = json && '"secret":' not simple.
+*  json = json && '"insecure_ssl":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_create_invitation.
-* todo
+    json = json && '{'.
+    json = json && |"invitee_id": "{ data-invitee_id }",|.
+    json = json && |"email": "{ data-email }",|.
+    json = json && |"role": "{ data-role }",|.
+*  json = json && '"team_ids":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_set_membership_for_u.
-* todo
+    json = json && '{'.
+    json = json && |"role": "{ data-role }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_remove_membership_fo.
-* todo
+    json = json && '{'.
+    json = json && |"role": "{ data-role }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_migrations_start_for_org.
-* todo
+    json = json && '{'.
+*  json = json && '"repositories":' not simple.
+    json = json && |"lock_repositories": "{ data-lock_repositories }",|.
+    json = json && |"exclude_attachments": "{ data-exclude_attachments }",|.
+*  json = json && '"exclude":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_create_for_org.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_in_org.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"homepage": "{ data-homepage }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+    json = json && |"has_issues": "{ data-has_issues }",|.
+    json = json && |"has_projects": "{ data-has_projects }",|.
+    json = json && |"has_wiki": "{ data-has_wiki }",|.
+    json = json && |"is_template": "{ data-is_template }",|.
+    json = json && |"team_id": "{ data-team_id }",|.
+    json = json && |"auto_init": "{ data-auto_init }",|.
+    json = json && |"gitignore_template": "{ data-gitignore_template }",|.
+    json = json && |"license_template": "{ data-license_template }",|.
+    json = json && |"allow_squash_merge": "{ data-allow_squash_merge }",|.
+    json = json && |"allow_merge_commit": "{ data-allow_merge_commit }",|.
+    json = json && |"allow_rebase_merge": "{ data-allow_rebase_merge }",|.
+    json = json && |"delete_branch_on_merge": "{ data-delete_branch_on_merge }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_create.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+*  json = json && '"maintainers":' not simple.
+*  json = json && '"repo_names":' not simple.
+    json = json && |"privacy": "{ data-privacy }",|.
+    json = json && |"permission": "{ data-permission }",|.
+    json = json && |"parent_team_id": "{ data-parent_team_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_update_in_org.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"privacy": "{ data-privacy }",|.
+    json = json && |"permission": "{ data-permission }",|.
+    json = json && |"parent_team_id": "{ data-parent_team_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_delete_in_org.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"privacy": "{ data-privacy }",|.
+    json = json && |"permission": "{ data-permission }",|.
+    json = json && |"parent_team_id": "{ data-parent_team_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_create_discussion_i.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_update_discussion_i.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_delete_discussion_i.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_create_discussion_c.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_update_discussion_c.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_delete_discussion_c.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_reactions_create_for_team.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_reactions_create_for_te01.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_add_or_update_membe.
-* todo
+    json = json && '{'.
+    json = json && |"role": "{ data-role }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_remove_membership_f.
-* todo
+    json = json && '{'.
+    json = json && |"role": "{ data-role }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_add_or_update_proje.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_remove_project_in_o.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_add_or_update_repo_.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_remove_repo_in_org.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_create_or_update_id.
-* todo
+    json = json && '{'.
+*  json = json && '"groups":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_update_card.
-* todo
+    json = json && '{'.
+    json = json && |"note": "{ data-note }",|.
+    json = json && |"archived": "{ data-archived }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_delete_card.
-* todo
+    json = json && '{'.
+    json = json && |"note": "{ data-note }",|.
+    json = json && |"archived": "{ data-archived }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_move_card.
-* todo
+    json = json && '{'.
+    json = json && |"position": "{ data-position }",|.
+    json = json && |"column_id": "{ data-column_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_update_column.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_delete_column.
-* todo
-  ENDMETHOD.
-
-  METHOD json_projects_create_card.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_move_column.
-* todo
+    json = json && '{'.
+    json = json && |"position": "{ data-position }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_update.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"organization_permission": "{ data-organization_permission }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_delete.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"organization_permission": "{ data-organization_permission }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_add_collaborator.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_remove_collabora.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_create_column.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"homepage": "{ data-homepage }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+    json = json && |"has_issues": "{ data-has_issues }",|.
+    json = json && |"has_projects": "{ data-has_projects }",|.
+    json = json && |"has_wiki": "{ data-has_wiki }",|.
+    json = json && |"is_template": "{ data-is_template }",|.
+    json = json && |"default_branch": "{ data-default_branch }",|.
+    json = json && |"allow_squash_merge": "{ data-allow_squash_merge }",|.
+    json = json && |"allow_merge_commit": "{ data-allow_merge_commit }",|.
+    json = json && |"allow_rebase_merge": "{ data-allow_rebase_merge }",|.
+    json = json && |"delete_branch_on_merge": "{ data-delete_branch_on_merge }",|.
+    json = json && |"archived": "{ data-archived }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"homepage": "{ data-homepage }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+    json = json && |"has_issues": "{ data-has_issues }",|.
+    json = json && |"has_projects": "{ data-has_projects }",|.
+    json = json && |"has_wiki": "{ data-has_wiki }",|.
+    json = json && |"is_template": "{ data-is_template }",|.
+    json = json && |"default_branch": "{ data-default_branch }",|.
+    json = json && |"allow_squash_merge": "{ data-allow_squash_merge }",|.
+    json = json && |"allow_merge_commit": "{ data-allow_merge_commit }",|.
+    json = json && |"allow_rebase_merge": "{ data-allow_rebase_merge }",|.
+    json = json && |"delete_branch_on_merge": "{ data-delete_branch_on_merge }",|.
+    json = json && |"archived": "{ data-archived }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_set_github_acti01.
-* todo
+    json = json && '{'.
+*  json = json && '"enabled":' not simple.
+*  json = json && '"allowed_actions":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_create_or_updat01.
-* todo
+    json = json && '{'.
+    json = json && |"encrypted_value": "{ data-encrypted_value }",|.
+    json = json && |"key_id": "{ data-key_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_delete_repo_secre.
-* todo
+    json = json && '{'.
+    json = json && |"encrypted_value": "{ data-encrypted_value }",|.
+    json = json && |"key_id": "{ data-key_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_create_workflow_d.
-* todo
+    json = json && '{'.
+    json = json && |"ref": "{ data-ref }",|.
+*  json = json && '"inputs":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_branch_prote.
-* todo
+    json = json && '{'.
+*  json = json && '"required_status_checks":' not simple.
+    json = json && |"enforce_admins": "{ data-enforce_admins }",|.
+*  json = json && '"required_pull_request_reviews":' not simple.
+*  json = json && '"restrictions":' not simple.
+    json = json && |"required_linear_history": "{ data-required_linear_history }",|.
+    json = json && |"allow_force_pushes": "{ data-allow_force_pushes }",|.
+    json = json && |"allow_deletions": "{ data-allow_deletions }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_branch_prote.
-* todo
+    json = json && '{'.
+*  json = json && '"required_status_checks":' not simple.
+    json = json && |"enforce_admins": "{ data-enforce_admins }",|.
+*  json = json && '"required_pull_request_reviews":' not simple.
+*  json = json && '"restrictions":' not simple.
+    json = json && |"required_linear_history": "{ data-required_linear_history }",|.
+    json = json && |"allow_force_pushes": "{ data-allow_force_pushes }",|.
+    json = json && |"allow_deletions": "{ data-allow_deletions }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_pull_request.
-* todo
+    json = json && '{'.
+*  json = json && '"dismissal_restrictions":' not simple.
+    json = json && |"dismiss_stale_reviews": "{ data-dismiss_stale_reviews }",|.
+    json = json && |"require_code_owner_reviews": "{ data-require_code_owner_reviews }",|.
+    json = json && |"required_approving_review_count": "{ data-required_approving_review_coun }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_pull_request.
-* todo
+    json = json && '{'.
+*  json = json && '"dismissal_restrictions":' not simple.
+    json = json && |"dismiss_stale_reviews": "{ data-dismiss_stale_reviews }",|.
+    json = json && |"require_code_owner_reviews": "{ data-require_code_owner_reviews }",|.
+    json = json && |"required_approving_review_count": "{ data-required_approving_review_coun }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_status_check.
-* todo
+    json = json && '{'.
+    json = json && |"strict": "{ data-strict }",|.
+*  json = json && '"contexts":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_remove_status_check.
-* todo
+    json = json && '{'.
+    json = json && |"strict": "{ data-strict }",|.
+*  json = json && '"contexts":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_add_status_check_co.
-* todo
+    json = json && '{'.
+*  json = json && '"contexts":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_set_status_check_co.
-* todo
+    json = json && '{'.
+*  json = json && '"contexts":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_remove_status_che01.
-* todo
+    json = json && '{'.
+*  json = json && '"contexts":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_add_app_access_rest.
-* todo
+    json = json && '{'.
+*  json = json && '"apps":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_set_app_access_rest.
-* todo
+    json = json && '{'.
+*  json = json && '"apps":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_remove_app_access_r.
-* todo
+    json = json && '{'.
+*  json = json && '"apps":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_add_team_access_res.
-* todo
+    json = json && '{'.
+*  json = json && '"teams":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_set_team_access_res.
-* todo
+    json = json && '{'.
+*  json = json && '"teams":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_remove_team_access_.
-* todo
+    json = json && '{'.
+*  json = json && '"teams":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_add_user_access_res.
-* todo
+    json = json && '{'.
+*  json = json && '"users":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_set_user_access_res.
-* todo
+    json = json && '{'.
+*  json = json && '"users":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_remove_user_access_.
-* todo
+    json = json && '{'.
+*  json = json && '"users":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_rename_branch.
-* todo
+    json = json && '{'.
+    json = json && |"new_name": "{ data-new_name }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_checks_create.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"head_sha": "{ data-head_sha }",|.
+    json = json && |"details_url": "{ data-details_url }",|.
+    json = json && |"external_id": "{ data-external_id }",|.
+    json = json && |"status": "{ data-status }",|.
+    json = json && |"started_at": "{ data-started_at }",|.
+    json = json && |"conclusion": "{ data-conclusion }",|.
+    json = json && |"completed_at": "{ data-completed_at }",|.
+*  json = json && '"output":' not simple.
+*  json = json && '"actions":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_checks_update.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"details_url": "{ data-details_url }",|.
+    json = json && |"external_id": "{ data-external_id }",|.
+    json = json && |"started_at": "{ data-started_at }",|.
+    json = json && |"status": "{ data-status }",|.
+    json = json && |"conclusion": "{ data-conclusion }",|.
+    json = json && |"completed_at": "{ data-completed_at }",|.
+*  json = json && '"output":' not simple.
+*  json = json && '"actions":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_checks_create_suite.
-* todo
+    json = json && '{'.
+    json = json && |"head_sha": "{ data-head_sha }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_checks_set_suites_prefere.
-* todo
+    json = json && '{'.
+*  json = json && '"auto_trigger_checks":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_code_scanning_update_aler.
-* todo
+    json = json && '{'.
+*  json = json && '"state":' not simple.
+*  json = json && '"dismissed_reason":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_code_scanning_upload_sari.
-* todo
+    json = json && '{'.
+*  json = json && '"commit_sha":' not simple.
+*  json = json && '"ref":' not simple.
+*  json = json && '"sarif":' not simple.
+    json = json && |"checkout_uri": "{ data-checkout_uri }",|.
+    json = json && |"started_at": "{ data-started_at }",|.
+*  json = json && '"tool_name":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_add_collaborator.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = json && |"permissions": "{ data-permissions }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_remove_collaborator.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = json && |"permissions": "{ data-permissions }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_commit_comme.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_commit_comme.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_reactions_create_for_comm.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_commit_comme.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"path": "{ data-path }",|.
+    json = json && |"position": "{ data-position }",|.
+    json = json && |"line": "{ data-line }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_or_update_fi.
-* todo
+    json = json && '{'.
+    json = json && |"message": "{ data-message }",|.
+    json = json && |"content": "{ data-content }",|.
+    json = json && |"sha": "{ data-sha }",|.
+    json = json && |"branch": "{ data-branch }",|.
+*  json = json && '"committer":' not simple.
+*  json = json && '"author":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_file.
-* todo
+    json = json && '{'.
+    json = json && |"message": "{ data-message }",|.
+    json = json && |"sha": "{ data-sha }",|.
+    json = json && |"branch": "{ data-branch }",|.
+*  json = json && '"committer":' not simple.
+*  json = json && '"author":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_deployment.
-* todo
+    json = json && '{'.
+    json = json && |"ref": "{ data-ref }",|.
+    json = json && |"task": "{ data-task }",|.
+    json = json && |"auto_merge": "{ data-auto_merge }",|.
+*  json = json && '"required_contexts":' not simple.
+    json = json && |"payload": "{ data-payload }",|.
+    json = json && |"environment": "{ data-environment }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"transient_environment": "{ data-transient_environment }",|.
+    json = json && |"production_environment": "{ data-production_environment }",|.
+    json = json && |"created_at": "{ data-created_at }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_deployment_s.
-* todo
+    json = json && '{'.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"target_url": "{ data-target_url }",|.
+    json = json && |"log_url": "{ data-log_url }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"environment": "{ data-environment }",|.
+    json = json && |"environment_url": "{ data-environment_url }",|.
+    json = json && |"auto_inactive": "{ data-auto_inactive }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_dispatch_eve.
-* todo
+    json = json && '{'.
+    json = json && |"event_type": "{ data-event_type }",|.
+*  json = json && '"client_payload":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_fork.
-* todo
+    json = json && '{'.
+    json = json && |"organization": "{ data-organization }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_git_create_blob.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = json && |"encoding": "{ data-encoding }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_git_create_commit.
-* todo
+    json = json && '{'.
+    json = json && |"message": "{ data-message }",|.
+    json = json && |"tree": "{ data-tree }",|.
+*  json = json && '"parents":' not simple.
+*  json = json && '"author":' not simple.
+*  json = json && '"committer":' not simple.
+    json = json && |"signature": "{ data-signature }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_git_create_ref.
-* todo
+    json = json && '{'.
+    json = json && |"ref": "{ data-ref }",|.
+    json = json && |"sha": "{ data-sha }",|.
+    json = json && |"key": "{ data-key }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_git_update_ref.
-* todo
+    json = json && '{'.
+    json = json && |"sha": "{ data-sha }",|.
+    json = json && |"force": "{ data-force }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_git_delete_ref.
-* todo
+    json = json && '{'.
+    json = json && |"sha": "{ data-sha }",|.
+    json = json && |"force": "{ data-force }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_git_create_tag.
-* todo
+    json = json && '{'.
+    json = json && |"tag": "{ data-tag }",|.
+    json = json && |"message": "{ data-message }",|.
+    json = json && |"object": "{ data-object }",|.
+    json = json && |"type": "{ data-type }",|.
+*  json = json && '"tagger":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_git_create_tree.
-* todo
+    json = json && '{'.
+*  json = json && '"tree":' not simple.
+    json = json && |"base_tree": "{ data-base_tree }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_webhook.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+*  json = json && '"config":' not simple.
+*  json = json && '"events":' not simple.
+    json = json && |"active": "{ data-active }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_webhook.
-* todo
+    json = json && '{'.
+*  json = json && '"config":' not simple.
+*  json = json && '"events":' not simple.
+*  json = json && '"add_events":' not simple.
+*  json = json && '"remove_events":' not simple.
+    json = json && |"active": "{ data-active }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_webhook.
-* todo
+    json = json && '{'.
+*  json = json && '"config":' not simple.
+*  json = json && '"events":' not simple.
+*  json = json && '"add_events":' not simple.
+*  json = json && '"remove_events":' not simple.
+    json = json && |"active": "{ data-active }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_webhook_conf.
-* todo
+    json = json && '{'.
+*  json = json && '"url":' not simple.
+*  json = json && '"content_type":' not simple.
+*  json = json && '"secret":' not simple.
+*  json = json && '"insecure_ssl":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_migrations_start_import.
-* todo
+    json = json && '{'.
+    json = json && |"vcs_url": "{ data-vcs_url }",|.
+    json = json && |"vcs": "{ data-vcs }",|.
+    json = json && |"vcs_username": "{ data-vcs_username }",|.
+    json = json && |"vcs_password": "{ data-vcs_password }",|.
+    json = json && |"tfvc_project": "{ data-tfvc_project }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_migrations_update_import.
-* todo
+    json = json && '{'.
+    json = json && |"vcs_username": "{ data-vcs_username }",|.
+    json = json && |"vcs_password": "{ data-vcs_password }",|.
+    json = json && |"vcs": "{ data-vcs }",|.
+    json = json && |"tfvc_project": "{ data-tfvc_project }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_migrations_cancel_import.
-* todo
+    json = json && '{'.
+    json = json && |"vcs_username": "{ data-vcs_username }",|.
+    json = json && |"vcs_password": "{ data-vcs_password }",|.
+    json = json && |"vcs": "{ data-vcs }",|.
+    json = json && |"tfvc_project": "{ data-tfvc_project }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_migrations_map_commit_aut.
-* todo
+    json = json && '{'.
+    json = json && |"email": "{ data-email }",|.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"remote_id": "{ data-remote_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_migrations_set_lfs_prefer.
-* todo
+    json = json && '{'.
+    json = json && |"use_lfs": "{ data-use_lfs }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_invitation.
-* todo
+    json = json && '{'.
+    json = json && |"permissions": "{ data-permissions }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_invitation.
-* todo
+    json = json && '{'.
+    json = json && |"permissions": "{ data-permissions }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_create.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"assignee": "{ data-assignee }",|.
+    json = json && |"milestone": "{ data-milestone }",|.
+*  json = json && '"labels":' not simple.
+*  json = json && '"assignees":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_update_comment.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_delete_comment.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_reactions_create_for_issu.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_update.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"assignee": "{ data-assignee }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"milestone": "{ data-milestone }",|.
+*  json = json && '"labels":' not simple.
+*  json = json && '"assignees":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_add_assignees.
-* todo
+    json = json && '{'.
+*  json = json && '"assignees":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_remove_assignees.
-* todo
+    json = json && '{'.
+*  json = json && '"assignees":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_create_comment.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_add_labels.
-* todo
+    json = json && '{'.
+*  json = json && '"labels":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_set_labels.
-* todo
+    json = json && '{'.
+*  json = json && '"labels":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_remove_all_labels.
-* todo
+    json = json && '{'.
+*  json = json && '"labels":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_lock.
-* todo
+    json = json && '{'.
+    json = json && |"lock_reason": "{ data-lock_reason }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_unlock.
-* todo
+    json = json && '{'.
+    json = json && |"lock_reason": "{ data-lock_reason }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_reactions_create_for_is01.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_deploy_key.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"key": "{ data-key }",|.
+    json = json && |"read_only": "{ data-read_only }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_create_label.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"color": "{ data-color }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_update_label.
-* todo
+    json = json && '{'.
+    json = json && |"new_name": "{ data-new_name }",|.
+    json = json && |"color": "{ data-color }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_delete_label.
-* todo
+    json = json && '{'.
+    json = json && |"new_name": "{ data-new_name }",|.
+    json = json && |"color": "{ data-color }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_merge.
-* todo
+    json = json && '{'.
+    json = json && |"base": "{ data-base }",|.
+    json = json && |"head": "{ data-head }",|.
+    json = json && |"commit_message": "{ data-commit_message }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_create_milestone.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"due_on": "{ data-due_on }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_update_milestone.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"due_on": "{ data-due_on }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_delete_milestone.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"due_on": "{ data-due_on }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_activity_mark_repo_notifi.
-* todo
+    json = json && '{'.
+    json = json && |"last_read_at": "{ data-last_read_at }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_pages_site.
-* todo
+    json = json && '{'.
+*  json = json && '"source":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_information_.
-* todo
+    json = json && '{'.
+    json = json && |"cname": "{ data-cname }",|.
+    json = json && |"public": "{ data-public }",|.
+    json = json && |"source": "{ data-source }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_pages_site.
-* todo
+    json = json && '{'.
+    json = json && |"cname": "{ data-cname }",|.
+    json = json && |"public": "{ data-public }",|.
+    json = json && |"source": "{ data-source }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_create_for_repo.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_create.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"head": "{ data-head }",|.
+    json = json && |"base": "{ data-base }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"maintainer_can_modify": "{ data-maintainer_can_modify }",|.
+    json = json && |"draft": "{ data-draft }",|.
+    json = json && |"issue": "{ data-issue }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_update_review_comme.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_delete_review_comme.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_reactions_create_for_pull.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_update.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"base": "{ data-base }",|.
+    json = json && |"maintainer_can_modify": "{ data-maintainer_can_modify }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_create_review_comme.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"commit_id": "{ data-commit_id }",|.
+    json = json && |"path": "{ data-path }",|.
+    json = json && |"position": "{ data-position }",|.
+    json = json && |"side": "{ data-side }",|.
+    json = json && |"line": "{ data-line }",|.
+    json = json && |"start_line": "{ data-start_line }",|.
+    json = json && |"start_side": "{ data-start_side }",|.
+    json = json && |"in_reply_to": "{ data-in_reply_to }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_create_reply_for_re.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_merge.
-* todo
+    json = json && '{'.
+    json = json && |"commit_title": "{ data-commit_title }",|.
+    json = json && |"commit_message": "{ data-commit_message }",|.
+    json = json && |"sha": "{ data-sha }",|.
+    json = json && |"merge_method": "{ data-merge_method }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_request_reviewers.
-* todo
+    json = json && '{'.
+*  json = json && '"reviewers":' not simple.
+*  json = json && '"team_reviewers":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_remove_requested_re.
-* todo
+    json = json && '{'.
+*  json = json && '"reviewers":' not simple.
+*  json = json && '"team_reviewers":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_create_review.
-* todo
+    json = json && '{'.
+    json = json && |"commit_id": "{ data-commit_id }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"event": "{ data-event }",|.
+*  json = json && '"comments":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_update_review.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_delete_pending_revi.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_dismiss_review.
-* todo
+    json = json && '{'.
+    json = json && |"message": "{ data-message }",|.
+    json = json && |"event": "{ data-event }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_submit_review.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"event": "{ data-event }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_update_branch.
-* todo
+    json = json && '{'.
+    json = json && |"expected_head_sha": "{ data-expected_head_sha }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_release.
-* todo
+    json = json && '{'.
+    json = json && |"tag_name": "{ data-tag_name }",|.
+    json = json && |"target_commitish": "{ data-target_commitish }",|.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"draft": "{ data-draft }",|.
+    json = json && |"prerelease": "{ data-prerelease }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_release_asse.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"label": "{ data-label }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_release_asse.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"label": "{ data-label }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_release.
-* todo
+    json = json && '{'.
+    json = json && |"tag_name": "{ data-tag_name }",|.
+    json = json && |"target_commitish": "{ data-target_commitish }",|.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"draft": "{ data-draft }",|.
+    json = json && |"prerelease": "{ data-prerelease }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_release.
-* todo
+    json = json && '{'.
+    json = json && |"tag_name": "{ data-tag_name }",|.
+    json = json && |"target_commitish": "{ data-target_commitish }",|.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"draft": "{ data-draft }",|.
+    json = json && |"prerelease": "{ data-prerelease }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_secret_scanning_update_al.
-* todo
+    json = json && '{'.
+*  json = json && '"state":' not simple.
+*  json = json && '"resolution":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_commit_statu.
-* todo
+    json = json && '{'.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"target_url": "{ data-target_url }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"context": "{ data-context }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_activity_set_repo_subscri.
-* todo
+    json = json && '{'.
+    json = json && |"subscribed": "{ data-subscribed }",|.
+    json = json && |"ignored": "{ data-ignored }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_activity_delete_repo_subs.
-* todo
+    json = json && '{'.
+    json = json && |"subscribed": "{ data-subscribed }",|.
+    json = json && |"ignored": "{ data-ignored }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_replace_all_topics.
-* todo
+    json = json && '{'.
+*  json = json && '"names":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_transfer.
-* todo
+    json = json && '{'.
+    json = json && |"new_owner": "{ data-new_owner }",|.
+*  json = json && '"team_ids":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_using_templa.
-* todo
+    json = json && '{'.
+    json = json && |"owner": "{ data-owner }",|.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"include_all_branches": "{ data-include_all_branches }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_provisio.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple.
+    json = json && |"displayName": "{ data-displayname }",|.
+*  json = json && '"members":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_set_info.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple.
+    json = json && |"displayName": "{ data-displayname }",|.
+*  json = json && '"members":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_update_a.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple.
+*  json = json && '"Operations":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_delete01.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple.
+*  json = json && '"Operations":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_provis01.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple.
+    json = json && |"userName": "{ data-username }",|.
+*  json = json && '"name":' not simple.
+*  json = json && '"emails":' not simple.
+*  json = json && '"groups":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_set_in01.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple.
+    json = json && |"userName": "{ data-username }",|.
+*  json = json && '"name":' not simple.
+*  json = json && '"emails":' not simple.
+*  json = json && '"groups":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_update01.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple.
+*  json = json && '"Operations":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_delete_u.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple.
+*  json = json && '"Operations":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_scim_provision_and_invite.
-* todo
+    json = json && '{'.
+    json = json && |"userName": "{ data-username }",|.
+    json = json && |"displayName": "{ data-displayname }",|.
+*  json = json && '"name":' not simple.
+*  json = json && '"emails":' not simple.
+*  json = json && '"schemas":' not simple.
+    json = json && |"externalId": "{ data-externalid }",|.
+*  json = json && '"groups":' not simple.
+    json = json && |"active": "{ data-active }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_scim_set_information_for_.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple.
+    json = json && |"displayName": "{ data-displayname }",|.
+    json = json && |"externalId": "{ data-externalid }",|.
+*  json = json && '"groups":' not simple.
+    json = json && |"active": "{ data-active }",|.
+    json = json && |"userName": "{ data-username }",|.
+*  json = json && '"name":' not simple.
+*  json = json && '"emails":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_scim_update_attribute_for.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple.
+*  json = json && '"Operations":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_scim_delete_user_from_org.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple.
+*  json = json && '"Operations":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_update_legacy.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"privacy": "{ data-privacy }",|.
+    json = json && |"permission": "{ data-permission }",|.
+    json = json && |"parent_team_id": "{ data-parent_team_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_delete_legacy.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"privacy": "{ data-privacy }",|.
+    json = json && |"permission": "{ data-permission }",|.
+    json = json && |"parent_team_id": "{ data-parent_team_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_create_discussion_l.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_update_discussion_l.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_delete_discussion_l.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_create_discussion01.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_update_discussion01.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_delete_discussion01.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_reactions_create_for_te02.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_reactions_create_for_te03.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_add_or_update_mem01.
-* todo
+    json = json && '{'.
+    json = json && |"role": "{ data-role }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_remove_membership01.
-* todo
+    json = json && '{'.
+    json = json && |"role": "{ data-role }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_add_or_update_pro01.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_remove_project_lega.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_add_or_update_rep01.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_remove_repo_legacy.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_create_or_update_01.
-* todo
+    json = json && '{'.
+*  json = json && '"groups":' not simple.
+    json = json && |"synced_at": "{ data-synced_at }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_users_update_authenticate.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"email": "{ data-email }",|.
+    json = json && |"blog": "{ data-blog }",|.
+    json = json && |"twitter_username": "{ data-twitter_username }",|.
+    json = json && |"company": "{ data-company }",|.
+    json = json && |"location": "{ data-location }",|.
+    json = json && |"hireable": "{ data-hireable }",|.
+    json = json && |"bio": "{ data-bio }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_users_set_primary_email_v.
-* todo
-  ENDMETHOD.
-
-  METHOD json_users_add_email_for_authe.
-* todo
-  ENDMETHOD.
-
-  METHOD json_users_delete_email_for_au.
-* todo
+    json = json && '{'.
+    json = json && |"email": "{ data-email }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_users_create_gpg_key_for_.
-* todo
+    json = json && '{'.
+    json = json && |"armored_public_key": "{ data-armored_public_key }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_users_create_public_ssh_k.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"key": "{ data-key }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_update_membership_fo.
-* todo
+    json = json && '{'.
+    json = json && |"state": "{ data-state }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_migrations_start_for_auth.
-* todo
+    json = json && '{'.
+    json = json && |"lock_repositories": "{ data-lock_repositories }",|.
+    json = json && |"exclude_attachments": "{ data-exclude_attachments }",|.
+*  json = json && '"exclude":' not simple.
+*  json = json && '"repositories":' not simple.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_create_for_authe.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_for_authenti.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"homepage": "{ data-homepage }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = json && |"has_issues": "{ data-has_issues }",|.
+    json = json && |"has_projects": "{ data-has_projects }",|.
+    json = json && |"has_wiki": "{ data-has_wiki }",|.
+    json = json && |"team_id": "{ data-team_id }",|.
+    json = json && |"auto_init": "{ data-auto_init }",|.
+    json = json && |"gitignore_template": "{ data-gitignore_template }",|.
+    json = json && |"license_template": "{ data-license_template }",|.
+    json = json && |"allow_squash_merge": "{ data-allow_squash_merge }",|.
+    json = json && |"allow_merge_commit": "{ data-allow_merge_commit }",|.
+    json = json && |"allow_rebase_merge": "{ data-allow_rebase_merge }",|.
+    json = json && |"delete_branch_on_merge": "{ data-delete_branch_on_merge }",|.
+    json = json && |"has_downloads": "{ data-has_downloads }",|.
+    json = json && |"is_template": "{ data-is_template }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD zif_github~meta_root.
@@ -10980,7 +12108,6 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{column_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_projects_create_card( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -11835,9 +12962,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = workflow_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -11852,9 +12977,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = workflow_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -11869,9 +12992,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = workflow_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     mi_client->request->set_cdata( json_actions_create_workflow_d( body ) ).
@@ -11887,9 +13008,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/enable'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = workflow_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -11904,9 +13023,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = workflow_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     IF actor IS SUPPLIED.
       mi_client->request->set_form_field( name = 'actor' value = actor ).
     ENDIF.
@@ -11943,9 +13060,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = workflow_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -12777,15 +13892,11 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/code-scanning/alerts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = state.
-    CONDENSE lv_temp.
     IF state IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'state' value = lv_temp ).
+      mi_client->request->set_form_field( name = 'state' value = state ).
     ENDIF.
-    lv_temp = ref.
-    CONDENSE lv_temp.
     IF ref IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'ref' value = lv_temp ).
+      mi_client->request->set_form_field( name = 'ref' value = ref ).
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -12818,9 +13929,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = alert_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH alert_number.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     mi_client->request->set_cdata( json_code_scanning_update_aler( body ) ).
@@ -12836,15 +13945,11 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/code-scanning/analyses'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = ref.
-    CONDENSE lv_temp.
     IF ref IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'ref' value = lv_temp ).
+      mi_client->request->set_form_field( name = 'ref' value = ref ).
     ENDIF.
-    lv_temp = tool_name.
-    CONDENSE lv_temp.
     IF tool_name IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'tool_name' value = lv_temp ).
+      mi_client->request->set_form_field( name = 'tool_name' value = tool_name ).
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -16443,9 +17548,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = alert_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH alert_number.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -16460,9 +17563,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = alert_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH alert_number.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     mi_client->request->set_cdata( json_secret_scanning_update_al( body ) ).
@@ -18230,7 +19331,6 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/emails'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_users_add_email_for_authe( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -18243,7 +19343,6 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/emails'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_users_delete_email_for_au( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).

@@ -46,6 +46,10 @@ CLASS zcl_oapi_main DEFINITION PUBLIC.
     METHODS dump_json_methods
       RETURNING VALUE(rv_abap) TYPE string.
 
+    METHODS dump_json
+      IMPORTING ii_schema TYPE REF TO zif_oapi_schema
+      RETURNING VALUE(rv_abap) TYPE string.
+
     METHODS find_parser_method
       IMPORTING iv_name TYPE string
       RETURNING VALUE(rv_method) TYPE string.
@@ -160,10 +164,35 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
     LOOP AT ms_specification-components-schemas INTO ls_schema WHERE abap_json_method IS NOT INITIAL.
       rv_abap = rv_abap && |  METHOD { ls_schema-abap_json_method }.\n|.
-      rv_abap = rv_abap && |* todo\n|.
+      rv_abap = rv_abap && dump_json( ls_schema-schema ).
       rv_abap = rv_abap && |  ENDMETHOD.\n\n|.
     ENDLOOP.
 
+  ENDMETHOD.
+
+  METHOD dump_json.
+    DATA ls_property TYPE zif_oapi_schema=>ty_property.
+
+    CASE ii_schema->type.
+      WHEN 'object'.
+        rv_abap = rv_abap && |    json = json && '\{'.\n|.
+        LOOP AT ii_schema->properties INTO ls_property.
+          IF ls_property-schema IS NOT INITIAL
+              AND ls_property-schema->is_simple_type( ) = abap_true.
+            rv_abap = rv_abap && |    json = json && \|"{ ls_property-name }": "\{ data-{ ls_property-abap_name } \}",\|.\n|.
+          ELSE.
+            rv_abap = rv_abap && |*  json = json && '"{ ls_property-name }":' not simple\n|.
+          ENDIF.
+        ENDLOOP.
+        rv_abap = rv_abap && |    json = substring( val = json off = 0 len = strlen( json ) - 1 ).\n|.
+        rv_abap = rv_abap && |    json = json && '\}'.\n|.
+      WHEN 'array'.
+        rv_abap = rv_abap && |    json = json && '['.\n|.
+        rv_abap = rv_abap && |* todo, array\n|.
+        rv_abap = rv_abap && |    json = json && ']'.\n|.
+      WHEN OTHERS.
+        rv_abap = rv_abap && |* todo, { ii_schema->type }\n|.
+    ENDCASE.
   ENDMETHOD.
 
   METHOD dump_parser_methods.

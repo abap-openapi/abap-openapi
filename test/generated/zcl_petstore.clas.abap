@@ -116,7 +116,9 @@ CLASS zcl_petstore IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD json_createuserswithlistinput.
-* todo
+    json = json && '['.
+* todo, array
+    json = json && ']'.
   ENDMETHOD.
 
   METHOD zif_petstore~updatepet.
