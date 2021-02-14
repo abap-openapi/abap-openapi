@@ -9,6 +9,8 @@ ABAP [OpenAPI](https://www.openapis.org) Client Generator in ABAP
 - eventually OpenAPI v2 support, converting v2 to v3: https://github.com/swagger-api/swagger-converter
 - only JSON support
 
+NOTE: generated code currently uses ZCL_OAPI_JSON, suggest copying the implementation to a local class in the generated global class
+
 prerequsites = [NodeJS](https://nodejs.org) 12+
 
 setup `npm install`

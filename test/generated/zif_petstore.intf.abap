@@ -68,6 +68,9 @@ INTERFACE zif_petstore PUBLIC.
            message TYPE string,
          END OF apiresponse.
 
+* Component schema: bodycreateuserswithlistinput, array
+  TYPES bodycreateuserswithlistinput TYPE string. " array #/components/schemas/User todo
+
 * PUT - "Update an existing pet"
 * Operation id: updatePet
 * Response: 200
@@ -78,6 +81,8 @@ INTERFACE zif_petstore PUBLIC.
 * Response: 405
 * Body ref: #/components/schemas/Pet
   METHODS updatepet
+    IMPORTING
+      body TYPE pet
     RETURNING VALUE(return_data) TYPE pet
     RAISING cx_static_check.
 
@@ -89,6 +94,8 @@ INTERFACE zif_petstore PUBLIC.
 * Response: 405
 * Body ref: #/components/schemas/Pet
   METHODS addpet
+    IMPORTING
+      body TYPE pet
     RETURNING VALUE(return_data) TYPE pet
     RAISING cx_static_check.
 
@@ -181,6 +188,8 @@ INTERFACE zif_petstore PUBLIC.
 * Response: 405
 * Body ref: #/components/schemas/Order
   METHODS placeorder
+    IMPORTING
+      body TYPE order
     RETURNING VALUE(return_data) TYPE order
     RAISING cx_static_check.
 
@@ -215,6 +224,8 @@ INTERFACE zif_petstore PUBLIC.
 *     application/xml, #/components/schemas/User
 * Body ref: #/components/schemas/User
   METHODS createuser
+    IMPORTING
+      body TYPE user
     RAISING cx_static_check.
 
 * POST - "Creates list of users with given input array"
@@ -223,8 +234,10 @@ INTERFACE zif_petstore PUBLIC.
 *     application/xml, #/components/schemas/User
 *     application/json, #/components/schemas/User
 * Response: default
-* Body schema: array
+* Body ref: #/components/schemas/bodycreateuserswithlistinput
   METHODS createuserswithlistinput
+    IMPORTING
+      body TYPE bodycreateuserswithlistinput
     RETURNING VALUE(return_data) TYPE user
     RAISING cx_static_check.
 
@@ -270,6 +283,7 @@ INTERFACE zif_petstore PUBLIC.
   METHODS updateuser
     IMPORTING
       username TYPE string
+      body TYPE user
     RAISING cx_static_check.
 
 * DELETE - "Delete user"
