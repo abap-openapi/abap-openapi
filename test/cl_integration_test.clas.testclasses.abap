@@ -136,34 +136,34 @@ CLASS ltcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD pulls_update.
-    DATA ls_body TYPE zif_github=>bodypulls_update.
-    DATA ls_pull_request TYPE zif_github=>pull_request.
+    " DATA ls_body TYPE zif_github=>bodypulls_update.
+    " DATA ls_pull_request TYPE zif_github=>pull_request.
 
-    IF mv_token IS INITIAL.
-      RETURN.
-    ENDIF.
+    " IF mv_token IS INITIAL.
+    "   RETURN.
+    " ENDIF.
 
-    ls_body-title = 'abc_title'.
-    ls_body-body  = 'abc_body'.
-    ls_body-state = 'open'.
-    ls_body-base  = 'sdfsdf'.
-    ls_body-maintainer_can_modify = abap_true.
+    " ls_body-title = 'abc_title'.
+    " ls_body-body  = 'abc_body'.
+    " ls_body-state = 'open'.
+    " ls_body-base  = 'sdfsdf'.
+    " ls_body-maintainer_can_modify = abap_true.
 
-    ls_pull_request = mi_github->pulls_update(
-      owner       = 'larshp'
-      repo        = 'testing-test'
-      pull_number = 2
-      body        = ls_body ).
+    " ls_pull_request = mi_github->pulls_update(
+    "   owner       = 'larshp'
+    "   repo        = 'testing-test'
+    "   pull_number = 2
+    "   body        = ls_body ).
 
-    cl_abap_unit_assert=>assert_equals(
-      act = ls_pull_request-url
-      exp = 'https://api.github.com/repos/larshp/testing-test/pulls/2' ).
+    " cl_abap_unit_assert=>assert_equals(
+    "   act = ls_pull_request-url
+    "   exp = 'https://api.github.com/repos/larshp/testing-test/pulls/2' ).
   ENDMETHOD.
 
   METHOD pulls_list.
-    " mi_github->pulls_list(
-    "  owner       = 'abapGit-tests'
-    "  repo        = 'VIEW' ).
+    mi_github->pulls_list(
+      owner = 'abapGit-tests'
+      repo  = 'VIEW' ).
   ENDMETHOD.
 
 ENDCLASS.
