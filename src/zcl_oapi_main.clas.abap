@@ -340,7 +340,9 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         |  METHODS { ls_operation-abap_name }{ build_abap_parameters( ls_operation ) }|.
       ls_return = find_return( ls_operation ).
       IF ls_return IS NOT INITIAL.
-        rv_abap = rv_abap && |    RETURNING VALUE(return_data) TYPE { ls_return-abap_name }\n|.
+        rv_abap = rv_abap &&
+          |    RETURNING\n| &&
+          |      VALUE(return_data) TYPE { ls_return-abap_name }\n|.
       ENDIF.
       rv_abap = rv_abap && |    RAISING cx_static_check.\n\n|.
     ENDLOOP.
@@ -450,6 +452,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       IF ls_response-code = '200'
           OR ls_response-code = '201'
           OR ls_response-code = '204'.
+* todo, handle basic types
         READ TABLE ls_response-content INTO ls_content WITH KEY type = 'application/json'.
         IF sy-subrc = 0 AND ls_content-schema_ref IS NOT INITIAL.
           rs_type = find_schema( ls_content-schema_ref ).

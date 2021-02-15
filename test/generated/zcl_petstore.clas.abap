@@ -44,6 +44,18 @@ CLASS zcl_petstore DEFINITION PUBLIC.
       IMPORTING data TYPE zif_petstore=>bodycreateuserswithlistinput
       RETURNING VALUE(json) TYPE string
       RAISING cx_static_check.
+    METHODS parse_findpetsbystatus
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_findpetsbystatus) TYPE zif_petstore=>response_findpetsbystatus
+      RAISING cx_static_check.
+    METHODS parse_findpetsbytags
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_findpetsbytags) TYPE zif_petstore=>response_findpetsbytags
+      RAISING cx_static_check.
+    METHODS parse_getinventory
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_getinventory) TYPE zif_petstore=>response_getinventory
+      RAISING cx_static_check.
 ENDCLASS.
 
 CLASS zcl_petstore IMPLEMENTATION.
@@ -115,6 +127,17 @@ CLASS zcl_petstore IMPLEMENTATION.
     apiresponse-message = mo_json->value_string( iv_prefix && '/message' ).
   ENDMETHOD.
 
+  METHOD parse_findpetsbystatus.
+* todo, handle type array
+  ENDMETHOD.
+
+  METHOD parse_findpetsbytags.
+* todo, handle type array
+  ENDMETHOD.
+
+  METHOD parse_getinventory.
+  ENDMETHOD.
+
   METHOD json_createuserswithlistinput.
     json = json && '['.
 * todo, array
@@ -158,8 +181,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_findpetsbystatus( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~findpetsbytags.
@@ -175,8 +198,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_findpetsbytags( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~getpetbyid.
@@ -256,8 +279,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_getinventory( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~placeorder.
