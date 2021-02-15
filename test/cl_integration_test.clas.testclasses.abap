@@ -161,7 +161,9 @@ CLASS ltcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD pulls_list.
-    mi_github->pulls_list(
+    DATA lt_pulls TYPE zif_github=>response_pulls_list.
+
+    lt_pulls = mi_github->pulls_list(
       owner = 'abapGit-tests'
       repo  = 'VIEW' ).
   ENDMETHOD.
