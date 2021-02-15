@@ -69,13 +69,13 @@ INTERFACE zif_petstore PUBLIC.
          END OF apiresponse.
 
 * Component schema: bodycreateuserswithlistinput, array
-  TYPES bodycreateuserswithlistinput TYPE string. " array #/components/schemas/User todo
+  TYPES bodycreateuserswithlistinput TYPE STANDARD TABLE OF user WITH DEFAULT KEY.
 
 * Component schema: response_findpetsbystatus, array
-  TYPES response_findpetsbystatus TYPE string. " array #/components/schemas/Pet todo
+  TYPES response_findpetsbystatus TYPE STANDARD TABLE OF pet WITH DEFAULT KEY.
 
 * Component schema: response_findpetsbytags, array
-  TYPES response_findpetsbytags TYPE string. " array #/components/schemas/Pet todo
+  TYPES response_findpetsbytags TYPE STANDARD TABLE OF pet WITH DEFAULT KEY.
 
 * Component schema: response_getinventory, object
   TYPES: BEGIN OF response_getinventory,

@@ -50,7 +50,8 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
       LOOP AT zif_oapi_schema~properties INTO ls_property.
         rv_abap = rv_abap && |           | && ls_property-abap_name && | TYPE |.
         IF ls_property-schema IS INITIAL.
-          ls_ref = lookup_ref( iv_name = ls_property-ref it_refs = it_refs ).
+          ls_ref = lookup_ref( iv_name = ls_property-ref
+                               it_refs = it_refs ).
           rv_abap = rv_abap && ls_ref-abap_name && |,\n|.
         ELSEIF ls_property-schema->is_simple_type( ) = abap_true.
           rv_abap = rv_abap && ls_property-schema->get_simple_type( ) && |,\n|.
@@ -71,6 +72,10 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
         rv_abap = rv_abap && |           dummy_workaround TYPE i,\n|.
       ENDIF.
       rv_abap = rv_abap && |         END OF { iv_name }.\n|.
+    ELSEIF zif_oapi_schema~type = 'array' AND zif_oapi_schema~items_ref IS NOT INITIAL.
+      ls_ref = lookup_ref( iv_name = zif_oapi_schema~items_ref
+                           it_refs = it_refs ).
+      rv_abap = rv_abap && |  TYPES { iv_name } TYPE STANDARD TABLE OF { ls_ref-abap_name } WITH DEFAULT KEY.\n|.
     ELSEIF zif_oapi_schema~is_simple_type( ) = abap_true.
       rv_abap = rv_abap && |  TYPES { iv_name } TYPE { zif_oapi_schema~get_simple_type( ) }.\n|.
     ELSE.

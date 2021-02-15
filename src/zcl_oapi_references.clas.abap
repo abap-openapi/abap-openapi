@@ -50,8 +50,8 @@ CLASS zcl_oapi_references IMPLEMENTATION.
             CONTINUE.
           ENDIF.
 
-          ls_new-name = lo_names->to_abap_name( |response_{ <ls_operation>-abap_name }| ).
-          ls_new-abap_name = ls_new-name.
+          ls_new-name = |response_{ <ls_operation>-abap_name }|.
+          ls_new-abap_name = lo_names->to_abap_name( ls_new-name ).
           ls_new-abap_parser_method = lo_names->to_abap_name( |parse_{ <ls_operation>-abap_name }| ).
           CLEAR ls_new-abap_json_method. " dumping json not needed, this is a response
           ls_new-schema = <ls_content>-schema.

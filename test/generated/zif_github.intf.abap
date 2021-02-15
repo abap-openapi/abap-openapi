@@ -6089,89 +6089,89 @@ INTERFACE zif_github PUBLIC.
            user_search_url TYPE string,
          END OF response_meta_root.
 
-* Component schema: response_apps_list_installatio, array
-  TYPES response_apps_list_installatio TYPE string. " array #/components/schemas/installation todo
+* Component schema: response_apps_list_installations, array
+  TYPES response_apps_list_installatio TYPE STANDARD TABLE OF installation WITH DEFAULT KEY.
 
-* Component schema: response_oauth_authorizations_, array
-  TYPES response_oauth_authorizations_ TYPE string. " array #/components/schemas/application-grant todo
+* Component schema: response_oauth_authorizations_list_gran, array
+  TYPES response_oauth_authorizations_ TYPE STANDARD TABLE OF application_grant WITH DEFAULT KEY.
 
-* Component schema: response_oauth_authorization01, array
-  TYPES response_oauth_authorization01 TYPE string. " array #/components/schemas/authorization todo
+* Component schema: response_oauth_authorizations_list_auth, array
+  TYPES response_oauth_authorization01 TYPE STANDARD TABLE OF authorization WITH DEFAULT KEY.
 
-* Component schema: response_codes_of_conduct_get_, array
-  TYPES response_codes_of_conduct_get_ TYPE string. " array #/components/schemas/code-of-conduct todo
+* Component schema: response_codes_of_conduct_get_all_codes, array
+  TYPES response_codes_of_conduct_get_ TYPE STANDARD TABLE OF code_of_conduct WITH DEFAULT KEY.
 
 * Component schema: response_emojis_get, object
   TYPES: BEGIN OF response_emojis_get,
            dummy_workaround TYPE i,
          END OF response_emojis_get.
 
-* Component schema: response_enterprise_admin_list, object
+* Component schema: response_enterprise_admin_list_selected, object
   TYPES: BEGIN OF response_enterprise_admin_list,
            total_count TYPE f,
            organizations TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_enterprise_admin_list.
 
-* Component schema: response_enterprise_admin_li01, object
+* Component schema: response_enterprise_admin_list_self_hos, object
   TYPES: BEGIN OF response_enterprise_admin_li01,
            total_count TYPE f,
            runner_groups TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_enterprise_admin_li01.
 
-* Component schema: response_enterprise_admin_li02, object
+* Component schema: response_enterprise_admin_list_org_acce, object
   TYPES: BEGIN OF response_enterprise_admin_li02,
            total_count TYPE f,
            organizations TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_enterprise_admin_li02.
 
-* Component schema: response_enterprise_admin_li03, object
+* Component schema: response_enterprise_admin_list_self_h01, object
   TYPES: BEGIN OF response_enterprise_admin_li03,
            total_count TYPE f,
            runners TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_enterprise_admin_li03.
 
-* Component schema: response_enterprise_admin_li04, object
+* Component schema: response_enterprise_admin_list_self_h02, object
   TYPES: BEGIN OF response_enterprise_admin_li04,
            total_count TYPE f,
            runners TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_enterprise_admin_li04.
 
-* Component schema: response_enterprise_admin_li05, array
-  TYPES response_enterprise_admin_li05 TYPE string. " array #/components/schemas/runner-application todo
+* Component schema: response_enterprise_admin_list_runner_a, array
+  TYPES response_enterprise_admin_li05 TYPE STANDARD TABLE OF runner_application WITH DEFAULT KEY.
 
-* Component schema: response_audit_log_get_audit_l, array
-  TYPES response_audit_log_get_audit_l TYPE string. " array #/components/schemas/audit-log-event todo
+* Component schema: response_audit_log_get_audit_log, array
+  TYPES response_audit_log_get_audit_l TYPE STANDARD TABLE OF audit_log_event WITH DEFAULT KEY.
 
-* Component schema: response_activity_list_public_, array
-  TYPES response_activity_list_public_ TYPE string. " array #/components/schemas/event todo
+* Component schema: response_activity_list_public_events, array
+  TYPES response_activity_list_public_ TYPE STANDARD TABLE OF event WITH DEFAULT KEY.
 
 * Component schema: response_gists_list, array
-  TYPES response_gists_list TYPE string. " array #/components/schemas/base-gist todo
+  TYPES response_gists_list TYPE STANDARD TABLE OF base_gist WITH DEFAULT KEY.
 
 * Component schema: response_gists_list_public, array
-  TYPES response_gists_list_public TYPE string. " array #/components/schemas/base-gist todo
+  TYPES response_gists_list_public TYPE STANDARD TABLE OF base_gist WITH DEFAULT KEY.
 
 * Component schema: response_gists_list_starred, array
-  TYPES response_gists_list_starred TYPE string. " array #/components/schemas/base-gist todo
+  TYPES response_gists_list_starred TYPE STANDARD TABLE OF base_gist WITH DEFAULT KEY.
 
 * Component schema: response_gists_list_comments, array
-  TYPES response_gists_list_comments TYPE string. " array #/components/schemas/gist-comment todo
+  TYPES response_gists_list_comments TYPE STANDARD TABLE OF gist_comment WITH DEFAULT KEY.
 
 * Component schema: response_gists_list_commits, array
-  TYPES response_gists_list_commits TYPE string. " array #/components/schemas/gist-commit todo
+  TYPES response_gists_list_commits TYPE STANDARD TABLE OF gist_commit WITH DEFAULT KEY.
 
 * Component schema: response_gists_list_forks, array
-  TYPES response_gists_list_forks TYPE string. " array #/components/schemas/gist-simple todo
+  TYPES response_gists_list_forks TYPE STANDARD TABLE OF gist_simple WITH DEFAULT KEY.
 
-* Component schema: response_gists_check_is_starre, object
+* Component schema: response_gists_check_is_starred, object
   TYPES: BEGIN OF response_gists_check_is_starre,
            dummy_workaround TYPE i,
          END OF response_gists_check_is_starre.
 
-* Component schema: response_gitignore_get_all_tem, array
+* Component schema: response_gitignore_get_all_templates, array
   TYPES response_gitignore_get_all_tem TYPE string. " array  todo
 
-* Component schema: response_apps_list_repos_acces, object
+* Component schema: response_apps_list_repos_accessible_to_, object
   TYPES: BEGIN OF response_apps_list_repos_acces,
            total_count TYPE i,
            repositories TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
@@ -6179,189 +6179,189 @@ INTERFACE zif_github PUBLIC.
          END OF response_apps_list_repos_acces.
 
 * Component schema: response_issues_list, array
-  TYPES response_issues_list TYPE string. " array #/components/schemas/issue todo
+  TYPES response_issues_list TYPE STANDARD TABLE OF issue WITH DEFAULT KEY.
 
-* Component schema: response_licenses_get_all_comm, array
-  TYPES response_licenses_get_all_comm TYPE string. " array #/components/schemas/license-simple todo
+* Component schema: response_licenses_get_all_commonly_used, array
+  TYPES response_licenses_get_all_comm TYPE STANDARD TABLE OF license_simple WITH DEFAULT KEY.
 
 * Component schema: response_apps_list_plans, array
-  TYPES response_apps_list_plans TYPE string. " array #/components/schemas/marketplace-listing-plan todo
+  TYPES response_apps_list_plans TYPE STANDARD TABLE OF marketplace_listing_plan WITH DEFAULT KEY.
 
-* Component schema: response_apps_list_accounts_fo, array
-  TYPES response_apps_list_accounts_fo TYPE string. " array #/components/schemas/marketplace-purchase todo
+* Component schema: response_apps_list_accounts_for_plan, array
+  TYPES response_apps_list_accounts_fo TYPE STANDARD TABLE OF marketplace_purchase WITH DEFAULT KEY.
 
-* Component schema: response_apps_list_plans_stubb, array
-  TYPES response_apps_list_plans_stubb TYPE string. " array #/components/schemas/marketplace-listing-plan todo
+* Component schema: response_apps_list_plans_stubbed, array
+  TYPES response_apps_list_plans_stubb TYPE STANDARD TABLE OF marketplace_listing_plan WITH DEFAULT KEY.
 
-* Component schema: response_apps_list_accounts_01, array
-  TYPES response_apps_list_accounts_01 TYPE string. " array #/components/schemas/marketplace-purchase todo
+* Component schema: response_apps_list_accounts_for_plan_st, array
+  TYPES response_apps_list_accounts_01 TYPE STANDARD TABLE OF marketplace_purchase WITH DEFAULT KEY.
 
-* Component schema: response_activity_list_publi01, array
-  TYPES response_activity_list_publi01 TYPE string. " array #/components/schemas/event todo
+* Component schema: response_activity_list_public_events_fo, array
+  TYPES response_activity_list_publi01 TYPE STANDARD TABLE OF event WITH DEFAULT KEY.
 
-* Component schema: response_activity_list_notific, array
-  TYPES response_activity_list_notific TYPE string. " array #/components/schemas/thread todo
+* Component schema: response_activity_list_notifications_fo, array
+  TYPES response_activity_list_notific TYPE STANDARD TABLE OF thread WITH DEFAULT KEY.
 
-* Component schema: response_activity_mark_notific, object
+* Component schema: response_activity_mark_notifications_as, object
   TYPES: BEGIN OF response_activity_mark_notific,
            message TYPE string,
          END OF response_activity_mark_notific.
 
 * Component schema: response_orgs_list, array
-  TYPES response_orgs_list TYPE string. " array #/components/schemas/organization-simple todo
+  TYPES response_orgs_list TYPE STANDARD TABLE OF organization_simple WITH DEFAULT KEY.
 
-* Component schema: response_actions_list_selected, object
+* Component schema: response_actions_list_selected_reposito, object
   TYPES: BEGIN OF response_actions_list_selected,
            total_count TYPE f,
            repositories TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_actions_list_selected.
 
-* Component schema: response_actions_list_self_hos, object
+* Component schema: response_actions_list_self_hosted_runne, object
   TYPES: BEGIN OF response_actions_list_self_hos,
            total_count TYPE f,
            runner_groups TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_actions_list_self_hos.
 
-* Component schema: response_actions_list_repo_acc, object
+* Component schema: response_actions_list_repo_access_to_se, object
   TYPES: BEGIN OF response_actions_list_repo_acc,
            total_count TYPE f,
            repositories TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_actions_list_repo_acc.
 
-* Component schema: response_actions_list_self_h01, object
+* Component schema: response_actions_list_self_hosted_run01, object
   TYPES: BEGIN OF response_actions_list_self_h01,
            total_count TYPE f,
            runners TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_actions_list_self_h01.
 
-* Component schema: response_actions_list_self_h02, object
+* Component schema: response_actions_list_self_hosted_run02, object
   TYPES: BEGIN OF response_actions_list_self_h02,
            total_count TYPE i,
            runners TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_actions_list_self_h02.
 
-* Component schema: response_actions_list_runner_a, array
-  TYPES response_actions_list_runner_a TYPE string. " array #/components/schemas/runner-application todo
+* Component schema: response_actions_list_runner_applicatio, array
+  TYPES response_actions_list_runner_a TYPE STANDARD TABLE OF runner_application WITH DEFAULT KEY.
 
-* Component schema: response_actions_list_org_secr, object
+* Component schema: response_actions_list_org_secrets, object
   TYPES: BEGIN OF response_actions_list_org_secr,
            total_count TYPE i,
            secrets TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_actions_list_org_secr.
 
-* Component schema: response_actions_list_select01, object
+* Component schema: response_actions_list_selected_repos_fo, object
   TYPES: BEGIN OF response_actions_list_select01,
            total_count TYPE i,
            repositories TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_actions_list_select01.
 
 * Component schema: response_orgs_get_audit_log, array
-  TYPES response_orgs_get_audit_log TYPE string. " array #/components/schemas/audit-log-event todo
+  TYPES response_orgs_get_audit_log TYPE STANDARD TABLE OF audit_log_event WITH DEFAULT KEY.
 
-* Component schema: response_orgs_list_blocked_use, array
-  TYPES response_orgs_list_blocked_use TYPE string. " array #/components/schemas/simple-user todo
+* Component schema: response_orgs_list_blocked_users, array
+  TYPES response_orgs_list_blocked_use TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
-* Component schema: response_orgs_list_saml_sso_au, array
-  TYPES response_orgs_list_saml_sso_au TYPE string. " array #/components/schemas/credential-authorization todo
+* Component schema: response_orgs_list_saml_sso_authorizati, array
+  TYPES response_orgs_list_saml_sso_au TYPE STANDARD TABLE OF credential_authorization WITH DEFAULT KEY.
 
-* Component schema: response_activity_list_publi02, array
-  TYPES response_activity_list_publi02 TYPE string. " array #/components/schemas/event todo
+* Component schema: response_activity_list_public_org_event, array
+  TYPES response_activity_list_publi02 TYPE STANDARD TABLE OF event WITH DEFAULT KEY.
 
-* Component schema: response_orgs_list_failed_invi, array
-  TYPES response_orgs_list_failed_invi TYPE string. " array #/components/schemas/organization-invitation todo
+* Component schema: response_orgs_list_failed_invitations, array
+  TYPES response_orgs_list_failed_invi TYPE STANDARD TABLE OF organization_invitation WITH DEFAULT KEY.
 
 * Component schema: response_orgs_list_webhooks, array
-  TYPES response_orgs_list_webhooks TYPE string. " array #/components/schemas/org-hook todo
+  TYPES response_orgs_list_webhooks TYPE STANDARD TABLE OF org_hook WITH DEFAULT KEY.
 
-* Component schema: response_orgs_list_app_install, object
+* Component schema: response_orgs_list_app_installations, object
   TYPES: BEGIN OF response_orgs_list_app_install,
            total_count TYPE i,
            installations TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_orgs_list_app_install.
 
-* Component schema: response_orgs_list_pending_inv, array
-  TYPES response_orgs_list_pending_inv TYPE string. " array #/components/schemas/organization-invitation todo
+* Component schema: response_orgs_list_pending_invitations, array
+  TYPES response_orgs_list_pending_inv TYPE STANDARD TABLE OF organization_invitation WITH DEFAULT KEY.
 
-* Component schema: response_orgs_list_invitation_, array
-  TYPES response_orgs_list_invitation_ TYPE string. " array #/components/schemas/team todo
+* Component schema: response_orgs_list_invitation_teams, array
+  TYPES response_orgs_list_invitation_ TYPE STANDARD TABLE OF team WITH DEFAULT KEY.
 
 * Component schema: response_issues_list_for_org, array
-  TYPES response_issues_list_for_org TYPE string. " array #/components/schemas/issue todo
+  TYPES response_issues_list_for_org TYPE STANDARD TABLE OF issue WITH DEFAULT KEY.
 
 * Component schema: response_orgs_list_members, array
-  TYPES response_orgs_list_members TYPE string. " array #/components/schemas/simple-user todo
+  TYPES response_orgs_list_members TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
-* Component schema: response_migrations_list_for_o, array
-  TYPES response_migrations_list_for_o TYPE string. " array #/components/schemas/migration todo
+* Component schema: response_migrations_list_for_org, array
+  TYPES response_migrations_list_for_o TYPE STANDARD TABLE OF migration WITH DEFAULT KEY.
 
-* Component schema: response_migrations_list_repos, array
-  TYPES response_migrations_list_repos TYPE string. " array #/components/schemas/minimal-repository todo
+* Component schema: response_migrations_list_repos_for_org, array
+  TYPES response_migrations_list_repos TYPE STANDARD TABLE OF minimal_repository WITH DEFAULT KEY.
 
-* Component schema: response_orgs_list_outside_col, array
-  TYPES response_orgs_list_outside_col TYPE string. " array #/components/schemas/simple-user todo
+* Component schema: response_orgs_list_outside_collaborator, array
+  TYPES response_orgs_list_outside_col TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
-* Component schema: response_orgs_convert_member_t, object
+* Component schema: response_orgs_convert_member_to_outside, object
   TYPES: BEGIN OF response_orgs_convert_member_t,
            message TYPE string,
            documentation_url TYPE string,
          END OF response_orgs_convert_member_t.
 
-* Component schema: response_orgs_remove_outside_c, object
+* Component schema: response_orgs_remove_outside_collaborat, object
   TYPES: BEGIN OF response_orgs_remove_outside_c,
            message TYPE string,
            documentation_url TYPE string,
          END OF response_orgs_remove_outside_c.
 
 * Component schema: response_projects_list_for_org, array
-  TYPES response_projects_list_for_org TYPE string. " array #/components/schemas/project todo
+  TYPES response_projects_list_for_org TYPE STANDARD TABLE OF project WITH DEFAULT KEY.
 
-* Component schema: response_orgs_list_public_memb, array
-  TYPES response_orgs_list_public_memb TYPE string. " array #/components/schemas/simple-user todo
+* Component schema: response_orgs_list_public_members, array
+  TYPES response_orgs_list_public_memb TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
 * Component schema: response_repos_list_for_org, array
-  TYPES response_repos_list_for_org TYPE string. " array #/components/schemas/minimal-repository todo
+  TYPES response_repos_list_for_org TYPE STANDARD TABLE OF minimal_repository WITH DEFAULT KEY.
 
 * Component schema: response_teams_list, array
-  TYPES response_teams_list TYPE string. " array #/components/schemas/team todo
+  TYPES response_teams_list TYPE STANDARD TABLE OF team WITH DEFAULT KEY.
 
-* Component schema: response_teams_list_discussion, array
-  TYPES response_teams_list_discussion TYPE string. " array #/components/schemas/team-discussion todo
+* Component schema: response_teams_list_discussions_in_org, array
+  TYPES response_teams_list_discussion TYPE STANDARD TABLE OF team_discussion WITH DEFAULT KEY.
 
-* Component schema: response_teams_list_discussi01, array
-  TYPES response_teams_list_discussi01 TYPE string. " array #/components/schemas/team-discussion-comment todo
+* Component schema: response_teams_list_discussion_comments, array
+  TYPES response_teams_list_discussi01 TYPE STANDARD TABLE OF team_discussion_comment WITH DEFAULT KEY.
 
-* Component schema: response_reactions_list_for_te, array
-  TYPES response_reactions_list_for_te TYPE string. " array #/components/schemas/reaction todo
+* Component schema: response_reactions_list_for_team_discus, array
+  TYPES response_reactions_list_for_te TYPE STANDARD TABLE OF reaction WITH DEFAULT KEY.
 
-* Component schema: response_reactions_list_for_01, array
-  TYPES response_reactions_list_for_01 TYPE string. " array #/components/schemas/reaction todo
+* Component schema: response_reactions_list_for_team_disc01, array
+  TYPES response_reactions_list_for_01 TYPE STANDARD TABLE OF reaction WITH DEFAULT KEY.
 
-* Component schema: response_teams_list_pending_in, array
-  TYPES response_teams_list_pending_in TYPE string. " array #/components/schemas/organization-invitation todo
+* Component schema: response_teams_list_pending_invitations, array
+  TYPES response_teams_list_pending_in TYPE STANDARD TABLE OF organization_invitation WITH DEFAULT KEY.
 
-* Component schema: response_teams_list_members_in, array
-  TYPES response_teams_list_members_in TYPE string. " array #/components/schemas/simple-user todo
+* Component schema: response_teams_list_members_in_org, array
+  TYPES response_teams_list_members_in TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
-* Component schema: response_teams_add_or_update_m, object
+* Component schema: response_teams_add_or_update_membership, object
   TYPES: BEGIN OF response_teams_add_or_update_m,
            message TYPE string,
            errors TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_teams_add_or_update_m.
 
-* Component schema: response_teams_list_projects_i, array
-  TYPES response_teams_list_projects_i TYPE string. " array #/components/schemas/team-project todo
+* Component schema: response_teams_list_projects_in_org, array
+  TYPES response_teams_list_projects_i TYPE STANDARD TABLE OF team_project WITH DEFAULT KEY.
 
-* Component schema: response_teams_add_or_update_p, object
+* Component schema: response_teams_add_or_update_project_pe, object
   TYPES: BEGIN OF response_teams_add_or_update_p,
            message TYPE string,
            documentation_url TYPE string,
          END OF response_teams_add_or_update_p.
 
-* Component schema: response_teams_list_repos_in_o, array
-  TYPES response_teams_list_repos_in_o TYPE string. " array #/components/schemas/minimal-repository todo
+* Component schema: response_teams_list_repos_in_org, array
+  TYPES response_teams_list_repos_in_o TYPE STANDARD TABLE OF minimal_repository WITH DEFAULT KEY.
 
-* Component schema: response_teams_list_child_in_o, array
-  TYPES response_teams_list_child_in_o TYPE string. " array #/components/schemas/team todo
+* Component schema: response_teams_list_child_in_org, array
+  TYPES response_teams_list_child_in_o TYPE STANDARD TABLE OF team WITH DEFAULT KEY.
 
 * Component schema: response_projects_delete_card, object
   TYPES: BEGIN OF response_projects_delete_card,
@@ -6375,14 +6375,14 @@ INTERFACE zif_github PUBLIC.
            dummy_workaround TYPE i,
          END OF response_projects_move_card.
 
-* Component schema: response_projects_move_card01, object
+* Component schema: response_projects_move_card, object
   TYPES: BEGIN OF response_projects_move_card01,
            message TYPE string,
            documentation_url TYPE string,
            errors TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_projects_move_card01.
 
-* Component schema: response_projects_move_card02, object
+* Component schema: response_projects_move_card, object
   TYPES: BEGIN OF response_projects_move_card02,
            code TYPE string,
            message TYPE string,
@@ -6391,7 +6391,7 @@ INTERFACE zif_github PUBLIC.
          END OF response_projects_move_card02.
 
 * Component schema: response_projects_list_cards, array
-  TYPES response_projects_list_cards TYPE string. " array #/components/schemas/project-card todo
+  TYPES response_projects_list_cards TYPE STANDARD TABLE OF project_card WITH DEFAULT KEY.
 
 * Component schema: response_projects_create_card, object
   TYPES: BEGIN OF response_projects_create_card,
@@ -6420,11 +6420,11 @@ INTERFACE zif_github PUBLIC.
            errors TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_projects_delete.
 
-* Component schema: response_projects_list_collabo, array
-  TYPES response_projects_list_collabo TYPE string. " array #/components/schemas/simple-user todo
+* Component schema: response_projects_list_collaborators, array
+  TYPES response_projects_list_collabo TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
 * Component schema: response_projects_list_columns, array
-  TYPES response_projects_list_columns TYPE string. " array #/components/schemas/project-column todo
+  TYPES response_projects_list_columns TYPE STANDARD TABLE OF project_column WITH DEFAULT KEY.
 
 * Component schema: response_repos_delete, object
   TYPES: BEGIN OF response_repos_delete,
@@ -6432,113 +6432,113 @@ INTERFACE zif_github PUBLIC.
            documentation_url TYPE string,
          END OF response_repos_delete.
 
-* Component schema: response_actions_list_artifact, object
+* Component schema: response_actions_list_artifacts_for_rep, object
   TYPES: BEGIN OF response_actions_list_artifact,
            total_count TYPE i,
            artifacts TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_actions_list_artifact.
 
-* Component schema: response_actions_list_self_h03, object
+* Component schema: response_actions_list_self_hosted_run03, object
   TYPES: BEGIN OF response_actions_list_self_h03,
            total_count TYPE i,
            runners TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_actions_list_self_h03.
 
-* Component schema: response_actions_list_runner01, array
-  TYPES response_actions_list_runner01 TYPE string. " array #/components/schemas/runner-application todo
+* Component schema: response_actions_list_runner_applicat01, array
+  TYPES response_actions_list_runner01 TYPE STANDARD TABLE OF runner_application WITH DEFAULT KEY.
 
-* Component schema: response_actions_list_workflow, object
+* Component schema: response_actions_list_workflow_runs_for, object
   TYPES: BEGIN OF response_actions_list_workflow,
            total_count TYPE i,
            workflow_runs TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_actions_list_workflow.
 
-* Component schema: response_actions_list_workfl01, object
+* Component schema: response_actions_list_workflow_run_arti, object
   TYPES: BEGIN OF response_actions_list_workfl01,
            total_count TYPE i,
            artifacts TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_actions_list_workfl01.
 
-* Component schema: response_actions_list_jobs_for, object
+* Component schema: response_actions_list_jobs_for_workflow, object
   TYPES: BEGIN OF response_actions_list_jobs_for,
            total_count TYPE i,
            jobs TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_actions_list_jobs_for.
 
-* Component schema: response_actions_list_repo_sec, object
+* Component schema: response_actions_list_repo_secrets, object
   TYPES: BEGIN OF response_actions_list_repo_sec,
            total_count TYPE i,
            secrets TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_actions_list_repo_sec.
 
-* Component schema: response_actions_list_repo_wor, object
+* Component schema: response_actions_list_repo_workflows, object
   TYPES: BEGIN OF response_actions_list_repo_wor,
            total_count TYPE i,
            workflows TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_actions_list_repo_wor.
 
-* Component schema: response_actions_list_workfl02, object
+* Component schema: response_actions_list_workflow_runs, object
   TYPES: BEGIN OF response_actions_list_workfl02,
            total_count TYPE i,
            workflow_runs TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_actions_list_workfl02.
 
 * Component schema: response_issues_list_assignees, array
-  TYPES response_issues_list_assignees TYPE string. " array #/components/schemas/simple-user todo
+  TYPES response_issues_list_assignees TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
 * Component schema: response_repos_list_branches, array
-  TYPES response_repos_list_branches TYPE string. " array #/components/schemas/short-branch todo
+  TYPES response_repos_list_branches TYPE STANDARD TABLE OF short_branch WITH DEFAULT KEY.
 
-* Component schema: response_repos_get_all_status_, array
+* Component schema: response_repos_get_all_status_check_con, array
   TYPES response_repos_get_all_status_ TYPE string. " array  todo
 
-* Component schema: response_repos_add_status_chec, array
+* Component schema: response_repos_add_status_check_context, array
   TYPES response_repos_add_status_chec TYPE string. " array  todo
 
-* Component schema: response_repos_set_status_chec, array
+* Component schema: response_repos_set_status_check_context, array
   TYPES response_repos_set_status_chec TYPE string. " array  todo
 
-* Component schema: response_repos_remove_status_c, array
+* Component schema: response_repos_remove_status_check_cont, array
   TYPES response_repos_remove_status_c TYPE string. " array  todo
 
-* Component schema: response_repos_get_apps_with_a, array
-  TYPES response_repos_get_apps_with_a TYPE string. " array #/components/schemas/integration todo
+* Component schema: response_repos_get_apps_with_access_to_, array
+  TYPES response_repos_get_apps_with_a TYPE STANDARD TABLE OF integration WITH DEFAULT KEY.
 
-* Component schema: response_repos_add_app_access_, array
-  TYPES response_repos_add_app_access_ TYPE string. " array #/components/schemas/integration todo
+* Component schema: response_repos_add_app_access_restricti, array
+  TYPES response_repos_add_app_access_ TYPE STANDARD TABLE OF integration WITH DEFAULT KEY.
 
-* Component schema: response_repos_set_app_access_, array
-  TYPES response_repos_set_app_access_ TYPE string. " array #/components/schemas/integration todo
+* Component schema: response_repos_set_app_access_restricti, array
+  TYPES response_repos_set_app_access_ TYPE STANDARD TABLE OF integration WITH DEFAULT KEY.
 
-* Component schema: response_repos_remove_app_acce, array
-  TYPES response_repos_remove_app_acce TYPE string. " array #/components/schemas/integration todo
+* Component schema: response_repos_remove_app_access_restri, array
+  TYPES response_repos_remove_app_acce TYPE STANDARD TABLE OF integration WITH DEFAULT KEY.
 
-* Component schema: response_repos_get_teams_with_, array
-  TYPES response_repos_get_teams_with_ TYPE string. " array #/components/schemas/team todo
+* Component schema: response_repos_get_teams_with_access_to, array
+  TYPES response_repos_get_teams_with_ TYPE STANDARD TABLE OF team WITH DEFAULT KEY.
 
-* Component schema: response_repos_add_team_access, array
-  TYPES response_repos_add_team_access TYPE string. " array #/components/schemas/team todo
+* Component schema: response_repos_add_team_access_restrict, array
+  TYPES response_repos_add_team_access TYPE STANDARD TABLE OF team WITH DEFAULT KEY.
 
-* Component schema: response_repos_set_team_access, array
-  TYPES response_repos_set_team_access TYPE string. " array #/components/schemas/team todo
+* Component schema: response_repos_set_team_access_restrict, array
+  TYPES response_repos_set_team_access TYPE STANDARD TABLE OF team WITH DEFAULT KEY.
 
-* Component schema: response_repos_remove_team_acc, array
-  TYPES response_repos_remove_team_acc TYPE string. " array #/components/schemas/team todo
+* Component schema: response_repos_remove_team_access_restr, array
+  TYPES response_repos_remove_team_acc TYPE STANDARD TABLE OF team WITH DEFAULT KEY.
 
-* Component schema: response_repos_get_users_with_, array
-  TYPES response_repos_get_users_with_ TYPE string. " array #/components/schemas/simple-user todo
+* Component schema: response_repos_get_users_with_access_to, array
+  TYPES response_repos_get_users_with_ TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
-* Component schema: response_repos_add_user_access, array
-  TYPES response_repos_add_user_access TYPE string. " array #/components/schemas/simple-user todo
+* Component schema: response_repos_add_user_access_restrict, array
+  TYPES response_repos_add_user_access TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
-* Component schema: response_repos_set_user_access, array
-  TYPES response_repos_set_user_access TYPE string. " array #/components/schemas/simple-user todo
+* Component schema: response_repos_set_user_access_restrict, array
+  TYPES response_repos_set_user_access TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
-* Component schema: response_repos_remove_user_acc, array
-  TYPES response_repos_remove_user_acc TYPE string. " array #/components/schemas/simple-user todo
+* Component schema: response_repos_remove_user_access_restr, array
+  TYPES response_repos_remove_user_acc TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
-* Component schema: response_checks_list_annotatio, array
-  TYPES response_checks_list_annotatio TYPE string. " array #/components/schemas/check-annotation todo
+* Component schema: response_checks_list_annotations, array
+  TYPES response_checks_list_annotatio TYPE STANDARD TABLE OF check_annotation WITH DEFAULT KEY.
 
 * Component schema: response_checks_list_for_suite, object
   TYPES: BEGIN OF response_checks_list_for_suite,
@@ -6546,32 +6546,32 @@ INTERFACE zif_github PUBLIC.
            check_runs TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_checks_list_for_suite.
 
-* Component schema: response_code_scanning_list_al, array
-  TYPES response_code_scanning_list_al TYPE string. " array #/components/schemas/code-scanning-alert-code-scanning-alert-items todo
+* Component schema: response_code_scanning_list_alerts_for_, array
+  TYPES response_code_scanning_list_al TYPE STANDARD TABLE OF code_scanning_alert_code_scann WITH DEFAULT KEY.
 
-* Component schema: response_code_scanning_list_re, array
-  TYPES response_code_scanning_list_re TYPE string. " array #/components/schemas/code-scanning-analysis-code-scanning-analysis todo
+* Component schema: response_code_scanning_list_recent_anal, array
+  TYPES response_code_scanning_list_re TYPE STANDARD TABLE OF code_scanning_analysis_code_sc WITH DEFAULT KEY.
 
-* Component schema: response_repos_list_collaborat, array
-  TYPES response_repos_list_collaborat TYPE string. " array #/components/schemas/collaborator todo
+* Component schema: response_repos_list_collaborators, array
+  TYPES response_repos_list_collaborat TYPE STANDARD TABLE OF collaborator WITH DEFAULT KEY.
 
-* Component schema: response_repos_list_commit_com, array
-  TYPES response_repos_list_commit_com TYPE string. " array #/components/schemas/commit-comment todo
+* Component schema: response_repos_list_commit_comments_for, array
+  TYPES response_repos_list_commit_com TYPE STANDARD TABLE OF commit_comment WITH DEFAULT KEY.
 
-* Component schema: response_reactions_list_for_co, array
-  TYPES response_reactions_list_for_co TYPE string. " array #/components/schemas/reaction todo
+* Component schema: response_reactions_list_for_commit_comm, array
+  TYPES response_reactions_list_for_co TYPE STANDARD TABLE OF reaction WITH DEFAULT KEY.
 
 * Component schema: response_repos_list_commits, array
-  TYPES response_repos_list_commits TYPE string. " array #/components/schemas/commit todo
+  TYPES response_repos_list_commits TYPE STANDARD TABLE OF commit WITH DEFAULT KEY.
 
-* Component schema: response_repos_list_branches_f, array
-  TYPES response_repos_list_branches_f TYPE string. " array #/components/schemas/branch-short todo
+* Component schema: response_repos_list_branches_for_head_c, array
+  TYPES response_repos_list_branches_f TYPE STANDARD TABLE OF branch_short WITH DEFAULT KEY.
 
-* Component schema: response_repos_list_comments_f, array
-  TYPES response_repos_list_comments_f TYPE string. " array #/components/schemas/commit-comment todo
+* Component schema: response_repos_list_comments_for_commit, array
+  TYPES response_repos_list_comments_f TYPE STANDARD TABLE OF commit_comment WITH DEFAULT KEY.
 
-* Component schema: response_repos_list_pull_reque, array
-  TYPES response_repos_list_pull_reque TYPE string. " array #/components/schemas/pull-request-simple todo
+* Component schema: response_repos_list_pull_requests_assoc, array
+  TYPES response_repos_list_pull_reque TYPE STANDARD TABLE OF pull_request_simple WITH DEFAULT KEY.
 
 * Component schema: response_checks_list_for_ref, object
   TYPES: BEGIN OF response_checks_list_for_ref,
@@ -6579,97 +6579,97 @@ INTERFACE zif_github PUBLIC.
            check_runs TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_checks_list_for_ref.
 
-* Component schema: response_checks_list_suites_fo, object
+* Component schema: response_checks_list_suites_for_ref, object
   TYPES: BEGIN OF response_checks_list_suites_fo,
            total_count TYPE i,
            check_suites TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_checks_list_suites_fo.
 
-* Component schema: response_repos_list_commit_sta, array
-  TYPES response_repos_list_commit_sta TYPE string. " array #/components/schemas/status todo
+* Component schema: response_repos_list_commit_statuses_for, array
+  TYPES response_repos_list_commit_sta TYPE STANDARD TABLE OF status WITH DEFAULT KEY.
 
-* Component schema: response_repos_list_contributo, array
-  TYPES response_repos_list_contributo TYPE string. " array #/components/schemas/contributor todo
+* Component schema: response_repos_list_contributors, array
+  TYPES response_repos_list_contributo TYPE STANDARD TABLE OF contributor WITH DEFAULT KEY.
 
-* Component schema: response_repos_list_deployment, array
-  TYPES response_repos_list_deployment TYPE string. " array #/components/schemas/deployment todo
+* Component schema: response_repos_list_deployments, array
+  TYPES response_repos_list_deployment TYPE STANDARD TABLE OF deployment WITH DEFAULT KEY.
 
-* Component schema: response_repos_create_deployme, object
+* Component schema: response_repos_create_deployment, object
   TYPES: BEGIN OF response_repos_create_deployme,
            message TYPE string,
          END OF response_repos_create_deployme.
 
-* Component schema: response_repos_create_deploy01, object
+* Component schema: response_repos_create_deployment, object
   TYPES: BEGIN OF response_repos_create_deploy01,
            message TYPE string,
            documentation_url TYPE string,
          END OF response_repos_create_deploy01.
 
-* Component schema: response_repos_list_deployme01, array
-  TYPES response_repos_list_deployme01 TYPE string. " array #/components/schemas/deployment-status todo
+* Component schema: response_repos_list_deployment_statuses, array
+  TYPES response_repos_list_deployme01 TYPE STANDARD TABLE OF deployment_status WITH DEFAULT KEY.
 
-* Component schema: response_activity_list_repo_ev, array
-  TYPES response_activity_list_repo_ev TYPE string. " array #/components/schemas/event todo
+* Component schema: response_activity_list_repo_events, array
+  TYPES response_activity_list_repo_ev TYPE STANDARD TABLE OF event WITH DEFAULT KEY.
 
 * Component schema: response_repos_list_forks, array
-  TYPES response_repos_list_forks TYPE string. " array #/components/schemas/minimal-repository todo
+  TYPES response_repos_list_forks TYPE STANDARD TABLE OF minimal_repository WITH DEFAULT KEY.
 
-* Component schema: response_git_list_matching_ref, array
-  TYPES response_git_list_matching_ref TYPE string. " array #/components/schemas/git-ref todo
+* Component schema: response_git_list_matching_refs, array
+  TYPES response_git_list_matching_ref TYPE STANDARD TABLE OF git_ref WITH DEFAULT KEY.
 
 * Component schema: response_repos_list_webhooks, array
-  TYPES response_repos_list_webhooks TYPE string. " array #/components/schemas/hook todo
+  TYPES response_repos_list_webhooks TYPE STANDARD TABLE OF hook WITH DEFAULT KEY.
 
-* Component schema: response_migrations_get_commit, array
-  TYPES response_migrations_get_commit TYPE string. " array #/components/schemas/porter-author todo
+* Component schema: response_migrations_get_commit_authors, array
+  TYPES response_migrations_get_commit TYPE STANDARD TABLE OF porter_author WITH DEFAULT KEY.
 
-* Component schema: response_migrations_get_large_, array
-  TYPES response_migrations_get_large_ TYPE string. " array #/components/schemas/porter-large-file todo
+* Component schema: response_migrations_get_large_files, array
+  TYPES response_migrations_get_large_ TYPE STANDARD TABLE OF porter_large_file WITH DEFAULT KEY.
 
-* Component schema: response_repos_list_invitation, array
-  TYPES response_repos_list_invitation TYPE string. " array #/components/schemas/repository-invitation todo
+* Component schema: response_repos_list_invitations, array
+  TYPES response_repos_list_invitation TYPE STANDARD TABLE OF repository_invitation WITH DEFAULT KEY.
 
 * Component schema: response_issues_list_for_repo, array
-  TYPES response_issues_list_for_repo TYPE string. " array #/components/schemas/issue-simple todo
+  TYPES response_issues_list_for_repo TYPE STANDARD TABLE OF issue_simple WITH DEFAULT KEY.
 
-* Component schema: response_issues_list_comments_, array
-  TYPES response_issues_list_comments_ TYPE string. " array #/components/schemas/issue-comment todo
+* Component schema: response_issues_list_comments_for_repo, array
+  TYPES response_issues_list_comments_ TYPE STANDARD TABLE OF issue_comment WITH DEFAULT KEY.
 
-* Component schema: response_reactions_list_for_is, array
-  TYPES response_reactions_list_for_is TYPE string. " array #/components/schemas/reaction todo
+* Component schema: response_reactions_list_for_issue_comme, array
+  TYPES response_reactions_list_for_is TYPE STANDARD TABLE OF reaction WITH DEFAULT KEY.
 
-* Component schema: response_issues_list_events_fo, array
-  TYPES response_issues_list_events_fo TYPE string. " array #/components/schemas/issue-event todo
+* Component schema: response_issues_list_events_for_repo, array
+  TYPES response_issues_list_events_fo TYPE STANDARD TABLE OF issue_event WITH DEFAULT KEY.
 
 * Component schema: response_issues_list_comments, array
-  TYPES response_issues_list_comments TYPE string. " array #/components/schemas/issue-comment todo
+  TYPES response_issues_list_comments TYPE STANDARD TABLE OF issue_comment WITH DEFAULT KEY.
 
 * Component schema: response_issues_list_events, array
-  TYPES response_issues_list_events TYPE string. " array #/components/schemas/issue-event-for-issue todo
+  TYPES response_issues_list_events TYPE STANDARD TABLE OF issue_event_for_issue WITH DEFAULT KEY.
 
-* Component schema: response_issues_list_labels_on, array
-  TYPES response_issues_list_labels_on TYPE string. " array #/components/schemas/label todo
+* Component schema: response_issues_list_labels_on_issue, array
+  TYPES response_issues_list_labels_on TYPE STANDARD TABLE OF label WITH DEFAULT KEY.
 
 * Component schema: response_issues_add_labels, array
-  TYPES response_issues_add_labels TYPE string. " array #/components/schemas/label todo
+  TYPES response_issues_add_labels TYPE STANDARD TABLE OF label WITH DEFAULT KEY.
 
 * Component schema: response_issues_set_labels, array
-  TYPES response_issues_set_labels TYPE string. " array #/components/schemas/label todo
+  TYPES response_issues_set_labels TYPE STANDARD TABLE OF label WITH DEFAULT KEY.
 
 * Component schema: response_issues_remove_label, array
-  TYPES response_issues_remove_label TYPE string. " array #/components/schemas/label todo
+  TYPES response_issues_remove_label TYPE STANDARD TABLE OF label WITH DEFAULT KEY.
 
-* Component schema: response_reactions_list_for_02, array
-  TYPES response_reactions_list_for_02 TYPE string. " array #/components/schemas/reaction todo
+* Component schema: response_reactions_list_for_issue, array
+  TYPES response_reactions_list_for_02 TYPE STANDARD TABLE OF reaction WITH DEFAULT KEY.
 
-* Component schema: response_issues_list_events_01, array
-  TYPES response_issues_list_events_01 TYPE string. " array #/components/schemas/issue-event-for-issue todo
+* Component schema: response_issues_list_events_for_timelin, array
+  TYPES response_issues_list_events_01 TYPE STANDARD TABLE OF issue_event_for_issue WITH DEFAULT KEY.
 
-* Component schema: response_repos_list_deploy_key, array
-  TYPES response_repos_list_deploy_key TYPE string. " array #/components/schemas/deploy-key todo
+* Component schema: response_repos_list_deploy_keys, array
+  TYPES response_repos_list_deploy_key TYPE STANDARD TABLE OF deploy_key WITH DEFAULT KEY.
 
-* Component schema: response_issues_list_labels_fo, array
-  TYPES response_issues_list_labels_fo TYPE string. " array #/components/schemas/label todo
+* Component schema: response_issues_list_labels_for_repo, array
+  TYPES response_issues_list_labels_fo TYPE STANDARD TABLE OF label WITH DEFAULT KEY.
 
 * Component schema: response_repos_merge, object
   TYPES: BEGIN OF response_repos_merge,
@@ -6677,44 +6677,44 @@ INTERFACE zif_github PUBLIC.
            documentation_url TYPE string,
          END OF response_repos_merge.
 
-* Component schema: response_repos_merge01, object
+* Component schema: response_repos_merge, object
   TYPES: BEGIN OF response_repos_merge01,
            message TYPE string,
            documentation_url TYPE string,
          END OF response_repos_merge01.
 
-* Component schema: response_issues_list_milestone, array
-  TYPES response_issues_list_milestone TYPE string. " array #/components/schemas/milestone todo
+* Component schema: response_issues_list_milestones, array
+  TYPES response_issues_list_milestone TYPE STANDARD TABLE OF milestone WITH DEFAULT KEY.
 
-* Component schema: response_issues_list_labels_01, array
-  TYPES response_issues_list_labels_01 TYPE string. " array #/components/schemas/label todo
+* Component schema: response_issues_list_labels_for_milesto, array
+  TYPES response_issues_list_labels_01 TYPE STANDARD TABLE OF label WITH DEFAULT KEY.
 
-* Component schema: response_activity_list_repo_no, array
-  TYPES response_activity_list_repo_no TYPE string. " array #/components/schemas/thread todo
+* Component schema: response_activity_list_repo_notificatio, array
+  TYPES response_activity_list_repo_no TYPE STANDARD TABLE OF thread WITH DEFAULT KEY.
 
-* Component schema: response_repos_list_pages_buil, array
-  TYPES response_repos_list_pages_buil TYPE string. " array #/components/schemas/page-build todo
+* Component schema: response_repos_list_pages_builds, array
+  TYPES response_repos_list_pages_buil TYPE STANDARD TABLE OF page_build WITH DEFAULT KEY.
 
-* Component schema: response_projects_list_for_rep, array
-  TYPES response_projects_list_for_rep TYPE string. " array #/components/schemas/project todo
+* Component schema: response_projects_list_for_repo, array
+  TYPES response_projects_list_for_rep TYPE STANDARD TABLE OF project WITH DEFAULT KEY.
 
 * Component schema: response_pulls_list, array
-  TYPES response_pulls_list TYPE string. " array #/components/schemas/pull-request-simple todo
+  TYPES response_pulls_list TYPE STANDARD TABLE OF pull_request_simple WITH DEFAULT KEY.
 
-* Component schema: response_pulls_list_review_com, array
-  TYPES response_pulls_list_review_com TYPE string. " array #/components/schemas/pull-request-review-comment todo
+* Component schema: response_pulls_list_review_comments_for, array
+  TYPES response_pulls_list_review_com TYPE STANDARD TABLE OF pull_request_review_comment WITH DEFAULT KEY.
 
-* Component schema: response_reactions_list_for_pu, array
-  TYPES response_reactions_list_for_pu TYPE string. " array #/components/schemas/reaction todo
+* Component schema: response_reactions_list_for_pull_reques, array
+  TYPES response_reactions_list_for_pu TYPE STANDARD TABLE OF reaction WITH DEFAULT KEY.
 
-* Component schema: response_pulls_list_review_c01, array
-  TYPES response_pulls_list_review_c01 TYPE string. " array #/components/schemas/pull-request-review-comment todo
+* Component schema: response_pulls_list_review_comments, array
+  TYPES response_pulls_list_review_c01 TYPE STANDARD TABLE OF pull_request_review_comment WITH DEFAULT KEY.
 
 * Component schema: response_pulls_list_commits, array
-  TYPES response_pulls_list_commits TYPE string. " array #/components/schemas/commit todo
+  TYPES response_pulls_list_commits TYPE STANDARD TABLE OF commit WITH DEFAULT KEY.
 
 * Component schema: response_pulls_list_files, array
-  TYPES response_pulls_list_files TYPE string. " array #/components/schemas/diff-entry todo
+  TYPES response_pulls_list_files TYPE STANDARD TABLE OF diff_entry WITH DEFAULT KEY.
 
 * Component schema: response_pulls_merge, object
   TYPES: BEGIN OF response_pulls_merge,
@@ -6722,17 +6722,17 @@ INTERFACE zif_github PUBLIC.
            documentation_url TYPE string,
          END OF response_pulls_merge.
 
-* Component schema: response_pulls_merge01, object
+* Component schema: response_pulls_merge, object
   TYPES: BEGIN OF response_pulls_merge01,
            message TYPE string,
            documentation_url TYPE string,
          END OF response_pulls_merge01.
 
 * Component schema: response_pulls_list_reviews, array
-  TYPES response_pulls_list_reviews TYPE string. " array #/components/schemas/pull-request-review todo
+  TYPES response_pulls_list_reviews TYPE STANDARD TABLE OF pull_request_review WITH DEFAULT KEY.
 
-* Component schema: response_pulls_list_comments_f, array
-  TYPES response_pulls_list_comments_f TYPE string. " array #/components/schemas/review-comment todo
+* Component schema: response_pulls_list_comments_for_review, array
+  TYPES response_pulls_list_comments_f TYPE STANDARD TABLE OF review_comment WITH DEFAULT KEY.
 
 * Component schema: response_pulls_update_branch, object
   TYPES: BEGIN OF response_pulls_update_branch,
@@ -6741,46 +6741,46 @@ INTERFACE zif_github PUBLIC.
          END OF response_pulls_update_branch.
 
 * Component schema: response_repos_list_releases, array
-  TYPES response_repos_list_releases TYPE string. " array #/components/schemas/release todo
+  TYPES response_repos_list_releases TYPE STANDARD TABLE OF release WITH DEFAULT KEY.
 
-* Component schema: response_repos_list_release_as, array
-  TYPES response_repos_list_release_as TYPE string. " array #/components/schemas/release-asset todo
+* Component schema: response_repos_list_release_assets, array
+  TYPES response_repos_list_release_as TYPE STANDARD TABLE OF release_asset WITH DEFAULT KEY.
 
-* Component schema: response_secret_scanning_list_, array
-  TYPES response_secret_scanning_list_ TYPE string. " array #/components/schemas/secret-scanning-alert todo
+* Component schema: response_secret_scanning_list_alerts_fo, array
+  TYPES response_secret_scanning_list_ TYPE STANDARD TABLE OF secret_scanning_alert WITH DEFAULT KEY.
 
-* Component schema: response_activity_list_stargaz, array
-  TYPES response_activity_list_stargaz TYPE string. " array #/components/schemas/simple-user todo
+* Component schema: response_activity_list_stargazers_for_r, array
+  TYPES response_activity_list_stargaz TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
-* Component schema: response_repos_get_code_freque, array
-  TYPES response_repos_get_code_freque TYPE string. " array #/components/schemas/code-frequency-stat todo
+* Component schema: response_repos_get_code_frequency_stats, array
+  TYPES response_repos_get_code_freque TYPE STANDARD TABLE OF code_frequency_stat WITH DEFAULT KEY.
 
-* Component schema: response_repos_get_commit_acti, array
-  TYPES response_repos_get_commit_acti TYPE string. " array #/components/schemas/commit-activity todo
+* Component schema: response_repos_get_commit_activity_stat, array
+  TYPES response_repos_get_commit_acti TYPE STANDARD TABLE OF commit_activity WITH DEFAULT KEY.
 
-* Component schema: response_repos_get_contributor, array
-  TYPES response_repos_get_contributor TYPE string. " array #/components/schemas/contributor-activity todo
+* Component schema: response_repos_get_contributors_stats, array
+  TYPES response_repos_get_contributor TYPE STANDARD TABLE OF contributor_activity WITH DEFAULT KEY.
 
-* Component schema: response_repos_get_punch_card_, array
-  TYPES response_repos_get_punch_card_ TYPE string. " array #/components/schemas/code-frequency-stat todo
+* Component schema: response_repos_get_punch_card_stats, array
+  TYPES response_repos_get_punch_card_ TYPE STANDARD TABLE OF code_frequency_stat WITH DEFAULT KEY.
 
-* Component schema: response_activity_list_watcher, array
-  TYPES response_activity_list_watcher TYPE string. " array #/components/schemas/simple-user todo
+* Component schema: response_activity_list_watchers_for_rep, array
+  TYPES response_activity_list_watcher TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
 * Component schema: response_repos_list_tags, array
-  TYPES response_repos_list_tags TYPE string. " array #/components/schemas/tag todo
+  TYPES response_repos_list_tags TYPE STANDARD TABLE OF tag WITH DEFAULT KEY.
 
 * Component schema: response_repos_list_teams, array
-  TYPES response_repos_list_teams TYPE string. " array #/components/schemas/team todo
+  TYPES response_repos_list_teams TYPE STANDARD TABLE OF team WITH DEFAULT KEY.
 
 * Component schema: response_repos_get_top_paths, array
-  TYPES response_repos_get_top_paths TYPE string. " array #/components/schemas/content-traffic todo
+  TYPES response_repos_get_top_paths TYPE STANDARD TABLE OF content_traffic WITH DEFAULT KEY.
 
-* Component schema: response_repos_get_top_referre, array
-  TYPES response_repos_get_top_referre TYPE string. " array #/components/schemas/referrer-traffic todo
+* Component schema: response_repos_get_top_referrers, array
+  TYPES response_repos_get_top_referre TYPE STANDARD TABLE OF referrer_traffic WITH DEFAULT KEY.
 
 * Component schema: response_repos_list_public, array
-  TYPES response_repos_list_public TYPE string. " array #/components/schemas/minimal-repository todo
+  TYPES response_repos_list_public TYPE STANDARD TABLE OF minimal_repository WITH DEFAULT KEY.
 
 * Component schema: response_search_code, object
   TYPES: BEGIN OF response_search_code,
@@ -6796,7 +6796,7 @@ INTERFACE zif_github PUBLIC.
            items TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_search_commits.
 
-* Component schema: response_search_issues_and_pul, object
+* Component schema: response_search_issues_and_pull_request, object
   TYPES: BEGIN OF response_search_issues_and_pul,
            total_count TYPE i,
            incomplete_results TYPE abap_bool,
@@ -6831,176 +6831,176 @@ INTERFACE zif_github PUBLIC.
            items TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_search_users.
 
-* Component schema: response_teams_list_discussi02, array
-  TYPES response_teams_list_discussi02 TYPE string. " array #/components/schemas/team-discussion todo
+* Component schema: response_teams_list_discussions_legacy, array
+  TYPES response_teams_list_discussi02 TYPE STANDARD TABLE OF team_discussion WITH DEFAULT KEY.
 
-* Component schema: response_teams_list_discussi03, array
-  TYPES response_teams_list_discussi03 TYPE string. " array #/components/schemas/team-discussion-comment todo
+* Component schema: response_teams_list_discussion_commen01, array
+  TYPES response_teams_list_discussi03 TYPE STANDARD TABLE OF team_discussion_comment WITH DEFAULT KEY.
 
-* Component schema: response_reactions_list_for_03, array
-  TYPES response_reactions_list_for_03 TYPE string. " array #/components/schemas/reaction todo
+* Component schema: response_reactions_list_for_team_disc02, array
+  TYPES response_reactions_list_for_03 TYPE STANDARD TABLE OF reaction WITH DEFAULT KEY.
 
-* Component schema: response_reactions_list_for_04, array
-  TYPES response_reactions_list_for_04 TYPE string. " array #/components/schemas/reaction todo
+* Component schema: response_reactions_list_for_team_disc03, array
+  TYPES response_reactions_list_for_04 TYPE STANDARD TABLE OF reaction WITH DEFAULT KEY.
 
-* Component schema: response_teams_list_pending_01, array
-  TYPES response_teams_list_pending_01 TYPE string. " array #/components/schemas/organization-invitation todo
+* Component schema: response_teams_list_pending_invitatio01, array
+  TYPES response_teams_list_pending_01 TYPE STANDARD TABLE OF organization_invitation WITH DEFAULT KEY.
 
-* Component schema: response_teams_list_members_le, array
-  TYPES response_teams_list_members_le TYPE string. " array #/components/schemas/simple-user todo
+* Component schema: response_teams_list_members_legacy, array
+  TYPES response_teams_list_members_le TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
-* Component schema: response_teams_add_member_lega, object
+* Component schema: response_teams_add_member_legacy, object
   TYPES: BEGIN OF response_teams_add_member_lega,
            message TYPE string,
            errors TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            documentation_url TYPE string,
          END OF response_teams_add_member_lega.
 
-* Component schema: response_teams_add_or_update01, object
+* Component schema: response_teams_add_or_update_membersh01, object
   TYPES: BEGIN OF response_teams_add_or_update01,
            message TYPE string,
            errors TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            documentation_url TYPE string,
          END OF response_teams_add_or_update01.
 
-* Component schema: response_teams_list_projects_l, array
-  TYPES response_teams_list_projects_l TYPE string. " array #/components/schemas/team-project todo
+* Component schema: response_teams_list_projects_legacy, array
+  TYPES response_teams_list_projects_l TYPE STANDARD TABLE OF team_project WITH DEFAULT KEY.
 
-* Component schema: response_teams_add_or_update02, object
+* Component schema: response_teams_add_or_update_project_01, object
   TYPES: BEGIN OF response_teams_add_or_update02,
            message TYPE string,
            documentation_url TYPE string,
          END OF response_teams_add_or_update02.
 
-* Component schema: response_teams_list_repos_lega, array
-  TYPES response_teams_list_repos_lega TYPE string. " array #/components/schemas/minimal-repository todo
+* Component schema: response_teams_list_repos_legacy, array
+  TYPES response_teams_list_repos_lega TYPE STANDARD TABLE OF minimal_repository WITH DEFAULT KEY.
 
-* Component schema: response_teams_list_child_lega, array
-  TYPES response_teams_list_child_lega TYPE string. " array #/components/schemas/team todo
+* Component schema: response_teams_list_child_legacy, array
+  TYPES response_teams_list_child_lega TYPE STANDARD TABLE OF team WITH DEFAULT KEY.
 
-* Component schema: response_users_list_blocked_by, array
-  TYPES response_users_list_blocked_by TYPE string. " array #/components/schemas/simple-user todo
+* Component schema: response_users_list_blocked_by_authenti, array
+  TYPES response_users_list_blocked_by TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
-* Component schema: response_users_set_primary_ema, array
-  TYPES response_users_set_primary_ema TYPE string. " array #/components/schemas/email todo
+* Component schema: response_users_set_primary_email_visibi, array
+  TYPES response_users_set_primary_ema TYPE STANDARD TABLE OF email WITH DEFAULT KEY.
 
-* Component schema: response_users_list_emails_for, array
-  TYPES response_users_list_emails_for TYPE string. " array #/components/schemas/email todo
+* Component schema: response_users_list_emails_for_authenti, array
+  TYPES response_users_list_emails_for TYPE STANDARD TABLE OF email WITH DEFAULT KEY.
 
-* Component schema: response_users_add_email_for_a, array
-  TYPES response_users_add_email_for_a TYPE string. " array #/components/schemas/email todo
+* Component schema: response_users_add_email_for_authentica, array
+  TYPES response_users_add_email_for_a TYPE STANDARD TABLE OF email WITH DEFAULT KEY.
 
-* Component schema: response_users_list_followers_, array
-  TYPES response_users_list_followers_ TYPE string. " array #/components/schemas/simple-user todo
+* Component schema: response_users_list_followers_for_authe, array
+  TYPES response_users_list_followers_ TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
-* Component schema: response_users_list_followed_b, array
-  TYPES response_users_list_followed_b TYPE string. " array #/components/schemas/simple-user todo
+* Component schema: response_users_list_followed_by_authent, array
+  TYPES response_users_list_followed_b TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
-* Component schema: response_users_list_gpg_keys_f, array
-  TYPES response_users_list_gpg_keys_f TYPE string. " array #/components/schemas/gpg-key todo
+* Component schema: response_users_list_gpg_keys_for_authen, array
+  TYPES response_users_list_gpg_keys_f TYPE STANDARD TABLE OF gpg_key WITH DEFAULT KEY.
 
-* Component schema: response_apps_list_installat01, object
+* Component schema: response_apps_list_installations_for_au, object
   TYPES: BEGIN OF response_apps_list_installat01,
            total_count TYPE i,
            installations TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_apps_list_installat01.
 
-* Component schema: response_apps_list_installat02, object
+* Component schema: response_apps_list_installation_repos_f, object
   TYPES: BEGIN OF response_apps_list_installat02,
            total_count TYPE i,
            repository_selection TYPE string,
            repositories TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF response_apps_list_installat02.
 
-* Component schema: response_issues_list_for_authe, array
-  TYPES response_issues_list_for_authe TYPE string. " array #/components/schemas/issue todo
+* Component schema: response_issues_list_for_authenticated_, array
+  TYPES response_issues_list_for_authe TYPE STANDARD TABLE OF issue WITH DEFAULT KEY.
 
-* Component schema: response_users_list_public_ssh, array
-  TYPES response_users_list_public_ssh TYPE string. " array #/components/schemas/key todo
+* Component schema: response_users_list_public_ssh_keys_for, array
+  TYPES response_users_list_public_ssh TYPE STANDARD TABLE OF key WITH DEFAULT KEY.
 
-* Component schema: response_apps_list_subscriptio, array
-  TYPES response_apps_list_subscriptio TYPE string. " array #/components/schemas/user-marketplace-purchase todo
+* Component schema: response_apps_list_subscriptions_for_au, array
+  TYPES response_apps_list_subscriptio TYPE STANDARD TABLE OF user_marketplace_purchase WITH DEFAULT KEY.
 
-* Component schema: response_apps_list_subscript01, array
-  TYPES response_apps_list_subscript01 TYPE string. " array #/components/schemas/user-marketplace-purchase todo
+* Component schema: response_apps_list_subscriptions_for_01, array
+  TYPES response_apps_list_subscript01 TYPE STANDARD TABLE OF user_marketplace_purchase WITH DEFAULT KEY.
 
-* Component schema: response_orgs_list_memberships, array
-  TYPES response_orgs_list_memberships TYPE string. " array #/components/schemas/org-membership todo
+* Component schema: response_orgs_list_memberships_for_auth, array
+  TYPES response_orgs_list_memberships TYPE STANDARD TABLE OF org_membership WITH DEFAULT KEY.
 
-* Component schema: response_migrations_list_for_a, array
-  TYPES response_migrations_list_for_a TYPE string. " array #/components/schemas/migration todo
+* Component schema: response_migrations_list_for_authentica, array
+  TYPES response_migrations_list_for_a TYPE STANDARD TABLE OF migration WITH DEFAULT KEY.
 
-* Component schema: response_migrations_list_rep01, array
-  TYPES response_migrations_list_rep01 TYPE string. " array #/components/schemas/minimal-repository todo
+* Component schema: response_migrations_list_repos_for_user, array
+  TYPES response_migrations_list_rep01 TYPE STANDARD TABLE OF minimal_repository WITH DEFAULT KEY.
 
-* Component schema: response_orgs_list_for_authent, array
-  TYPES response_orgs_list_for_authent TYPE string. " array #/components/schemas/organization-simple todo
+* Component schema: response_orgs_list_for_authenticated_us, array
+  TYPES response_orgs_list_for_authent TYPE STANDARD TABLE OF organization_simple WITH DEFAULT KEY.
 
-* Component schema: response_users_list_public_ema, array
-  TYPES response_users_list_public_ema TYPE string. " array #/components/schemas/email todo
+* Component schema: response_users_list_public_emails_for_a, array
+  TYPES response_users_list_public_ema TYPE STANDARD TABLE OF email WITH DEFAULT KEY.
 
-* Component schema: response_repos_list_for_authen, array
-  TYPES response_repos_list_for_authen TYPE string. " array #/components/schemas/repository todo
+* Component schema: response_repos_list_for_authenticated_u, array
+  TYPES response_repos_list_for_authen TYPE STANDARD TABLE OF repository WITH DEFAULT KEY.
 
-* Component schema: response_repos_list_invitati01, array
-  TYPES response_repos_list_invitati01 TYPE string. " array #/components/schemas/repository-invitation todo
+* Component schema: response_repos_list_invitations_for_aut, array
+  TYPES response_repos_list_invitati01 TYPE STANDARD TABLE OF repository_invitation WITH DEFAULT KEY.
 
-* Component schema: response_activity_list_repos_s, array
-  TYPES response_activity_list_repos_s TYPE string. " array #/components/schemas/repository todo
+* Component schema: response_activity_list_repos_starred_by, array
+  TYPES response_activity_list_repos_s TYPE STANDARD TABLE OF repository WITH DEFAULT KEY.
 
-* Component schema: response_activity_list_watched, array
-  TYPES response_activity_list_watched TYPE string. " array #/components/schemas/minimal-repository todo
+* Component schema: response_activity_list_watched_repos_fo, array
+  TYPES response_activity_list_watched TYPE STANDARD TABLE OF minimal_repository WITH DEFAULT KEY.
 
-* Component schema: response_teams_list_for_authen, array
-  TYPES response_teams_list_for_authen TYPE string. " array #/components/schemas/team-full todo
+* Component schema: response_teams_list_for_authenticated_u, array
+  TYPES response_teams_list_for_authen TYPE STANDARD TABLE OF team_full WITH DEFAULT KEY.
 
 * Component schema: response_users_list, array
-  TYPES response_users_list TYPE string. " array #/components/schemas/simple-user todo
+  TYPES response_users_list TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
-* Component schema: response_activity_list_events_, array
-  TYPES response_activity_list_events_ TYPE string. " array #/components/schemas/event todo
+* Component schema: response_activity_list_events_for_authe, array
+  TYPES response_activity_list_events_ TYPE STANDARD TABLE OF event WITH DEFAULT KEY.
 
-* Component schema: response_activity_list_org_eve, array
-  TYPES response_activity_list_org_eve TYPE string. " array #/components/schemas/event todo
+* Component schema: response_activity_list_org_events_for_a, array
+  TYPES response_activity_list_org_eve TYPE STANDARD TABLE OF event WITH DEFAULT KEY.
 
-* Component schema: response_activity_list_publi03, array
-  TYPES response_activity_list_publi03 TYPE string. " array #/components/schemas/event todo
+* Component schema: response_activity_list_public_events_01, array
+  TYPES response_activity_list_publi03 TYPE STANDARD TABLE OF event WITH DEFAULT KEY.
 
-* Component schema: response_users_list_follower01, array
-  TYPES response_users_list_follower01 TYPE string. " array #/components/schemas/simple-user todo
+* Component schema: response_users_list_followers_for_user, array
+  TYPES response_users_list_follower01 TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
-* Component schema: response_users_list_following_, array
-  TYPES response_users_list_following_ TYPE string. " array #/components/schemas/simple-user todo
+* Component schema: response_users_list_following_for_user, array
+  TYPES response_users_list_following_ TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
 
 * Component schema: response_gists_list_for_user, array
-  TYPES response_gists_list_for_user TYPE string. " array #/components/schemas/base-gist todo
+  TYPES response_gists_list_for_user TYPE STANDARD TABLE OF base_gist WITH DEFAULT KEY.
 
-* Component schema: response_users_list_gpg_keys01, array
-  TYPES response_users_list_gpg_keys01 TYPE string. " array #/components/schemas/gpg-key todo
+* Component schema: response_users_list_gpg_keys_for_user, array
+  TYPES response_users_list_gpg_keys01 TYPE STANDARD TABLE OF gpg_key WITH DEFAULT KEY.
 
-* Component schema: response_users_list_public_key, array
-  TYPES response_users_list_public_key TYPE string. " array #/components/schemas/key-simple todo
+* Component schema: response_users_list_public_keys_for_use, array
+  TYPES response_users_list_public_key TYPE STANDARD TABLE OF key_simple WITH DEFAULT KEY.
 
 * Component schema: response_orgs_list_for_user, array
-  TYPES response_orgs_list_for_user TYPE string. " array #/components/schemas/organization-simple todo
+  TYPES response_orgs_list_for_user TYPE STANDARD TABLE OF organization_simple WITH DEFAULT KEY.
 
-* Component schema: response_projects_list_for_use, array
-  TYPES response_projects_list_for_use TYPE string. " array #/components/schemas/project todo
+* Component schema: response_projects_list_for_user, array
+  TYPES response_projects_list_for_use TYPE STANDARD TABLE OF project WITH DEFAULT KEY.
 
-* Component schema: response_activity_list_receive, array
-  TYPES response_activity_list_receive TYPE string. " array #/components/schemas/event todo
+* Component schema: response_activity_list_received_events_, array
+  TYPES response_activity_list_receive TYPE STANDARD TABLE OF event WITH DEFAULT KEY.
 
-* Component schema: response_activity_list_recei01, array
-  TYPES response_activity_list_recei01 TYPE string. " array #/components/schemas/event todo
+* Component schema: response_activity_list_received_public_, array
+  TYPES response_activity_list_recei01 TYPE STANDARD TABLE OF event WITH DEFAULT KEY.
 
 * Component schema: response_repos_list_for_user, array
-  TYPES response_repos_list_for_user TYPE string. " array #/components/schemas/minimal-repository todo
+  TYPES response_repos_list_for_user TYPE STANDARD TABLE OF minimal_repository WITH DEFAULT KEY.
 
-* Component schema: response_activity_list_repos01, array
-  TYPES response_activity_list_repos01 TYPE string. " array #/components/schemas/repository todo
+* Component schema: response_activity_list_repos_starred_01, array
+  TYPES response_activity_list_repos01 TYPE STANDARD TABLE OF repository WITH DEFAULT KEY.
 
-* Component schema: response_activity_list_repos_w, array
-  TYPES response_activity_list_repos_w TYPE string. " array #/components/schemas/minimal-repository todo
+* Component schema: response_activity_list_repos_watched_by, array
+  TYPES response_activity_list_repos_w TYPE STANDARD TABLE OF minimal_repository WITH DEFAULT KEY.
 
 * GET - "GitHub API Root"
 * Operation id: meta/root
@@ -7060,7 +7060,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: page, optional, query
 * Parameter: since, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_apps_list_installatio
+*     application/json, #/components/schemas/response_apps_list_installations
   METHODS apps_list_installations
     IMPORTING
       outdated TYPE string OPTIONAL
@@ -7139,7 +7139,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_oauth_authorizations_
+*     application/json, #/components/schemas/response_oauth_authorizations_list_gran
 * Response: 304
 * Response: 401
 * Response: 403
@@ -7321,7 +7321,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_oauth_authorization01
+*     application/json, #/components/schemas/response_oauth_authorizations_list_auth
 * Response: 304
 * Response: 401
 * Response: 403
@@ -7437,7 +7437,7 @@ INTERFACE zif_github PUBLIC.
 * GET - "Get all codes of conduct"
 * Operation id: codes-of-conduct/get-all-codes-of-conduct
 * Response: 200
-*     application/json, #/components/schemas/response_codes_of_conduct_get_
+*     application/json, #/components/schemas/response_codes_of_conduct_get_all_codes
 * Response: 304
 * Response: 415
   METHODS codes_of_conduct_get_all_codes
@@ -7519,7 +7519,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_enterprise_admin_list
+*     application/json, #/components/schemas/response_enterprise_admin_list_selected
   METHODS enterprise_admin_list_selected
     IMPORTING
       enterprise TYPE string
@@ -7591,7 +7591,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_enterprise_admin_li01
+*     application/json, #/components/schemas/response_enterprise_admin_list_self_hos
   METHODS enterprise_admin_list_self_hos
     IMPORTING
       enterprise TYPE string
@@ -7665,7 +7665,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_enterprise_admin_li02
+*     application/json, #/components/schemas/response_enterprise_admin_list_org_acce
   METHODS enterprise_admin_list_org_acce
     IMPORTING
       enterprise TYPE string
@@ -7722,7 +7722,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_enterprise_admin_li03
+*     application/json, #/components/schemas/response_enterprise_admin_list_self_h01
   METHODS enterprise_admin_list_self_h01
     IMPORTING
       enterprise TYPE string
@@ -7778,7 +7778,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_enterprise_admin_li04
+*     application/json, #/components/schemas/response_enterprise_admin_list_self_h02
   METHODS enterprise_admin_list_self_h02
     IMPORTING
       enterprise TYPE string
@@ -7792,7 +7792,7 @@ INTERFACE zif_github PUBLIC.
 * Operation id: enterprise-admin/list-runner-applications-for-enterprise
 * Parameter: enterprise, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_enterprise_admin_li05
+*     application/json, #/components/schemas/response_enterprise_admin_list_runner_a
   METHODS enterprise_admin_list_runner_a
     IMPORTING
       enterprise TYPE string
@@ -7859,7 +7859,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: order, optional, query
 * Parameter: per_page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_audit_log_get_audit_l
+*     application/json, #/components/schemas/response_audit_log_get_audit_log
   METHODS audit_log_get_audit_log
     IMPORTING
       enterprise TYPE string
@@ -7914,7 +7914,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_activity_list_public_
+*     application/json, #/components/schemas/response_activity_list_public_events
 * Response: 304
 * Response: 403
 * Response: 503
@@ -8199,7 +8199,7 @@ INTERFACE zif_github PUBLIC.
 * Response: 304
 * Response: 403
 * Response: 404
-*     application/json, #/components/schemas/response_gists_check_is_starre
+*     application/json, #/components/schemas/response_gists_check_is_starred
   METHODS gists_check_is_starred
     IMPORTING
       gist_id TYPE string
@@ -8249,7 +8249,7 @@ INTERFACE zif_github PUBLIC.
 * GET - "Get all gitignore templates"
 * Operation id: gitignore/get-all-templates
 * Response: 200
-*     application/json, #/components/schemas/response_gitignore_get_all_tem
+*     application/json, #/components/schemas/response_gitignore_get_all_templates
 * Response: 304
   METHODS gitignore_get_all_templates
     RETURNING
@@ -8274,7 +8274,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_apps_list_repos_acces
+*     application/json, #/components/schemas/response_apps_list_repos_accessible_to_
 * Response: 304
 * Response: 401
 * Response: 403
@@ -8334,7 +8334,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: featured, optional, query
 * Parameter: per_page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_licenses_get_all_comm
+*     application/json, #/components/schemas/response_licenses_get_all_commonly_used
 * Response: 304
   METHODS licenses_get_all_commonly_used
     IMPORTING
@@ -8417,7 +8417,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_apps_list_accounts_fo
+*     application/json, #/components/schemas/response_apps_list_accounts_for_plan
 * Response: 401
 * Response: 404
 * Response: 422
@@ -8451,7 +8451,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_apps_list_plans_stubb
+*     application/json, #/components/schemas/response_apps_list_plans_stubbed
 * Response: 401
   METHODS apps_list_plans_stubbed
     IMPORTING
@@ -8469,7 +8469,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_apps_list_accounts_01
+*     application/json, #/components/schemas/response_apps_list_accounts_for_plan_st
 * Response: 401
   METHODS apps_list_accounts_for_plan_st
     IMPORTING
@@ -8499,7 +8499,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_activity_list_publi01
+*     application/json, #/components/schemas/response_activity_list_public_events_fo
 * Response: 301
 * Response: 304
 * Response: 403
@@ -8523,7 +8523,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_activity_list_notific
+*     application/json, #/components/schemas/response_activity_list_notifications_fo
 * Response: 304
 * Response: 401
 * Response: 403
@@ -8543,7 +8543,7 @@ INTERFACE zif_github PUBLIC.
 * PUT - "Mark notifications as read"
 * Operation id: activity/mark-notifications-as-read
 * Response: 202
-*     application/json, #/components/schemas/response_activity_mark_notific
+*     application/json, #/components/schemas/response_activity_mark_notifications_as
 * Response: 205
 * Response: 304
 * Response: 401
@@ -8711,7 +8711,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_actions_list_selected
+*     application/json, #/components/schemas/response_actions_list_selected_reposito
   METHODS actions_list_selected_reposito
     IMPORTING
       org TYPE string
@@ -8783,7 +8783,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_actions_list_self_hos
+*     application/json, #/components/schemas/response_actions_list_self_hosted_runne
   METHODS actions_list_self_hosted_runne
     IMPORTING
       org TYPE string
@@ -8855,7 +8855,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: org, required, path
 * Parameter: runner_group_id, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_actions_list_repo_acc
+*     application/json, #/components/schemas/response_actions_list_repo_access_to_se
   METHODS actions_list_repo_access_to_se
     IMPORTING
       org TYPE string
@@ -8910,7 +8910,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_actions_list_self_h01
+*     application/json, #/components/schemas/response_actions_list_self_hosted_run01
   METHODS actions_list_self_hosted_run01
     IMPORTING
       org TYPE string
@@ -8966,7 +8966,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_actions_list_self_h02
+*     application/json, #/components/schemas/response_actions_list_self_hosted_run02
   METHODS actions_list_self_hosted_run02
     IMPORTING
       org TYPE string
@@ -8980,7 +8980,7 @@ INTERFACE zif_github PUBLIC.
 * Operation id: actions/list-runner-applications-for-org
 * Parameter: org, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_actions_list_runner_a
+*     application/json, #/components/schemas/response_actions_list_runner_applicatio
   METHODS actions_list_runner_applicatio
     IMPORTING
       org TYPE string
@@ -9043,7 +9043,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_actions_list_org_secr
+*     application/json, #/components/schemas/response_actions_list_org_secrets
   METHODS actions_list_org_secrets
     IMPORTING
       org TYPE string
@@ -9111,7 +9111,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: org, required, path
 * Parameter: secret_name, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_actions_list_select01
+*     application/json, #/components/schemas/response_actions_list_selected_repos_fo
   METHODS actions_list_selected_repos_fo
     IMPORTING
       org TYPE string
@@ -9189,7 +9189,7 @@ INTERFACE zif_github PUBLIC.
 * Operation id: orgs/list-blocked-users
 * Parameter: org, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_orgs_list_blocked_use
+*     application/json, #/components/schemas/response_orgs_list_blocked_users
 * Response: 415
   METHODS orgs_list_blocked_users
     IMPORTING
@@ -9238,7 +9238,7 @@ INTERFACE zif_github PUBLIC.
 * Operation id: orgs/list-saml-sso-authorizations
 * Parameter: org, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_orgs_list_saml_sso_au
+*     application/json, #/components/schemas/response_orgs_list_saml_sso_authorizati
   METHODS orgs_list_saml_sso_authorizati
     IMPORTING
       org TYPE string
@@ -9264,7 +9264,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_activity_list_publi02
+*     application/json, #/components/schemas/response_activity_list_public_org_event
   METHODS activity_list_public_org_event
     IMPORTING
       org TYPE string
@@ -9280,7 +9280,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_orgs_list_failed_invi
+*     application/json, #/components/schemas/response_orgs_list_failed_invitations
 * Response: 404
   METHODS orgs_list_failed_invitations
     IMPORTING
@@ -9431,7 +9431,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_orgs_list_app_install
+*     application/json, #/components/schemas/response_orgs_list_app_installations
   METHODS orgs_list_app_installations
     IMPORTING
       org TYPE string
@@ -9483,7 +9483,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_orgs_list_pending_inv
+*     application/json, #/components/schemas/response_orgs_list_pending_invitations
 * Response: 404
   METHODS orgs_list_pending_invitations
     IMPORTING
@@ -9530,7 +9530,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_orgs_list_invitation_
+*     application/json, #/components/schemas/response_orgs_list_invitation_teams
 * Response: 404
   METHODS orgs_list_invitation_teams
     IMPORTING
@@ -9673,7 +9673,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_migrations_list_for_o
+*     application/json, #/components/schemas/response_migrations_list_for_org
   METHODS migrations_list_for_org
     IMPORTING
       org TYPE string
@@ -9759,7 +9759,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_migrations_list_repos
+*     application/json, #/components/schemas/response_migrations_list_repos_for_org
 * Response: 404
   METHODS migrations_list_repos_for_org
     IMPORTING
@@ -9778,7 +9778,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_orgs_list_outside_col
+*     application/json, #/components/schemas/response_orgs_list_outside_collaborator
   METHODS orgs_list_outside_collaborator
     IMPORTING
       filter TYPE string DEFAULT 'all'
@@ -9796,7 +9796,7 @@ INTERFACE zif_github PUBLIC.
 * Response: 202
 * Response: 204
 * Response: 403
-*     application/json, #/components/schemas/response_orgs_convert_member_t
+*     application/json, #/components/schemas/response_orgs_convert_member_to_outside
 * Response: 404
   METHODS orgs_convert_member_to_outside
     IMPORTING
@@ -9810,7 +9810,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: username, required, path
 * Response: 204
 * Response: 422
-*     application/json, #/components/schemas/response_orgs_remove_outside_c
+*     application/json, #/components/schemas/response_orgs_remove_outside_collaborat
   METHODS orgs_remove_outside_collaborat
     IMPORTING
       org TYPE string
@@ -9861,7 +9861,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_orgs_list_public_memb
+*     application/json, #/components/schemas/response_orgs_list_public_members
   METHODS orgs_list_public_members
     IMPORTING
       org TYPE string
@@ -10081,7 +10081,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_teams_list_discussion
+*     application/json, #/components/schemas/response_teams_list_discussions_in_org
   METHODS teams_list_discussions_in_org
     IMPORTING
       org TYPE string
@@ -10167,7 +10167,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_teams_list_discussi01
+*     application/json, #/components/schemas/response_teams_list_discussion_comments
   METHODS teams_list_discussion_comments
     IMPORTING
       org TYPE string
@@ -10263,7 +10263,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_reactions_list_for_te
+*     application/json, #/components/schemas/response_reactions_list_for_team_discus
   METHODS reactions_list_for_team_discus
     IMPORTING
       content TYPE string OPTIONAL
@@ -10323,7 +10323,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_reactions_list_for_01
+*     application/json, #/components/schemas/response_reactions_list_for_team_disc01
   METHODS reactions_list_for_team_disc01
     IMPORTING
       content TYPE string OPTIONAL
@@ -10376,7 +10376,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_teams_list_pending_in
+*     application/json, #/components/schemas/response_teams_list_pending_invitations
   METHODS teams_list_pending_invitations
     IMPORTING
       org TYPE string
@@ -10395,7 +10395,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_teams_list_members_in
+*     application/json, #/components/schemas/response_teams_list_members_in_org
   METHODS teams_list_members_in_org
     IMPORTING
       role TYPE string DEFAULT 'all'
@@ -10433,7 +10433,7 @@ INTERFACE zif_github PUBLIC.
 *     application/json, #/components/schemas/team-membership
 * Response: 403
 * Response: 422
-*     application/json, #/components/schemas/response_teams_add_or_update_m
+*     application/json, #/components/schemas/response_teams_add_or_update_membership
 * Body ref: #/components/schemas/bodyteams_add_or_update_member
   METHODS teams_add_or_update_membership
     IMPORTING
@@ -10468,7 +10468,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_teams_list_projects_i
+*     application/json, #/components/schemas/response_teams_list_projects_in_org
   METHODS teams_list_projects_in_org
     IMPORTING
       org TYPE string
@@ -10503,7 +10503,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: project_id, required, path
 * Response: 204
 * Response: 403
-*     application/json, #/components/schemas/response_teams_add_or_update_p
+*     application/json, #/components/schemas/response_teams_add_or_update_project_pe
 * Body ref: #/components/schemas/bodyteams_add_or_update_projec
   METHODS teams_add_or_update_project_pe
     IMPORTING
@@ -10535,7 +10535,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_teams_list_repos_in_o
+*     application/json, #/components/schemas/response_teams_list_repos_in_org
   METHODS teams_list_repos_in_org
     IMPORTING
       org TYPE string
@@ -10635,7 +10635,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_teams_list_child_in_o
+*     application/json, #/components/schemas/response_teams_list_child_in_org
   METHODS teams_list_child_in_org
     IMPORTING
       org TYPE string
@@ -10705,10 +10705,10 @@ INTERFACE zif_github PUBLIC.
 * Response: 304
 * Response: 401
 * Response: 403
-*     application/json, #/components/schemas/response_projects_move_card01
+*     application/json, #/components/schemas/response_projects_move_card
 * Response: 422
 * Response: 503
-*     application/json, #/components/schemas/response_projects_move_card02
+*     application/json, #/components/schemas/response_projects_move_card
 * Body ref: #/components/schemas/bodyprojects_move_card
   METHODS projects_move_card
     IMPORTING
@@ -10884,7 +10884,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_projects_list_collabo
+*     application/json, #/components/schemas/response_projects_list_collaborators
 * Response: 304
 * Response: 401
 * Response: 403
@@ -11080,7 +11080,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_actions_list_artifact
+*     application/json, #/components/schemas/response_actions_list_artifacts_for_rep
   METHODS actions_list_artifacts_for_rep
     IMPORTING
       owner TYPE string
@@ -11223,7 +11223,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_actions_list_self_h03
+*     application/json, #/components/schemas/response_actions_list_self_hosted_run03
   METHODS actions_list_self_hosted_run03
     IMPORTING
       owner TYPE string
@@ -11239,7 +11239,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_actions_list_runner01
+*     application/json, #/components/schemas/response_actions_list_runner_applicat01
   METHODS actions_list_runner_applicat01
     IMPORTING
       owner TYPE string
@@ -11316,7 +11316,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_actions_list_workflow
+*     application/json, #/components/schemas/response_actions_list_workflow_runs_for
   METHODS actions_list_workflow_runs_for
     IMPORTING
       owner TYPE string
@@ -11368,7 +11368,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_actions_list_workfl01
+*     application/json, #/components/schemas/response_actions_list_workflow_run_arti
   METHODS actions_list_workflow_run_arti
     IMPORTING
       owner TYPE string
@@ -11402,7 +11402,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_actions_list_jobs_for
+*     application/json, #/components/schemas/response_actions_list_jobs_for_workflow
   METHODS actions_list_jobs_for_workflow
     IMPORTING
       filter TYPE string DEFAULT 'latest'
@@ -11477,7 +11477,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_actions_list_repo_sec
+*     application/json, #/components/schemas/response_actions_list_repo_secrets
   METHODS actions_list_repo_secrets
     IMPORTING
       owner TYPE string
@@ -11556,7 +11556,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_actions_list_repo_wor
+*     application/json, #/components/schemas/response_actions_list_repo_workflows
   METHODS actions_list_repo_workflows
     IMPORTING
       owner TYPE string
@@ -11636,7 +11636,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_actions_list_workfl02
+*     application/json, #/components/schemas/response_actions_list_workflow_runs
   METHODS actions_list_workflow_runs
     IMPORTING
       owner TYPE string
@@ -12019,7 +12019,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: branch, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_get_all_status_
+*     application/json, #/components/schemas/response_repos_get_all_status_check_con
 * Response: 404
   METHODS repos_get_all_status_check_con
     IMPORTING
@@ -12036,7 +12036,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: branch, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_add_status_chec
+*     application/json, #/components/schemas/response_repos_add_status_check_context
 * Response: 403
 * Response: 404
 * Response: 422
@@ -12057,7 +12057,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: branch, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_set_status_chec
+*     application/json, #/components/schemas/response_repos_set_status_check_context
 * Response: 404
 * Response: 422
 * Body ref: #/components/schemas/bodyrepos_set_status_check_con
@@ -12077,7 +12077,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: branch, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_remove_status_c
+*     application/json, #/components/schemas/response_repos_remove_status_check_cont
 * Response: 404
 * Response: 422
 * Body ref: #/components/schemas/bodyrepos_remove_status_chec01
@@ -12127,7 +12127,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: branch, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_get_apps_with_a
+*     application/json, #/components/schemas/response_repos_get_apps_with_access_to_
 * Response: 404
   METHODS repos_get_apps_with_access_to_
     IMPORTING
@@ -12144,7 +12144,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: branch, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_add_app_access_
+*     application/json, #/components/schemas/response_repos_add_app_access_restricti
 * Response: 422
 * Body ref: #/components/schemas/bodyrepos_add_app_access_restr
   METHODS repos_add_app_access_restricti
@@ -12163,7 +12163,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: branch, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_set_app_access_
+*     application/json, #/components/schemas/response_repos_set_app_access_restricti
 * Response: 422
 * Body ref: #/components/schemas/bodyrepos_set_app_access_restr
   METHODS repos_set_app_access_restricti
@@ -12182,7 +12182,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: branch, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_remove_app_acce
+*     application/json, #/components/schemas/response_repos_remove_app_access_restri
 * Response: 422
 * Body ref: #/components/schemas/bodyrepos_remove_app_access_re
   METHODS repos_remove_app_access_restri
@@ -12201,7 +12201,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: branch, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_get_teams_with_
+*     application/json, #/components/schemas/response_repos_get_teams_with_access_to
 * Response: 404
   METHODS repos_get_teams_with_access_to
     IMPORTING
@@ -12218,7 +12218,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: branch, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_add_team_access
+*     application/json, #/components/schemas/response_repos_add_team_access_restrict
 * Response: 422
 * Body ref: #/components/schemas/bodyrepos_add_team_access_rest
   METHODS repos_add_team_access_restrict
@@ -12237,7 +12237,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: branch, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_set_team_access
+*     application/json, #/components/schemas/response_repos_set_team_access_restrict
 * Response: 422
 * Body ref: #/components/schemas/bodyrepos_set_team_access_rest
   METHODS repos_set_team_access_restrict
@@ -12256,7 +12256,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: branch, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_remove_team_acc
+*     application/json, #/components/schemas/response_repos_remove_team_access_restr
 * Response: 422
 * Body ref: #/components/schemas/bodyrepos_remove_team_access_r
   METHODS repos_remove_team_access_restr
@@ -12275,7 +12275,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: branch, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_get_users_with_
+*     application/json, #/components/schemas/response_repos_get_users_with_access_to
 * Response: 404
   METHODS repos_get_users_with_access_to
     IMPORTING
@@ -12292,7 +12292,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: branch, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_add_user_access
+*     application/json, #/components/schemas/response_repos_add_user_access_restrict
 * Response: 422
 * Body ref: #/components/schemas/bodyrepos_add_user_access_rest
   METHODS repos_add_user_access_restrict
@@ -12311,7 +12311,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: branch, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_set_user_access
+*     application/json, #/components/schemas/response_repos_set_user_access_restrict
 * Response: 422
 * Body ref: #/components/schemas/bodyrepos_set_user_access_rest
   METHODS repos_set_user_access_restrict
@@ -12330,7 +12330,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: branch, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_remove_user_acc
+*     application/json, #/components/schemas/response_repos_remove_user_access_restr
 * Response: 422
 * Body ref: #/components/schemas/bodyrepos_remove_user_access_r
   METHODS repos_remove_user_access_restr
@@ -12422,7 +12422,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_checks_list_annotatio
+*     application/json, #/components/schemas/response_checks_list_annotations
   METHODS checks_list_annotations
     IMPORTING
       owner TYPE string
@@ -12528,7 +12528,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_code_scanning_list_al
+*     application/json, #/components/schemas/response_code_scanning_list_alerts_for_
 * Response: 403
 * Response: 404
 * Response: 503
@@ -12588,7 +12588,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_code_scanning_list_re
+*     application/json, #/components/schemas/response_code_scanning_list_recent_anal
 * Response: 403
   METHODS code_scanning_list_recent_anal
     IMPORTING
@@ -12625,7 +12625,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_repos_list_collaborat
+*     application/json, #/components/schemas/response_repos_list_collaborators
 * Response: 404
   METHODS repos_list_collaborators
     IMPORTING
@@ -12712,7 +12712,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_repos_list_commit_com
+*     application/json, #/components/schemas/response_repos_list_commit_comments_for
   METHODS repos_list_commit_comments_for
     IMPORTING
       owner TYPE string
@@ -12784,7 +12784,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_reactions_list_for_co
+*     application/json, #/components/schemas/response_reactions_list_for_commit_comm
 * Response: 404
 * Response: 415
   METHODS reactions_list_for_commit_comm
@@ -12874,7 +12874,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: commit_sha, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_list_branches_f
+*     application/json, #/components/schemas/response_repos_list_branches_for_head_c
 * Response: 415
 * Response: 422
   METHODS repos_list_branches_for_head_c
@@ -12894,7 +12894,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_repos_list_comments_f
+*     application/json, #/components/schemas/response_repos_list_comments_for_commit
   METHODS repos_list_comments_for_commit
     IMPORTING
       owner TYPE string
@@ -12934,7 +12934,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_repos_list_pull_reque
+*     application/json, #/components/schemas/response_repos_list_pull_requests_assoc
 * Response: 415
   METHODS repos_list_pull_requests_assoc
     IMPORTING
@@ -13002,7 +13002,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_checks_list_suites_fo
+*     application/json, #/components/schemas/response_checks_list_suites_for_ref
   METHODS checks_list_suites_for_ref
     IMPORTING
       ref TYPE string
@@ -13041,7 +13041,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_repos_list_commit_sta
+*     application/json, #/components/schemas/response_repos_list_commit_statuses_for
 * Response: 301
   METHODS repos_list_commit_statuses_for
     IMPORTING
@@ -13175,7 +13175,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_repos_list_contributo
+*     application/json, #/components/schemas/response_repos_list_contributors
 * Response: 204
 * Response: 403
 * Response: 404
@@ -13201,7 +13201,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_repos_list_deployment
+*     application/json, #/components/schemas/response_repos_list_deployments
   METHODS repos_list_deployments
     IMPORTING
       sha TYPE string DEFAULT 'none'
@@ -13223,9 +13223,9 @@ INTERFACE zif_github PUBLIC.
 * Response: 201
 *     application/json, #/components/schemas/deployment
 * Response: 202
-*     application/json, #/components/schemas/response_repos_create_deployme
+*     application/json, #/components/schemas/response_repos_create_deployment
 * Response: 409
-*     application/json, #/components/schemas/response_repos_create_deploy01
+*     application/json, #/components/schemas/response_repos_create_deployment
 * Response: 422
 * Body ref: #/components/schemas/bodyrepos_create_deployment
   METHODS repos_create_deployment
@@ -13277,7 +13277,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_repos_list_deployme01
+*     application/json, #/components/schemas/response_repos_list_deployment_statuses
 * Response: 404
   METHODS repos_list_deployment_statuses
     IMPORTING
@@ -13350,7 +13350,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_activity_list_repo_ev
+*     application/json, #/components/schemas/response_activity_list_repo_events
   METHODS activity_list_repo_events
     IMPORTING
       owner TYPE string
@@ -13482,7 +13482,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_git_list_matching_ref
+*     application/json, #/components/schemas/response_git_list_matching_refs
   METHODS git_list_matching_refs
     IMPORTING
       ref TYPE string
@@ -13857,7 +13857,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: since, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_migrations_get_commit
+*     application/json, #/components/schemas/response_migrations_get_commit_authors
 * Response: 404
   METHODS migrations_get_commit_authors
     IMPORTING
@@ -13893,7 +13893,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_migrations_get_large_
+*     application/json, #/components/schemas/response_migrations_get_large_files
   METHODS migrations_get_large_files
     IMPORTING
       owner TYPE string
@@ -13985,7 +13985,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_repos_list_invitation
+*     application/json, #/components/schemas/response_repos_list_invitations
   METHODS repos_list_invitations
     IMPORTING
       owner TYPE string
@@ -14099,7 +14099,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_issues_list_comments_
+*     application/json, #/components/schemas/response_issues_list_comments_for_repo
 * Response: 404
 * Response: 422
   METHODS issues_list_comments_for_repo
@@ -14175,7 +14175,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_reactions_list_for_is
+*     application/json, #/components/schemas/response_reactions_list_for_issue_comme
 * Response: 404
 * Response: 415
   METHODS reactions_list_for_issue_comme
@@ -14234,7 +14234,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_issues_list_events_fo
+*     application/json, #/components/schemas/response_issues_list_events_for_repo
 * Response: 422
   METHODS issues_list_events_for_repo
     IMPORTING
@@ -14420,7 +14420,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_issues_list_labels_on
+*     application/json, #/components/schemas/response_issues_list_labels_on_issue
 * Response: 410
   METHODS issues_list_labels_on_issue
     IMPORTING
@@ -14554,7 +14554,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_reactions_list_for_02
+*     application/json, #/components/schemas/response_reactions_list_for_issue
 * Response: 404
 * Response: 410
 * Response: 415
@@ -14613,7 +14613,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_issues_list_events_01
+*     application/json, #/components/schemas/response_issues_list_events_for_timelin
 * Response: 404
 * Response: 410
 * Response: 415
@@ -14635,7 +14635,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_repos_list_deploy_key
+*     application/json, #/components/schemas/response_repos_list_deploy_keys
   METHODS repos_list_deploy_keys
     IMPORTING
       owner TYPE string
@@ -14700,7 +14700,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_issues_list_labels_fo
+*     application/json, #/components/schemas/response_issues_list_labels_for_repo
 * Response: 404
   METHODS issues_list_labels_for_repo
     IMPORTING
@@ -14818,7 +14818,7 @@ INTERFACE zif_github PUBLIC.
 * Response: 404
 *     application/json, #/components/schemas/response_repos_merge
 * Response: 409
-*     application/json, #/components/schemas/response_repos_merge01
+*     application/json, #/components/schemas/response_repos_merge
 * Response: 422
 * Body ref: #/components/schemas/bodyrepos_merge
   METHODS repos_merge
@@ -14840,7 +14840,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_issues_list_milestone
+*     application/json, #/components/schemas/response_issues_list_milestones
 * Response: 404
   METHODS issues_list_milestones
     IMPORTING
@@ -14932,7 +14932,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_issues_list_labels_01
+*     application/json, #/components/schemas/response_issues_list_labels_for_milesto
   METHODS issues_list_labels_for_milesto
     IMPORTING
       owner TYPE string
@@ -14955,7 +14955,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_activity_list_repo_no
+*     application/json, #/components/schemas/response_activity_list_repo_notificatio
   METHODS activity_list_repo_notificatio
     IMPORTING
       owner TYPE string
@@ -15055,7 +15055,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_repos_list_pages_buil
+*     application/json, #/components/schemas/response_repos_list_pages_builds
   METHODS repos_list_pages_builds
     IMPORTING
       owner TYPE string
@@ -15118,7 +15118,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_projects_list_for_rep
+*     application/json, #/components/schemas/response_projects_list_for_repo
 * Response: 401
 * Response: 403
 * Response: 404
@@ -15214,7 +15214,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_pulls_list_review_com
+*     application/json, #/components/schemas/response_pulls_list_review_comments_for
   METHODS pulls_list_review_comments_for
     IMPORTING
       direction TYPE string OPTIONAL
@@ -15288,7 +15288,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_reactions_list_for_pu
+*     application/json, #/components/schemas/response_reactions_list_for_pull_reques
 * Response: 404
 * Response: 415
   METHODS reactions_list_for_pull_reques
@@ -15390,7 +15390,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_pulls_list_review_c01
+*     application/json, #/components/schemas/response_pulls_list_review_comments
   METHODS pulls_list_review_comments
     IMPORTING
       direction TYPE string OPTIONAL
@@ -15514,7 +15514,7 @@ INTERFACE zif_github PUBLIC.
 * Response: 405
 *     application/json, #/components/schemas/response_pulls_merge
 * Response: 409
-*     application/json, #/components/schemas/response_pulls_merge01
+*     application/json, #/components/schemas/response_pulls_merge
 * Response: 422
 * Body ref: #/components/schemas/bodypulls_merge
   METHODS pulls_merge
@@ -15694,7 +15694,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_pulls_list_comments_f
+*     application/json, #/components/schemas/response_pulls_list_comments_for_review
 * Response: 404
   METHODS pulls_list_comments_for_review
     IMPORTING
@@ -15967,7 +15967,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_repos_list_release_as
+*     application/json, #/components/schemas/response_repos_list_release_assets
   METHODS repos_list_release_assets
     IMPORTING
       owner TYPE string
@@ -16007,7 +16007,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: page, optional, query
 * Parameter: per_page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_secret_scanning_list_
+*     application/json, #/components/schemas/response_secret_scanning_list_alerts_fo
 * Response: 404
 * Response: 503
   METHODS secret_scanning_list_alerts_fo
@@ -16067,7 +16067,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_activity_list_stargaz
+*     application/json, #/components/schemas/response_activity_list_stargazers_for_r
 *     application/vnd.github.v3.star+json, array
 * Response: 422
   METHODS activity_list_stargazers_for_r
@@ -16085,7 +16085,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_get_code_freque
+*     application/json, #/components/schemas/response_repos_get_code_frequency_stats
   METHODS repos_get_code_frequency_stats
     IMPORTING
       owner TYPE string
@@ -16099,7 +16099,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_get_commit_acti
+*     application/json, #/components/schemas/response_repos_get_commit_activity_stat
   METHODS repos_get_commit_activity_stat
     IMPORTING
       owner TYPE string
@@ -16113,7 +16113,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_get_contributor
+*     application/json, #/components/schemas/response_repos_get_contributors_stats
   METHODS repos_get_contributors_stats
     IMPORTING
       owner TYPE string
@@ -16142,7 +16142,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_get_punch_card_
+*     application/json, #/components/schemas/response_repos_get_punch_card_stats
   METHODS repos_get_punch_card_stats
     IMPORTING
       owner TYPE string
@@ -16176,7 +16176,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_activity_list_watcher
+*     application/json, #/components/schemas/response_activity_list_watchers_for_rep
   METHODS activity_list_watchers_for_rep
     IMPORTING
       owner TYPE string
@@ -16353,7 +16353,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 200
-*     application/json, #/components/schemas/response_repos_get_top_referre
+*     application/json, #/components/schemas/response_repos_get_top_referrers
 * Response: 403
   METHODS repos_get_top_referrers
     IMPORTING
@@ -16809,7 +16809,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_search_issues_and_pul
+*     application/json, #/components/schemas/response_search_issues_and_pull_request
 * Response: 304
 * Response: 403
 * Response: 422
@@ -16957,7 +16957,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_teams_list_discussi02
+*     application/json, #/components/schemas/response_teams_list_discussions_legacy
   METHODS teams_list_discussions_legacy
     IMPORTING
       team_id TYPE i
@@ -17033,7 +17033,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_teams_list_discussi03
+*     application/json, #/components/schemas/response_teams_list_discussion_commen01
   METHODS teams_list_discussion_commen01
     IMPORTING
       team_id TYPE i
@@ -17119,7 +17119,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_reactions_list_for_03
+*     application/json, #/components/schemas/response_reactions_list_for_team_disc02
   METHODS reactions_list_for_team_disc02
     IMPORTING
       content TYPE string OPTIONAL
@@ -17158,7 +17158,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_reactions_list_for_04
+*     application/json, #/components/schemas/response_reactions_list_for_team_disc03
   METHODS reactions_list_for_team_disc03
     IMPORTING
       content TYPE string OPTIONAL
@@ -17192,7 +17192,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_teams_list_pending_01
+*     application/json, #/components/schemas/response_teams_list_pending_invitatio01
   METHODS teams_list_pending_invitatio01
     IMPORTING
       team_id TYPE i
@@ -17209,7 +17209,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_teams_list_members_le
+*     application/json, #/components/schemas/response_teams_list_members_legacy
 * Response: 404
   METHODS teams_list_members_legacy
     IMPORTING
@@ -17241,7 +17241,7 @@ INTERFACE zif_github PUBLIC.
 * Response: 403
 * Response: 404
 * Response: 422
-*     application/json, #/components/schemas/response_teams_add_member_lega
+*     application/json, #/components/schemas/response_teams_add_member_legacy
   METHODS teams_add_member_legacy
     IMPORTING
       team_id TYPE i
@@ -17284,7 +17284,7 @@ INTERFACE zif_github PUBLIC.
 * Response: 403
 * Response: 404
 * Response: 422
-*     application/json, #/components/schemas/response_teams_add_or_update01
+*     application/json, #/components/schemas/response_teams_add_or_update_membersh01
 * Body ref: #/components/schemas/bodyteams_add_or_update_memb01
   METHODS teams_add_or_update_membersh01
     IMPORTING
@@ -17315,7 +17315,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_teams_list_projects_l
+*     application/json, #/components/schemas/response_teams_list_projects_legacy
 * Response: 404
 * Response: 415
   METHODS teams_list_projects_legacy
@@ -17349,7 +17349,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: project_id, required, path
 * Response: 204
 * Response: 403
-*     application/json, #/components/schemas/response_teams_add_or_update02
+*     application/json, #/components/schemas/response_teams_add_or_update_project_01
 * Response: 404
 * Response: 415
 * Response: 422
@@ -17383,7 +17383,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_teams_list_repos_lega
+*     application/json, #/components/schemas/response_teams_list_repos_legacy
 * Response: 404
   METHODS teams_list_repos_legacy
     IMPORTING
@@ -17478,7 +17478,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_teams_list_child_lega
+*     application/json, #/components/schemas/response_teams_list_child_legacy
 * Response: 403
 * Response: 404
 * Response: 422
@@ -17521,7 +17521,7 @@ INTERFACE zif_github PUBLIC.
 * GET - "List users blocked by the authenticated user"
 * Operation id: users/list-blocked-by-authenticated
 * Response: 200
-*     application/json, #/components/schemas/response_users_list_blocked_by
+*     application/json, #/components/schemas/response_users_list_blocked_by_authenti
 * Response: 304
 * Response: 401
 * Response: 403
@@ -17576,7 +17576,7 @@ INTERFACE zif_github PUBLIC.
 * PATCH - "Set primary email visibility for the authenticated user"
 * Operation id: users/set-primary-email-visibility-for-authenticated
 * Response: 200
-*     application/json, #/components/schemas/response_users_set_primary_ema
+*     application/json, #/components/schemas/response_users_set_primary_email_visibi
 * Response: 304
 * Response: 401
 * Response: 403
@@ -17595,7 +17595,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_users_list_emails_for
+*     application/json, #/components/schemas/response_users_list_emails_for_authenti
 * Response: 304
 * Response: 401
 * Response: 403
@@ -17611,7 +17611,7 @@ INTERFACE zif_github PUBLIC.
 * POST - "Add an email address for the authenticated user"
 * Operation id: users/add-email-for-authenticated
 * Response: 201
-*     application/json, #/components/schemas/response_users_add_email_for_a
+*     application/json, #/components/schemas/response_users_add_email_for_authentica
 * Response: 304
 * Response: 401
 * Response: 403
@@ -17640,7 +17640,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_users_list_followers_
+*     application/json, #/components/schemas/response_users_list_followers_for_authe
 * Response: 304
 * Response: 401
 * Response: 403
@@ -17657,7 +17657,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_users_list_followed_b
+*     application/json, #/components/schemas/response_users_list_followed_by_authent
 * Response: 304
 * Response: 401
 * Response: 403
@@ -17714,7 +17714,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_users_list_gpg_keys_f
+*     application/json, #/components/schemas/response_users_list_gpg_keys_for_authen
 * Response: 304
 * Response: 401
 * Response: 403
@@ -17779,7 +17779,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_apps_list_installat01
+*     application/json, #/components/schemas/response_apps_list_installations_for_au
 * Response: 304
 * Response: 401
 * Response: 403
@@ -17798,7 +17798,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_apps_list_installat02
+*     application/json, #/components/schemas/response_apps_list_installation_repos_f
 * Response: 304
 * Response: 403
 * Response: 404
@@ -17878,7 +17878,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_issues_list_for_authe
+*     application/json, #/components/schemas/response_issues_list_for_authenticated_
 * Response: 304
 * Response: 404
   METHODS issues_list_for_authenticated_
@@ -17900,7 +17900,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_users_list_public_ssh
+*     application/json, #/components/schemas/response_users_list_public_ssh_keys_for
 * Response: 304
 * Response: 401
 * Response: 403
@@ -17964,7 +17964,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_apps_list_subscriptio
+*     application/json, #/components/schemas/response_apps_list_subscriptions_for_au
 * Response: 304
 * Response: 401
 * Response: 404
@@ -17981,7 +17981,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_apps_list_subscript01
+*     application/json, #/components/schemas/response_apps_list_subscriptions_for_01
 * Response: 304
 * Response: 401
   METHODS apps_list_subscriptions_for_01
@@ -17998,7 +17998,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_orgs_list_memberships
+*     application/json, #/components/schemas/response_orgs_list_memberships_for_auth
 * Response: 304
 * Response: 401
 * Response: 403
@@ -18048,7 +18048,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_migrations_list_for_a
+*     application/json, #/components/schemas/response_migrations_list_for_authentica
 * Response: 304
 * Response: 401
 * Response: 403
@@ -18140,7 +18140,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_migrations_list_rep01
+*     application/json, #/components/schemas/response_migrations_list_repos_for_user
 * Response: 404
   METHODS migrations_list_repos_for_user
     IMPORTING
@@ -18156,7 +18156,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_orgs_list_for_authent
+*     application/json, #/components/schemas/response_orgs_list_for_authenticated_us
 * Response: 304
 * Response: 401
 * Response: 403
@@ -18190,7 +18190,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_users_list_public_ema
+*     application/json, #/components/schemas/response_users_list_public_emails_for_a
 * Response: 304
 * Response: 401
 * Response: 403
@@ -18215,7 +18215,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: since, optional, query
 * Parameter: before, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_repos_list_for_authen
+*     application/json, #/components/schemas/response_repos_list_for_authenticated_u
 * Response: 304
 * Response: 401
 * Response: 403
@@ -18258,7 +18258,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_repos_list_invitati01
+*     application/json, #/components/schemas/response_repos_list_invitations_for_aut
 * Response: 304
 * Response: 401
 * Response: 403
@@ -18304,7 +18304,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_activity_list_repos_s
+*     application/json, #/components/schemas/response_activity_list_repos_starred_by
 *     application/vnd.github.v3.star+json, array
 * Response: 304
 * Response: 401
@@ -18370,7 +18370,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_activity_list_watched
+*     application/json, #/components/schemas/response_activity_list_watched_repos_fo
 * Response: 304
 * Response: 401
 * Response: 403
@@ -18387,7 +18387,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_teams_list_for_authen
+*     application/json, #/components/schemas/response_teams_list_for_authenticated_u
 * Response: 304
 * Response: 403
 * Response: 404
@@ -18431,7 +18431,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_activity_list_events_
+*     application/json, #/components/schemas/response_activity_list_events_for_authe
   METHODS activity_list_events_for_authe
     IMPORTING
       username TYPE string
@@ -18448,7 +18448,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_activity_list_org_eve
+*     application/json, #/components/schemas/response_activity_list_org_events_for_a
   METHODS activity_list_org_events_for_a
     IMPORTING
       username TYPE string
@@ -18465,7 +18465,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_activity_list_publi03
+*     application/json, #/components/schemas/response_activity_list_public_events_01
   METHODS activity_list_public_events_01
     IMPORTING
       username TYPE string
@@ -18481,7 +18481,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_users_list_follower01
+*     application/json, #/components/schemas/response_users_list_followers_for_user
   METHODS users_list_followers_for_user
     IMPORTING
       username TYPE string
@@ -18497,7 +18497,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_users_list_following_
+*     application/json, #/components/schemas/response_users_list_following_for_user
   METHODS users_list_following_for_user
     IMPORTING
       username TYPE string
@@ -18544,7 +18544,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_users_list_gpg_keys01
+*     application/json, #/components/schemas/response_users_list_gpg_keys_for_user
   METHODS users_list_gpg_keys_for_user
     IMPORTING
       username TYPE string
@@ -18590,7 +18590,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_users_list_public_key
+*     application/json, #/components/schemas/response_users_list_public_keys_for_use
   METHODS users_list_public_keys_for_use
     IMPORTING
       username TYPE string
@@ -18623,7 +18623,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_projects_list_for_use
+*     application/json, #/components/schemas/response_projects_list_for_user
 * Response: 415
 * Response: 422
   METHODS projects_list_for_user
@@ -18642,7 +18642,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_activity_list_receive
+*     application/json, #/components/schemas/response_activity_list_received_events_
   METHODS activity_list_received_events_
     IMPORTING
       username TYPE string
@@ -18658,7 +18658,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_activity_list_recei01
+*     application/json, #/components/schemas/response_activity_list_received_public_
   METHODS activity_list_received_public_
     IMPORTING
       username TYPE string
@@ -18734,7 +18734,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_activity_list_repos01
+*     application/json, #/components/schemas/response_activity_list_repos_starred_01
 *     application/vnd.github.v3.star+json, array
   METHODS activity_list_repos_starred_01
     IMPORTING
@@ -18753,7 +18753,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_activity_list_repos_w
+*     application/json, #/components/schemas/response_activity_list_repos_watched_by
   METHODS activity_list_repos_watched_by
     IMPORTING
       username TYPE string
