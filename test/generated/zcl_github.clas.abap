@@ -4822,7 +4822,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_inst.
-* todo, handle type array
+* todo, handle type array, no item_ref 
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_co01.
@@ -5119,7 +5119,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_content_directory.
-* todo, handle type array
+* todo, handle type array, no item_ref 
   ENDMETHOD.
 
   METHOD parse_content_file.
@@ -6007,7 +6007,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_code_frequency_stat.
-* todo, handle type array
+* todo, handle type array, no item_ref 
   ENDMETHOD.
 
   METHOD parse_commit_activity.
@@ -6153,7 +6153,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_search_result_text_match.
-* todo, handle type array
+* todo, handle type array, no item_ref 
   ENDMETHOD.
 
   METHOD parse_code_search_result_item.
@@ -6591,19 +6591,51 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_apps_list_installations.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA installation TYPE zif_github=>installation.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR installation.
+      installation = parse_installation( iv_prefix && '/' && lv_member ).
+      APPEND installation TO response_apps_list_installatio.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_oauth_authorizations_lis.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA application_grant TYPE zif_github=>application_grant.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR application_grant.
+      application_grant = parse_application_grant( iv_prefix && '/' && lv_member ).
+      APPEND application_grant TO response_oauth_authorizations_.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_oauth_authorizations_l01.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA authorization TYPE zif_github=>authorization.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR authorization.
+      authorization = parse_authorization( iv_prefix && '/' && lv_member ).
+      APPEND authorization TO response_oauth_authorization01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_codes_of_conduct_get_all.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA code_of_conduct TYPE zif_github=>code_of_conduct.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR code_of_conduct.
+      code_of_conduct = parse_code_of_conduct( iv_prefix && '/' && lv_member ).
+      APPEND code_of_conduct TO response_codes_of_conduct_get_.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_emojis_get.
@@ -6635,46 +6667,118 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_enterprise_admin_list_ru.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA runner_application TYPE zif_github=>runner_application.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR runner_application.
+      runner_application = parse_runner_application( iv_prefix && '/' && lv_member ).
+      APPEND runner_application TO response_enterprise_admin_li05.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_audit_log_get_audit_log.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA audit_log_event TYPE zif_github=>audit_log_event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR audit_log_event.
+      audit_log_event = parse_audit_log_event( iv_prefix && '/' && lv_member ).
+      APPEND audit_log_event TO response_audit_log_get_audit_l.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_list_public_eve.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_public_.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_gists_list.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA base_gist TYPE zif_github=>base_gist.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR base_gist.
+      base_gist = parse_base_gist( iv_prefix && '/' && lv_member ).
+      APPEND base_gist TO response_gists_list.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_gists_list_public.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA base_gist TYPE zif_github=>base_gist.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR base_gist.
+      base_gist = parse_base_gist( iv_prefix && '/' && lv_member ).
+      APPEND base_gist TO response_gists_list_public.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_gists_list_starred.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA base_gist TYPE zif_github=>base_gist.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR base_gist.
+      base_gist = parse_base_gist( iv_prefix && '/' && lv_member ).
+      APPEND base_gist TO response_gists_list_starred.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_gists_list_comments.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA gist_comment TYPE zif_github=>gist_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR gist_comment.
+      gist_comment = parse_gist_comment( iv_prefix && '/' && lv_member ).
+      APPEND gist_comment TO response_gists_list_comments.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_gists_list_commits.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA gist_commit TYPE zif_github=>gist_commit.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR gist_commit.
+      gist_commit = parse_gist_commit( iv_prefix && '/' && lv_member ).
+      APPEND gist_commit TO response_gists_list_commits.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_gists_list_forks.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA gist_simple TYPE zif_github=>gist_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR gist_simple.
+      gist_simple = parse_gist_simple( iv_prefix && '/' && lv_member ).
+      APPEND gist_simple TO response_gists_list_forks.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_gists_check_is_starred.
   ENDMETHOD.
 
   METHOD parse_gitignore_get_all_templa.
-* todo, handle type array
+* todo, handle type array, no item_ref 
   ENDMETHOD.
 
   METHOD parse_apps_list_repos_accessib.
@@ -6684,35 +6788,99 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_issues_list.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue TYPE zif_github=>issue.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue.
+      issue = parse_issue( iv_prefix && '/' && lv_member ).
+      APPEND issue TO response_issues_list.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_licenses_get_all_commonl.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA license_simple TYPE zif_github=>license_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR license_simple.
+      license_simple = parse_license_simple( iv_prefix && '/' && lv_member ).
+      APPEND license_simple TO response_licenses_get_all_comm.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_apps_list_plans.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA marketplace_listing_plan TYPE zif_github=>marketplace_listing_plan.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR marketplace_listing_plan.
+      marketplace_listing_plan = parse_marketplace_listing_plan( iv_prefix && '/' && lv_member ).
+      APPEND marketplace_listing_plan TO response_apps_list_plans.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_apps_list_accounts_for_p.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA marketplace_purchase TYPE zif_github=>marketplace_purchase.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR marketplace_purchase.
+      marketplace_purchase = parse_marketplace_purchase( iv_prefix && '/' && lv_member ).
+      APPEND marketplace_purchase TO response_apps_list_accounts_fo.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_apps_list_plans_stubbed.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA marketplace_listing_plan TYPE zif_github=>marketplace_listing_plan.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR marketplace_listing_plan.
+      marketplace_listing_plan = parse_marketplace_listing_plan( iv_prefix && '/' && lv_member ).
+      APPEND marketplace_listing_plan TO response_apps_list_plans_stubb.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_apps_list_accounts_for01.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA marketplace_purchase TYPE zif_github=>marketplace_purchase.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR marketplace_purchase.
+      marketplace_purchase = parse_marketplace_purchase( iv_prefix && '/' && lv_member ).
+      APPEND marketplace_purchase TO response_apps_list_accounts_01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_list_public_e01.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_publi01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_list_notificati.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA thread TYPE zif_github=>thread.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR thread.
+      thread = parse_thread( iv_prefix && '/' && lv_member ).
+      APPEND thread TO response_activity_list_notific.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_mark_notificati.
@@ -6720,7 +6888,15 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_orgs_list.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA organization_simple TYPE zif_github=>organization_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR organization_simple.
+      organization_simple = parse_organization_simple( iv_prefix && '/' && lv_member ).
+      APPEND organization_simple TO response_orgs_list.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_actions_list_selected_re.
@@ -6749,7 +6925,15 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_actions_list_runner_appl.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA runner_application TYPE zif_github=>runner_application.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR runner_application.
+      runner_application = parse_runner_application( iv_prefix && '/' && lv_member ).
+      APPEND runner_application TO response_actions_list_runner_a.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_actions_list_org_secrets.
@@ -6763,27 +6947,75 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_orgs_get_audit_log.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA audit_log_event TYPE zif_github=>audit_log_event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR audit_log_event.
+      audit_log_event = parse_audit_log_event( iv_prefix && '/' && lv_member ).
+      APPEND audit_log_event TO response_orgs_get_audit_log.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_orgs_list_blocked_users.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_orgs_list_blocked_use.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_orgs_list_saml_sso_autho.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA credential_authorization TYPE zif_github=>credential_authorization.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR credential_authorization.
+      credential_authorization = parse_credential_authorization( iv_prefix && '/' && lv_member ).
+      APPEND credential_authorization TO response_orgs_list_saml_sso_au.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_list_public_org.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_publi02.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_orgs_list_failed_invitat.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA organization_invitation TYPE zif_github=>organization_invitation.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR organization_invitation.
+      organization_invitation = parse_organization_invitation( iv_prefix && '/' && lv_member ).
+      APPEND organization_invitation TO response_orgs_list_failed_invi.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_orgs_list_webhooks.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA org_hook TYPE zif_github=>org_hook.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR org_hook.
+      org_hook = parse_org_hook( iv_prefix && '/' && lv_member ).
+      APPEND org_hook TO response_orgs_list_webhooks.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_orgs_list_app_installati.
@@ -6792,31 +7024,87 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_orgs_list_pending_invita.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA organization_invitation TYPE zif_github=>organization_invitation.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR organization_invitation.
+      organization_invitation = parse_organization_invitation( iv_prefix && '/' && lv_member ).
+      APPEND organization_invitation TO response_orgs_list_pending_inv.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_orgs_list_invitation_tea.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_orgs_list_invitation_.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_issues_list_for_org.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue TYPE zif_github=>issue.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue.
+      issue = parse_issue( iv_prefix && '/' && lv_member ).
+      APPEND issue TO response_issues_list_for_org.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_orgs_list_members.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_orgs_list_members.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_migrations_list_for_org.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA migration TYPE zif_github=>migration.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR migration.
+      migration = parse_migration( iv_prefix && '/' && lv_member ).
+      APPEND migration TO response_migrations_list_for_o.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_migrations_list_repos_fo.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_migrations_list_repos.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_orgs_list_outside_collab.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_orgs_list_outside_col.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_orgs_convert_member_to_o.
@@ -6830,43 +7118,123 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_projects_list_for_org.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA project TYPE zif_github=>project.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR project.
+      project = parse_project( iv_prefix && '/' && lv_member ).
+      APPEND project TO response_projects_list_for_org.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_orgs_list_public_members.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_orgs_list_public_memb.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_for_org.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_repos_list_for_org.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_teams_list.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_teams_list.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_teams_list_discussions_i.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team_discussion TYPE zif_github=>team_discussion.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team_discussion.
+      team_discussion = parse_team_discussion( iv_prefix && '/' && lv_member ).
+      APPEND team_discussion TO response_teams_list_discussion.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_teams_list_discussion_co.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team_discussion_comment TYPE zif_github=>team_discussion_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team_discussion_comment.
+      team_discussion_comment = parse_team_discussion_comment( iv_prefix && '/' && lv_member ).
+      APPEND team_discussion_comment TO response_teams_list_discussi01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_reactions_list_for_team_.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA reaction TYPE zif_github=>reaction.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR reaction.
+      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
+      APPEND reaction TO response_reactions_list_for_te.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_reactions_list_for_tea01.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA reaction TYPE zif_github=>reaction.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR reaction.
+      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
+      APPEND reaction TO response_reactions_list_for_01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_teams_list_pending_invit.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA organization_invitation TYPE zif_github=>organization_invitation.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR organization_invitation.
+      organization_invitation = parse_organization_invitation( iv_prefix && '/' && lv_member ).
+      APPEND organization_invitation TO response_teams_list_pending_in.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_teams_list_members_in_or.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_teams_list_members_in.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_teams_add_or_update_memb.
@@ -6875,7 +7243,15 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_teams_list_projects_in_o.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team_project TYPE zif_github=>team_project.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team_project.
+      team_project = parse_team_project( iv_prefix && '/' && lv_member ).
+      APPEND team_project TO response_teams_list_projects_i.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_teams_add_or_update_proj.
@@ -6884,11 +7260,27 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_teams_list_repos_in_org.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_teams_list_repos_in_o.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_teams_list_child_in_org.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_teams_list_child_in_o.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_projects_delete_card.
@@ -6914,7 +7306,15 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_projects_list_cards.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA project_card TYPE zif_github=>project_card.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR project_card.
+      project_card = parse_project_card( iv_prefix && '/' && lv_member ).
+      APPEND project_card TO response_projects_list_cards.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_projects_create_card.
@@ -6940,11 +7340,27 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_projects_list_collaborat.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_projects_list_collabo.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_projects_list_columns.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA project_column TYPE zif_github=>project_column.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR project_column.
+      project_column = parse_project_column( iv_prefix && '/' && lv_member ).
+      APPEND project_column TO response_projects_list_columns.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_delete.
@@ -6963,7 +7379,15 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_actions_list_runner_ap01.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA runner_application TYPE zif_github=>runner_application.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR runner_application.
+      runner_application = parse_runner_application( iv_prefix && '/' && lv_member ).
+      APPEND runner_application TO response_actions_list_runner01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_actions_list_workflow_ru.
@@ -6997,79 +7421,199 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_issues_list_assignees.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_issues_list_assignees.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_branches.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA short_branch TYPE zif_github=>short_branch.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR short_branch.
+      short_branch = parse_short_branch( iv_prefix && '/' && lv_member ).
+      APPEND short_branch TO response_repos_list_branches.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_get_all_status_che.
-* todo, handle type array
+* todo, handle type array, no item_ref 
   ENDMETHOD.
 
   METHOD parse_repos_add_status_check_c.
-* todo, handle type array
+* todo, handle type array, no item_ref 
   ENDMETHOD.
 
   METHOD parse_repos_set_status_check_c.
-* todo, handle type array
+* todo, handle type array, no item_ref 
   ENDMETHOD.
 
   METHOD parse_repos_remove_status_chec.
-* todo, handle type array
+* todo, handle type array, no item_ref 
   ENDMETHOD.
 
   METHOD parse_repos_get_apps_with_acce.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA integration TYPE zif_github=>integration.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR integration.
+      integration = parse_integration( iv_prefix && '/' && lv_member ).
+      APPEND integration TO response_repos_get_apps_with_a.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_add_app_access_res.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA integration TYPE zif_github=>integration.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR integration.
+      integration = parse_integration( iv_prefix && '/' && lv_member ).
+      APPEND integration TO response_repos_add_app_access_.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_set_app_access_res.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA integration TYPE zif_github=>integration.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR integration.
+      integration = parse_integration( iv_prefix && '/' && lv_member ).
+      APPEND integration TO response_repos_set_app_access_.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_remove_app_access_.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA integration TYPE zif_github=>integration.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR integration.
+      integration = parse_integration( iv_prefix && '/' && lv_member ).
+      APPEND integration TO response_repos_remove_app_acce.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_get_teams_with_acc.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_repos_get_teams_with_.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_add_team_access_re.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_repos_add_team_access.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_set_team_access_re.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_repos_set_team_access.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_remove_team_access.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_repos_remove_team_acc.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_get_users_with_acc.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_repos_get_users_with_.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_add_user_access_re.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_repos_add_user_access.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_set_user_access_re.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_repos_set_user_access.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_remove_user_access.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_repos_remove_user_acc.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_checks_list_annotations.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA check_annotation TYPE zif_github=>check_annotation.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR check_annotation.
+      check_annotation = parse_check_annotation( iv_prefix && '/' && lv_member ).
+      APPEND check_annotation TO response_checks_list_annotatio.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_checks_list_for_suite.
@@ -7078,39 +7622,111 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_code_scanning_list_alert.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA code_scanning_alert_code_scann TYPE zif_github=>code_scanning_alert_code_scann.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR code_scanning_alert_code_scann.
+      code_scanning_alert_code_scann = parse_code_scanning_alert_code( iv_prefix && '/' && lv_member ).
+      APPEND code_scanning_alert_code_scann TO response_code_scanning_list_al.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_code_scanning_list_recen.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA code_scanning_analysis_code_sc TYPE zif_github=>code_scanning_analysis_code_sc.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR code_scanning_analysis_code_sc.
+      code_scanning_analysis_code_sc = parse_code_scanning_analysis03( iv_prefix && '/' && lv_member ).
+      APPEND code_scanning_analysis_code_sc TO response_code_scanning_list_re.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_collaborators.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA collaborator TYPE zif_github=>collaborator.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR collaborator.
+      collaborator = parse_collaborator( iv_prefix && '/' && lv_member ).
+      APPEND collaborator TO response_repos_list_collaborat.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_commit_commen.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA commit_comment TYPE zif_github=>commit_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR commit_comment.
+      commit_comment = parse_commit_comment( iv_prefix && '/' && lv_member ).
+      APPEND commit_comment TO response_repos_list_commit_com.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_reactions_list_for_commi.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA reaction TYPE zif_github=>reaction.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR reaction.
+      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
+      APPEND reaction TO response_reactions_list_for_co.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_commits.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA commit TYPE zif_github=>commit.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR commit.
+      commit = parse_commit( iv_prefix && '/' && lv_member ).
+      APPEND commit TO response_repos_list_commits.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_branches_for_.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA branch_short TYPE zif_github=>branch_short.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR branch_short.
+      branch_short = parse_branch_short( iv_prefix && '/' && lv_member ).
+      APPEND branch_short TO response_repos_list_branches_f.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_comments_for_.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA commit_comment TYPE zif_github=>commit_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR commit_comment.
+      commit_comment = parse_commit_comment( iv_prefix && '/' && lv_member ).
+      APPEND commit_comment TO response_repos_list_comments_f.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_pull_requests.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA pull_request_simple TYPE zif_github=>pull_request_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR pull_request_simple.
+      pull_request_simple = parse_pull_request_simple( iv_prefix && '/' && lv_member ).
+      APPEND pull_request_simple TO response_repos_list_pull_reque.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_checks_list_for_ref.
@@ -7124,15 +7740,39 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_repos_list_commit_status.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA status TYPE zif_github=>status.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR status.
+      status = parse_status( iv_prefix && '/' && lv_member ).
+      APPEND status TO response_repos_list_commit_sta.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_contributors.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA contributor TYPE zif_github=>contributor.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR contributor.
+      contributor = parse_contributor( iv_prefix && '/' && lv_member ).
+      APPEND contributor TO response_repos_list_contributo.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_deployments.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA deployment TYPE zif_github=>deployment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR deployment.
+      deployment = parse_deployment( iv_prefix && '/' && lv_member ).
+      APPEND deployment TO response_repos_list_deployment.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_create_deployment.
@@ -7145,91 +7785,267 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_repos_list_deployment_st.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA deployment_status TYPE zif_github=>deployment_status.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR deployment_status.
+      deployment_status = parse_deployment_status( iv_prefix && '/' && lv_member ).
+      APPEND deployment_status TO response_repos_list_deployme01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_list_repo_event.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_repo_ev.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_forks.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_repos_list_forks.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_git_list_matching_refs.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA git_ref TYPE zif_github=>git_ref.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR git_ref.
+      git_ref = parse_git_ref( iv_prefix && '/' && lv_member ).
+      APPEND git_ref TO response_git_list_matching_ref.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_webhooks.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA hook TYPE zif_github=>hook.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR hook.
+      hook = parse_hook( iv_prefix && '/' && lv_member ).
+      APPEND hook TO response_repos_list_webhooks.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_migrations_get_commit_au.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA porter_author TYPE zif_github=>porter_author.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR porter_author.
+      porter_author = parse_porter_author( iv_prefix && '/' && lv_member ).
+      APPEND porter_author TO response_migrations_get_commit.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_migrations_get_large_fil.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA porter_large_file TYPE zif_github=>porter_large_file.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR porter_large_file.
+      porter_large_file = parse_porter_large_file( iv_prefix && '/' && lv_member ).
+      APPEND porter_large_file TO response_migrations_get_large_.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_invitations.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA repository_invitation TYPE zif_github=>repository_invitation.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR repository_invitation.
+      repository_invitation = parse_repository_invitation( iv_prefix && '/' && lv_member ).
+      APPEND repository_invitation TO response_repos_list_invitation.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_issues_list_for_repo.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue_simple TYPE zif_github=>issue_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue_simple.
+      issue_simple = parse_issue_simple( iv_prefix && '/' && lv_member ).
+      APPEND issue_simple TO response_issues_list_for_repo.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_issues_list_comments_for.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue_comment TYPE zif_github=>issue_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue_comment.
+      issue_comment = parse_issue_comment( iv_prefix && '/' && lv_member ).
+      APPEND issue_comment TO response_issues_list_comments_.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_reactions_list_for_issue.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA reaction TYPE zif_github=>reaction.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR reaction.
+      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
+      APPEND reaction TO response_reactions_list_for_is.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_issues_list_events_for_r.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue_event TYPE zif_github=>issue_event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue_event.
+      issue_event = parse_issue_event( iv_prefix && '/' && lv_member ).
+      APPEND issue_event TO response_issues_list_events_fo.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_issues_list_comments.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue_comment TYPE zif_github=>issue_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue_comment.
+      issue_comment = parse_issue_comment( iv_prefix && '/' && lv_member ).
+      APPEND issue_comment TO response_issues_list_comments.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_issues_list_events.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue_event_for_issue TYPE zif_github=>issue_event_for_issue.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue_event_for_issue.
+      issue_event_for_issue = parse_issue_event_for_issue( iv_prefix && '/' && lv_member ).
+      APPEND issue_event_for_issue TO response_issues_list_events.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_issues_list_labels_on_is.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA label TYPE zif_github=>label.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR label.
+      label = parse_label( iv_prefix && '/' && lv_member ).
+      APPEND label TO response_issues_list_labels_on.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_issues_add_labels.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA label TYPE zif_github=>label.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR label.
+      label = parse_label( iv_prefix && '/' && lv_member ).
+      APPEND label TO response_issues_add_labels.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_issues_set_labels.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA label TYPE zif_github=>label.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR label.
+      label = parse_label( iv_prefix && '/' && lv_member ).
+      APPEND label TO response_issues_set_labels.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_issues_remove_label.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA label TYPE zif_github=>label.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR label.
+      label = parse_label( iv_prefix && '/' && lv_member ).
+      APPEND label TO response_issues_remove_label.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_reactions_list_for_iss01.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA reaction TYPE zif_github=>reaction.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR reaction.
+      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
+      APPEND reaction TO response_reactions_list_for_02.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_issues_list_events_for_t.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue_event_for_issue TYPE zif_github=>issue_event_for_issue.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue_event_for_issue.
+      issue_event_for_issue = parse_issue_event_for_issue( iv_prefix && '/' && lv_member ).
+      APPEND issue_event_for_issue TO response_issues_list_events_01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_deploy_keys.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA deploy_key TYPE zif_github=>deploy_key.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR deploy_key.
+      deploy_key = parse_deploy_key( iv_prefix && '/' && lv_member ).
+      APPEND deploy_key TO response_repos_list_deploy_key.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_issues_list_labels_for_r.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA label TYPE zif_github=>label.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR label.
+      label = parse_label( iv_prefix && '/' && lv_member ).
+      APPEND label TO response_issues_list_labels_fo.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_merge.
@@ -7243,47 +8059,135 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_issues_list_milestones.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA milestone TYPE zif_github=>milestone.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR milestone.
+      milestone = parse_milestone( iv_prefix && '/' && lv_member ).
+      APPEND milestone TO response_issues_list_milestone.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_issues_list_labels_for_m.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA label TYPE zif_github=>label.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR label.
+      label = parse_label( iv_prefix && '/' && lv_member ).
+      APPEND label TO response_issues_list_labels_01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_list_repo_notif.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA thread TYPE zif_github=>thread.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR thread.
+      thread = parse_thread( iv_prefix && '/' && lv_member ).
+      APPEND thread TO response_activity_list_repo_no.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_pages_builds.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA page_build TYPE zif_github=>page_build.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR page_build.
+      page_build = parse_page_build( iv_prefix && '/' && lv_member ).
+      APPEND page_build TO response_repos_list_pages_buil.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_projects_list_for_repo.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA project TYPE zif_github=>project.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR project.
+      project = parse_project( iv_prefix && '/' && lv_member ).
+      APPEND project TO response_projects_list_for_rep.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_pulls_list.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA pull_request_simple TYPE zif_github=>pull_request_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR pull_request_simple.
+      pull_request_simple = parse_pull_request_simple( iv_prefix && '/' && lv_member ).
+      APPEND pull_request_simple TO response_pulls_list.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_pulls_list_review_commen.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA pull_request_review_comment TYPE zif_github=>pull_request_review_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR pull_request_review_comment.
+      pull_request_review_comment = parse_pull_request_review_comm( iv_prefix && '/' && lv_member ).
+      APPEND pull_request_review_comment TO response_pulls_list_review_com.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_reactions_list_for_pull_.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA reaction TYPE zif_github=>reaction.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR reaction.
+      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
+      APPEND reaction TO response_reactions_list_for_pu.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_pulls_list_review_comm01.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA pull_request_review_comment TYPE zif_github=>pull_request_review_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR pull_request_review_comment.
+      pull_request_review_comment = parse_pull_request_review_comm( iv_prefix && '/' && lv_member ).
+      APPEND pull_request_review_comment TO response_pulls_list_review_c01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_pulls_list_commits.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA commit TYPE zif_github=>commit.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR commit.
+      commit = parse_commit( iv_prefix && '/' && lv_member ).
+      APPEND commit TO response_pulls_list_commits.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_pulls_list_files.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA diff_entry TYPE zif_github=>diff_entry.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR diff_entry.
+      diff_entry = parse_diff_entry( iv_prefix && '/' && lv_member ).
+      APPEND diff_entry TO response_pulls_list_files.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_pulls_merge.
@@ -7297,11 +8201,27 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_pulls_list_reviews.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA pull_request_review TYPE zif_github=>pull_request_review.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR pull_request_review.
+      pull_request_review = parse_pull_request_review( iv_prefix && '/' && lv_member ).
+      APPEND pull_request_review TO response_pulls_list_reviews.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_pulls_list_comments_for_.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA review_comment TYPE zif_github=>review_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR review_comment.
+      review_comment = parse_review_comment( iv_prefix && '/' && lv_member ).
+      APPEND review_comment TO response_pulls_list_comments_f.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_pulls_update_branch.
@@ -7310,59 +8230,171 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_repos_list_releases.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA release TYPE zif_github=>release.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR release.
+      release = parse_release( iv_prefix && '/' && lv_member ).
+      APPEND release TO response_repos_list_releases.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_release_asset.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA release_asset TYPE zif_github=>release_asset.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR release_asset.
+      release_asset = parse_release_asset( iv_prefix && '/' && lv_member ).
+      APPEND release_asset TO response_repos_list_release_as.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_secret_scanning_list_ale.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA secret_scanning_alert TYPE zif_github=>secret_scanning_alert.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR secret_scanning_alert.
+      secret_scanning_alert = parse_secret_scanning_alert( iv_prefix && '/' && lv_member ).
+      APPEND secret_scanning_alert TO response_secret_scanning_list_.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_list_stargazers.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_activity_list_stargaz.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_get_code_frequency.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA code_frequency_stat TYPE zif_github=>code_frequency_stat.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR code_frequency_stat.
+      code_frequency_stat = parse_code_frequency_stat( iv_prefix && '/' && lv_member ).
+      APPEND code_frequency_stat TO response_repos_get_code_freque.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_get_commit_activit.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA commit_activity TYPE zif_github=>commit_activity.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR commit_activity.
+      commit_activity = parse_commit_activity( iv_prefix && '/' && lv_member ).
+      APPEND commit_activity TO response_repos_get_commit_acti.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_get_contributors_s.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA contributor_activity TYPE zif_github=>contributor_activity.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR contributor_activity.
+      contributor_activity = parse_contributor_activity( iv_prefix && '/' && lv_member ).
+      APPEND contributor_activity TO response_repos_get_contributor.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_get_punch_card_sta.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA code_frequency_stat TYPE zif_github=>code_frequency_stat.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR code_frequency_stat.
+      code_frequency_stat = parse_code_frequency_stat( iv_prefix && '/' && lv_member ).
+      APPEND code_frequency_stat TO response_repos_get_punch_card_.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_list_watchers_f.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_activity_list_watcher.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_tags.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA tag TYPE zif_github=>tag.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR tag.
+      tag = parse_tag( iv_prefix && '/' && lv_member ).
+      APPEND tag TO response_repos_list_tags.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_teams.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_repos_list_teams.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_get_top_paths.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA content_traffic TYPE zif_github=>content_traffic.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR content_traffic.
+      content_traffic = parse_content_traffic( iv_prefix && '/' && lv_member ).
+      APPEND content_traffic TO response_repos_get_top_paths.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_get_top_referrers.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA referrer_traffic TYPE zif_github=>referrer_traffic.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR referrer_traffic.
+      referrer_traffic = parse_referrer_traffic( iv_prefix && '/' && lv_member ).
+      APPEND referrer_traffic TO response_repos_get_top_referre.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_public.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_repos_list_public.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_search_code.
@@ -7408,27 +8440,75 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_teams_list_discussions_l.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team_discussion TYPE zif_github=>team_discussion.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team_discussion.
+      team_discussion = parse_team_discussion( iv_prefix && '/' && lv_member ).
+      APPEND team_discussion TO response_teams_list_discussi02.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_teams_list_discussion_01.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team_discussion_comment TYPE zif_github=>team_discussion_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team_discussion_comment.
+      team_discussion_comment = parse_team_discussion_comment( iv_prefix && '/' && lv_member ).
+      APPEND team_discussion_comment TO response_teams_list_discussi03.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_reactions_list_for_tea02.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA reaction TYPE zif_github=>reaction.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR reaction.
+      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
+      APPEND reaction TO response_reactions_list_for_03.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_reactions_list_for_tea03.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA reaction TYPE zif_github=>reaction.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR reaction.
+      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
+      APPEND reaction TO response_reactions_list_for_04.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_teams_list_pending_inv01.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA organization_invitation TYPE zif_github=>organization_invitation.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR organization_invitation.
+      organization_invitation = parse_organization_invitation( iv_prefix && '/' && lv_member ).
+      APPEND organization_invitation TO response_teams_list_pending_01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_teams_list_members_legac.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_teams_list_members_le.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_teams_add_member_legacy.
@@ -7444,7 +8524,15 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_teams_list_projects_lega.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team_project TYPE zif_github=>team_project.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team_project.
+      team_project = parse_team_project( iv_prefix && '/' && lv_member ).
+      APPEND team_project TO response_teams_list_projects_l.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_teams_add_or_update_pr01.
@@ -7453,39 +8541,111 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_teams_list_repos_legacy.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_teams_list_repos_lega.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_teams_list_child_legacy.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_teams_list_child_lega.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_users_list_blocked_by_au.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_users_list_blocked_by.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_users_set_primary_email_.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA email TYPE zif_github=>email.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR email.
+      email = parse_email( iv_prefix && '/' && lv_member ).
+      APPEND email TO response_users_set_primary_ema.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_users_list_emails_for_au.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA email TYPE zif_github=>email.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR email.
+      email = parse_email( iv_prefix && '/' && lv_member ).
+      APPEND email TO response_users_list_emails_for.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_users_add_email_for_auth.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA email TYPE zif_github=>email.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR email.
+      email = parse_email( iv_prefix && '/' && lv_member ).
+      APPEND email TO response_users_add_email_for_a.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_users_list_followers_for.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_users_list_followers_.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_users_list_followed_by_a.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_users_list_followed_b.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_users_list_gpg_keys_for_.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA gpg_key TYPE zif_github=>gpg_key.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR gpg_key.
+      gpg_key = parse_gpg_key( iv_prefix && '/' && lv_member ).
+      APPEND gpg_key TO response_users_list_gpg_keys_f.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_apps_list_installations_.
@@ -7500,123 +8660,363 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_issues_list_for_authenti.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue TYPE zif_github=>issue.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue.
+      issue = parse_issue( iv_prefix && '/' && lv_member ).
+      APPEND issue TO response_issues_list_for_authe.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_users_list_public_ssh_ke.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA key TYPE zif_github=>key.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR key.
+      key = parse_key( iv_prefix && '/' && lv_member ).
+      APPEND key TO response_users_list_public_ssh.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_apps_list_subscriptions_.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA user_marketplace_purchase TYPE zif_github=>user_marketplace_purchase.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR user_marketplace_purchase.
+      user_marketplace_purchase = parse_user_marketplace_purchas( iv_prefix && '/' && lv_member ).
+      APPEND user_marketplace_purchase TO response_apps_list_subscriptio.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_apps_list_subscription01.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA user_marketplace_purchase TYPE zif_github=>user_marketplace_purchase.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR user_marketplace_purchase.
+      user_marketplace_purchase = parse_user_marketplace_purchas( iv_prefix && '/' && lv_member ).
+      APPEND user_marketplace_purchase TO response_apps_list_subscript01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_orgs_list_memberships_fo.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA org_membership TYPE zif_github=>org_membership.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR org_membership.
+      org_membership = parse_org_membership( iv_prefix && '/' && lv_member ).
+      APPEND org_membership TO response_orgs_list_memberships.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_migrations_list_for_auth.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA migration TYPE zif_github=>migration.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR migration.
+      migration = parse_migration( iv_prefix && '/' && lv_member ).
+      APPEND migration TO response_migrations_list_for_a.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_migrations_list_repos_01.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_migrations_list_rep01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_orgs_list_for_authentica.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA organization_simple TYPE zif_github=>organization_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR organization_simple.
+      organization_simple = parse_organization_simple( iv_prefix && '/' && lv_member ).
+      APPEND organization_simple TO response_orgs_list_for_authent.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_users_list_public_emails.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA email TYPE zif_github=>email.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR email.
+      email = parse_email( iv_prefix && '/' && lv_member ).
+      APPEND email TO response_users_list_public_ema.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_for_authentic.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA repository TYPE zif_github=>repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR repository.
+      repository = parse_repository( iv_prefix && '/' && lv_member ).
+      APPEND repository TO response_repos_list_for_authen.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_invitations_f.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA repository_invitation TYPE zif_github=>repository_invitation.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR repository_invitation.
+      repository_invitation = parse_repository_invitation( iv_prefix && '/' && lv_member ).
+      APPEND repository_invitation TO response_repos_list_invitati01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_list_repos_star.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA repository TYPE zif_github=>repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR repository.
+      repository = parse_repository( iv_prefix && '/' && lv_member ).
+      APPEND repository TO response_activity_list_repos_s.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_list_watched_re.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_activity_list_watched.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_teams_list_for_authentic.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team_full TYPE zif_github=>team_full.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team_full.
+      team_full = parse_team_full( iv_prefix && '/' && lv_member ).
+      APPEND team_full TO response_teams_list_for_authen.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_users_list.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_users_list.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_list_events_for.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_events_.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_list_org_events.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_org_eve.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_list_public_e02.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_publi03.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_users_list_followers_f01.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_users_list_follower01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_users_list_following_for.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_users_list_following_.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_gists_list_for_user.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA base_gist TYPE zif_github=>base_gist.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR base_gist.
+      base_gist = parse_base_gist( iv_prefix && '/' && lv_member ).
+      APPEND base_gist TO response_gists_list_for_user.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_users_list_gpg_keys_fo01.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA gpg_key TYPE zif_github=>gpg_key.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR gpg_key.
+      gpg_key = parse_gpg_key( iv_prefix && '/' && lv_member ).
+      APPEND gpg_key TO response_users_list_gpg_keys01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_users_list_public_keys_f.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA key_simple TYPE zif_github=>key_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR key_simple.
+      key_simple = parse_key_simple( iv_prefix && '/' && lv_member ).
+      APPEND key_simple TO response_users_list_public_key.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_orgs_list_for_user.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA organization_simple TYPE zif_github=>organization_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR organization_simple.
+      organization_simple = parse_organization_simple( iv_prefix && '/' && lv_member ).
+      APPEND organization_simple TO response_orgs_list_for_user.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_projects_list_for_user.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA project TYPE zif_github=>project.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR project.
+      project = parse_project( iv_prefix && '/' && lv_member ).
+      APPEND project TO response_projects_list_for_use.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_list_received_e.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_receive.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_list_received_p.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_recei01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_repos_list_for_user.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_repos_list_for_user.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_list_repos_st01.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA repository TYPE zif_github=>repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR repository.
+      repository = parse_repository( iv_prefix && '/' && lv_member ).
+      APPEND repository TO response_activity_list_repos01.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_activity_list_repos_watc.
-* todo, handle type array
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_activity_list_repos_w.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD json_apps_update_webhook_confi.
@@ -10340,7 +11740,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-* todo body, #/components/schemas/selected-actions
+* todo, set body, #/components/schemas/selected-actions
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -11783,7 +13183,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-* todo body, #/components/schemas/selected-actions
+* todo, set body, #/components/schemas/selected-actions
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -12621,7 +14021,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-* todo body, #/components/schemas/interaction-limit
+* todo, set body, #/components/schemas/interaction-limit
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14557,7 +15957,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-* todo body, #/components/schemas/selected-actions
+* todo, set body, #/components/schemas/selected-actions
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -17363,7 +18763,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-* todo body, #/components/schemas/interaction-limit
+* todo, set body, #/components/schemas/interaction-limit
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -21627,7 +23027,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/interaction-limits'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-* todo body, #/components/schemas/interaction-limit
+* todo, set body, #/components/schemas/interaction-limit
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).

@@ -161,11 +161,31 @@ CLASS ltcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD pulls_list.
+
     DATA lt_pulls TYPE zif_github=>response_pulls_list.
+    DATA ls_pull LIKE LINE OF lt_pulls.
 
     lt_pulls = mi_github->pulls_list(
       owner = 'abapGit-tests'
       repo  = 'VIEW' ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = lines( lt_pulls )
+      exp = 1 ).
+
+    READ TABLE lt_pulls INDEX 1 INTO ls_pull.
+    cl_abap_unit_assert=>assert_subrc( ).
+
+*    WRITE '@KERNEL console.dir(ls_pull);'.
+
+    cl_abap_unit_assert=>assert_equals(
+      act = ls_pull-url
+      exp = 'https://api.github.com/repos/abapGit-tests/VIEW/pulls/1' ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = ls_pull-title
+      exp = 'VIEW format updates' ).
+
   ENDMETHOD.
 
 ENDCLASS.
