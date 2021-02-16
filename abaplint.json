@@ -80,7 +80,15 @@
     "line_only_punc": true,
     "local_class_naming": true,
     "local_testclass_location": true,
-    "local_variable_names": true,
+    "local_variable_names": {
+      "exclude": ["generated/"],
+      "patternKind": "required",
+      "ignoreNames": [],
+      "ignorePatterns": [],
+      "expectedData": "^L._.+$",
+      "expectedConstant": "^LC_.+$",
+      "expectedFS": "^<L._.+>$"
+    },
     "main_file_contents": true,
     "many_parenthesis": true,
     "max_one_statement": true,
@@ -160,7 +168,7 @@
     "try_without_catch": true,
     "type_form_parameters": true,
     "types_naming": {
-      "exclude": ["test/"],
+      "exclude": ["generated/"],
       "pattern": "^TY_.+$"
     },
     "uncaught_exception": false,
@@ -168,7 +176,7 @@
     "unreachable_code": true,
     "unused_methods": false,
     "unused_types": {
-      "exclude": ["test/"],
+      "exclude": ["generated/"],
       "skipNames": []
     },
     "unused_variables": false,

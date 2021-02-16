@@ -44,6 +44,18 @@ CLASS zcl_petstore DEFINITION PUBLIC.
       IMPORTING data TYPE zif_petstore=>bodycreateuserswithlistinput
       RETURNING VALUE(json) TYPE string
       RAISING cx_static_check.
+    METHODS parse_findpetsbystatus
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_findpetsbystatus) TYPE zif_petstore=>response_findpetsbystatus
+      RAISING cx_static_check.
+    METHODS parse_findpetsbytags
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_findpetsbytags) TYPE zif_petstore=>response_findpetsbytags
+      RAISING cx_static_check.
+    METHODS parse_getinventory
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_getinventory) TYPE zif_petstore=>response_getinventory
+      RAISING cx_static_check.
 ENDCLASS.
 
 CLASS zcl_petstore IMPLEMENTATION.
@@ -115,8 +127,37 @@ CLASS zcl_petstore IMPLEMENTATION.
     apiresponse-message = mo_json->value_string( iv_prefix && '/message' ).
   ENDMETHOD.
 
+  METHOD parse_findpetsbystatus.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA pet TYPE zif_petstore=>pet.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR pet.
+      pet = parse_pet( iv_prefix && '/' && lv_member ).
+      APPEND pet TO response_findpetsbystatus.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_findpetsbytags.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA pet TYPE zif_petstore=>pet.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR pet.
+      pet = parse_pet( iv_prefix && '/' && lv_member ).
+      APPEND pet TO response_findpetsbytags.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_getinventory.
+  ENDMETHOD.
+
   METHOD json_createuserswithlistinput.
-* todo
+    json = json && '['.
+* todo, array
+    json = json && ']'.
   ENDMETHOD.
 
   METHOD zif_petstore~updatepet.
@@ -125,7 +166,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/api/v3/pet'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-* todo body, #/components/schemas/Pet
+* todo, set body, #/components/schemas/Pet
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -138,7 +179,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/api/v3/pet'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-* todo body, #/components/schemas/Pet
+* todo, set body, #/components/schemas/Pet
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -156,8 +197,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_findpetsbystatus( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~findpetsbytags.
@@ -173,8 +214,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_findpetsbytags( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~getpetbyid.
@@ -254,8 +295,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_getinventory( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~placeorder.
@@ -264,7 +305,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/api/v3/store/order'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-* todo body, #/components/schemas/Order
+* todo, set body, #/components/schemas/Order
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -307,7 +348,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/api/v3/user'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-* todo body, #/components/schemas/User
+* todo, set body, #/components/schemas/User
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -377,7 +418,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-* todo body, #/components/schemas/User
+* todo, set body, #/components/schemas/User
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).

@@ -69,7 +69,18 @@ INTERFACE zif_petstore PUBLIC.
          END OF apiresponse.
 
 * Component schema: bodycreateuserswithlistinput, array
-  TYPES bodycreateuserswithlistinput TYPE string. " array #/components/schemas/User todo
+  TYPES bodycreateuserswithlistinput TYPE STANDARD TABLE OF user WITH DEFAULT KEY.
+
+* Component schema: response_findpetsbystatus, array
+  TYPES response_findpetsbystatus TYPE STANDARD TABLE OF pet WITH DEFAULT KEY.
+
+* Component schema: response_findpetsbytags, array
+  TYPES response_findpetsbytags TYPE STANDARD TABLE OF pet WITH DEFAULT KEY.
+
+* Component schema: response_getinventory, object
+  TYPES: BEGIN OF response_getinventory,
+           dummy_workaround TYPE i,
+         END OF response_getinventory.
 
 * PUT - "Update an existing pet"
 * Operation id: updatePet
@@ -83,7 +94,8 @@ INTERFACE zif_petstore PUBLIC.
   METHODS updatepet
     IMPORTING
       body TYPE pet
-    RETURNING VALUE(return_data) TYPE pet
+    RETURNING
+      VALUE(return_data) TYPE pet
     RAISING cx_static_check.
 
 * POST - "Add a new pet to the store"
@@ -96,7 +108,8 @@ INTERFACE zif_petstore PUBLIC.
   METHODS addpet
     IMPORTING
       body TYPE pet
-    RETURNING VALUE(return_data) TYPE pet
+    RETURNING
+      VALUE(return_data) TYPE pet
     RAISING cx_static_check.
 
 * GET - "Finds Pets by status"
@@ -104,11 +117,13 @@ INTERFACE zif_petstore PUBLIC.
 * Parameter: status, optional, query
 * Response: 200
 *     application/xml, array
-*     application/json, array
+*     application/json, #/components/schemas/response_findpetsbystatus
 * Response: 400
   METHODS findpetsbystatus
     IMPORTING
       status TYPE string DEFAULT 'available'
+    RETURNING
+      VALUE(return_data) TYPE response_findpetsbystatus
     RAISING cx_static_check.
 
 * GET - "Finds Pets by tags"
@@ -116,11 +131,13 @@ INTERFACE zif_petstore PUBLIC.
 * Parameter: tags, optional, query
 * Response: 200
 *     application/xml, array
-*     application/json, array
+*     application/json, #/components/schemas/response_findpetsbytags
 * Response: 400
   METHODS findpetsbytags
     IMPORTING
       tags TYPE string OPTIONAL
+    RETURNING
+      VALUE(return_data) TYPE response_findpetsbytags
     RAISING cx_static_check.
 
 * GET - "Find pet by ID"
@@ -134,7 +151,8 @@ INTERFACE zif_petstore PUBLIC.
   METHODS getpetbyid
     IMPORTING
       petid TYPE i
-    RETURNING VALUE(return_data) TYPE pet
+    RETURNING
+      VALUE(return_data) TYPE pet
     RAISING cx_static_check.
 
 * POST - "Updates a pet in the store with form data"
@@ -171,14 +189,17 @@ INTERFACE zif_petstore PUBLIC.
     IMPORTING
       petid TYPE i
       additionalmetadata TYPE string OPTIONAL
-    RETURNING VALUE(return_data) TYPE apiresponse
+    RETURNING
+      VALUE(return_data) TYPE apiresponse
     RAISING cx_static_check.
 
 * GET - "Returns pet inventories by status"
 * Operation id: getInventory
 * Response: 200
-*     application/json, object
+*     application/json, #/components/schemas/response_getinventory
   METHODS getinventory
+    RETURNING
+      VALUE(return_data) TYPE response_getinventory
     RAISING cx_static_check.
 
 * POST - "Place an order for a pet"
@@ -190,7 +211,8 @@ INTERFACE zif_petstore PUBLIC.
   METHODS placeorder
     IMPORTING
       body TYPE order
-    RETURNING VALUE(return_data) TYPE order
+    RETURNING
+      VALUE(return_data) TYPE order
     RAISING cx_static_check.
 
 * GET - "Find purchase order by ID"
@@ -204,7 +226,8 @@ INTERFACE zif_petstore PUBLIC.
   METHODS getorderbyid
     IMPORTING
       orderid TYPE i
-    RETURNING VALUE(return_data) TYPE order
+    RETURNING
+      VALUE(return_data) TYPE order
     RAISING cx_static_check.
 
 * DELETE - "Delete purchase order by ID"
@@ -238,7 +261,8 @@ INTERFACE zif_petstore PUBLIC.
   METHODS createuserswithlistinput
     IMPORTING
       body TYPE bodycreateuserswithlistinput
-    RETURNING VALUE(return_data) TYPE user
+    RETURNING
+      VALUE(return_data) TYPE user
     RAISING cx_static_check.
 
 * GET - "Logs user into the system"
@@ -272,7 +296,8 @@ INTERFACE zif_petstore PUBLIC.
   METHODS getuserbyname
     IMPORTING
       username TYPE string
-    RETURNING VALUE(return_data) TYPE user
+    RETURNING
+      VALUE(return_data) TYPE user
     RAISING cx_static_check.
 
 * PUT - "Update user"

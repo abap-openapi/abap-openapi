@@ -46,6 +46,10 @@ CLASS zcl_oapi_main DEFINITION PUBLIC.
     METHODS dump_json_methods
       RETURNING VALUE(rv_abap) TYPE string.
 
+    METHODS dump_json
+      IMPORTING ii_schema TYPE REF TO zif_oapi_schema
+      RETURNING VALUE(rv_abap) TYPE string.
+
     METHODS find_parser_method
       IMPORTING iv_name TYPE string
       RETURNING VALUE(rv_method) TYPE string.
@@ -160,10 +164,35 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
     LOOP AT ms_specification-components-schemas INTO ls_schema WHERE abap_json_method IS NOT INITIAL.
       rv_abap = rv_abap && |  METHOD { ls_schema-abap_json_method }.\n|.
-      rv_abap = rv_abap && |* todo\n|.
+      rv_abap = rv_abap && dump_json( ls_schema-schema ).
       rv_abap = rv_abap && |  ENDMETHOD.\n\n|.
     ENDLOOP.
 
+  ENDMETHOD.
+
+  METHOD dump_json.
+    DATA ls_property TYPE zif_oapi_schema=>ty_property.
+
+    CASE ii_schema->type.
+      WHEN 'object'.
+        rv_abap = rv_abap && |    json = json && '\{'.\n|.
+        LOOP AT ii_schema->properties INTO ls_property.
+          IF ls_property-schema IS NOT INITIAL
+              AND ls_property-schema->is_simple_type( ) = abap_true.
+            rv_abap = rv_abap && |    json = json && \|"{ ls_property-name }": "\{ data-{ ls_property-abap_name } \}",\|.\n|.
+          ELSE.
+            rv_abap = rv_abap && |*  json = json && '"{ ls_property-name }":' not simple\n|.
+          ENDIF.
+        ENDLOOP.
+        rv_abap = rv_abap && |    json = substring( val = json off = 0 len = strlen( json ) - 1 ).\n|.
+        rv_abap = rv_abap && |    json = json && '\}'.\n|.
+      WHEN 'array'.
+        rv_abap = rv_abap && |    json = json && '['.\n|.
+        rv_abap = rv_abap && |* todo, array\n|.
+        rv_abap = rv_abap && |    json = json && ']'.\n|.
+      WHEN OTHERS.
+        rv_abap = rv_abap && |* todo, { ii_schema->type }\n|.
+    ENDCASE.
   ENDMETHOD.
 
   METHOD dump_parser_methods.
@@ -210,6 +239,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
   METHOD dump_parser.
     DATA ls_property TYPE zif_oapi_schema=>ty_property.
+    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
     DATA lv_method TYPE string.
 
     CASE ii_schema->type.
@@ -234,6 +264,22 @@ CLASS zcl_oapi_main IMPLEMENTATION.
             rv_abap = rv_abap && |* todo, { ls_property-schema->type }, { ls_property-abap_name }\n|.
           ENDIF.
         ENDLOOP.
+      WHEN 'array'.
+        IF ii_schema->items_ref IS NOT INITIAL.
+          ls_schema = find_schema( ii_schema->items_ref ).
+          rv_abap = rv_abap &&
+            |    DATA lt_members TYPE string_table.\n| &&
+            |    DATA lv_member LIKE LINE OF lt_members.\n| &&
+            |    DATA { ls_schema-abap_name } TYPE { ms_input-interface_name }=>{ ls_schema-abap_name }.\n| &&
+            |    lt_members = mo_json->members( iv_prefix && '/' ).\n| &&
+            |    LOOP AT lt_members INTO lv_member.\n| &&
+            |      CLEAR { ls_schema-abap_name }.\n| &&
+            |      { ls_schema-abap_name } = { ls_schema-abap_parser_method }( iv_prefix && '/' && lv_member ).\n| &&
+            |      APPEND { ls_schema-abap_name } TO { iv_abap_name }.\n| &&
+            |    ENDLOOP.\n|.
+        ELSE.
+          rv_abap = rv_abap && |* todo, handle type { ii_schema->type }, no item_ref \n|.
+        ENDIF.
       WHEN OTHERS.
         rv_abap = rv_abap && |* todo, handle type { ii_schema->type }\n|.
     ENDCASE.
@@ -311,7 +357,9 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         |  METHODS { ls_operation-abap_name }{ build_abap_parameters( ls_operation ) }|.
       ls_return = find_return( ls_operation ).
       IF ls_return IS NOT INITIAL.
-        rv_abap = rv_abap && |    RETURNING VALUE(return_data) TYPE { ls_return-abap_name }\n|.
+        rv_abap = rv_abap &&
+          |    RETURNING\n| &&
+          |      VALUE(return_data) TYPE { ls_return-abap_name }\n|.
       ENDIF.
       rv_abap = rv_abap && |    RAISING cx_static_check.\n\n|.
     ENDLOOP.
@@ -407,7 +455,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       IF ls_schema-abap_json_method IS NOT INITIAL.
         rv_abap = |    mi_client->request->set_cdata( { ls_schema-abap_json_method }( body ) ).\n|.
       ELSE.
-        rv_abap = |* todo body, { iv_name }\n|.
+        rv_abap = |* todo, set body, { iv_name }\n|.
       ENDIF.
     ENDIF.
   ENDMETHOD.
@@ -421,6 +469,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       IF ls_response-code = '200'
           OR ls_response-code = '201'
           OR ls_response-code = '204'.
+* todo, handle basic types
         READ TABLE ls_response-content INTO ls_content WITH KEY type = 'application/json'.
         IF sy-subrc = 0 AND ls_content-schema_ref IS NOT INITIAL.
           rs_type = find_schema( ls_content-schema_ref ).

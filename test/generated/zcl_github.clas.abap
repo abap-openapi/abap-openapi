@@ -1252,10 +1252,6 @@ CLASS zcl_github DEFINITION PUBLIC.
       IMPORTING data TYPE zif_github=>bodyprojects_delete_column
       RETURNING VALUE(json) TYPE string
       RAISING cx_static_check.
-    METHODS json_projects_create_card
-      IMPORTING data TYPE zif_github=>bodyprojects_create_card
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
     METHODS json_projects_move_column
       IMPORTING data TYPE zif_github=>bodyprojects_move_column
       RETURNING VALUE(json) TYPE string
@@ -1868,14 +1864,6 @@ CLASS zcl_github DEFINITION PUBLIC.
       IMPORTING data TYPE zif_github=>bodyusers_set_primary_email_vi
       RETURNING VALUE(json) TYPE string
       RAISING cx_static_check.
-    METHODS json_users_add_email_for_authe
-      IMPORTING data TYPE zif_github=>bodyusers_add_email_for_authen
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_users_delete_email_for_au
-      IMPORTING data TYPE zif_github=>bodyusers_delete_email_for_aut
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
     METHODS json_users_create_gpg_key_for_
       IMPORTING data TYPE zif_github=>bodyusers_create_gpg_key_for_a
       RETURNING VALUE(json) TYPE string
@@ -1899,6 +1887,970 @@ CLASS zcl_github DEFINITION PUBLIC.
     METHODS json_repos_create_for_authenti
       IMPORTING data TYPE zif_github=>bodyrepos_create_for_authentic
       RETURNING VALUE(json) TYPE string
+      RAISING cx_static_check.
+    METHODS parse_meta_root
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_meta_root) TYPE zif_github=>response_meta_root
+      RAISING cx_static_check.
+    METHODS parse_apps_list_installations
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_apps_list_installatio) TYPE zif_github=>response_apps_list_installatio
+      RAISING cx_static_check.
+    METHODS parse_oauth_authorizations_lis
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_oauth_authorizations_) TYPE zif_github=>response_oauth_authorizations_
+      RAISING cx_static_check.
+    METHODS parse_oauth_authorizations_l01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_oauth_authorization01) TYPE zif_github=>response_oauth_authorization01
+      RAISING cx_static_check.
+    METHODS parse_codes_of_conduct_get_all
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_codes_of_conduct_get_) TYPE zif_github=>response_codes_of_conduct_get_
+      RAISING cx_static_check.
+    METHODS parse_emojis_get
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_emojis_get) TYPE zif_github=>response_emojis_get
+      RAISING cx_static_check.
+    METHODS parse_enterprise_admin_list_se
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_enterprise_admin_list) TYPE zif_github=>response_enterprise_admin_list
+      RAISING cx_static_check.
+    METHODS parse_enterprise_admin_list_01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_enterprise_admin_li01) TYPE zif_github=>response_enterprise_admin_li01
+      RAISING cx_static_check.
+    METHODS parse_enterprise_admin_list_or
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_enterprise_admin_li02) TYPE zif_github=>response_enterprise_admin_li02
+      RAISING cx_static_check.
+    METHODS parse_enterprise_admin_list_02
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_enterprise_admin_li03) TYPE zif_github=>response_enterprise_admin_li03
+      RAISING cx_static_check.
+    METHODS parse_enterprise_admin_list_03
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_enterprise_admin_li04) TYPE zif_github=>response_enterprise_admin_li04
+      RAISING cx_static_check.
+    METHODS parse_enterprise_admin_list_ru
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_enterprise_admin_li05) TYPE zif_github=>response_enterprise_admin_li05
+      RAISING cx_static_check.
+    METHODS parse_audit_log_get_audit_log
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_audit_log_get_audit_l) TYPE zif_github=>response_audit_log_get_audit_l
+      RAISING cx_static_check.
+    METHODS parse_activity_list_public_eve
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_list_public_) TYPE zif_github=>response_activity_list_public_
+      RAISING cx_static_check.
+    METHODS parse_gists_list
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_gists_list) TYPE zif_github=>response_gists_list
+      RAISING cx_static_check.
+    METHODS parse_gists_list_public
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_gists_list_public) TYPE zif_github=>response_gists_list_public
+      RAISING cx_static_check.
+    METHODS parse_gists_list_starred
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_gists_list_starred) TYPE zif_github=>response_gists_list_starred
+      RAISING cx_static_check.
+    METHODS parse_gists_list_comments
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_gists_list_comments) TYPE zif_github=>response_gists_list_comments
+      RAISING cx_static_check.
+    METHODS parse_gists_list_commits
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_gists_list_commits) TYPE zif_github=>response_gists_list_commits
+      RAISING cx_static_check.
+    METHODS parse_gists_list_forks
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_gists_list_forks) TYPE zif_github=>response_gists_list_forks
+      RAISING cx_static_check.
+    METHODS parse_gists_check_is_starred
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_gists_check_is_starre) TYPE zif_github=>response_gists_check_is_starre
+      RAISING cx_static_check.
+    METHODS parse_gitignore_get_all_templa
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_gitignore_get_all_tem) TYPE zif_github=>response_gitignore_get_all_tem
+      RAISING cx_static_check.
+    METHODS parse_apps_list_repos_accessib
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_apps_list_repos_acces) TYPE zif_github=>response_apps_list_repos_acces
+      RAISING cx_static_check.
+    METHODS parse_issues_list
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_issues_list) TYPE zif_github=>response_issues_list
+      RAISING cx_static_check.
+    METHODS parse_licenses_get_all_commonl
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_licenses_get_all_comm) TYPE zif_github=>response_licenses_get_all_comm
+      RAISING cx_static_check.
+    METHODS parse_apps_list_plans
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_apps_list_plans) TYPE zif_github=>response_apps_list_plans
+      RAISING cx_static_check.
+    METHODS parse_apps_list_accounts_for_p
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_apps_list_accounts_fo) TYPE zif_github=>response_apps_list_accounts_fo
+      RAISING cx_static_check.
+    METHODS parse_apps_list_plans_stubbed
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_apps_list_plans_stubb) TYPE zif_github=>response_apps_list_plans_stubb
+      RAISING cx_static_check.
+    METHODS parse_apps_list_accounts_for01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_apps_list_accounts_01) TYPE zif_github=>response_apps_list_accounts_01
+      RAISING cx_static_check.
+    METHODS parse_activity_list_public_e01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_list_publi01) TYPE zif_github=>response_activity_list_publi01
+      RAISING cx_static_check.
+    METHODS parse_activity_list_notificati
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_list_notific) TYPE zif_github=>response_activity_list_notific
+      RAISING cx_static_check.
+    METHODS parse_activity_mark_notificati
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_mark_notific) TYPE zif_github=>response_activity_mark_notific
+      RAISING cx_static_check.
+    METHODS parse_orgs_list
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_orgs_list) TYPE zif_github=>response_orgs_list
+      RAISING cx_static_check.
+    METHODS parse_actions_list_selected_re
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_actions_list_selected) TYPE zif_github=>response_actions_list_selected
+      RAISING cx_static_check.
+    METHODS parse_actions_list_self_hosted
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_actions_list_self_hos) TYPE zif_github=>response_actions_list_self_hos
+      RAISING cx_static_check.
+    METHODS parse_actions_list_repo_access
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_actions_list_repo_acc) TYPE zif_github=>response_actions_list_repo_acc
+      RAISING cx_static_check.
+    METHODS parse_actions_list_self_host01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_actions_list_self_h01) TYPE zif_github=>response_actions_list_self_h01
+      RAISING cx_static_check.
+    METHODS parse_actions_list_self_host02
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_actions_list_self_h02) TYPE zif_github=>response_actions_list_self_h02
+      RAISING cx_static_check.
+    METHODS parse_actions_list_runner_appl
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_actions_list_runner_a) TYPE zif_github=>response_actions_list_runner_a
+      RAISING cx_static_check.
+    METHODS parse_actions_list_org_secrets
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_actions_list_org_secr) TYPE zif_github=>response_actions_list_org_secr
+      RAISING cx_static_check.
+    METHODS parse_actions_list_selected_01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_actions_list_select01) TYPE zif_github=>response_actions_list_select01
+      RAISING cx_static_check.
+    METHODS parse_orgs_get_audit_log
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_orgs_get_audit_log) TYPE zif_github=>response_orgs_get_audit_log
+      RAISING cx_static_check.
+    METHODS parse_orgs_list_blocked_users
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_orgs_list_blocked_use) TYPE zif_github=>response_orgs_list_blocked_use
+      RAISING cx_static_check.
+    METHODS parse_orgs_list_saml_sso_autho
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_orgs_list_saml_sso_au) TYPE zif_github=>response_orgs_list_saml_sso_au
+      RAISING cx_static_check.
+    METHODS parse_activity_list_public_org
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_list_publi02) TYPE zif_github=>response_activity_list_publi02
+      RAISING cx_static_check.
+    METHODS parse_orgs_list_failed_invitat
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_orgs_list_failed_invi) TYPE zif_github=>response_orgs_list_failed_invi
+      RAISING cx_static_check.
+    METHODS parse_orgs_list_webhooks
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_orgs_list_webhooks) TYPE zif_github=>response_orgs_list_webhooks
+      RAISING cx_static_check.
+    METHODS parse_orgs_list_app_installati
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_orgs_list_app_install) TYPE zif_github=>response_orgs_list_app_install
+      RAISING cx_static_check.
+    METHODS parse_orgs_list_pending_invita
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_orgs_list_pending_inv) TYPE zif_github=>response_orgs_list_pending_inv
+      RAISING cx_static_check.
+    METHODS parse_orgs_list_invitation_tea
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_orgs_list_invitation_) TYPE zif_github=>response_orgs_list_invitation_
+      RAISING cx_static_check.
+    METHODS parse_issues_list_for_org
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_issues_list_for_org) TYPE zif_github=>response_issues_list_for_org
+      RAISING cx_static_check.
+    METHODS parse_orgs_list_members
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_orgs_list_members) TYPE zif_github=>response_orgs_list_members
+      RAISING cx_static_check.
+    METHODS parse_migrations_list_for_org
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_migrations_list_for_o) TYPE zif_github=>response_migrations_list_for_o
+      RAISING cx_static_check.
+    METHODS parse_migrations_list_repos_fo
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_migrations_list_repos) TYPE zif_github=>response_migrations_list_repos
+      RAISING cx_static_check.
+    METHODS parse_orgs_list_outside_collab
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_orgs_list_outside_col) TYPE zif_github=>response_orgs_list_outside_col
+      RAISING cx_static_check.
+    METHODS parse_orgs_convert_member_to_o
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_orgs_convert_member_t) TYPE zif_github=>response_orgs_convert_member_t
+      RAISING cx_static_check.
+    METHODS parse_orgs_remove_outside_coll
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_orgs_remove_outside_c) TYPE zif_github=>response_orgs_remove_outside_c
+      RAISING cx_static_check.
+    METHODS parse_projects_list_for_org
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_projects_list_for_org) TYPE zif_github=>response_projects_list_for_org
+      RAISING cx_static_check.
+    METHODS parse_orgs_list_public_members
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_orgs_list_public_memb) TYPE zif_github=>response_orgs_list_public_memb
+      RAISING cx_static_check.
+    METHODS parse_repos_list_for_org
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_for_org) TYPE zif_github=>response_repos_list_for_org
+      RAISING cx_static_check.
+    METHODS parse_teams_list
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_list) TYPE zif_github=>response_teams_list
+      RAISING cx_static_check.
+    METHODS parse_teams_list_discussions_i
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_list_discussion) TYPE zif_github=>response_teams_list_discussion
+      RAISING cx_static_check.
+    METHODS parse_teams_list_discussion_co
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_list_discussi01) TYPE zif_github=>response_teams_list_discussi01
+      RAISING cx_static_check.
+    METHODS parse_reactions_list_for_team_
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_reactions_list_for_te) TYPE zif_github=>response_reactions_list_for_te
+      RAISING cx_static_check.
+    METHODS parse_reactions_list_for_tea01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_reactions_list_for_01) TYPE zif_github=>response_reactions_list_for_01
+      RAISING cx_static_check.
+    METHODS parse_teams_list_pending_invit
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_list_pending_in) TYPE zif_github=>response_teams_list_pending_in
+      RAISING cx_static_check.
+    METHODS parse_teams_list_members_in_or
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_list_members_in) TYPE zif_github=>response_teams_list_members_in
+      RAISING cx_static_check.
+    METHODS parse_teams_add_or_update_memb
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_add_or_update_m) TYPE zif_github=>response_teams_add_or_update_m
+      RAISING cx_static_check.
+    METHODS parse_teams_list_projects_in_o
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_list_projects_i) TYPE zif_github=>response_teams_list_projects_i
+      RAISING cx_static_check.
+    METHODS parse_teams_add_or_update_proj
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_add_or_update_p) TYPE zif_github=>response_teams_add_or_update_p
+      RAISING cx_static_check.
+    METHODS parse_teams_list_repos_in_org
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_list_repos_in_o) TYPE zif_github=>response_teams_list_repos_in_o
+      RAISING cx_static_check.
+    METHODS parse_teams_list_child_in_org
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_list_child_in_o) TYPE zif_github=>response_teams_list_child_in_o
+      RAISING cx_static_check.
+    METHODS parse_projects_delete_card
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_projects_delete_card) TYPE zif_github=>response_projects_delete_card
+      RAISING cx_static_check.
+    METHODS parse_projects_move_card
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_projects_move_card) TYPE zif_github=>response_projects_move_card
+      RAISING cx_static_check.
+    METHODS parse_projects_move_card01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_projects_move_card01) TYPE zif_github=>response_projects_move_card01
+      RAISING cx_static_check.
+    METHODS parse_projects_move_card02
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_projects_move_card02) TYPE zif_github=>response_projects_move_card02
+      RAISING cx_static_check.
+    METHODS parse_projects_list_cards
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_projects_list_cards) TYPE zif_github=>response_projects_list_cards
+      RAISING cx_static_check.
+    METHODS parse_projects_create_card
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_projects_create_card) TYPE zif_github=>response_projects_create_card
+      RAISING cx_static_check.
+    METHODS parse_projects_move_column
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_projects_move_column) TYPE zif_github=>response_projects_move_column
+      RAISING cx_static_check.
+    METHODS parse_projects_update
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_projects_update) TYPE zif_github=>response_projects_update
+      RAISING cx_static_check.
+    METHODS parse_projects_delete
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_projects_delete) TYPE zif_github=>response_projects_delete
+      RAISING cx_static_check.
+    METHODS parse_projects_list_collaborat
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_projects_list_collabo) TYPE zif_github=>response_projects_list_collabo
+      RAISING cx_static_check.
+    METHODS parse_projects_list_columns
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_projects_list_columns) TYPE zif_github=>response_projects_list_columns
+      RAISING cx_static_check.
+    METHODS parse_repos_delete
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_delete) TYPE zif_github=>response_repos_delete
+      RAISING cx_static_check.
+    METHODS parse_actions_list_artifacts_f
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_actions_list_artifact) TYPE zif_github=>response_actions_list_artifact
+      RAISING cx_static_check.
+    METHODS parse_actions_list_self_host03
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_actions_list_self_h03) TYPE zif_github=>response_actions_list_self_h03
+      RAISING cx_static_check.
+    METHODS parse_actions_list_runner_ap01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_actions_list_runner01) TYPE zif_github=>response_actions_list_runner01
+      RAISING cx_static_check.
+    METHODS parse_actions_list_workflow_ru
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_actions_list_workflow) TYPE zif_github=>response_actions_list_workflow
+      RAISING cx_static_check.
+    METHODS parse_actions_list_workflow_01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_actions_list_workfl01) TYPE zif_github=>response_actions_list_workfl01
+      RAISING cx_static_check.
+    METHODS parse_actions_list_jobs_for_wo
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_actions_list_jobs_for) TYPE zif_github=>response_actions_list_jobs_for
+      RAISING cx_static_check.
+    METHODS parse_actions_list_repo_secret
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_actions_list_repo_sec) TYPE zif_github=>response_actions_list_repo_sec
+      RAISING cx_static_check.
+    METHODS parse_actions_list_repo_workfl
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_actions_list_repo_wor) TYPE zif_github=>response_actions_list_repo_wor
+      RAISING cx_static_check.
+    METHODS parse_actions_list_workflow_02
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_actions_list_workfl02) TYPE zif_github=>response_actions_list_workfl02
+      RAISING cx_static_check.
+    METHODS parse_issues_list_assignees
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_issues_list_assignees) TYPE zif_github=>response_issues_list_assignees
+      RAISING cx_static_check.
+    METHODS parse_repos_list_branches
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_branches) TYPE zif_github=>response_repos_list_branches
+      RAISING cx_static_check.
+    METHODS parse_repos_get_all_status_che
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_get_all_status_) TYPE zif_github=>response_repos_get_all_status_
+      RAISING cx_static_check.
+    METHODS parse_repos_add_status_check_c
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_add_status_chec) TYPE zif_github=>response_repos_add_status_chec
+      RAISING cx_static_check.
+    METHODS parse_repos_set_status_check_c
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_set_status_chec) TYPE zif_github=>response_repos_set_status_chec
+      RAISING cx_static_check.
+    METHODS parse_repos_remove_status_chec
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_remove_status_c) TYPE zif_github=>response_repos_remove_status_c
+      RAISING cx_static_check.
+    METHODS parse_repos_get_apps_with_acce
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_get_apps_with_a) TYPE zif_github=>response_repos_get_apps_with_a
+      RAISING cx_static_check.
+    METHODS parse_repos_add_app_access_res
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_add_app_access_) TYPE zif_github=>response_repos_add_app_access_
+      RAISING cx_static_check.
+    METHODS parse_repos_set_app_access_res
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_set_app_access_) TYPE zif_github=>response_repos_set_app_access_
+      RAISING cx_static_check.
+    METHODS parse_repos_remove_app_access_
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_remove_app_acce) TYPE zif_github=>response_repos_remove_app_acce
+      RAISING cx_static_check.
+    METHODS parse_repos_get_teams_with_acc
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_get_teams_with_) TYPE zif_github=>response_repos_get_teams_with_
+      RAISING cx_static_check.
+    METHODS parse_repos_add_team_access_re
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_add_team_access) TYPE zif_github=>response_repos_add_team_access
+      RAISING cx_static_check.
+    METHODS parse_repos_set_team_access_re
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_set_team_access) TYPE zif_github=>response_repos_set_team_access
+      RAISING cx_static_check.
+    METHODS parse_repos_remove_team_access
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_remove_team_acc) TYPE zif_github=>response_repos_remove_team_acc
+      RAISING cx_static_check.
+    METHODS parse_repos_get_users_with_acc
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_get_users_with_) TYPE zif_github=>response_repos_get_users_with_
+      RAISING cx_static_check.
+    METHODS parse_repos_add_user_access_re
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_add_user_access) TYPE zif_github=>response_repos_add_user_access
+      RAISING cx_static_check.
+    METHODS parse_repos_set_user_access_re
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_set_user_access) TYPE zif_github=>response_repos_set_user_access
+      RAISING cx_static_check.
+    METHODS parse_repos_remove_user_access
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_remove_user_acc) TYPE zif_github=>response_repos_remove_user_acc
+      RAISING cx_static_check.
+    METHODS parse_checks_list_annotations
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_checks_list_annotatio) TYPE zif_github=>response_checks_list_annotatio
+      RAISING cx_static_check.
+    METHODS parse_checks_list_for_suite
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_checks_list_for_suite) TYPE zif_github=>response_checks_list_for_suite
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_list_alert
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_code_scanning_list_al) TYPE zif_github=>response_code_scanning_list_al
+      RAISING cx_static_check.
+    METHODS parse_code_scanning_list_recen
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_code_scanning_list_re) TYPE zif_github=>response_code_scanning_list_re
+      RAISING cx_static_check.
+    METHODS parse_repos_list_collaborators
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_collaborat) TYPE zif_github=>response_repos_list_collaborat
+      RAISING cx_static_check.
+    METHODS parse_repos_list_commit_commen
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_commit_com) TYPE zif_github=>response_repos_list_commit_com
+      RAISING cx_static_check.
+    METHODS parse_reactions_list_for_commi
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_reactions_list_for_co) TYPE zif_github=>response_reactions_list_for_co
+      RAISING cx_static_check.
+    METHODS parse_repos_list_commits
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_commits) TYPE zif_github=>response_repos_list_commits
+      RAISING cx_static_check.
+    METHODS parse_repos_list_branches_for_
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_branches_f) TYPE zif_github=>response_repos_list_branches_f
+      RAISING cx_static_check.
+    METHODS parse_repos_list_comments_for_
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_comments_f) TYPE zif_github=>response_repos_list_comments_f
+      RAISING cx_static_check.
+    METHODS parse_repos_list_pull_requests
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_pull_reque) TYPE zif_github=>response_repos_list_pull_reque
+      RAISING cx_static_check.
+    METHODS parse_checks_list_for_ref
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_checks_list_for_ref) TYPE zif_github=>response_checks_list_for_ref
+      RAISING cx_static_check.
+    METHODS parse_checks_list_suites_for_r
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_checks_list_suites_fo) TYPE zif_github=>response_checks_list_suites_fo
+      RAISING cx_static_check.
+    METHODS parse_repos_list_commit_status
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_commit_sta) TYPE zif_github=>response_repos_list_commit_sta
+      RAISING cx_static_check.
+    METHODS parse_repos_list_contributors
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_contributo) TYPE zif_github=>response_repos_list_contributo
+      RAISING cx_static_check.
+    METHODS parse_repos_list_deployments
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_deployment) TYPE zif_github=>response_repos_list_deployment
+      RAISING cx_static_check.
+    METHODS parse_repos_create_deployment
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_create_deployme) TYPE zif_github=>response_repos_create_deployme
+      RAISING cx_static_check.
+    METHODS parse_repos_create_deploymen01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_create_deploy01) TYPE zif_github=>response_repos_create_deploy01
+      RAISING cx_static_check.
+    METHODS parse_repos_list_deployment_st
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_deployme01) TYPE zif_github=>response_repos_list_deployme01
+      RAISING cx_static_check.
+    METHODS parse_activity_list_repo_event
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_list_repo_ev) TYPE zif_github=>response_activity_list_repo_ev
+      RAISING cx_static_check.
+    METHODS parse_repos_list_forks
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_forks) TYPE zif_github=>response_repos_list_forks
+      RAISING cx_static_check.
+    METHODS parse_git_list_matching_refs
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_git_list_matching_ref) TYPE zif_github=>response_git_list_matching_ref
+      RAISING cx_static_check.
+    METHODS parse_repos_list_webhooks
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_webhooks) TYPE zif_github=>response_repos_list_webhooks
+      RAISING cx_static_check.
+    METHODS parse_migrations_get_commit_au
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_migrations_get_commit) TYPE zif_github=>response_migrations_get_commit
+      RAISING cx_static_check.
+    METHODS parse_migrations_get_large_fil
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_migrations_get_large_) TYPE zif_github=>response_migrations_get_large_
+      RAISING cx_static_check.
+    METHODS parse_repos_list_invitations
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_invitation) TYPE zif_github=>response_repos_list_invitation
+      RAISING cx_static_check.
+    METHODS parse_issues_list_for_repo
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_issues_list_for_repo) TYPE zif_github=>response_issues_list_for_repo
+      RAISING cx_static_check.
+    METHODS parse_issues_list_comments_for
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_issues_list_comments_) TYPE zif_github=>response_issues_list_comments_
+      RAISING cx_static_check.
+    METHODS parse_reactions_list_for_issue
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_reactions_list_for_is) TYPE zif_github=>response_reactions_list_for_is
+      RAISING cx_static_check.
+    METHODS parse_issues_list_events_for_r
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_issues_list_events_fo) TYPE zif_github=>response_issues_list_events_fo
+      RAISING cx_static_check.
+    METHODS parse_issues_list_comments
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_issues_list_comments) TYPE zif_github=>response_issues_list_comments
+      RAISING cx_static_check.
+    METHODS parse_issues_list_events
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_issues_list_events) TYPE zif_github=>response_issues_list_events
+      RAISING cx_static_check.
+    METHODS parse_issues_list_labels_on_is
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_issues_list_labels_on) TYPE zif_github=>response_issues_list_labels_on
+      RAISING cx_static_check.
+    METHODS parse_issues_add_labels
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_issues_add_labels) TYPE zif_github=>response_issues_add_labels
+      RAISING cx_static_check.
+    METHODS parse_issues_set_labels
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_issues_set_labels) TYPE zif_github=>response_issues_set_labels
+      RAISING cx_static_check.
+    METHODS parse_issues_remove_label
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_issues_remove_label) TYPE zif_github=>response_issues_remove_label
+      RAISING cx_static_check.
+    METHODS parse_reactions_list_for_iss01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_reactions_list_for_02) TYPE zif_github=>response_reactions_list_for_02
+      RAISING cx_static_check.
+    METHODS parse_issues_list_events_for_t
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_issues_list_events_01) TYPE zif_github=>response_issues_list_events_01
+      RAISING cx_static_check.
+    METHODS parse_repos_list_deploy_keys
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_deploy_key) TYPE zif_github=>response_repos_list_deploy_key
+      RAISING cx_static_check.
+    METHODS parse_issues_list_labels_for_r
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_issues_list_labels_fo) TYPE zif_github=>response_issues_list_labels_fo
+      RAISING cx_static_check.
+    METHODS parse_repos_merge
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_merge) TYPE zif_github=>response_repos_merge
+      RAISING cx_static_check.
+    METHODS parse_repos_merge01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_merge01) TYPE zif_github=>response_repos_merge01
+      RAISING cx_static_check.
+    METHODS parse_issues_list_milestones
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_issues_list_milestone) TYPE zif_github=>response_issues_list_milestone
+      RAISING cx_static_check.
+    METHODS parse_issues_list_labels_for_m
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_issues_list_labels_01) TYPE zif_github=>response_issues_list_labels_01
+      RAISING cx_static_check.
+    METHODS parse_activity_list_repo_notif
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_list_repo_no) TYPE zif_github=>response_activity_list_repo_no
+      RAISING cx_static_check.
+    METHODS parse_repos_list_pages_builds
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_pages_buil) TYPE zif_github=>response_repos_list_pages_buil
+      RAISING cx_static_check.
+    METHODS parse_projects_list_for_repo
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_projects_list_for_rep) TYPE zif_github=>response_projects_list_for_rep
+      RAISING cx_static_check.
+    METHODS parse_pulls_list
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_pulls_list) TYPE zif_github=>response_pulls_list
+      RAISING cx_static_check.
+    METHODS parse_pulls_list_review_commen
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_pulls_list_review_com) TYPE zif_github=>response_pulls_list_review_com
+      RAISING cx_static_check.
+    METHODS parse_reactions_list_for_pull_
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_reactions_list_for_pu) TYPE zif_github=>response_reactions_list_for_pu
+      RAISING cx_static_check.
+    METHODS parse_pulls_list_review_comm01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_pulls_list_review_c01) TYPE zif_github=>response_pulls_list_review_c01
+      RAISING cx_static_check.
+    METHODS parse_pulls_list_commits
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_pulls_list_commits) TYPE zif_github=>response_pulls_list_commits
+      RAISING cx_static_check.
+    METHODS parse_pulls_list_files
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_pulls_list_files) TYPE zif_github=>response_pulls_list_files
+      RAISING cx_static_check.
+    METHODS parse_pulls_merge
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_pulls_merge) TYPE zif_github=>response_pulls_merge
+      RAISING cx_static_check.
+    METHODS parse_pulls_merge01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_pulls_merge01) TYPE zif_github=>response_pulls_merge01
+      RAISING cx_static_check.
+    METHODS parse_pulls_list_reviews
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_pulls_list_reviews) TYPE zif_github=>response_pulls_list_reviews
+      RAISING cx_static_check.
+    METHODS parse_pulls_list_comments_for_
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_pulls_list_comments_f) TYPE zif_github=>response_pulls_list_comments_f
+      RAISING cx_static_check.
+    METHODS parse_pulls_update_branch
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_pulls_update_branch) TYPE zif_github=>response_pulls_update_branch
+      RAISING cx_static_check.
+    METHODS parse_repos_list_releases
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_releases) TYPE zif_github=>response_repos_list_releases
+      RAISING cx_static_check.
+    METHODS parse_repos_list_release_asset
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_release_as) TYPE zif_github=>response_repos_list_release_as
+      RAISING cx_static_check.
+    METHODS parse_secret_scanning_list_ale
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_secret_scanning_list_) TYPE zif_github=>response_secret_scanning_list_
+      RAISING cx_static_check.
+    METHODS parse_activity_list_stargazers
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_list_stargaz) TYPE zif_github=>response_activity_list_stargaz
+      RAISING cx_static_check.
+    METHODS parse_repos_get_code_frequency
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_get_code_freque) TYPE zif_github=>response_repos_get_code_freque
+      RAISING cx_static_check.
+    METHODS parse_repos_get_commit_activit
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_get_commit_acti) TYPE zif_github=>response_repos_get_commit_acti
+      RAISING cx_static_check.
+    METHODS parse_repos_get_contributors_s
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_get_contributor) TYPE zif_github=>response_repos_get_contributor
+      RAISING cx_static_check.
+    METHODS parse_repos_get_punch_card_sta
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_get_punch_card_) TYPE zif_github=>response_repos_get_punch_card_
+      RAISING cx_static_check.
+    METHODS parse_activity_list_watchers_f
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_list_watcher) TYPE zif_github=>response_activity_list_watcher
+      RAISING cx_static_check.
+    METHODS parse_repos_list_tags
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_tags) TYPE zif_github=>response_repos_list_tags
+      RAISING cx_static_check.
+    METHODS parse_repos_list_teams
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_teams) TYPE zif_github=>response_repos_list_teams
+      RAISING cx_static_check.
+    METHODS parse_repos_get_top_paths
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_get_top_paths) TYPE zif_github=>response_repos_get_top_paths
+      RAISING cx_static_check.
+    METHODS parse_repos_get_top_referrers
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_get_top_referre) TYPE zif_github=>response_repos_get_top_referre
+      RAISING cx_static_check.
+    METHODS parse_repos_list_public
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_public) TYPE zif_github=>response_repos_list_public
+      RAISING cx_static_check.
+    METHODS parse_search_code
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_search_code) TYPE zif_github=>response_search_code
+      RAISING cx_static_check.
+    METHODS parse_search_commits
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_search_commits) TYPE zif_github=>response_search_commits
+      RAISING cx_static_check.
+    METHODS parse_search_issues_and_pull_r
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_search_issues_and_pul) TYPE zif_github=>response_search_issues_and_pul
+      RAISING cx_static_check.
+    METHODS parse_search_labels
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_search_labels) TYPE zif_github=>response_search_labels
+      RAISING cx_static_check.
+    METHODS parse_search_repos
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_search_repos) TYPE zif_github=>response_search_repos
+      RAISING cx_static_check.
+    METHODS parse_search_topics
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_search_topics) TYPE zif_github=>response_search_topics
+      RAISING cx_static_check.
+    METHODS parse_search_users
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_search_users) TYPE zif_github=>response_search_users
+      RAISING cx_static_check.
+    METHODS parse_teams_list_discussions_l
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_list_discussi02) TYPE zif_github=>response_teams_list_discussi02
+      RAISING cx_static_check.
+    METHODS parse_teams_list_discussion_01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_list_discussi03) TYPE zif_github=>response_teams_list_discussi03
+      RAISING cx_static_check.
+    METHODS parse_reactions_list_for_tea02
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_reactions_list_for_03) TYPE zif_github=>response_reactions_list_for_03
+      RAISING cx_static_check.
+    METHODS parse_reactions_list_for_tea03
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_reactions_list_for_04) TYPE zif_github=>response_reactions_list_for_04
+      RAISING cx_static_check.
+    METHODS parse_teams_list_pending_inv01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_list_pending_01) TYPE zif_github=>response_teams_list_pending_01
+      RAISING cx_static_check.
+    METHODS parse_teams_list_members_legac
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_list_members_le) TYPE zif_github=>response_teams_list_members_le
+      RAISING cx_static_check.
+    METHODS parse_teams_add_member_legacy
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_add_member_lega) TYPE zif_github=>response_teams_add_member_lega
+      RAISING cx_static_check.
+    METHODS parse_teams_add_or_update_me01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_add_or_update01) TYPE zif_github=>response_teams_add_or_update01
+      RAISING cx_static_check.
+    METHODS parse_teams_list_projects_lega
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_list_projects_l) TYPE zif_github=>response_teams_list_projects_l
+      RAISING cx_static_check.
+    METHODS parse_teams_add_or_update_pr01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_add_or_update02) TYPE zif_github=>response_teams_add_or_update02
+      RAISING cx_static_check.
+    METHODS parse_teams_list_repos_legacy
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_list_repos_lega) TYPE zif_github=>response_teams_list_repos_lega
+      RAISING cx_static_check.
+    METHODS parse_teams_list_child_legacy
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_list_child_lega) TYPE zif_github=>response_teams_list_child_lega
+      RAISING cx_static_check.
+    METHODS parse_users_list_blocked_by_au
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_users_list_blocked_by) TYPE zif_github=>response_users_list_blocked_by
+      RAISING cx_static_check.
+    METHODS parse_users_set_primary_email_
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_users_set_primary_ema) TYPE zif_github=>response_users_set_primary_ema
+      RAISING cx_static_check.
+    METHODS parse_users_list_emails_for_au
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_users_list_emails_for) TYPE zif_github=>response_users_list_emails_for
+      RAISING cx_static_check.
+    METHODS parse_users_add_email_for_auth
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_users_add_email_for_a) TYPE zif_github=>response_users_add_email_for_a
+      RAISING cx_static_check.
+    METHODS parse_users_list_followers_for
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_users_list_followers_) TYPE zif_github=>response_users_list_followers_
+      RAISING cx_static_check.
+    METHODS parse_users_list_followed_by_a
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_users_list_followed_b) TYPE zif_github=>response_users_list_followed_b
+      RAISING cx_static_check.
+    METHODS parse_users_list_gpg_keys_for_
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_users_list_gpg_keys_f) TYPE zif_github=>response_users_list_gpg_keys_f
+      RAISING cx_static_check.
+    METHODS parse_apps_list_installations_
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_apps_list_installat01) TYPE zif_github=>response_apps_list_installat01
+      RAISING cx_static_check.
+    METHODS parse_apps_list_installation_r
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_apps_list_installat02) TYPE zif_github=>response_apps_list_installat02
+      RAISING cx_static_check.
+    METHODS parse_issues_list_for_authenti
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_issues_list_for_authe) TYPE zif_github=>response_issues_list_for_authe
+      RAISING cx_static_check.
+    METHODS parse_users_list_public_ssh_ke
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_users_list_public_ssh) TYPE zif_github=>response_users_list_public_ssh
+      RAISING cx_static_check.
+    METHODS parse_apps_list_subscriptions_
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_apps_list_subscriptio) TYPE zif_github=>response_apps_list_subscriptio
+      RAISING cx_static_check.
+    METHODS parse_apps_list_subscription01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_apps_list_subscript01) TYPE zif_github=>response_apps_list_subscript01
+      RAISING cx_static_check.
+    METHODS parse_orgs_list_memberships_fo
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_orgs_list_memberships) TYPE zif_github=>response_orgs_list_memberships
+      RAISING cx_static_check.
+    METHODS parse_migrations_list_for_auth
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_migrations_list_for_a) TYPE zif_github=>response_migrations_list_for_a
+      RAISING cx_static_check.
+    METHODS parse_migrations_list_repos_01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_migrations_list_rep01) TYPE zif_github=>response_migrations_list_rep01
+      RAISING cx_static_check.
+    METHODS parse_orgs_list_for_authentica
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_orgs_list_for_authent) TYPE zif_github=>response_orgs_list_for_authent
+      RAISING cx_static_check.
+    METHODS parse_users_list_public_emails
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_users_list_public_ema) TYPE zif_github=>response_users_list_public_ema
+      RAISING cx_static_check.
+    METHODS parse_repos_list_for_authentic
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_for_authen) TYPE zif_github=>response_repos_list_for_authen
+      RAISING cx_static_check.
+    METHODS parse_repos_list_invitations_f
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_invitati01) TYPE zif_github=>response_repos_list_invitati01
+      RAISING cx_static_check.
+    METHODS parse_activity_list_repos_star
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_list_repos_s) TYPE zif_github=>response_activity_list_repos_s
+      RAISING cx_static_check.
+    METHODS parse_activity_list_watched_re
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_list_watched) TYPE zif_github=>response_activity_list_watched
+      RAISING cx_static_check.
+    METHODS parse_teams_list_for_authentic
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_teams_list_for_authen) TYPE zif_github=>response_teams_list_for_authen
+      RAISING cx_static_check.
+    METHODS parse_users_list
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_users_list) TYPE zif_github=>response_users_list
+      RAISING cx_static_check.
+    METHODS parse_activity_list_events_for
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_list_events_) TYPE zif_github=>response_activity_list_events_
+      RAISING cx_static_check.
+    METHODS parse_activity_list_org_events
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_list_org_eve) TYPE zif_github=>response_activity_list_org_eve
+      RAISING cx_static_check.
+    METHODS parse_activity_list_public_e02
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_list_publi03) TYPE zif_github=>response_activity_list_publi03
+      RAISING cx_static_check.
+    METHODS parse_users_list_followers_f01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_users_list_follower01) TYPE zif_github=>response_users_list_follower01
+      RAISING cx_static_check.
+    METHODS parse_users_list_following_for
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_users_list_following_) TYPE zif_github=>response_users_list_following_
+      RAISING cx_static_check.
+    METHODS parse_gists_list_for_user
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_gists_list_for_user) TYPE zif_github=>response_gists_list_for_user
+      RAISING cx_static_check.
+    METHODS parse_users_list_gpg_keys_fo01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_users_list_gpg_keys01) TYPE zif_github=>response_users_list_gpg_keys01
+      RAISING cx_static_check.
+    METHODS parse_users_list_public_keys_f
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_users_list_public_key) TYPE zif_github=>response_users_list_public_key
+      RAISING cx_static_check.
+    METHODS parse_orgs_list_for_user
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_orgs_list_for_user) TYPE zif_github=>response_orgs_list_for_user
+      RAISING cx_static_check.
+    METHODS parse_projects_list_for_user
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_projects_list_for_use) TYPE zif_github=>response_projects_list_for_use
+      RAISING cx_static_check.
+    METHODS parse_activity_list_received_e
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_list_receive) TYPE zif_github=>response_activity_list_receive
+      RAISING cx_static_check.
+    METHODS parse_activity_list_received_p
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_list_recei01) TYPE zif_github=>response_activity_list_recei01
+      RAISING cx_static_check.
+    METHODS parse_repos_list_for_user
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_repos_list_for_user) TYPE zif_github=>response_repos_list_for_user
+      RAISING cx_static_check.
+    METHODS parse_activity_list_repos_st01
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_list_repos01) TYPE zif_github=>response_activity_list_repos01
+      RAISING cx_static_check.
+    METHODS parse_activity_list_repos_watc
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(response_activity_list_repos_w) TYPE zif_github=>response_activity_list_repos_w
       RAISING cx_static_check.
 ENDCLASS.
 
@@ -1939,7 +2891,7 @@ CLASS zcl_github IMPLEMENTATION.
     integration-id = mo_json->value_string( iv_prefix && '/id' ).
     integration-slug = mo_json->value_string( iv_prefix && '/slug' ).
     integration-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
-* todo, , owner
+    integration-owner = mo_json->value_string( iv_prefix && '/owner' ).
     integration-name = mo_json->value_string( iv_prefix && '/name' ).
     integration-description = mo_json->value_string( iv_prefix && '/description' ).
     integration-external_url = mo_json->value_string( iv_prefix && '/external_url' ).
@@ -2008,7 +2960,7 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD parse_installation.
     installation-id = mo_json->value_string( iv_prefix && '/id' ).
-* todo, , account
+    installation-account = mo_json->value_string( iv_prefix && '/account' ).
     installation-repository_selection = mo_json->value_string( iv_prefix && '/repository_selection' ).
     installation-access_tokens_url = mo_json->value_string( iv_prefix && '/access_tokens_url' ).
     installation-repositories_url = mo_json->value_string( iv_prefix && '/repositories_url' ).
@@ -2031,7 +2983,7 @@ CLASS zcl_github IMPLEMENTATION.
     installation-has_multiple_single_files = mo_json->value_boolean( iv_prefix && '/has_multiple_single_files' ).
 * todo, array, single_file_paths
     installation-app_slug = mo_json->value_string( iv_prefix && '/app_slug' ).
-* todo, , suspended_by
+    installation-suspended_by = mo_json->value_string( iv_prefix && '/suspended_by' ).
     installation-suspended_at = mo_json->value_string( iv_prefix && '/suspended_at' ).
     installation-contact_email = mo_json->value_string( iv_prefix && '/contact_email' ).
   ENDMETHOD.
@@ -2083,14 +3035,14 @@ CLASS zcl_github IMPLEMENTATION.
     repository-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
     repository-name = mo_json->value_string( iv_prefix && '/name' ).
     repository-full_name = mo_json->value_string( iv_prefix && '/full_name' ).
-* todo, , license
+    repository-license = mo_json->value_string( iv_prefix && '/license' ).
     repository-forks = mo_json->value_string( iv_prefix && '/forks' ).
     repository-permissions-admin = mo_json->value_boolean( iv_prefix && '/permissions/admin' ).
     repository-permissions-pull = mo_json->value_boolean( iv_prefix && '/permissions/pull' ).
     repository-permissions-triage = mo_json->value_boolean( iv_prefix && '/permissions/triage' ).
     repository-permissions-push = mo_json->value_boolean( iv_prefix && '/permissions/push' ).
     repository-permissions-maintain = mo_json->value_boolean( iv_prefix && '/permissions/maintain' ).
-* todo, , owner
+    repository-owner = mo_json->value_string( iv_prefix && '/owner' ).
     repository-private = mo_json->value_boolean( iv_prefix && '/private' ).
     repository-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
     repository-description = mo_json->value_string( iv_prefix && '/description' ).
@@ -2299,7 +3251,7 @@ CLASS zcl_github IMPLEMENTATION.
     application_grant-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     application_grant-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
 * todo, array, scopes
-* todo, , user
+    application_grant-user = mo_json->value_string( iv_prefix && '/user' ).
   ENDMETHOD.
 
   METHOD parse_scoped_installation.
@@ -2327,8 +3279,8 @@ CLASS zcl_github IMPLEMENTATION.
     authorization-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     authorization-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     authorization-fingerprint = mo_json->value_string( iv_prefix && '/fingerprint' ).
-* todo, , user
-* todo, , installation
+    authorization-user = mo_json->value_string( iv_prefix && '/user' ).
+    authorization-installation = mo_json->value_string( iv_prefix && '/installation' ).
   ENDMETHOD.
 
   METHOD parse_code_of_conduct.
@@ -2508,7 +3460,7 @@ CLASS zcl_github IMPLEMENTATION.
     milestone-state = mo_json->value_string( iv_prefix && '/state' ).
     milestone-title = mo_json->value_string( iv_prefix && '/title' ).
     milestone-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, , creator
+    milestone-creator = mo_json->value_string( iv_prefix && '/creator' ).
     milestone-open_issues = mo_json->value_string( iv_prefix && '/open_issues' ).
     milestone-closed_issues = mo_json->value_string( iv_prefix && '/closed_issues' ).
     milestone-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
@@ -2534,11 +3486,11 @@ CLASS zcl_github IMPLEMENTATION.
     issue_simple-state = mo_json->value_string( iv_prefix && '/state' ).
     issue_simple-title = mo_json->value_string( iv_prefix && '/title' ).
     issue_simple-body = mo_json->value_string( iv_prefix && '/body' ).
-* todo, , user
+    issue_simple-user = mo_json->value_string( iv_prefix && '/user' ).
 * todo, array, labels
-* todo, , assignee
+    issue_simple-assignee = mo_json->value_string( iv_prefix && '/assignee' ).
 * todo, array, assignees
-* todo, , milestone
+    issue_simple-milestone = mo_json->value_string( iv_prefix && '/milestone' ).
     issue_simple-locked = mo_json->value_boolean( iv_prefix && '/locked' ).
     issue_simple-active_lock_reason = mo_json->value_string( iv_prefix && '/active_lock_reason' ).
     issue_simple-comments = mo_json->value_string( iv_prefix && '/comments' ).
@@ -2555,7 +3507,7 @@ CLASS zcl_github IMPLEMENTATION.
     issue_simple-body_text = mo_json->value_string( iv_prefix && '/body_text' ).
     issue_simple-timeline_url = mo_json->value_string( iv_prefix && '/timeline_url' ).
     issue_simple-repository = parse_repository( iv_prefix ).
-* todo, , performed_via_github_app
+    issue_simple-performed_via_github_app = mo_json->value_string( iv_prefix && '/performed_via_github_app' ).
   ENDMETHOD.
 
   METHOD parse_reaction_rollup.
@@ -2579,12 +3531,12 @@ CLASS zcl_github IMPLEMENTATION.
     issue_comment-body_text = mo_json->value_string( iv_prefix && '/body_text' ).
     issue_comment-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
     issue_comment-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
-* todo, , user
+    issue_comment-user = mo_json->value_string( iv_prefix && '/user' ).
     issue_comment-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     issue_comment-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     issue_comment-issue_url = mo_json->value_string( iv_prefix && '/issue_url' ).
     issue_comment-author_association = parse_author_association( iv_prefix ).
-* todo, , performed_via_github_app
+    issue_comment-performed_via_github_app = mo_json->value_string( iv_prefix && '/performed_via_github_app' ).
     issue_comment-reactions = parse_reaction_rollup( iv_prefix ).
   ENDMETHOD.
 
@@ -2642,9 +3594,9 @@ CLASS zcl_github IMPLEMENTATION.
     base_gist-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     base_gist-description = mo_json->value_string( iv_prefix && '/description' ).
     base_gist-comments = mo_json->value_string( iv_prefix && '/comments' ).
-* todo, , user
+    base_gist-user = mo_json->value_string( iv_prefix && '/user' ).
     base_gist-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
-* todo, , owner
+    base_gist-owner = mo_json->value_string( iv_prefix && '/owner' ).
     base_gist-truncated = mo_json->value_boolean( iv_prefix && '/truncated' ).
 * todo, array, forks
 * todo, array, history
@@ -2675,7 +3627,7 @@ CLASS zcl_github IMPLEMENTATION.
     gist_comment-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
     gist_comment-url = mo_json->value_string( iv_prefix && '/url' ).
     gist_comment-body = mo_json->value_string( iv_prefix && '/body' ).
-* todo, , user
+    gist_comment-user = mo_json->value_string( iv_prefix && '/user' ).
     gist_comment-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     gist_comment-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     gist_comment-author_association = parse_author_association( iv_prefix ).
@@ -2684,7 +3636,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD parse_gist_commit.
     gist_commit-url = mo_json->value_string( iv_prefix && '/url' ).
     gist_commit-version = mo_json->value_string( iv_prefix && '/version' ).
-* todo, , user
+    gist_commit-user = mo_json->value_string( iv_prefix && '/user' ).
     gist_commit-change_status-total = mo_json->value_string( iv_prefix && '/change_status/total' ).
     gist_commit-change_status-additions = mo_json->value_string( iv_prefix && '/change_status/additions' ).
     gist_commit-change_status-deletions = mo_json->value_string( iv_prefix && '/change_status/deletions' ).
@@ -2709,11 +3661,11 @@ CLASS zcl_github IMPLEMENTATION.
     issue-state = mo_json->value_string( iv_prefix && '/state' ).
     issue-title = mo_json->value_string( iv_prefix && '/title' ).
     issue-body = mo_json->value_string( iv_prefix && '/body' ).
-* todo, , user
+    issue-user = mo_json->value_string( iv_prefix && '/user' ).
 * todo, array, labels
-* todo, , assignee
+    issue-assignee = mo_json->value_string( iv_prefix && '/assignee' ).
 * todo, array, assignees
-* todo, , milestone
+    issue-milestone = mo_json->value_string( iv_prefix && '/milestone' ).
     issue-locked = mo_json->value_boolean( iv_prefix && '/locked' ).
     issue-active_lock_reason = mo_json->value_string( iv_prefix && '/active_lock_reason' ).
     issue-comments = mo_json->value_string( iv_prefix && '/comments' ).
@@ -2725,12 +3677,12 @@ CLASS zcl_github IMPLEMENTATION.
     issue-closed_at = mo_json->value_string( iv_prefix && '/closed_at' ).
     issue-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     issue-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
-* todo, , closed_by
+    issue-closed_by = mo_json->value_string( iv_prefix && '/closed_by' ).
     issue-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
     issue-body_text = mo_json->value_string( iv_prefix && '/body_text' ).
     issue-timeline_url = mo_json->value_string( iv_prefix && '/timeline_url' ).
     issue-repository = parse_repository( iv_prefix ).
-* todo, , performed_via_github_app
+    issue-performed_via_github_app = mo_json->value_string( iv_prefix && '/performed_via_github_app' ).
     issue-author_association = parse_author_association( iv_prefix ).
     issue-reactions = parse_reaction_rollup( iv_prefix ).
   ENDMETHOD.
@@ -3097,7 +4049,7 @@ CLASS zcl_github IMPLEMENTATION.
     team-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
     team-members_url = mo_json->value_string( iv_prefix && '/members_url' ).
     team-repositories_url = mo_json->value_string( iv_prefix && '/repositories_url' ).
-* todo, , parent
+    team-parent = mo_json->value_string( iv_prefix && '/parent' ).
   ENDMETHOD.
 
   METHOD parse_org_membership.
@@ -3106,13 +4058,13 @@ CLASS zcl_github IMPLEMENTATION.
     org_membership-role = mo_json->value_string( iv_prefix && '/role' ).
     org_membership-organization_url = mo_json->value_string( iv_prefix && '/organization_url' ).
     org_membership-organization = parse_organization_simple( iv_prefix ).
-* todo, , user
+    org_membership-user = mo_json->value_string( iv_prefix && '/user' ).
     org_membership-permissions-can_create_repository = mo_json->value_boolean( iv_prefix && '/permissions/can_create_repository' ).
   ENDMETHOD.
 
   METHOD parse_migration.
     migration-id = mo_json->value_string( iv_prefix && '/id' ).
-* todo, , owner
+    migration-owner = mo_json->value_string( iv_prefix && '/owner' ).
     migration-guid = mo_json->value_string( iv_prefix && '/guid' ).
     migration-state = mo_json->value_string( iv_prefix && '/state' ).
     migration-lock_repositories = mo_json->value_boolean( iv_prefix && '/lock_repositories' ).
@@ -3137,7 +4089,7 @@ CLASS zcl_github IMPLEMENTATION.
     project-body = mo_json->value_string( iv_prefix && '/body' ).
     project-number = mo_json->value_string( iv_prefix && '/number' ).
     project-state = mo_json->value_string( iv_prefix && '/state' ).
-* todo, , creator
+    project-creator = mo_json->value_string( iv_prefix && '/creator' ).
     project-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     project-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     project-organization_permission = mo_json->value_string( iv_prefix && '/organization_permission' ).
@@ -3165,7 +4117,7 @@ CLASS zcl_github IMPLEMENTATION.
     team_full-permission = mo_json->value_string( iv_prefix && '/permission' ).
     team_full-members_url = mo_json->value_string( iv_prefix && '/members_url' ).
     team_full-repositories_url = mo_json->value_string( iv_prefix && '/repositories_url' ).
-* todo, , parent
+    team_full-parent = mo_json->value_string( iv_prefix && '/parent' ).
     team_full-members_count = mo_json->value_string( iv_prefix && '/members_count' ).
     team_full-repos_count = mo_json->value_string( iv_prefix && '/repos_count' ).
     team_full-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
@@ -3175,7 +4127,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_team_discussion.
-* todo, , author
+    team_discussion-author = mo_json->value_string( iv_prefix && '/author' ).
     team_discussion-body = mo_json->value_string( iv_prefix && '/body' ).
     team_discussion-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
     team_discussion-body_version = mo_json->value_string( iv_prefix && '/body_version' ).
@@ -3196,7 +4148,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_team_discussion_comment.
-* todo, , author
+    team_discussion_comment-author = mo_json->value_string( iv_prefix && '/author' ).
     team_discussion_comment-body = mo_json->value_string( iv_prefix && '/body' ).
     team_discussion_comment-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
     team_discussion_comment-body_version = mo_json->value_string( iv_prefix && '/body_version' ).
@@ -3214,7 +4166,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD parse_reaction.
     reaction-id = mo_json->value_string( iv_prefix && '/id' ).
     reaction-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
-* todo, , user
+    reaction-user = mo_json->value_string( iv_prefix && '/user' ).
     reaction-content = mo_json->value_string( iv_prefix && '/content' ).
     reaction-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
   ENDMETHOD.
@@ -3251,14 +4203,14 @@ CLASS zcl_github IMPLEMENTATION.
     team_repository-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
     team_repository-name = mo_json->value_string( iv_prefix && '/name' ).
     team_repository-full_name = mo_json->value_string( iv_prefix && '/full_name' ).
-* todo, , license
+    team_repository-license = mo_json->value_string( iv_prefix && '/license' ).
     team_repository-forks = mo_json->value_string( iv_prefix && '/forks' ).
     team_repository-permissions-admin = mo_json->value_boolean( iv_prefix && '/permissions/admin' ).
     team_repository-permissions-pull = mo_json->value_boolean( iv_prefix && '/permissions/pull' ).
     team_repository-permissions-triage = mo_json->value_boolean( iv_prefix && '/permissions/triage' ).
     team_repository-permissions-push = mo_json->value_boolean( iv_prefix && '/permissions/push' ).
     team_repository-permissions-maintain = mo_json->value_boolean( iv_prefix && '/permissions/maintain' ).
-* todo, , owner
+    team_repository-owner = mo_json->value_string( iv_prefix && '/owner' ).
     team_repository-private = mo_json->value_boolean( iv_prefix && '/private' ).
     team_repository-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
     team_repository-description = mo_json->value_string( iv_prefix && '/description' ).
@@ -3343,7 +4295,7 @@ CLASS zcl_github IMPLEMENTATION.
     project_card-id = mo_json->value_string( iv_prefix && '/id' ).
     project_card-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
     project_card-note = mo_json->value_string( iv_prefix && '/note' ).
-* todo, , creator
+    project_card-creator = mo_json->value_string( iv_prefix && '/creator' ).
     project_card-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     project_card-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     project_card-archived = mo_json->value_boolean( iv_prefix && '/archived' ).
@@ -3365,7 +4317,7 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD parse_repository_collaborator_.
     repository_collaborator_permis-permission = mo_json->value_string( iv_prefix && '/permission' ).
-* todo, , user
+    repository_collaborator_permis-user = mo_json->value_string( iv_prefix && '/user' ).
   ENDMETHOD.
 
   METHOD parse_rate_limit.
@@ -3389,7 +4341,7 @@ CLASS zcl_github IMPLEMENTATION.
     full_repository-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
     full_repository-name = mo_json->value_string( iv_prefix && '/name' ).
     full_repository-full_name = mo_json->value_string( iv_prefix && '/full_name' ).
-* todo, , owner
+    full_repository-owner = mo_json->value_string( iv_prefix && '/owner' ).
     full_repository-private = mo_json->value_boolean( iv_prefix && '/private' ).
     full_repository-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
     full_repository-description = mo_json->value_string( iv_prefix && '/description' ).
@@ -3467,8 +4419,8 @@ CLASS zcl_github IMPLEMENTATION.
     full_repository-allow_merge_commit = mo_json->value_boolean( iv_prefix && '/allow_merge_commit' ).
     full_repository-subscribers_count = mo_json->value_string( iv_prefix && '/subscribers_count' ).
     full_repository-network_count = mo_json->value_string( iv_prefix && '/network_count' ).
-* todo, , license
-* todo, , organization
+    full_repository-license = mo_json->value_string( iv_prefix && '/license' ).
+    full_repository-organization = mo_json->value_string( iv_prefix && '/organization' ).
     full_repository-parent = parse_repository( iv_prefix ).
     full_repository-source = parse_repository( iv_prefix ).
     full_repository-forks = mo_json->value_string( iv_prefix && '/forks' ).
@@ -3683,15 +4635,15 @@ CLASS zcl_github IMPLEMENTATION.
     commit-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
     commit-comments_url = mo_json->value_string( iv_prefix && '/comments_url' ).
     commit-commit-url = mo_json->value_string( iv_prefix && '/commit/url' ).
-* todo, , author
-* todo, , committer
+    commit-commit-author = mo_json->value_string( iv_prefix && '/commit/author' ).
+    commit-commit-committer = mo_json->value_string( iv_prefix && '/commit/committer' ).
     commit-commit-message = mo_json->value_string( iv_prefix && '/commit/message' ).
     commit-commit-comment_count = mo_json->value_string( iv_prefix && '/commit/comment_count' ).
     commit-commit-tree-sha = mo_json->value_string( iv_prefix && '/commit/tree/sha' ).
     commit-commit-tree-url = mo_json->value_string( iv_prefix && '/commit/tree/url' ).
     commit-commit-verification = parse_verification( iv_prefix ).
-* todo, , author
-* todo, , committer
+    commit-author = mo_json->value_string( iv_prefix && '/author' ).
+    commit-committer = mo_json->value_string( iv_prefix && '/committer' ).
 * todo, array, parents
     commit-stats-additions = mo_json->value_string( iv_prefix && '/stats/additions' ).
     commit-stats-deletions = mo_json->value_string( iv_prefix && '/stats/deletions' ).
@@ -3759,8 +4711,8 @@ CLASS zcl_github IMPLEMENTATION.
     check_run-output-annotations_url = mo_json->value_string( iv_prefix && '/output/annotations_url' ).
     check_run-name = mo_json->value_string( iv_prefix && '/name' ).
     check_run-check_suite-id = mo_json->value_string( iv_prefix && '/check_suite/id' ).
-* todo, , app
-* todo, , pull_requests
+    check_run-app = mo_json->value_string( iv_prefix && '/app' ).
+    check_run-pull_requests = mo_json->value_string( iv_prefix && '/pull_requests' ).
   ENDMETHOD.
 
   METHOD parse_check_annotation.
@@ -3787,7 +4739,7 @@ CLASS zcl_github IMPLEMENTATION.
     check_suite-before = mo_json->value_string( iv_prefix && '/before' ).
     check_suite-after = mo_json->value_string( iv_prefix && '/after' ).
 * todo, array, pull_requests
-* todo, , app
+    check_suite-app = mo_json->value_string( iv_prefix && '/app' ).
     check_suite-repository = parse_minimal_repository( iv_prefix ).
     check_suite-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     check_suite-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
@@ -3870,7 +4822,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_inst.
-* todo, handle type array
+* todo, handle type array, no item_ref 
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_co01.
@@ -3948,8 +4900,8 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD parse_repository_invitation.
     repository_invitation-id = mo_json->value_string( iv_prefix && '/id' ).
     repository_invitation-repository = parse_minimal_repository( iv_prefix ).
-* todo, , invitee
-* todo, , inviter
+    repository_invitation-invitee = mo_json->value_string( iv_prefix && '/invitee' ).
+    repository_invitation-inviter = mo_json->value_string( iv_prefix && '/inviter' ).
     repository_invitation-permissions = mo_json->value_string( iv_prefix && '/permissions' ).
     repository_invitation-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     repository_invitation-expired = mo_json->value_boolean( iv_prefix && '/expired' ).
@@ -3968,7 +4920,7 @@ CLASS zcl_github IMPLEMENTATION.
     commit_comment-position = mo_json->value_string( iv_prefix && '/position' ).
     commit_comment-line = mo_json->value_string( iv_prefix && '/line' ).
     commit_comment-commit_id = mo_json->value_string( iv_prefix && '/commit_id' ).
-* todo, , user
+    commit_comment-user = mo_json->value_string( iv_prefix && '/user' ).
     commit_comment-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     commit_comment-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     commit_comment-author_association = parse_author_association( iv_prefix ).
@@ -4019,17 +4971,17 @@ CLASS zcl_github IMPLEMENTATION.
     pull_request_simple-state = mo_json->value_string( iv_prefix && '/state' ).
     pull_request_simple-locked = mo_json->value_boolean( iv_prefix && '/locked' ).
     pull_request_simple-title = mo_json->value_string( iv_prefix && '/title' ).
-* todo, , user
+    pull_request_simple-user = mo_json->value_string( iv_prefix && '/user' ).
     pull_request_simple-body = mo_json->value_string( iv_prefix && '/body' ).
 * todo, array, labels
-* todo, , milestone
+    pull_request_simple-milestone = mo_json->value_string( iv_prefix && '/milestone' ).
     pull_request_simple-active_lock_reason = mo_json->value_string( iv_prefix && '/active_lock_reason' ).
     pull_request_simple-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     pull_request_simple-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     pull_request_simple-closed_at = mo_json->value_string( iv_prefix && '/closed_at' ).
     pull_request_simple-merged_at = mo_json->value_string( iv_prefix && '/merged_at' ).
     pull_request_simple-merge_commit_sha = mo_json->value_string( iv_prefix && '/merge_commit_sha' ).
-* todo, , assignee
+    pull_request_simple-assignee = mo_json->value_string( iv_prefix && '/assignee' ).
 * todo, array, assignees
 * todo, array, requested_reviewers
 * todo, array, requested_teams
@@ -4037,12 +4989,12 @@ CLASS zcl_github IMPLEMENTATION.
     pull_request_simple-head-ref = mo_json->value_string( iv_prefix && '/head/ref' ).
     pull_request_simple-head-repo = parse_repository( iv_prefix ).
     pull_request_simple-head-sha = mo_json->value_string( iv_prefix && '/head/sha' ).
-* todo, , user
+    pull_request_simple-head-user = mo_json->value_string( iv_prefix && '/head/user' ).
     pull_request_simple-base-label = mo_json->value_string( iv_prefix && '/base/label' ).
     pull_request_simple-base-ref = mo_json->value_string( iv_prefix && '/base/ref' ).
     pull_request_simple-base-repo = parse_repository( iv_prefix ).
     pull_request_simple-base-sha = mo_json->value_string( iv_prefix && '/base/sha' ).
-* todo, , user
+    pull_request_simple-base-user = mo_json->value_string( iv_prefix && '/base/user' ).
     pull_request_simple-_links-comments = parse_link( iv_prefix ).
     pull_request_simple-_links-commits = parse_link( iv_prefix ).
     pull_request_simple-_links-statuses = parse_link( iv_prefix ).
@@ -4110,12 +5062,12 @@ CLASS zcl_github IMPLEMENTATION.
     community_profile-health_percentage = mo_json->value_string( iv_prefix && '/health_percentage' ).
     community_profile-description = mo_json->value_string( iv_prefix && '/description' ).
     community_profile-documentation = mo_json->value_string( iv_prefix && '/documentation' ).
-* todo, , code_of_conduct
-* todo, , license
-* todo, , contributing
-* todo, , readme
-* todo, , issue_template
-* todo, , pull_request_template
+    community_profile-files-code_of_conduct = mo_json->value_string( iv_prefix && '/files/code_of_conduct' ).
+    community_profile-files-license = mo_json->value_string( iv_prefix && '/files/license' ).
+    community_profile-files-contributing = mo_json->value_string( iv_prefix && '/files/contributing' ).
+    community_profile-files-readme = mo_json->value_string( iv_prefix && '/files/readme' ).
+    community_profile-files-issue_template = mo_json->value_string( iv_prefix && '/files/issue_template' ).
+    community_profile-files-pull_request_template = mo_json->value_string( iv_prefix && '/files/pull_request_template' ).
     community_profile-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     community_profile-content_reports_enabled = mo_json->value_boolean( iv_prefix && '/content_reports_enabled' ).
   ENDMETHOD.
@@ -4167,7 +5119,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_content_directory.
-* todo, handle type array
+* todo, handle type array, no item_ref 
   ENDMETHOD.
 
   METHOD parse_content_file.
@@ -4288,14 +5240,14 @@ CLASS zcl_github IMPLEMENTATION.
     deployment-original_environment = mo_json->value_string( iv_prefix && '/original_environment' ).
     deployment-environment = mo_json->value_string( iv_prefix && '/environment' ).
     deployment-description = mo_json->value_string( iv_prefix && '/description' ).
-* todo, , creator
+    deployment-creator = mo_json->value_string( iv_prefix && '/creator' ).
     deployment-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     deployment-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     deployment-statuses_url = mo_json->value_string( iv_prefix && '/statuses_url' ).
     deployment-repository_url = mo_json->value_string( iv_prefix && '/repository_url' ).
     deployment-transient_environment = mo_json->value_boolean( iv_prefix && '/transient_environment' ).
     deployment-production_environment = mo_json->value_boolean( iv_prefix && '/production_environment' ).
-* todo, , performed_via_github_app
+    deployment-performed_via_github_app = mo_json->value_string( iv_prefix && '/performed_via_github_app' ).
   ENDMETHOD.
 
   METHOD parse_deployment_status.
@@ -4303,7 +5255,7 @@ CLASS zcl_github IMPLEMENTATION.
     deployment_status-id = mo_json->value_string( iv_prefix && '/id' ).
     deployment_status-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
     deployment_status-state = mo_json->value_string( iv_prefix && '/state' ).
-* todo, , creator
+    deployment_status-creator = mo_json->value_string( iv_prefix && '/creator' ).
     deployment_status-description = mo_json->value_string( iv_prefix && '/description' ).
     deployment_status-environment = mo_json->value_string( iv_prefix && '/environment' ).
     deployment_status-target_url = mo_json->value_string( iv_prefix && '/target_url' ).
@@ -4313,7 +5265,7 @@ CLASS zcl_github IMPLEMENTATION.
     deployment_status-repository_url = mo_json->value_string( iv_prefix && '/repository_url' ).
     deployment_status-environment_url = mo_json->value_string( iv_prefix && '/environment_url' ).
     deployment_status-log_url = mo_json->value_string( iv_prefix && '/log_url' ).
-* todo, , performed_via_github_app
+    deployment_status-performed_via_github_app = mo_json->value_string( iv_prefix && '/performed_via_github_app' ).
   ENDMETHOD.
 
   METHOD parse_short_blob.
@@ -4490,17 +5442,17 @@ CLASS zcl_github IMPLEMENTATION.
     issue_event-id = mo_json->value_string( iv_prefix && '/id' ).
     issue_event-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
     issue_event-url = mo_json->value_string( iv_prefix && '/url' ).
-* todo, , actor
+    issue_event-actor = mo_json->value_string( iv_prefix && '/actor' ).
     issue_event-event = mo_json->value_string( iv_prefix && '/event' ).
     issue_event-commit_id = mo_json->value_string( iv_prefix && '/commit_id' ).
     issue_event-commit_url = mo_json->value_string( iv_prefix && '/commit_url' ).
     issue_event-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     issue_event-issue = parse_issue_simple( iv_prefix ).
     issue_event-label = parse_issue_event_label( iv_prefix ).
-* todo, , assignee
-* todo, , assigner
-* todo, , review_requester
-* todo, , requested_reviewer
+    issue_event-assignee = mo_json->value_string( iv_prefix && '/assignee' ).
+    issue_event-assigner = mo_json->value_string( iv_prefix && '/assigner' ).
+    issue_event-review_requester = mo_json->value_string( iv_prefix && '/review_requester' ).
+    issue_event-requested_reviewer = mo_json->value_string( iv_prefix && '/requested_reviewer' ).
     issue_event-requested_team = parse_team( iv_prefix ).
     issue_event-dismissed_review = parse_issue_event_dismissed_re( iv_prefix ).
     issue_event-milestone = parse_issue_event_milestone( iv_prefix ).
@@ -4562,7 +5514,7 @@ CLASS zcl_github IMPLEMENTATION.
     license_content-_links-git = mo_json->value_string( iv_prefix && '/_links/git' ).
     license_content-_links-html = mo_json->value_string( iv_prefix && '/_links/html' ).
     license_content-_links-self = mo_json->value_string( iv_prefix && '/_links/self' ).
-* todo, , license
+    license_content-license = mo_json->value_string( iv_prefix && '/license' ).
   ENDMETHOD.
 
   METHOD parse_pages_source_hash.
@@ -4584,7 +5536,7 @@ CLASS zcl_github IMPLEMENTATION.
     page_build-url = mo_json->value_string( iv_prefix && '/url' ).
     page_build-status = mo_json->value_string( iv_prefix && '/status' ).
     page_build-error-message = mo_json->value_string( iv_prefix && '/error/message' ).
-* todo, , pusher
+    page_build-pusher = mo_json->value_string( iv_prefix && '/pusher' ).
     page_build-commit = mo_json->value_string( iv_prefix && '/commit' ).
     page_build-duration = mo_json->value_string( iv_prefix && '/duration' ).
     page_build-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
@@ -4613,17 +5565,17 @@ CLASS zcl_github IMPLEMENTATION.
     pull_request-state = mo_json->value_string( iv_prefix && '/state' ).
     pull_request-locked = mo_json->value_boolean( iv_prefix && '/locked' ).
     pull_request-title = mo_json->value_string( iv_prefix && '/title' ).
-* todo, , user
+    pull_request-user = mo_json->value_string( iv_prefix && '/user' ).
     pull_request-body = mo_json->value_string( iv_prefix && '/body' ).
 * todo, array, labels
-* todo, , milestone
+    pull_request-milestone = mo_json->value_string( iv_prefix && '/milestone' ).
     pull_request-active_lock_reason = mo_json->value_string( iv_prefix && '/active_lock_reason' ).
     pull_request-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     pull_request-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
     pull_request-closed_at = mo_json->value_string( iv_prefix && '/closed_at' ).
     pull_request-merged_at = mo_json->value_string( iv_prefix && '/merged_at' ).
     pull_request-merge_commit_sha = mo_json->value_string( iv_prefix && '/merge_commit_sha' ).
-* todo, , assignee
+    pull_request-assignee = mo_json->value_string( iv_prefix && '/assignee' ).
 * todo, array, assignees
 * todo, array, requested_reviewers
 * todo, array, requested_teams
@@ -4841,7 +5793,7 @@ CLASS zcl_github IMPLEMENTATION.
     pull_request-base-repo-allow_merge_commit = mo_json->value_boolean( iv_prefix && '/base/repo/allow_merge_commit' ).
     pull_request-base-repo-allow_squash_merge = mo_json->value_boolean( iv_prefix && '/base/repo/allow_squash_merge' ).
     pull_request-base-repo-allow_rebase_merge = mo_json->value_boolean( iv_prefix && '/base/repo/allow_rebase_merge' ).
-* todo, , license
+    pull_request-base-repo-license = mo_json->value_string( iv_prefix && '/base/repo/license' ).
     pull_request-base-repo-pushed_at = mo_json->value_string( iv_prefix && '/base/repo/pushed_at' ).
     pull_request-base-repo-size = mo_json->value_string( iv_prefix && '/base/repo/size' ).
     pull_request-base-repo-ssh_url = mo_json->value_string( iv_prefix && '/base/repo/ssh_url' ).
@@ -4886,7 +5838,7 @@ CLASS zcl_github IMPLEMENTATION.
     pull_request-mergeable = mo_json->value_boolean( iv_prefix && '/mergeable' ).
     pull_request-rebaseable = mo_json->value_boolean( iv_prefix && '/rebaseable' ).
     pull_request-mergeable_state = mo_json->value_string( iv_prefix && '/mergeable_state' ).
-* todo, , merged_by
+    pull_request-merged_by = mo_json->value_string( iv_prefix && '/merged_by' ).
     pull_request-comments = mo_json->value_string( iv_prefix && '/comments' ).
     pull_request-review_comments = mo_json->value_string( iv_prefix && '/review_comments' ).
     pull_request-maintainer_can_modify = mo_json->value_boolean( iv_prefix && '/maintainer_can_modify' ).
@@ -4943,7 +5895,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD parse_pull_request_review.
     pull_request_review-id = mo_json->value_string( iv_prefix && '/id' ).
     pull_request_review-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
-* todo, , user
+    pull_request_review-user = mo_json->value_string( iv_prefix && '/user' ).
     pull_request_review-body = mo_json->value_string( iv_prefix && '/body' ).
     pull_request_review-state = mo_json->value_string( iv_prefix && '/state' ).
     pull_request_review-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
@@ -4969,7 +5921,7 @@ CLASS zcl_github IMPLEMENTATION.
     review_comment-commit_id = mo_json->value_string( iv_prefix && '/commit_id' ).
     review_comment-original_commit_id = mo_json->value_string( iv_prefix && '/original_commit_id' ).
     review_comment-in_reply_to_id = mo_json->value_string( iv_prefix && '/in_reply_to_id' ).
-* todo, , user
+    review_comment-user = mo_json->value_string( iv_prefix && '/user' ).
     review_comment-body = mo_json->value_string( iv_prefix && '/body' ).
     review_comment-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     review_comment-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
@@ -5002,7 +5954,7 @@ CLASS zcl_github IMPLEMENTATION.
     release_asset-download_count = mo_json->value_string( iv_prefix && '/download_count' ).
     release_asset-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     release_asset-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
-* todo, , uploader
+    release_asset-uploader = mo_json->value_string( iv_prefix && '/uploader' ).
   ENDMETHOD.
 
   METHOD parse_release.
@@ -5051,11 +6003,11 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD parse_stargazer.
     stargazer-starred_at = mo_json->value_string( iv_prefix && '/starred_at' ).
-* todo, , user
+    stargazer-user = mo_json->value_string( iv_prefix && '/user' ).
   ENDMETHOD.
 
   METHOD parse_code_frequency_stat.
-* todo, handle type array
+* todo, handle type array, no item_ref 
   ENDMETHOD.
 
   METHOD parse_commit_activity.
@@ -5065,7 +6017,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_contributor_activity.
-* todo, , author
+    contributor_activity-author = mo_json->value_string( iv_prefix && '/author' ).
     contributor_activity-total = mo_json->value_string( iv_prefix && '/total' ).
 * todo, array, weeks
   ENDMETHOD.
@@ -5201,7 +6153,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_search_result_text_match.
-* todo, handle type array
+* todo, handle type array, no item_ref 
   ENDMETHOD.
 
   METHOD parse_code_search_result_item.
@@ -5228,15 +6180,15 @@ CLASS zcl_github IMPLEMENTATION.
     commit_search_result_item-commit-author-name = mo_json->value_string( iv_prefix && '/commit/author/name' ).
     commit_search_result_item-commit-author-email = mo_json->value_string( iv_prefix && '/commit/author/email' ).
     commit_search_result_item-commit-author-date = mo_json->value_string( iv_prefix && '/commit/author/date' ).
-* todo, , committer
+    commit_search_result_item-commit-committer = mo_json->value_string( iv_prefix && '/commit/committer' ).
     commit_search_result_item-commit-comment_count = mo_json->value_string( iv_prefix && '/commit/comment_count' ).
     commit_search_result_item-commit-message = mo_json->value_string( iv_prefix && '/commit/message' ).
     commit_search_result_item-commit-tree-sha = mo_json->value_string( iv_prefix && '/commit/tree/sha' ).
     commit_search_result_item-commit-tree-url = mo_json->value_string( iv_prefix && '/commit/tree/url' ).
     commit_search_result_item-commit-url = mo_json->value_string( iv_prefix && '/commit/url' ).
     commit_search_result_item-commit-verification = parse_verification( iv_prefix ).
-* todo, , author
-* todo, , committer
+    commit_search_result_item-author = mo_json->value_string( iv_prefix && '/author' ).
+    commit_search_result_item-committer = mo_json->value_string( iv_prefix && '/committer' ).
 * todo, array, parents
     commit_search_result_item-repository = parse_minimal_repository( iv_prefix ).
     commit_search_result_item-score = mo_json->value_string( iv_prefix && '/score' ).
@@ -5258,11 +6210,11 @@ CLASS zcl_github IMPLEMENTATION.
     issue_search_result_item-locked = mo_json->value_boolean( iv_prefix && '/locked' ).
     issue_search_result_item-active_lock_reason = mo_json->value_string( iv_prefix && '/active_lock_reason' ).
 * todo, array, assignees
-* todo, , user
+    issue_search_result_item-user = mo_json->value_string( iv_prefix && '/user' ).
 * todo, array, labels
     issue_search_result_item-state = mo_json->value_string( iv_prefix && '/state' ).
-* todo, , assignee
-* todo, , milestone
+    issue_search_result_item-assignee = mo_json->value_string( iv_prefix && '/assignee' ).
+    issue_search_result_item-milestone = mo_json->value_string( iv_prefix && '/milestone' ).
     issue_search_result_item-comments = mo_json->value_string( iv_prefix && '/comments' ).
     issue_search_result_item-created_at = mo_json->value_string( iv_prefix && '/created_at' ).
     issue_search_result_item-updated_at = mo_json->value_string( iv_prefix && '/updated_at' ).
@@ -5281,7 +6233,7 @@ CLASS zcl_github IMPLEMENTATION.
     issue_search_result_item-body_html = mo_json->value_string( iv_prefix && '/body_html' ).
     issue_search_result_item-body_text = mo_json->value_string( iv_prefix && '/body_text' ).
     issue_search_result_item-timeline_url = mo_json->value_string( iv_prefix && '/timeline_url' ).
-* todo, , performed_via_github_app
+    issue_search_result_item-performed_via_github_app = mo_json->value_string( iv_prefix && '/performed_via_github_app' ).
   ENDMETHOD.
 
   METHOD parse_label_search_result_item.
@@ -5301,7 +6253,7 @@ CLASS zcl_github IMPLEMENTATION.
     repo_search_result_item-node_id = mo_json->value_string( iv_prefix && '/node_id' ).
     repo_search_result_item-name = mo_json->value_string( iv_prefix && '/name' ).
     repo_search_result_item-full_name = mo_json->value_string( iv_prefix && '/full_name' ).
-* todo, , owner
+    repo_search_result_item-owner = mo_json->value_string( iv_prefix && '/owner' ).
     repo_search_result_item-private = mo_json->value_boolean( iv_prefix && '/private' ).
     repo_search_result_item-html_url = mo_json->value_string( iv_prefix && '/html_url' ).
     repo_search_result_item-description = mo_json->value_string( iv_prefix && '/description' ).
@@ -5372,7 +6324,7 @@ CLASS zcl_github IMPLEMENTATION.
     repo_search_result_item-has_downloads = mo_json->value_boolean( iv_prefix && '/has_downloads' ).
     repo_search_result_item-archived = mo_json->value_boolean( iv_prefix && '/archived' ).
     repo_search_result_item-disabled = mo_json->value_boolean( iv_prefix && '/disabled' ).
-* todo, , license
+    repo_search_result_item-license = mo_json->value_string( iv_prefix && '/license' ).
     repo_search_result_item-permissions-admin = mo_json->value_boolean( iv_prefix && '/permissions/admin' ).
     repo_search_result_item-permissions-pull = mo_json->value_boolean( iv_prefix && '/permissions/pull' ).
     repo_search_result_item-permissions-push = mo_json->value_boolean( iv_prefix && '/permissions/push' ).
@@ -5602,948 +6554,4553 @@ CLASS zcl_github IMPLEMENTATION.
     key_simple-key = mo_json->value_string( iv_prefix && '/key' ).
   ENDMETHOD.
 
+  METHOD parse_meta_root.
+    response_meta_root-current_user_url = mo_json->value_string( iv_prefix && '/current_user_url' ).
+    response_meta_root-current_user_authorizations_ht = mo_json->value_string( iv_prefix && '/current_user_authorizations_html_url' ).
+    response_meta_root-authorizations_url = mo_json->value_string( iv_prefix && '/authorizations_url' ).
+    response_meta_root-code_search_url = mo_json->value_string( iv_prefix && '/code_search_url' ).
+    response_meta_root-commit_search_url = mo_json->value_string( iv_prefix && '/commit_search_url' ).
+    response_meta_root-emails_url = mo_json->value_string( iv_prefix && '/emails_url' ).
+    response_meta_root-emojis_url = mo_json->value_string( iv_prefix && '/emojis_url' ).
+    response_meta_root-events_url = mo_json->value_string( iv_prefix && '/events_url' ).
+    response_meta_root-feeds_url = mo_json->value_string( iv_prefix && '/feeds_url' ).
+    response_meta_root-followers_url = mo_json->value_string( iv_prefix && '/followers_url' ).
+    response_meta_root-following_url = mo_json->value_string( iv_prefix && '/following_url' ).
+    response_meta_root-gists_url = mo_json->value_string( iv_prefix && '/gists_url' ).
+    response_meta_root-hub_url = mo_json->value_string( iv_prefix && '/hub_url' ).
+    response_meta_root-issue_search_url = mo_json->value_string( iv_prefix && '/issue_search_url' ).
+    response_meta_root-issues_url = mo_json->value_string( iv_prefix && '/issues_url' ).
+    response_meta_root-keys_url = mo_json->value_string( iv_prefix && '/keys_url' ).
+    response_meta_root-label_search_url = mo_json->value_string( iv_prefix && '/label_search_url' ).
+    response_meta_root-notifications_url = mo_json->value_string( iv_prefix && '/notifications_url' ).
+    response_meta_root-organization_url = mo_json->value_string( iv_prefix && '/organization_url' ).
+    response_meta_root-organization_repositories_url = mo_json->value_string( iv_prefix && '/organization_repositories_url' ).
+    response_meta_root-organization_teams_url = mo_json->value_string( iv_prefix && '/organization_teams_url' ).
+    response_meta_root-public_gists_url = mo_json->value_string( iv_prefix && '/public_gists_url' ).
+    response_meta_root-rate_limit_url = mo_json->value_string( iv_prefix && '/rate_limit_url' ).
+    response_meta_root-repository_url = mo_json->value_string( iv_prefix && '/repository_url' ).
+    response_meta_root-repository_search_url = mo_json->value_string( iv_prefix && '/repository_search_url' ).
+    response_meta_root-current_user_repositories_url = mo_json->value_string( iv_prefix && '/current_user_repositories_url' ).
+    response_meta_root-starred_url = mo_json->value_string( iv_prefix && '/starred_url' ).
+    response_meta_root-starred_gists_url = mo_json->value_string( iv_prefix && '/starred_gists_url' ).
+    response_meta_root-topic_search_url = mo_json->value_string( iv_prefix && '/topic_search_url' ).
+    response_meta_root-user_url = mo_json->value_string( iv_prefix && '/user_url' ).
+    response_meta_root-user_organizations_url = mo_json->value_string( iv_prefix && '/user_organizations_url' ).
+    response_meta_root-user_repositories_url = mo_json->value_string( iv_prefix && '/user_repositories_url' ).
+    response_meta_root-user_search_url = mo_json->value_string( iv_prefix && '/user_search_url' ).
+  ENDMETHOD.
+
+  METHOD parse_apps_list_installations.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA installation TYPE zif_github=>installation.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR installation.
+      installation = parse_installation( iv_prefix && '/' && lv_member ).
+      APPEND installation TO response_apps_list_installatio.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_oauth_authorizations_lis.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA application_grant TYPE zif_github=>application_grant.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR application_grant.
+      application_grant = parse_application_grant( iv_prefix && '/' && lv_member ).
+      APPEND application_grant TO response_oauth_authorizations_.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_oauth_authorizations_l01.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA authorization TYPE zif_github=>authorization.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR authorization.
+      authorization = parse_authorization( iv_prefix && '/' && lv_member ).
+      APPEND authorization TO response_oauth_authorization01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_codes_of_conduct_get_all.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA code_of_conduct TYPE zif_github=>code_of_conduct.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR code_of_conduct.
+      code_of_conduct = parse_code_of_conduct( iv_prefix && '/' && lv_member ).
+      APPEND code_of_conduct TO response_codes_of_conduct_get_.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_emojis_get.
+  ENDMETHOD.
+
+  METHOD parse_enterprise_admin_list_se.
+* todo, number, total_count
+* todo, array, organizations
+  ENDMETHOD.
+
+  METHOD parse_enterprise_admin_list_01.
+* todo, number, total_count
+* todo, array, runner_groups
+  ENDMETHOD.
+
+  METHOD parse_enterprise_admin_list_or.
+* todo, number, total_count
+* todo, array, organizations
+  ENDMETHOD.
+
+  METHOD parse_enterprise_admin_list_02.
+* todo, number, total_count
+* todo, array, runners
+  ENDMETHOD.
+
+  METHOD parse_enterprise_admin_list_03.
+* todo, number, total_count
+* todo, array, runners
+  ENDMETHOD.
+
+  METHOD parse_enterprise_admin_list_ru.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA runner_application TYPE zif_github=>runner_application.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR runner_application.
+      runner_application = parse_runner_application( iv_prefix && '/' && lv_member ).
+      APPEND runner_application TO response_enterprise_admin_li05.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_audit_log_get_audit_log.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA audit_log_event TYPE zif_github=>audit_log_event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR audit_log_event.
+      audit_log_event = parse_audit_log_event( iv_prefix && '/' && lv_member ).
+      APPEND audit_log_event TO response_audit_log_get_audit_l.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_list_public_eve.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_public_.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_gists_list.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA base_gist TYPE zif_github=>base_gist.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR base_gist.
+      base_gist = parse_base_gist( iv_prefix && '/' && lv_member ).
+      APPEND base_gist TO response_gists_list.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_gists_list_public.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA base_gist TYPE zif_github=>base_gist.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR base_gist.
+      base_gist = parse_base_gist( iv_prefix && '/' && lv_member ).
+      APPEND base_gist TO response_gists_list_public.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_gists_list_starred.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA base_gist TYPE zif_github=>base_gist.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR base_gist.
+      base_gist = parse_base_gist( iv_prefix && '/' && lv_member ).
+      APPEND base_gist TO response_gists_list_starred.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_gists_list_comments.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA gist_comment TYPE zif_github=>gist_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR gist_comment.
+      gist_comment = parse_gist_comment( iv_prefix && '/' && lv_member ).
+      APPEND gist_comment TO response_gists_list_comments.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_gists_list_commits.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA gist_commit TYPE zif_github=>gist_commit.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR gist_commit.
+      gist_commit = parse_gist_commit( iv_prefix && '/' && lv_member ).
+      APPEND gist_commit TO response_gists_list_commits.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_gists_list_forks.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA gist_simple TYPE zif_github=>gist_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR gist_simple.
+      gist_simple = parse_gist_simple( iv_prefix && '/' && lv_member ).
+      APPEND gist_simple TO response_gists_list_forks.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_gists_check_is_starred.
+  ENDMETHOD.
+
+  METHOD parse_gitignore_get_all_templa.
+* todo, handle type array, no item_ref 
+  ENDMETHOD.
+
+  METHOD parse_apps_list_repos_accessib.
+    response_apps_list_repos_acces-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, array, repositories
+    response_apps_list_repos_acces-repository_selection = mo_json->value_string( iv_prefix && '/repository_selection' ).
+  ENDMETHOD.
+
+  METHOD parse_issues_list.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue TYPE zif_github=>issue.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue.
+      issue = parse_issue( iv_prefix && '/' && lv_member ).
+      APPEND issue TO response_issues_list.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_licenses_get_all_commonl.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA license_simple TYPE zif_github=>license_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR license_simple.
+      license_simple = parse_license_simple( iv_prefix && '/' && lv_member ).
+      APPEND license_simple TO response_licenses_get_all_comm.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_apps_list_plans.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA marketplace_listing_plan TYPE zif_github=>marketplace_listing_plan.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR marketplace_listing_plan.
+      marketplace_listing_plan = parse_marketplace_listing_plan( iv_prefix && '/' && lv_member ).
+      APPEND marketplace_listing_plan TO response_apps_list_plans.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_apps_list_accounts_for_p.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA marketplace_purchase TYPE zif_github=>marketplace_purchase.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR marketplace_purchase.
+      marketplace_purchase = parse_marketplace_purchase( iv_prefix && '/' && lv_member ).
+      APPEND marketplace_purchase TO response_apps_list_accounts_fo.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_apps_list_plans_stubbed.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA marketplace_listing_plan TYPE zif_github=>marketplace_listing_plan.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR marketplace_listing_plan.
+      marketplace_listing_plan = parse_marketplace_listing_plan( iv_prefix && '/' && lv_member ).
+      APPEND marketplace_listing_plan TO response_apps_list_plans_stubb.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_apps_list_accounts_for01.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA marketplace_purchase TYPE zif_github=>marketplace_purchase.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR marketplace_purchase.
+      marketplace_purchase = parse_marketplace_purchase( iv_prefix && '/' && lv_member ).
+      APPEND marketplace_purchase TO response_apps_list_accounts_01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_list_public_e01.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_publi01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_list_notificati.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA thread TYPE zif_github=>thread.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR thread.
+      thread = parse_thread( iv_prefix && '/' && lv_member ).
+      APPEND thread TO response_activity_list_notific.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_mark_notificati.
+    response_activity_mark_notific-message = mo_json->value_string( iv_prefix && '/message' ).
+  ENDMETHOD.
+
+  METHOD parse_orgs_list.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA organization_simple TYPE zif_github=>organization_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR organization_simple.
+      organization_simple = parse_organization_simple( iv_prefix && '/' && lv_member ).
+      APPEND organization_simple TO response_orgs_list.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_actions_list_selected_re.
+* todo, number, total_count
+* todo, array, repositories
+  ENDMETHOD.
+
+  METHOD parse_actions_list_self_hosted.
+* todo, number, total_count
+* todo, array, runner_groups
+  ENDMETHOD.
+
+  METHOD parse_actions_list_repo_access.
+* todo, number, total_count
+* todo, array, repositories
+  ENDMETHOD.
+
+  METHOD parse_actions_list_self_host01.
+* todo, number, total_count
+* todo, array, runners
+  ENDMETHOD.
+
+  METHOD parse_actions_list_self_host02.
+    response_actions_list_self_h02-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, array, runners
+  ENDMETHOD.
+
+  METHOD parse_actions_list_runner_appl.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA runner_application TYPE zif_github=>runner_application.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR runner_application.
+      runner_application = parse_runner_application( iv_prefix && '/' && lv_member ).
+      APPEND runner_application TO response_actions_list_runner_a.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_actions_list_org_secrets.
+    response_actions_list_org_secr-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, array, secrets
+  ENDMETHOD.
+
+  METHOD parse_actions_list_selected_01.
+    response_actions_list_select01-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, array, repositories
+  ENDMETHOD.
+
+  METHOD parse_orgs_get_audit_log.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA audit_log_event TYPE zif_github=>audit_log_event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR audit_log_event.
+      audit_log_event = parse_audit_log_event( iv_prefix && '/' && lv_member ).
+      APPEND audit_log_event TO response_orgs_get_audit_log.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_orgs_list_blocked_users.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_orgs_list_blocked_use.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_orgs_list_saml_sso_autho.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA credential_authorization TYPE zif_github=>credential_authorization.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR credential_authorization.
+      credential_authorization = parse_credential_authorization( iv_prefix && '/' && lv_member ).
+      APPEND credential_authorization TO response_orgs_list_saml_sso_au.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_list_public_org.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_publi02.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_orgs_list_failed_invitat.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA organization_invitation TYPE zif_github=>organization_invitation.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR organization_invitation.
+      organization_invitation = parse_organization_invitation( iv_prefix && '/' && lv_member ).
+      APPEND organization_invitation TO response_orgs_list_failed_invi.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_orgs_list_webhooks.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA org_hook TYPE zif_github=>org_hook.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR org_hook.
+      org_hook = parse_org_hook( iv_prefix && '/' && lv_member ).
+      APPEND org_hook TO response_orgs_list_webhooks.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_orgs_list_app_installati.
+    response_orgs_list_app_install-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, array, installations
+  ENDMETHOD.
+
+  METHOD parse_orgs_list_pending_invita.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA organization_invitation TYPE zif_github=>organization_invitation.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR organization_invitation.
+      organization_invitation = parse_organization_invitation( iv_prefix && '/' && lv_member ).
+      APPEND organization_invitation TO response_orgs_list_pending_inv.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_orgs_list_invitation_tea.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_orgs_list_invitation_.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_issues_list_for_org.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue TYPE zif_github=>issue.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue.
+      issue = parse_issue( iv_prefix && '/' && lv_member ).
+      APPEND issue TO response_issues_list_for_org.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_orgs_list_members.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_orgs_list_members.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_migrations_list_for_org.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA migration TYPE zif_github=>migration.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR migration.
+      migration = parse_migration( iv_prefix && '/' && lv_member ).
+      APPEND migration TO response_migrations_list_for_o.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_migrations_list_repos_fo.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_migrations_list_repos.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_orgs_list_outside_collab.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_orgs_list_outside_col.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_orgs_convert_member_to_o.
+    response_orgs_convert_member_t-message = mo_json->value_string( iv_prefix && '/message' ).
+    response_orgs_convert_member_t-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+  ENDMETHOD.
+
+  METHOD parse_orgs_remove_outside_coll.
+    response_orgs_remove_outside_c-message = mo_json->value_string( iv_prefix && '/message' ).
+    response_orgs_remove_outside_c-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+  ENDMETHOD.
+
+  METHOD parse_projects_list_for_org.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA project TYPE zif_github=>project.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR project.
+      project = parse_project( iv_prefix && '/' && lv_member ).
+      APPEND project TO response_projects_list_for_org.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_orgs_list_public_members.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_orgs_list_public_memb.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_for_org.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_repos_list_for_org.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_teams_list.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_teams_list.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_teams_list_discussions_i.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team_discussion TYPE zif_github=>team_discussion.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team_discussion.
+      team_discussion = parse_team_discussion( iv_prefix && '/' && lv_member ).
+      APPEND team_discussion TO response_teams_list_discussion.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_teams_list_discussion_co.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team_discussion_comment TYPE zif_github=>team_discussion_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team_discussion_comment.
+      team_discussion_comment = parse_team_discussion_comment( iv_prefix && '/' && lv_member ).
+      APPEND team_discussion_comment TO response_teams_list_discussi01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_reactions_list_for_team_.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA reaction TYPE zif_github=>reaction.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR reaction.
+      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
+      APPEND reaction TO response_reactions_list_for_te.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_reactions_list_for_tea01.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA reaction TYPE zif_github=>reaction.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR reaction.
+      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
+      APPEND reaction TO response_reactions_list_for_01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_teams_list_pending_invit.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA organization_invitation TYPE zif_github=>organization_invitation.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR organization_invitation.
+      organization_invitation = parse_organization_invitation( iv_prefix && '/' && lv_member ).
+      APPEND organization_invitation TO response_teams_list_pending_in.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_teams_list_members_in_or.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_teams_list_members_in.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_teams_add_or_update_memb.
+    response_teams_add_or_update_m-message = mo_json->value_string( iv_prefix && '/message' ).
+* todo, array, errors
+  ENDMETHOD.
+
+  METHOD parse_teams_list_projects_in_o.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team_project TYPE zif_github=>team_project.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team_project.
+      team_project = parse_team_project( iv_prefix && '/' && lv_member ).
+      APPEND team_project TO response_teams_list_projects_i.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_teams_add_or_update_proj.
+    response_teams_add_or_update_p-message = mo_json->value_string( iv_prefix && '/message' ).
+    response_teams_add_or_update_p-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+  ENDMETHOD.
+
+  METHOD parse_teams_list_repos_in_org.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_teams_list_repos_in_o.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_teams_list_child_in_org.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_teams_list_child_in_o.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_projects_delete_card.
+    response_projects_delete_card-message = mo_json->value_string( iv_prefix && '/message' ).
+    response_projects_delete_card-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+* todo, array, errors
+  ENDMETHOD.
+
+  METHOD parse_projects_move_card.
+  ENDMETHOD.
+
+  METHOD parse_projects_move_card01.
+    response_projects_move_card01-message = mo_json->value_string( iv_prefix && '/message' ).
+    response_projects_move_card01-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+* todo, array, errors
+  ENDMETHOD.
+
+  METHOD parse_projects_move_card02.
+    response_projects_move_card02-code = mo_json->value_string( iv_prefix && '/code' ).
+    response_projects_move_card02-message = mo_json->value_string( iv_prefix && '/message' ).
+    response_projects_move_card02-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+* todo, array, errors
+  ENDMETHOD.
+
+  METHOD parse_projects_list_cards.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA project_card TYPE zif_github=>project_card.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR project_card.
+      project_card = parse_project_card( iv_prefix && '/' && lv_member ).
+      APPEND project_card TO response_projects_list_cards.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_projects_create_card.
+    response_projects_create_card-code = mo_json->value_string( iv_prefix && '/code' ).
+    response_projects_create_card-message = mo_json->value_string( iv_prefix && '/message' ).
+    response_projects_create_card-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+* todo, array, errors
+  ENDMETHOD.
+
+  METHOD parse_projects_move_column.
+  ENDMETHOD.
+
+  METHOD parse_projects_update.
+    response_projects_update-message = mo_json->value_string( iv_prefix && '/message' ).
+    response_projects_update-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+* todo, array, errors
+  ENDMETHOD.
+
+  METHOD parse_projects_delete.
+    response_projects_delete-message = mo_json->value_string( iv_prefix && '/message' ).
+    response_projects_delete-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+* todo, array, errors
+  ENDMETHOD.
+
+  METHOD parse_projects_list_collaborat.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_projects_list_collabo.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_projects_list_columns.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA project_column TYPE zif_github=>project_column.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR project_column.
+      project_column = parse_project_column( iv_prefix && '/' && lv_member ).
+      APPEND project_column TO response_projects_list_columns.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_delete.
+    response_repos_delete-message = mo_json->value_string( iv_prefix && '/message' ).
+    response_repos_delete-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+  ENDMETHOD.
+
+  METHOD parse_actions_list_artifacts_f.
+    response_actions_list_artifact-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, array, artifacts
+  ENDMETHOD.
+
+  METHOD parse_actions_list_self_host03.
+    response_actions_list_self_h03-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, array, runners
+  ENDMETHOD.
+
+  METHOD parse_actions_list_runner_ap01.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA runner_application TYPE zif_github=>runner_application.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR runner_application.
+      runner_application = parse_runner_application( iv_prefix && '/' && lv_member ).
+      APPEND runner_application TO response_actions_list_runner01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_actions_list_workflow_ru.
+    response_actions_list_workflow-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, array, workflow_runs
+  ENDMETHOD.
+
+  METHOD parse_actions_list_workflow_01.
+    response_actions_list_workfl01-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, array, artifacts
+  ENDMETHOD.
+
+  METHOD parse_actions_list_jobs_for_wo.
+    response_actions_list_jobs_for-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, array, jobs
+  ENDMETHOD.
+
+  METHOD parse_actions_list_repo_secret.
+    response_actions_list_repo_sec-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, array, secrets
+  ENDMETHOD.
+
+  METHOD parse_actions_list_repo_workfl.
+    response_actions_list_repo_wor-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, array, workflows
+  ENDMETHOD.
+
+  METHOD parse_actions_list_workflow_02.
+    response_actions_list_workfl02-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, array, workflow_runs
+  ENDMETHOD.
+
+  METHOD parse_issues_list_assignees.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_issues_list_assignees.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_branches.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA short_branch TYPE zif_github=>short_branch.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR short_branch.
+      short_branch = parse_short_branch( iv_prefix && '/' && lv_member ).
+      APPEND short_branch TO response_repos_list_branches.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_get_all_status_che.
+* todo, handle type array, no item_ref 
+  ENDMETHOD.
+
+  METHOD parse_repos_add_status_check_c.
+* todo, handle type array, no item_ref 
+  ENDMETHOD.
+
+  METHOD parse_repos_set_status_check_c.
+* todo, handle type array, no item_ref 
+  ENDMETHOD.
+
+  METHOD parse_repos_remove_status_chec.
+* todo, handle type array, no item_ref 
+  ENDMETHOD.
+
+  METHOD parse_repos_get_apps_with_acce.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA integration TYPE zif_github=>integration.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR integration.
+      integration = parse_integration( iv_prefix && '/' && lv_member ).
+      APPEND integration TO response_repos_get_apps_with_a.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_add_app_access_res.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA integration TYPE zif_github=>integration.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR integration.
+      integration = parse_integration( iv_prefix && '/' && lv_member ).
+      APPEND integration TO response_repos_add_app_access_.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_set_app_access_res.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA integration TYPE zif_github=>integration.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR integration.
+      integration = parse_integration( iv_prefix && '/' && lv_member ).
+      APPEND integration TO response_repos_set_app_access_.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_remove_app_access_.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA integration TYPE zif_github=>integration.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR integration.
+      integration = parse_integration( iv_prefix && '/' && lv_member ).
+      APPEND integration TO response_repos_remove_app_acce.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_get_teams_with_acc.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_repos_get_teams_with_.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_add_team_access_re.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_repos_add_team_access.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_set_team_access_re.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_repos_set_team_access.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_remove_team_access.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_repos_remove_team_acc.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_get_users_with_acc.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_repos_get_users_with_.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_add_user_access_re.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_repos_add_user_access.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_set_user_access_re.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_repos_set_user_access.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_remove_user_access.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_repos_remove_user_acc.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_checks_list_annotations.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA check_annotation TYPE zif_github=>check_annotation.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR check_annotation.
+      check_annotation = parse_check_annotation( iv_prefix && '/' && lv_member ).
+      APPEND check_annotation TO response_checks_list_annotatio.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_checks_list_for_suite.
+    response_checks_list_for_suite-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, array, check_runs
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_list_alert.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA code_scanning_alert_code_scann TYPE zif_github=>code_scanning_alert_code_scann.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR code_scanning_alert_code_scann.
+      code_scanning_alert_code_scann = parse_code_scanning_alert_code( iv_prefix && '/' && lv_member ).
+      APPEND code_scanning_alert_code_scann TO response_code_scanning_list_al.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_code_scanning_list_recen.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA code_scanning_analysis_code_sc TYPE zif_github=>code_scanning_analysis_code_sc.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR code_scanning_analysis_code_sc.
+      code_scanning_analysis_code_sc = parse_code_scanning_analysis03( iv_prefix && '/' && lv_member ).
+      APPEND code_scanning_analysis_code_sc TO response_code_scanning_list_re.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_collaborators.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA collaborator TYPE zif_github=>collaborator.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR collaborator.
+      collaborator = parse_collaborator( iv_prefix && '/' && lv_member ).
+      APPEND collaborator TO response_repos_list_collaborat.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_commit_commen.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA commit_comment TYPE zif_github=>commit_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR commit_comment.
+      commit_comment = parse_commit_comment( iv_prefix && '/' && lv_member ).
+      APPEND commit_comment TO response_repos_list_commit_com.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_reactions_list_for_commi.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA reaction TYPE zif_github=>reaction.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR reaction.
+      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
+      APPEND reaction TO response_reactions_list_for_co.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_commits.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA commit TYPE zif_github=>commit.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR commit.
+      commit = parse_commit( iv_prefix && '/' && lv_member ).
+      APPEND commit TO response_repos_list_commits.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_branches_for_.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA branch_short TYPE zif_github=>branch_short.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR branch_short.
+      branch_short = parse_branch_short( iv_prefix && '/' && lv_member ).
+      APPEND branch_short TO response_repos_list_branches_f.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_comments_for_.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA commit_comment TYPE zif_github=>commit_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR commit_comment.
+      commit_comment = parse_commit_comment( iv_prefix && '/' && lv_member ).
+      APPEND commit_comment TO response_repos_list_comments_f.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_pull_requests.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA pull_request_simple TYPE zif_github=>pull_request_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR pull_request_simple.
+      pull_request_simple = parse_pull_request_simple( iv_prefix && '/' && lv_member ).
+      APPEND pull_request_simple TO response_repos_list_pull_reque.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_checks_list_for_ref.
+    response_checks_list_for_ref-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, array, check_runs
+  ENDMETHOD.
+
+  METHOD parse_checks_list_suites_for_r.
+    response_checks_list_suites_fo-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, array, check_suites
+  ENDMETHOD.
+
+  METHOD parse_repos_list_commit_status.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA status TYPE zif_github=>status.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR status.
+      status = parse_status( iv_prefix && '/' && lv_member ).
+      APPEND status TO response_repos_list_commit_sta.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_contributors.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA contributor TYPE zif_github=>contributor.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR contributor.
+      contributor = parse_contributor( iv_prefix && '/' && lv_member ).
+      APPEND contributor TO response_repos_list_contributo.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_deployments.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA deployment TYPE zif_github=>deployment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR deployment.
+      deployment = parse_deployment( iv_prefix && '/' && lv_member ).
+      APPEND deployment TO response_repos_list_deployment.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_create_deployment.
+    response_repos_create_deployme-message = mo_json->value_string( iv_prefix && '/message' ).
+  ENDMETHOD.
+
+  METHOD parse_repos_create_deploymen01.
+    response_repos_create_deploy01-message = mo_json->value_string( iv_prefix && '/message' ).
+    response_repos_create_deploy01-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+  ENDMETHOD.
+
+  METHOD parse_repos_list_deployment_st.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA deployment_status TYPE zif_github=>deployment_status.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR deployment_status.
+      deployment_status = parse_deployment_status( iv_prefix && '/' && lv_member ).
+      APPEND deployment_status TO response_repos_list_deployme01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_list_repo_event.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_repo_ev.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_forks.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_repos_list_forks.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_git_list_matching_refs.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA git_ref TYPE zif_github=>git_ref.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR git_ref.
+      git_ref = parse_git_ref( iv_prefix && '/' && lv_member ).
+      APPEND git_ref TO response_git_list_matching_ref.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_webhooks.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA hook TYPE zif_github=>hook.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR hook.
+      hook = parse_hook( iv_prefix && '/' && lv_member ).
+      APPEND hook TO response_repos_list_webhooks.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_migrations_get_commit_au.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA porter_author TYPE zif_github=>porter_author.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR porter_author.
+      porter_author = parse_porter_author( iv_prefix && '/' && lv_member ).
+      APPEND porter_author TO response_migrations_get_commit.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_migrations_get_large_fil.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA porter_large_file TYPE zif_github=>porter_large_file.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR porter_large_file.
+      porter_large_file = parse_porter_large_file( iv_prefix && '/' && lv_member ).
+      APPEND porter_large_file TO response_migrations_get_large_.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_invitations.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA repository_invitation TYPE zif_github=>repository_invitation.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR repository_invitation.
+      repository_invitation = parse_repository_invitation( iv_prefix && '/' && lv_member ).
+      APPEND repository_invitation TO response_repos_list_invitation.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_issues_list_for_repo.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue_simple TYPE zif_github=>issue_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue_simple.
+      issue_simple = parse_issue_simple( iv_prefix && '/' && lv_member ).
+      APPEND issue_simple TO response_issues_list_for_repo.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_issues_list_comments_for.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue_comment TYPE zif_github=>issue_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue_comment.
+      issue_comment = parse_issue_comment( iv_prefix && '/' && lv_member ).
+      APPEND issue_comment TO response_issues_list_comments_.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_reactions_list_for_issue.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA reaction TYPE zif_github=>reaction.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR reaction.
+      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
+      APPEND reaction TO response_reactions_list_for_is.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_issues_list_events_for_r.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue_event TYPE zif_github=>issue_event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue_event.
+      issue_event = parse_issue_event( iv_prefix && '/' && lv_member ).
+      APPEND issue_event TO response_issues_list_events_fo.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_issues_list_comments.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue_comment TYPE zif_github=>issue_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue_comment.
+      issue_comment = parse_issue_comment( iv_prefix && '/' && lv_member ).
+      APPEND issue_comment TO response_issues_list_comments.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_issues_list_events.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue_event_for_issue TYPE zif_github=>issue_event_for_issue.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue_event_for_issue.
+      issue_event_for_issue = parse_issue_event_for_issue( iv_prefix && '/' && lv_member ).
+      APPEND issue_event_for_issue TO response_issues_list_events.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_issues_list_labels_on_is.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA label TYPE zif_github=>label.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR label.
+      label = parse_label( iv_prefix && '/' && lv_member ).
+      APPEND label TO response_issues_list_labels_on.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_issues_add_labels.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA label TYPE zif_github=>label.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR label.
+      label = parse_label( iv_prefix && '/' && lv_member ).
+      APPEND label TO response_issues_add_labels.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_issues_set_labels.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA label TYPE zif_github=>label.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR label.
+      label = parse_label( iv_prefix && '/' && lv_member ).
+      APPEND label TO response_issues_set_labels.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_issues_remove_label.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA label TYPE zif_github=>label.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR label.
+      label = parse_label( iv_prefix && '/' && lv_member ).
+      APPEND label TO response_issues_remove_label.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_reactions_list_for_iss01.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA reaction TYPE zif_github=>reaction.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR reaction.
+      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
+      APPEND reaction TO response_reactions_list_for_02.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_issues_list_events_for_t.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue_event_for_issue TYPE zif_github=>issue_event_for_issue.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue_event_for_issue.
+      issue_event_for_issue = parse_issue_event_for_issue( iv_prefix && '/' && lv_member ).
+      APPEND issue_event_for_issue TO response_issues_list_events_01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_deploy_keys.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA deploy_key TYPE zif_github=>deploy_key.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR deploy_key.
+      deploy_key = parse_deploy_key( iv_prefix && '/' && lv_member ).
+      APPEND deploy_key TO response_repos_list_deploy_key.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_issues_list_labels_for_r.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA label TYPE zif_github=>label.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR label.
+      label = parse_label( iv_prefix && '/' && lv_member ).
+      APPEND label TO response_issues_list_labels_fo.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_merge.
+    response_repos_merge-message = mo_json->value_string( iv_prefix && '/message' ).
+    response_repos_merge-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+  ENDMETHOD.
+
+  METHOD parse_repos_merge01.
+    response_repos_merge01-message = mo_json->value_string( iv_prefix && '/message' ).
+    response_repos_merge01-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+  ENDMETHOD.
+
+  METHOD parse_issues_list_milestones.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA milestone TYPE zif_github=>milestone.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR milestone.
+      milestone = parse_milestone( iv_prefix && '/' && lv_member ).
+      APPEND milestone TO response_issues_list_milestone.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_issues_list_labels_for_m.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA label TYPE zif_github=>label.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR label.
+      label = parse_label( iv_prefix && '/' && lv_member ).
+      APPEND label TO response_issues_list_labels_01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_list_repo_notif.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA thread TYPE zif_github=>thread.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR thread.
+      thread = parse_thread( iv_prefix && '/' && lv_member ).
+      APPEND thread TO response_activity_list_repo_no.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_pages_builds.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA page_build TYPE zif_github=>page_build.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR page_build.
+      page_build = parse_page_build( iv_prefix && '/' && lv_member ).
+      APPEND page_build TO response_repos_list_pages_buil.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_projects_list_for_repo.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA project TYPE zif_github=>project.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR project.
+      project = parse_project( iv_prefix && '/' && lv_member ).
+      APPEND project TO response_projects_list_for_rep.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_pulls_list.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA pull_request_simple TYPE zif_github=>pull_request_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR pull_request_simple.
+      pull_request_simple = parse_pull_request_simple( iv_prefix && '/' && lv_member ).
+      APPEND pull_request_simple TO response_pulls_list.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_pulls_list_review_commen.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA pull_request_review_comment TYPE zif_github=>pull_request_review_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR pull_request_review_comment.
+      pull_request_review_comment = parse_pull_request_review_comm( iv_prefix && '/' && lv_member ).
+      APPEND pull_request_review_comment TO response_pulls_list_review_com.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_reactions_list_for_pull_.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA reaction TYPE zif_github=>reaction.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR reaction.
+      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
+      APPEND reaction TO response_reactions_list_for_pu.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_pulls_list_review_comm01.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA pull_request_review_comment TYPE zif_github=>pull_request_review_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR pull_request_review_comment.
+      pull_request_review_comment = parse_pull_request_review_comm( iv_prefix && '/' && lv_member ).
+      APPEND pull_request_review_comment TO response_pulls_list_review_c01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_pulls_list_commits.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA commit TYPE zif_github=>commit.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR commit.
+      commit = parse_commit( iv_prefix && '/' && lv_member ).
+      APPEND commit TO response_pulls_list_commits.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_pulls_list_files.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA diff_entry TYPE zif_github=>diff_entry.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR diff_entry.
+      diff_entry = parse_diff_entry( iv_prefix && '/' && lv_member ).
+      APPEND diff_entry TO response_pulls_list_files.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_pulls_merge.
+    response_pulls_merge-message = mo_json->value_string( iv_prefix && '/message' ).
+    response_pulls_merge-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+  ENDMETHOD.
+
+  METHOD parse_pulls_merge01.
+    response_pulls_merge01-message = mo_json->value_string( iv_prefix && '/message' ).
+    response_pulls_merge01-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+  ENDMETHOD.
+
+  METHOD parse_pulls_list_reviews.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA pull_request_review TYPE zif_github=>pull_request_review.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR pull_request_review.
+      pull_request_review = parse_pull_request_review( iv_prefix && '/' && lv_member ).
+      APPEND pull_request_review TO response_pulls_list_reviews.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_pulls_list_comments_for_.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA review_comment TYPE zif_github=>review_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR review_comment.
+      review_comment = parse_review_comment( iv_prefix && '/' && lv_member ).
+      APPEND review_comment TO response_pulls_list_comments_f.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_pulls_update_branch.
+    response_pulls_update_branch-message = mo_json->value_string( iv_prefix && '/message' ).
+    response_pulls_update_branch-url = mo_json->value_string( iv_prefix && '/url' ).
+  ENDMETHOD.
+
+  METHOD parse_repos_list_releases.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA release TYPE zif_github=>release.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR release.
+      release = parse_release( iv_prefix && '/' && lv_member ).
+      APPEND release TO response_repos_list_releases.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_release_asset.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA release_asset TYPE zif_github=>release_asset.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR release_asset.
+      release_asset = parse_release_asset( iv_prefix && '/' && lv_member ).
+      APPEND release_asset TO response_repos_list_release_as.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_secret_scanning_list_ale.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA secret_scanning_alert TYPE zif_github=>secret_scanning_alert.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR secret_scanning_alert.
+      secret_scanning_alert = parse_secret_scanning_alert( iv_prefix && '/' && lv_member ).
+      APPEND secret_scanning_alert TO response_secret_scanning_list_.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_list_stargazers.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_activity_list_stargaz.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_get_code_frequency.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA code_frequency_stat TYPE zif_github=>code_frequency_stat.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR code_frequency_stat.
+      code_frequency_stat = parse_code_frequency_stat( iv_prefix && '/' && lv_member ).
+      APPEND code_frequency_stat TO response_repos_get_code_freque.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_get_commit_activit.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA commit_activity TYPE zif_github=>commit_activity.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR commit_activity.
+      commit_activity = parse_commit_activity( iv_prefix && '/' && lv_member ).
+      APPEND commit_activity TO response_repos_get_commit_acti.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_get_contributors_s.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA contributor_activity TYPE zif_github=>contributor_activity.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR contributor_activity.
+      contributor_activity = parse_contributor_activity( iv_prefix && '/' && lv_member ).
+      APPEND contributor_activity TO response_repos_get_contributor.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_get_punch_card_sta.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA code_frequency_stat TYPE zif_github=>code_frequency_stat.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR code_frequency_stat.
+      code_frequency_stat = parse_code_frequency_stat( iv_prefix && '/' && lv_member ).
+      APPEND code_frequency_stat TO response_repos_get_punch_card_.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_list_watchers_f.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_activity_list_watcher.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_tags.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA tag TYPE zif_github=>tag.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR tag.
+      tag = parse_tag( iv_prefix && '/' && lv_member ).
+      APPEND tag TO response_repos_list_tags.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_teams.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_repos_list_teams.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_get_top_paths.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA content_traffic TYPE zif_github=>content_traffic.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR content_traffic.
+      content_traffic = parse_content_traffic( iv_prefix && '/' && lv_member ).
+      APPEND content_traffic TO response_repos_get_top_paths.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_get_top_referrers.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA referrer_traffic TYPE zif_github=>referrer_traffic.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR referrer_traffic.
+      referrer_traffic = parse_referrer_traffic( iv_prefix && '/' && lv_member ).
+      APPEND referrer_traffic TO response_repos_get_top_referre.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_public.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_repos_list_public.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_search_code.
+    response_search_code-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+    response_search_code-incomplete_results = mo_json->value_boolean( iv_prefix && '/incomplete_results' ).
+* todo, array, items
+  ENDMETHOD.
+
+  METHOD parse_search_commits.
+    response_search_commits-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+    response_search_commits-incomplete_results = mo_json->value_boolean( iv_prefix && '/incomplete_results' ).
+* todo, array, items
+  ENDMETHOD.
+
+  METHOD parse_search_issues_and_pull_r.
+    response_search_issues_and_pul-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+    response_search_issues_and_pul-incomplete_results = mo_json->value_boolean( iv_prefix && '/incomplete_results' ).
+* todo, array, items
+  ENDMETHOD.
+
+  METHOD parse_search_labels.
+    response_search_labels-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+    response_search_labels-incomplete_results = mo_json->value_boolean( iv_prefix && '/incomplete_results' ).
+* todo, array, items
+  ENDMETHOD.
+
+  METHOD parse_search_repos.
+    response_search_repos-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+    response_search_repos-incomplete_results = mo_json->value_boolean( iv_prefix && '/incomplete_results' ).
+* todo, array, items
+  ENDMETHOD.
+
+  METHOD parse_search_topics.
+    response_search_topics-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+    response_search_topics-incomplete_results = mo_json->value_boolean( iv_prefix && '/incomplete_results' ).
+* todo, array, items
+  ENDMETHOD.
+
+  METHOD parse_search_users.
+    response_search_users-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+    response_search_users-incomplete_results = mo_json->value_boolean( iv_prefix && '/incomplete_results' ).
+* todo, array, items
+  ENDMETHOD.
+
+  METHOD parse_teams_list_discussions_l.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team_discussion TYPE zif_github=>team_discussion.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team_discussion.
+      team_discussion = parse_team_discussion( iv_prefix && '/' && lv_member ).
+      APPEND team_discussion TO response_teams_list_discussi02.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_teams_list_discussion_01.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team_discussion_comment TYPE zif_github=>team_discussion_comment.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team_discussion_comment.
+      team_discussion_comment = parse_team_discussion_comment( iv_prefix && '/' && lv_member ).
+      APPEND team_discussion_comment TO response_teams_list_discussi03.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_reactions_list_for_tea02.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA reaction TYPE zif_github=>reaction.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR reaction.
+      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
+      APPEND reaction TO response_reactions_list_for_03.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_reactions_list_for_tea03.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA reaction TYPE zif_github=>reaction.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR reaction.
+      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
+      APPEND reaction TO response_reactions_list_for_04.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_teams_list_pending_inv01.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA organization_invitation TYPE zif_github=>organization_invitation.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR organization_invitation.
+      organization_invitation = parse_organization_invitation( iv_prefix && '/' && lv_member ).
+      APPEND organization_invitation TO response_teams_list_pending_01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_teams_list_members_legac.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_teams_list_members_le.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_teams_add_member_legacy.
+    response_teams_add_member_lega-message = mo_json->value_string( iv_prefix && '/message' ).
+* todo, array, errors
+    response_teams_add_member_lega-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+  ENDMETHOD.
+
+  METHOD parse_teams_add_or_update_me01.
+    response_teams_add_or_update01-message = mo_json->value_string( iv_prefix && '/message' ).
+* todo, array, errors
+    response_teams_add_or_update01-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+  ENDMETHOD.
+
+  METHOD parse_teams_list_projects_lega.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team_project TYPE zif_github=>team_project.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team_project.
+      team_project = parse_team_project( iv_prefix && '/' && lv_member ).
+      APPEND team_project TO response_teams_list_projects_l.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_teams_add_or_update_pr01.
+    response_teams_add_or_update02-message = mo_json->value_string( iv_prefix && '/message' ).
+    response_teams_add_or_update02-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
+  ENDMETHOD.
+
+  METHOD parse_teams_list_repos_legacy.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_teams_list_repos_lega.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_teams_list_child_legacy.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team TYPE zif_github=>team.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team.
+      team = parse_team( iv_prefix && '/' && lv_member ).
+      APPEND team TO response_teams_list_child_lega.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_users_list_blocked_by_au.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_users_list_blocked_by.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_users_set_primary_email_.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA email TYPE zif_github=>email.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR email.
+      email = parse_email( iv_prefix && '/' && lv_member ).
+      APPEND email TO response_users_set_primary_ema.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_users_list_emails_for_au.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA email TYPE zif_github=>email.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR email.
+      email = parse_email( iv_prefix && '/' && lv_member ).
+      APPEND email TO response_users_list_emails_for.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_users_add_email_for_auth.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA email TYPE zif_github=>email.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR email.
+      email = parse_email( iv_prefix && '/' && lv_member ).
+      APPEND email TO response_users_add_email_for_a.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_users_list_followers_for.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_users_list_followers_.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_users_list_followed_by_a.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_users_list_followed_b.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_users_list_gpg_keys_for_.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA gpg_key TYPE zif_github=>gpg_key.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR gpg_key.
+      gpg_key = parse_gpg_key( iv_prefix && '/' && lv_member ).
+      APPEND gpg_key TO response_users_list_gpg_keys_f.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_apps_list_installations_.
+    response_apps_list_installat01-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+* todo, array, installations
+  ENDMETHOD.
+
+  METHOD parse_apps_list_installation_r.
+    response_apps_list_installat02-total_count = mo_json->value_string( iv_prefix && '/total_count' ).
+    response_apps_list_installat02-repository_selection = mo_json->value_string( iv_prefix && '/repository_selection' ).
+* todo, array, repositories
+  ENDMETHOD.
+
+  METHOD parse_issues_list_for_authenti.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA issue TYPE zif_github=>issue.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR issue.
+      issue = parse_issue( iv_prefix && '/' && lv_member ).
+      APPEND issue TO response_issues_list_for_authe.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_users_list_public_ssh_ke.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA key TYPE zif_github=>key.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR key.
+      key = parse_key( iv_prefix && '/' && lv_member ).
+      APPEND key TO response_users_list_public_ssh.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_apps_list_subscriptions_.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA user_marketplace_purchase TYPE zif_github=>user_marketplace_purchase.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR user_marketplace_purchase.
+      user_marketplace_purchase = parse_user_marketplace_purchas( iv_prefix && '/' && lv_member ).
+      APPEND user_marketplace_purchase TO response_apps_list_subscriptio.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_apps_list_subscription01.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA user_marketplace_purchase TYPE zif_github=>user_marketplace_purchase.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR user_marketplace_purchase.
+      user_marketplace_purchase = parse_user_marketplace_purchas( iv_prefix && '/' && lv_member ).
+      APPEND user_marketplace_purchase TO response_apps_list_subscript01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_orgs_list_memberships_fo.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA org_membership TYPE zif_github=>org_membership.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR org_membership.
+      org_membership = parse_org_membership( iv_prefix && '/' && lv_member ).
+      APPEND org_membership TO response_orgs_list_memberships.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_migrations_list_for_auth.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA migration TYPE zif_github=>migration.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR migration.
+      migration = parse_migration( iv_prefix && '/' && lv_member ).
+      APPEND migration TO response_migrations_list_for_a.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_migrations_list_repos_01.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_migrations_list_rep01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_orgs_list_for_authentica.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA organization_simple TYPE zif_github=>organization_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR organization_simple.
+      organization_simple = parse_organization_simple( iv_prefix && '/' && lv_member ).
+      APPEND organization_simple TO response_orgs_list_for_authent.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_users_list_public_emails.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA email TYPE zif_github=>email.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR email.
+      email = parse_email( iv_prefix && '/' && lv_member ).
+      APPEND email TO response_users_list_public_ema.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_for_authentic.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA repository TYPE zif_github=>repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR repository.
+      repository = parse_repository( iv_prefix && '/' && lv_member ).
+      APPEND repository TO response_repos_list_for_authen.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_invitations_f.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA repository_invitation TYPE zif_github=>repository_invitation.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR repository_invitation.
+      repository_invitation = parse_repository_invitation( iv_prefix && '/' && lv_member ).
+      APPEND repository_invitation TO response_repos_list_invitati01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_list_repos_star.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA repository TYPE zif_github=>repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR repository.
+      repository = parse_repository( iv_prefix && '/' && lv_member ).
+      APPEND repository TO response_activity_list_repos_s.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_list_watched_re.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_activity_list_watched.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_teams_list_for_authentic.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA team_full TYPE zif_github=>team_full.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR team_full.
+      team_full = parse_team_full( iv_prefix && '/' && lv_member ).
+      APPEND team_full TO response_teams_list_for_authen.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_users_list.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_users_list.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_list_events_for.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_events_.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_list_org_events.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_org_eve.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_list_public_e02.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_publi03.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_users_list_followers_f01.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_users_list_follower01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_users_list_following_for.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA simple_user TYPE zif_github=>simple_user.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR simple_user.
+      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
+      APPEND simple_user TO response_users_list_following_.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_gists_list_for_user.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA base_gist TYPE zif_github=>base_gist.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR base_gist.
+      base_gist = parse_base_gist( iv_prefix && '/' && lv_member ).
+      APPEND base_gist TO response_gists_list_for_user.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_users_list_gpg_keys_fo01.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA gpg_key TYPE zif_github=>gpg_key.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR gpg_key.
+      gpg_key = parse_gpg_key( iv_prefix && '/' && lv_member ).
+      APPEND gpg_key TO response_users_list_gpg_keys01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_users_list_public_keys_f.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA key_simple TYPE zif_github=>key_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR key_simple.
+      key_simple = parse_key_simple( iv_prefix && '/' && lv_member ).
+      APPEND key_simple TO response_users_list_public_key.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_orgs_list_for_user.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA organization_simple TYPE zif_github=>organization_simple.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR organization_simple.
+      organization_simple = parse_organization_simple( iv_prefix && '/' && lv_member ).
+      APPEND organization_simple TO response_orgs_list_for_user.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_projects_list_for_user.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA project TYPE zif_github=>project.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR project.
+      project = parse_project( iv_prefix && '/' && lv_member ).
+      APPEND project TO response_projects_list_for_use.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_list_received_e.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_receive.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_list_received_p.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA event TYPE zif_github=>event.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR event.
+      event = parse_event( iv_prefix && '/' && lv_member ).
+      APPEND event TO response_activity_list_recei01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_repos_list_for_user.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_repos_list_for_user.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_list_repos_st01.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA repository TYPE zif_github=>repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR repository.
+      repository = parse_repository( iv_prefix && '/' && lv_member ).
+      APPEND repository TO response_activity_list_repos01.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_activity_list_repos_watc.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA minimal_repository TYPE zif_github=>minimal_repository.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR minimal_repository.
+      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
+      APPEND minimal_repository TO response_activity_list_repos_w.
+    ENDLOOP.
+  ENDMETHOD.
+
   METHOD json_apps_update_webhook_confi.
-* todo
+    json = json && '{'.
+*  json = json && '"url":' not simple
+*  json = json && '"content_type":' not simple
+*  json = json && '"secret":' not simple
+*  json = json && '"insecure_ssl":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_apps_create_installation_.
-* todo
+    json = json && '{'.
+*  json = json && '"repositories":' not simple
+*  json = json && '"repository_ids":' not simple
+*  json = json && '"permissions":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_apps_delete_authorization.
-* todo
+    json = json && '{'.
+    json = json && |"access_token": "{ data-access_token }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_apps_check_token.
-* todo
+    json = json && '{'.
+    json = json && |"access_token": "{ data-access_token }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_apps_reset_token.
-* todo
+    json = json && '{'.
+    json = json && |"access_token": "{ data-access_token }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_apps_delete_token.
-* todo
+    json = json && '{'.
+    json = json && |"access_token": "{ data-access_token }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_apps_scope_token.
-* todo
+    json = json && '{'.
+    json = json && |"access_token": "{ data-access_token }",|.
+    json = json && |"target": "{ data-target }",|.
+    json = json && |"target_id": "{ data-target_id }",|.
+*  json = json && '"repositories":' not simple
+*  json = json && '"repository_ids":' not simple
+*  json = json && '"permissions":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_oauth_authorizations_crea.
-* todo
+    json = json && '{'.
+*  json = json && '"scopes":' not simple
+    json = json && |"note": "{ data-note }",|.
+    json = json && |"note_url": "{ data-note_url }",|.
+    json = json && |"client_id": "{ data-client_id }",|.
+    json = json && |"client_secret": "{ data-client_secret }",|.
+    json = json && |"fingerprint": "{ data-fingerprint }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_oauth_authorizations_get_.
-* todo
+    json = json && '{'.
+    json = json && |"client_secret": "{ data-client_secret }",|.
+*  json = json && '"scopes":' not simple
+    json = json && |"note": "{ data-note }",|.
+    json = json && |"note_url": "{ data-note_url }",|.
+    json = json && |"fingerprint": "{ data-fingerprint }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_oauth_authorizations_ge01.
-* todo
+    json = json && '{'.
+    json = json && |"client_secret": "{ data-client_secret }",|.
+*  json = json && '"scopes":' not simple
+    json = json && |"note": "{ data-note }",|.
+    json = json && |"note_url": "{ data-note_url }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_oauth_authorizations_upda.
-* todo
+    json = json && '{'.
+*  json = json && '"scopes":' not simple
+*  json = json && '"add_scopes":' not simple
+*  json = json && '"remove_scopes":' not simple
+    json = json && |"note": "{ data-note }",|.
+    json = json && |"note_url": "{ data-note_url }",|.
+    json = json && |"fingerprint": "{ data-fingerprint }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_oauth_authorizations_dele.
-* todo
+    json = json && '{'.
+*  json = json && '"scopes":' not simple
+*  json = json && '"add_scopes":' not simple
+*  json = json && '"remove_scopes":' not simple
+    json = json && |"note": "{ data-note }",|.
+    json = json && |"note_url": "{ data-note_url }",|.
+    json = json && |"fingerprint": "{ data-fingerprint }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_apps_create_content_attac.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_set_gith.
-* todo
+    json = json && '{'.
+*  json = json && '"enabled_organizations":' not simple
+*  json = json && '"allowed_actions":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_set_sele.
-* todo
+    json = json && '{'.
+*  json = json && '"selected_organization_ids":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_create_s.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+*  json = json && '"selected_organization_ids":' not simple
+*  json = json && '"runners":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_update_s.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_delete_s.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_set_org_.
-* todo
+    json = json && '{'.
+*  json = json && '"selected_organization_ids":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_set_self.
-* todo
+    json = json && '{'.
+*  json = json && '"runners":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_gists_create.
-* todo
+    json = json && '{'.
+    json = json && |"description": "{ data-description }",|.
+*  json = json && '"files":' not simple
+    json = json && |"public": "{ data-public }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_gists_update.
-* todo
+    json = json && '{'.
+    json = json && |"description": "{ data-description }",|.
+*  json = json && '"files":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_gists_delete.
-* todo
+    json = json && '{'.
+    json = json && |"description": "{ data-description }",|.
+*  json = json && '"files":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_gists_create_comment.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_gists_update_comment.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_gists_delete_comment.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_markdown_render.
-* todo
+    json = json && '{'.
+    json = json && |"text": "{ data-text }",|.
+    json = json && |"mode": "{ data-mode }",|.
+    json = json && |"context": "{ data-context }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_activity_mark_notificatio.
-* todo
+    json = json && '{'.
+    json = json && |"last_read_at": "{ data-last_read_at }",|.
+    json = json && |"read": "{ data-read }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_activity_set_thread_subsc.
-* todo
+    json = json && '{'.
+    json = json && |"ignored": "{ data-ignored }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_activity_delete_thread_su.
-* todo
+    json = json && '{'.
+    json = json && |"ignored": "{ data-ignored }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_update.
-* todo
+    json = json && '{'.
+    json = json && |"billing_email": "{ data-billing_email }",|.
+    json = json && |"company": "{ data-company }",|.
+    json = json && |"email": "{ data-email }",|.
+    json = json && |"twitter_username": "{ data-twitter_username }",|.
+    json = json && |"location": "{ data-location }",|.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"has_organization_projects": "{ data-has_organization_projects }",|.
+    json = json && |"has_repository_projects": "{ data-has_repository_projects }",|.
+    json = json && |"default_repository_permission": "{ data-default_repository_permission }",|.
+    json = json && |"members_can_create_repositories": "{ data-members_can_create_repositorie }",|.
+    json = json && |"members_can_create_internal_repositories": "{ data-members_can_create_internal_re }",|.
+    json = json && |"members_can_create_private_repositories": "{ data-members_can_create_private_rep }",|.
+    json = json && |"members_can_create_public_repositories": "{ data-members_can_create_public_repo }",|.
+    json = json && |"members_allowed_repository_creation_type": "{ data-members_allowed_repository_cre }",|.
+    json = json && |"members_can_create_pages": "{ data-members_can_create_pages }",|.
+    json = json && |"members_can_create_public_pages": "{ data-members_can_create_public_page }",|.
+    json = json && |"members_can_create_private_pages": "{ data-members_can_create_private_pag }",|.
+    json = json && |"blog": "{ data-blog }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_set_github_action.
-* todo
+    json = json && '{'.
+*  json = json && '"enabled_repositories":' not simple
+*  json = json && '"allowed_actions":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_set_selected_repo.
-* todo
+    json = json && '{'.
+*  json = json && '"selected_repository_ids":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_create_self_hoste.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+*  json = json && '"selected_repository_ids":' not simple
+*  json = json && '"runners":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_update_self_hoste.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_delete_self_hoste.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_set_repo_access_t.
-* todo
+    json = json && '{'.
+*  json = json && '"selected_repository_ids":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_set_self_hosted_r.
-* todo
+    json = json && '{'.
+*  json = json && '"runners":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_create_or_update_.
-* todo
+    json = json && '{'.
+    json = json && |"encrypted_value": "{ data-encrypted_value }",|.
+    json = json && |"key_id": "{ data-key_id }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+*  json = json && '"selected_repository_ids":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_delete_org_secret.
-* todo
+    json = json && '{'.
+    json = json && |"encrypted_value": "{ data-encrypted_value }",|.
+    json = json && |"key_id": "{ data-key_id }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+*  json = json && '"selected_repository_ids":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_set_selected_re01.
-* todo
+    json = json && '{'.
+*  json = json && '"selected_repository_ids":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_create_webhook.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+*  json = json && '"config":' not simple
+*  json = json && '"events":' not simple
+    json = json && |"active": "{ data-active }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_update_webhook.
-* todo
+    json = json && '{'.
+*  json = json && '"config":' not simple
+*  json = json && '"events":' not simple
+    json = json && |"active": "{ data-active }",|.
+    json = json && |"name": "{ data-name }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_delete_webhook.
-* todo
+    json = json && '{'.
+*  json = json && '"config":' not simple
+*  json = json && '"events":' not simple
+    json = json && |"active": "{ data-active }",|.
+    json = json && |"name": "{ data-name }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_update_webhook_confi.
-* todo
+    json = json && '{'.
+*  json = json && '"url":' not simple
+*  json = json && '"content_type":' not simple
+*  json = json && '"secret":' not simple
+*  json = json && '"insecure_ssl":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_create_invitation.
-* todo
+    json = json && '{'.
+    json = json && |"invitee_id": "{ data-invitee_id }",|.
+    json = json && |"email": "{ data-email }",|.
+    json = json && |"role": "{ data-role }",|.
+*  json = json && '"team_ids":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_set_membership_for_u.
-* todo
+    json = json && '{'.
+    json = json && |"role": "{ data-role }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_remove_membership_fo.
-* todo
+    json = json && '{'.
+    json = json && |"role": "{ data-role }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_migrations_start_for_org.
-* todo
+    json = json && '{'.
+*  json = json && '"repositories":' not simple
+    json = json && |"lock_repositories": "{ data-lock_repositories }",|.
+    json = json && |"exclude_attachments": "{ data-exclude_attachments }",|.
+*  json = json && '"exclude":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_create_for_org.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_in_org.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"homepage": "{ data-homepage }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+    json = json && |"has_issues": "{ data-has_issues }",|.
+    json = json && |"has_projects": "{ data-has_projects }",|.
+    json = json && |"has_wiki": "{ data-has_wiki }",|.
+    json = json && |"is_template": "{ data-is_template }",|.
+    json = json && |"team_id": "{ data-team_id }",|.
+    json = json && |"auto_init": "{ data-auto_init }",|.
+    json = json && |"gitignore_template": "{ data-gitignore_template }",|.
+    json = json && |"license_template": "{ data-license_template }",|.
+    json = json && |"allow_squash_merge": "{ data-allow_squash_merge }",|.
+    json = json && |"allow_merge_commit": "{ data-allow_merge_commit }",|.
+    json = json && |"allow_rebase_merge": "{ data-allow_rebase_merge }",|.
+    json = json && |"delete_branch_on_merge": "{ data-delete_branch_on_merge }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_create.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+*  json = json && '"maintainers":' not simple
+*  json = json && '"repo_names":' not simple
+    json = json && |"privacy": "{ data-privacy }",|.
+    json = json && |"permission": "{ data-permission }",|.
+    json = json && |"parent_team_id": "{ data-parent_team_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_update_in_org.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"privacy": "{ data-privacy }",|.
+    json = json && |"permission": "{ data-permission }",|.
+    json = json && |"parent_team_id": "{ data-parent_team_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_delete_in_org.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"privacy": "{ data-privacy }",|.
+    json = json && |"permission": "{ data-permission }",|.
+    json = json && |"parent_team_id": "{ data-parent_team_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_create_discussion_i.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_update_discussion_i.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_delete_discussion_i.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_create_discussion_c.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_update_discussion_c.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_delete_discussion_c.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_reactions_create_for_team.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_reactions_create_for_te01.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_add_or_update_membe.
-* todo
+    json = json && '{'.
+    json = json && |"role": "{ data-role }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_remove_membership_f.
-* todo
+    json = json && '{'.
+    json = json && |"role": "{ data-role }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_add_or_update_proje.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_remove_project_in_o.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_add_or_update_repo_.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_remove_repo_in_org.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_create_or_update_id.
-* todo
+    json = json && '{'.
+*  json = json && '"groups":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_update_card.
-* todo
+    json = json && '{'.
+    json = json && |"note": "{ data-note }",|.
+    json = json && |"archived": "{ data-archived }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_delete_card.
-* todo
+    json = json && '{'.
+    json = json && |"note": "{ data-note }",|.
+    json = json && |"archived": "{ data-archived }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_move_card.
-* todo
+    json = json && '{'.
+    json = json && |"position": "{ data-position }",|.
+    json = json && |"column_id": "{ data-column_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_update_column.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_delete_column.
-* todo
-  ENDMETHOD.
-
-  METHOD json_projects_create_card.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_move_column.
-* todo
+    json = json && '{'.
+    json = json && |"position": "{ data-position }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_update.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"organization_permission": "{ data-organization_permission }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_delete.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"organization_permission": "{ data-organization_permission }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_add_collaborator.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_remove_collabora.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_create_column.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"homepage": "{ data-homepage }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+    json = json && |"has_issues": "{ data-has_issues }",|.
+    json = json && |"has_projects": "{ data-has_projects }",|.
+    json = json && |"has_wiki": "{ data-has_wiki }",|.
+    json = json && |"is_template": "{ data-is_template }",|.
+    json = json && |"default_branch": "{ data-default_branch }",|.
+    json = json && |"allow_squash_merge": "{ data-allow_squash_merge }",|.
+    json = json && |"allow_merge_commit": "{ data-allow_merge_commit }",|.
+    json = json && |"allow_rebase_merge": "{ data-allow_rebase_merge }",|.
+    json = json && |"delete_branch_on_merge": "{ data-delete_branch_on_merge }",|.
+    json = json && |"archived": "{ data-archived }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"homepage": "{ data-homepage }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+    json = json && |"has_issues": "{ data-has_issues }",|.
+    json = json && |"has_projects": "{ data-has_projects }",|.
+    json = json && |"has_wiki": "{ data-has_wiki }",|.
+    json = json && |"is_template": "{ data-is_template }",|.
+    json = json && |"default_branch": "{ data-default_branch }",|.
+    json = json && |"allow_squash_merge": "{ data-allow_squash_merge }",|.
+    json = json && |"allow_merge_commit": "{ data-allow_merge_commit }",|.
+    json = json && |"allow_rebase_merge": "{ data-allow_rebase_merge }",|.
+    json = json && |"delete_branch_on_merge": "{ data-delete_branch_on_merge }",|.
+    json = json && |"archived": "{ data-archived }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_set_github_acti01.
-* todo
+    json = json && '{'.
+*  json = json && '"enabled":' not simple
+*  json = json && '"allowed_actions":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_create_or_updat01.
-* todo
+    json = json && '{'.
+    json = json && |"encrypted_value": "{ data-encrypted_value }",|.
+    json = json && |"key_id": "{ data-key_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_delete_repo_secre.
-* todo
+    json = json && '{'.
+    json = json && |"encrypted_value": "{ data-encrypted_value }",|.
+    json = json && |"key_id": "{ data-key_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_actions_create_workflow_d.
-* todo
+    json = json && '{'.
+    json = json && |"ref": "{ data-ref }",|.
+*  json = json && '"inputs":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_branch_prote.
-* todo
+    json = json && '{'.
+*  json = json && '"required_status_checks":' not simple
+    json = json && |"enforce_admins": "{ data-enforce_admins }",|.
+*  json = json && '"required_pull_request_reviews":' not simple
+*  json = json && '"restrictions":' not simple
+    json = json && |"required_linear_history": "{ data-required_linear_history }",|.
+    json = json && |"allow_force_pushes": "{ data-allow_force_pushes }",|.
+    json = json && |"allow_deletions": "{ data-allow_deletions }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_branch_prote.
-* todo
+    json = json && '{'.
+*  json = json && '"required_status_checks":' not simple
+    json = json && |"enforce_admins": "{ data-enforce_admins }",|.
+*  json = json && '"required_pull_request_reviews":' not simple
+*  json = json && '"restrictions":' not simple
+    json = json && |"required_linear_history": "{ data-required_linear_history }",|.
+    json = json && |"allow_force_pushes": "{ data-allow_force_pushes }",|.
+    json = json && |"allow_deletions": "{ data-allow_deletions }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_pull_request.
-* todo
+    json = json && '{'.
+*  json = json && '"dismissal_restrictions":' not simple
+    json = json && |"dismiss_stale_reviews": "{ data-dismiss_stale_reviews }",|.
+    json = json && |"require_code_owner_reviews": "{ data-require_code_owner_reviews }",|.
+    json = json && |"required_approving_review_count": "{ data-required_approving_review_coun }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_pull_request.
-* todo
+    json = json && '{'.
+*  json = json && '"dismissal_restrictions":' not simple
+    json = json && |"dismiss_stale_reviews": "{ data-dismiss_stale_reviews }",|.
+    json = json && |"require_code_owner_reviews": "{ data-require_code_owner_reviews }",|.
+    json = json && |"required_approving_review_count": "{ data-required_approving_review_coun }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_status_check.
-* todo
+    json = json && '{'.
+    json = json && |"strict": "{ data-strict }",|.
+*  json = json && '"contexts":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_remove_status_check.
-* todo
+    json = json && '{'.
+    json = json && |"strict": "{ data-strict }",|.
+*  json = json && '"contexts":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_add_status_check_co.
-* todo
+    json = json && '{'.
+*  json = json && '"contexts":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_set_status_check_co.
-* todo
+    json = json && '{'.
+*  json = json && '"contexts":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_remove_status_che01.
-* todo
+    json = json && '{'.
+*  json = json && '"contexts":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_add_app_access_rest.
-* todo
+    json = json && '{'.
+*  json = json && '"apps":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_set_app_access_rest.
-* todo
+    json = json && '{'.
+*  json = json && '"apps":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_remove_app_access_r.
-* todo
+    json = json && '{'.
+*  json = json && '"apps":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_add_team_access_res.
-* todo
+    json = json && '{'.
+*  json = json && '"teams":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_set_team_access_res.
-* todo
+    json = json && '{'.
+*  json = json && '"teams":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_remove_team_access_.
-* todo
+    json = json && '{'.
+*  json = json && '"teams":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_add_user_access_res.
-* todo
+    json = json && '{'.
+*  json = json && '"users":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_set_user_access_res.
-* todo
+    json = json && '{'.
+*  json = json && '"users":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_remove_user_access_.
-* todo
+    json = json && '{'.
+*  json = json && '"users":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_rename_branch.
-* todo
+    json = json && '{'.
+    json = json && |"new_name": "{ data-new_name }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_checks_create.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"head_sha": "{ data-head_sha }",|.
+    json = json && |"details_url": "{ data-details_url }",|.
+    json = json && |"external_id": "{ data-external_id }",|.
+    json = json && |"status": "{ data-status }",|.
+    json = json && |"started_at": "{ data-started_at }",|.
+    json = json && |"conclusion": "{ data-conclusion }",|.
+    json = json && |"completed_at": "{ data-completed_at }",|.
+*  json = json && '"output":' not simple
+*  json = json && '"actions":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_checks_update.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"details_url": "{ data-details_url }",|.
+    json = json && |"external_id": "{ data-external_id }",|.
+    json = json && |"started_at": "{ data-started_at }",|.
+    json = json && |"status": "{ data-status }",|.
+    json = json && |"conclusion": "{ data-conclusion }",|.
+    json = json && |"completed_at": "{ data-completed_at }",|.
+*  json = json && '"output":' not simple
+*  json = json && '"actions":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_checks_create_suite.
-* todo
+    json = json && '{'.
+    json = json && |"head_sha": "{ data-head_sha }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_checks_set_suites_prefere.
-* todo
+    json = json && '{'.
+*  json = json && '"auto_trigger_checks":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_code_scanning_update_aler.
-* todo
+    json = json && '{'.
+*  json = json && '"state":' not simple
+*  json = json && '"dismissed_reason":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_code_scanning_upload_sari.
-* todo
+    json = json && '{'.
+*  json = json && '"commit_sha":' not simple
+*  json = json && '"ref":' not simple
+*  json = json && '"sarif":' not simple
+    json = json && |"checkout_uri": "{ data-checkout_uri }",|.
+    json = json && |"started_at": "{ data-started_at }",|.
+*  json = json && '"tool_name":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_add_collaborator.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = json && |"permissions": "{ data-permissions }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_remove_collaborator.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = json && |"permissions": "{ data-permissions }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_commit_comme.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_commit_comme.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_reactions_create_for_comm.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_commit_comme.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"path": "{ data-path }",|.
+    json = json && |"position": "{ data-position }",|.
+    json = json && |"line": "{ data-line }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_or_update_fi.
-* todo
+    json = json && '{'.
+    json = json && |"message": "{ data-message }",|.
+    json = json && |"content": "{ data-content }",|.
+    json = json && |"sha": "{ data-sha }",|.
+    json = json && |"branch": "{ data-branch }",|.
+*  json = json && '"committer":' not simple
+*  json = json && '"author":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_file.
-* todo
+    json = json && '{'.
+    json = json && |"message": "{ data-message }",|.
+    json = json && |"sha": "{ data-sha }",|.
+    json = json && |"branch": "{ data-branch }",|.
+*  json = json && '"committer":' not simple
+*  json = json && '"author":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_deployment.
-* todo
+    json = json && '{'.
+    json = json && |"ref": "{ data-ref }",|.
+    json = json && |"task": "{ data-task }",|.
+    json = json && |"auto_merge": "{ data-auto_merge }",|.
+*  json = json && '"required_contexts":' not simple
+    json = json && |"payload": "{ data-payload }",|.
+    json = json && |"environment": "{ data-environment }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"transient_environment": "{ data-transient_environment }",|.
+    json = json && |"production_environment": "{ data-production_environment }",|.
+    json = json && |"created_at": "{ data-created_at }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_deployment_s.
-* todo
+    json = json && '{'.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"target_url": "{ data-target_url }",|.
+    json = json && |"log_url": "{ data-log_url }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"environment": "{ data-environment }",|.
+    json = json && |"environment_url": "{ data-environment_url }",|.
+    json = json && |"auto_inactive": "{ data-auto_inactive }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_dispatch_eve.
-* todo
+    json = json && '{'.
+    json = json && |"event_type": "{ data-event_type }",|.
+*  json = json && '"client_payload":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_fork.
-* todo
+    json = json && '{'.
+    json = json && |"organization": "{ data-organization }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_git_create_blob.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = json && |"encoding": "{ data-encoding }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_git_create_commit.
-* todo
+    json = json && '{'.
+    json = json && |"message": "{ data-message }",|.
+    json = json && |"tree": "{ data-tree }",|.
+*  json = json && '"parents":' not simple
+*  json = json && '"author":' not simple
+*  json = json && '"committer":' not simple
+    json = json && |"signature": "{ data-signature }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_git_create_ref.
-* todo
+    json = json && '{'.
+    json = json && |"ref": "{ data-ref }",|.
+    json = json && |"sha": "{ data-sha }",|.
+    json = json && |"key": "{ data-key }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_git_update_ref.
-* todo
+    json = json && '{'.
+    json = json && |"sha": "{ data-sha }",|.
+    json = json && |"force": "{ data-force }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_git_delete_ref.
-* todo
+    json = json && '{'.
+    json = json && |"sha": "{ data-sha }",|.
+    json = json && |"force": "{ data-force }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_git_create_tag.
-* todo
+    json = json && '{'.
+    json = json && |"tag": "{ data-tag }",|.
+    json = json && |"message": "{ data-message }",|.
+    json = json && |"object": "{ data-object }",|.
+    json = json && |"type": "{ data-type }",|.
+*  json = json && '"tagger":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_git_create_tree.
-* todo
+    json = json && '{'.
+*  json = json && '"tree":' not simple
+    json = json && |"base_tree": "{ data-base_tree }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_webhook.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+*  json = json && '"config":' not simple
+*  json = json && '"events":' not simple
+    json = json && |"active": "{ data-active }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_webhook.
-* todo
+    json = json && '{'.
+*  json = json && '"config":' not simple
+*  json = json && '"events":' not simple
+*  json = json && '"add_events":' not simple
+*  json = json && '"remove_events":' not simple
+    json = json && |"active": "{ data-active }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_webhook.
-* todo
+    json = json && '{'.
+*  json = json && '"config":' not simple
+*  json = json && '"events":' not simple
+*  json = json && '"add_events":' not simple
+*  json = json && '"remove_events":' not simple
+    json = json && |"active": "{ data-active }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_webhook_conf.
-* todo
+    json = json && '{'.
+*  json = json && '"url":' not simple
+*  json = json && '"content_type":' not simple
+*  json = json && '"secret":' not simple
+*  json = json && '"insecure_ssl":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_migrations_start_import.
-* todo
+    json = json && '{'.
+    json = json && |"vcs_url": "{ data-vcs_url }",|.
+    json = json && |"vcs": "{ data-vcs }",|.
+    json = json && |"vcs_username": "{ data-vcs_username }",|.
+    json = json && |"vcs_password": "{ data-vcs_password }",|.
+    json = json && |"tfvc_project": "{ data-tfvc_project }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_migrations_update_import.
-* todo
+    json = json && '{'.
+    json = json && |"vcs_username": "{ data-vcs_username }",|.
+    json = json && |"vcs_password": "{ data-vcs_password }",|.
+    json = json && |"vcs": "{ data-vcs }",|.
+    json = json && |"tfvc_project": "{ data-tfvc_project }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_migrations_cancel_import.
-* todo
+    json = json && '{'.
+    json = json && |"vcs_username": "{ data-vcs_username }",|.
+    json = json && |"vcs_password": "{ data-vcs_password }",|.
+    json = json && |"vcs": "{ data-vcs }",|.
+    json = json && |"tfvc_project": "{ data-tfvc_project }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_migrations_map_commit_aut.
-* todo
+    json = json && '{'.
+    json = json && |"email": "{ data-email }",|.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"remote_id": "{ data-remote_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_migrations_set_lfs_prefer.
-* todo
+    json = json && '{'.
+    json = json && |"use_lfs": "{ data-use_lfs }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_invitation.
-* todo
+    json = json && '{'.
+    json = json && |"permissions": "{ data-permissions }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_invitation.
-* todo
+    json = json && '{'.
+    json = json && |"permissions": "{ data-permissions }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_create.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"assignee": "{ data-assignee }",|.
+    json = json && |"milestone": "{ data-milestone }",|.
+*  json = json && '"labels":' not simple
+*  json = json && '"assignees":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_update_comment.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_delete_comment.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_reactions_create_for_issu.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_update.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"assignee": "{ data-assignee }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"milestone": "{ data-milestone }",|.
+*  json = json && '"labels":' not simple
+*  json = json && '"assignees":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_add_assignees.
-* todo
+    json = json && '{'.
+*  json = json && '"assignees":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_remove_assignees.
-* todo
+    json = json && '{'.
+*  json = json && '"assignees":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_create_comment.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_add_labels.
-* todo
+    json = json && '{'.
+*  json = json && '"labels":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_set_labels.
-* todo
+    json = json && '{'.
+*  json = json && '"labels":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_remove_all_labels.
-* todo
+    json = json && '{'.
+*  json = json && '"labels":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_lock.
-* todo
+    json = json && '{'.
+    json = json && |"lock_reason": "{ data-lock_reason }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_unlock.
-* todo
+    json = json && '{'.
+    json = json && |"lock_reason": "{ data-lock_reason }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_reactions_create_for_is01.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_deploy_key.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"key": "{ data-key }",|.
+    json = json && |"read_only": "{ data-read_only }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_create_label.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"color": "{ data-color }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_update_label.
-* todo
+    json = json && '{'.
+    json = json && |"new_name": "{ data-new_name }",|.
+    json = json && |"color": "{ data-color }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_delete_label.
-* todo
+    json = json && '{'.
+    json = json && |"new_name": "{ data-new_name }",|.
+    json = json && |"color": "{ data-color }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_merge.
-* todo
+    json = json && '{'.
+    json = json && |"base": "{ data-base }",|.
+    json = json && |"head": "{ data-head }",|.
+    json = json && |"commit_message": "{ data-commit_message }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_create_milestone.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"due_on": "{ data-due_on }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_update_milestone.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"due_on": "{ data-due_on }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_issues_delete_milestone.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"due_on": "{ data-due_on }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_activity_mark_repo_notifi.
-* todo
+    json = json && '{'.
+    json = json && |"last_read_at": "{ data-last_read_at }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_pages_site.
-* todo
+    json = json && '{'.
+*  json = json && '"source":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_information_.
-* todo
+    json = json && '{'.
+    json = json && |"cname": "{ data-cname }",|.
+    json = json && |"public": "{ data-public }",|.
+    json = json && |"source": "{ data-source }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_pages_site.
-* todo
+    json = json && '{'.
+    json = json && |"cname": "{ data-cname }",|.
+    json = json && |"public": "{ data-public }",|.
+    json = json && |"source": "{ data-source }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_create_for_repo.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_create.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"head": "{ data-head }",|.
+    json = json && |"base": "{ data-base }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"maintainer_can_modify": "{ data-maintainer_can_modify }",|.
+    json = json && |"draft": "{ data-draft }",|.
+    json = json && |"issue": "{ data-issue }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_update_review_comme.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_delete_review_comme.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_reactions_create_for_pull.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_update.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"base": "{ data-base }",|.
+    json = json && |"maintainer_can_modify": "{ data-maintainer_can_modify }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_create_review_comme.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"commit_id": "{ data-commit_id }",|.
+    json = json && |"path": "{ data-path }",|.
+    json = json && |"position": "{ data-position }",|.
+    json = json && |"side": "{ data-side }",|.
+    json = json && |"line": "{ data-line }",|.
+    json = json && |"start_line": "{ data-start_line }",|.
+    json = json && |"start_side": "{ data-start_side }",|.
+    json = json && |"in_reply_to": "{ data-in_reply_to }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_create_reply_for_re.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_merge.
-* todo
+    json = json && '{'.
+    json = json && |"commit_title": "{ data-commit_title }",|.
+    json = json && |"commit_message": "{ data-commit_message }",|.
+    json = json && |"sha": "{ data-sha }",|.
+    json = json && |"merge_method": "{ data-merge_method }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_request_reviewers.
-* todo
+    json = json && '{'.
+*  json = json && '"reviewers":' not simple
+*  json = json && '"team_reviewers":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_remove_requested_re.
-* todo
+    json = json && '{'.
+*  json = json && '"reviewers":' not simple
+*  json = json && '"team_reviewers":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_create_review.
-* todo
+    json = json && '{'.
+    json = json && |"commit_id": "{ data-commit_id }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"event": "{ data-event }",|.
+*  json = json && '"comments":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_update_review.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_delete_pending_revi.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_dismiss_review.
-* todo
+    json = json && '{'.
+    json = json && |"message": "{ data-message }",|.
+    json = json && |"event": "{ data-event }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_submit_review.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"event": "{ data-event }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_pulls_update_branch.
-* todo
+    json = json && '{'.
+    json = json && |"expected_head_sha": "{ data-expected_head_sha }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_release.
-* todo
+    json = json && '{'.
+    json = json && |"tag_name": "{ data-tag_name }",|.
+    json = json && |"target_commitish": "{ data-target_commitish }",|.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"draft": "{ data-draft }",|.
+    json = json && |"prerelease": "{ data-prerelease }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_release_asse.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"label": "{ data-label }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_release_asse.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"label": "{ data-label }",|.
+    json = json && |"state": "{ data-state }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_release.
-* todo
+    json = json && '{'.
+    json = json && |"tag_name": "{ data-tag_name }",|.
+    json = json && |"target_commitish": "{ data-target_commitish }",|.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"draft": "{ data-draft }",|.
+    json = json && |"prerelease": "{ data-prerelease }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_delete_release.
-* todo
+    json = json && '{'.
+    json = json && |"tag_name": "{ data-tag_name }",|.
+    json = json && |"target_commitish": "{ data-target_commitish }",|.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"draft": "{ data-draft }",|.
+    json = json && |"prerelease": "{ data-prerelease }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_secret_scanning_update_al.
-* todo
+    json = json && '{'.
+*  json = json && '"state":' not simple
+*  json = json && '"resolution":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_commit_statu.
-* todo
+    json = json && '{'.
+    json = json && |"state": "{ data-state }",|.
+    json = json && |"target_url": "{ data-target_url }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"context": "{ data-context }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_activity_set_repo_subscri.
-* todo
+    json = json && '{'.
+    json = json && |"subscribed": "{ data-subscribed }",|.
+    json = json && |"ignored": "{ data-ignored }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_activity_delete_repo_subs.
-* todo
+    json = json && '{'.
+    json = json && |"subscribed": "{ data-subscribed }",|.
+    json = json && |"ignored": "{ data-ignored }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_replace_all_topics.
-* todo
+    json = json && '{'.
+*  json = json && '"names":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_transfer.
-* todo
+    json = json && '{'.
+    json = json && |"new_owner": "{ data-new_owner }",|.
+*  json = json && '"team_ids":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_using_templa.
-* todo
+    json = json && '{'.
+    json = json && |"owner": "{ data-owner }",|.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"include_all_branches": "{ data-include_all_branches }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_provisio.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple
+    json = json && |"displayName": "{ data-displayname }",|.
+*  json = json && '"members":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_set_info.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple
+    json = json && |"displayName": "{ data-displayname }",|.
+*  json = json && '"members":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_update_a.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple
+*  json = json && '"Operations":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_delete01.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple
+*  json = json && '"Operations":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_provis01.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple
+    json = json && |"userName": "{ data-username }",|.
+*  json = json && '"name":' not simple
+*  json = json && '"emails":' not simple
+*  json = json && '"groups":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_set_in01.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple
+    json = json && |"userName": "{ data-username }",|.
+*  json = json && '"name":' not simple
+*  json = json && '"emails":' not simple
+*  json = json && '"groups":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_update01.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple
+*  json = json && '"Operations":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_enterprise_admin_delete_u.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple
+*  json = json && '"Operations":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_scim_provision_and_invite.
-* todo
+    json = json && '{'.
+    json = json && |"userName": "{ data-username }",|.
+    json = json && |"displayName": "{ data-displayname }",|.
+*  json = json && '"name":' not simple
+*  json = json && '"emails":' not simple
+*  json = json && '"schemas":' not simple
+    json = json && |"externalId": "{ data-externalid }",|.
+*  json = json && '"groups":' not simple
+    json = json && |"active": "{ data-active }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_scim_set_information_for_.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple
+    json = json && |"displayName": "{ data-displayname }",|.
+    json = json && |"externalId": "{ data-externalid }",|.
+*  json = json && '"groups":' not simple
+    json = json && |"active": "{ data-active }",|.
+    json = json && |"userName": "{ data-username }",|.
+*  json = json && '"name":' not simple
+*  json = json && '"emails":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_scim_update_attribute_for.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple
+*  json = json && '"Operations":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_scim_delete_user_from_org.
-* todo
+    json = json && '{'.
+*  json = json && '"schemas":' not simple
+*  json = json && '"Operations":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_update_legacy.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"privacy": "{ data-privacy }",|.
+    json = json && |"permission": "{ data-permission }",|.
+    json = json && |"parent_team_id": "{ data-parent_team_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_delete_legacy.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"privacy": "{ data-privacy }",|.
+    json = json && |"permission": "{ data-permission }",|.
+    json = json && |"parent_team_id": "{ data-parent_team_id }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_create_discussion_l.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_update_discussion_l.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_delete_discussion_l.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_create_discussion01.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_update_discussion01.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_delete_discussion01.
-* todo
+    json = json && '{'.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_reactions_create_for_te02.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_reactions_create_for_te03.
-* todo
+    json = json && '{'.
+    json = json && |"content": "{ data-content }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_add_or_update_mem01.
-* todo
+    json = json && '{'.
+    json = json && |"role": "{ data-role }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_remove_membership01.
-* todo
+    json = json && '{'.
+    json = json && |"role": "{ data-role }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_add_or_update_pro01.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_remove_project_lega.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_add_or_update_rep01.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_remove_repo_legacy.
-* todo
+    json = json && '{'.
+    json = json && |"permission": "{ data-permission }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_teams_create_or_update_01.
-* todo
+    json = json && '{'.
+*  json = json && '"groups":' not simple
+    json = json && |"synced_at": "{ data-synced_at }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_users_update_authenticate.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"email": "{ data-email }",|.
+    json = json && |"blog": "{ data-blog }",|.
+    json = json && |"twitter_username": "{ data-twitter_username }",|.
+    json = json && |"company": "{ data-company }",|.
+    json = json && |"location": "{ data-location }",|.
+    json = json && |"hireable": "{ data-hireable }",|.
+    json = json && |"bio": "{ data-bio }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_users_set_primary_email_v.
-* todo
-  ENDMETHOD.
-
-  METHOD json_users_add_email_for_authe.
-* todo
-  ENDMETHOD.
-
-  METHOD json_users_delete_email_for_au.
-* todo
+    json = json && '{'.
+    json = json && |"email": "{ data-email }",|.
+    json = json && |"visibility": "{ data-visibility }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_users_create_gpg_key_for_.
-* todo
+    json = json && '{'.
+    json = json && |"armored_public_key": "{ data-armored_public_key }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_users_create_public_ssh_k.
-* todo
+    json = json && '{'.
+    json = json && |"title": "{ data-title }",|.
+    json = json && |"key": "{ data-key }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_orgs_update_membership_fo.
-* todo
+    json = json && '{'.
+    json = json && |"state": "{ data-state }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_migrations_start_for_auth.
-* todo
+    json = json && '{'.
+    json = json && |"lock_repositories": "{ data-lock_repositories }",|.
+    json = json && |"exclude_attachments": "{ data-exclude_attachments }",|.
+*  json = json && '"exclude":' not simple
+*  json = json && '"repositories":' not simple
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_projects_create_for_authe.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"body": "{ data-body }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_create_for_authenti.
-* todo
+    json = json && '{'.
+    json = json && |"name": "{ data-name }",|.
+    json = json && |"description": "{ data-description }",|.
+    json = json && |"homepage": "{ data-homepage }",|.
+    json = json && |"private": "{ data-private }",|.
+    json = json && |"has_issues": "{ data-has_issues }",|.
+    json = json && |"has_projects": "{ data-has_projects }",|.
+    json = json && |"has_wiki": "{ data-has_wiki }",|.
+    json = json && |"team_id": "{ data-team_id }",|.
+    json = json && |"auto_init": "{ data-auto_init }",|.
+    json = json && |"gitignore_template": "{ data-gitignore_template }",|.
+    json = json && |"license_template": "{ data-license_template }",|.
+    json = json && |"allow_squash_merge": "{ data-allow_squash_merge }",|.
+    json = json && |"allow_merge_commit": "{ data-allow_merge_commit }",|.
+    json = json && |"allow_rebase_merge": "{ data-allow_rebase_merge }",|.
+    json = json && |"delete_branch_on_merge": "{ data-delete_branch_on_merge }",|.
+    json = json && |"has_downloads": "{ data-has_downloads }",|.
+    json = json && |"is_template": "{ data-is_template }",|.
+    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
+    json = json && '}'.
   ENDMETHOD.
 
   METHOD zif_github~meta_root.
@@ -6554,8 +11111,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_meta_root( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_get_authenticated.
@@ -6632,8 +11189,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_apps_list_installations( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_get_installation.
@@ -6730,8 +11287,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_oauth_authorizations_lis( '' ).
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_get_grant.
@@ -6921,8 +11478,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_oauth_authorizations_l01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~oauth_authorizations_create_au.
@@ -7022,8 +11579,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_codes_of_conduct_get_all( '' ).
   ENDMETHOD.
 
   METHOD zif_github~codes_of_conduct_get_conduct_c.
@@ -7063,8 +11620,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_emojis_get( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_get_github_ac.
@@ -7113,8 +11670,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_enterprise_admin_list_se( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_set_selected_.
@@ -7183,7 +11740,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{enterprise}' IN lv_uri WITH enterprise.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-* todo body, #/components/schemas/selected-actions
+* todo, set body, #/components/schemas/selected-actions
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -7209,8 +11766,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_enterprise_admin_list_01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_create_self_h.
@@ -7299,8 +11856,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_enterprise_admin_list_or( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_set_org_acces.
@@ -7380,8 +11937,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_enterprise_admin_list_02( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_set_self_host.
@@ -7458,8 +12015,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_enterprise_admin_list_03( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_list_runner_a.
@@ -7471,8 +12028,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_enterprise_admin_list_ru( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_create_regist.
@@ -7562,8 +12119,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_audit_log_get_audit_log( '' ).
   ENDMETHOD.
 
   METHOD zif_github~billing_get_github_actions_bil.
@@ -7623,8 +12180,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_activity_list_public_eve( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_get_feeds.
@@ -7660,8 +12217,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gists_list( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_create.
@@ -7698,8 +12255,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gists_list_public( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_list_starred.
@@ -7723,8 +12280,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gists_list_starred( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_get.
@@ -7787,8 +12344,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gists_list_comments( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_create_comment.
@@ -7874,8 +12431,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gists_list_commits( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_list_forks.
@@ -7897,8 +12454,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gists_list_forks( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gists_fork.
@@ -7975,8 +12532,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gitignore_get_all_templa( '' ).
   ENDMETHOD.
 
   METHOD zif_github~gitignore_get_template.
@@ -8010,8 +12567,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_apps_list_repos_accessib( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_revoke_installation_acces.
@@ -8082,8 +12639,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issues_list( '' ).
   ENDMETHOD.
 
   METHOD zif_github~licenses_get_all_commonly_used.
@@ -8104,8 +12661,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_licenses_get_all_commonl( '' ).
   ENDMETHOD.
 
   METHOD zif_github~licenses_get.
@@ -8179,8 +12736,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_apps_list_plans( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_list_accounts_for_plan.
@@ -8210,8 +12767,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_apps_list_accounts_for_p( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_get_subscription_plan_f01.
@@ -8247,8 +12804,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_apps_list_plans_stubbed( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_list_accounts_for_plan_st.
@@ -8278,8 +12835,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_apps_list_accounts_for01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~meta_get.
@@ -8314,8 +12871,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_activity_list_public_e01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_list_notifications_fo.
@@ -8352,8 +12909,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_activity_list_notificati( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_mark_notifications_as.
@@ -8479,8 +13036,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_orgs_list( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_get.
@@ -8556,8 +13113,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_list_selected_re( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_set_selected_repositor.
@@ -8626,7 +13183,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-* todo body, #/components/schemas/selected-actions
+* todo, set body, #/components/schemas/selected-actions
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -8652,8 +13209,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_list_self_hosted( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_create_self_hosted_run.
@@ -8732,8 +13289,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_list_repo_access( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_set_repo_access_to_sel.
@@ -8813,8 +13370,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_list_self_host01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_set_self_hosted_runner.
@@ -8891,8 +13448,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_list_self_host02( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_list_runner_applicatio.
@@ -8904,8 +13461,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_list_runner_appl( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_create_registration_to.
@@ -8985,8 +13542,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_list_org_secrets( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_get_org_public_key.
@@ -9056,8 +13613,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_list_selected_01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_set_selected_repos_for.
@@ -9138,8 +13695,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_orgs_get_audit_log( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_blocked_users.
@@ -9151,8 +13708,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_orgs_list_blocked_users( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_check_blocked_user.
@@ -9206,8 +13763,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_orgs_list_saml_sso_autho( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_remove_saml_sso_authoriza.
@@ -9245,8 +13802,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_activity_list_public_org( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_failed_invitations.
@@ -9268,8 +13825,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_orgs_list_failed_invitat( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_webhooks.
@@ -9291,8 +13848,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_orgs_list_webhooks( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_create_webhook.
@@ -9440,8 +13997,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_orgs_list_app_installati( '' ).
   ENDMETHOD.
 
   METHOD zif_github~interactions_get_restrictions_.
@@ -9464,7 +14021,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{org}' IN lv_uri WITH org.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-* todo body, #/components/schemas/interaction-limit
+* todo, set body, #/components/schemas/interaction-limit
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -9503,8 +14060,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_orgs_list_pending_invita( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_create_invitation.
@@ -9559,8 +14116,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_orgs_list_invitation_tea( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_list_for_org.
@@ -9600,8 +14157,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issues_list_for_org( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_members.
@@ -9629,8 +14186,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_orgs_list_members( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_check_membership_for_user.
@@ -9724,8 +14281,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_migrations_list_for_org( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_start_for_org.
@@ -9829,8 +14386,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_migrations_list_repos_fo( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_outside_collaborator.
@@ -9855,8 +14412,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_orgs_list_outside_collab( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_convert_member_to_outside.
@@ -9909,8 +14466,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_projects_list_for_org( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_create_for_org.
@@ -9946,8 +14503,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_orgs_list_public_members( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_check_public_membership_f.
@@ -10020,8 +14577,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_for_org( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_create_in_org.
@@ -10119,8 +14676,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_teams_list( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_create.
@@ -10204,8 +14761,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_teams_list_discussions_i( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_create_discussion_in_org.
@@ -10302,8 +14859,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_teams_list_discussion_co( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_create_discussion_commen.
@@ -10415,8 +14972,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_reactions_list_for_team_( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_create_for_team_disc.
@@ -10489,8 +15046,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_reactions_list_for_tea01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_create_for_team_di01.
@@ -10551,8 +15108,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_teams_list_pending_invit( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_list_members_in_org.
@@ -10578,8 +15135,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_teams_list_members_in_or( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_get_membership_for_user_.
@@ -10649,8 +15206,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_teams_list_projects_in_o( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_check_permissions_for_pr.
@@ -10726,8 +15283,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_teams_list_repos_in_org( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_check_permissions_for_re.
@@ -10829,8 +15386,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_teams_list_child_in_org( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_get_card.
@@ -10892,8 +15449,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_projects_move_card( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_projects_move_card( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_get_column.
@@ -10967,8 +15524,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_projects_list_cards( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_create_card.
@@ -10980,7 +15537,6 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{column_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_projects_create_card( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -10999,8 +15555,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_projects_move_column( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_projects_move_column( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_get.
@@ -11074,8 +15630,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_projects_list_collaborat( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_add_collaborator.
@@ -11149,8 +15705,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_projects_list_columns( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_create_column.
@@ -11260,8 +15816,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_list_artifacts_f( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_get_artifact.
@@ -11401,7 +15957,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-* todo body, #/components/schemas/selected-actions
+* todo, set body, #/components/schemas/selected-actions
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -11428,8 +15984,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_list_self_host03( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_list_runner_applicat01.
@@ -11442,8 +15998,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_list_runner_ap01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_create_registration_01.
@@ -11540,8 +16096,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_list_workflow_ru( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_get_workflow_run.
@@ -11601,8 +16157,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_list_workflow_01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_cancel_workflow_run.
@@ -11648,8 +16204,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_list_jobs_for_wo( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_download_workflow_run_.
@@ -11740,8 +16296,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_list_repo_secret( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_get_repo_public_key.
@@ -11825,8 +16381,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_list_repo_workfl( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_get_workflow.
@@ -11835,9 +16391,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = workflow_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -11852,9 +16406,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = workflow_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -11869,9 +16421,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = workflow_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     mi_client->request->set_cdata( json_actions_create_workflow_d( body ) ).
@@ -11887,9 +16437,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/enable'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = workflow_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -11904,9 +16452,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = workflow_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     IF actor IS SUPPLIED.
       mi_client->request->set_form_field( name = 'actor' value = actor ).
     ENDIF.
@@ -11933,8 +16479,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_actions_list_workflow_02( '' ).
   ENDMETHOD.
 
   METHOD zif_github~actions_get_workflow_usage.
@@ -11943,9 +16489,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = workflow_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{workflow_id}' IN lv_uri WITH workflow_id.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -11974,8 +16518,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issues_list_assignees( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_check_user_can_be_assig.
@@ -12046,8 +16590,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_branches( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_branch.
@@ -12307,8 +16851,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_get_all_status_che( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_add_status_check_context.
@@ -12323,8 +16867,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_add_status_check_co( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_add_status_check_c( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_set_status_check_context.
@@ -12339,8 +16883,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_set_status_check_co( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_set_status_check_c( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_remove_status_check_cont.
@@ -12355,8 +16899,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_remove_status_che01( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_remove_status_chec( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_access_restrictions.
@@ -12400,8 +16944,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_get_apps_with_acce( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_add_app_access_restricti.
@@ -12416,8 +16960,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_add_app_access_rest( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_add_app_access_res( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_set_app_access_restricti.
@@ -12432,8 +16976,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_set_app_access_rest( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_set_app_access_res( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_remove_app_access_restri.
@@ -12448,8 +16992,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_remove_app_access_r( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_remove_app_access_( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_teams_with_access_to.
@@ -12463,8 +17007,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_get_teams_with_acc( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_add_team_access_restrict.
@@ -12479,8 +17023,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_add_team_access_res( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_add_team_access_re( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_set_team_access_restrict.
@@ -12495,8 +17039,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_set_team_access_res( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_set_team_access_re( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_remove_team_access_restr.
@@ -12511,8 +17055,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_remove_team_access_( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_remove_team_access( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_users_with_access_to.
@@ -12526,8 +17070,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_get_users_with_acc( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_add_user_access_restrict.
@@ -12542,8 +17086,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_add_user_access_res( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_add_user_access_re( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_set_user_access_restrict.
@@ -12558,8 +17102,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_set_user_access_res( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_set_user_access_re( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_remove_user_access_restr.
@@ -12574,8 +17118,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_remove_user_access_( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_remove_user_access( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_rename_branch.
@@ -12667,8 +17211,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_checks_list_annotations( '' ).
   ENDMETHOD.
 
   METHOD zif_github~checks_create_suite.
@@ -12750,8 +17294,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_checks_list_for_suite( '' ).
   ENDMETHOD.
 
   METHOD zif_github~checks_rerequest_suite.
@@ -12777,22 +17321,18 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/code-scanning/alerts'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = state.
-    CONDENSE lv_temp.
     IF state IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'state' value = lv_temp ).
+      mi_client->request->set_form_field( name = 'state' value = state ).
     ENDIF.
-    lv_temp = ref.
-    CONDENSE lv_temp.
     IF ref IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'ref' value = lv_temp ).
+      mi_client->request->set_form_field( name = 'ref' value = ref ).
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_code_scanning_list_alert( '' ).
   ENDMETHOD.
 
   METHOD zif_github~code_scanning_get_alert.
@@ -12818,9 +17358,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = alert_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH alert_number.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     mi_client->request->set_cdata( json_code_scanning_update_aler( body ) ).
@@ -12836,22 +17374,18 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/code-scanning/analyses'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = ref.
-    CONDENSE lv_temp.
     IF ref IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'ref' value = lv_temp ).
+      mi_client->request->set_form_field( name = 'ref' value = ref ).
     ENDIF.
-    lv_temp = tool_name.
-    CONDENSE lv_temp.
     IF tool_name IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'tool_name' value = lv_temp ).
+      mi_client->request->set_form_field( name = 'tool_name' value = tool_name ).
     ENDIF.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_code_scanning_list_recen( '' ).
   ENDMETHOD.
 
   METHOD zif_github~code_scanning_upload_sarif.
@@ -12892,8 +17426,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_collaborators( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_check_collaborator.
@@ -12978,8 +17512,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_commit_commen( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_commit_comment.
@@ -13061,8 +17595,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_reactions_list_for_commi( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_create_for_commit_co.
@@ -13138,8 +17672,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_commits( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_branches_for_head_c.
@@ -13153,8 +17687,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_branches_for_( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_comments_for_commit.
@@ -13178,8 +17712,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_comments_for_( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_create_commit_comment.
@@ -13219,8 +17753,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_pull_requests( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_commit.
@@ -13268,8 +17802,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_checks_list_for_ref( '' ).
   ENDMETHOD.
 
   METHOD zif_github~checks_list_suites_for_ref.
@@ -13301,8 +17835,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_checks_list_suites_for_r( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_combined_status_for_.
@@ -13341,8 +17875,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_commit_status( '' ).
   ENDMETHOD.
 
   METHOD zif_github~codes_of_conduct_get_for_repo.
@@ -13462,8 +17996,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_contributors( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_deployments.
@@ -13498,8 +18032,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_deployments( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_create_deployment.
@@ -13574,8 +18108,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_deployment_st( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_create_deployment_status.
@@ -13651,8 +18185,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_activity_list_repo_event( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_forks.
@@ -13678,8 +18212,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_forks( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_create_fork.
@@ -13778,8 +18312,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_git_list_matching_refs( '' ).
   ENDMETHOD.
 
   METHOD zif_github~git_get_ref.
@@ -13927,8 +18461,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_webhooks( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_create_webhook.
@@ -14142,8 +18676,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_migrations_get_commit_au( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_map_commit_author.
@@ -14174,8 +18708,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_migrations_get_large_fil( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_set_lfs_preference.
@@ -14229,7 +18763,7 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-* todo body, #/components/schemas/interaction-limit
+* todo, set body, #/components/schemas/interaction-limit
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -14270,8 +18804,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_invitations( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_update_invitation.
@@ -14357,8 +18891,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issues_list_for_repo( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_create.
@@ -14405,8 +18939,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issues_list_comments_for( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_get_comment.
@@ -14488,8 +19022,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_reactions_list_for_issue( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_create_for_issue_com.
@@ -14550,8 +19084,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issues_list_events_for_r( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_get_event.
@@ -14668,8 +19202,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issues_list_comments( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_create_comment.
@@ -14713,8 +19247,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issues_list_events( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_list_labels_on_issue.
@@ -14740,8 +19274,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issues_list_labels_on_is( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_add_labels.
@@ -14758,8 +19292,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_issues_add_labels( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issues_add_labels( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_set_labels.
@@ -14776,8 +19310,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_issues_set_labels( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issues_set_labels( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_remove_all_labels.
@@ -14812,8 +19346,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issues_remove_label( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_lock.
@@ -14878,8 +19412,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_reactions_list_for_iss01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_create_for_issue.
@@ -14943,8 +19477,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issues_list_events_for_t( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_deploy_keys.
@@ -14967,8 +19501,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_deploy_keys( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_create_deploy_key.
@@ -15040,8 +19574,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issues_list_labels_for_r( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_create_label.
@@ -15178,8 +19712,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issues_list_milestones( '' ).
   ENDMETHOD.
 
   METHOD zif_github~issues_create_milestone.
@@ -15273,8 +19807,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issues_list_labels_for_m( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_list_repo_notificatio.
@@ -15313,8 +19847,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_activity_list_repo_notif( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_mark_repo_notificatio.
@@ -15411,8 +19945,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_pages_builds( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_request_pages_build.
@@ -15483,8 +20017,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_projects_list_for_repo( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_create_for_repo.
@@ -15537,8 +20071,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pulls_list( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_create.
@@ -15585,8 +20119,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pulls_list_review_commen( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_get_review_comment.
@@ -15668,8 +20202,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_reactions_list_for_pull_( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_create_for_pull_requ.
@@ -15777,8 +20311,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pulls_list_review_comm01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_create_review_comment.
@@ -15843,8 +20377,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pulls_list_commits( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_list_files.
@@ -15870,8 +20404,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pulls_list_files( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_check_if_merged.
@@ -15995,8 +20529,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pulls_list_reviews( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_create_review.
@@ -16105,8 +20639,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_pulls_list_comments_for_( '' ).
   ENDMETHOD.
 
   METHOD zif_github~pulls_dismiss_review.
@@ -16206,8 +20740,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_releases( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_create_release.
@@ -16383,8 +20917,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_release_asset( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_upload_release_asset.
@@ -16433,8 +20967,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_secret_scanning_list_ale( '' ).
   ENDMETHOD.
 
   METHOD zif_github~secret_scanning_get_alert.
@@ -16443,9 +20977,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = alert_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH alert_number.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -16460,9 +20992,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    lv_temp = alert_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH lv_temp.
+    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH alert_number.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     mi_client->request->set_cdata( json_secret_scanning_update_al( body ) ).
@@ -16492,8 +21022,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_activity_list_stargazers( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_code_frequency_stats.
@@ -16506,8 +21036,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_get_code_frequency( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_commit_activity_stat.
@@ -16520,8 +21050,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_get_commit_activit( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_contributors_stats.
@@ -16534,8 +21064,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_get_contributors_s( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_participation_stats.
@@ -16562,8 +21092,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_get_punch_card_sta( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_create_commit_status.
@@ -16602,8 +21132,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_activity_list_watchers_f( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_get_repo_subscription.
@@ -16670,8 +21200,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_tags( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_download_tarball_archive.
@@ -16709,8 +21239,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_teams( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_all_topics.
@@ -16769,8 +21299,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_get_top_paths( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_top_referrers.
@@ -16783,8 +21313,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_get_top_referrers( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_get_views.
@@ -16904,8 +21434,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_public( '' ).
   ENDMETHOD.
 
   METHOD zif_github~enterprise_admin_list_provisio.
@@ -17224,8 +21754,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_search_code( '' ).
   ENDMETHOD.
 
   METHOD zif_github~search_commits.
@@ -17253,8 +21783,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_search_commits( '' ).
   ENDMETHOD.
 
   METHOD zif_github~search_issues_and_pull_request.
@@ -17282,8 +21812,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_search_issues_and_pull_r( '' ).
   ENDMETHOD.
 
   METHOD zif_github~search_labels.
@@ -17304,8 +21834,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_search_labels( '' ).
   ENDMETHOD.
 
   METHOD zif_github~search_repos.
@@ -17333,8 +21863,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_search_repos( '' ).
   ENDMETHOD.
 
   METHOD zif_github~search_topics.
@@ -17346,8 +21876,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_search_topics( '' ).
   ENDMETHOD.
 
   METHOD zif_github~search_users.
@@ -17375,8 +21905,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_search_users( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_get_legacy.
@@ -17450,8 +21980,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_teams_list_discussions_l( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_create_discussion_legacy.
@@ -17553,8 +22083,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_teams_list_discussion_01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_create_discussion_comm01.
@@ -17671,8 +22201,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_reactions_list_for_tea02( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_create_for_team_di02.
@@ -17724,8 +22254,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_reactions_list_for_tea03( '' ).
   ENDMETHOD.
 
   METHOD zif_github~reactions_create_for_team_di03.
@@ -17768,8 +22298,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_teams_list_pending_inv01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_list_members_legacy.
@@ -17796,8 +22326,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_teams_list_members_legac( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_get_member_legacy.
@@ -17919,8 +22449,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_teams_list_projects_lega( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_check_permissions_for_01.
@@ -18000,8 +22530,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_teams_list_repos_legacy( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_check_permissions_for_02.
@@ -18109,8 +22639,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_teams_list_child_legacy( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_get_authenticated.
@@ -18146,8 +22676,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_users_list_blocked_by_au( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_check_blocked.
@@ -18198,8 +22728,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_users_set_primary_email_v( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_users_set_primary_email_( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_list_emails_for_authenti.
@@ -18220,8 +22750,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_users_list_emails_for_au( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_add_email_for_authentica.
@@ -18230,11 +22760,10 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/emails'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_users_add_email_for_authe( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_users_add_email_for_auth( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_delete_email_for_authent.
@@ -18243,7 +22772,6 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/emails'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_users_delete_email_for_au( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -18268,8 +22796,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_users_list_followers_for( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_list_followed_by_authent.
@@ -18290,8 +22818,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_users_list_followed_by_a( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_check_person_is_followed.
@@ -18351,8 +22879,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_users_list_gpg_keys_for_( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_create_gpg_key_for_authe.
@@ -18416,8 +22944,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_apps_list_installations_( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_list_installation_repos_f.
@@ -18441,8 +22969,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_apps_list_installation_r( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_add_repo_to_installation.
@@ -18499,7 +23027,7 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/interaction-limits'.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-* todo body, #/components/schemas/interaction-limit
+* todo, set body, #/components/schemas/interaction-limit
     lv_code = send_receive( ).
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -18554,8 +23082,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_issues_list_for_authenti( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_list_public_ssh_keys_for.
@@ -18576,8 +23104,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_users_list_public_ssh_ke( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_create_public_ssh_key_fo.
@@ -18641,8 +23169,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_apps_list_subscriptions_( '' ).
   ENDMETHOD.
 
   METHOD zif_github~apps_list_subscriptions_for_01.
@@ -18663,8 +23191,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_apps_list_subscription01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_memberships_for_auth.
@@ -18688,8 +23216,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_orgs_list_memberships_fo( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_get_membership_for_authen.
@@ -18737,8 +23265,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_migrations_list_for_auth( '' ).
   ENDMETHOD.
 
   METHOD zif_github~migrations_start_for_authentic.
@@ -18841,8 +23369,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_migrations_list_repos_01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_for_authenticated_us.
@@ -18863,8 +23391,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_orgs_list_for_authentica( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_create_for_authentica.
@@ -18898,8 +23426,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_users_list_public_emails( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_for_authenticated_u.
@@ -18941,8 +23469,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_for_authentic( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_create_for_authenticated.
@@ -18976,8 +23504,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_invitations_f( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_accept_invitation.
@@ -19034,8 +23562,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_activity_list_repos_star( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_check_repo_is_starred.
@@ -19098,8 +23626,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_activity_list_watched_re( '' ).
   ENDMETHOD.
 
   METHOD zif_github~teams_list_for_authenticated_u.
@@ -19120,8 +23648,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_teams_list_for_authentic( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_list.
@@ -19142,8 +23670,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_users_list( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_get_by_username.
@@ -19178,8 +23706,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_activity_list_events_for( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_list_org_events_for_a.
@@ -19202,8 +23730,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_activity_list_org_events( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_list_public_events_01.
@@ -19225,8 +23753,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_activity_list_public_e02( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_list_followers_for_user.
@@ -19248,8 +23776,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_users_list_followers_f01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_list_following_for_user.
@@ -19271,8 +23799,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_users_list_following_for( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_check_following_for_user.
@@ -19311,8 +23839,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_gists_list_for_user( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_list_gpg_keys_for_user.
@@ -19334,8 +23862,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_users_list_gpg_keys_fo01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_get_context_for_user.
@@ -19389,8 +23917,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_users_list_public_keys_f( '' ).
   ENDMETHOD.
 
   METHOD zif_github~orgs_list_for_user.
@@ -19412,8 +23940,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_orgs_list_for_user( '' ).
   ENDMETHOD.
 
   METHOD zif_github~projects_list_for_user.
@@ -19438,8 +23966,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_projects_list_for_user( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_list_received_events_.
@@ -19461,8 +23989,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_activity_list_received_e( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_list_received_public_.
@@ -19484,8 +24012,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_activity_list_received_p( '' ).
   ENDMETHOD.
 
   METHOD zif_github~repos_list_for_user.
@@ -19516,8 +24044,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_repos_list_for_user( '' ).
   ENDMETHOD.
 
   METHOD zif_github~billing_get_github_actions_b02.
@@ -19584,8 +24112,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_activity_list_repos_st01( '' ).
   ENDMETHOD.
 
   METHOD zif_github~activity_list_repos_watched_by.
@@ -19607,8 +24135,8 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+    return_data = parse_activity_list_repos_watc( '' ).
   ENDMETHOD.
 
   METHOD zif_github~meta_get_zen.

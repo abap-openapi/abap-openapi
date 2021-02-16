@@ -69,6 +69,10 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
 
     CREATE OBJECT ri_schema TYPE zcl_oapi_schema.
     ri_schema->type = mo_json->value_string( iv_prefix && '/type' ).
+    IF ri_schema->type IS INITIAL.
+      ri_schema->type = 'string'. " todo, handle "oneOf" and "anyOf"
+      RETURN.
+    ENDIF.
     ri_schema->default = mo_json->value_string( iv_prefix && '/default' ).
     ri_schema->items_ref = mo_json->value_string( iv_prefix && '/items/$ref' ).
 
