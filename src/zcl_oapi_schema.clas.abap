@@ -59,7 +59,7 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
           rv_abap = rv_abap && |STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array\n|.
         ELSE.
 * todo, there is a change that this clashes with something else
-          lv_name = lo_names->to_abap_name( iv_name && '_' && ls_property-abap_name ).
+          lv_name = lo_names->to_abap_name( 'sub' && iv_name && '_' && ls_property-abap_name ).
           rv_abap = ls_property-schema->build_type_definition(
             iv_name  = lv_name
             io_names = lo_names
