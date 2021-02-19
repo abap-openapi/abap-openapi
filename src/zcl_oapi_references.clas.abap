@@ -43,7 +43,7 @@ CLASS zcl_oapi_references IMPLEMENTATION.
     DATA lo_names TYPE REF TO zcl_oapi_abap_name.
     CREATE OBJECT lo_names.
 
-    LOOP AT ms_spec-operations ASSIGNING <ls_operation>.
+    LOOP AT ms_spec-operations ASSIGNING <ls_operation> WHERE deprecated = abap_false.
       LOOP AT <ls_operation>-responses ASSIGNING <ls_response>.
         LOOP AT <ls_response>-content ASSIGNING <ls_content> WHERE type = 'application/json' AND schema_ref IS INITIAL AND schema IS NOT INITIAL.
           IF <ls_content>-schema->is_simple_type( ) = abap_true.
@@ -70,7 +70,7 @@ CLASS zcl_oapi_references IMPLEMENTATION.
     DATA lo_names TYPE REF TO zcl_oapi_abap_name.
     CREATE OBJECT lo_names.
 
-    LOOP AT ms_spec-operations ASSIGNING <ls_operation>.
+    LOOP AT ms_spec-operations ASSIGNING <ls_operation> WHERE deprecated = abap_false.
       IF <ls_operation>-body_schema IS NOT INITIAL
           AND <ls_operation>-body_schema->is_simple_type( ) = abap_false.
 
@@ -93,7 +93,7 @@ CLASS zcl_oapi_references IMPLEMENTATION.
     DATA ls_parameter TYPE zif_oapi_specification_v3=>ty_parameter.
     DATA lv_ref TYPE string.
 
-    LOOP AT ms_spec-operations ASSIGNING <ls_operation>.
+    LOOP AT ms_spec-operations ASSIGNING <ls_operation> WHERE deprecated = abap_false.
       LOOP AT <ls_operation>-parameters_ref INTO lv_ref.
         REPLACE FIRST OCCURRENCE OF '#/components/parameters/' IN lv_ref WITH ''.
         READ TABLE ms_spec-components-parameters WITH KEY id = lv_ref INTO ls_parameter.

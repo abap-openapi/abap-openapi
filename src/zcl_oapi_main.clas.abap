@@ -9,6 +9,7 @@ CLASS zcl_oapi_main DEFINITION PUBLIC.
     TYPES: BEGIN OF ty_result,
         clas TYPE string,
         intf TYPE string,
+* todo, skip_deprecated default true
       END OF ty_result.
 
     METHODS run
@@ -145,7 +146,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
     rv_abap = rv_abap && dump_parser_methods( ) && dump_json_methods( ).
 
-    LOOP AT ms_specification-operations INTO ls_operation.
+    LOOP AT ms_specification-operations INTO ls_operation WHERE deprecated = abap_false.
       rv_abap = rv_abap &&
         |  METHOD { ms_input-interface_name }~{ ls_operation-abap_name }.\n| &&
         operation_implementation( ls_operation ) &&
@@ -179,7 +180,18 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         LOOP AT ii_schema->properties INTO ls_property.
           IF ls_property-schema IS NOT INITIAL
               AND ls_property-schema->is_simple_type( ) = abap_true.
-            rv_abap = rv_abap && |    json = json && \|"{ ls_property-name }": "\{ data-{ ls_property-abap_name } \}",\|.\n|.
+            CASE ls_property-schema->type.
+              WHEN 'integer'.
+                rv_abap = rv_abap && |    json = json && \|"{ ls_property-name }": \{ data-{ ls_property-abap_name } \},\|.\n|.
+              WHEN 'boolean'.
+                rv_abap = rv_abap && |    IF data-{ ls_property-abap_name } = abap_true.\n|.
+                rv_abap = rv_abap && |      json = json && \|"{ ls_property-name }": true,\|.\n|.
+                rv_abap = rv_abap && |    ELSE.\n|.
+                rv_abap = rv_abap && |      json = json && \|"{ ls_property-name }": false,\|.\n|.
+                rv_abap = rv_abap && |    ENDIF.\n|.
+              WHEN OTHERS.
+                rv_abap = rv_abap && |    json = json && \|"{ ls_property-name }": "\{ data-{ ls_property-abap_name } \}",\|.\n|.
+            ENDCASE.
           ELSE.
             rv_abap = rv_abap && |*  json = json && '"{ ls_property-name }":' not simple\n|.
           ENDIF.
@@ -278,7 +290,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
             |      APPEND { ls_schema-abap_name } TO { iv_abap_name }.\n| &&
             |    ENDLOOP.\n|.
         ELSE.
-          rv_abap = rv_abap && |* todo, handle type { ii_schema->type }, no item_ref \n|.
+          rv_abap = rv_abap && |* todo, handle type { ii_schema->type }, no item_ref\n|.
         ENDIF.
       WHEN OTHERS.
         rv_abap = rv_abap && |* todo, handle type { ii_schema->type }\n|.
@@ -318,7 +330,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
     rv_abap = rv_abap && dump_types( ).
 
-    LOOP AT ms_specification-operations INTO ls_operation.
+    LOOP AT ms_specification-operations INTO ls_operation WHERE deprecated = abap_false.
       rv_abap = rv_abap &&
         |* { to_upper( ls_operation-method ) } - "{ ls_operation-summary }"\n|.
       IF ls_operation-operation_id IS NOT INITIAL.

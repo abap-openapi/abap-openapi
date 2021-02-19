@@ -119,19 +119,21 @@ CLASS ltcl_github IMPLEMENTATION.
 
   METHOD pulls_create.
 
-    " DATA ls_body TYPE zif_github=>bodypulls_create.
-    " DATA ls_created TYPE zif_github=>pull_request.
+    DATA ls_body TYPE zif_github=>bodypulls_create.
+    DATA ls_created TYPE zif_github=>pull_request.
 
-    " IF mv_token IS INITIAL.
-    "   RETURN.
-    " ENDIF.
+    IF mv_token IS INITIAL.
+      RETURN.
+    ENDIF.
 
-    " ls_created = mi_github->pulls_create(
-    "   owner = 'larshp'
-    "   repo  = 'testing-test'
-    "   body  = ls_body ).
+    ls_created = mi_github->pulls_create(
+      owner = 'larshp'
+      repo  = 'testing-test'
+      body  = ls_body ).
 
-    " cl_abap_unit_assert=>assert_not_initial( ls_created ).
+    WRITE '@KERNEL console.dir(ls_created);'.
+
+    cl_abap_unit_assert=>assert_not_initial( ls_created ).
 
   ENDMETHOD.
 
