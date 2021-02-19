@@ -153,7 +153,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         |  ENDMETHOD.\n\n|.
     ENDLOOP.
 
-    rv_abap = rv_abap && |ENDCLASS.|.
+    rv_abap = rv_abap && |ENDCLASS.\n|.
 
   ENDMETHOD.
 
@@ -302,12 +302,19 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
     DATA ls_property TYPE zif_oapi_schema=>ty_property.
     DATA lv_count TYPE i.
+    DATA lo_names TYPE REF TO zcl_oapi_abap_name.
+    CREATE OBJECT lo_names.
+
+    LOOP AT ms_specification-components-schemas INTO ls_schema.
+      lo_names->add_used( ls_schema-abap_name ).
+    ENDLOOP.
 
     LOOP AT ms_specification-components-schemas INTO ls_schema.
       rv_abap = rv_abap && |* Component schema: { ls_schema-name }, { ls_schema-schema->type }\n|.
       rv_abap = rv_abap && ls_schema-schema->build_type_definition(
-        iv_name = ls_schema-abap_name
-        it_refs = ms_specification-components-schemas ).
+        iv_name  = ls_schema-abap_name
+        io_names = lo_names
+        it_refs  = ms_specification-components-schemas ).
       rv_abap = rv_abap && |\n|.
     ENDLOOP.
 
@@ -375,7 +382,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       ENDIF.
       rv_abap = rv_abap && |    RAISING cx_static_check.\n\n|.
     ENDLOOP.
-    rv_abap = rv_abap && |ENDINTERFACE.|.
+    rv_abap = rv_abap && |ENDINTERFACE.\n|.
 
   ENDMETHOD.
 
