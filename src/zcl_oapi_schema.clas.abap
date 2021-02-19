@@ -37,12 +37,6 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
     DATA ls_ref TYPE zif_oapi_specification_v3=>ty_component_schema.
     DATA lv_count TYPE i.
     DATA lv_name TYPE string.
-    DATA lo_names TYPE REF TO zcl_oapi_abap_name.
-    lo_names = io_names.
-    IF lo_names IS INITIAL.
-      CREATE OBJECT lo_names.
-      lo_names->add_used( iv_name ).
-    ENDIF.
 
     IF zif_oapi_schema~type = 'object'.
       rv_abap = rv_abap && |  TYPES: BEGIN OF { iv_name },\n|.
@@ -59,10 +53,10 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
           rv_abap = rv_abap && |STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array\n|.
         ELSE.
 * todo, there is a change that this clashes with something else
-          lv_name = lo_names->to_abap_name( 'sub' && iv_name && '_' && ls_property-abap_name ).
+          lv_name = io_names->to_abap_name( 'sub' && iv_name && '_' && ls_property-abap_name ).
           rv_abap = ls_property-schema->build_type_definition(
             iv_name  = lv_name
-            io_names = lo_names
+            io_names = io_names
             it_refs  = it_refs ) && rv_abap && lv_name && |,\n|.
 *          rv_abap = rv_abap && |string, " not simple, { ls_property-schema->type }, todo\n|.
         ENDIF.
