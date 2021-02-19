@@ -153,7 +153,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         |  ENDMETHOD.\n\n|.
     ENDLOOP.
 
-    rv_abap = rv_abap && |ENDCLASS.|.
+    rv_abap = rv_abap && |ENDCLASS.\n|.
 
   ENDMETHOD.
 
@@ -382,7 +382,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       ENDIF.
       rv_abap = rv_abap && |    RAISING cx_static_check.\n\n|.
     ENDLOOP.
-    rv_abap = rv_abap && |ENDINTERFACE.|.
+    rv_abap = rv_abap && |ENDINTERFACE.\n|.
 
   ENDMETHOD.
 
