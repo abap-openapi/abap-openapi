@@ -5,12 +5,13 @@ ABAP [OpenAPI](https://www.openapis.org) Client Generator in ABAP
 - possibility to run via command line(NodeJS)
 - possibility to generate for different ABAP versions(ie. Steampunk)
 - one self-contained global class + interface per OpenAPI definition
-- possible to run on ABAP stack
-- eventually OpenAPI v2 support, converting v2 to v3: https://github.com/swagger-api/swagger-converter
+- possible to run generation on ABAP stack
+- eventually OpenAPI v2 support, [converting v2 to v3](https://github.com/swagger-api/swagger-converter)
 - only JSON support
 
 NOTE: generated code currently uses ZCL_OAPI_JSON, suggest copying the implementation to a local class in the generated global class
 
+## Building/Developing
 prerequsites = [NodeJS](https://nodejs.org) 12+
 
 setup `npm install`
