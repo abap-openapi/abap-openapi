@@ -984,26 +984,6 @@ CLASS zcl_github DEFINITION PUBLIC.
       IMPORTING data TYPE zif_github=>bodyapps_scope_token
       RETURNING VALUE(json) TYPE string
       RAISING cx_static_check.
-    METHODS json_oauth_authorizations_crea
-      IMPORTING data TYPE zif_github=>bodyoauth_authorizations_creat
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_oauth_authorizations_get_
-      IMPORTING data TYPE zif_github=>bodyoauth_authorizations_get_o
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_oauth_authorizations_ge01
-      IMPORTING data TYPE zif_github=>bodyoauth_authorizations_get01
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_oauth_authorizations_upda
-      IMPORTING data TYPE zif_github=>bodyoauth_authorizations_updat
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_oauth_authorizations_dele
-      IMPORTING data TYPE zif_github=>bodyoauth_authorizations_delet
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
     METHODS json_apps_create_content_attac
       IMPORTING data TYPE zif_github=>bodyapps_create_content_attach
       RETURNING VALUE(json) TYPE string
@@ -1788,74 +1768,6 @@ CLASS zcl_github DEFINITION PUBLIC.
       IMPORTING data TYPE zif_github=>bodyscim_delete_user_from_org
       RETURNING VALUE(json) TYPE string
       RAISING cx_static_check.
-    METHODS json_teams_update_legacy
-      IMPORTING data TYPE zif_github=>bodyteams_update_legacy
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_teams_delete_legacy
-      IMPORTING data TYPE zif_github=>bodyteams_delete_legacy
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_teams_create_discussion_l
-      IMPORTING data TYPE zif_github=>bodyteams_create_discussion_le
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_teams_update_discussion_l
-      IMPORTING data TYPE zif_github=>bodyteams_update_discussion_le
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_teams_delete_discussion_l
-      IMPORTING data TYPE zif_github=>bodyteams_delete_discussion_le
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_teams_create_discussion01
-      IMPORTING data TYPE zif_github=>bodyteams_create_discussion_01
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_teams_update_discussion01
-      IMPORTING data TYPE zif_github=>bodyteams_update_discussion_01
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_teams_delete_discussion01
-      IMPORTING data TYPE zif_github=>bodyteams_delete_discussion_01
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_reactions_create_for_te02
-      IMPORTING data TYPE zif_github=>bodyreactions_create_for_tea02
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_reactions_create_for_te03
-      IMPORTING data TYPE zif_github=>bodyreactions_create_for_tea03
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_teams_add_or_update_mem01
-      IMPORTING data TYPE zif_github=>bodyteams_add_or_update_memb01
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_teams_remove_membership01
-      IMPORTING data TYPE zif_github=>bodyteams_remove_membership_01
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_teams_add_or_update_pro01
-      IMPORTING data TYPE zif_github=>bodyteams_add_or_update_proj01
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_teams_remove_project_lega
-      IMPORTING data TYPE zif_github=>bodyteams_remove_project_legac
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_teams_add_or_update_rep01
-      IMPORTING data TYPE zif_github=>bodyteams_add_or_update_repo01
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_teams_remove_repo_legacy
-      IMPORTING data TYPE zif_github=>bodyteams_remove_repo_legacy
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS json_teams_create_or_update_01
-      IMPORTING data TYPE zif_github=>bodyteams_create_or_update_i01
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
     METHODS json_users_update_authenticate
       IMPORTING data TYPE zif_github=>bodyusers_update_authenticated
       RETURNING VALUE(json) TYPE string
@@ -1895,14 +1807,6 @@ CLASS zcl_github DEFINITION PUBLIC.
     METHODS parse_apps_list_installations
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(response_apps_list_installatio) TYPE zif_github=>response_apps_list_installatio
-      RAISING cx_static_check.
-    METHODS parse_oauth_authorizations_lis
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(response_oauth_authorizations_) TYPE zif_github=>response_oauth_authorizations_
-      RAISING cx_static_check.
-    METHODS parse_oauth_authorizations_l01
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(response_oauth_authorization01) TYPE zif_github=>response_oauth_authorization01
       RAISING cx_static_check.
     METHODS parse_codes_of_conduct_get_all
       IMPORTING iv_prefix TYPE string
@@ -2647,54 +2551,6 @@ CLASS zcl_github DEFINITION PUBLIC.
     METHODS parse_search_users
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(response_search_users) TYPE zif_github=>response_search_users
-      RAISING cx_static_check.
-    METHODS parse_teams_list_discussions_l
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(response_teams_list_discussi02) TYPE zif_github=>response_teams_list_discussi02
-      RAISING cx_static_check.
-    METHODS parse_teams_list_discussion_01
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(response_teams_list_discussi03) TYPE zif_github=>response_teams_list_discussi03
-      RAISING cx_static_check.
-    METHODS parse_reactions_list_for_tea02
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(response_reactions_list_for_03) TYPE zif_github=>response_reactions_list_for_03
-      RAISING cx_static_check.
-    METHODS parse_reactions_list_for_tea03
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(response_reactions_list_for_04) TYPE zif_github=>response_reactions_list_for_04
-      RAISING cx_static_check.
-    METHODS parse_teams_list_pending_inv01
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(response_teams_list_pending_01) TYPE zif_github=>response_teams_list_pending_01
-      RAISING cx_static_check.
-    METHODS parse_teams_list_members_legac
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(response_teams_list_members_le) TYPE zif_github=>response_teams_list_members_le
-      RAISING cx_static_check.
-    METHODS parse_teams_add_member_legacy
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(response_teams_add_member_lega) TYPE zif_github=>response_teams_add_member_lega
-      RAISING cx_static_check.
-    METHODS parse_teams_add_or_update_me01
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(response_teams_add_or_update01) TYPE zif_github=>response_teams_add_or_update01
-      RAISING cx_static_check.
-    METHODS parse_teams_list_projects_lega
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(response_teams_list_projects_l) TYPE zif_github=>response_teams_list_projects_l
-      RAISING cx_static_check.
-    METHODS parse_teams_add_or_update_pr01
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(response_teams_add_or_update02) TYPE zif_github=>response_teams_add_or_update02
-      RAISING cx_static_check.
-    METHODS parse_teams_list_repos_legacy
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(response_teams_list_repos_lega) TYPE zif_github=>response_teams_list_repos_lega
-      RAISING cx_static_check.
-    METHODS parse_teams_list_child_legacy
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(response_teams_list_child_lega) TYPE zif_github=>response_teams_list_child_lega
       RAISING cx_static_check.
     METHODS parse_users_list_blocked_by_au
       IMPORTING iv_prefix TYPE string
@@ -4822,7 +4678,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_inst.
-* todo, handle type array, no item_ref 
+* todo, handle type array, no item_ref
   ENDMETHOD.
 
   METHOD parse_code_scanning_alert_co01.
@@ -5119,7 +4975,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_content_directory.
-* todo, handle type array, no item_ref 
+* todo, handle type array, no item_ref
   ENDMETHOD.
 
   METHOD parse_content_file.
@@ -6007,7 +5863,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_code_frequency_stat.
-* todo, handle type array, no item_ref 
+* todo, handle type array, no item_ref
   ENDMETHOD.
 
   METHOD parse_commit_activity.
@@ -6153,7 +6009,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_search_result_text_match.
-* todo, handle type array, no item_ref 
+* todo, handle type array, no item_ref
   ENDMETHOD.
 
   METHOD parse_code_search_result_item.
@@ -6602,30 +6458,6 @@ CLASS zcl_github IMPLEMENTATION.
     ENDLOOP.
   ENDMETHOD.
 
-  METHOD parse_oauth_authorizations_lis.
-    DATA lt_members TYPE string_table.
-    DATA lv_member LIKE LINE OF lt_members.
-    DATA application_grant TYPE zif_github=>application_grant.
-    lt_members = mo_json->members( iv_prefix && '/' ).
-    LOOP AT lt_members INTO lv_member.
-      CLEAR application_grant.
-      application_grant = parse_application_grant( iv_prefix && '/' && lv_member ).
-      APPEND application_grant TO response_oauth_authorizations_.
-    ENDLOOP.
-  ENDMETHOD.
-
-  METHOD parse_oauth_authorizations_l01.
-    DATA lt_members TYPE string_table.
-    DATA lv_member LIKE LINE OF lt_members.
-    DATA authorization TYPE zif_github=>authorization.
-    lt_members = mo_json->members( iv_prefix && '/' ).
-    LOOP AT lt_members INTO lv_member.
-      CLEAR authorization.
-      authorization = parse_authorization( iv_prefix && '/' && lv_member ).
-      APPEND authorization TO response_oauth_authorization01.
-    ENDLOOP.
-  ENDMETHOD.
-
   METHOD parse_codes_of_conduct_get_all.
     DATA lt_members TYPE string_table.
     DATA lv_member LIKE LINE OF lt_members.
@@ -6778,7 +6610,7 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_gitignore_get_all_templa.
-* todo, handle type array, no item_ref 
+* todo, handle type array, no item_ref
   ENDMETHOD.
 
   METHOD parse_apps_list_repos_accessib.
@@ -7445,19 +7277,19 @@ CLASS zcl_github IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_repos_get_all_status_che.
-* todo, handle type array, no item_ref 
+* todo, handle type array, no item_ref
   ENDMETHOD.
 
   METHOD parse_repos_add_status_check_c.
-* todo, handle type array, no item_ref 
+* todo, handle type array, no item_ref
   ENDMETHOD.
 
   METHOD parse_repos_set_status_check_c.
-* todo, handle type array, no item_ref 
+* todo, handle type array, no item_ref
   ENDMETHOD.
 
   METHOD parse_repos_remove_status_chec.
-* todo, handle type array, no item_ref 
+* todo, handle type array, no item_ref
   ENDMETHOD.
 
   METHOD parse_repos_get_apps_with_acce.
@@ -8439,131 +8271,6 @@ CLASS zcl_github IMPLEMENTATION.
 * todo, array, items
   ENDMETHOD.
 
-  METHOD parse_teams_list_discussions_l.
-    DATA lt_members TYPE string_table.
-    DATA lv_member LIKE LINE OF lt_members.
-    DATA team_discussion TYPE zif_github=>team_discussion.
-    lt_members = mo_json->members( iv_prefix && '/' ).
-    LOOP AT lt_members INTO lv_member.
-      CLEAR team_discussion.
-      team_discussion = parse_team_discussion( iv_prefix && '/' && lv_member ).
-      APPEND team_discussion TO response_teams_list_discussi02.
-    ENDLOOP.
-  ENDMETHOD.
-
-  METHOD parse_teams_list_discussion_01.
-    DATA lt_members TYPE string_table.
-    DATA lv_member LIKE LINE OF lt_members.
-    DATA team_discussion_comment TYPE zif_github=>team_discussion_comment.
-    lt_members = mo_json->members( iv_prefix && '/' ).
-    LOOP AT lt_members INTO lv_member.
-      CLEAR team_discussion_comment.
-      team_discussion_comment = parse_team_discussion_comment( iv_prefix && '/' && lv_member ).
-      APPEND team_discussion_comment TO response_teams_list_discussi03.
-    ENDLOOP.
-  ENDMETHOD.
-
-  METHOD parse_reactions_list_for_tea02.
-    DATA lt_members TYPE string_table.
-    DATA lv_member LIKE LINE OF lt_members.
-    DATA reaction TYPE zif_github=>reaction.
-    lt_members = mo_json->members( iv_prefix && '/' ).
-    LOOP AT lt_members INTO lv_member.
-      CLEAR reaction.
-      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
-      APPEND reaction TO response_reactions_list_for_03.
-    ENDLOOP.
-  ENDMETHOD.
-
-  METHOD parse_reactions_list_for_tea03.
-    DATA lt_members TYPE string_table.
-    DATA lv_member LIKE LINE OF lt_members.
-    DATA reaction TYPE zif_github=>reaction.
-    lt_members = mo_json->members( iv_prefix && '/' ).
-    LOOP AT lt_members INTO lv_member.
-      CLEAR reaction.
-      reaction = parse_reaction( iv_prefix && '/' && lv_member ).
-      APPEND reaction TO response_reactions_list_for_04.
-    ENDLOOP.
-  ENDMETHOD.
-
-  METHOD parse_teams_list_pending_inv01.
-    DATA lt_members TYPE string_table.
-    DATA lv_member LIKE LINE OF lt_members.
-    DATA organization_invitation TYPE zif_github=>organization_invitation.
-    lt_members = mo_json->members( iv_prefix && '/' ).
-    LOOP AT lt_members INTO lv_member.
-      CLEAR organization_invitation.
-      organization_invitation = parse_organization_invitation( iv_prefix && '/' && lv_member ).
-      APPEND organization_invitation TO response_teams_list_pending_01.
-    ENDLOOP.
-  ENDMETHOD.
-
-  METHOD parse_teams_list_members_legac.
-    DATA lt_members TYPE string_table.
-    DATA lv_member LIKE LINE OF lt_members.
-    DATA simple_user TYPE zif_github=>simple_user.
-    lt_members = mo_json->members( iv_prefix && '/' ).
-    LOOP AT lt_members INTO lv_member.
-      CLEAR simple_user.
-      simple_user = parse_simple_user( iv_prefix && '/' && lv_member ).
-      APPEND simple_user TO response_teams_list_members_le.
-    ENDLOOP.
-  ENDMETHOD.
-
-  METHOD parse_teams_add_member_legacy.
-    response_teams_add_member_lega-message = mo_json->value_string( iv_prefix && '/message' ).
-* todo, array, errors
-    response_teams_add_member_lega-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
-  ENDMETHOD.
-
-  METHOD parse_teams_add_or_update_me01.
-    response_teams_add_or_update01-message = mo_json->value_string( iv_prefix && '/message' ).
-* todo, array, errors
-    response_teams_add_or_update01-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
-  ENDMETHOD.
-
-  METHOD parse_teams_list_projects_lega.
-    DATA lt_members TYPE string_table.
-    DATA lv_member LIKE LINE OF lt_members.
-    DATA team_project TYPE zif_github=>team_project.
-    lt_members = mo_json->members( iv_prefix && '/' ).
-    LOOP AT lt_members INTO lv_member.
-      CLEAR team_project.
-      team_project = parse_team_project( iv_prefix && '/' && lv_member ).
-      APPEND team_project TO response_teams_list_projects_l.
-    ENDLOOP.
-  ENDMETHOD.
-
-  METHOD parse_teams_add_or_update_pr01.
-    response_teams_add_or_update02-message = mo_json->value_string( iv_prefix && '/message' ).
-    response_teams_add_or_update02-documentation_url = mo_json->value_string( iv_prefix && '/documentation_url' ).
-  ENDMETHOD.
-
-  METHOD parse_teams_list_repos_legacy.
-    DATA lt_members TYPE string_table.
-    DATA lv_member LIKE LINE OF lt_members.
-    DATA minimal_repository TYPE zif_github=>minimal_repository.
-    lt_members = mo_json->members( iv_prefix && '/' ).
-    LOOP AT lt_members INTO lv_member.
-      CLEAR minimal_repository.
-      minimal_repository = parse_minimal_repository( iv_prefix && '/' && lv_member ).
-      APPEND minimal_repository TO response_teams_list_repos_lega.
-    ENDLOOP.
-  ENDMETHOD.
-
-  METHOD parse_teams_list_child_legacy.
-    DATA lt_members TYPE string_table.
-    DATA lv_member LIKE LINE OF lt_members.
-    DATA team TYPE zif_github=>team.
-    lt_members = mo_json->members( iv_prefix && '/' ).
-    LOOP AT lt_members INTO lv_member.
-      CLEAR team.
-      team = parse_team( iv_prefix && '/' && lv_member ).
-      APPEND team TO response_teams_list_child_lega.
-    ENDLOOP.
-  ENDMETHOD.
-
   METHOD parse_users_list_blocked_by_au.
     DATA lt_members TYPE string_table.
     DATA lv_member LIKE LINE OF lt_members.
@@ -9070,67 +8777,10 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && '{'.
     json = json && |"access_token": "{ data-access_token }",|.
     json = json && |"target": "{ data-target }",|.
-    json = json && |"target_id": "{ data-target_id }",|.
+    json = json && |"target_id": { data-target_id },|.
 *  json = json && '"repositories":' not simple
 *  json = json && '"repository_ids":' not simple
 *  json = json && '"permissions":' not simple
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_oauth_authorizations_crea.
-    json = json && '{'.
-*  json = json && '"scopes":' not simple
-    json = json && |"note": "{ data-note }",|.
-    json = json && |"note_url": "{ data-note_url }",|.
-    json = json && |"client_id": "{ data-client_id }",|.
-    json = json && |"client_secret": "{ data-client_secret }",|.
-    json = json && |"fingerprint": "{ data-fingerprint }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_oauth_authorizations_get_.
-    json = json && '{'.
-    json = json && |"client_secret": "{ data-client_secret }",|.
-*  json = json && '"scopes":' not simple
-    json = json && |"note": "{ data-note }",|.
-    json = json && |"note_url": "{ data-note_url }",|.
-    json = json && |"fingerprint": "{ data-fingerprint }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_oauth_authorizations_ge01.
-    json = json && '{'.
-    json = json && |"client_secret": "{ data-client_secret }",|.
-*  json = json && '"scopes":' not simple
-    json = json && |"note": "{ data-note }",|.
-    json = json && |"note_url": "{ data-note_url }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_oauth_authorizations_upda.
-    json = json && '{'.
-*  json = json && '"scopes":' not simple
-*  json = json && '"add_scopes":' not simple
-*  json = json && '"remove_scopes":' not simple
-    json = json && |"note": "{ data-note }",|.
-    json = json && |"note_url": "{ data-note_url }",|.
-    json = json && |"fingerprint": "{ data-fingerprint }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_oauth_authorizations_dele.
-    json = json && '{'.
-*  json = json && '"scopes":' not simple
-*  json = json && '"add_scopes":' not simple
-*  json = json && '"remove_scopes":' not simple
-    json = json && |"note": "{ data-note }",|.
-    json = json && |"note_url": "{ data-note_url }",|.
-    json = json && |"fingerprint": "{ data-fingerprint }",|.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9256,21 +8906,33 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD json_activity_mark_notificatio.
     json = json && '{'.
     json = json && |"last_read_at": "{ data-last_read_at }",|.
-    json = json && |"read": "{ data-read }",|.
+    IF data-read = abap_true.
+      json = json && |"read": true,|.
+    ELSE.
+      json = json && |"read": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
 
   METHOD json_activity_set_thread_subsc.
     json = json && '{'.
-    json = json && |"ignored": "{ data-ignored }",|.
+    IF data-ignored = abap_true.
+      json = json && |"ignored": true,|.
+    ELSE.
+      json = json && |"ignored": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
 
   METHOD json_activity_delete_thread_su.
     json = json && '{'.
-    json = json && |"ignored": "{ data-ignored }",|.
+    IF data-ignored = abap_true.
+      json = json && |"ignored": true,|.
+    ELSE.
+      json = json && |"ignored": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9284,17 +8946,53 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"location": "{ data-location }",|.
     json = json && |"name": "{ data-name }",|.
     json = json && |"description": "{ data-description }",|.
-    json = json && |"has_organization_projects": "{ data-has_organization_projects }",|.
-    json = json && |"has_repository_projects": "{ data-has_repository_projects }",|.
+    IF data-has_organization_projects = abap_true.
+      json = json && |"has_organization_projects": true,|.
+    ELSE.
+      json = json && |"has_organization_projects": false,|.
+    ENDIF.
+    IF data-has_repository_projects = abap_true.
+      json = json && |"has_repository_projects": true,|.
+    ELSE.
+      json = json && |"has_repository_projects": false,|.
+    ENDIF.
     json = json && |"default_repository_permission": "{ data-default_repository_permission }",|.
-    json = json && |"members_can_create_repositories": "{ data-members_can_create_repositorie }",|.
-    json = json && |"members_can_create_internal_repositories": "{ data-members_can_create_internal_re }",|.
-    json = json && |"members_can_create_private_repositories": "{ data-members_can_create_private_rep }",|.
-    json = json && |"members_can_create_public_repositories": "{ data-members_can_create_public_repo }",|.
+    IF data-members_can_create_repositorie = abap_true.
+      json = json && |"members_can_create_repositories": true,|.
+    ELSE.
+      json = json && |"members_can_create_repositories": false,|.
+    ENDIF.
+    IF data-members_can_create_internal_re = abap_true.
+      json = json && |"members_can_create_internal_repositories": true,|.
+    ELSE.
+      json = json && |"members_can_create_internal_repositories": false,|.
+    ENDIF.
+    IF data-members_can_create_private_rep = abap_true.
+      json = json && |"members_can_create_private_repositories": true,|.
+    ELSE.
+      json = json && |"members_can_create_private_repositories": false,|.
+    ENDIF.
+    IF data-members_can_create_public_repo = abap_true.
+      json = json && |"members_can_create_public_repositories": true,|.
+    ELSE.
+      json = json && |"members_can_create_public_repositories": false,|.
+    ENDIF.
     json = json && |"members_allowed_repository_creation_type": "{ data-members_allowed_repository_cre }",|.
-    json = json && |"members_can_create_pages": "{ data-members_can_create_pages }",|.
-    json = json && |"members_can_create_public_pages": "{ data-members_can_create_public_page }",|.
-    json = json && |"members_can_create_private_pages": "{ data-members_can_create_private_pag }",|.
+    IF data-members_can_create_pages = abap_true.
+      json = json && |"members_can_create_pages": true,|.
+    ELSE.
+      json = json && |"members_can_create_pages": false,|.
+    ENDIF.
+    IF data-members_can_create_public_page = abap_true.
+      json = json && |"members_can_create_public_pages": true,|.
+    ELSE.
+      json = json && |"members_can_create_public_pages": false,|.
+    ENDIF.
+    IF data-members_can_create_private_pag = abap_true.
+      json = json && |"members_can_create_private_pages": true,|.
+    ELSE.
+      json = json && |"members_can_create_private_pages": false,|.
+    ENDIF.
     json = json && |"blog": "{ data-blog }",|.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
@@ -9387,7 +9085,11 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"name": "{ data-name }",|.
 *  json = json && '"config":' not simple
 *  json = json && '"events":' not simple
-    json = json && |"active": "{ data-active }",|.
+    IF data-active = abap_true.
+      json = json && |"active": true,|.
+    ELSE.
+      json = json && |"active": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9396,7 +9098,11 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && '{'.
 *  json = json && '"config":' not simple
 *  json = json && '"events":' not simple
-    json = json && |"active": "{ data-active }",|.
+    IF data-active = abap_true.
+      json = json && |"active": true,|.
+    ELSE.
+      json = json && |"active": false,|.
+    ENDIF.
     json = json && |"name": "{ data-name }",|.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
@@ -9406,7 +9112,11 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && '{'.
 *  json = json && '"config":' not simple
 *  json = json && '"events":' not simple
-    json = json && |"active": "{ data-active }",|.
+    IF data-active = abap_true.
+      json = json && |"active": true,|.
+    ELSE.
+      json = json && |"active": false,|.
+    ENDIF.
     json = json && |"name": "{ data-name }",|.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
@@ -9424,7 +9134,7 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD json_orgs_create_invitation.
     json = json && '{'.
-    json = json && |"invitee_id": "{ data-invitee_id }",|.
+    json = json && |"invitee_id": { data-invitee_id },|.
     json = json && |"email": "{ data-email }",|.
     json = json && |"role": "{ data-role }",|.
 *  json = json && '"team_ids":' not simple
@@ -9449,8 +9159,16 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD json_migrations_start_for_org.
     json = json && '{'.
 *  json = json && '"repositories":' not simple
-    json = json && |"lock_repositories": "{ data-lock_repositories }",|.
-    json = json && |"exclude_attachments": "{ data-exclude_attachments }",|.
+    IF data-lock_repositories = abap_true.
+      json = json && |"lock_repositories": true,|.
+    ELSE.
+      json = json && |"lock_repositories": false,|.
+    ENDIF.
+    IF data-exclude_attachments = abap_true.
+      json = json && |"exclude_attachments": true,|.
+    ELSE.
+      json = json && |"exclude_attachments": false,|.
+    ENDIF.
 *  json = json && '"exclude":' not simple
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
@@ -9469,20 +9187,60 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"name": "{ data-name }",|.
     json = json && |"description": "{ data-description }",|.
     json = json && |"homepage": "{ data-homepage }",|.
-    json = json && |"private": "{ data-private }",|.
+    IF data-private = abap_true.
+      json = json && |"private": true,|.
+    ELSE.
+      json = json && |"private": false,|.
+    ENDIF.
     json = json && |"visibility": "{ data-visibility }",|.
-    json = json && |"has_issues": "{ data-has_issues }",|.
-    json = json && |"has_projects": "{ data-has_projects }",|.
-    json = json && |"has_wiki": "{ data-has_wiki }",|.
-    json = json && |"is_template": "{ data-is_template }",|.
-    json = json && |"team_id": "{ data-team_id }",|.
-    json = json && |"auto_init": "{ data-auto_init }",|.
+    IF data-has_issues = abap_true.
+      json = json && |"has_issues": true,|.
+    ELSE.
+      json = json && |"has_issues": false,|.
+    ENDIF.
+    IF data-has_projects = abap_true.
+      json = json && |"has_projects": true,|.
+    ELSE.
+      json = json && |"has_projects": false,|.
+    ENDIF.
+    IF data-has_wiki = abap_true.
+      json = json && |"has_wiki": true,|.
+    ELSE.
+      json = json && |"has_wiki": false,|.
+    ENDIF.
+    IF data-is_template = abap_true.
+      json = json && |"is_template": true,|.
+    ELSE.
+      json = json && |"is_template": false,|.
+    ENDIF.
+    json = json && |"team_id": { data-team_id },|.
+    IF data-auto_init = abap_true.
+      json = json && |"auto_init": true,|.
+    ELSE.
+      json = json && |"auto_init": false,|.
+    ENDIF.
     json = json && |"gitignore_template": "{ data-gitignore_template }",|.
     json = json && |"license_template": "{ data-license_template }",|.
-    json = json && |"allow_squash_merge": "{ data-allow_squash_merge }",|.
-    json = json && |"allow_merge_commit": "{ data-allow_merge_commit }",|.
-    json = json && |"allow_rebase_merge": "{ data-allow_rebase_merge }",|.
-    json = json && |"delete_branch_on_merge": "{ data-delete_branch_on_merge }",|.
+    IF data-allow_squash_merge = abap_true.
+      json = json && |"allow_squash_merge": true,|.
+    ELSE.
+      json = json && |"allow_squash_merge": false,|.
+    ENDIF.
+    IF data-allow_merge_commit = abap_true.
+      json = json && |"allow_merge_commit": true,|.
+    ELSE.
+      json = json && |"allow_merge_commit": false,|.
+    ENDIF.
+    IF data-allow_rebase_merge = abap_true.
+      json = json && |"allow_rebase_merge": true,|.
+    ELSE.
+      json = json && |"allow_rebase_merge": false,|.
+    ENDIF.
+    IF data-delete_branch_on_merge = abap_true.
+      json = json && |"delete_branch_on_merge": true,|.
+    ELSE.
+      json = json && |"delete_branch_on_merge": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9495,7 +9253,7 @@ CLASS zcl_github IMPLEMENTATION.
 *  json = json && '"repo_names":' not simple
     json = json && |"privacy": "{ data-privacy }",|.
     json = json && |"permission": "{ data-permission }",|.
-    json = json && |"parent_team_id": "{ data-parent_team_id }",|.
+    json = json && |"parent_team_id": { data-parent_team_id },|.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9506,7 +9264,7 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"description": "{ data-description }",|.
     json = json && |"privacy": "{ data-privacy }",|.
     json = json && |"permission": "{ data-permission }",|.
-    json = json && |"parent_team_id": "{ data-parent_team_id }",|.
+    json = json && |"parent_team_id": { data-parent_team_id },|.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9517,7 +9275,7 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"description": "{ data-description }",|.
     json = json && |"privacy": "{ data-privacy }",|.
     json = json && |"permission": "{ data-permission }",|.
-    json = json && |"parent_team_id": "{ data-parent_team_id }",|.
+    json = json && |"parent_team_id": { data-parent_team_id },|.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9526,7 +9284,11 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && '{'.
     json = json && |"title": "{ data-title }",|.
     json = json && |"body": "{ data-body }",|.
-    json = json && |"private": "{ data-private }",|.
+    IF data-private = abap_true.
+      json = json && |"private": true,|.
+    ELSE.
+      json = json && |"private": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9634,7 +9396,11 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD json_projects_update_card.
     json = json && '{'.
     json = json && |"note": "{ data-note }",|.
-    json = json && |"archived": "{ data-archived }",|.
+    IF data-archived = abap_true.
+      json = json && |"archived": true,|.
+    ELSE.
+      json = json && |"archived": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9642,7 +9408,11 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD json_projects_delete_card.
     json = json && '{'.
     json = json && |"note": "{ data-note }",|.
-    json = json && |"archived": "{ data-archived }",|.
+    IF data-archived = abap_true.
+      json = json && |"archived": true,|.
+    ELSE.
+      json = json && |"archived": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9650,7 +9420,7 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD json_projects_move_card.
     json = json && '{'.
     json = json && |"position": "{ data-position }",|.
-    json = json && |"column_id": "{ data-column_id }",|.
+    json = json && |"column_id": { data-column_id },|.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9682,7 +9452,11 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"body": "{ data-body }",|.
     json = json && |"state": "{ data-state }",|.
     json = json && |"organization_permission": "{ data-organization_permission }",|.
-    json = json && |"private": "{ data-private }",|.
+    IF data-private = abap_true.
+      json = json && |"private": true,|.
+    ELSE.
+      json = json && |"private": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9693,7 +9467,11 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"body": "{ data-body }",|.
     json = json && |"state": "{ data-state }",|.
     json = json && |"organization_permission": "{ data-organization_permission }",|.
-    json = json && |"private": "{ data-private }",|.
+    IF data-private = abap_true.
+      json = json && |"private": true,|.
+    ELSE.
+      json = json && |"private": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9724,18 +9502,58 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"name": "{ data-name }",|.
     json = json && |"description": "{ data-description }",|.
     json = json && |"homepage": "{ data-homepage }",|.
-    json = json && |"private": "{ data-private }",|.
+    IF data-private = abap_true.
+      json = json && |"private": true,|.
+    ELSE.
+      json = json && |"private": false,|.
+    ENDIF.
     json = json && |"visibility": "{ data-visibility }",|.
-    json = json && |"has_issues": "{ data-has_issues }",|.
-    json = json && |"has_projects": "{ data-has_projects }",|.
-    json = json && |"has_wiki": "{ data-has_wiki }",|.
-    json = json && |"is_template": "{ data-is_template }",|.
+    IF data-has_issues = abap_true.
+      json = json && |"has_issues": true,|.
+    ELSE.
+      json = json && |"has_issues": false,|.
+    ENDIF.
+    IF data-has_projects = abap_true.
+      json = json && |"has_projects": true,|.
+    ELSE.
+      json = json && |"has_projects": false,|.
+    ENDIF.
+    IF data-has_wiki = abap_true.
+      json = json && |"has_wiki": true,|.
+    ELSE.
+      json = json && |"has_wiki": false,|.
+    ENDIF.
+    IF data-is_template = abap_true.
+      json = json && |"is_template": true,|.
+    ELSE.
+      json = json && |"is_template": false,|.
+    ENDIF.
     json = json && |"default_branch": "{ data-default_branch }",|.
-    json = json && |"allow_squash_merge": "{ data-allow_squash_merge }",|.
-    json = json && |"allow_merge_commit": "{ data-allow_merge_commit }",|.
-    json = json && |"allow_rebase_merge": "{ data-allow_rebase_merge }",|.
-    json = json && |"delete_branch_on_merge": "{ data-delete_branch_on_merge }",|.
-    json = json && |"archived": "{ data-archived }",|.
+    IF data-allow_squash_merge = abap_true.
+      json = json && |"allow_squash_merge": true,|.
+    ELSE.
+      json = json && |"allow_squash_merge": false,|.
+    ENDIF.
+    IF data-allow_merge_commit = abap_true.
+      json = json && |"allow_merge_commit": true,|.
+    ELSE.
+      json = json && |"allow_merge_commit": false,|.
+    ENDIF.
+    IF data-allow_rebase_merge = abap_true.
+      json = json && |"allow_rebase_merge": true,|.
+    ELSE.
+      json = json && |"allow_rebase_merge": false,|.
+    ENDIF.
+    IF data-delete_branch_on_merge = abap_true.
+      json = json && |"delete_branch_on_merge": true,|.
+    ELSE.
+      json = json && |"delete_branch_on_merge": false,|.
+    ENDIF.
+    IF data-archived = abap_true.
+      json = json && |"archived": true,|.
+    ELSE.
+      json = json && |"archived": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9745,18 +9563,58 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"name": "{ data-name }",|.
     json = json && |"description": "{ data-description }",|.
     json = json && |"homepage": "{ data-homepage }",|.
-    json = json && |"private": "{ data-private }",|.
+    IF data-private = abap_true.
+      json = json && |"private": true,|.
+    ELSE.
+      json = json && |"private": false,|.
+    ENDIF.
     json = json && |"visibility": "{ data-visibility }",|.
-    json = json && |"has_issues": "{ data-has_issues }",|.
-    json = json && |"has_projects": "{ data-has_projects }",|.
-    json = json && |"has_wiki": "{ data-has_wiki }",|.
-    json = json && |"is_template": "{ data-is_template }",|.
+    IF data-has_issues = abap_true.
+      json = json && |"has_issues": true,|.
+    ELSE.
+      json = json && |"has_issues": false,|.
+    ENDIF.
+    IF data-has_projects = abap_true.
+      json = json && |"has_projects": true,|.
+    ELSE.
+      json = json && |"has_projects": false,|.
+    ENDIF.
+    IF data-has_wiki = abap_true.
+      json = json && |"has_wiki": true,|.
+    ELSE.
+      json = json && |"has_wiki": false,|.
+    ENDIF.
+    IF data-is_template = abap_true.
+      json = json && |"is_template": true,|.
+    ELSE.
+      json = json && |"is_template": false,|.
+    ENDIF.
     json = json && |"default_branch": "{ data-default_branch }",|.
-    json = json && |"allow_squash_merge": "{ data-allow_squash_merge }",|.
-    json = json && |"allow_merge_commit": "{ data-allow_merge_commit }",|.
-    json = json && |"allow_rebase_merge": "{ data-allow_rebase_merge }",|.
-    json = json && |"delete_branch_on_merge": "{ data-delete_branch_on_merge }",|.
-    json = json && |"archived": "{ data-archived }",|.
+    IF data-allow_squash_merge = abap_true.
+      json = json && |"allow_squash_merge": true,|.
+    ELSE.
+      json = json && |"allow_squash_merge": false,|.
+    ENDIF.
+    IF data-allow_merge_commit = abap_true.
+      json = json && |"allow_merge_commit": true,|.
+    ELSE.
+      json = json && |"allow_merge_commit": false,|.
+    ENDIF.
+    IF data-allow_rebase_merge = abap_true.
+      json = json && |"allow_rebase_merge": true,|.
+    ELSE.
+      json = json && |"allow_rebase_merge": false,|.
+    ENDIF.
+    IF data-delete_branch_on_merge = abap_true.
+      json = json && |"delete_branch_on_merge": true,|.
+    ELSE.
+      json = json && |"delete_branch_on_merge": false,|.
+    ENDIF.
+    IF data-archived = abap_true.
+      json = json && |"archived": true,|.
+    ELSE.
+      json = json && |"archived": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9796,12 +9654,28 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD json_repos_update_branch_prote.
     json = json && '{'.
 *  json = json && '"required_status_checks":' not simple
-    json = json && |"enforce_admins": "{ data-enforce_admins }",|.
+    IF data-enforce_admins = abap_true.
+      json = json && |"enforce_admins": true,|.
+    ELSE.
+      json = json && |"enforce_admins": false,|.
+    ENDIF.
 *  json = json && '"required_pull_request_reviews":' not simple
 *  json = json && '"restrictions":' not simple
-    json = json && |"required_linear_history": "{ data-required_linear_history }",|.
-    json = json && |"allow_force_pushes": "{ data-allow_force_pushes }",|.
-    json = json && |"allow_deletions": "{ data-allow_deletions }",|.
+    IF data-required_linear_history = abap_true.
+      json = json && |"required_linear_history": true,|.
+    ELSE.
+      json = json && |"required_linear_history": false,|.
+    ENDIF.
+    IF data-allow_force_pushes = abap_true.
+      json = json && |"allow_force_pushes": true,|.
+    ELSE.
+      json = json && |"allow_force_pushes": false,|.
+    ENDIF.
+    IF data-allow_deletions = abap_true.
+      json = json && |"allow_deletions": true,|.
+    ELSE.
+      json = json && |"allow_deletions": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9809,12 +9683,28 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD json_repos_delete_branch_prote.
     json = json && '{'.
 *  json = json && '"required_status_checks":' not simple
-    json = json && |"enforce_admins": "{ data-enforce_admins }",|.
+    IF data-enforce_admins = abap_true.
+      json = json && |"enforce_admins": true,|.
+    ELSE.
+      json = json && |"enforce_admins": false,|.
+    ENDIF.
 *  json = json && '"required_pull_request_reviews":' not simple
 *  json = json && '"restrictions":' not simple
-    json = json && |"required_linear_history": "{ data-required_linear_history }",|.
-    json = json && |"allow_force_pushes": "{ data-allow_force_pushes }",|.
-    json = json && |"allow_deletions": "{ data-allow_deletions }",|.
+    IF data-required_linear_history = abap_true.
+      json = json && |"required_linear_history": true,|.
+    ELSE.
+      json = json && |"required_linear_history": false,|.
+    ENDIF.
+    IF data-allow_force_pushes = abap_true.
+      json = json && |"allow_force_pushes": true,|.
+    ELSE.
+      json = json && |"allow_force_pushes": false,|.
+    ENDIF.
+    IF data-allow_deletions = abap_true.
+      json = json && |"allow_deletions": true,|.
+    ELSE.
+      json = json && |"allow_deletions": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9822,9 +9712,17 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD json_repos_update_pull_request.
     json = json && '{'.
 *  json = json && '"dismissal_restrictions":' not simple
-    json = json && |"dismiss_stale_reviews": "{ data-dismiss_stale_reviews }",|.
-    json = json && |"require_code_owner_reviews": "{ data-require_code_owner_reviews }",|.
-    json = json && |"required_approving_review_count": "{ data-required_approving_review_coun }",|.
+    IF data-dismiss_stale_reviews = abap_true.
+      json = json && |"dismiss_stale_reviews": true,|.
+    ELSE.
+      json = json && |"dismiss_stale_reviews": false,|.
+    ENDIF.
+    IF data-require_code_owner_reviews = abap_true.
+      json = json && |"require_code_owner_reviews": true,|.
+    ELSE.
+      json = json && |"require_code_owner_reviews": false,|.
+    ENDIF.
+    json = json && |"required_approving_review_count": { data-required_approving_review_coun },|.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -9832,16 +9730,28 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD json_repos_delete_pull_request.
     json = json && '{'.
 *  json = json && '"dismissal_restrictions":' not simple
-    json = json && |"dismiss_stale_reviews": "{ data-dismiss_stale_reviews }",|.
-    json = json && |"require_code_owner_reviews": "{ data-require_code_owner_reviews }",|.
-    json = json && |"required_approving_review_count": "{ data-required_approving_review_coun }",|.
+    IF data-dismiss_stale_reviews = abap_true.
+      json = json && |"dismiss_stale_reviews": true,|.
+    ELSE.
+      json = json && |"dismiss_stale_reviews": false,|.
+    ENDIF.
+    IF data-require_code_owner_reviews = abap_true.
+      json = json && |"require_code_owner_reviews": true,|.
+    ELSE.
+      json = json && |"require_code_owner_reviews": false,|.
+    ENDIF.
+    json = json && |"required_approving_review_count": { data-required_approving_review_coun },|.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
 
   METHOD json_repos_update_status_check.
     json = json && '{'.
-    json = json && |"strict": "{ data-strict }",|.
+    IF data-strict = abap_true.
+      json = json && |"strict": true,|.
+    ELSE.
+      json = json && |"strict": false,|.
+    ENDIF.
 *  json = json && '"contexts":' not simple
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
@@ -9849,7 +9759,11 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD json_repos_remove_status_check.
     json = json && '{'.
-    json = json && |"strict": "{ data-strict }",|.
+    IF data-strict = abap_true.
+      json = json && |"strict": true,|.
+    ELSE.
+      json = json && |"strict": false,|.
+    ENDIF.
 *  json = json && '"contexts":' not simple
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
@@ -10052,8 +9966,8 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && '{'.
     json = json && |"body": "{ data-body }",|.
     json = json && |"path": "{ data-path }",|.
-    json = json && |"position": "{ data-position }",|.
-    json = json && |"line": "{ data-line }",|.
+    json = json && |"position": { data-position },|.
+    json = json && |"line": { data-line },|.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -10085,13 +9999,25 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && '{'.
     json = json && |"ref": "{ data-ref }",|.
     json = json && |"task": "{ data-task }",|.
-    json = json && |"auto_merge": "{ data-auto_merge }",|.
+    IF data-auto_merge = abap_true.
+      json = json && |"auto_merge": true,|.
+    ELSE.
+      json = json && |"auto_merge": false,|.
+    ENDIF.
 *  json = json && '"required_contexts":' not simple
     json = json && |"payload": "{ data-payload }",|.
     json = json && |"environment": "{ data-environment }",|.
     json = json && |"description": "{ data-description }",|.
-    json = json && |"transient_environment": "{ data-transient_environment }",|.
-    json = json && |"production_environment": "{ data-production_environment }",|.
+    IF data-transient_environment = abap_true.
+      json = json && |"transient_environment": true,|.
+    ELSE.
+      json = json && |"transient_environment": false,|.
+    ENDIF.
+    IF data-production_environment = abap_true.
+      json = json && |"production_environment": true,|.
+    ELSE.
+      json = json && |"production_environment": false,|.
+    ENDIF.
     json = json && |"created_at": "{ data-created_at }",|.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
@@ -10105,7 +10031,11 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"description": "{ data-description }",|.
     json = json && |"environment": "{ data-environment }",|.
     json = json && |"environment_url": "{ data-environment_url }",|.
-    json = json && |"auto_inactive": "{ data-auto_inactive }",|.
+    IF data-auto_inactive = abap_true.
+      json = json && |"auto_inactive": true,|.
+    ELSE.
+      json = json && |"auto_inactive": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -10157,7 +10087,11 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD json_git_update_ref.
     json = json && '{'.
     json = json && |"sha": "{ data-sha }",|.
-    json = json && |"force": "{ data-force }",|.
+    IF data-force = abap_true.
+      json = json && |"force": true,|.
+    ELSE.
+      json = json && |"force": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -10165,7 +10099,11 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD json_git_delete_ref.
     json = json && '{'.
     json = json && |"sha": "{ data-sha }",|.
-    json = json && |"force": "{ data-force }",|.
+    IF data-force = abap_true.
+      json = json && |"force": true,|.
+    ELSE.
+      json = json && |"force": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -10194,7 +10132,11 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"name": "{ data-name }",|.
 *  json = json && '"config":' not simple
 *  json = json && '"events":' not simple
-    json = json && |"active": "{ data-active }",|.
+    IF data-active = abap_true.
+      json = json && |"active": true,|.
+    ELSE.
+      json = json && |"active": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -10205,7 +10147,11 @@ CLASS zcl_github IMPLEMENTATION.
 *  json = json && '"events":' not simple
 *  json = json && '"add_events":' not simple
 *  json = json && '"remove_events":' not simple
-    json = json && |"active": "{ data-active }",|.
+    IF data-active = abap_true.
+      json = json && |"active": true,|.
+    ELSE.
+      json = json && |"active": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -10216,7 +10162,11 @@ CLASS zcl_github IMPLEMENTATION.
 *  json = json && '"events":' not simple
 *  json = json && '"add_events":' not simple
 *  json = json && '"remove_events":' not simple
-    json = json && |"active": "{ data-active }",|.
+    IF data-active = abap_true.
+      json = json && |"active": true,|.
+    ELSE.
+      json = json && |"active": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -10405,7 +10355,11 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && '{'.
     json = json && |"title": "{ data-title }",|.
     json = json && |"key": "{ data-key }",|.
-    json = json && |"read_only": "{ data-read_only }",|.
+    IF data-read_only = abap_true.
+      json = json && |"read_only": true,|.
+    ELSE.
+      json = json && |"read_only": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -10493,7 +10447,11 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD json_repos_update_information_.
     json = json && '{'.
     json = json && |"cname": "{ data-cname }",|.
-    json = json && |"public": "{ data-public }",|.
+    IF data-public = abap_true.
+      json = json && |"public": true,|.
+    ELSE.
+      json = json && |"public": false,|.
+    ENDIF.
     json = json && |"source": "{ data-source }",|.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
@@ -10502,7 +10460,11 @@ CLASS zcl_github IMPLEMENTATION.
   METHOD json_repos_delete_pages_site.
     json = json && '{'.
     json = json && |"cname": "{ data-cname }",|.
-    json = json && |"public": "{ data-public }",|.
+    IF data-public = abap_true.
+      json = json && |"public": true,|.
+    ELSE.
+      json = json && |"public": false,|.
+    ENDIF.
     json = json && |"source": "{ data-source }",|.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
@@ -10522,9 +10484,17 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"head": "{ data-head }",|.
     json = json && |"base": "{ data-base }",|.
     json = json && |"body": "{ data-body }",|.
-    json = json && |"maintainer_can_modify": "{ data-maintainer_can_modify }",|.
-    json = json && |"draft": "{ data-draft }",|.
-    json = json && |"issue": "{ data-issue }",|.
+    IF data-maintainer_can_modify = abap_true.
+      json = json && |"maintainer_can_modify": true,|.
+    ELSE.
+      json = json && |"maintainer_can_modify": false,|.
+    ENDIF.
+    IF data-draft = abap_true.
+      json = json && |"draft": true,|.
+    ELSE.
+      json = json && |"draft": false,|.
+    ENDIF.
+    json = json && |"issue": { data-issue },|.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -10556,7 +10526,11 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"body": "{ data-body }",|.
     json = json && |"state": "{ data-state }",|.
     json = json && |"base": "{ data-base }",|.
-    json = json && |"maintainer_can_modify": "{ data-maintainer_can_modify }",|.
+    IF data-maintainer_can_modify = abap_true.
+      json = json && |"maintainer_can_modify": true,|.
+    ELSE.
+      json = json && |"maintainer_can_modify": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -10566,12 +10540,12 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"body": "{ data-body }",|.
     json = json && |"commit_id": "{ data-commit_id }",|.
     json = json && |"path": "{ data-path }",|.
-    json = json && |"position": "{ data-position }",|.
+    json = json && |"position": { data-position },|.
     json = json && |"side": "{ data-side }",|.
-    json = json && |"line": "{ data-line }",|.
-    json = json && |"start_line": "{ data-start_line }",|.
+    json = json && |"line": { data-line },|.
+    json = json && |"start_line": { data-start_line },|.
     json = json && |"start_side": "{ data-start_side }",|.
-    json = json && |"in_reply_to": "{ data-in_reply_to }",|.
+    json = json && |"in_reply_to": { data-in_reply_to },|.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -10662,8 +10636,16 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"target_commitish": "{ data-target_commitish }",|.
     json = json && |"name": "{ data-name }",|.
     json = json && |"body": "{ data-body }",|.
-    json = json && |"draft": "{ data-draft }",|.
-    json = json && |"prerelease": "{ data-prerelease }",|.
+    IF data-draft = abap_true.
+      json = json && |"draft": true,|.
+    ELSE.
+      json = json && |"draft": false,|.
+    ENDIF.
+    IF data-prerelease = abap_true.
+      json = json && |"prerelease": true,|.
+    ELSE.
+      json = json && |"prerelease": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -10692,8 +10674,16 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"target_commitish": "{ data-target_commitish }",|.
     json = json && |"name": "{ data-name }",|.
     json = json && |"body": "{ data-body }",|.
-    json = json && |"draft": "{ data-draft }",|.
-    json = json && |"prerelease": "{ data-prerelease }",|.
+    IF data-draft = abap_true.
+      json = json && |"draft": true,|.
+    ELSE.
+      json = json && |"draft": false,|.
+    ENDIF.
+    IF data-prerelease = abap_true.
+      json = json && |"prerelease": true,|.
+    ELSE.
+      json = json && |"prerelease": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -10704,8 +10694,16 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"target_commitish": "{ data-target_commitish }",|.
     json = json && |"name": "{ data-name }",|.
     json = json && |"body": "{ data-body }",|.
-    json = json && |"draft": "{ data-draft }",|.
-    json = json && |"prerelease": "{ data-prerelease }",|.
+    IF data-draft = abap_true.
+      json = json && |"draft": true,|.
+    ELSE.
+      json = json && |"draft": false,|.
+    ENDIF.
+    IF data-prerelease = abap_true.
+      json = json && |"prerelease": true,|.
+    ELSE.
+      json = json && |"prerelease": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -10730,16 +10728,32 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD json_activity_set_repo_subscri.
     json = json && '{'.
-    json = json && |"subscribed": "{ data-subscribed }",|.
-    json = json && |"ignored": "{ data-ignored }",|.
+    IF data-subscribed = abap_true.
+      json = json && |"subscribed": true,|.
+    ELSE.
+      json = json && |"subscribed": false,|.
+    ENDIF.
+    IF data-ignored = abap_true.
+      json = json && |"ignored": true,|.
+    ELSE.
+      json = json && |"ignored": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
 
   METHOD json_activity_delete_repo_subs.
     json = json && '{'.
-    json = json && |"subscribed": "{ data-subscribed }",|.
-    json = json && |"ignored": "{ data-ignored }",|.
+    IF data-subscribed = abap_true.
+      json = json && |"subscribed": true,|.
+    ELSE.
+      json = json && |"subscribed": false,|.
+    ENDIF.
+    IF data-ignored = abap_true.
+      json = json && |"ignored": true,|.
+    ELSE.
+      json = json && |"ignored": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -10764,8 +10778,16 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"owner": "{ data-owner }",|.
     json = json && |"name": "{ data-name }",|.
     json = json && |"description": "{ data-description }",|.
-    json = json && |"include_all_branches": "{ data-include_all_branches }",|.
-    json = json && |"private": "{ data-private }",|.
+    IF data-include_all_branches = abap_true.
+      json = json && |"include_all_branches": true,|.
+    ELSE.
+      json = json && |"include_all_branches": false,|.
+    ENDIF.
+    IF data-private = abap_true.
+      json = json && |"private": true,|.
+    ELSE.
+      json = json && |"private": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -10851,7 +10873,11 @@ CLASS zcl_github IMPLEMENTATION.
 *  json = json && '"schemas":' not simple
     json = json && |"externalId": "{ data-externalid }",|.
 *  json = json && '"groups":' not simple
-    json = json && |"active": "{ data-active }",|.
+    IF data-active = abap_true.
+      json = json && |"active": true,|.
+    ELSE.
+      json = json && |"active": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -10862,7 +10888,11 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"displayName": "{ data-displayname }",|.
     json = json && |"externalId": "{ data-externalid }",|.
 *  json = json && '"groups":' not simple
-    json = json && |"active": "{ data-active }",|.
+    IF data-active = abap_true.
+      json = json && |"active": true,|.
+    ELSE.
+      json = json && |"active": false,|.
+    ENDIF.
     json = json && |"userName": "{ data-username }",|.
 *  json = json && '"name":' not simple
 *  json = json && '"emails":' not simple
@@ -10886,138 +10916,6 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && '}'.
   ENDMETHOD.
 
-  METHOD json_teams_update_legacy.
-    json = json && '{'.
-    json = json && |"name": "{ data-name }",|.
-    json = json && |"description": "{ data-description }",|.
-    json = json && |"privacy": "{ data-privacy }",|.
-    json = json && |"permission": "{ data-permission }",|.
-    json = json && |"parent_team_id": "{ data-parent_team_id }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_teams_delete_legacy.
-    json = json && '{'.
-    json = json && |"name": "{ data-name }",|.
-    json = json && |"description": "{ data-description }",|.
-    json = json && |"privacy": "{ data-privacy }",|.
-    json = json && |"permission": "{ data-permission }",|.
-    json = json && |"parent_team_id": "{ data-parent_team_id }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_teams_create_discussion_l.
-    json = json && '{'.
-    json = json && |"title": "{ data-title }",|.
-    json = json && |"body": "{ data-body }",|.
-    json = json && |"private": "{ data-private }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_teams_update_discussion_l.
-    json = json && '{'.
-    json = json && |"title": "{ data-title }",|.
-    json = json && |"body": "{ data-body }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_teams_delete_discussion_l.
-    json = json && '{'.
-    json = json && |"title": "{ data-title }",|.
-    json = json && |"body": "{ data-body }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_teams_create_discussion01.
-    json = json && '{'.
-    json = json && |"body": "{ data-body }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_teams_update_discussion01.
-    json = json && '{'.
-    json = json && |"body": "{ data-body }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_teams_delete_discussion01.
-    json = json && '{'.
-    json = json && |"body": "{ data-body }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_reactions_create_for_te02.
-    json = json && '{'.
-    json = json && |"content": "{ data-content }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_reactions_create_for_te03.
-    json = json && '{'.
-    json = json && |"content": "{ data-content }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_teams_add_or_update_mem01.
-    json = json && '{'.
-    json = json && |"role": "{ data-role }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_teams_remove_membership01.
-    json = json && '{'.
-    json = json && |"role": "{ data-role }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_teams_add_or_update_pro01.
-    json = json && '{'.
-    json = json && |"permission": "{ data-permission }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_teams_remove_project_lega.
-    json = json && '{'.
-    json = json && |"permission": "{ data-permission }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_teams_add_or_update_rep01.
-    json = json && '{'.
-    json = json && |"permission": "{ data-permission }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_teams_remove_repo_legacy.
-    json = json && '{'.
-    json = json && |"permission": "{ data-permission }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
-  METHOD json_teams_create_or_update_01.
-    json = json && '{'.
-*  json = json && '"groups":' not simple
-    json = json && |"synced_at": "{ data-synced_at }",|.
-    json = substring( val = json off = 0 len = strlen( json ) - 1 ).
-    json = json && '}'.
-  ENDMETHOD.
-
   METHOD json_users_update_authenticate.
     json = json && '{'.
     json = json && |"name": "{ data-name }",|.
@@ -11026,7 +10924,11 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"twitter_username": "{ data-twitter_username }",|.
     json = json && |"company": "{ data-company }",|.
     json = json && |"location": "{ data-location }",|.
-    json = json && |"hireable": "{ data-hireable }",|.
+    IF data-hireable = abap_true.
+      json = json && |"hireable": true,|.
+    ELSE.
+      json = json && |"hireable": false,|.
+    ENDIF.
     json = json && |"bio": "{ data-bio }",|.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
@@ -11064,8 +10966,16 @@ CLASS zcl_github IMPLEMENTATION.
 
   METHOD json_migrations_start_for_auth.
     json = json && '{'.
-    json = json && |"lock_repositories": "{ data-lock_repositories }",|.
-    json = json && |"exclude_attachments": "{ data-exclude_attachments }",|.
+    IF data-lock_repositories = abap_true.
+      json = json && |"lock_repositories": true,|.
+    ELSE.
+      json = json && |"lock_repositories": false,|.
+    ENDIF.
+    IF data-exclude_attachments = abap_true.
+      json = json && |"exclude_attachments": true,|.
+    ELSE.
+      json = json && |"exclude_attachments": false,|.
+    ENDIF.
 *  json = json && '"exclude":' not simple
 *  json = json && '"repositories":' not simple
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
@@ -11085,20 +10995,64 @@ CLASS zcl_github IMPLEMENTATION.
     json = json && |"name": "{ data-name }",|.
     json = json && |"description": "{ data-description }",|.
     json = json && |"homepage": "{ data-homepage }",|.
-    json = json && |"private": "{ data-private }",|.
-    json = json && |"has_issues": "{ data-has_issues }",|.
-    json = json && |"has_projects": "{ data-has_projects }",|.
-    json = json && |"has_wiki": "{ data-has_wiki }",|.
-    json = json && |"team_id": "{ data-team_id }",|.
-    json = json && |"auto_init": "{ data-auto_init }",|.
+    IF data-private = abap_true.
+      json = json && |"private": true,|.
+    ELSE.
+      json = json && |"private": false,|.
+    ENDIF.
+    IF data-has_issues = abap_true.
+      json = json && |"has_issues": true,|.
+    ELSE.
+      json = json && |"has_issues": false,|.
+    ENDIF.
+    IF data-has_projects = abap_true.
+      json = json && |"has_projects": true,|.
+    ELSE.
+      json = json && |"has_projects": false,|.
+    ENDIF.
+    IF data-has_wiki = abap_true.
+      json = json && |"has_wiki": true,|.
+    ELSE.
+      json = json && |"has_wiki": false,|.
+    ENDIF.
+    json = json && |"team_id": { data-team_id },|.
+    IF data-auto_init = abap_true.
+      json = json && |"auto_init": true,|.
+    ELSE.
+      json = json && |"auto_init": false,|.
+    ENDIF.
     json = json && |"gitignore_template": "{ data-gitignore_template }",|.
     json = json && |"license_template": "{ data-license_template }",|.
-    json = json && |"allow_squash_merge": "{ data-allow_squash_merge }",|.
-    json = json && |"allow_merge_commit": "{ data-allow_merge_commit }",|.
-    json = json && |"allow_rebase_merge": "{ data-allow_rebase_merge }",|.
-    json = json && |"delete_branch_on_merge": "{ data-delete_branch_on_merge }",|.
-    json = json && |"has_downloads": "{ data-has_downloads }",|.
-    json = json && |"is_template": "{ data-is_template }",|.
+    IF data-allow_squash_merge = abap_true.
+      json = json && |"allow_squash_merge": true,|.
+    ELSE.
+      json = json && |"allow_squash_merge": false,|.
+    ENDIF.
+    IF data-allow_merge_commit = abap_true.
+      json = json && |"allow_merge_commit": true,|.
+    ELSE.
+      json = json && |"allow_merge_commit": false,|.
+    ENDIF.
+    IF data-allow_rebase_merge = abap_true.
+      json = json && |"allow_rebase_merge": true,|.
+    ELSE.
+      json = json && |"allow_rebase_merge": false,|.
+    ENDIF.
+    IF data-delete_branch_on_merge = abap_true.
+      json = json && |"delete_branch_on_merge": true,|.
+    ELSE.
+      json = json && |"delete_branch_on_merge": false,|.
+    ENDIF.
+    IF data-has_downloads = abap_true.
+      json = json && |"has_downloads": true,|.
+    ELSE.
+      json = json && |"has_downloads": false,|.
+    ENDIF.
+    IF data-is_template = abap_true.
+      json = json && |"is_template": true,|.
+    ELSE.
+      json = json && |"is_template": false,|.
+    ENDIF.
     json = substring( val = json off = 0 len = strlen( json ) - 1 ).
     json = json && '}'.
   ENDMETHOD.
@@ -11269,58 +11223,6 @@ CLASS zcl_github IMPLEMENTATION.
 * todo, handle more responses
   ENDMETHOD.
 
-  METHOD zif_github~oauth_authorizations_list_gran.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/applications/grants'.
-    lv_temp = per_page.
-    CONDENSE lv_temp.
-    IF per_page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
-    ENDIF.
-    lv_temp = page.
-    CONDENSE lv_temp.
-    IF page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'page' value = lv_temp ).
-    ENDIF.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_oauth_authorizations_lis( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~oauth_authorizations_get_grant.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/applications/grants/{grant_id}'.
-    lv_temp = grant_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{grant_id}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_application_grant( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~oauth_authorizations_delete_gr.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/applications/grants/{grant_id}'.
-    lv_temp = grant_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{grant_id}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'DELETE' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
-  ENDMETHOD.
-
   METHOD zif_github~apps_delete_authorization.
     DATA lv_code TYPE i.
     DATA lv_temp TYPE string.
@@ -11329,20 +11231,6 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     mi_client->request->set_cdata( json_apps_delete_authorization( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
-  ENDMETHOD.
-
-  METHOD zif_github~apps_revoke_grant_for_applicat.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/applications/{client_id}/grants/{access_token}'.
-    REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
-    REPLACE ALL OCCURRENCES OF '{access_token}' IN lv_uri WITH access_token.
-    mi_client->request->set_method( 'DELETE' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
@@ -11405,48 +11293,6 @@ CLASS zcl_github IMPLEMENTATION.
     return_data = parse_authorization( '' ).
   ENDMETHOD.
 
-  METHOD zif_github~apps_check_authorization.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/applications/{client_id}/tokens/{access_token}'.
-    REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
-    REPLACE ALL OCCURRENCES OF '{access_token}' IN lv_uri WITH access_token.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
-  ENDMETHOD.
-
-  METHOD zif_github~apps_reset_authorization.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/applications/{client_id}/tokens/{access_token}'.
-    REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
-    REPLACE ALL OCCURRENCES OF '{access_token}' IN lv_uri WITH access_token.
-    mi_client->request->set_method( 'POST' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_authorization( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~apps_revoke_authorization_for_.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/applications/{client_id}/tokens/{access_token}'.
-    REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
-    REPLACE ALL OCCURRENCES OF '{access_token}' IN lv_uri WITH access_token.
-    mi_client->request->set_method( 'DELETE' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
-  ENDMETHOD.
-
   METHOD zif_github~apps_get_by_slug.
     DATA lv_code TYPE i.
     DATA lv_temp TYPE string.
@@ -11458,117 +11304,6 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_integration( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~oauth_authorizations_list_auth.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/authorizations'.
-    lv_temp = per_page.
-    CONDENSE lv_temp.
-    IF per_page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
-    ENDIF.
-    lv_temp = page.
-    CONDENSE lv_temp.
-    IF page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'page' value = lv_temp ).
-    ENDIF.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_oauth_authorizations_l01( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~oauth_authorizations_create_au.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/authorizations'.
-    mi_client->request->set_method( 'POST' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_oauth_authorizations_crea( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_authorization( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~oauth_authorizations_get_or_cr.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/authorizations/clients/{client_id}'.
-    REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
-    mi_client->request->set_method( 'PUT' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_oauth_authorizations_get_( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_authorization( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~oauth_authorizations_get_or_01.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/authorizations/clients/{client_id}/{fingerprint}'.
-    REPLACE ALL OCCURRENCES OF '{fingerprint}' IN lv_uri WITH fingerprint.
-    REPLACE ALL OCCURRENCES OF '{client_id}' IN lv_uri WITH client_id.
-    mi_client->request->set_method( 'PUT' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_oauth_authorizations_ge01( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_authorization( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~oauth_authorizations_get_autho.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/authorizations/{authorization_id}'.
-    lv_temp = authorization_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{authorization_id}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_authorization( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~oauth_authorizations_update_au.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/authorizations/{authorization_id}'.
-    lv_temp = authorization_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{authorization_id}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'PATCH' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_oauth_authorizations_upda( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_authorization( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~oauth_authorizations_delete_au.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/authorizations/{authorization_id}'.
-    lv_temp = authorization_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{authorization_id}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'DELETE' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_oauth_authorizations_dele( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~codes_of_conduct_get_all_codes.
@@ -15735,21 +15470,6 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_rate_limit_overview( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~reactions_delete_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/reactions/{reaction_id}'.
-    lv_temp = reaction_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{reaction_id}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'DELETE' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_github~repos_get.
@@ -21907,740 +21627,6 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_search_users( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_get_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_team_full( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_update_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'PATCH' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_teams_update_legacy( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_team_full( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_delete_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'DELETE' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_teams_delete_legacy( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
-  ENDMETHOD.
-
-  METHOD zif_github~teams_list_discussions_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    IF direction IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'direction' value = direction ).
-    ENDIF.
-    lv_temp = per_page.
-    CONDENSE lv_temp.
-    IF per_page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
-    ENDIF.
-    lv_temp = page.
-    CONDENSE lv_temp.
-    IF page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'page' value = lv_temp ).
-    ENDIF.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_teams_list_discussions_l( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_create_discussion_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'POST' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_teams_create_discussion_l( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_team_discussion( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_get_discussion_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = discussion_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_team_discussion( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_update_discussion_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = discussion_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'PATCH' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_teams_update_discussion_l( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_team_discussion( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_delete_discussion_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = discussion_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'DELETE' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_teams_delete_discussion_l( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
-  ENDMETHOD.
-
-  METHOD zif_github~teams_list_discussion_commen01.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = discussion_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
-    IF direction IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'direction' value = direction ).
-    ENDIF.
-    lv_temp = per_page.
-    CONDENSE lv_temp.
-    IF per_page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
-    ENDIF.
-    lv_temp = page.
-    CONDENSE lv_temp.
-    IF page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'page' value = lv_temp ).
-    ENDIF.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_teams_list_discussion_01( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_create_discussion_comm01.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = discussion_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'POST' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_teams_create_discussion01( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_team_discussion_comment( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_get_discussion_comment_l.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = discussion_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
-    lv_temp = comment_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_team_discussion_comment( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_update_discussion_comm01.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = discussion_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
-    lv_temp = comment_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'PATCH' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_teams_update_discussion01( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_team_discussion_comment( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_delete_discussion_comm01.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = discussion_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
-    lv_temp = comment_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'DELETE' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_teams_delete_discussion01( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
-  ENDMETHOD.
-
-  METHOD zif_github~reactions_list_for_team_disc02.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = discussion_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
-    lv_temp = comment_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH lv_temp.
-    IF content IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'content' value = content ).
-    ENDIF.
-    lv_temp = per_page.
-    CONDENSE lv_temp.
-    IF per_page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
-    ENDIF.
-    lv_temp = page.
-    CONDENSE lv_temp.
-    IF page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'page' value = lv_temp ).
-    ENDIF.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_reactions_list_for_tea02( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~reactions_create_for_team_di02.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = discussion_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
-    lv_temp = comment_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{comment_number}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'POST' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_reactions_create_for_te02( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_reaction( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~reactions_list_for_team_disc03.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/reactions'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = discussion_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
-    IF content IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'content' value = content ).
-    ENDIF.
-    lv_temp = per_page.
-    CONDENSE lv_temp.
-    IF per_page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
-    ENDIF.
-    lv_temp = page.
-    CONDENSE lv_temp.
-    IF page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'page' value = lv_temp ).
-    ENDIF.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_reactions_list_for_tea03( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~reactions_create_for_team_di03.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/discussions/{discussion_number}/reactions'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = discussion_number.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{discussion_number}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'POST' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_reactions_create_for_te03( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_reaction( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_list_pending_invitatio01.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/invitations'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = per_page.
-    CONDENSE lv_temp.
-    IF per_page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
-    ENDIF.
-    lv_temp = page.
-    CONDENSE lv_temp.
-    IF page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'page' value = lv_temp ).
-    ENDIF.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_teams_list_pending_inv01( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_list_members_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/members'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    IF role IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'role' value = role ).
-    ENDIF.
-    lv_temp = per_page.
-    CONDENSE lv_temp.
-    IF per_page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
-    ENDIF.
-    lv_temp = page.
-    CONDENSE lv_temp.
-    IF page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'page' value = lv_temp ).
-    ENDIF.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_teams_list_members_legac( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_get_member_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/members/{username}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
-  ENDMETHOD.
-
-  METHOD zif_github~teams_add_member_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/members/{username}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_method( 'PUT' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
-  ENDMETHOD.
-
-  METHOD zif_github~teams_remove_member_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/members/{username}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_method( 'DELETE' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
-  ENDMETHOD.
-
-  METHOD zif_github~teams_get_membership_for_use01.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/memberships/{username}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_team_membership( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_add_or_update_membersh01.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/memberships/{username}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_method( 'PUT' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_teams_add_or_update_mem01( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_team_membership( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_remove_membership_for_01.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/memberships/{username}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
-    mi_client->request->set_method( 'DELETE' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_teams_remove_membership01( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
-  ENDMETHOD.
-
-  METHOD zif_github~teams_list_projects_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/projects'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = per_page.
-    CONDENSE lv_temp.
-    IF per_page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
-    ENDIF.
-    lv_temp = page.
-    CONDENSE lv_temp.
-    IF page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'page' value = lv_temp ).
-    ENDIF.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_teams_list_projects_lega( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_check_permissions_for_01.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/projects/{project_id}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = project_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_team_project( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_add_or_update_project_01.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/projects/{project_id}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = project_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'PUT' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_teams_add_or_update_pro01( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
-  ENDMETHOD.
-
-  METHOD zif_github~teams_remove_project_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/projects/{project_id}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = project_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{project_id}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'DELETE' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_teams_remove_project_lega( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
-  ENDMETHOD.
-
-  METHOD zif_github~teams_list_repos_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/repos'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = per_page.
-    CONDENSE lv_temp.
-    IF per_page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
-    ENDIF.
-    lv_temp = page.
-    CONDENSE lv_temp.
-    IF page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'page' value = lv_temp ).
-    ENDIF.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_teams_list_repos_legacy( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_check_permissions_for_02.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/repos/{owner}/{repo}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
-    REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
-  ENDMETHOD.
-
-  METHOD zif_github~teams_add_or_update_repo_per01.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/repos/{owner}/{repo}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
-    REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_method( 'PUT' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_teams_add_or_update_rep01( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
-  ENDMETHOD.
-
-  METHOD zif_github~teams_remove_repo_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/repos/{owner}/{repo}'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
-    REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    mi_client->request->set_method( 'DELETE' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_teams_remove_repo_legacy( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
-  ENDMETHOD.
-
-  METHOD zif_github~teams_list_idp_groups_for_lega.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/team-sync/group-mappings'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_group_mapping( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_create_or_update_idp_g01.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/team-sync/group-mappings'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    mi_client->request->set_method( 'PATCH' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    mi_client->request->set_cdata( json_teams_create_or_update_01( body ) ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_group_mapping( '' ).
-  ENDMETHOD.
-
-  METHOD zif_github~teams_list_child_legacy.
-    DATA lv_code TYPE i.
-    DATA lv_temp TYPE string.
-    DATA lv_uri TYPE string VALUE '/teams/{team_id}/teams'.
-    lv_temp = team_id.
-    CONDENSE lv_temp.
-    REPLACE ALL OCCURRENCES OF '{team_id}' IN lv_uri WITH lv_temp.
-    lv_temp = per_page.
-    CONDENSE lv_temp.
-    IF per_page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'per_page' value = lv_temp ).
-    ENDIF.
-    lv_temp = page.
-    CONDENSE lv_temp.
-    IF page IS SUPPLIED.
-      mi_client->request->set_form_field( name = 'page' value = lv_temp ).
-    ENDIF.
-    mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
-    lv_code = send_receive( ).
-    WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_teams_list_child_legacy( '' ).
   ENDMETHOD.
 
   METHOD zif_github~users_get_authenticated.
