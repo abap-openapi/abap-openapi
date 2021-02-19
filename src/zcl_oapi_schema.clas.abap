@@ -52,13 +52,11 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
         ELSEIF ls_property-schema->type = 'array'.
           rv_abap = rv_abap && |STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array\n|.
         ELSE.
-* todo, there is a change that this clashes with something else
           lv_name = io_names->to_abap_name( 'sub' && iv_name && '_' && ls_property-abap_name ).
           rv_abap = ls_property-schema->build_type_definition(
             iv_name  = lv_name
             io_names = io_names
             it_refs  = it_refs ) && rv_abap && lv_name && |,\n|.
-*          rv_abap = rv_abap && |string, " not simple, { ls_property-schema->type }, todo\n|.
         ENDIF.
         lv_count = lv_count + 1.
       ENDLOOP.
