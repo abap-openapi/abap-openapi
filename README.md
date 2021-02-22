@@ -11,6 +11,10 @@ ABAP [OpenAPI](https://www.openapis.org) Client Generator in ABAP
 
 NOTE: generated code currently uses ZCL_OAPI_JSON, suggest copying the implementation to a local class in the generated global class
 
+Generation is targeted to run on v702
+
+Generated client code is targeted to run on v702
+
 ## Building/Developing
 prerequsites = [NodeJS](https://nodejs.org) 12+
 
