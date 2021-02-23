@@ -45,7 +45,7 @@
     "commented_code": false,
     "constructor_visibility_public": true,
     "contains_tab": true,
-    "cyclomatic_complexity": true,
+    "cyclomatic_complexity": false,
     "definitions_top": true,
     "description_empty": false,
     "double_space": true,

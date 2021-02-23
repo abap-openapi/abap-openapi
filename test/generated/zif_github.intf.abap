@@ -1363,6 +1363,47 @@ INTERFACE zif_github PUBLIC.
            exclude TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF migration.
 
+* Component schema: package, object
+  TYPES: BEGIN OF package,
+           id TYPE i,
+           name TYPE string,
+           package_type TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           version_count TYPE i,
+           visibility TYPE string,
+           owner TYPE string,
+           repository TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+         END OF package.
+
+* Component schema: package-version, object
+  TYPES: BEGIN OF subsubpackage_version_metada01,
+           tag TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF subsubpackage_version_metada01.
+  TYPES: BEGIN OF subsubpackage_version_metadata,
+           tags TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF subsubpackage_version_metadata.
+  TYPES: BEGIN OF subpackage_version_metadata,
+           package_type TYPE string,
+           container TYPE subsubpackage_version_metadata,
+           docker TYPE subsubpackage_version_metada01,
+         END OF subpackage_version_metadata.
+  TYPES: BEGIN OF package_version,
+           id TYPE i,
+           name TYPE string,
+           url TYPE string,
+           package_html_url TYPE string,
+           html_url TYPE string,
+           license TYPE string,
+           description TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           deleted_at TYPE string,
+           metadata TYPE subpackage_version_metadata,
+         END OF package_version.
+
 * Component schema: project, object
   TYPES: BEGIN OF project,
            owner_url TYPE string,
@@ -1385,11 +1426,6 @@ INTERFACE zif_github PUBLIC.
 * Component schema: group-mapping, object
   TYPES: BEGIN OF group_mapping,
            groups TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-           group_id TYPE string,
-           group_name TYPE string,
-           group_description TYPE string,
-           status TYPE string,
-           synced_at TYPE string,
          END OF group_mapping.
 
 * Component schema: team-full, object
@@ -1648,6 +1684,14 @@ INTERFACE zif_github PUBLIC.
            rate TYPE rate_limit,
          END OF rate_limit_overview.
 
+* Component schema: code-of-conduct-simple, object
+  TYPES: BEGIN OF code_of_conduct_simple,
+           url TYPE string,
+           key TYPE string,
+           name TYPE string,
+           html_url TYPE string,
+         END OF code_of_conduct_simple.
+
 * Component schema: full-repository, object
   TYPES: BEGIN OF subfull_repository_template_re,
            dummy_workaround TYPE i,
@@ -1748,6 +1792,7 @@ INTERFACE zif_github PUBLIC.
            open_issues TYPE i,
            watchers TYPE i,
            anonymous_access_enabled TYPE abap_bool,
+           code_of_conduct TYPE code_of_conduct_simple,
          END OF full_repository.
 
 * Component schema: artifact, object
@@ -2199,11 +2244,17 @@ INTERFACE zif_github PUBLIC.
            repository TYPE repository,
          END OF check_suite_preference.
 
+* Component schema: code-scanning-analysis-tool-name, string
+  TYPES code_scanning_analysis_tool_na TYPE string.
+
+* Component schema: code-scanning-analysis-tool-guid, string
+  TYPES code_scanning_analysis_tool_gu TYPE string.
+
+* Component schema: code-scanning-ref, string
+  TYPES code_scanning_ref TYPE string.
+
 * Component schema: code-scanning-alert-state, string
   TYPES code_scanning_alert_state TYPE string.
-
-* Component schema: code-scanning-alert-ref, string
-  TYPES code_scanning_alert_ref TYPE string.
 
 * Component schema: alert-number, integer
   TYPES alert_number TYPE i.
@@ -2217,41 +2268,32 @@ INTERFACE zif_github PUBLIC.
 * Component schema: alert-html-url, string
   TYPES alert_html_url TYPE string.
 
+* Component schema: alert-instances-url, string
+  TYPES alert_instances_url TYPE string.
+
 * Component schema: code-scanning-alert-dismissed-at, string
   TYPES code_scanning_alert_dismissed_ TYPE string.
 
 * Component schema: code-scanning-alert-dismissed-reason, string
   TYPES code_scanning_alert_dismisse01 TYPE string.
 
-* Component schema: code-scanning-alert-rule, object
-  TYPES: BEGIN OF code_scanning_alert_rule,
+* Component schema: code-scanning-alert-rule-summary, object
+  TYPES: BEGIN OF code_scanning_alert_rule_summa,
            id TYPE string,
+           name TYPE string,
            severity TYPE string,
            description TYPE string,
-         END OF code_scanning_alert_rule.
+         END OF code_scanning_alert_rule_summa.
 
-* Component schema: code-scanning-analysis-tool-name, string
-  TYPES code_scanning_analysis_tool_na TYPE string.
+* Component schema: code-scanning-analysis-tool-version, string
+  TYPES code_scanning_analysis_tool_ve TYPE string.
 
 * Component schema: code-scanning-analysis-tool, object
   TYPES: BEGIN OF code_scanning_analysis_tool,
            name TYPE code_scanning_analysis_tool_na,
-           version TYPE string,
+           version TYPE code_scanning_analysis_tool_ve,
+           guid TYPE code_scanning_analysis_tool_gu,
          END OF code_scanning_analysis_tool.
-
-* Component schema: code-scanning-alert-code-scanning-alert-items, object
-  TYPES: BEGIN OF code_scanning_alert_code_scann,
-           number TYPE alert_number,
-           created_at TYPE alert_created_at,
-           url TYPE alert_url,
-           html_url TYPE alert_html_url,
-           state TYPE code_scanning_alert_state,
-           dismissed_by TYPE simple_user,
-           dismissed_at TYPE code_scanning_alert_dismissed_,
-           dismissed_reason TYPE code_scanning_alert_dismisse01,
-           rule TYPE code_scanning_alert_rule,
-           tool TYPE code_scanning_analysis_tool,
-         END OF code_scanning_alert_code_scann.
 
 * Component schema: code-scanning-analysis-analysis-key, string
   TYPES code_scanning_analysis_analysi TYPE string.
@@ -2259,52 +2301,142 @@ INTERFACE zif_github PUBLIC.
 * Component schema: code-scanning-alert-environment, string
   TYPES code_scanning_alert_environmen TYPE string.
 
-* Component schema: code-scanning-alert-instances, array
-  TYPES code_scanning_alert_instances TYPE string. " array  todo
+* Component schema: code-scanning-alert-location, object
+  TYPES: BEGIN OF code_scanning_alert_location,
+           path TYPE string,
+           start_line TYPE i,
+           end_line TYPE i,
+           start_column TYPE i,
+           end_column TYPE i,
+         END OF code_scanning_alert_location.
 
-* Component schema: code-scanning-alert-code-scanning-alert, object
-  TYPES: BEGIN OF code_scanning_alert_code_sca01,
+* Component schema: code-scanning-alert-classification, string
+  TYPES code_scanning_alert_classifica TYPE string.
+
+* Component schema: code-scanning-alert-instance, object
+  TYPES: BEGIN OF subcode_scanning_alert_instanc,
+           text TYPE string,
+         END OF subcode_scanning_alert_instanc.
+  TYPES: BEGIN OF code_scanning_alert_instance,
+           ref TYPE code_scanning_ref,
+           analysis_key TYPE code_scanning_analysis_analysi,
+           environment TYPE code_scanning_alert_environmen,
+           state TYPE code_scanning_alert_state,
+           commit_sha TYPE string,
+           message TYPE subcode_scanning_alert_instanc,
+           location TYPE code_scanning_alert_location,
+           html_url TYPE string,
+           classifications TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF code_scanning_alert_instance.
+
+* Component schema: code-scanning-alert-items, object
+  TYPES: BEGIN OF code_scanning_alert_items,
            number TYPE alert_number,
            created_at TYPE alert_created_at,
            url TYPE alert_url,
            html_url TYPE alert_html_url,
-           instances TYPE code_scanning_alert_instances,
+           instances_url TYPE alert_instances_url,
+           state TYPE code_scanning_alert_state,
+           dismissed_by TYPE simple_user,
+           dismissed_at TYPE code_scanning_alert_dismissed_,
+           dismissed_reason TYPE code_scanning_alert_dismisse01,
+           rule TYPE code_scanning_alert_rule_summa,
+           tool TYPE code_scanning_analysis_tool,
+           most_recent_instance TYPE code_scanning_alert_instance,
+         END OF code_scanning_alert_items.
+
+* Component schema: code-scanning-alert-rule, object
+  TYPES: BEGIN OF code_scanning_alert_rule,
+           id TYPE string,
+           name TYPE string,
+           severity TYPE string,
+           description TYPE string,
+           full_description TYPE string,
+           tags TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           help TYPE string,
+         END OF code_scanning_alert_rule.
+
+* Component schema: code-scanning-alert, object
+  TYPES: BEGIN OF code_scanning_alert,
+           number TYPE alert_number,
+           created_at TYPE alert_created_at,
+           url TYPE alert_url,
+           html_url TYPE alert_html_url,
+           instances_url TYPE alert_instances_url,
            state TYPE code_scanning_alert_state,
            dismissed_by TYPE simple_user,
            dismissed_at TYPE code_scanning_alert_dismissed_,
            dismissed_reason TYPE code_scanning_alert_dismisse01,
            rule TYPE code_scanning_alert_rule,
            tool TYPE code_scanning_analysis_tool,
-         END OF code_scanning_alert_code_sca01.
+           most_recent_instance TYPE code_scanning_alert_instance,
+         END OF code_scanning_alert.
 
 * Component schema: code-scanning-alert-set-state, string
   TYPES code_scanning_alert_set_state TYPE string.
 
-* Component schema: code-scanning-analysis-ref, string
-  TYPES code_scanning_analysis_ref TYPE string.
+* Component schema: code-scanning-analysis-sarif-id, string
+  TYPES code_scanning_analysis_sarif_i TYPE string.
 
 * Component schema: code-scanning-analysis-commit-sha, string
   TYPES code_scanning_analysis_commit_ TYPE string.
 
-* Component schema: code-scanning-analysis-created-at, string
-  TYPES code_scanning_analysis_created TYPE string.
-
 * Component schema: code-scanning-analysis-environment, string
   TYPES code_scanning_analysis_environ TYPE string.
 
-* Component schema: code-scanning-analysis-code-scanning-analysis, object
-  TYPES: BEGIN OF code_scanning_analysis_code_sc,
+* Component schema: code-scanning-analysis-created-at, string
+  TYPES code_scanning_analysis_created TYPE string.
+
+* Component schema: code-scanning-analysis-url, string
+  TYPES code_scanning_analysis_url TYPE string.
+
+* Component schema: code-scanning-analysis, object
+  TYPES: BEGIN OF code_scanning_analysis,
+           ref TYPE code_scanning_ref,
            commit_sha TYPE code_scanning_analysis_commit_,
-           ref TYPE code_scanning_analysis_ref,
            analysis_key TYPE code_scanning_analysis_analysi,
-           created_at TYPE code_scanning_analysis_created,
-           tool_name TYPE code_scanning_analysis_tool_na,
-           error TYPE string,
            environment TYPE code_scanning_analysis_environ,
-         END OF code_scanning_analysis_code_sc.
+           error TYPE string,
+           created_at TYPE code_scanning_analysis_created,
+           results_count TYPE i,
+           rules_count TYPE i,
+           id TYPE i,
+           url TYPE code_scanning_analysis_url,
+           sarif_id TYPE code_scanning_analysis_sarif_i,
+           tool TYPE code_scanning_analysis_tool,
+           deletable TYPE abap_bool,
+         END OF code_scanning_analysis.
+
+* Component schema: code-scanning-analysis-deletion, object
+  TYPES: BEGIN OF code_scanning_analysis_deletio,
+           next_analysis_url TYPE string,
+           confirm_delete_url TYPE string,
+         END OF code_scanning_analysis_deletio.
+
+* Component schema: scim-error, object
+  TYPES: BEGIN OF scim_error,
+           message TYPE string,
+           documentation_url TYPE string,
+           detail TYPE string,
+           status TYPE i,
+           scimtype TYPE string,
+           schemas TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF scim_error.
 
 * Component schema: code-scanning-analysis-sarif-file, string
   TYPES code_scanning_analysis_sarif_f TYPE string.
+
+* Component schema: code-scanning-sarifs-receipt, object
+  TYPES: BEGIN OF code_scanning_sarifs_receipt,
+           id TYPE code_scanning_analysis_sarif_i,
+           url TYPE string,
+         END OF code_scanning_sarifs_receipt.
+
+* Component schema: code-scanning-sarifs-status, object
+  TYPES: BEGIN OF code_scanning_sarifs_status,
+           processing_status TYPE string,
+           analyses_url TYPE string,
+         END OF code_scanning_sarifs_status.
 
 * Component schema: collaborator, object
   TYPES: BEGIN OF subcollaborator_permissions,
@@ -2365,16 +2497,6 @@ INTERFACE zif_github PUBLIC.
            author_association TYPE author_association,
            reactions TYPE reaction_rollup,
          END OF commit_comment.
-
-* Component schema: scim-error, object
-  TYPES: BEGIN OF scim_error,
-           message TYPE string,
-           documentation_url TYPE string,
-           detail TYPE string,
-           status TYPE i,
-           scimtype TYPE string,
-           schemas TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-         END OF scim_error.
 
 * Component schema: branch-short, object
   TYPES: BEGIN OF subbranch_short_commit,
@@ -2504,14 +2626,6 @@ INTERFACE zif_github PUBLIC.
            updated_at TYPE string,
            creator TYPE simple_user,
          END OF status.
-
-* Component schema: code-of-conduct-simple, object
-  TYPES: BEGIN OF code_of_conduct_simple,
-           url TYPE string,
-           key TYPE string,
-           name TYPE string,
-           html_url TYPE string,
-         END OF code_of_conduct_simple.
 
 * Component schema: community-health-file, object
   TYPES: BEGIN OF community_health_file,
@@ -5068,11 +5182,11 @@ INTERFACE zif_github PUBLIC.
 * Component schema: bodycode_scanning_upload_sarif, object
   TYPES: BEGIN OF bodycode_scanning_upload_sarif,
            commit_sha TYPE code_scanning_analysis_commit_,
-           ref TYPE code_scanning_analysis_ref,
+           ref TYPE code_scanning_ref,
            sarif TYPE code_scanning_analysis_sarif_f,
            checkout_uri TYPE string,
            started_at TYPE string,
-           tool_name TYPE code_scanning_analysis_tool_na,
+           tool_name TYPE string,
          END OF bodycode_scanning_upload_sarif.
 
 * Component schema: bodyrepos_add_collaborator, object
@@ -6161,6 +6275,9 @@ INTERFACE zif_github PUBLIC.
            documentation_url TYPE string,
          END OF response_orgs_remove_outside_c.
 
+* Component schema: response_packages_get_all_package_versi, array
+  TYPES response_packages_get_all_pack TYPE STANDARD TABLE OF package_version WITH DEFAULT KEY.
+
 * Component schema: response_projects_list_for_org, array
   TYPES response_projects_list_for_org TYPE STANDARD TABLE OF project WITH DEFAULT KEY.
 
@@ -6396,10 +6513,13 @@ INTERFACE zif_github PUBLIC.
          END OF response_checks_list_for_suite.
 
 * Component schema: response_code_scanning_list_alerts_for_, array
-  TYPES response_code_scanning_list_al TYPE STANDARD TABLE OF code_scanning_alert_code_scann WITH DEFAULT KEY.
+  TYPES response_code_scanning_list_al TYPE STANDARD TABLE OF code_scanning_alert_items WITH DEFAULT KEY.
+
+* Component schema: response_code_scanning_list_alerts_inst, array
+  TYPES response_code_scanning_list_01 TYPE STANDARD TABLE OF code_scanning_alert_instance WITH DEFAULT KEY.
 
 * Component schema: response_code_scanning_list_recent_anal, array
-  TYPES response_code_scanning_list_re TYPE STANDARD TABLE OF code_scanning_analysis_code_sc WITH DEFAULT KEY.
+  TYPES response_code_scanning_list_re TYPE STANDARD TABLE OF code_scanning_analysis WITH DEFAULT KEY.
 
 * Component schema: response_repos_list_collaborators, array
   TYPES response_repos_list_collaborat TYPE STANDARD TABLE OF collaborator WITH DEFAULT KEY.
@@ -6738,6 +6858,9 @@ INTERFACE zif_github PUBLIC.
 * Component schema: response_orgs_list_for_authenticated_us, array
   TYPES response_orgs_list_for_authent TYPE STANDARD TABLE OF organization_simple WITH DEFAULT KEY.
 
+* Component schema: response_packages_get_all_package_ver01, array
+  TYPES response_packages_get_all_pa01 TYPE STANDARD TABLE OF package_version WITH DEFAULT KEY.
+
 * Component schema: response_users_list_public_emails_for_a, array
   TYPES response_users_list_public_ema TYPE STANDARD TABLE OF email WITH DEFAULT KEY.
 
@@ -6785,6 +6908,9 @@ INTERFACE zif_github PUBLIC.
 
 * Component schema: response_orgs_list_for_user, array
   TYPES response_orgs_list_for_user TYPE STANDARD TABLE OF organization_simple WITH DEFAULT KEY.
+
+* Component schema: response_packages_get_all_package_ver02, array
+  TYPES response_packages_get_all_pa02 TYPE STANDARD TABLE OF package_version WITH DEFAULT KEY.
 
 * Component schema: response_projects_list_for_user, array
   TYPES response_projects_list_for_use TYPE STANDARD TABLE OF project WITH DEFAULT KEY.
@@ -9405,6 +9531,127 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       org TYPE string
       username TYPE string
+    RAISING cx_static_check.
+
+* GET - "Get a package for an organization"
+* Operation id: packages/get-package-for-organization
+* Parameter: package_type, required, path
+* Parameter: package_name, required, path
+* Parameter: org, required, path
+* Response: 200
+*     application/json, #/components/schemas/package
+  METHODS packages_get_package_for_organ
+    IMPORTING
+      package_type TYPE string
+      package_name TYPE string
+      org TYPE string
+    RETURNING
+      VALUE(return_data) TYPE package
+    RAISING cx_static_check.
+
+* DELETE - "Delete a package for an organization"
+* Operation id: packages/delete-package-for-org
+* Parameter: package_type, required, path
+* Parameter: package_name, required, path
+* Parameter: org, required, path
+* Response: 204
+* Response: 401
+* Response: 403
+* Response: 404
+  METHODS packages_delete_package_for_or
+    IMPORTING
+      package_type TYPE string
+      package_name TYPE string
+      org TYPE string
+    RAISING cx_static_check.
+
+* POST - "Restore a package for an organization"
+* Operation id: packages/restore-package-for-org
+* Parameter: package_type, required, path
+* Parameter: package_name, required, path
+* Parameter: org, required, path
+* Response: 204
+* Response: 401
+* Response: 403
+* Response: 404
+  METHODS packages_restore_package_for_o
+    IMPORTING
+      package_type TYPE string
+      package_name TYPE string
+      org TYPE string
+    RAISING cx_static_check.
+
+* GET - "Get all package versions for a package owned by an organization"
+* Operation id: packages/get-all-package-versions-for-a-package-owned-by-an-org
+* Parameter: package_type, required, path
+* Parameter: package_name, required, path
+* Parameter: org, required, path
+* Response: 200
+*     application/json, #/components/schemas/response_packages_get_all_package_versi
+* Response: 401
+* Response: 403
+* Response: 404
+  METHODS packages_get_all_package_versi
+    IMPORTING
+      package_type TYPE string
+      package_name TYPE string
+      org TYPE string
+    RETURNING
+      VALUE(return_data) TYPE response_packages_get_all_pack
+    RAISING cx_static_check.
+
+* GET - "Get a package version for an organization"
+* Operation id: packages/get-package-version-for-organization
+* Parameter: package_type, required, path
+* Parameter: package_name, required, path
+* Parameter: org, required, path
+* Parameter: package_version_id, required, path
+* Response: 200
+*     application/json, #/components/schemas/package-version
+  METHODS packages_get_package_version_f
+    IMPORTING
+      package_type TYPE string
+      package_name TYPE string
+      org TYPE string
+      package_version_id TYPE i
+    RETURNING
+      VALUE(return_data) TYPE package_version
+    RAISING cx_static_check.
+
+* DELETE - "Delete package version for an organization"
+* Operation id: packages/delete-package-version-for-org
+* Parameter: package_type, required, path
+* Parameter: package_name, required, path
+* Parameter: org, required, path
+* Parameter: package_version_id, required, path
+* Response: 204
+* Response: 401
+* Response: 403
+* Response: 404
+  METHODS packages_delete_package_versio
+    IMPORTING
+      package_type TYPE string
+      package_name TYPE string
+      org TYPE string
+      package_version_id TYPE i
+    RAISING cx_static_check.
+
+* POST - "Restore package version for an organization"
+* Operation id: packages/restore-package-version-for-org
+* Parameter: package_type, required, path
+* Parameter: package_name, required, path
+* Parameter: org, required, path
+* Parameter: package_version_id, required, path
+* Response: 204
+* Response: 401
+* Response: 403
+* Response: 404
+  METHODS packages_restore_package_versi
+    IMPORTING
+      package_type TYPE string
+      package_name TYPE string
+      org TYPE string
+      package_version_id TYPE i
     RAISING cx_static_check.
 
 * GET - "List organization projects"
@@ -12100,9 +12347,13 @@ INTERFACE zif_github PUBLIC.
 * GET - "List code scanning alerts for a repository"
 * Operation id: code-scanning/list-alerts-for-repo
 * Parameter: state, optional, query
-* Parameter: ref, optional, query
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: tool_name, optional, query
+* Parameter: tool_guid, optional, query
+* Parameter: page, optional, query
+* Parameter: per_page, optional, query
+* Parameter: ref, optional, query
 * Response: 200
 *     application/json, #/components/schemas/response_code_scanning_list_alerts_for_
 * Response: 403
@@ -12111,30 +12362,34 @@ INTERFACE zif_github PUBLIC.
   METHODS code_scanning_list_alerts_for_
     IMPORTING
       state TYPE string OPTIONAL
-      ref TYPE string OPTIONAL
       owner TYPE string
       repo TYPE string
+      tool_name TYPE string OPTIONAL
+      tool_guid TYPE string OPTIONAL
+      page TYPE i DEFAULT 1
+      per_page TYPE i DEFAULT 30
+      ref TYPE string OPTIONAL
     RETURNING
       VALUE(return_data) TYPE response_code_scanning_list_al
     RAISING cx_static_check.
 
 * GET - "Get a code scanning alert"
 * Operation id: code-scanning/get-alert
-* Parameter: alert_number, required, path
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: alert_number, required, path
 * Response: 200
-*     application/json, #/components/schemas/code-scanning-alert-code-scanning-alert
+*     application/json, #/components/schemas/code-scanning-alert
 * Response: 403
 * Response: 404
 * Response: 503
   METHODS code_scanning_get_alert
     IMPORTING
-      alert_number TYPE i
       owner TYPE string
       repo TYPE string
+      alert_number TYPE string
     RETURNING
-      VALUE(return_data) TYPE code_scanning_alert_code_sca01
+      VALUE(return_data) TYPE code_scanning_alert
     RAISING cx_static_check.
 
 * PATCH - "Update a code scanning alert"
@@ -12143,8 +12398,9 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: alert_number, required, path
 * Response: 200
-*     application/json, #/components/schemas/code-scanning-alert-code-scanning-alert
+*     application/json, #/components/schemas/code-scanning-alert
 * Response: 403
+* Response: 404
 * Response: 503
 * Body ref: #/components/schemas/bodycode_scanning_update_alert
   METHODS code_scanning_update_alert
@@ -12154,43 +12410,140 @@ INTERFACE zif_github PUBLIC.
       alert_number TYPE string
       body TYPE bodycode_scanning_update_alert
     RETURNING
-      VALUE(return_data) TYPE code_scanning_alert_code_sca01
+      VALUE(return_data) TYPE code_scanning_alert
     RAISING cx_static_check.
 
-* GET - "List recent code scanning analyses for a repository"
-* Operation id: code-scanning/list-recent-analyses
-* Parameter: ref, optional, query
-* Parameter: tool_name, optional, query
+* GET - "List instances of a code scanning alert"
+* Operation id: code-scanning/list-alerts-instances
 * Parameter: owner, required, path
 * Parameter: repo, required, path
+* Parameter: alert_number, required, path
+* Parameter: page, optional, query
+* Parameter: per_page, optional, query
+* Parameter: ref, optional, query
+* Response: 200
+*     application/json, #/components/schemas/response_code_scanning_list_alerts_inst
+* Response: 403
+* Response: 404
+* Response: 503
+  METHODS code_scanning_list_alerts_inst
+    IMPORTING
+      owner TYPE string
+      repo TYPE string
+      alert_number TYPE string
+      page TYPE i DEFAULT 1
+      per_page TYPE i DEFAULT 30
+      ref TYPE string OPTIONAL
+    RETURNING
+      VALUE(return_data) TYPE response_code_scanning_list_01
+    RAISING cx_static_check.
+
+* GET - "List code scanning analyses for a repository"
+* Operation id: code-scanning/list-recent-analyses
+* Parameter: ref, optional, query
+* Parameter: sarif_id, optional, query
+* Parameter: owner, required, path
+* Parameter: repo, required, path
+* Parameter: tool_name, optional, query
+* Parameter: tool_guid, optional, query
+* Parameter: page, optional, query
+* Parameter: per_page, optional, query
 * Response: 200
 *     application/json, #/components/schemas/response_code_scanning_list_recent_anal
 * Response: 403
+* Response: 404
+* Response: 503
   METHODS code_scanning_list_recent_anal
     IMPORTING
       ref TYPE string OPTIONAL
-      tool_name TYPE string OPTIONAL
+      sarif_id TYPE string OPTIONAL
       owner TYPE string
       repo TYPE string
+      tool_name TYPE string OPTIONAL
+      tool_guid TYPE string OPTIONAL
+      page TYPE i DEFAULT 1
+      per_page TYPE i DEFAULT 30
     RETURNING
       VALUE(return_data) TYPE response_code_scanning_list_re
     RAISING cx_static_check.
 
-* POST - "Upload a SARIF file"
+* GET - "Get a code scanning analysis for a repository"
+* Operation id: code-scanning/get-analysis
+* Parameter: analysis_id, required, path
+* Parameter: owner, required, path
+* Parameter: repo, required, path
+* Response: 200
+*     application/json, #/components/schemas/code-scanning-analysis
+* Response: 403
+* Response: 404
+* Response: 503
+  METHODS code_scanning_get_analysis
+    IMPORTING
+      analysis_id TYPE i
+      owner TYPE string
+      repo TYPE string
+    RETURNING
+      VALUE(return_data) TYPE code_scanning_analysis
+    RAISING cx_static_check.
+
+* DELETE - "Delete a code scanning analysis from a repository"
+* Operation id: code-scanning/delete-analysis
+* Parameter: analysis_id, required, path
+* Parameter: confirm_delete, optional, query
+* Parameter: owner, required, path
+* Parameter: repo, required, path
+* Response: 200
+*     application/json, #/components/schemas/code-scanning-analysis-deletion
+* Response: 400
+* Response: 403
+* Response: 404
+* Response: 503
+  METHODS code_scanning_delete_analysis
+    IMPORTING
+      analysis_id TYPE i
+      confirm_delete TYPE string OPTIONAL
+      owner TYPE string
+      repo TYPE string
+    RETURNING
+      VALUE(return_data) TYPE code_scanning_analysis_deletio
+    RAISING cx_static_check.
+
+* POST - "Upload an analysis as SARIF data"
 * Operation id: code-scanning/upload-sarif
 * Parameter: owner, required, path
 * Parameter: repo, required, path
 * Response: 202
+*     application/json, #/components/schemas/code-scanning-sarifs-receipt
 * Response: 400
 * Response: 403
 * Response: 404
 * Response: 413
+* Response: 503
 * Body ref: #/components/schemas/bodycode_scanning_upload_sarif
   METHODS code_scanning_upload_sarif
     IMPORTING
       owner TYPE string
       repo TYPE string
       body TYPE bodycode_scanning_upload_sarif
+    RAISING cx_static_check.
+
+* GET - "Get information about a SARIF upload"
+* Operation id: code-scanning/get-sarif
+* Parameter: sarif_id, required, path
+* Parameter: owner, required, path
+* Parameter: repo, required, path
+* Response: 200
+*     application/json, #/components/schemas/code-scanning-sarifs-status
+* Response: 403
+* Response: 404
+* Response: 503
+  METHODS code_scanning_get_sarif
+    IMPORTING
+      sarif_id TYPE string
+      owner TYPE string
+      repo TYPE string
+    RETURNING
+      VALUE(return_data) TYPE code_scanning_sarifs_status
     RAISING cx_static_check.
 
 * GET - "List repository collaborators"
@@ -17160,6 +17513,113 @@ INTERFACE zif_github PUBLIC.
       VALUE(return_data) TYPE response_orgs_list_for_authent
     RAISING cx_static_check.
 
+* GET - "Get a package for the authenticated user"
+* Operation id: packages/get-package-for-authenticated-user
+* Parameter: package_type, required, path
+* Parameter: package_name, required, path
+* Response: 200
+*     application/json, #/components/schemas/package
+  METHODS packages_get_package_for_authe
+    IMPORTING
+      package_type TYPE string
+      package_name TYPE string
+    RETURNING
+      VALUE(return_data) TYPE package
+    RAISING cx_static_check.
+
+* DELETE - "Delete a package for the authenticated user"
+* Operation id: packages/delete-package-for-authenticated-user
+* Parameter: package_type, required, path
+* Parameter: package_name, required, path
+* Response: 204
+* Response: 401
+* Response: 403
+* Response: 404
+  METHODS packages_delete_package_for_au
+    IMPORTING
+      package_type TYPE string
+      package_name TYPE string
+    RAISING cx_static_check.
+
+* POST - "Restore a package for the authenticated user"
+* Operation id: packages/restore-package-for-authenticated-user
+* Parameter: package_type, required, path
+* Parameter: package_name, required, path
+* Response: 204
+* Response: 401
+* Response: 403
+* Response: 404
+  METHODS packages_restore_package_for_a
+    IMPORTING
+      package_type TYPE string
+      package_name TYPE string
+    RAISING cx_static_check.
+
+* GET - "Get all package versions for a package owned by the authenticated user"
+* Operation id: packages/get-all-package-versions-for-a-package-owned-by-the-authenticated-user
+* Parameter: package_type, required, path
+* Parameter: package_name, required, path
+* Response: 200
+*     application/json, #/components/schemas/response_packages_get_all_package_ver01
+* Response: 401
+* Response: 403
+* Response: 404
+  METHODS packages_get_all_package_ver01
+    IMPORTING
+      package_type TYPE string
+      package_name TYPE string
+    RETURNING
+      VALUE(return_data) TYPE response_packages_get_all_pa01
+    RAISING cx_static_check.
+
+* GET - "Get a package version for the authenticated user"
+* Operation id: packages/get-package-version-for-authenticated-user
+* Parameter: package_type, required, path
+* Parameter: package_name, required, path
+* Parameter: package_version_id, required, path
+* Response: 200
+*     application/json, #/components/schemas/package-version
+  METHODS packages_get_package_version01
+    IMPORTING
+      package_type TYPE string
+      package_name TYPE string
+      package_version_id TYPE i
+    RETURNING
+      VALUE(return_data) TYPE package_version
+    RAISING cx_static_check.
+
+* DELETE - "Delete a package version for the authenticated user"
+* Operation id: packages/delete-package-version-for-authenticated-user
+* Parameter: package_type, required, path
+* Parameter: package_name, required, path
+* Parameter: package_version_id, required, path
+* Response: 204
+* Response: 401
+* Response: 403
+* Response: 404
+  METHODS packages_delete_package_vers01
+    IMPORTING
+      package_type TYPE string
+      package_name TYPE string
+      package_version_id TYPE i
+    RAISING cx_static_check.
+
+* POST - "Restore a package version for the authenticated user"
+* Operation id: packages/restore-package-version-for-authenticated-user
+* Parameter: package_type, required, path
+* Parameter: package_name, required, path
+* Parameter: package_version_id, required, path
+* Response: 204
+* Response: 401
+* Response: 403
+* Response: 404
+  METHODS packages_restore_package_ver01
+    IMPORTING
+      package_type TYPE string
+      package_name TYPE string
+      package_version_id TYPE i
+    RAISING cx_static_check.
+
 * POST - "Create a user project"
 * Operation id: projects/create-for-authenticated-user
 * Response: 201
@@ -17606,6 +18066,59 @@ INTERFACE zif_github PUBLIC.
       page TYPE i DEFAULT 1
     RETURNING
       VALUE(return_data) TYPE response_orgs_list_for_user
+    RAISING cx_static_check.
+
+* GET - "Get a package for a user"
+* Operation id: packages/get-package-for-user
+* Parameter: package_type, required, path
+* Parameter: package_name, required, path
+* Parameter: username, required, path
+* Response: 200
+*     application/json, #/components/schemas/package
+  METHODS packages_get_package_for_user
+    IMPORTING
+      package_type TYPE string
+      package_name TYPE string
+      username TYPE string
+    RETURNING
+      VALUE(return_data) TYPE package
+    RAISING cx_static_check.
+
+* GET - "Get all package versions for a package owned by a user"
+* Operation id: packages/get-all-package-versions-for-package-owned-by-user
+* Parameter: package_type, required, path
+* Parameter: package_name, required, path
+* Parameter: username, required, path
+* Response: 200
+*     application/json, #/components/schemas/response_packages_get_all_package_ver02
+* Response: 401
+* Response: 403
+* Response: 404
+  METHODS packages_get_all_package_ver02
+    IMPORTING
+      package_type TYPE string
+      package_name TYPE string
+      username TYPE string
+    RETURNING
+      VALUE(return_data) TYPE response_packages_get_all_pa02
+    RAISING cx_static_check.
+
+* GET - "Get a package version for a user"
+* Operation id: packages/get-package-version-for-user
+* Parameter: package_type, required, path
+* Parameter: package_name, required, path
+* Parameter: package_version_id, required, path
+* Parameter: username, required, path
+* Response: 200
+*     application/json, #/components/schemas/package-version
+  METHODS packages_get_package_version02
+    IMPORTING
+      package_type TYPE string
+      package_name TYPE string
+      package_version_id TYPE i
+      username TYPE string
+    RETURNING
+      VALUE(return_data) TYPE package_version
     RAISING cx_static_check.
 
 * GET - "List user projects"

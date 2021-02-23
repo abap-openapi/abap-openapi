@@ -182,11 +182,13 @@ CLASS zcl_oapi_main IMPLEMENTATION.
               AND ls_property-schema->is_simple_type( ) = abap_true.
             CASE ls_property-schema->type.
               WHEN 'integer'.
-                rv_abap = rv_abap && |    json = json && \|"{ ls_property-name }": \{ data-{ ls_property-abap_name } \},\|.\n|.
+                rv_abap = rv_abap && |    IF data-{ ls_property-abap_name } <> cl_abap_math=>max_int4.\n|.
+                rv_abap = rv_abap && |      json = json && \|"{ ls_property-name }": \{ data-{ ls_property-abap_name } \},\|.\n|.
+                rv_abap = rv_abap && |    ENDIF.\n|.
               WHEN 'boolean'.
                 rv_abap = rv_abap && |    IF data-{ ls_property-abap_name } = abap_true.\n|.
                 rv_abap = rv_abap && |      json = json && \|"{ ls_property-name }": true,\|.\n|.
-                rv_abap = rv_abap && |    ELSE.\n|.
+                rv_abap = rv_abap && |    ELSEIF data-{ ls_property-abap_name } = abap_false.\n|.
                 rv_abap = rv_abap && |      json = json && \|"{ ls_property-name }": false,\|.\n|.
                 rv_abap = rv_abap && |    ENDIF.\n|.
               WHEN OTHERS.
