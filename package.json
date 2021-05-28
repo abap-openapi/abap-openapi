@@ -3,12 +3,12 @@
   "private": true,
   "version": "1.0.0",
   "description": "ABAP OpenAPI Client Generator",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {
     "test": "abaplint && rm -rf output && abap_transpile && node output/index.mjs",
-    "petstore": "abaplint && rm -rf output && abap_transpile && node index.js https://petstore3.swagger.io/api/v3/openapi.json petstore",
-    "github": "abaplint && rm -rf output && abap_transpile && node index.js https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json github",
-    "jira": "abaplint && rm -rf output && abap_transpile && node index.js https://developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json jira",
+    "petstore": "abaplint && rm -rf output && abap_transpile && node index.mjs https://petstore3.swagger.io/api/v3/openapi.json petstore",
+    "github": "abaplint && rm -rf output && abap_transpile && node index.mjs https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json github",
+    "jira": "abaplint && rm -rf output && abap_transpile && node index.mjs https://developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json jira",
     "integration_test": "rm -rf output_test && abap_transpile ./abap_transpile_test.json && node output_test/index.mjs",
     "lint": "abaplint"
   },
