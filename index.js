@@ -35,7 +35,7 @@ async function run() {
   }
   const spec = await get(process.argv[2]);
 
-  const zcl_oapi_main = require("./output/zcl_oapi_main.clas.js").zcl_oapi_main;
+  const zcl_oapi_main = require("./output/zcl_oapi_main.clas.mjs").zcl_oapi_main;
   const main = new zcl_oapi_main();
   await main.constructor_();
 
