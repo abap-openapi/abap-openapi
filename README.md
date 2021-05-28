@@ -16,7 +16,7 @@ Generation is targeted to run on v702
 Generated client code is targeted to run on v702
 
 ## Building/Developing
-prerequsites = [NodeJS](https://nodejs.org) 12+
+prerequsites = [NodeJS](https://nodejs.org) 14+
 
 setup `npm install`
 

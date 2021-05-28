@@ -11,6 +11,9 @@ module.exports = {
     "json.worker": "monaco-editor/esm/vs/language/json/json.worker",
     "ts.worker": "monaco-editor/esm/vs/language/typescript/ts.worker",
   },
+  experiments: {
+    topLevelAwait: true
+  },
   devServer: {
     open: true,
     hot: true,
