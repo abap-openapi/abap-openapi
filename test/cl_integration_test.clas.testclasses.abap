@@ -65,6 +65,10 @@ CLASS ltcl_github IMPLEMENTATION.
       IMPORTING
         client = li_client ).
 
+    li_client->request->set_header_field(
+      name  = 'user-agent'
+      value = 'abap-openapi-client-integration-test' ).
+
     WRITE '@KERNEL this.mv_token.set(process.env.GITHUB_TOKEN || "");'.
     IF mv_token IS NOT INITIAL.
       li_client->authenticate(
