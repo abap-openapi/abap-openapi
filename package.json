@@ -9,6 +9,7 @@
     "petstore": "abaplint && rm -rf output && abap_transpile && node index.mjs https://petstore3.swagger.io/api/v3/openapi.json petstore",
     "github": "abaplint && rm -rf output && abap_transpile && node index.mjs https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json github",
     "jira": "abaplint && rm -rf output && abap_transpile && node index.mjs https://developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json jira",
+    "gitea": "abaplint && rm -rf output && abap_transpile && node index.mjs https://converter.swagger.io/api/convert?url=https%3A%2F%2Ftry.gitea.io%2Fswagger.v1.json gitea",
     "integration_test": "rm -rf output_test && abap_transpile ./abap_transpile_test.json && node output_test/index.mjs",
     "lint": "abaplint"
   },
