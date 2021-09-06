@@ -20,6 +20,8 @@
     "globalMacros": []
   },
   "rules": {
+    "cyclic_oo": false,
+    "dangerous_statement": true,
     "7bit_ascii": true,
     "abapdoc": false,
     "allowed_object_naming": true,
@@ -90,7 +92,6 @@
       "expectedFS": "^<L._.+>$"
     },
     "main_file_contents": true,
-    "many_parenthesis": true,
     "max_one_statement": true,
     "message_exists": true,
     "method_implemented_twice": true,
