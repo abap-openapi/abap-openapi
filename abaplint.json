@@ -20,6 +20,19 @@
     "globalMacros": []
   },
   "rules": {
+    "cyclic_oo": false,
+    "db_operation_in_loop": true,
+    "identical_descriptions": false,
+    "many_parentheses": true,
+    "max_one_method_parameter_per_line": true,
+    "modify_only_own_db_tables": true,
+    "no_yoda_conditions": true,
+    "pragma_placement": true,
+    "select_add_order_by": true,
+    "unsecure_fae": true,
+    "unused_ddic": true,
+    "select_performance": true,
+    "dangerous_statement": true,
     "7bit_ascii": true,
     "abapdoc": false,
     "allowed_object_naming": true,
@@ -90,7 +103,6 @@
       "expectedFS": "^<L._.+>$"
     },
     "main_file_contents": true,
-    "many_parenthesis": true,
     "max_one_statement": true,
     "message_exists": true,
     "method_implemented_twice": true,
