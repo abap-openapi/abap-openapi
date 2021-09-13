@@ -394,7 +394,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     IF sy-subrc = 0.
       rv_prefix = ls_server-url.
       IF rv_prefix CP 'http*'.
-        FIND REGEX '\w(\/[\w\d\.\-\/]+)' IN ls_server-url SUBMATCHES rv_prefix.
+        FIND REGEX '\w(\/[\w\d\.\-\/]+)' IN ls_server-url SUBMATCHES rv_prefix. "#EC CI_SUBRC
       ENDIF.
     ENDIF.
   ENDMETHOD.
