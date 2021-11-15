@@ -405,6 +405,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
 
     DATA ls_parameter LIKE LINE OF is_operation-parameters.
     DATA ls_return TYPE zif_oapi_specification_v3=>ty_component_schema.
+    DATA ls_response LIKE LINE OF is_operation-responses.
     DATA lv_value TYPE string.
 
     rv_abap =
@@ -459,6 +460,18 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |    lv_code = send_receive( ).\n| &&
       |    WRITE / lv_code.\n|.
 * todo, accept and check content types
+
+    IF lines( is_operation-responses ) > 1.
+      rv_abap = rv_abap && |    CASE lv_code.\n|.
+      LOOP AT is_operation-responses INTO ls_response.
+        IF ls_response-code = 'default'.
+          rv_abap = rv_abap && |      WHEN OTHERS.\n|.
+        ELSE.
+          rv_abap = rv_abap && |      WHEN { ls_response-code }.\n|.
+        ENDIF.
+      ENDLOOP.
+      rv_abap = rv_abap && |    ENDCASE.\n|.
+    ENDIF.
 
     ls_return = find_return( is_operation ).
     IF ls_return IS NOT INITIAL.

@@ -169,6 +169,12 @@ CLASS zcl_petstore IMPLEMENTATION.
 * todo, set body, #/components/schemas/Pet
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200.
+      WHEN 400.
+      WHEN 404.
+      WHEN 405.
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pet( '' ).
   ENDMETHOD.
@@ -182,6 +188,10 @@ CLASS zcl_petstore IMPLEMENTATION.
 * todo, set body, #/components/schemas/Pet
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200.
+      WHEN 405.
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pet( '' ).
   ENDMETHOD.
@@ -197,6 +207,10 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200.
+      WHEN 400.
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_findpetsbystatus( '' ).
   ENDMETHOD.
@@ -214,6 +228,10 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200.
+      WHEN 400.
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_findpetsbytags( '' ).
   ENDMETHOD.
@@ -229,6 +247,11 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200.
+      WHEN 400.
+      WHEN 404.
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pet( '' ).
   ENDMETHOD.
@@ -308,6 +331,10 @@ CLASS zcl_petstore IMPLEMENTATION.
 * todo, set body, #/components/schemas/Order
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200.
+      WHEN 405.
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_order( '' ).
   ENDMETHOD.
@@ -323,6 +350,11 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200.
+      WHEN 400.
+      WHEN 404.
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_order( '' ).
   ENDMETHOD.
@@ -338,6 +370,10 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 400.
+      WHEN 404.
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -364,6 +400,10 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_cdata( json_createuserswithlistinput( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200.
+      WHEN OTHERS.
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_user( '' ).
   ENDMETHOD.
@@ -382,6 +422,10 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200.
+      WHEN 400.
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -407,6 +451,11 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200.
+      WHEN 400.
+      WHEN 404.
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_user( '' ).
   ENDMETHOD.
@@ -434,6 +483,10 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 400.
+      WHEN 404.
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.

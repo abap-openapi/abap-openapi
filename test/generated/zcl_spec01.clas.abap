@@ -47,6 +47,11 @@ CLASS zcl_spec01 IMPLEMENTATION.
     mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204.
+      WHEN 400.
+      WHEN 404.
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
