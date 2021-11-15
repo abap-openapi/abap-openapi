@@ -72,6 +72,7 @@ INTERFACE zif_oapi_specification_v3 PUBLIC.
 
   TYPES: BEGIN OF ty_info,
            title TYPE string,
+           version TYPE string,
            description TYPE string,
          END OF ty_info.
 

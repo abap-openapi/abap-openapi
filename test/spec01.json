@@ -1,0 +1,100 @@
+{
+  "openapi": "3.0.1",
+  "servers": [],
+  "info": {
+    "title": "test",
+    "version": "1.2.3"
+  },
+  "paths": {
+    "/queues/{queue-name}/messages": {
+      "post": {
+        "operationId": "publish-message-to-queue",
+        "summary": "Publish message to a queue",
+        "parameters": [
+          {
+            "name": "queue-name",
+            "in": "path",
+            "description": "Queue name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-qos",
+            "in": "header",
+            "description": "Quality of service",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/QOS"
+            }
+          },
+          {
+            "name": "x-message-expiration",
+            "in": "header",
+            "description": "Message expiration",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Message payload",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content, message published successfully"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorMessage": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "QOS": {
+        "type": "integer",
+        "enum": [
+          0,
+          1
+        ]
+      }
+    }
+  }
+}

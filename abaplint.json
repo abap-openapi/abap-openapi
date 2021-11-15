@@ -124,7 +124,7 @@
     "mix_returning": true,
     "msag_consistency": true,
     "names_no_dash": true,
-    "nesting": true,
+    "nesting": false,
     "newline_between_methods": true,
     "no_public_attributes": false,
     "object_naming": {
@@ -170,7 +170,7 @@
     "rfc_error_handling": true,
     "selection_screen_naming": true,
     "sequential_blank": true,
-    "short_case": true,
+    "short_case": false,
     "sicf_consistency": true,
     "space_before_colon": true,
     "space_before_dot": true,
