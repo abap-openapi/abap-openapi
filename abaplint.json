@@ -20,6 +20,8 @@
     "globalMacros": []
   },
   "rules": {
+    "align_parameters": false,
+    "constant_classes": true,
     "cyclic_oo": false,
     "db_operation_in_loop": true,
     "identical_descriptions": false,
@@ -183,7 +185,7 @@
       "exclude": ["generated/"],
       "pattern": "^TY_.+$"
     },
-    "uncaught_exception": false,
+    "uncaught_exception": true,
     "unknown_types": true,
     "unreachable_code": true,
     "unused_methods": false,
