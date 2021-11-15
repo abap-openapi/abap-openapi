@@ -13190,6 +13190,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_apps_create_from_manifest( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -13235,6 +13240,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 400. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_apps_list_webhook_delive( '' ).
   ENDMETHOD.
@@ -13250,6 +13260,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 400. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_hook_delivery( '' ).
   ENDMETHOD.
@@ -13265,6 +13280,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 202. " 
+      WHEN 400. " 
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -13308,6 +13328,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 415. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_installation( '' ).
   ENDMETHOD.
@@ -13323,6 +13348,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -13339,6 +13368,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_apps_create_installation_( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 415. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_installation_token( '' ).
   ENDMETHOD.
@@ -13354,6 +13391,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -13369,6 +13410,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -13383,6 +13428,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_apps_delete_authorization( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -13397,6 +13446,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_apps_check_token( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_authorization( '' ).
   ENDMETHOD.
@@ -13411,6 +13465,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_apps_reset_token( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_authorization( '' ).
   ENDMETHOD.
@@ -13425,6 +13483,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_apps_delete_token( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -13439,6 +13501,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_apps_scope_token( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_authorization( '' ).
   ENDMETHOD.
@@ -13452,6 +13521,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 415. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_integration( '' ).
   ENDMETHOD.
@@ -13464,6 +13539,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_codes_of_conduct_get_all( '' ).
   ENDMETHOD.
@@ -13477,6 +13556,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_code_of_conduct( '' ).
   ENDMETHOD.
@@ -13489,6 +13573,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_emojis_get( '' ).
   ENDMETHOD.
@@ -14029,6 +14117,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Success
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_advanced_security_acti02( '' ).
   ENDMETHOD.
@@ -14077,6 +14169,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_activity_list_public_eve( '' ).
   ENDMETHOD.
@@ -14114,6 +14212,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gists_list( '' ).
   ENDMETHOD.
@@ -14127,6 +14230,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_gists_create( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gist_simple( '' ).
   ENDMETHOD.
@@ -14152,6 +14262,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gists_list_public( '' ).
   ENDMETHOD.
@@ -14177,6 +14293,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gists_list_starred( '' ).
   ENDMETHOD.
@@ -14190,6 +14312,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gist_simple( '' ).
   ENDMETHOD.
@@ -14204,6 +14332,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_gists_update( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gist_simple( '' ).
   ENDMETHOD.
@@ -14218,6 +14351,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_gists_delete( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -14241,6 +14380,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gists_list_comments( '' ).
   ENDMETHOD.
@@ -14255,6 +14400,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_gists_create_comment( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gist_comment( '' ).
   ENDMETHOD.
@@ -14271,6 +14422,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gist_comment( '' ).
   ENDMETHOD.
@@ -14288,6 +14445,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_gists_update_comment( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gist_comment( '' ).
   ENDMETHOD.
@@ -14305,6 +14466,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_gists_delete_comment( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -14328,6 +14495,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gists_list_commits( '' ).
   ENDMETHOD.
@@ -14351,6 +14524,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gists_list_forks( '' ).
   ENDMETHOD.
@@ -14364,6 +14543,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_base_gist( '' ).
   ENDMETHOD.
@@ -14377,6 +14563,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response if gist is starred
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " Not Found if gist is not starred
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -14390,6 +14582,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -14403,6 +14601,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -14417,6 +14621,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gist_simple( '' ).
   ENDMETHOD.
@@ -14429,6 +14639,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gitignore_get_all_templa( '' ).
   ENDMETHOD.
@@ -14442,6 +14656,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gitignore_template( '' ).
   ENDMETHOD.
@@ -14464,6 +14682,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_apps_list_repos_accessib( '' ).
   ENDMETHOD.
@@ -14536,6 +14760,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issues_list( '' ).
   ENDMETHOD.
@@ -14563,6 +14793,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_licenses_get_all_commonl( '' ).
   ENDMETHOD.
@@ -14576,6 +14810,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_license( '' ).
   ENDMETHOD.
@@ -14589,6 +14829,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_markdown_render( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -14601,6 +14845,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -14616,6 +14864,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 401. " 
+      WHEN 404. " Not Found when the account has not purchased the listing
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_marketplace_purchase( '' ).
   ENDMETHOD.
@@ -14638,6 +14891,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 401. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_apps_list_plans( '' ).
   ENDMETHOD.
@@ -14669,6 +14927,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 401. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_apps_list_accounts_for_p( '' ).
   ENDMETHOD.
@@ -14684,6 +14948,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 401. " 
+      WHEN 404. " Not Found when the account has not purchased the listing
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_marketplace_purchase( '' ).
   ENDMETHOD.
@@ -14706,6 +14975,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 401. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_apps_list_plans_stubbed( '' ).
   ENDMETHOD.
@@ -14737,6 +15010,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 401. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_apps_list_accounts_for01( '' ).
   ENDMETHOD.
@@ -14749,6 +15026,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_api_overview( '' ).
   ENDMETHOD.
@@ -14773,6 +15054,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 301. " 
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_activity_list_public_e01( '' ).
   ENDMETHOD.
@@ -14811,6 +15099,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_activity_list_notificati( '' ).
   ENDMETHOD.
@@ -14824,6 +15119,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_activity_mark_notificatio( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 202. " Response
+      WHEN 205. " Reset Content
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -14839,6 +15141,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_thread( '' ).
   ENDMETHOD.
@@ -14854,6 +15162,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 205. " Reset Content
+      WHEN 304. " 
+      WHEN 403. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -14869,6 +15182,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_thread_subscription( '' ).
   ENDMETHOD.
@@ -14885,6 +15204,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_activity_set_thread_subsc( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_thread_subscription( '' ).
   ENDMETHOD.
@@ -14901,6 +15226,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_activity_delete_thread_su( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -14938,6 +15269,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_orgs_list( '' ).
   ENDMETHOD.
@@ -14964,6 +15299,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_organization_full( '' ).
   ENDMETHOD.
@@ -14978,6 +15317,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_orgs_update( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 409. " 
+      WHEN 422. " Validation failed
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_organization_full( '' ).
   ENDMETHOD.
@@ -15509,6 +15853,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_actions_create_or_update_( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response when creating a secret
+      WHEN 204. " Response when updating a secret
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_empty_object( '' ).
   ENDMETHOD.
@@ -15580,6 +15928,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " No Content when repository was added to the selected list
+      WHEN 409. " Conflict when visibility type is not set to selected
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -15597,6 +15949,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response when repository was removed from the selected list
+      WHEN 409. " Conflict when visibility type not set to selected
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -15643,6 +15999,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 415. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_orgs_list_blocked_users( '' ).
   ENDMETHOD.
@@ -15657,6 +16017,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " If the user is blocked:
+      WHEN 404. " If the user is not blocked:
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -15671,6 +16035,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -15714,6 +16082,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -15802,6 +16174,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_orgs_list_failed_invitat( '' ).
   ENDMETHOD.
@@ -15825,6 +16201,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_orgs_list_webhooks( '' ).
   ENDMETHOD.
@@ -15839,6 +16219,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_orgs_create_webhook( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_org_hook( '' ).
   ENDMETHOD.
@@ -15855,6 +16240,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_org_hook( '' ).
   ENDMETHOD.
@@ -15872,6 +16261,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_orgs_update_webhook( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_org_hook( '' ).
   ENDMETHOD.
@@ -15889,6 +16283,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_orgs_delete_webhook( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -15946,6 +16344,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 400. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_orgs_list_webhook_delive( '' ).
   ENDMETHOD.
@@ -15965,6 +16368,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 400. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_hook_delivery( '' ).
   ENDMETHOD.
@@ -15984,6 +16392,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 202. " 
+      WHEN 400. " 
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -16000,6 +16413,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -16063,6 +16480,10 @@ CLASS zcl_github IMPLEMENTATION.
 * todo, set body, #/components/schemas/interaction-limit
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_interaction_limit_respon( '' ).
   ENDMETHOD.
@@ -16099,6 +16520,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_orgs_list_pending_invita( '' ).
   ENDMETHOD.
@@ -16113,6 +16538,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_orgs_create_invitation( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_organization_invitation( '' ).
   ENDMETHOD.
@@ -16129,6 +16559,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -16155,6 +16590,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_orgs_list_invitation_tea( '' ).
   ENDMETHOD.
@@ -16196,6 +16635,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issues_list_for_org( '' ).
   ENDMETHOD.
@@ -16225,6 +16668,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 302. " Response if requester is not an organization member
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_orgs_list_members( '' ).
   ENDMETHOD.
@@ -16239,6 +16687,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response if requester is an organization member and user is a member
+      WHEN 302. " Response if requester is not an organization member
+      WHEN 404. " Not Found if requester is an organization member and user is not a member
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -16253,6 +16706,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 403. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -16267,6 +16724,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_org_membership( '' ).
   ENDMETHOD.
@@ -16282,6 +16744,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_orgs_set_membership_for_u( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_org_membership( '' ).
   ENDMETHOD.
@@ -16297,6 +16764,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_orgs_remove_membership_fo( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -16339,6 +16811,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_migrations_start_for_org( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_migration( '' ).
   ENDMETHOD.
@@ -16360,6 +16837,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " *   `pending`, which means the migration hasn't started yet.\n*   `exporting`, which means the migration is in progress.\n*   `exported`, which means the migration finished successfully.\n*   `failed`, which means the migration failed.
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_migration( '' ).
   ENDMETHOD.
@@ -16376,6 +16857,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 302. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -16392,6 +16877,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -16409,6 +16898,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -16435,6 +16928,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_migrations_list_repos_fo( '' ).
   ENDMETHOD.
@@ -16475,6 +16972,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 202. " User is getting converted asynchronously
+      WHEN 204. " User was converted
+      WHEN 403. " Forbidden if user is the last owner of the organization or not a member of the organization
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -16489,6 +16992,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 422. " Unprocessable Entity if user is a member of the organization
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -16506,6 +17013,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_packages_list_packages_f( '' ).
   ENDMETHOD.
@@ -16536,6 +17048,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -16554,6 +17072,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -16582,6 +17106,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_packages_get_all_package( '' ).
   ENDMETHOD.
@@ -16618,6 +17148,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -16636,6 +17172,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -16662,6 +17204,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projects_list_for_org( '' ).
   ENDMETHOD.
@@ -16676,6 +17222,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_projects_create_for_org( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 410. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_project( '' ).
   ENDMETHOD.
@@ -16713,6 +17267,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response if user is a public member
+      WHEN 404. " Not Found if user is not a public member
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -16727,6 +17285,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 403. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -16787,6 +17349,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_create_in_org( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 403. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repository( '' ).
   ENDMETHOD.
@@ -16819,6 +17386,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_secret_scanning_list_ale( '' ).
   ENDMETHOD.
@@ -16855,6 +17427,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Success
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_advanced_security_acti02( '' ).
   ENDMETHOD.
@@ -16925,6 +17501,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_teams_list( '' ).
   ENDMETHOD.
@@ -16939,6 +17519,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_teams_create( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 403. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_team_full( '' ).
   ENDMETHOD.
@@ -16953,6 +17538,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_team_full( '' ).
   ENDMETHOD.
@@ -17245,6 +17834,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_reactions_create_for_team( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 201. " Response
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_reaction( '' ).
   ENDMETHOD.
@@ -17316,6 +17909,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_reactions_create_for_te01( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 201. " Response
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_reaction( '' ).
   ENDMETHOD.
@@ -17432,6 +18029,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " if user has no team membership
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_team_membership( '' ).
   ENDMETHOD.
@@ -17448,6 +18049,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_teams_add_or_update_membe( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " Forbidden if team synchronization is set up
+      WHEN 422. " Unprocessable Entity if you attempt to add an organization to a team
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_team_membership( '' ).
   ENDMETHOD.
@@ -17464,6 +18070,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_teams_remove_membership_f( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 403. " Forbidden if team synchronization is set up
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -17505,6 +18115,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " Not Found if project is not managed by this team
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_team_project( '' ).
   ENDMETHOD.
@@ -17523,6 +18137,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_teams_add_or_update_proje( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 403. " Forbidden if the project is not owned by the organization
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -17581,6 +18199,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Alternative response with repository permissions
+      WHEN 204. " Response if team has permission for the repository. This is the response when the repository media type hasn't been provded in the Accept header.
+      WHEN 404. " Not Found if team does not have permission for the repository
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_team_repository( '' ).
   ENDMETHOD.
@@ -17683,6 +18306,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_project_card( '' ).
   ENDMETHOD.
@@ -17699,6 +18329,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_projects_update_card( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_project_card( '' ).
   ENDMETHOD.
@@ -17715,6 +18353,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_projects_delete_card( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " Forbidden
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -17731,6 +18376,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_projects_move_card( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " Forbidden
+      WHEN 422. " 
+      WHEN 503. " Response
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projects_move_card( '' ).
   ENDMETHOD.
@@ -17746,6 +18399,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_project_column( '' ).
   ENDMETHOD.
@@ -17762,6 +18422,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_projects_update_column( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_project_column( '' ).
   ENDMETHOD.
@@ -17778,6 +18444,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_projects_delete_column( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -17806,6 +18478,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projects_list_cards( '' ).
   ENDMETHOD.
@@ -17819,8 +18497,17 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{column_id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 422. " Validation failed
+      WHEN 503. " Response
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_project_card( '' ).
   ENDMETHOD.
@@ -17837,6 +18524,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_projects_move_column( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projects_move_column( '' ).
   ENDMETHOD.
@@ -17852,6 +18546,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_project( '' ).
   ENDMETHOD.
@@ -17868,6 +18568,15 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_projects_update( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " Forbidden
+      WHEN 404. " Not Found if the authenticated user does not have access to the project
+      WHEN 410. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_project( '' ).
   ENDMETHOD.
@@ -17884,6 +18593,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_projects_delete( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Delete Success
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " Forbidden
+      WHEN 404. " 
+      WHEN 410. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -17912,6 +18629,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projects_list_collaborat( '' ).
   ENDMETHOD.
@@ -17929,6 +18654,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_projects_add_collaborator( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -17946,6 +18679,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_projects_remove_collabora( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -17962,6 +18703,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_project_collaborator_per( '' ).
   ENDMETHOD.
@@ -17987,6 +18736,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projects_list_columns( '' ).
   ENDMETHOD.
@@ -18003,6 +18758,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_projects_create_column( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_project_column( '' ).
   ENDMETHOD.
@@ -18015,6 +18777,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_rate_limit_overview( '' ).
   ENDMETHOD.
@@ -18029,6 +18796,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 301. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_full_repository( '' ).
   ENDMETHOD.
@@ -18044,6 +18817,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_update( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 307. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_full_repository( '' ).
   ENDMETHOD.
@@ -18059,6 +18839,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_delete( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 307. " 
+      WHEN 403. " If an organization owner has configured the organization to prevent members from deleting organization-owned repositories, a member will get this response:
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -18444,6 +19230,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_empty_object( '' ).
   ENDMETHOD.
@@ -18526,6 +19317,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_actions_list_jobs_for_wo( '' ).
   ENDMETHOD.
@@ -18748,6 +19543,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_actions_create_or_updat01( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response when creating a secret
+      WHEN 204. " Response when updating a secret
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_actions_create_or_update( '' ).
   ENDMETHOD.
@@ -18933,6 +19732,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issues_list_assignees( '' ).
   ENDMETHOD.
@@ -18948,6 +19751,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " If the `assignee` can be assigned to issues in the repository, a `204` header with no content is returned.
+      WHEN 404. " Otherwise a `404` status code is returned.
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -18982,6 +19789,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_create_autolink( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_autolink( '' ).
   ENDMETHOD.
@@ -18999,6 +19810,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_autolink( '' ).
   ENDMETHOD.
@@ -19016,6 +19831,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -19073,6 +19892,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_list_branches( '' ).
   ENDMETHOD.
@@ -19088,6 +19911,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 301. " 
+      WHEN 404. " 
+      WHEN 415. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_branch_with_protection( '' ).
   ENDMETHOD.
@@ -19103,6 +19932,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_branch_protection( '' ).
   ENDMETHOD.
@@ -19119,6 +19952,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_update_branch_prote( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_protected_branch( '' ).
   ENDMETHOD.
@@ -19135,6 +19974,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_delete_branch_prote( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 403. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -19180,6 +20023,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -19211,6 +20058,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_update_pull_request( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_protected_branch_pull_re( '' ).
   ENDMETHOD.
@@ -19227,6 +20078,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_delete_pull_request( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -19242,6 +20097,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_protected_branch_admin_e( '' ).
   ENDMETHOD.
@@ -19257,6 +20116,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_protected_branch_admin_e( '' ).
   ENDMETHOD.
@@ -19272,6 +20135,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -19287,6 +20154,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_status_check_policy( '' ).
   ENDMETHOD.
@@ -19303,6 +20174,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_update_status_check( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_status_check_policy( '' ).
   ENDMETHOD.
@@ -19334,6 +20210,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_get_all_status_che( '' ).
   ENDMETHOD.
@@ -19347,8 +20227,15 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_add_status_check_c( '' ).
   ENDMETHOD.
@@ -19362,8 +20249,14 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_set_status_check_c( '' ).
   ENDMETHOD.
@@ -19377,8 +20270,14 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_remove_status_chec( '' ).
   ENDMETHOD.
@@ -19394,6 +20293,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_branch_restriction_polic( '' ).
   ENDMETHOD.
@@ -19424,6 +20327,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_get_apps_with_acce( '' ).
   ENDMETHOD.
@@ -19437,8 +20344,13 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_add_app_access_res( '' ).
   ENDMETHOD.
@@ -19452,8 +20364,13 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_set_app_access_res( '' ).
   ENDMETHOD.
@@ -19467,8 +20384,13 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_remove_app_access_( '' ).
   ENDMETHOD.
@@ -19484,6 +20406,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_get_teams_with_acc( '' ).
   ENDMETHOD.
@@ -19497,8 +20423,13 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_add_team_access_re( '' ).
   ENDMETHOD.
@@ -19512,8 +20443,13 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_set_team_access_re( '' ).
   ENDMETHOD.
@@ -19527,8 +20463,13 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_remove_team_access( '' ).
   ENDMETHOD.
@@ -19544,6 +20485,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_get_users_with_acc( '' ).
   ENDMETHOD.
@@ -19557,8 +20502,13 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_add_user_access_re( '' ).
   ENDMETHOD.
@@ -19572,8 +20522,13 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_set_user_access_re( '' ).
   ENDMETHOD.
@@ -19587,8 +20542,13 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{branch}' IN lv_uri WITH branch.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_remove_user_access( '' ).
   ENDMETHOD.
@@ -19605,6 +20565,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_rename_branch( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_branch_with_protection( '' ).
   ENDMETHOD.
@@ -19699,6 +20665,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 403. " Forbidden if the check run is not rerequestable or doesn't belong to the authenticated GitHub App
+      WHEN 404. " 
+      WHEN 422. " Validation error if the check run is not rerequestable
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_checks_rerequest_run( '' ).
   ENDMETHOD.
@@ -19714,6 +20686,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_checks_create_suite( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " when the suite already existed
+      WHEN 201. " Response when the suite was created
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_check_suite( '' ).
   ENDMETHOD.
@@ -19835,6 +20811,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_code_scanning_list_alert( '' ).
   ENDMETHOD.
@@ -19850,6 +20832,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_code_scanning_alert( '' ).
   ENDMETHOD.
@@ -19866,6 +20854,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_code_scanning_update_aler( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_code_scanning_alert( '' ).
   ENDMETHOD.
@@ -19894,6 +20888,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_code_scanning_list_ale01( '' ).
   ENDMETHOD.
@@ -19930,6 +20930,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_code_scanning_list_recen( '' ).
   ENDMETHOD.
@@ -19947,6 +20953,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_code_scanning_analysis( '' ).
   ENDMETHOD.
@@ -19967,6 +20979,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 400. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_code_scanning_analysis_d( '' ).
   ENDMETHOD.
@@ -19982,6 +21001,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_code_scanning_upload_sari( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 202. " Response
+      WHEN 400. " Bad Request if the sarif field is invalid
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 413. " Payload Too Large if the sarif field is too large
+      WHEN 503. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -19997,6 +21024,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 404. " Not Found if the sarif id does not match any upload
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_code_scanning_sarifs_sta( '' ).
   ENDMETHOD.
@@ -20021,6 +21054,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 500. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_codespaces_list_in_repos( '' ).
   ENDMETHOD.
@@ -20036,6 +21076,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_codespaces_create_with_re( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response when the codespace was successfully created
+      WHEN 202. " Response when the codespace creation partially failed but is being retried in the background
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_codespace( '' ).
   ENDMETHOD.
@@ -20051,6 +21098,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 500. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_codespaces_repo_machines( '' ).
   ENDMETHOD.
@@ -20078,6 +21133,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_list_collaborators( '' ).
   ENDMETHOD.
@@ -20093,6 +21152,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response if user is a collaborator
+      WHEN 404. " Not Found if user is not a collaborator
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -20109,6 +21172,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_add_collaborator( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response when a new invitation is created
+      WHEN 204. " Response when person is already a collaborator
+      WHEN 403. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repository_invitation( '' ).
   ENDMETHOD.
@@ -20140,6 +21209,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " if user has admin permissions
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repository_collaborator_( '' ).
   ENDMETHOD.
@@ -20181,6 +21254,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_commit_comment( '' ).
   ENDMETHOD.
@@ -20199,6 +21276,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_update_commit_comme( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_commit_comment( '' ).
   ENDMETHOD.
@@ -20217,6 +21298,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_delete_commit_comme( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -20247,6 +21332,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_reactions_list_for_commi( '' ).
   ENDMETHOD.
@@ -20265,6 +21354,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_reactions_create_for_comm( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Reaction exists
+      WHEN 201. " Reaction created
+      WHEN 415. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_reaction( '' ).
   ENDMETHOD.
@@ -20324,6 +21419,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 400. " 
+      WHEN 404. " 
+      WHEN 409. " 
+      WHEN 500. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_list_commits( '' ).
   ENDMETHOD.
@@ -20339,6 +21441,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_list_branches_for_( '' ).
   ENDMETHOD.
@@ -20380,6 +21486,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_create_commit_comme( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 403. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_commit_comment( '' ).
   ENDMETHOD.
@@ -20430,6 +21541,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+      WHEN 500. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_commit( '' ).
   ENDMETHOD.
@@ -20527,6 +21644,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_combined_commit_status( '' ).
   ENDMETHOD.
@@ -20552,6 +21673,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 301. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_list_commit_status( '' ).
   ENDMETHOD.
@@ -20591,6 +21716,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 500. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_commit_comparison( '' ).
   ENDMETHOD.
@@ -20609,6 +21739,15 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_apps_create_content_attac( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 410. " 
+      WHEN 415. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_content_reference_attach( '' ).
   ENDMETHOD.
@@ -20627,6 +21766,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 302. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -20643,6 +21788,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_create_or_update_fi( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 201. " Response
+      WHEN 404. " 
+      WHEN 409. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_file_commit( '' ).
   ENDMETHOD.
@@ -20659,6 +21811,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_delete_file( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 409. " 
+      WHEN 422. " 
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_file_commit( '' ).
   ENDMETHOD.
@@ -20686,6 +21845,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " if repository contains content
+      WHEN 204. " Response if repository is empty
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_list_contributors( '' ).
   ENDMETHOD.
@@ -20737,6 +21902,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_create_deployment( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 202. " Merged branch response
+      WHEN 409. " Conflict when there is a merge conflict or the commit's status checks failed
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_deployment( '' ).
   ENDMETHOD.
@@ -20754,6 +21925,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_deployment( '' ).
   ENDMETHOD.
@@ -20771,6 +21946,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -20798,6 +21978,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_list_deployment_st( '' ).
   ENDMETHOD.
@@ -20816,6 +22000,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_create_deployment_s( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_deployment_status( '' ).
   ENDMETHOD.
@@ -20836,6 +22024,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_deployment_status( '' ).
   ENDMETHOD.
@@ -20851,6 +22043,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_create_dispatch_eve( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -20896,6 +22092,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_create_or_update_en( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " Validation error when the environment name is invalid or when `protected_branches` and `custom_branch_policies` in `deployment_branch_policy` are set to the same value
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_environment( '' ).
   ENDMETHOD.
@@ -20963,6 +22163,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 400. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_list_forks( '' ).
   ENDMETHOD.
@@ -20978,6 +22182,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_create_fork( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 202. " Response
+      WHEN 400. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -20993,6 +22204,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_git_create_blob( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 409. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_short_blob( '' ).
   ENDMETHOD.
@@ -21008,6 +22226,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_blob( '' ).
   ENDMETHOD.
@@ -21023,6 +22247,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_git_create_commit( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_git_commit( '' ).
   ENDMETHOD.
@@ -21038,6 +22267,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_git_commit( '' ).
   ENDMETHOD.
@@ -21078,6 +22311,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_git_ref( '' ).
   ENDMETHOD.
@@ -21093,6 +22330,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_git_create_ref( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_git_ref( '' ).
   ENDMETHOD.
@@ -21109,6 +22350,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_git_update_ref( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_git_ref( '' ).
   ENDMETHOD.
@@ -21125,6 +22370,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_git_delete_ref( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -21140,6 +22389,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_git_create_tag( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_git_tag( '' ).
   ENDMETHOD.
@@ -21155,6 +22408,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_git_tag( '' ).
   ENDMETHOD.
@@ -21170,6 +22427,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_git_create_tree( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_git_tree( '' ).
   ENDMETHOD.
@@ -21188,6 +22451,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_git_tree( '' ).
   ENDMETHOD.
@@ -21212,6 +22480,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_list_webhooks( '' ).
   ENDMETHOD.
@@ -21227,6 +22499,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_create_webhook( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_hook( '' ).
   ENDMETHOD.
@@ -21244,6 +22522,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_hook( '' ).
   ENDMETHOD.
@@ -21262,6 +22544,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_update_webhook( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_hook( '' ).
   ENDMETHOD.
@@ -21280,6 +22567,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_delete_webhook( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -21340,6 +22631,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 400. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_list_webhook_deliv( '' ).
   ENDMETHOD.
@@ -21360,6 +22656,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 400. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_hook_delivery( '' ).
   ENDMETHOD.
@@ -21380,6 +22681,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 202. " 
+      WHEN 400. " 
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -21397,6 +22703,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -21414,6 +22724,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -21428,6 +22742,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_import( '' ).
   ENDMETHOD.
@@ -21443,6 +22761,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_migrations_start_import( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_import( '' ).
   ENDMETHOD.
@@ -21492,6 +22815,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_migrations_get_commit_au( '' ).
   ENDMETHOD.
@@ -21510,6 +22837,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_migrations_map_commit_aut( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_porter_author( '' ).
   ENDMETHOD.
@@ -21539,6 +22871,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_migrations_set_lfs_prefer( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_import( '' ).
   ENDMETHOD.
@@ -21553,6 +22889,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 301. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_installation( '' ).
   ENDMETHOD.
@@ -21582,6 +22923,10 @@ CLASS zcl_github IMPLEMENTATION.
 * todo, set body, #/components/schemas/interaction-limit
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 409. " Response
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_interaction_limit_respon( '' ).
   ENDMETHOD.
@@ -21596,6 +22941,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 409. " Response
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -21707,6 +23056,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 301. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issues_list_for_repo( '' ).
   ENDMETHOD.
@@ -21722,6 +23077,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_issues_create( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 410. " 
+      WHEN 422. " 
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issue( '' ).
   ENDMETHOD.
@@ -21755,6 +23118,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issues_list_comments_for( '' ).
   ENDMETHOD.
@@ -21772,6 +23140,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issue_comment( '' ).
   ENDMETHOD.
@@ -21790,6 +23162,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_issues_update_comment( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issue_comment( '' ).
   ENDMETHOD.
@@ -21838,6 +23214,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_reactions_list_for_issue( '' ).
   ENDMETHOD.
@@ -21856,6 +23236,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_reactions_create_for_issu( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Reaction exists
+      WHEN 201. " Reaction created
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_reaction( '' ).
   ENDMETHOD.
@@ -21900,6 +23285,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issues_list_events_for_r( '' ).
   ENDMETHOD.
@@ -21917,6 +23306,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 410. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issue_event( '' ).
   ENDMETHOD.
@@ -21934,6 +23329,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 301. " 
+      WHEN 304. " 
+      WHEN 404. " 
+      WHEN 410. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issue( '' ).
   ENDMETHOD.
@@ -21952,6 +23354,15 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_issues_update( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 301. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 410. " 
+      WHEN 422. " 
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issue( '' ).
   ENDMETHOD.
@@ -22018,6 +23429,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 410. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issues_list_comments( '' ).
   ENDMETHOD.
@@ -22036,6 +23452,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_issues_create_comment( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 410. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issue_comment( '' ).
   ENDMETHOD.
@@ -22063,6 +23486,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 410. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issues_list_events( '' ).
   ENDMETHOD.
@@ -22090,6 +23517,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 410. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issues_list_labels_on_is( '' ).
   ENDMETHOD.
@@ -22105,8 +23536,14 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 410. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issues_add_labels( '' ).
   ENDMETHOD.
@@ -22122,8 +23559,14 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 410. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issues_set_labels( '' ).
   ENDMETHOD.
@@ -22139,8 +23582,13 @@ CLASS zcl_github IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{issue_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 410. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -22159,6 +23607,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 410. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issues_remove_label( '' ).
   ENDMETHOD.
@@ -22177,6 +23630,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_issues_lock( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 410. " 
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -22195,6 +23655,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_issues_unlock( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -22225,6 +23690,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 410. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_reactions_list_for_iss01( '' ).
   ENDMETHOD.
@@ -22243,6 +23713,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_reactions_create_for_is01( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 201. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_reaction( '' ).
   ENDMETHOD.
@@ -22290,6 +23765,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 410. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issues_list_events_for_t( '' ).
   ENDMETHOD.
@@ -22329,6 +23809,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_create_deploy_key( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_deploy_key( '' ).
   ENDMETHOD.
@@ -22346,6 +23830,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_deploy_key( '' ).
   ENDMETHOD.
@@ -22387,6 +23875,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issues_list_labels_for_r( '' ).
   ENDMETHOD.
@@ -22402,6 +23894,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_issues_create_label( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_label( '' ).
   ENDMETHOD.
@@ -22417,6 +23914,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_label( '' ).
   ENDMETHOD.
@@ -22477,6 +23978,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 202. " 
+      WHEN 403. " We will return a 403 with one of the following messages:\n\n- Git LFS support not enabled because Git LFS is globally disabled.\n- Git LFS support not enabled because Git LFS is disabled for the root repository in the network.\n- Git LFS support not enabled because Git LFS is disabled for <owner>.
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -22520,6 +24025,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_merge_upstream( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " The branch has been successfully synced with the upstream repository
+      WHEN 409. " The branch could not be synced because of a merge conflict
+      WHEN 422. " The branch could not be synced for some other reason
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_merged_upstream( '' ).
   ENDMETHOD.
@@ -22535,6 +24045,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_merge( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Successful Response (The resulting merge commit)
+      WHEN 204. " Response when already merged
+      WHEN 403. " 
+      WHEN 404. " Not Found when the base or head does not exist
+      WHEN 409. " Conflict when there is a merge conflict
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_commit( '' ).
   ENDMETHOD.
@@ -22568,6 +24086,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issues_list_milestones( '' ).
   ENDMETHOD.
@@ -22583,6 +24105,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_issues_create_milestone( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_milestone( '' ).
   ENDMETHOD.
@@ -22600,6 +24127,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_milestone( '' ).
   ENDMETHOD.
@@ -22636,6 +24167,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_issues_delete_milestone( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -22718,6 +24253,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_activity_mark_repo_notifi( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 202. " Response
+      WHEN 205. " Reset Content
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -22732,6 +24271,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_page( '' ).
   ENDMETHOD.
@@ -22747,6 +24290,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_create_pages_site( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 409. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_page( '' ).
   ENDMETHOD.
@@ -22762,6 +24310,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_update_information_( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 400. " 
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -22777,6 +24330,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_delete_pages_site( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -22860,6 +24418,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 202. " Empty response
+      WHEN 400. " Custom domains are not available for GitHub Pages
+      WHEN 404. " 
+      WHEN 422. " There isn't a CNAME for this page
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pages_health_check( '' ).
   ENDMETHOD.
@@ -22887,6 +24452,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 410. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projects_list_for_repo( '' ).
   ENDMETHOD.
@@ -22902,6 +24475,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_projects_create_for_repo( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 410. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_project( '' ).
   ENDMETHOD.
@@ -22941,6 +24522,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pulls_list( '' ).
   ENDMETHOD.
@@ -22956,6 +24542,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_pulls_create( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 403. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pull_request( '' ).
   ENDMETHOD.
@@ -23006,6 +24597,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pull_request_review_comm( '' ).
   ENDMETHOD.
@@ -23042,6 +24637,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_pulls_delete_review_comme( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -23072,6 +24671,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_reactions_list_for_pull_( '' ).
   ENDMETHOD.
@@ -23090,6 +24693,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_reactions_create_for_pull( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Reaction exists
+      WHEN 201. " Reaction created
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_reaction( '' ).
   ENDMETHOD.
@@ -23127,6 +24735,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Pass the appropriate [media type](https://docs.github.com/rest/overview/media-types/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.
+      WHEN 304. " 
+      WHEN 404. " 
+      WHEN 500. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pull_request( '' ).
   ENDMETHOD.
@@ -23145,6 +24759,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_pulls_update( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pull_request( '' ).
   ENDMETHOD.
@@ -23163,6 +24782,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_codespaces_create_with_pr( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response when the codespace was successfully created
+      WHEN 202. " Response when the codespace creation partially failed but is being retried in the background
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_codespace( '' ).
   ENDMETHOD.
@@ -23217,6 +24843,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_pulls_create_review_comme( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 403. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pull_request_review_comm( '' ).
   ENDMETHOD.
@@ -23238,6 +24869,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_pulls_create_reply_for_re( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pull_request_review_comm( '' ).
   ENDMETHOD.
@@ -23292,6 +24927,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+      WHEN 500. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pulls_list_files( '' ).
   ENDMETHOD.
@@ -23309,6 +24949,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response if pull request has been merged
+      WHEN 404. " Not Found if pull request has not been merged
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -23327,6 +24971,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_pulls_merge( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " if merge was successful
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 405. " Method Not Allowed if merge cannot be performed
+      WHEN 409. " Conflict if sha was provided and pull request head did not match
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pull_request_merge_resul( '' ).
   ENDMETHOD.
@@ -23372,6 +25024,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_pulls_request_reviewers( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 403. " 
+      WHEN 422. " Unprocessable Entity if user is not a collaborator
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pull_request_simple( '' ).
   ENDMETHOD.
@@ -23390,6 +25047,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_pulls_remove_requested_re( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pull_request_simple( '' ).
   ENDMETHOD.
@@ -23435,6 +25096,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_pulls_create_review( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
@@ -23455,6 +25121,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
@@ -23476,6 +25146,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_pulls_update_review( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
@@ -23497,6 +25171,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_pulls_delete_pending_revi( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
@@ -23527,6 +25206,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pulls_list_comments_for_( '' ).
   ENDMETHOD.
@@ -23548,6 +25231,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_pulls_dismiss_review( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
@@ -23569,6 +25257,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_pulls_submit_review( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pull_request_review( '' ).
   ENDMETHOD.
@@ -23587,6 +25281,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_pulls_update_branch( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 202. " Response
+      WHEN 403. " 
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -23604,6 +25303,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_content_file( '' ).
   ENDMETHOD.
@@ -23622,6 +25326,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_content_file( '' ).
   ENDMETHOD.
@@ -23646,6 +25355,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_list_releases( '' ).
   ENDMETHOD.
@@ -23661,6 +25374,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_create_release( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 404. " Not Found if the discussion category name is invalid
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_release( '' ).
   ENDMETHOD.
@@ -23678,6 +25396,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " To download the asset's binary content, set the `Accept` header of the request to [`application/octet-stream`](https://docs.github.com/rest/overview/media-types). The API will either redirect the client to the location, or stream it directly if possible. API clients should handle both a `200` or `302` response.
+      WHEN 302. " 
+      WHEN 404. " 
+      WHEN 415. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_release_asset( '' ).
   ENDMETHOD.
@@ -23729,6 +25453,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_generate_release_no( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Name and body of generated release notes
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_release_notes_content( '' ).
   ENDMETHOD.
@@ -23758,6 +25486,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_release( '' ).
   ENDMETHOD.
@@ -23775,6 +25507,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " **Note:** This returns an `upload_url` key corresponding to the endpoint for uploading release assets. This key is a [hypermedia resource](https://docs.github.com/rest/overview/resources-in-the-rest-api#hypermedia).
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_release( '' ).
   ENDMETHOD.
@@ -23793,6 +25529,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_update_release( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " Not Found if the discussion category name is invalid
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_release( '' ).
   ENDMETHOD.
@@ -23859,6 +25599,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response for successful upload
+      WHEN 422. " Response if you upload an asset with the same filename as another uploaded asset
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_release_asset( '' ).
   ENDMETHOD.
@@ -23877,6 +25621,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_reactions_create_for_rele( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Reaction exists
+      WHEN 201. " Reaction created
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_reaction( '' ).
   ENDMETHOD.
@@ -23910,6 +25659,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " Repository is public or secret scanning is disabled for the repository
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_secret_scanning_list_a01( '' ).
   ENDMETHOD.
@@ -23925,6 +25679,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 404. " Repository is public, or secret scanning is disabled for the repository, or the resource is not found
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_secret_scanning_alert( '' ).
   ENDMETHOD.
@@ -23941,6 +25701,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_secret_scanning_update_al( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " Repository is public, or secret scanning is disabled for the repository, or the resource is not found
+      WHEN 422. " State does not match the resolution
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_secret_scanning_alert( '' ).
   ENDMETHOD.
@@ -23965,6 +25731,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -23979,6 +25749,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Returns a weekly aggregate of the number of additions and deletions pushed to a repository.
+      WHEN 202. " 
+      WHEN 204. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_get_code_frequency( '' ).
   ENDMETHOD.
@@ -23993,6 +25768,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 202. " 
+      WHEN 204. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_get_commit_activit( '' ).
   ENDMETHOD.
@@ -24007,6 +25787,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " *   `w` - Start of the week, given as a [Unix timestamp](http://en.wikipedia.org/wiki/Unix_time).\n*   `a` - Number of additions\n*   `d` - Number of deletions\n*   `c` - Number of commits
+      WHEN 202. " 
+      WHEN 204. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_get_contributors_s( '' ).
   ENDMETHOD.
@@ -24021,6 +25806,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " The array order is oldest week (index 0) to most recent week.
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_participation_stats( '' ).
   ENDMETHOD.
@@ -24035,6 +25824,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " For example, `[2, 14, 25]` indicates that there were 25 total commits, during the 2:00pm hour on Tuesdays. All times are based on the time zone of individual commits.
+      WHEN 204. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_get_punch_card_sta( '' ).
   ENDMETHOD.
@@ -24089,6 +25882,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " if you subscribe to the repository
+      WHEN 403. " 
+      WHEN 404. " Not Found if you don't subscribe to the repository
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repository_subscription( '' ).
   ENDMETHOD.
@@ -24206,6 +26004,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_topic( '' ).
   ENDMETHOD.
@@ -24221,6 +26023,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_replace_all_topics( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_topic( '' ).
   ENDMETHOD.
@@ -24238,6 +26045,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_clone_traffic( '' ).
   ENDMETHOD.
@@ -24252,6 +26063,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_get_top_paths( '' ).
   ENDMETHOD.
@@ -24266,6 +26081,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_get_top_referrers( '' ).
   ENDMETHOD.
@@ -24283,6 +26102,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_view_traffic( '' ).
   ENDMETHOD.
@@ -24312,6 +26135,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response if repository is enabled with vulnerability alerts
+      WHEN 404. " Not Found if repository is not enabled with vulnerability alerts
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -24387,6 +26214,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_list_public( '' ).
   ENDMETHOD.
@@ -24464,6 +26296,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_actions_create_or_updat02( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response when creating a secret
+      WHEN 204. " Response when updating a secret
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_empty_object( '' ).
   ENDMETHOD.
@@ -24712,6 +26548,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 400. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -24726,6 +26569,15 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_scim_provision_and_invite( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 304. " 
+      WHEN 400. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 409. " 
+      WHEN 500. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -24740,6 +26592,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -24755,6 +26613,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_scim_set_information_for_( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -24770,6 +26634,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_scim_update_attribute_for( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 400. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 429. " Response
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -24785,6 +26657,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_scim_delete_user_from_org( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -24814,6 +26692,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 422. " 
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_search_code( '' ).
   ENDMETHOD.
@@ -24843,6 +26728,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_search_commits( '' ).
   ENDMETHOD.
@@ -24872,6 +26761,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 422. " 
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_search_issues_and_pull_r( '' ).
   ENDMETHOD.
@@ -24904,6 +26800,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_search_labels( '' ).
   ENDMETHOD.
@@ -24933,6 +26836,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 422. " 
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_search_repos( '' ).
   ENDMETHOD.
@@ -24956,6 +26865,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_search_topics( '' ).
   ENDMETHOD.
@@ -24985,6 +26898,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 422. " 
+      WHEN 503. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_search_users( '' ).
   ENDMETHOD.
@@ -24997,6 +26916,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25010,6 +26935,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_users_update_authenticate( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_private_user( '' ).
   ENDMETHOD.
@@ -25022,6 +26955,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 415. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_users_list_blocked_by_au( '' ).
   ENDMETHOD.
@@ -25035,6 +26976,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " If the user is blocked:
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " If the user is not blocked:
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25048,6 +26996,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25061,6 +27017,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25088,6 +27051,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 500. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_codespaces_list_for_auth( '' ).
   ENDMETHOD.
@@ -25098,8 +27069,16 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/codespaces'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response when the codespace was successfully created
+      WHEN 202. " Response when the codespace creation partially failed but is being retried in the background
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_codespace( '' ).
   ENDMETHOD.
@@ -25161,6 +27140,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_codespaces_create_or_upda( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response after successfully creaing a secret
+      WHEN 204. " Response after successfully updating a secret
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_codespaces_create_or_upd( '' ).
   ENDMETHOD.
@@ -25188,6 +27173,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 500. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_codespaces_list_reposito( '' ).
   ENDMETHOD.
@@ -25202,6 +27194,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_codespaces_set_repositori( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " No Content when repositories were added to the selected list
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 500. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25218,6 +27217,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " No Content when repository was added to the selected list
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 500. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25234,6 +27240,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " No Content when repository was removed from the selected list
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 500. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25247,6 +27260,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 500. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_codespace( '' ).
   ENDMETHOD.
@@ -25261,6 +27282,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_codespaces_update_for_aut( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_codespace( '' ).
   ENDMETHOD.
@@ -25275,6 +27302,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_codespaces_delete_for_aut( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 202. " 
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 500. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25288,6 +27323,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 500. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_codespaces_codespace_mac( '' ).
   ENDMETHOD.
@@ -25301,6 +27344,17 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 400. " 
+      WHEN 401. " 
+      WHEN 402. " Payment required
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 409. " 
+      WHEN 500. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_codespace( '' ).
   ENDMETHOD.
@@ -25314,6 +27368,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 500. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_codespace( '' ).
   ENDMETHOD.
@@ -25327,6 +27388,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_users_set_primary_email_v( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_users_set_primary_email_( '' ).
   ENDMETHOD.
@@ -25349,6 +27418,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_users_list_emails_for_au( '' ).
   ENDMETHOD.
@@ -25359,8 +27435,17 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/emails'.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_users_add_email_for_auth( '' ).
   ENDMETHOD.
@@ -25371,8 +27456,17 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/user/emails'.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25395,6 +27489,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_users_list_followers_for( '' ).
   ENDMETHOD.
@@ -25417,6 +27517,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_users_list_followed_by_a( '' ).
   ENDMETHOD.
@@ -25430,6 +27536,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " if the person is followed by the authenticated user
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " if the person is not followed by the authenticated user
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25443,6 +27556,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25456,6 +27576,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25478,6 +27605,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_users_list_gpg_keys_for_( '' ).
   ENDMETHOD.
@@ -25491,6 +27625,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_users_create_gpg_key_for_( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gpg_key( '' ).
   ENDMETHOD.
@@ -25506,6 +27648,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gpg_key( '' ).
   ENDMETHOD.
@@ -25521,6 +27670,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25543,6 +27700,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " You can find the permissions for the installation under the `permissions` key.
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 415. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_apps_list_installations_( '' ).
   ENDMETHOD.
@@ -25568,6 +27732,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " The access the user has to each repository is included in the hash under the `permissions` key.
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_apps_list_installation_r( '' ).
   ENDMETHOD.
@@ -25586,6 +27756,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25604,6 +27780,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25616,6 +27798,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Default response
+      WHEN 204. " Response when there are no restrictions
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25629,6 +27815,10 @@ CLASS zcl_github IMPLEMENTATION.
 * todo, set body, #/components/schemas/interaction-limit
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_interaction_limit_respon( '' ).
   ENDMETHOD.
@@ -25681,6 +27871,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_issues_list_for_authenti( '' ).
   ENDMETHOD.
@@ -25703,6 +27898,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_users_list_public_ssh_ke( '' ).
   ENDMETHOD.
@@ -25716,6 +27918,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_users_create_public_ssh_k( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_key( '' ).
   ENDMETHOD.
@@ -25731,6 +27941,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_key( '' ).
   ENDMETHOD.
@@ -25746,6 +27963,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25768,6 +27992,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_apps_list_subscriptions_( '' ).
   ENDMETHOD.
@@ -25790,6 +28020,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_apps_list_subscription01( '' ).
   ENDMETHOD.
@@ -25815,6 +28050,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_orgs_list_memberships_fo( '' ).
   ENDMETHOD.
@@ -25828,6 +28070,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_org_membership( '' ).
   ENDMETHOD.
@@ -25842,6 +28089,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_orgs_update_membership_fo( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_org_membership( '' ).
   ENDMETHOD.
@@ -25864,6 +28117,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_migrations_list_for_auth( '' ).
   ENDMETHOD.
@@ -25877,6 +28136,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_migrations_start_for_auth( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_migration( '' ).
   ENDMETHOD.
@@ -25897,6 +28163,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_migration( '' ).
   ENDMETHOD.
@@ -25912,6 +28185,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 302. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25927,6 +28206,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25943,6 +28229,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -25968,6 +28261,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_migrations_list_repos_01( '' ).
   ENDMETHOD.
@@ -25990,6 +28287,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_orgs_list_for_authentica( '' ).
   ENDMETHOD.
@@ -26034,6 +28337,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -26051,6 +28360,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -26078,6 +28393,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_packages_get_all_packa01( '' ).
   ENDMETHOD.
@@ -26112,6 +28433,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -26129,6 +28456,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -26142,6 +28475,14 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_projects_create_for_authe( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 415. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_project( '' ).
   ENDMETHOD.
@@ -26164,6 +28505,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_users_list_public_emails( '' ).
   ENDMETHOD.
@@ -26207,6 +28555,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_list_for_authentic( '' ).
   ENDMETHOD.
@@ -26220,6 +28575,15 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_cdata( json_repos_create_for_authenti( body ) ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 201. " Response
+      WHEN 304. " 
+      WHEN 400. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repository( '' ).
   ENDMETHOD.
@@ -26242,6 +28606,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_repos_list_invitations_f( '' ).
   ENDMETHOD.
@@ -26257,6 +28628,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 409. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -26272,6 +28650,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+      WHEN 409. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -26300,6 +28685,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_activity_list_repos_star( '' ).
   ENDMETHOD.
@@ -26314,6 +28705,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response if this repository is starred by you
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " Not Found if this repository is not starred by you
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -26328,6 +28726,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -26342,6 +28747,13 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -26364,6 +28776,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_activity_list_watched_re( '' ).
   ENDMETHOD.
@@ -26386,6 +28804,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_teams_list_for_authentic( '' ).
   ENDMETHOD.
@@ -26408,6 +28832,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 304. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_users_list( '' ).
   ENDMETHOD.
@@ -26421,6 +28849,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -26551,6 +28983,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " if the user follows the target user
+      WHEN 404. " if the user does not follow the target user
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -26577,6 +29013,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_gists_list_for_user( '' ).
   ENDMETHOD.
@@ -26619,6 +29059,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 404. " 
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_hovercard( '' ).
   ENDMETHOD.
@@ -26695,6 +29140,11 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_packages_list_packages02( '' ).
   ENDMETHOD.
@@ -26725,6 +29175,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -26743,6 +29199,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -26758,6 +29220,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_packages_get_all_packa02( '' ).
   ENDMETHOD.
@@ -26794,6 +29262,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -26812,6 +29286,12 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 204. " Response
+      WHEN 401. " 
+      WHEN 403. " 
+      WHEN 404. " 
+    ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
   ENDMETHOD.
@@ -26838,6 +29318,10 @@ CLASS zcl_github IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Response
+      WHEN 422. " 
+    ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_projects_list_for_user( '' ).
   ENDMETHOD.

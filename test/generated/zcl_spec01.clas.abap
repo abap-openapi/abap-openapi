@@ -48,9 +48,9 @@ CLASS zcl_spec01 IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
-      WHEN 204.
-      WHEN 400.
-      WHEN 404.
+      WHEN 204. " No Content, message published successfully
+      WHEN 400. " Bad Request
+      WHEN 404. " Not Found
     ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses

@@ -467,7 +467,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         IF ls_response-code = 'default'.
           rv_abap = rv_abap && |      WHEN OTHERS.\n|.
         ELSE.
-          rv_abap = rv_abap && |      WHEN { ls_response-code }.\n|.
+          rv_abap = rv_abap && |      WHEN { ls_response-code }. " { ls_response-description }\n|.
         ENDIF.
       ENDLOOP.
       rv_abap = rv_abap && |    ENDCASE.\n|.

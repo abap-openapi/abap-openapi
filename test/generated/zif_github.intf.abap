@@ -12438,6 +12438,7 @@ INTERFACE zif_github PUBLIC.
   METHODS projects_create_card
     IMPORTING
       column_id TYPE i
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE project_card
     RAISING cx_static_check.
@@ -13861,6 +13862,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       branch TYPE string
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE response_repos_add_status_chec
     RAISING cx_static_check.
@@ -13880,6 +13882,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       branch TYPE string
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE response_repos_set_status_chec
     RAISING cx_static_check.
@@ -13899,6 +13902,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       branch TYPE string
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE response_repos_remove_status_c
     RAISING cx_static_check.
@@ -13964,6 +13968,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       branch TYPE string
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE response_repos_add_app_access_
     RAISING cx_static_check.
@@ -13982,6 +13987,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       branch TYPE string
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE response_repos_set_app_access_
     RAISING cx_static_check.
@@ -14000,6 +14006,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       branch TYPE string
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE response_repos_remove_app_acce
     RAISING cx_static_check.
@@ -14035,6 +14042,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       branch TYPE string
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE response_repos_add_team_access
     RAISING cx_static_check.
@@ -14053,6 +14061,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       branch TYPE string
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE response_repos_set_team_access
     RAISING cx_static_check.
@@ -14071,6 +14080,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       branch TYPE string
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE response_repos_remove_team_acc
     RAISING cx_static_check.
@@ -14106,6 +14116,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       branch TYPE string
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE response_repos_add_user_access
     RAISING cx_static_check.
@@ -14124,6 +14135,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       branch TYPE string
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE response_repos_set_user_access
     RAISING cx_static_check.
@@ -14142,6 +14154,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       branch TYPE string
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE response_repos_remove_user_acc
     RAISING cx_static_check.
@@ -16585,6 +16598,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       issue_number TYPE i
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE response_issues_add_labels
     RAISING cx_static_check.
@@ -16604,6 +16618,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       issue_number TYPE i
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE response_issues_set_labels
     RAISING cx_static_check.
@@ -16621,6 +16636,7 @@ INTERFACE zif_github PUBLIC.
       owner TYPE string
       repo TYPE string
       issue_number TYPE i
+      body TYPE string
     RAISING cx_static_check.
 
 * DELETE - "Remove a label from an issue"
@@ -19406,6 +19422,8 @@ INTERFACE zif_github PUBLIC.
 * Response: 404
 * Body schema: string
   METHODS codespaces_create_for_authenti
+    IMPORTING
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE codespace
     RAISING cx_static_check.
@@ -19684,6 +19702,8 @@ INTERFACE zif_github PUBLIC.
 * Response: 422
 * Body schema: string
   METHODS users_add_email_for_authentica
+    IMPORTING
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE response_users_add_email_for_a
     RAISING cx_static_check.
@@ -19698,6 +19718,8 @@ INTERFACE zif_github PUBLIC.
 * Response: 422
 * Body schema: string
   METHODS users_delete_email_for_authent
+    IMPORTING
+      body TYPE string
     RAISING cx_static_check.
 
 * GET - "List followers of the authenticated user"

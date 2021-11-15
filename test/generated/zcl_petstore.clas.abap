@@ -170,10 +170,10 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
-      WHEN 200.
-      WHEN 400.
-      WHEN 404.
-      WHEN 405.
+      WHEN 200. " Successful operation
+      WHEN 400. " Invalid ID supplied
+      WHEN 404. " Pet not found
+      WHEN 405. " Validation exception
     ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pet( '' ).
@@ -189,8 +189,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
-      WHEN 200.
-      WHEN 405.
+      WHEN 200. " Successful operation
+      WHEN 405. " Invalid input
     ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pet( '' ).
@@ -208,8 +208,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
-      WHEN 200.
-      WHEN 400.
+      WHEN 200. " successful operation
+      WHEN 400. " Invalid status value
     ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_findpetsbystatus( '' ).
@@ -229,8 +229,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
-      WHEN 200.
-      WHEN 400.
+      WHEN 200. " successful operation
+      WHEN 400. " Invalid tag value
     ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_findpetsbytags( '' ).
@@ -248,9 +248,9 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
-      WHEN 200.
-      WHEN 400.
-      WHEN 404.
+      WHEN 200. " successful operation
+      WHEN 400. " Invalid ID supplied
+      WHEN 404. " Pet not found
     ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_pet( '' ).
@@ -332,8 +332,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
-      WHEN 200.
-      WHEN 405.
+      WHEN 200. " successful operation
+      WHEN 405. " Invalid input
     ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_order( '' ).
@@ -351,9 +351,9 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
-      WHEN 200.
-      WHEN 400.
-      WHEN 404.
+      WHEN 200. " successful operation
+      WHEN 400. " Invalid ID supplied
+      WHEN 404. " Order not found
     ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_order( '' ).
@@ -371,8 +371,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
-      WHEN 400.
-      WHEN 404.
+      WHEN 400. " Invalid ID supplied
+      WHEN 404. " Order not found
     ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
@@ -401,7 +401,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
-      WHEN 200.
+      WHEN 200. " Successful operation
       WHEN OTHERS.
     ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -423,8 +423,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
-      WHEN 200.
-      WHEN 400.
+      WHEN 200. " successful operation
+      WHEN 400. " Invalid username/password supplied
     ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
@@ -452,9 +452,9 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
-      WHEN 200.
-      WHEN 400.
-      WHEN 404.
+      WHEN 200. " successful operation
+      WHEN 400. " Invalid username supplied
+      WHEN 404. " User not found
     ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
     return_data = parse_user( '' ).
@@ -484,8 +484,8 @@ CLASS zcl_petstore IMPLEMENTATION.
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
-      WHEN 400.
-      WHEN 404.
+      WHEN 400. " Invalid username supplied
+      WHEN 404. " User not found
     ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
