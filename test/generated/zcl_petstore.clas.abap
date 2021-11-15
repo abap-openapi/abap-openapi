@@ -172,12 +172,15 @@ CLASS zcl_petstore IMPLEMENTATION.
     CASE lv_code.
       WHEN 200. " Successful operation
 " application/json, #/components/schemas/Pet
+        CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+        return_data = parse_pet( '' ).
       WHEN 400. " Invalid ID supplied
+" todo, raise
       WHEN 404. " Pet not found
+" todo, raise
       WHEN 405. " Validation exception
+" todo, raise
     ENDCASE.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_pet( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~addpet.
@@ -192,10 +195,11 @@ CLASS zcl_petstore IMPLEMENTATION.
     CASE lv_code.
       WHEN 200. " Successful operation
 " application/json, #/components/schemas/Pet
+        CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+        return_data = parse_pet( '' ).
       WHEN 405. " Invalid input
+" todo, raise
     ENDCASE.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_pet( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~findpetsbystatus.
@@ -212,10 +216,11 @@ CLASS zcl_petstore IMPLEMENTATION.
     CASE lv_code.
       WHEN 200. " successful operation
 " application/json, #/components/schemas/response_findpetsbystatus
+        CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+        return_data = parse_findpetsbystatus( '' ).
       WHEN 400. " Invalid status value
+" todo, raise
     ENDCASE.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_findpetsbystatus( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~findpetsbytags.
@@ -234,10 +239,11 @@ CLASS zcl_petstore IMPLEMENTATION.
     CASE lv_code.
       WHEN 200. " successful operation
 " application/json, #/components/schemas/response_findpetsbytags
+        CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+        return_data = parse_findpetsbytags( '' ).
       WHEN 400. " Invalid tag value
+" todo, raise
     ENDCASE.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_findpetsbytags( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~getpetbyid.
@@ -254,11 +260,13 @@ CLASS zcl_petstore IMPLEMENTATION.
     CASE lv_code.
       WHEN 200. " successful operation
 " application/json, #/components/schemas/Pet
+        CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+        return_data = parse_pet( '' ).
       WHEN 400. " Invalid ID supplied
+" todo, raise
       WHEN 404. " Pet not found
+" todo, raise
     ENDCASE.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_pet( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~updatepetwithform.
@@ -278,8 +286,10 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CASE lv_code.
+      WHEN 405. " Invalid input
+" todo, raise
+    ENDCASE.
   ENDMETHOD.
 
   METHOD zif_petstore~deletepet.
@@ -293,8 +303,10 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CASE lv_code.
+      WHEN 400. " Invalid pet value
+" todo, raise
+    ENDCASE.
   ENDMETHOD.
 
   METHOD zif_petstore~uploadfile.
@@ -311,8 +323,12 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_apiresponse( '' ).
+    CASE lv_code.
+      WHEN 200. " successful operation
+" application/json, #/components/schemas/ApiResponse
+        CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+        return_data = parse_apiresponse( '' ).
+    ENDCASE.
   ENDMETHOD.
 
   METHOD zif_petstore~getinventory.
@@ -323,8 +339,12 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_getinventory( '' ).
+    CASE lv_code.
+      WHEN 200. " successful operation
+" application/json, #/components/schemas/response_getinventory
+        CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+        return_data = parse_getinventory( '' ).
+    ENDCASE.
   ENDMETHOD.
 
   METHOD zif_petstore~placeorder.
@@ -339,10 +359,11 @@ CLASS zcl_petstore IMPLEMENTATION.
     CASE lv_code.
       WHEN 200. " successful operation
 " application/json, #/components/schemas/Order
+        CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+        return_data = parse_order( '' ).
       WHEN 405. " Invalid input
+" todo, raise
     ENDCASE.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_order( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~getorderbyid.
@@ -359,11 +380,13 @@ CLASS zcl_petstore IMPLEMENTATION.
     CASE lv_code.
       WHEN 200. " successful operation
 " application/json, #/components/schemas/Order
+        CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+        return_data = parse_order( '' ).
       WHEN 400. " Invalid ID supplied
+" todo, raise
       WHEN 404. " Order not found
+" todo, raise
     ENDCASE.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_order( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~deleteorder.
@@ -379,10 +402,10 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 400. " Invalid ID supplied
+" todo, raise
       WHEN 404. " Order not found
+" todo, raise
     ENDCASE.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~createuser.
@@ -394,8 +417,9 @@ CLASS zcl_petstore IMPLEMENTATION.
 * todo, set body, #/components/schemas/User
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CASE lv_code.
+      WHEN OTHERS.
+    ENDCASE.
   ENDMETHOD.
 
   METHOD zif_petstore~createuserswithlistinput.
@@ -410,10 +434,10 @@ CLASS zcl_petstore IMPLEMENTATION.
     CASE lv_code.
       WHEN 200. " Successful operation
 " application/json, #/components/schemas/User
+        CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+        return_data = parse_user( '' ).
       WHEN OTHERS.
     ENDCASE.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_user( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~loginuser.
@@ -434,9 +458,8 @@ CLASS zcl_petstore IMPLEMENTATION.
       WHEN 200. " successful operation
 " application/json, 
       WHEN 400. " Invalid username/password supplied
+" todo, raise
     ENDCASE.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
   ENDMETHOD.
 
   METHOD zif_petstore~logoutuser.
@@ -447,8 +470,9 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CASE lv_code.
+      WHEN OTHERS.
+    ENDCASE.
   ENDMETHOD.
 
   METHOD zif_petstore~getuserbyname.
@@ -463,11 +487,13 @@ CLASS zcl_petstore IMPLEMENTATION.
     CASE lv_code.
       WHEN 200. " successful operation
 " application/json, #/components/schemas/User
+        CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+        return_data = parse_user( '' ).
       WHEN 400. " Invalid username supplied
+" todo, raise
       WHEN 404. " User not found
+" todo, raise
     ENDCASE.
-    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
-    return_data = parse_user( '' ).
   ENDMETHOD.
 
   METHOD zif_petstore~updateuser.
@@ -480,8 +506,9 @@ CLASS zcl_petstore IMPLEMENTATION.
 * todo, set body, #/components/schemas/User
     lv_code = send_receive( ).
     WRITE / lv_code.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
+    CASE lv_code.
+      WHEN OTHERS.
+    ENDCASE.
   ENDMETHOD.
 
   METHOD zif_petstore~deleteuser.
@@ -495,10 +522,10 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 400. " Invalid username supplied
+" todo, raise
       WHEN 404. " User not found
+" todo, raise
     ENDCASE.
-    WRITE / mi_client->response->get_cdata( ).
-* todo, handle more responses
   ENDMETHOD.
 
 ENDCLASS.

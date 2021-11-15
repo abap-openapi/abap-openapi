@@ -20,6 +20,10 @@ CLASS zcl_oapi_main DEFINITION PUBLIC.
     DATA ms_specification TYPE zif_oapi_specification_v3=>ty_specification.
     DATA ms_input TYPE ty_input.
 
+    METHODS is_success_code
+      IMPORTING iv_code TYPE string
+      RETURNING VALUE(rv_bool) TYPE abap_bool.
+
     METHODS operation_implementation
       IMPORTING is_operation TYPE zif_oapi_specification_v3=>ty_operation
       RETURNING VALUE(rv_abap) TYPE string.
@@ -463,39 +467,35 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |    WRITE / lv_code.\n|.
 * todo, accept and check content types
 
-    IF lines( is_operation-responses ) > 1.
-      rv_abap = rv_abap && |    CASE lv_code.\n|.
-      LOOP AT is_operation-responses INTO ls_response.
-        IF ls_response-code = 'default'.
-          rv_abap = rv_abap && |      WHEN OTHERS.\n|.
-        ELSE.
-          rv_abap = rv_abap && |      WHEN { ls_response-code }. " { ls_response-description }\n|.
-          LOOP AT ls_response-content INTO ls_content WHERE type = 'application/json'.
-            rv_abap = rv_abap && |" { ls_content-type }, { ls_content-schema_ref }\n|.
-
-            IF ls_content-schema_ref IS NOT INITIAL.
-              ls_schema = find_schema( ls_content-schema_ref ).
-              IF ls_schema IS NOT INITIAL AND ls_schema-abap_json_method IS NOT INITIAL.
-                rv_abap = rv_abap && |    { ls_schema-abap_json_method }( body )|.
-              ENDIF.
-            ENDIF.
-
-          ENDLOOP.
-        ENDIF.
-      ENDLOOP.
-      rv_abap = rv_abap && |    ENDCASE.\n|.
-    ENDIF.
-
     ls_return = find_return( is_operation ).
-    IF ls_return IS NOT INITIAL.
-      rv_abap = rv_abap &&
-        |    CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).\n| &&
-        |    return_data = { ls_return-abap_parser_method }( '' ).\n|.
-    ELSE.
-      rv_abap = rv_abap &&
-        |    WRITE / mi_client->response->get_cdata( ).\n| &&
-        |* todo, handle more responses\n|.
-    ENDIF.
+    rv_abap = rv_abap && |    CASE lv_code.\n|.
+    LOOP AT is_operation-responses INTO ls_response.
+      IF ls_response-code = 'default'.
+        rv_abap = rv_abap && |      WHEN OTHERS.\n|.
+      ELSE.
+        rv_abap = rv_abap && |      WHEN { ls_response-code }. " { ls_response-description }\n|.
+        LOOP AT ls_response-content INTO ls_content WHERE type = 'application/json'.
+          rv_abap = rv_abap && |" { ls_content-type }, { ls_content-schema_ref }\n|.
+
+          IF ls_content-schema_ref IS NOT INITIAL.
+            ls_schema = find_schema( ls_content-schema_ref ).
+            IF ls_schema IS NOT INITIAL AND ls_schema-abap_parser_method = ls_return-abap_parser_method.
+              rv_abap = rv_abap &&
+                  |        CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).\n| &&
+                  |        return_data = { ls_schema-abap_parser_method }( '' ).\n|.
+            ELSEIF ls_schema IS NOT INITIAL AND ls_schema-abap_parser_method IS NOT INITIAL.
+              rv_abap = rv_abap &&
+                  |        CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).\n| &&
+                  |        { ls_schema-abap_parser_method }( '' ).\n|.
+            ENDIF.
+          ENDIF.
+        ENDLOOP.
+        IF is_success_code( ls_response-code ) = abap_false.
+          rv_abap = rv_abap && |" todo, raise\n|.
+        ENDIF.
+      ENDIF.
+    ENDLOOP.
+    rv_abap = rv_abap && |    ENDCASE.\n|.
 
   ENDMETHOD.
 
@@ -511,15 +511,17 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     ENDIF.
   ENDMETHOD.
 
+  METHOD is_success_code.
+    rv_bool = boolc( iv_code = '200' OR iv_code = '201' OR iv_code = '204' ).
+  ENDMETHOD.
+
   METHOD find_return.
 
     DATA ls_response LIKE LINE OF is_operation-responses.
     DATA ls_content LIKE LINE OF ls_response-content.
 
     LOOP AT is_operation-responses INTO ls_response.
-      IF ls_response-code = '200'
-          OR ls_response-code = '201'
-          OR ls_response-code = '204'.
+      IF is_success_code( ls_response-code ) = abap_true.
 * todo, handle basic types
         READ TABLE ls_response-content INTO ls_content WITH KEY type = 'application/json'.
         IF sy-subrc = 0 AND ls_content-schema_ref IS NOT INITIAL.

@@ -170,7 +170,7 @@
     "rfc_error_handling": true,
     "selection_screen_naming": true,
     "sequential_blank": true,
-    "short_case": true,
+    "short_case": false,
     "sicf_consistency": true,
     "space_before_colon": true,
     "space_before_dot": true,
