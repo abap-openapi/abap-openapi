@@ -117,12 +117,13 @@ async function get(url) {
 }
 
 async function run() {
-  if (process.argv[2] === undefined || process.argv[2] === "") {
+  const url = process.argv[2];
+  if (url === undefined || url === "") {
     throw "supply url";
   } else if (process.argv[3] === undefined || process.argv[3] === "") {
     throw "supply name";
   }
-  const spec = await get(process.argv[2]);
+  const spec = url.startsWith("http") ? await get(url) : fs.readFileSync(url).toString();
 
   const main = new abap.Classes["ZCL_OAPI_MAIN"]();
   await main.constructor_();

@@ -52,6 +52,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     ASSERT rs_schema-openapi CP '3*'.
 
     rs_schema-info-title = mo_json->value_string( '/info/title' ).
+    rs_schema-info-version = mo_json->value_string( '/info/version' ).
     rs_schema-info-description = mo_json->value_string( '/info/description' ).
 
     rs_schema-operations = parse_operations( ).
