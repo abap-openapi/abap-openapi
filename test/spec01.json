@@ -21,16 +21,6 @@
             }
           },
           {
-            "name": "content-type",
-            "in": "header",
-            "description": "Content type",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "application/json"
-            }
-          },
-          {
             "name": "x-qos",
             "in": "header",
             "description": "Quality of service",

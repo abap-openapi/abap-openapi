@@ -13,7 +13,6 @@ INTERFACE zif_spec01 PUBLIC.
 * POST - "Publish message to a queue"
 * Operation id: publish-message-to-queue
 * Parameter: queue-name, required, path
-* Parameter: content-type, required, header
 * Parameter: x-qos, required, header
 * Parameter: x-message-expiration, optional, header
 * Response: 204
@@ -25,9 +24,9 @@ INTERFACE zif_spec01 PUBLIC.
   METHODS publish_message_to_queue
     IMPORTING
       queue_name TYPE string
-      content_type TYPE string DEFAULT 'application/json'
       x_qos TYPE string
       x_message_expiration TYPE i OPTIONAL
+      body TYPE string
     RAISING cx_static_check.
 
 ENDINTERFACE.

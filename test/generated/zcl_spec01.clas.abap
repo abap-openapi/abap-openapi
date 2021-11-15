@@ -44,6 +44,7 @@ CLASS zcl_spec01 IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{queue-name}' IN lv_uri WITH queue_name.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
     WRITE / mi_client->response->get_cdata( ).
