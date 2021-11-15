@@ -406,7 +406,9 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     DATA ls_parameter LIKE LINE OF is_operation-parameters.
     DATA ls_return TYPE zif_oapi_specification_v3=>ty_component_schema.
     DATA ls_response LIKE LINE OF is_operation-responses.
+    DATA ls_content LIKE LINE OF ls_response-content.
     DATA lv_value TYPE string.
+    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
 
     rv_abap =
       |    DATA lv_code TYPE i.\n| &&
@@ -468,6 +470,17 @@ CLASS zcl_oapi_main IMPLEMENTATION.
           rv_abap = rv_abap && |      WHEN OTHERS.\n|.
         ELSE.
           rv_abap = rv_abap && |      WHEN { ls_response-code }. " { ls_response-description }\n|.
+          LOOP AT ls_response-content INTO ls_content WHERE type = 'application/json'.
+            rv_abap = rv_abap && |" { ls_content-type }, { ls_content-schema_ref }\n|.
+
+            IF ls_content-schema_ref IS NOT INITIAL.
+              ls_schema = find_schema( ls_content-schema_ref ).
+              IF ls_schema IS NOT INITIAL AND ls_schema-abap_json_method IS NOT INITIAL.
+                rv_abap = rv_abap && |    { ls_schema-abap_json_method }( body )|.
+              ENDIF.
+            ENDIF.
+
+          ENDLOOP.
         ENDIF.
       ENDLOOP.
       rv_abap = rv_abap && |    ENDCASE.\n|.

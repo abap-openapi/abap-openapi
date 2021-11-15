@@ -171,6 +171,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Successful operation
+" application/json, #/components/schemas/Pet
       WHEN 400. " Invalid ID supplied
       WHEN 404. " Pet not found
       WHEN 405. " Validation exception
@@ -190,6 +191,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Successful operation
+" application/json, #/components/schemas/Pet
       WHEN 405. " Invalid input
     ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -209,6 +211,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " successful operation
+" application/json, #/components/schemas/response_findpetsbystatus
       WHEN 400. " Invalid status value
     ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -230,6 +233,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " successful operation
+" application/json, #/components/schemas/response_findpetsbytags
       WHEN 400. " Invalid tag value
     ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -249,6 +253,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " successful operation
+" application/json, #/components/schemas/Pet
       WHEN 400. " Invalid ID supplied
       WHEN 404. " Pet not found
     ENDCASE.
@@ -333,6 +338,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " successful operation
+" application/json, #/components/schemas/Order
       WHEN 405. " Invalid input
     ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -352,6 +358,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " successful operation
+" application/json, #/components/schemas/Order
       WHEN 400. " Invalid ID supplied
       WHEN 404. " Order not found
     ENDCASE.
@@ -402,6 +409,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Successful operation
+" application/json, #/components/schemas/User
       WHEN OTHERS.
     ENDCASE.
     CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
@@ -424,6 +432,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " successful operation
+" application/json, 
       WHEN 400. " Invalid username/password supplied
     ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
@@ -453,6 +462,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " successful operation
+" application/json, #/components/schemas/User
       WHEN 400. " Invalid username supplied
       WHEN 404. " User not found
     ENDCASE.

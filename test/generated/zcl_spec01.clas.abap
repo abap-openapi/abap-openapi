@@ -50,7 +50,9 @@ CLASS zcl_spec01 IMPLEMENTATION.
     CASE lv_code.
       WHEN 204. " No Content, message published successfully
       WHEN 400. " Bad Request
+" application/json, #/components/schemas/ErrorMessage
       WHEN 404. " Not Found
+" application/json, #/components/schemas/ErrorMessage
     ENDCASE.
     WRITE / mi_client->response->get_cdata( ).
 * todo, handle more responses
