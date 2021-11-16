@@ -301,6 +301,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_header_field( name = 'api_key' value = api_key ).
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
