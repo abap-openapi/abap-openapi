@@ -42,7 +42,7 @@ ENDCLASS.
 
 
 
-CLASS ZCL_OAPI_JSON IMPLEMENTATION.
+CLASS zcl_oapi_json IMPLEMENTATION.
 
 
   METHOD constructor.
@@ -72,12 +72,12 @@ CLASS ZCL_OAPI_JSON IMPLEMENTATION.
 
 
   METHOD value_integer.
-    ASSERT 1 = 'todo'.
+    rv_value = value_string( iv_path ).
   ENDMETHOD.
 
 
   METHOD value_number.
-    ASSERT 1 = 'todo'.
+    rv_value = value_string( iv_path ).
   ENDMETHOD.
 
 

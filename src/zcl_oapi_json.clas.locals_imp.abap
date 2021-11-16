@@ -90,7 +90,7 @@ CLASS lcl_parser IMPLEMENTATION.
     DATA lv_index TYPE i.
     DATA lt_nodes TYPE STANDARD TABLE OF REF TO if_sxml_node WITH DEFAULT KEY.
 
-    FIELD-SYMBOLS <ls_data> LIKE LINE OF rt_data.
+*    FIELD-SYMBOLS <ls_data> LIKE LINE OF rt_data.
 
     CREATE OBJECT lo_stack.
 
