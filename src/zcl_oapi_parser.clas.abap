@@ -191,7 +191,10 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
         ls_parameter-required = mo_json->value_boolean( iv_prefix && lv_member && '/required' ).
         CREATE OBJECT lo_names. " in this place the names are not connected
         ls_parameter-abap_name = lo_names->to_abap_name( ls_parameter-name ).
-        ls_parameter-schema = parse_schema( iv_prefix && lv_member && '/schema' ).
+        ls_parameter-schema_ref = mo_json->value_string( iv_prefix && lv_member && '/schema/$ref' ).
+        IF ls_parameter-schema_ref IS INITIAL.
+          ls_parameter-schema = parse_schema( iv_prefix && lv_member && '/schema' ).
+        ENDIF.
         APPEND ls_parameter TO rt_parameters.
       ENDIF.
     ENDLOOP.
