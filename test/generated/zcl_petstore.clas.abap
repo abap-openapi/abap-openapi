@@ -171,7 +171,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Successful operation
-" application/json, #/components/schemas/Pet
+" application/json,#/components/schemas/Pet
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pet( '' ).
       WHEN 400. " Invalid ID supplied
@@ -194,7 +194,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Successful operation
-" application/json, #/components/schemas/Pet
+" application/json,#/components/schemas/Pet
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pet( '' ).
       WHEN 405. " Invalid input
@@ -215,7 +215,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " successful operation
-" application/json, #/components/schemas/response_findpetsbystatus
+" application/json,#/components/schemas/response_findpetsbystatus
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_findpetsbystatus( '' ).
       WHEN 400. " Invalid status value
@@ -238,7 +238,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " successful operation
-" application/json, #/components/schemas/response_findpetsbytags
+" application/json,#/components/schemas/response_findpetsbytags
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_findpetsbytags( '' ).
       WHEN 400. " Invalid tag value
@@ -259,7 +259,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " successful operation
-" application/json, #/components/schemas/Pet
+" application/json,#/components/schemas/Pet
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pet( '' ).
       WHEN 400. " Invalid ID supplied
@@ -325,7 +325,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " successful operation
-" application/json, #/components/schemas/ApiResponse
+" application/json,#/components/schemas/ApiResponse
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_apiresponse( '' ).
     ENDCASE.
@@ -341,7 +341,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " successful operation
-" application/json, #/components/schemas/response_getinventory
+" application/json,#/components/schemas/response_getinventory
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_getinventory( '' ).
     ENDCASE.
@@ -358,7 +358,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " successful operation
-" application/json, #/components/schemas/Order
+" application/json,#/components/schemas/Order
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_order( '' ).
       WHEN 405. " Invalid input
@@ -379,7 +379,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " successful operation
-" application/json, #/components/schemas/Order
+" application/json,#/components/schemas/Order
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_order( '' ).
       WHEN 400. " Invalid ID supplied
@@ -433,7 +433,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Successful operation
-" application/json, #/components/schemas/User
+" application/json,#/components/schemas/User
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_user( '' ).
       WHEN OTHERS.
@@ -456,7 +456,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " successful operation
-" application/json, 
+" application/json,
       WHEN 400. " Invalid username/password supplied
 " todo, raise
     ENDCASE.
@@ -486,7 +486,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " successful operation
-" application/json, #/components/schemas/User
+" application/json,#/components/schemas/User
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_user( '' ).
       WHEN 400. " Invalid username supplied

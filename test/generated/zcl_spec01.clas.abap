@@ -50,12 +50,12 @@ CLASS zcl_spec01 IMPLEMENTATION.
     CASE lv_code.
       WHEN 204. " No Content, message published successfully
       WHEN 400. " Bad Request
-" application/json, #/components/schemas/ErrorMessage
+" application/json,#/components/schemas/ErrorMessage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_errormessage( '' ).
 " todo, raise
       WHEN 404. " Not Found
-" application/json, #/components/schemas/ErrorMessage
+" application/json,#/components/schemas/ErrorMessage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_errormessage( '' ).
 " todo, raise
