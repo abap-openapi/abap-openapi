@@ -10,6 +10,7 @@ INTERFACE zif_oapi_specification_v3 PUBLIC.
            description TYPE string,
            required    TYPE abap_bool,
            schema      TYPE REF TO zif_oapi_schema,
+           schema_ref  TYPE string,
          END OF ty_parameter.
 
   TYPES ty_parameters TYPE STANDARD TABLE OF ty_parameter WITH DEFAULT KEY.

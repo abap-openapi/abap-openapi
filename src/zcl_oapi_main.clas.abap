@@ -545,7 +545,13 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     DATA lv_default TYPE string.
 
     LOOP AT is_operation-parameters INTO ls_parameter.
-      lv_type = ls_parameter-schema->get_simple_type( ).
+      IF ls_parameter-schema IS NOT INITIAL.
+        lv_type = ls_parameter-schema->get_simple_type( ).
+      ENDIF.
+      IF ls_parameter-schema_ref IS NOT INITIAL.
+        ls_schema = find_schema( ls_parameter-schema_ref ).
+        lv_type = ls_schema-abap_name.
+      ENDIF.
       IF lv_type IS INITIAL.
         lv_type = 'string'. " todo, at this point there should only be simple or referenced types?
       ENDIF.
