@@ -475,7 +475,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       ELSE.
         rv_abap = rv_abap && |      WHEN { ls_response-code }. " { ls_response-description }\n|.
         LOOP AT ls_response-content INTO ls_content WHERE type = 'application/json'.
-          rv_abap = rv_abap && |" { ls_content-type }, { ls_content-schema_ref }\n|.
+          rv_abap = rv_abap && |" { ls_content-type },{ ls_content-schema_ref }\n|.
 
           IF ls_content-schema_ref IS NOT INITIAL.
             ls_schema = find_schema( ls_content-schema_ref ).
