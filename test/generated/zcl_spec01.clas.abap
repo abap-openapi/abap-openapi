@@ -41,7 +41,9 @@ CLASS zcl_spec01 IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/queues/{queue-name}/messages'.
-    REPLACE ALL OCCURRENCES OF '{queue-name}' IN lv_uri WITH queue_name.
+    lv_temp = queue_name.
+    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).
+    REPLACE ALL OCCURRENCES OF '{queue-name}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     mi_client->request->set_header_field( name = 'x-qos' value = x_qos ).

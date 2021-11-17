@@ -420,15 +420,10 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |    DATA lv_uri TYPE string VALUE '{ find_uri_prefix( ms_specification-servers ) }{ is_operation-path }'.\n|.
 
     LOOP AT is_operation-parameters INTO ls_parameter WHERE in = 'path'.
-      IF ls_parameter-schema IS NOT INITIAL AND ls_parameter-schema->type = 'string'.
-        rv_abap = rv_abap &&
-          |    REPLACE ALL OCCURRENCES OF '\{{ ls_parameter-name }\}' IN lv_uri WITH { ls_parameter-abap_name }.\n|.
-      ELSE.
-        rv_abap = rv_abap &&
-          |    lv_temp = { ls_parameter-abap_name }.\n| &&
-          |    CONDENSE lv_temp.\n| &&
-          |    REPLACE ALL OCCURRENCES OF '\{{ ls_parameter-name }\}' IN lv_uri WITH lv_temp.\n|.
-      ENDIF.
+      rv_abap = rv_abap &&
+        |    lv_temp = { ls_parameter-abap_name }.\n| && " convert
+        |    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).\n| &&
+        |    REPLACE ALL OCCURRENCES OF '\{{ ls_parameter-name }\}' IN lv_uri WITH lv_temp.\n|.
     ENDLOOP.
 
     LOOP AT is_operation-parameters INTO ls_parameter WHERE in = 'query'.
