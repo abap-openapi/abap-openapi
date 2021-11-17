@@ -13166,7 +13166,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_meta_root
+" application/json,#/components/schemas/response_meta_root
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_meta_root( '' ).
     ENDCASE.
@@ -13182,7 +13182,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/integration
+" application/json,#/components/schemas/integration
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_integration( '' ).
     ENDCASE.
@@ -13200,7 +13200,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, 
+" application/json,
       WHEN 404. " 
 " todo, raise
       WHEN 422. " 
@@ -13218,7 +13218,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/webhook-config
+" application/json,#/components/schemas/webhook-config
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_webhook_config( '' ).
     ENDCASE.
@@ -13235,7 +13235,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/webhook-config
+" application/json,#/components/schemas/webhook-config
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_webhook_config( '' ).
     ENDCASE.
@@ -13259,7 +13259,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_apps_list_webhook_deliveries
+" application/json,#/components/schemas/response_apps_list_webhook_deliveries
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_apps_list_webhook_delive( '' ).
       WHEN 400. " 
@@ -13282,7 +13282,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/hook-delivery
+" application/json,#/components/schemas/hook-delivery
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_hook_delivery( '' ).
       WHEN 400. " 
@@ -13339,7 +13339,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " The permissions the installation has are included under the `permissions` key.
-" application/json, #/components/schemas/response_apps_list_installations
+" application/json,#/components/schemas/response_apps_list_installations
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_apps_list_installations( '' ).
     ENDCASE.
@@ -13358,7 +13358,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/installation
+" application/json,#/components/schemas/installation
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_installation( '' ).
       WHEN 404. " 
@@ -13400,7 +13400,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/installation-token
+" application/json,#/components/schemas/installation-token
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_installation_token( '' ).
       WHEN 401. " 
@@ -13481,7 +13481,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/authorization
+" application/json,#/components/schemas/authorization
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_authorization( '' ).
       WHEN 404. " 
@@ -13503,7 +13503,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/authorization
+" application/json,#/components/schemas/authorization
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_authorization( '' ).
       WHEN 422. " 
@@ -13540,7 +13540,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/authorization
+" application/json,#/components/schemas/authorization
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_authorization( '' ).
       WHEN 401. " 
@@ -13565,7 +13565,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/integration
+" application/json,#/components/schemas/integration
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_integration( '' ).
       WHEN 403. " 
@@ -13587,7 +13587,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_codes_of_conduct_get_all_codes
+" application/json,#/components/schemas/response_codes_of_conduct_get_all_codes
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codes_of_conduct_get_all( '' ).
       WHEN 304. " 
@@ -13606,7 +13606,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/code-of-conduct
+" application/json,#/components/schemas/code-of-conduct
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_code_of_conduct( '' ).
       WHEN 304. " 
@@ -13626,7 +13626,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_emojis_get
+" application/json,#/components/schemas/response_emojis_get
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_emojis_get( '' ).
       WHEN 304. " 
@@ -13645,7 +13645,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/actions-enterprise-permissions
+" application/json,#/components/schemas/actions-enterprise-permissions
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_enterprise_permi( '' ).
     ENDCASE.
@@ -13687,7 +13687,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_enterprise_admin_list_selected
+" application/json,#/components/schemas/response_enterprise_admin_list_selected
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_enterprise_admin_list_se( '' ).
     ENDCASE.
@@ -13753,7 +13753,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/selected-actions
+" application/json,#/components/schemas/selected-actions
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_selected_actions( '' ).
     ENDCASE.
@@ -13795,7 +13795,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_enterprise_admin_list_self_hos
+" application/json,#/components/schemas/response_enterprise_admin_list_self_hos
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_enterprise_admin_list_01( '' ).
     ENDCASE.
@@ -13813,7 +13813,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/runner-groups-enterprise
+" application/json,#/components/schemas/runner-groups-enterprise
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_runner_groups_enterprise( '' ).
     ENDCASE.
@@ -13833,7 +13833,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/runner-groups-enterprise
+" application/json,#/components/schemas/runner-groups-enterprise
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_runner_groups_enterprise( '' ).
     ENDCASE.
@@ -13854,7 +13854,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/runner-groups-enterprise
+" application/json,#/components/schemas/runner-groups-enterprise
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_runner_groups_enterprise( '' ).
     ENDCASE.
@@ -13902,7 +13902,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_enterprise_admin_list_org_acce
+" application/json,#/components/schemas/response_enterprise_admin_list_org_acce
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_enterprise_admin_list_or( '' ).
     ENDCASE.
@@ -13990,7 +13990,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_enterprise_admin_list_self_h01
+" application/json,#/components/schemas/response_enterprise_admin_list_self_h01
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_enterprise_admin_list_02( '' ).
     ENDCASE.
@@ -14075,7 +14075,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_enterprise_admin_list_self_h02
+" application/json,#/components/schemas/response_enterprise_admin_list_self_h02
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_enterprise_admin_list_03( '' ).
     ENDCASE.
@@ -14092,7 +14092,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_enterprise_admin_list_runner_a
+" application/json,#/components/schemas/response_enterprise_admin_list_runner_a
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_enterprise_admin_list_ru( '' ).
     ENDCASE.
@@ -14109,7 +14109,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/authentication-token
+" application/json,#/components/schemas/authentication-token
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_authentication_token( '' ).
     ENDCASE.
@@ -14126,7 +14126,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/authentication-token
+" application/json,#/components/schemas/authentication-token
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_authentication_token( '' ).
     ENDCASE.
@@ -14146,7 +14146,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/runner
+" application/json,#/components/schemas/runner
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_runner( '' ).
     ENDCASE.
@@ -14205,7 +14205,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_enterprise_admin_get_audit_log
+" application/json,#/components/schemas/response_enterprise_admin_get_audit_log
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_enterprise_admin_get_aud( '' ).
     ENDCASE.
@@ -14222,7 +14222,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/actions-billing-usage
+" application/json,#/components/schemas/actions-billing-usage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_billing_usage( '' ).
     ENDCASE.
@@ -14249,7 +14249,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Success
-" application/json, #/components/schemas/advanced-security-active-committers
+" application/json,#/components/schemas/advanced-security-active-committers
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_advanced_security_acti02( '' ).
       WHEN 403. " 
@@ -14268,7 +14268,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/packages-billing-usage
+" application/json,#/components/schemas/packages-billing-usage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_packages_billing_usage( '' ).
     ENDCASE.
@@ -14285,7 +14285,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/combined-billing-usage
+" application/json,#/components/schemas/combined-billing-usage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_combined_billing_usage( '' ).
     ENDCASE.
@@ -14311,7 +14311,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_activity_list_public_events
+" application/json,#/components/schemas/response_activity_list_public_events
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_activity_list_public_eve( '' ).
       WHEN 304. " 
@@ -14333,7 +14333,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/feed
+" application/json,#/components/schemas/feed
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_feed( '' ).
     ENDCASE.
@@ -14362,7 +14362,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_gists_list
+" application/json,#/components/schemas/response_gists_list
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gists_list( '' ).
       WHEN 304. " 
@@ -14383,7 +14383,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/gist-simple
+" application/json,#/components/schemas/gist-simple
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gist_simple( '' ).
       WHEN 304. " 
@@ -14420,7 +14420,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_gists_list_public
+" application/json,#/components/schemas/response_gists_list_public
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gists_list_public( '' ).
       WHEN 304. " 
@@ -14455,7 +14455,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_gists_list_starred
+" application/json,#/components/schemas/response_gists_list_starred
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gists_list_starred( '' ).
       WHEN 304. " 
@@ -14478,7 +14478,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/gist-simple
+" application/json,#/components/schemas/gist-simple
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gist_simple( '' ).
       WHEN 304. " 
@@ -14502,7 +14502,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/gist-simple
+" application/json,#/components/schemas/gist-simple
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gist_simple( '' ).
       WHEN 404. " 
@@ -14554,7 +14554,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_gists_list_comments
+" application/json,#/components/schemas/response_gists_list_comments
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gists_list_comments( '' ).
       WHEN 304. " 
@@ -14578,7 +14578,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/gist-comment
+" application/json,#/components/schemas/gist-comment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gist_comment( '' ).
       WHEN 304. " 
@@ -14604,7 +14604,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/gist-comment
+" application/json,#/components/schemas/gist-comment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gist_comment( '' ).
       WHEN 304. " 
@@ -14631,7 +14631,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/gist-comment
+" application/json,#/components/schemas/gist-comment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gist_comment( '' ).
       WHEN 404. " 
@@ -14684,7 +14684,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_gists_list_commits
+" application/json,#/components/schemas/response_gists_list_commits
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gists_list_commits( '' ).
       WHEN 304. " 
@@ -14717,7 +14717,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_gists_list_forks
+" application/json,#/components/schemas/response_gists_list_forks
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gists_list_forks( '' ).
       WHEN 304. " 
@@ -14740,7 +14740,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/base-gist
+" application/json,#/components/schemas/base-gist
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_base_gist( '' ).
       WHEN 304. " 
@@ -14770,7 +14770,7 @@ CLASS zcl_github IMPLEMENTATION.
       WHEN 403. " 
 " todo, raise
       WHEN 404. " Not Found if gist is not starred
-" application/json, #/components/schemas/response_gists_check_is_starred
+" application/json,#/components/schemas/response_gists_check_is_starred
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_gists_check_is_starred( '' ).
 " todo, raise
@@ -14829,7 +14829,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/gist-simple
+" application/json,#/components/schemas/gist-simple
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gist_simple( '' ).
       WHEN 403. " 
@@ -14851,7 +14851,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_gitignore_get_all_templates
+" application/json,#/components/schemas/response_gitignore_get_all_templates
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gitignore_get_all_templa( '' ).
       WHEN 304. " 
@@ -14870,7 +14870,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/gitignore-template
+" application/json,#/components/schemas/gitignore-template
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gitignore_template( '' ).
       WHEN 304. " 
@@ -14898,7 +14898,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_apps_list_repos_accessible_to_
+" application/json,#/components/schemas/response_apps_list_repos_accessible_to_
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_apps_list_repos_accessib( '' ).
       WHEN 304. " 
@@ -14981,7 +14981,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_issues_list
+" application/json,#/components/schemas/response_issues_list
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issues_list( '' ).
       WHEN 304. " 
@@ -15018,7 +15018,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_licenses_get_all_commonly_used
+" application/json,#/components/schemas/response_licenses_get_all_commonly_used
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_licenses_get_all_commonl( '' ).
       WHEN 304. " 
@@ -15037,7 +15037,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/license
+" application/json,#/components/schemas/license
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_license( '' ).
       WHEN 304. " 
@@ -15093,13 +15093,13 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/marketplace-purchase
+" application/json,#/components/schemas/marketplace-purchase
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_marketplace_purchase( '' ).
       WHEN 401. " 
 " todo, raise
       WHEN 404. " Not Found when the account has not purchased the listing
-" application/json, #/components/schemas/basic-error
+" application/json,#/components/schemas/basic-error
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_basic_error( '' ).
 " todo, raise
@@ -15126,7 +15126,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_apps_list_plans
+" application/json,#/components/schemas/response_apps_list_plans
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_apps_list_plans( '' ).
       WHEN 401. " 
@@ -15165,7 +15165,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_apps_list_accounts_for_plan
+" application/json,#/components/schemas/response_apps_list_accounts_for_plan
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_apps_list_accounts_for_p( '' ).
       WHEN 401. " 
@@ -15190,7 +15190,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/marketplace-purchase
+" application/json,#/components/schemas/marketplace-purchase
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_marketplace_purchase( '' ).
       WHEN 401. " 
@@ -15220,7 +15220,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_apps_list_plans_stubbed
+" application/json,#/components/schemas/response_apps_list_plans_stubbed
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_apps_list_plans_stubbed( '' ).
       WHEN 401. " 
@@ -15257,7 +15257,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_apps_list_accounts_for_plan_st
+" application/json,#/components/schemas/response_apps_list_accounts_for_plan_st
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_apps_list_accounts_for01( '' ).
       WHEN 401. " 
@@ -15275,7 +15275,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/api-overview
+" application/json,#/components/schemas/api-overview
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_api_overview( '' ).
       WHEN 304. " 
@@ -15305,7 +15305,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_activity_list_public_events_fo
+" application/json,#/components/schemas/response_activity_list_public_events_fo
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_activity_list_public_e01( '' ).
       WHEN 301. " 
@@ -15355,7 +15355,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_activity_list_notifications_fo
+" application/json,#/components/schemas/response_activity_list_notifications_fo
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_activity_list_notificati( '' ).
       WHEN 304. " 
@@ -15380,7 +15380,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 202. " Response
-" application/json, #/components/schemas/response_activity_mark_notifications_as
+" application/json,#/components/schemas/response_activity_mark_notifications_as
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_activity_mark_notificati( '' ).
 " todo, raise
@@ -15408,7 +15408,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/thread
+" application/json,#/components/schemas/thread
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_thread( '' ).
       WHEN 304. " 
@@ -15454,7 +15454,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/thread-subscription
+" application/json,#/components/schemas/thread-subscription
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_thread_subscription( '' ).
       WHEN 304. " 
@@ -15480,7 +15480,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/thread-subscription
+" application/json,#/components/schemas/thread-subscription
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_thread_subscription( '' ).
       WHEN 304. " 
@@ -15551,7 +15551,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_orgs_list
+" application/json,#/components/schemas/response_orgs_list
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_orgs_list( '' ).
       WHEN 304. " 
@@ -15570,7 +15570,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response - list of custom role names
-" application/json, #/components/schemas/response_orgs_list_custom_roles
+" application/json,#/components/schemas/response_orgs_list_custom_roles
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_orgs_list_custom_roles( '' ).
     ENDCASE.
@@ -15587,7 +15587,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/organization-full
+" application/json,#/components/schemas/organization-full
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_organization_full( '' ).
       WHEN 404. " 
@@ -15607,13 +15607,13 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/organization-full
+" application/json,#/components/schemas/organization-full
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_organization_full( '' ).
       WHEN 409. " 
 " todo, raise
       WHEN 422. " Validation failed
-" application/json, 
+" application/json,
 " todo, raise
     ENDCASE.
   ENDMETHOD.
@@ -15629,7 +15629,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/actions-organization-permissions
+" application/json,#/components/schemas/actions-organization-permissions
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_organization_per( '' ).
     ENDCASE.
@@ -15671,7 +15671,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_selected_reposito
+" application/json,#/components/schemas/response_actions_list_selected_reposito
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_selected_re( '' ).
     ENDCASE.
@@ -15737,7 +15737,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/selected-actions
+" application/json,#/components/schemas/selected-actions
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_selected_actions( '' ).
     ENDCASE.
@@ -15779,7 +15779,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_self_hosted_runne
+" application/json,#/components/schemas/response_actions_list_self_hosted_runne
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_self_hosted( '' ).
     ENDCASE.
@@ -15797,7 +15797,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/runner-groups-org
+" application/json,#/components/schemas/runner-groups-org
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_runner_groups_org( '' ).
     ENDCASE.
@@ -15817,7 +15817,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/runner-groups-org
+" application/json,#/components/schemas/runner-groups-org
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_runner_groups_org( '' ).
     ENDCASE.
@@ -15838,7 +15838,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/runner-groups-org
+" application/json,#/components/schemas/runner-groups-org
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_runner_groups_org( '' ).
     ENDCASE.
@@ -15886,7 +15886,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_repo_access_to_se
+" application/json,#/components/schemas/response_actions_list_repo_access_to_se
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_repo_access( '' ).
     ENDCASE.
@@ -15974,7 +15974,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_self_hosted_run01
+" application/json,#/components/schemas/response_actions_list_self_hosted_run01
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_self_host01( '' ).
     ENDCASE.
@@ -16059,7 +16059,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_self_hosted_run02
+" application/json,#/components/schemas/response_actions_list_self_hosted_run02
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_self_host02( '' ).
     ENDCASE.
@@ -16076,7 +16076,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_runner_applicatio
+" application/json,#/components/schemas/response_actions_list_runner_applicatio
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_runner_appl( '' ).
     ENDCASE.
@@ -16093,7 +16093,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/authentication-token
+" application/json,#/components/schemas/authentication-token
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_authentication_token( '' ).
     ENDCASE.
@@ -16110,7 +16110,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/authentication-token
+" application/json,#/components/schemas/authentication-token
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_authentication_token( '' ).
     ENDCASE.
@@ -16130,7 +16130,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/runner
+" application/json,#/components/schemas/runner
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_runner( '' ).
     ENDCASE.
@@ -16174,7 +16174,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_org_secrets
+" application/json,#/components/schemas/response_actions_list_org_secrets
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_org_secrets( '' ).
     ENDCASE.
@@ -16191,7 +16191,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/actions-public-key
+" application/json,#/components/schemas/actions-public-key
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_public_key( '' ).
     ENDCASE.
@@ -16209,7 +16209,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/organization-actions-secret
+" application/json,#/components/schemas/organization-actions-secret
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_organization_actions_sec( '' ).
     ENDCASE.
@@ -16228,7 +16228,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response when creating a secret
-" application/json, #/components/schemas/empty-object
+" application/json,#/components/schemas/empty-object
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_empty_object( '' ).
       WHEN 204. " Response when updating a secret
@@ -16273,7 +16273,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_selected_repos_fo
+" application/json,#/components/schemas/response_actions_list_selected_repos_fo
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_selected_01( '' ).
     ENDCASE.
@@ -16366,7 +16366,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_orgs_get_audit_log
+" application/json,#/components/schemas/response_orgs_get_audit_log
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_orgs_get_audit_log( '' ).
     ENDCASE.
@@ -16383,7 +16383,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_orgs_list_blocked_users
+" application/json,#/components/schemas/response_orgs_list_blocked_users
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_orgs_list_blocked_users( '' ).
       WHEN 415. " 
@@ -16404,7 +16404,7 @@ CLASS zcl_github IMPLEMENTATION.
     CASE lv_code.
       WHEN 204. " If the user is blocked:
       WHEN 404. " If the user is not blocked:
-" application/json, #/components/schemas/basic-error
+" application/json,#/components/schemas/basic-error
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_basic_error( '' ).
 " todo, raise
@@ -16454,7 +16454,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_orgs_list_saml_sso_authorizati
+" application/json,#/components/schemas/response_orgs_list_saml_sso_authorizati
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_orgs_list_saml_sso_autho( '' ).
     ENDCASE.
@@ -16500,7 +16500,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_activity_list_public_org_event
+" application/json,#/components/schemas/response_activity_list_public_org_event
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_activity_list_public_org( '' ).
     ENDCASE.
@@ -16520,7 +16520,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/external-group
+" application/json,#/components/schemas/external-group
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_external_group( '' ).
     ENDCASE.
@@ -16550,7 +16550,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/external-groups
+" application/json,#/components/schemas/external-groups
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_external_groups( '' ).
     ENDCASE.
@@ -16577,7 +16577,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_orgs_list_failed_invitations
+" application/json,#/components/schemas/response_orgs_list_failed_invitations
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_orgs_list_failed_invitat( '' ).
       WHEN 404. " 
@@ -16606,7 +16606,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_orgs_list_webhooks
+" application/json,#/components/schemas/response_orgs_list_webhooks
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_orgs_list_webhooks( '' ).
       WHEN 404. " 
@@ -16626,7 +16626,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/org-hook
+" application/json,#/components/schemas/org-hook
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_org_hook( '' ).
       WHEN 404. " 
@@ -16650,7 +16650,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/org-hook
+" application/json,#/components/schemas/org-hook
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_org_hook( '' ).
       WHEN 404. " 
@@ -16673,7 +16673,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/org-hook
+" application/json,#/components/schemas/org-hook
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_org_hook( '' ).
       WHEN 404. " 
@@ -16717,7 +16717,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/webhook-config
+" application/json,#/components/schemas/webhook-config
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_webhook_config( '' ).
     ENDCASE.
@@ -16738,7 +16738,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/webhook-config
+" application/json,#/components/schemas/webhook-config
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_webhook_config( '' ).
     ENDCASE.
@@ -16766,7 +16766,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_orgs_list_webhook_deliveries
+" application/json,#/components/schemas/response_orgs_list_webhook_deliveries
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_orgs_list_webhook_delive( '' ).
       WHEN 400. " 
@@ -16793,7 +16793,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/hook-delivery
+" application/json,#/components/schemas/hook-delivery
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_hook_delivery( '' ).
       WHEN 400. " 
@@ -16858,7 +16858,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/installation
+" application/json,#/components/schemas/installation
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_installation( '' ).
     ENDCASE.
@@ -16885,7 +16885,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_orgs_list_app_installations
+" application/json,#/components/schemas/response_orgs_list_app_installations
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_orgs_list_app_installati( '' ).
     ENDCASE.
@@ -16902,7 +16902,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, 
+" application/json,
     ENDCASE.
   ENDMETHOD.
 
@@ -16918,7 +16918,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/interaction-limit-response
+" application/json,#/components/schemas/interaction-limit-response
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_interaction_limit_respon( '' ).
       WHEN 422. " 
@@ -16961,7 +16961,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_orgs_list_pending_invitations
+" application/json,#/components/schemas/response_orgs_list_pending_invitations
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_orgs_list_pending_invita( '' ).
       WHEN 404. " 
@@ -16981,7 +16981,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/organization-invitation
+" application/json,#/components/schemas/organization-invitation
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_organization_invitation( '' ).
       WHEN 404. " 
@@ -17036,7 +17036,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_orgs_list_invitation_teams
+" application/json,#/components/schemas/response_orgs_list_invitation_teams
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_orgs_list_invitation_tea( '' ).
       WHEN 404. " 
@@ -17083,7 +17083,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_issues_list_for_org
+" application/json,#/components/schemas/response_issues_list_for_org
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issues_list_for_org( '' ).
       WHEN 404. " 
@@ -17118,7 +17118,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_orgs_list_members
+" application/json,#/components/schemas/response_orgs_list_members
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_orgs_list_members( '' ).
       WHEN 302. " Response if requester is not an organization member
@@ -17176,7 +17176,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/org-membership
+" application/json,#/components/schemas/org-membership
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_org_membership( '' ).
       WHEN 403. " 
@@ -17199,7 +17199,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/org-membership
+" application/json,#/components/schemas/org-membership
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_org_membership( '' ).
       WHEN 403. " 
@@ -17255,7 +17255,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_migrations_list_for_org
+" application/json,#/components/schemas/response_migrations_list_for_org
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_migrations_list_for_org( '' ).
     ENDCASE.
@@ -17273,7 +17273,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/migration
+" application/json,#/components/schemas/migration
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_migration( '' ).
       WHEN 404. " 
@@ -17302,7 +17302,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " *   `pending`, which means the migration hasn't started yet.\n*   `exporting`, which means the migration is in progress.\n*   `exported`, which means the migration finished successfully.\n*   `failed`, which means the migration failed.
-" application/json, #/components/schemas/migration
+" application/json,#/components/schemas/migration
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_migration( '' ).
       WHEN 404. " 
@@ -17393,7 +17393,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_migrations_list_repos_for_org
+" application/json,#/components/schemas/response_migrations_list_repos_for_org
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_migrations_list_repos_fo( '' ).
       WHEN 404. " 
@@ -17425,7 +17425,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_orgs_list_outside_collaborator
+" application/json,#/components/schemas/response_orgs_list_outside_collaborator
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_orgs_list_outside_collab( '' ).
     ENDCASE.
@@ -17443,7 +17443,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 202. " User is getting converted asynchronously
-" application/json, #/components/schemas/response_orgs_convert_member_to_outside
+" application/json,#/components/schemas/response_orgs_convert_member_to_outside
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_orgs_convert_member_to_o( '' ).
 " todo, raise
@@ -17468,7 +17468,7 @@ CLASS zcl_github IMPLEMENTATION.
     CASE lv_code.
       WHEN 204. " Response
       WHEN 422. " Unprocessable Entity if user is a member of the organization
-" application/json, #/components/schemas/response_orgs_remove_outside_collaborat
+" application/json,#/components/schemas/response_orgs_remove_outside_collaborat
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_orgs_remove_outside_coll( '' ).
 " todo, raise
@@ -17490,7 +17490,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_packages_list_packages_for_org
+" application/json,#/components/schemas/response_packages_list_packages_for_org
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_packages_list_packages_f( '' ).
       WHEN 401. " 
@@ -17513,7 +17513,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/package
+" application/json,#/components/schemas/package
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_package( '' ).
     ENDCASE.
@@ -17592,7 +17592,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_packages_get_all_package_versi
+" application/json,#/components/schemas/response_packages_get_all_package_versi
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_packages_get_all_package( '' ).
       WHEN 401. " 
@@ -17620,7 +17620,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/package-version
+" application/json,#/components/schemas/package-version
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_package_version( '' ).
     ENDCASE.
@@ -17700,7 +17700,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_projects_list_for_org
+" application/json,#/components/schemas/response_projects_list_for_org
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_projects_list_for_org( '' ).
       WHEN 422. " 
@@ -17720,7 +17720,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/project
+" application/json,#/components/schemas/project
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_project( '' ).
       WHEN 401. " 
@@ -17757,7 +17757,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_orgs_list_public_members
+" application/json,#/components/schemas/response_orgs_list_public_members
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_orgs_list_public_members( '' ).
     ENDCASE.
@@ -17842,7 +17842,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_for_org
+" application/json,#/components/schemas/response_repos_list_for_org
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_for_org( '' ).
     ENDCASE.
@@ -17860,7 +17860,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/repository
+" application/json,#/components/schemas/repository
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repository( '' ).
       WHEN 403. " 
@@ -17900,7 +17900,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_secret_scanning_list_alerts_fo
+" application/json,#/components/schemas/response_secret_scanning_list_alerts_fo
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_secret_scanning_list_ale( '' ).
       WHEN 404. " 
@@ -17921,7 +17921,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/actions-billing-usage
+" application/json,#/components/schemas/actions-billing-usage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_billing_usage( '' ).
     ENDCASE.
@@ -17948,7 +17948,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Success
-" application/json, #/components/schemas/advanced-security-active-committers
+" application/json,#/components/schemas/advanced-security-active-committers
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_advanced_security_acti02( '' ).
       WHEN 403. " 
@@ -17967,7 +17967,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/packages-billing-usage
+" application/json,#/components/schemas/packages-billing-usage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_packages_billing_usage( '' ).
     ENDCASE.
@@ -17984,7 +17984,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/combined-billing-usage
+" application/json,#/components/schemas/combined-billing-usage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_combined_billing_usage( '' ).
     ENDCASE.
@@ -18009,7 +18009,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/group-mapping
+" application/json,#/components/schemas/group-mapping
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_group_mapping( '' ).
     ENDCASE.
@@ -18036,7 +18036,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_teams_list
+" application/json,#/components/schemas/response_teams_list
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_teams_list( '' ).
       WHEN 403. " 
@@ -18056,7 +18056,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/team-full
+" application/json,#/components/schemas/team-full
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_team_full( '' ).
       WHEN 403. " 
@@ -18078,7 +18078,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/team-full
+" application/json,#/components/schemas/team-full
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_team_full( '' ).
       WHEN 404. " 
@@ -18099,7 +18099,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/team-full
+" application/json,#/components/schemas/team-full
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_team_full( '' ).
     ENDCASE.
@@ -18149,7 +18149,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_teams_list_discussions_in_org
+" application/json,#/components/schemas/response_teams_list_discussions_in_org
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_teams_list_discussions_i( '' ).
     ENDCASE.
@@ -18168,7 +18168,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/team-discussion
+" application/json,#/components/schemas/team-discussion
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_team_discussion( '' ).
     ENDCASE.
@@ -18189,7 +18189,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/team-discussion
+" application/json,#/components/schemas/team-discussion
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_team_discussion( '' ).
     ENDCASE.
@@ -18211,7 +18211,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/team-discussion
+" application/json,#/components/schemas/team-discussion
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_team_discussion( '' ).
     ENDCASE.
@@ -18264,7 +18264,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_teams_list_discussion_comments
+" application/json,#/components/schemas/response_teams_list_discussion_comments
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_teams_list_discussion_co( '' ).
     ENDCASE.
@@ -18286,7 +18286,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/team-discussion-comment
+" application/json,#/components/schemas/team-discussion-comment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_team_discussion_comment( '' ).
     ENDCASE.
@@ -18310,7 +18310,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/team-discussion-comment
+" application/json,#/components/schemas/team-discussion-comment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_team_discussion_comment( '' ).
     ENDCASE.
@@ -18335,7 +18335,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/team-discussion-comment
+" application/json,#/components/schemas/team-discussion-comment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_team_discussion_comment( '' ).
     ENDCASE.
@@ -18394,7 +18394,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_reactions_list_for_team_discus
+" application/json,#/components/schemas/response_reactions_list_for_team_discus
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reactions_list_for_team_( '' ).
     ENDCASE.
@@ -18419,11 +18419,11 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/reaction
+" application/json,#/components/schemas/reaction
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reaction( '' ).
       WHEN 201. " Response
-" application/json, #/components/schemas/reaction
+" application/json,#/components/schemas/reaction
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reaction( '' ).
     ENDCASE.
@@ -18481,7 +18481,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_reactions_list_for_team_disc01
+" application/json,#/components/schemas/response_reactions_list_for_team_disc01
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reactions_list_for_tea01( '' ).
     ENDCASE.
@@ -18503,11 +18503,11 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/reaction
+" application/json,#/components/schemas/reaction
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reaction( '' ).
       WHEN 201. " Response
-" application/json, #/components/schemas/reaction
+" application/json,#/components/schemas/reaction
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reaction( '' ).
     ENDCASE.
@@ -18547,7 +18547,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/external-group
+" application/json,#/components/schemas/external-group
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_external_group( '' ).
     ENDCASE.
@@ -18591,7 +18591,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_teams_list_pending_invitations
+" application/json,#/components/schemas/response_teams_list_pending_invitations
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_teams_list_pending_invit( '' ).
     ENDCASE.
@@ -18622,7 +18622,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_teams_list_members_in_org
+" application/json,#/components/schemas/response_teams_list_members_in_org
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_teams_list_members_in_or( '' ).
     ENDCASE.
@@ -18641,7 +18641,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/team-membership
+" application/json,#/components/schemas/team-membership
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_team_membership( '' ).
       WHEN 404. " if user has no team membership
@@ -18663,7 +18663,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/team-membership
+" application/json,#/components/schemas/team-membership
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_team_membership( '' ).
       WHEN 403. " Forbidden if team synchronization is set up
@@ -18714,7 +18714,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_teams_list_projects_in_org
+" application/json,#/components/schemas/response_teams_list_projects_in_org
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_teams_list_projects_in_o( '' ).
     ENDCASE.
@@ -18735,7 +18735,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/team-project
+" application/json,#/components/schemas/team-project
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_team_project( '' ).
       WHEN 404. " Not Found if project is not managed by this team
@@ -18760,7 +18760,7 @@ CLASS zcl_github IMPLEMENTATION.
     CASE lv_code.
       WHEN 204. " Response
       WHEN 403. " Forbidden if the project is not owned by the organization
-" application/json, #/components/schemas/response_teams_add_or_update_project_pe
+" application/json,#/components/schemas/response_teams_add_or_update_project_pe
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_teams_add_or_update_proj( '' ).
 " todo, raise
@@ -18808,7 +18808,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_teams_list_repos_in_org
+" application/json,#/components/schemas/response_teams_list_repos_in_org
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_teams_list_repos_in_org( '' ).
     ENDCASE.
@@ -18828,7 +18828,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Alternative response with repository permissions
-" application/json, #/components/schemas/team-repository
+" application/json,#/components/schemas/team-repository
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_team_repository( '' ).
       WHEN 204. " Response if team has permission for the repository. This is the response when the repository media type hasn't been provded in the Accept header.
@@ -18885,7 +18885,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/group-mapping
+" application/json,#/components/schemas/group-mapping
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_group_mapping( '' ).
     ENDCASE.
@@ -18904,7 +18904,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/group-mapping
+" application/json,#/components/schemas/group-mapping
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_group_mapping( '' ).
     ENDCASE.
@@ -18932,7 +18932,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " if child teams exist
-" application/json, #/components/schemas/response_teams_list_child_in_org
+" application/json,#/components/schemas/response_teams_list_child_in_org
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_teams_list_child_in_org( '' ).
     ENDCASE.
@@ -18951,7 +18951,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/project-card
+" application/json,#/components/schemas/project-card
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_project_card( '' ).
       WHEN 304. " 
@@ -18979,7 +18979,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/project-card
+" application/json,#/components/schemas/project-card
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_project_card( '' ).
       WHEN 304. " 
@@ -19014,7 +19014,7 @@ CLASS zcl_github IMPLEMENTATION.
       WHEN 401. " 
 " todo, raise
       WHEN 403. " Forbidden
-" application/json, #/components/schemas/response_projects_delete_card
+" application/json,#/components/schemas/response_projects_delete_card
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_projects_delete_card( '' ).
 " todo, raise
@@ -19037,7 +19037,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/response_projects_move_card
+" application/json,#/components/schemas/response_projects_move_card
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_projects_move_card( '' ).
       WHEN 304. " 
@@ -19045,14 +19045,14 @@ CLASS zcl_github IMPLEMENTATION.
       WHEN 401. " 
 " todo, raise
       WHEN 403. " Forbidden
-" application/json, #/components/schemas/response_projects_move_card
+" application/json,#/components/schemas/response_projects_move_card
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_projects_move_card( '' ).
 " todo, raise
       WHEN 422. " 
 " todo, raise
       WHEN 503. " Response
-" application/json, #/components/schemas/response_projects_move_card
+" application/json,#/components/schemas/response_projects_move_card
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_projects_move_card( '' ).
 " todo, raise
@@ -19072,7 +19072,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/project-column
+" application/json,#/components/schemas/project-column
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_project_column( '' ).
       WHEN 304. " 
@@ -19100,7 +19100,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/project-column
+" application/json,#/components/schemas/project-column
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_project_column( '' ).
       WHEN 304. " 
@@ -19161,7 +19161,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_projects_list_cards
+" application/json,#/components/schemas/response_projects_list_cards
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_projects_list_cards( '' ).
       WHEN 304. " 
@@ -19187,7 +19187,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/project-card
+" application/json,#/components/schemas/project-card
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_project_card( '' ).
       WHEN 304. " 
@@ -19197,10 +19197,10 @@ CLASS zcl_github IMPLEMENTATION.
       WHEN 403. " 
 " todo, raise
       WHEN 422. " Validation failed
-" application/json, 
+" application/json,
 " todo, raise
       WHEN 503. " Response
-" application/json, #/components/schemas/response_projects_create_card
+" application/json,#/components/schemas/response_projects_create_card
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_projects_create_card( '' ).
 " todo, raise
@@ -19221,7 +19221,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/response_projects_move_column
+" application/json,#/components/schemas/response_projects_move_column
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_projects_move_column( '' ).
       WHEN 304. " 
@@ -19248,7 +19248,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/project
+" application/json,#/components/schemas/project
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_project( '' ).
       WHEN 304. " 
@@ -19274,7 +19274,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/project
+" application/json,#/components/schemas/project
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_project( '' ).
       WHEN 304. " 
@@ -19282,7 +19282,7 @@ CLASS zcl_github IMPLEMENTATION.
       WHEN 401. " 
 " todo, raise
       WHEN 403. " Forbidden
-" application/json, #/components/schemas/response_projects_update
+" application/json,#/components/schemas/response_projects_update
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_projects_update( '' ).
 " todo, raise
@@ -19314,7 +19314,7 @@ CLASS zcl_github IMPLEMENTATION.
       WHEN 401. " 
 " todo, raise
       WHEN 403. " Forbidden
-" application/json, #/components/schemas/response_projects_delete
+" application/json,#/components/schemas/response_projects_delete
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_projects_delete( '' ).
 " todo, raise
@@ -19351,7 +19351,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_projects_list_collaborators
+" application/json,#/components/schemas/response_projects_list_collaborators
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_projects_list_collaborat( '' ).
       WHEN 304. " 
@@ -19437,7 +19437,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/project-collaborator-permission
+" application/json,#/components/schemas/project-collaborator-permission
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_project_collaborator_per( '' ).
       WHEN 304. " 
@@ -19476,7 +19476,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_projects_list_columns
+" application/json,#/components/schemas/response_projects_list_columns
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_projects_list_columns( '' ).
       WHEN 304. " 
@@ -19502,7 +19502,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/project-column
+" application/json,#/components/schemas/project-column
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_project_column( '' ).
       WHEN 304. " 
@@ -19526,7 +19526,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/rate-limit-overview
+" application/json,#/components/schemas/rate-limit-overview
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_rate_limit_overview( '' ).
       WHEN 304. " 
@@ -19548,7 +19548,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/full-repository
+" application/json,#/components/schemas/full-repository
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_full_repository( '' ).
       WHEN 301. " 
@@ -19573,7 +19573,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/full-repository
+" application/json,#/components/schemas/full-repository
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_full_repository( '' ).
       WHEN 307. " 
@@ -19603,7 +19603,7 @@ CLASS zcl_github IMPLEMENTATION.
       WHEN 307. " 
 " todo, raise
       WHEN 403. " If an organization owner has configured the organization to prevent members from deleting organization-owned repositories, a member will get this response:
-" application/json, #/components/schemas/response_repos_delete
+" application/json,#/components/schemas/response_repos_delete
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_repos_delete( '' ).
 " todo, raise
@@ -19634,7 +19634,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_artifacts_for_rep
+" application/json,#/components/schemas/response_actions_list_artifacts_for_rep
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_artifacts_f( '' ).
     ENDCASE.
@@ -19655,7 +19655,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/artifact
+" application/json,#/components/schemas/artifact
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_artifact( '' ).
     ENDCASE.
@@ -19714,7 +19714,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/job
+" application/json,#/components/schemas/job
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_job( '' ).
     ENDCASE.
@@ -19751,7 +19751,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/actions-repository-permissions
+" application/json,#/components/schemas/actions-repository-permissions
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_repository_permi( '' ).
     ENDCASE.
@@ -19785,7 +19785,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/selected-actions
+" application/json,#/components/schemas/selected-actions
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_selected_actions( '' ).
     ENDCASE.
@@ -19829,7 +19829,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_self_hosted_run03
+" application/json,#/components/schemas/response_actions_list_self_hosted_run03
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_self_host03( '' ).
     ENDCASE.
@@ -19847,7 +19847,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_runner_applicat01
+" application/json,#/components/schemas/response_actions_list_runner_applicat01
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_runner_ap01( '' ).
     ENDCASE.
@@ -19865,7 +19865,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/authentication-token
+" application/json,#/components/schemas/authentication-token
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_authentication_token( '' ).
     ENDCASE.
@@ -19883,7 +19883,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/authentication-token
+" application/json,#/components/schemas/authentication-token
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_authentication_token( '' ).
     ENDCASE.
@@ -19904,7 +19904,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/runner
+" application/json,#/components/schemas/runner
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_runner( '' ).
     ENDCASE.
@@ -19970,7 +19970,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_workflow_runs_for
+" application/json,#/components/schemas/response_actions_list_workflow_runs_for
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_workflow_ru( '' ).
     ENDCASE.
@@ -19996,7 +19996,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/workflow-run
+" application/json,#/components/schemas/workflow-run
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_workflow_run( '' ).
     ENDCASE.
@@ -20035,7 +20035,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_get_reviews_for_run
+" application/json,#/components/schemas/response_actions_get_reviews_for_run
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_get_reviews_for_( '' ).
     ENDCASE.
@@ -20056,7 +20056,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/empty-object
+" application/json,#/components/schemas/empty-object
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_empty_object( '' ).
       WHEN 403. " 
@@ -20091,7 +20091,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_workflow_run_arti
+" application/json,#/components/schemas/response_actions_list_workflow_run_arti
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_workflow_01( '' ).
     ENDCASE.
@@ -20120,7 +20120,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/workflow-run
+" application/json,#/components/schemas/workflow-run
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_workflow_run( '' ).
     ENDCASE.
@@ -20154,7 +20154,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_jobs_for_workflow
+" application/json,#/components/schemas/response_actions_list_jobs_for_workflow
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_jobs_for_wo( '' ).
       WHEN 404. " 
@@ -20199,7 +20199,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 202. " Response
-" application/json, #/components/schemas/response_actions_cancel_workflow_run
+" application/json,#/components/schemas/response_actions_cancel_workflow_run
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_actions_cancel_workflow_( '' ).
 " todo, raise
@@ -20234,7 +20234,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_jobs_for_workfl01
+" application/json,#/components/schemas/response_actions_list_jobs_for_workfl01
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_jobs_for_01( '' ).
     ENDCASE.
@@ -20292,7 +20292,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_get_pending_deployment
+" application/json,#/components/schemas/response_actions_get_pending_deployment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_get_pending_depl( '' ).
     ENDCASE.
@@ -20314,7 +20314,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_review_pending_deploym
+" application/json,#/components/schemas/response_actions_review_pending_deploym
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_review_pending_d( '' ).
     ENDCASE.
@@ -20335,7 +20335,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/workflow-run-usage
+" application/json,#/components/schemas/workflow-run-usage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_workflow_run_usage( '' ).
     ENDCASE.
@@ -20363,7 +20363,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_repo_secrets
+" application/json,#/components/schemas/response_actions_list_repo_secrets
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_repo_secret( '' ).
     ENDCASE.
@@ -20381,7 +20381,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/actions-public-key
+" application/json,#/components/schemas/actions-public-key
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_public_key( '' ).
     ENDCASE.
@@ -20400,7 +20400,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/actions-secret
+" application/json,#/components/schemas/actions-secret
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_secret( '' ).
     ENDCASE.
@@ -20420,7 +20420,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response when creating a secret
-" application/json, #/components/schemas/response_actions_create_or_update_repo_
+" application/json,#/components/schemas/response_actions_create_or_update_repo_
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_create_or_update( '' ).
       WHEN 204. " Response when updating a secret
@@ -20466,7 +20466,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_repo_workflows
+" application/json,#/components/schemas/response_actions_list_repo_workflows
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_repo_workfl( '' ).
     ENDCASE.
@@ -20485,7 +20485,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/workflow
+" application/json,#/components/schemas/workflow
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_workflow( '' ).
     ENDCASE.
@@ -20583,7 +20583,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_workflow_runs
+" application/json,#/components/schemas/response_actions_list_workflow_runs
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_workflow_02( '' ).
     ENDCASE.
@@ -20602,7 +20602,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/workflow-usage
+" application/json,#/components/schemas/workflow-usage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_workflow_usage( '' ).
     ENDCASE.
@@ -20630,7 +20630,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_issues_list_assignees
+" application/json,#/components/schemas/response_issues_list_assignees
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issues_list_assignees( '' ).
       WHEN 404. " 
@@ -20652,7 +20652,7 @@ CLASS zcl_github IMPLEMENTATION.
     CASE lv_code.
       WHEN 204. " If the `assignee` can be assigned to issues in the repository, a `204` header with no content is returned.
       WHEN 404. " Otherwise a `404` status code is returned.
-" application/json, #/components/schemas/basic-error
+" application/json,#/components/schemas/basic-error
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_basic_error( '' ).
 " todo, raise
@@ -20676,7 +20676,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_autolinks
+" application/json,#/components/schemas/response_repos_list_autolinks
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_autolinks( '' ).
     ENDCASE.
@@ -20695,7 +20695,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " response
-" application/json, #/components/schemas/autolink
+" application/json,#/components/schemas/autolink
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_autolink( '' ).
       WHEN 422. " 
@@ -20718,7 +20718,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/autolink
+" application/json,#/components/schemas/autolink
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_autolink( '' ).
       WHEN 404. " 
@@ -20803,7 +20803,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_branches
+" application/json,#/components/schemas/response_repos_list_branches
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_branches( '' ).
       WHEN 404. " 
@@ -20824,7 +20824,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/branch-with-protection
+" application/json,#/components/schemas/branch-with-protection
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_branch_with_protection( '' ).
       WHEN 301. " 
@@ -20849,7 +20849,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/branch-protection
+" application/json,#/components/schemas/branch-protection
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_branch_protection( '' ).
       WHEN 404. " 
@@ -20871,7 +20871,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/protected-branch
+" application/json,#/components/schemas/protected-branch
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_protected_branch( '' ).
       WHEN 403. " 
@@ -20915,7 +20915,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/protected-branch-admin-enforced
+" application/json,#/components/schemas/protected-branch-admin-enforced
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_protected_branch_admin_e( '' ).
     ENDCASE.
@@ -20934,7 +20934,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/protected-branch-admin-enforced
+" application/json,#/components/schemas/protected-branch-admin-enforced
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_protected_branch_admin_e( '' ).
     ENDCASE.
@@ -20971,7 +20971,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/protected-branch-pull-request-review
+" application/json,#/components/schemas/protected-branch-pull-request-review
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_protected_branch_pull_re( '' ).
     ENDCASE.
@@ -20991,7 +20991,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/protected-branch-pull-request-review
+" application/json,#/components/schemas/protected-branch-pull-request-review
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_protected_branch_pull_re( '' ).
       WHEN 422. " 
@@ -21031,7 +21031,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/protected-branch-admin-enforced
+" application/json,#/components/schemas/protected-branch-admin-enforced
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_protected_branch_admin_e( '' ).
       WHEN 404. " 
@@ -21052,7 +21052,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/protected-branch-admin-enforced
+" application/json,#/components/schemas/protected-branch-admin-enforced
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_protected_branch_admin_e( '' ).
       WHEN 404. " 
@@ -21091,7 +21091,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/status-check-policy
+" application/json,#/components/schemas/status-check-policy
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_status_check_policy( '' ).
       WHEN 404. " 
@@ -21113,7 +21113,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/status-check-policy
+" application/json,#/components/schemas/status-check-policy
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_status_check_policy( '' ).
       WHEN 404. " 
@@ -21153,7 +21153,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_get_all_status_check_con
+" application/json,#/components/schemas/response_repos_get_all_status_check_con
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_get_all_status_che( '' ).
       WHEN 404. " 
@@ -21175,7 +21175,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_add_status_check_context
+" application/json,#/components/schemas/response_repos_add_status_check_context
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_add_status_check_c( '' ).
       WHEN 403. " 
@@ -21201,7 +21201,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_set_status_check_context
+" application/json,#/components/schemas/response_repos_set_status_check_context
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_set_status_check_c( '' ).
       WHEN 404. " 
@@ -21225,7 +21225,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_remove_status_check_cont
+" application/json,#/components/schemas/response_repos_remove_status_check_cont
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_remove_status_chec( '' ).
       WHEN 404. " 
@@ -21248,7 +21248,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/branch-restriction-policy
+" application/json,#/components/schemas/branch-restriction-policy
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_branch_restriction_polic( '' ).
       WHEN 404. " 
@@ -21285,7 +21285,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_get_apps_with_access_to_
+" application/json,#/components/schemas/response_repos_get_apps_with_access_to_
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_get_apps_with_acce( '' ).
       WHEN 404. " 
@@ -21307,7 +21307,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_add_app_access_restricti
+" application/json,#/components/schemas/response_repos_add_app_access_restricti
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_add_app_access_res( '' ).
       WHEN 422. " 
@@ -21329,7 +21329,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_set_app_access_restricti
+" application/json,#/components/schemas/response_repos_set_app_access_restricti
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_set_app_access_res( '' ).
       WHEN 422. " 
@@ -21351,7 +21351,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_remove_app_access_restri
+" application/json,#/components/schemas/response_repos_remove_app_access_restri
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_remove_app_access_( '' ).
       WHEN 422. " 
@@ -21372,7 +21372,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_get_teams_with_access_to
+" application/json,#/components/schemas/response_repos_get_teams_with_access_to
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_get_teams_with_acc( '' ).
       WHEN 404. " 
@@ -21394,7 +21394,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_add_team_access_restrict
+" application/json,#/components/schemas/response_repos_add_team_access_restrict
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_add_team_access_re( '' ).
       WHEN 422. " 
@@ -21416,7 +21416,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_set_team_access_restrict
+" application/json,#/components/schemas/response_repos_set_team_access_restrict
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_set_team_access_re( '' ).
       WHEN 422. " 
@@ -21438,7 +21438,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_remove_team_access_restr
+" application/json,#/components/schemas/response_repos_remove_team_access_restr
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_remove_team_access( '' ).
       WHEN 422. " 
@@ -21459,7 +21459,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_get_users_with_access_to
+" application/json,#/components/schemas/response_repos_get_users_with_access_to
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_get_users_with_acc( '' ).
       WHEN 404. " 
@@ -21481,7 +21481,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_add_user_access_restrict
+" application/json,#/components/schemas/response_repos_add_user_access_restrict
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_add_user_access_re( '' ).
       WHEN 422. " 
@@ -21503,7 +21503,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_set_user_access_restrict
+" application/json,#/components/schemas/response_repos_set_user_access_restrict
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_set_user_access_re( '' ).
       WHEN 422. " 
@@ -21525,7 +21525,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_remove_user_access_restr
+" application/json,#/components/schemas/response_repos_remove_user_access_restr
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_remove_user_access( '' ).
       WHEN 422. " 
@@ -21547,7 +21547,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/branch-with-protection
+" application/json,#/components/schemas/branch-with-protection
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_branch_with_protection( '' ).
       WHEN 403. " 
@@ -21572,7 +21572,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/check-run
+" application/json,#/components/schemas/check-run
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_check_run( '' ).
     ENDCASE.
@@ -21593,7 +21593,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/check-run
+" application/json,#/components/schemas/check-run
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_check_run( '' ).
     ENDCASE.
@@ -21615,7 +21615,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/check-run
+" application/json,#/components/schemas/check-run
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_check_run( '' ).
     ENDCASE.
@@ -21646,7 +21646,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_checks_list_annotations
+" application/json,#/components/schemas/response_checks_list_annotations
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_checks_list_annotations( '' ).
     ENDCASE.
@@ -21667,18 +21667,18 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/response_checks_rerequest_run
+" application/json,#/components/schemas/response_checks_rerequest_run
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_checks_rerequest_run( '' ).
       WHEN 403. " Forbidden if the check run is not rerequestable or doesn't belong to the authenticated GitHub App
-" application/json, #/components/schemas/basic-error
+" application/json,#/components/schemas/basic-error
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_basic_error( '' ).
 " todo, raise
       WHEN 404. " 
 " todo, raise
       WHEN 422. " Validation error if the check run is not rerequestable
-" application/json, #/components/schemas/basic-error
+" application/json,#/components/schemas/basic-error
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_basic_error( '' ).
 " todo, raise
@@ -21698,11 +21698,11 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " when the suite already existed
-" application/json, #/components/schemas/check-suite
+" application/json,#/components/schemas/check-suite
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_check_suite( '' ).
       WHEN 201. " Response when the suite was created
-" application/json, #/components/schemas/check-suite
+" application/json,#/components/schemas/check-suite
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_check_suite( '' ).
     ENDCASE.
@@ -21721,7 +21721,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/check-suite-preference
+" application/json,#/components/schemas/check-suite-preference
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_check_suite_preference( '' ).
     ENDCASE.
@@ -21742,7 +21742,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/check-suite
+" application/json,#/components/schemas/check-suite
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_check_suite( '' ).
     ENDCASE.
@@ -21782,7 +21782,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_checks_list_for_suite
+" application/json,#/components/schemas/response_checks_list_for_suite
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_checks_list_for_suite( '' ).
     ENDCASE.
@@ -21803,7 +21803,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/response_checks_rerequest_suite
+" application/json,#/components/schemas/response_checks_rerequest_suite
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_checks_rerequest_suite( '' ).
     ENDCASE.
@@ -21843,7 +21843,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_code_scanning_list_alerts_for_
+" application/json,#/components/schemas/response_code_scanning_list_alerts_for_
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_code_scanning_list_alert( '' ).
       WHEN 403. " 
@@ -21861,14 +21861,16 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH alert_number.
+    lv_temp = alert_number.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/code-scanning-alert
+" application/json,#/components/schemas/code-scanning-alert
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_code_scanning_alert( '' ).
       WHEN 403. " 
@@ -21886,7 +21888,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH alert_number.
+    lv_temp = alert_number.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     mi_client->request->set_cdata( json_code_scanning_update_aler( body ) ).
@@ -21894,7 +21898,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/code-scanning-alert
+" application/json,#/components/schemas/code-scanning-alert
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_code_scanning_alert( '' ).
       WHEN 403. " 
@@ -21912,7 +21916,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH alert_number.
+    lv_temp = alert_number.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH lv_temp.
     lv_temp = page.
     CONDENSE lv_temp.
     IF page IS SUPPLIED.
@@ -21932,7 +21938,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_code_scanning_list_alert_insta
+" application/json,#/components/schemas/response_code_scanning_list_alert_insta
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_code_scanning_list_ale01( '' ).
       WHEN 403. " 
@@ -21978,7 +21984,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_code_scanning_list_recent_anal
+" application/json,#/components/schemas/response_code_scanning_list_recent_anal
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_code_scanning_list_recen( '' ).
       WHEN 403. " 
@@ -22005,7 +22011,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/code-scanning-analysis
+" application/json,#/components/schemas/code-scanning-analysis
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_code_scanning_analysis( '' ).
       WHEN 403. " 
@@ -22035,7 +22041,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/code-scanning-analysis-deletion
+" application/json,#/components/schemas/code-scanning-analysis-deletion
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_code_scanning_analysis_d( '' ).
       WHEN 400. " 
@@ -22062,7 +22068,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 202. " Response
-" application/json, #/components/schemas/code-scanning-sarifs-receipt
+" application/json,#/components/schemas/code-scanning-sarifs-receipt
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_code_scanning_sarifs_rec( '' ).
 " todo, raise
@@ -22092,7 +22098,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/code-scanning-sarifs-status
+" application/json,#/components/schemas/code-scanning-sarifs-status
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_code_scanning_sarifs_sta( '' ).
       WHEN 403. " 
@@ -22126,7 +22132,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_codespaces_list_in_repository_
+" application/json,#/components/schemas/response_codespaces_list_in_repository_
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespaces_list_in_repos( '' ).
       WHEN 401. " 
@@ -22153,11 +22159,11 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response when the codespace was successfully created
-" application/json, #/components/schemas/codespace
+" application/json,#/components/schemas/codespace
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespace( '' ).
       WHEN 202. " Response when the codespace creation partially failed but is being retried in the background
-" application/json, #/components/schemas/codespace
+" application/json,#/components/schemas/codespace
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespace( '' ).
 " todo, raise
@@ -22183,7 +22189,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_codespaces_repo_machines_for_a
+" application/json,#/components/schemas/response_codespaces_repo_machines_for_a
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespaces_repo_machines( '' ).
       WHEN 304. " 
@@ -22224,7 +22230,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_collaborators
+" application/json,#/components/schemas/response_repos_list_collaborators
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_collaborators( '' ).
       WHEN 404. " 
@@ -22264,7 +22270,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response when a new invitation is created
-" application/json, #/components/schemas/repository-invitation
+" application/json,#/components/schemas/repository-invitation
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repository_invitation( '' ).
       WHEN 204. " Response when person is already a collaborator
@@ -22305,7 +22311,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " if user has admin permissions
-" application/json, #/components/schemas/repository-collaborator-permission
+" application/json,#/components/schemas/repository-collaborator-permission
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repository_collaborator_( '' ).
       WHEN 404. " 
@@ -22335,7 +22341,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_commit_comments_for
+" application/json,#/components/schemas/response_repos_list_commit_comments_for
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_commit_commen( '' ).
     ENDCASE.
@@ -22356,7 +22362,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/commit-comment
+" application/json,#/components/schemas/commit-comment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_commit_comment( '' ).
       WHEN 404. " 
@@ -22380,7 +22386,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/commit-comment
+" application/json,#/components/schemas/commit-comment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_commit_comment( '' ).
       WHEN 404. " 
@@ -22437,7 +22443,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_reactions_list_for_commit_comm
+" application/json,#/components/schemas/response_reactions_list_for_commit_comm
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reactions_list_for_commi( '' ).
       WHEN 404. " 
@@ -22461,11 +22467,11 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Reaction exists
-" application/json, #/components/schemas/reaction
+" application/json,#/components/schemas/reaction
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reaction( '' ).
       WHEN 201. " Reaction created
-" application/json, #/components/schemas/reaction
+" application/json,#/components/schemas/reaction
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reaction( '' ).
       WHEN 415. " 
@@ -22533,7 +22539,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_commits
+" application/json,#/components/schemas/response_repos_list_commits
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_commits( '' ).
       WHEN 400. " 
@@ -22560,7 +22566,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_branches_for_head_c
+" application/json,#/components/schemas/response_repos_list_branches_for_head_c
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_branches_for_( '' ).
       WHEN 422. " 
@@ -22591,7 +22597,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_comments_for_commit
+" application/json,#/components/schemas/response_repos_list_comments_for_commit
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_comments_for_( '' ).
     ENDCASE.
@@ -22611,7 +22617,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/commit-comment
+" application/json,#/components/schemas/commit-comment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_commit_comment( '' ).
       WHEN 403. " 
@@ -22644,7 +22650,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_pull_requests_assoc
+" application/json,#/components/schemas/response_repos_list_pull_requests_assoc
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_pull_requests( '' ).
     ENDCASE.
@@ -22673,7 +22679,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/commit
+" application/json,#/components/schemas/commit
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_commit( '' ).
       WHEN 404. " 
@@ -22722,7 +22728,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_checks_list_for_ref
+" application/json,#/components/schemas/response_checks_list_for_ref
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_checks_list_for_ref( '' ).
     ENDCASE.
@@ -22759,7 +22765,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_checks_list_suites_for_ref
+" application/json,#/components/schemas/response_checks_list_suites_for_ref
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_checks_list_suites_for_r( '' ).
     ENDCASE.
@@ -22788,7 +22794,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/combined-commit-status
+" application/json,#/components/schemas/combined-commit-status
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_combined_commit_status( '' ).
       WHEN 404. " 
@@ -22819,7 +22825,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_commit_statuses_for
+" application/json,#/components/schemas/response_repos_list_commit_statuses_for
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_commit_status( '' ).
       WHEN 301. " 
@@ -22839,7 +22845,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/community-profile
+" application/json,#/components/schemas/community-profile
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_community_profile( '' ).
     ENDCASE.
@@ -22868,7 +22874,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/commit-comparison
+" application/json,#/components/schemas/commit-comparison
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_commit_comparison( '' ).
       WHEN 404. " 
@@ -22894,7 +22900,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/content-reference-attachment
+" application/json,#/components/schemas/content-reference-attachment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_content_reference_attach( '' ).
       WHEN 304. " 
@@ -22928,7 +22934,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, 
+" application/json,
       WHEN 302. " 
 " todo, raise
       WHEN 403. " 
@@ -22952,11 +22958,11 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/file-commit
+" application/json,#/components/schemas/file-commit
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_file_commit( '' ).
       WHEN 201. " Response
-" application/json, #/components/schemas/file-commit
+" application/json,#/components/schemas/file-commit
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_file_commit( '' ).
       WHEN 404. " 
@@ -22982,7 +22988,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/file-commit
+" application/json,#/components/schemas/file-commit
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_file_commit( '' ).
       WHEN 404. " 
@@ -23021,7 +23027,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " if repository contains content
-" application/json, #/components/schemas/response_repos_list_contributors
+" application/json,#/components/schemas/response_repos_list_contributors
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_contributors( '' ).
       WHEN 204. " Response if repository is empty
@@ -23066,7 +23072,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_deployments
+" application/json,#/components/schemas/response_repos_list_deployments
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_deployments( '' ).
     ENDCASE.
@@ -23085,11 +23091,11 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/deployment
+" application/json,#/components/schemas/deployment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_deployment( '' ).
       WHEN 202. " Merged branch response
-" application/json, #/components/schemas/response_repos_create_deployment
+" application/json,#/components/schemas/response_repos_create_deployment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_repos_create_deployment( '' ).
 " todo, raise
@@ -23115,7 +23121,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/deployment
+" application/json,#/components/schemas/deployment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_deployment( '' ).
       WHEN 404. " 
@@ -23170,7 +23176,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_deployment_statuses
+" application/json,#/components/schemas/response_repos_list_deployment_statuses
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_deployment_st( '' ).
       WHEN 404. " 
@@ -23194,7 +23200,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/deployment-status
+" application/json,#/components/schemas/deployment-status
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_deployment_status( '' ).
       WHEN 422. " 
@@ -23220,7 +23226,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/deployment-status
+" application/json,#/components/schemas/deployment-status
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_deployment_status( '' ).
       WHEN 404. " 
@@ -23258,7 +23264,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_get_all_environments
+" application/json,#/components/schemas/response_repos_get_all_environments
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_get_all_environmen( '' ).
     ENDCASE.
@@ -23277,7 +23283,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/environment
+" application/json,#/components/schemas/environment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_environment( '' ).
     ENDCASE.
@@ -23297,11 +23303,11 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/environment
+" application/json,#/components/schemas/environment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_environment( '' ).
       WHEN 422. " Validation error when the environment name is invalid or when `protected_branches` and `custom_branch_policies` in `deployment_branch_policy` are set to the same value
-" application/json, #/components/schemas/basic-error
+" application/json,#/components/schemas/basic-error
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_basic_error( '' ).
 " todo, raise
@@ -23347,7 +23353,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_activity_list_repo_events
+" application/json,#/components/schemas/response_activity_list_repo_events
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_activity_list_repo_event( '' ).
     ENDCASE.
@@ -23378,7 +23384,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_forks
+" application/json,#/components/schemas/response_repos_list_forks
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_forks( '' ).
       WHEN 400. " 
@@ -23399,7 +23405,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 202. " Response
-" application/json, #/components/schemas/full-repository
+" application/json,#/components/schemas/full-repository
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_full_repository( '' ).
 " todo, raise
@@ -23427,7 +23433,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/short-blob
+" application/json,#/components/schemas/short-blob
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_short_blob( '' ).
       WHEN 403. " 
@@ -23454,7 +23460,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/blob
+" application/json,#/components/schemas/blob
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_blob( '' ).
       WHEN 403. " 
@@ -23479,7 +23485,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/git-commit
+" application/json,#/components/schemas/git-commit
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_git_commit( '' ).
       WHEN 404. " 
@@ -23502,7 +23508,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/git-commit
+" application/json,#/components/schemas/git-commit
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_git_commit( '' ).
       WHEN 404. " 
@@ -23533,7 +23539,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_git_list_matching_refs
+" application/json,#/components/schemas/response_git_list_matching_refs
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_git_list_matching_refs( '' ).
     ENDCASE.
@@ -23552,7 +23558,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/git-ref
+" application/json,#/components/schemas/git-ref
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_git_ref( '' ).
       WHEN 404. " 
@@ -23573,7 +23579,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/git-ref
+" application/json,#/components/schemas/git-ref
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_git_ref( '' ).
       WHEN 422. " 
@@ -23595,7 +23601,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/git-ref
+" application/json,#/components/schemas/git-ref
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_git_ref( '' ).
       WHEN 422. " 
@@ -23635,7 +23641,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/git-tag
+" application/json,#/components/schemas/git-tag
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_git_tag( '' ).
       WHEN 422. " 
@@ -23656,7 +23662,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/git-tag
+" application/json,#/components/schemas/git-tag
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_git_tag( '' ).
       WHEN 404. " 
@@ -23677,7 +23683,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/git-tree
+" application/json,#/components/schemas/git-tree
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_git_tree( '' ).
       WHEN 403. " 
@@ -23705,7 +23711,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/git-tree
+" application/json,#/components/schemas/git-tree
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_git_tree( '' ).
       WHEN 404. " 
@@ -23737,7 +23743,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_webhooks
+" application/json,#/components/schemas/response_repos_list_webhooks
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_webhooks( '' ).
       WHEN 404. " 
@@ -23758,7 +23764,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/hook
+" application/json,#/components/schemas/hook
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_hook( '' ).
       WHEN 403. " 
@@ -23785,7 +23791,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/hook
+" application/json,#/components/schemas/hook
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_hook( '' ).
       WHEN 404. " 
@@ -23809,7 +23815,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/hook
+" application/json,#/components/schemas/hook
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_hook( '' ).
       WHEN 404. " 
@@ -23855,7 +23861,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/webhook-config
+" application/json,#/components/schemas/webhook-config
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_webhook_config( '' ).
     ENDCASE.
@@ -23877,7 +23883,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/webhook-config
+" application/json,#/components/schemas/webhook-config
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_webhook_config( '' ).
     ENDCASE.
@@ -23906,7 +23912,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_webhook_deliveries
+" application/json,#/components/schemas/response_repos_list_webhook_deliveries
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_webhook_deliv( '' ).
       WHEN 400. " 
@@ -23934,7 +23940,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/hook-delivery
+" application/json,#/components/schemas/hook-delivery
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_hook_delivery( '' ).
       WHEN 400. " 
@@ -24022,7 +24028,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/import
+" application/json,#/components/schemas/import
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_import( '' ).
       WHEN 404. " 
@@ -24043,7 +24049,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/import
+" application/json,#/components/schemas/import
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_import( '' ).
       WHEN 404. " 
@@ -24066,7 +24072,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/import
+" application/json,#/components/schemas/import
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_import( '' ).
     ENDCASE.
@@ -24105,7 +24111,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_migrations_get_commit_authors
+" application/json,#/components/schemas/response_migrations_get_commit_authors
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_migrations_get_commit_au( '' ).
       WHEN 404. " 
@@ -24129,7 +24135,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/porter-author
+" application/json,#/components/schemas/porter-author
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_porter_author( '' ).
       WHEN 404. " 
@@ -24151,7 +24157,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_migrations_get_large_files
+" application/json,#/components/schemas/response_migrations_get_large_files
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_migrations_get_large_fil( '' ).
     ENDCASE.
@@ -24170,7 +24176,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/import
+" application/json,#/components/schemas/import
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_import( '' ).
       WHEN 422. " 
@@ -24190,7 +24196,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/installation
+" application/json,#/components/schemas/installation
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_installation( '' ).
       WHEN 301. " 
@@ -24212,7 +24218,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, 
+" application/json,
     ENDCASE.
   ENDMETHOD.
 
@@ -24229,7 +24235,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/interaction-limit-response
+" application/json,#/components/schemas/interaction-limit-response
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_interaction_limit_respon( '' ).
       WHEN 409. " Response
@@ -24276,7 +24282,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_invitations
+" application/json,#/components/schemas/response_repos_list_invitations
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_invitations( '' ).
     ENDCASE.
@@ -24298,7 +24304,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/repository-invitation
+" application/json,#/components/schemas/repository-invitation
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repository_invitation( '' ).
     ENDCASE.
@@ -24372,7 +24378,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_issues_list_for_repo
+" application/json,#/components/schemas/response_issues_list_for_repo
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issues_list_for_repo( '' ).
       WHEN 301. " 
@@ -24397,7 +24403,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/issue
+" application/json,#/components/schemas/issue
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issue( '' ).
       WHEN 403. " 
@@ -24444,7 +24450,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_issues_list_comments_for_repo
+" application/json,#/components/schemas/response_issues_list_comments_for_repo
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issues_list_comments_for( '' ).
       WHEN 404. " 
@@ -24469,7 +24475,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/issue-comment
+" application/json,#/components/schemas/issue-comment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issue_comment( '' ).
       WHEN 404. " 
@@ -24493,7 +24499,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/issue-comment
+" application/json,#/components/schemas/issue-comment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issue_comment( '' ).
       WHEN 422. " 
@@ -24548,7 +24554,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_reactions_list_for_issue_comme
+" application/json,#/components/schemas/response_reactions_list_for_issue_comme
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reactions_list_for_issue( '' ).
       WHEN 404. " 
@@ -24572,11 +24578,11 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Reaction exists
-" application/json, #/components/schemas/reaction
+" application/json,#/components/schemas/reaction
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reaction( '' ).
       WHEN 201. " Reaction created
-" application/json, #/components/schemas/reaction
+" application/json,#/components/schemas/reaction
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reaction( '' ).
       WHEN 422. " 
@@ -24627,7 +24633,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_issues_list_events_for_repo
+" application/json,#/components/schemas/response_issues_list_events_for_repo
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issues_list_events_for_r( '' ).
       WHEN 422. " 
@@ -24650,7 +24656,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/issue-event
+" application/json,#/components/schemas/issue-event
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issue_event( '' ).
       WHEN 403. " 
@@ -24677,7 +24683,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/issue
+" application/json,#/components/schemas/issue
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issue( '' ).
       WHEN 301. " 
@@ -24707,7 +24713,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/issue
+" application/json,#/components/schemas/issue
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issue( '' ).
       WHEN 301. " 
@@ -24741,7 +24747,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/issue
+" application/json,#/components/schemas/issue
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issue( '' ).
     ENDCASE.
@@ -24763,7 +24769,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/issue
+" application/json,#/components/schemas/issue
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issue( '' ).
     ENDCASE.
@@ -24797,7 +24803,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_issues_list_comments
+" application/json,#/components/schemas/response_issues_list_comments
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issues_list_comments( '' ).
       WHEN 404. " 
@@ -24823,7 +24829,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/issue-comment
+" application/json,#/components/schemas/issue-comment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issue_comment( '' ).
       WHEN 403. " 
@@ -24862,7 +24868,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_issues_list_events
+" application/json,#/components/schemas/response_issues_list_events
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issues_list_events( '' ).
       WHEN 410. " 
@@ -24895,7 +24901,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_issues_list_labels_on_issue
+" application/json,#/components/schemas/response_issues_list_labels_on_issue
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issues_list_labels_on_is( '' ).
       WHEN 410. " 
@@ -24919,7 +24925,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_issues_add_labels
+" application/json,#/components/schemas/response_issues_add_labels
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issues_add_labels( '' ).
       WHEN 410. " 
@@ -24945,7 +24951,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_issues_set_labels
+" application/json,#/components/schemas/response_issues_set_labels
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issues_set_labels( '' ).
       WHEN 410. " 
@@ -24992,7 +24998,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_issues_remove_label
+" application/json,#/components/schemas/response_issues_remove_label
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issues_remove_label( '' ).
       WHEN 404. " 
@@ -25080,7 +25086,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_reactions_list_for_issue
+" application/json,#/components/schemas/response_reactions_list_for_issue
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reactions_list_for_iss01( '' ).
       WHEN 404. " 
@@ -25106,11 +25112,11 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/reaction
+" application/json,#/components/schemas/reaction
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reaction( '' ).
       WHEN 201. " Response
-" application/json, #/components/schemas/reaction
+" application/json,#/components/schemas/reaction
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reaction( '' ).
       WHEN 422. " 
@@ -25164,7 +25170,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_issues_list_events_for_timelin
+" application/json,#/components/schemas/response_issues_list_events_for_timelin
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issues_list_events_for_t( '' ).
       WHEN 404. " 
@@ -25196,7 +25202,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_deploy_keys
+" application/json,#/components/schemas/response_repos_list_deploy_keys
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_deploy_keys( '' ).
     ENDCASE.
@@ -25215,7 +25221,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/deploy-key
+" application/json,#/components/schemas/deploy-key
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_deploy_key( '' ).
       WHEN 422. " 
@@ -25238,7 +25244,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/deploy-key
+" application/json,#/components/schemas/deploy-key
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_deploy_key( '' ).
       WHEN 404. " 
@@ -25286,7 +25292,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_issues_list_labels_for_repo
+" application/json,#/components/schemas/response_issues_list_labels_for_repo
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issues_list_labels_for_r( '' ).
       WHEN 404. " 
@@ -25307,7 +25313,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/label
+" application/json,#/components/schemas/label
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_label( '' ).
       WHEN 404. " 
@@ -25330,7 +25336,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/label
+" application/json,#/components/schemas/label
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_label( '' ).
       WHEN 404. " 
@@ -25352,7 +25358,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/label
+" application/json,#/components/schemas/label
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_label( '' ).
     ENDCASE.
@@ -25387,7 +25393,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/language
+" application/json,#/components/schemas/language
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_language( '' ).
     ENDCASE.
@@ -25438,7 +25444,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/license-content
+" application/json,#/components/schemas/license-content
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_license_content( '' ).
     ENDCASE.
@@ -25457,7 +25463,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " The branch has been successfully synced with the upstream repository
-" application/json, #/components/schemas/merged-upstream
+" application/json,#/components/schemas/merged-upstream
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_merged_upstream( '' ).
       WHEN 409. " The branch could not be synced because of a merge conflict
@@ -25480,7 +25486,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Successful Response (The resulting merge commit)
-" application/json, #/components/schemas/commit
+" application/json,#/components/schemas/commit
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_commit( '' ).
       WHEN 204. " Response when already merged
@@ -25526,7 +25532,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_issues_list_milestones
+" application/json,#/components/schemas/response_issues_list_milestones
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issues_list_milestones( '' ).
       WHEN 404. " 
@@ -25547,7 +25553,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/milestone
+" application/json,#/components/schemas/milestone
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_milestone( '' ).
       WHEN 404. " 
@@ -25572,7 +25578,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/milestone
+" application/json,#/components/schemas/milestone
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_milestone( '' ).
       WHEN 404. " 
@@ -25596,7 +25602,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/milestone
+" application/json,#/components/schemas/milestone
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_milestone( '' ).
     ENDCASE.
@@ -25648,7 +25654,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_issues_list_labels_for_milesto
+" application/json,#/components/schemas/response_issues_list_labels_for_milesto
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issues_list_labels_for_m( '' ).
     ENDCASE.
@@ -25692,7 +25698,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_activity_list_repo_notificatio
+" application/json,#/components/schemas/response_activity_list_repo_notificatio
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_activity_list_repo_notif( '' ).
     ENDCASE.
@@ -25711,7 +25717,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 202. " Response
-" application/json, #/components/schemas/response_activity_mark_repo_notificatio
+" application/json,#/components/schemas/response_activity_mark_repo_notificatio
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_activity_mark_repo_notif( '' ).
 " todo, raise
@@ -25732,7 +25738,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/page
+" application/json,#/components/schemas/page
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_page( '' ).
       WHEN 404. " 
@@ -25753,7 +25759,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/page
+" application/json,#/components/schemas/page
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_page( '' ).
       WHEN 409. " 
@@ -25825,7 +25831,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_pages_builds
+" application/json,#/components/schemas/response_repos_list_pages_builds
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_pages_builds( '' ).
     ENDCASE.
@@ -25843,7 +25849,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/page-build-status
+" application/json,#/components/schemas/page-build-status
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_page_build_status( '' ).
     ENDCASE.
@@ -25861,7 +25867,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/page-build
+" application/json,#/components/schemas/page-build
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_page_build( '' ).
     ENDCASE.
@@ -25882,7 +25888,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/page-build
+" application/json,#/components/schemas/page-build
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_page_build( '' ).
     ENDCASE.
@@ -25900,11 +25906,11 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/pages-health-check
+" application/json,#/components/schemas/pages-health-check
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pages_health_check( '' ).
       WHEN 202. " Empty response
-" application/json, #/components/schemas/empty-object
+" application/json,#/components/schemas/empty-object
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_empty_object( '' ).
 " todo, raise
@@ -25942,7 +25948,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_projects_list_for_repo
+" application/json,#/components/schemas/response_projects_list_for_repo
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_projects_list_for_repo( '' ).
       WHEN 401. " 
@@ -25971,7 +25977,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/project
+" application/json,#/components/schemas/project
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_project( '' ).
       WHEN 401. " 
@@ -26024,7 +26030,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_pulls_list
+" application/json,#/components/schemas/response_pulls_list
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pulls_list( '' ).
       WHEN 304. " 
@@ -26047,7 +26053,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/pull-request
+" application/json,#/components/schemas/pull-request
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pull_request( '' ).
       WHEN 403. " 
@@ -26088,7 +26094,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_pulls_list_review_comments_for
+" application/json,#/components/schemas/response_pulls_list_review_comments_for
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pulls_list_review_commen( '' ).
     ENDCASE.
@@ -26109,7 +26115,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/pull-request-review-comment
+" application/json,#/components/schemas/pull-request-review-comment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pull_request_review_comm( '' ).
       WHEN 404. " 
@@ -26133,7 +26139,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/pull-request-review-comment
+" application/json,#/components/schemas/pull-request-review-comment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pull_request_review_comm( '' ).
     ENDCASE.
@@ -26188,7 +26194,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_reactions_list_for_pull_reques
+" application/json,#/components/schemas/response_reactions_list_for_pull_reques
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reactions_list_for_pull_( '' ).
       WHEN 404. " 
@@ -26212,11 +26218,11 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Reaction exists
-" application/json, #/components/schemas/reaction
+" application/json,#/components/schemas/reaction
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reaction( '' ).
       WHEN 201. " Reaction created
-" application/json, #/components/schemas/reaction
+" application/json,#/components/schemas/reaction
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reaction( '' ).
       WHEN 422. " 
@@ -26260,7 +26266,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Pass the appropriate [media type](https://docs.github.com/rest/overview/media-types/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.
-" application/json, #/components/schemas/pull-request
+" application/json,#/components/schemas/pull-request
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pull_request( '' ).
       WHEN 304. " 
@@ -26288,7 +26294,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/pull-request
+" application/json,#/components/schemas/pull-request
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pull_request( '' ).
       WHEN 403. " 
@@ -26314,11 +26320,11 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response when the codespace was successfully created
-" application/json, #/components/schemas/codespace
+" application/json,#/components/schemas/codespace
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespace( '' ).
       WHEN 202. " Response when the codespace creation partially failed but is being retried in the background
-" application/json, #/components/schemas/codespace
+" application/json,#/components/schemas/codespace
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespace( '' ).
 " todo, raise
@@ -26365,7 +26371,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_pulls_list_review_comments
+" application/json,#/components/schemas/response_pulls_list_review_comments
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pulls_list_review_comm01( '' ).
     ENDCASE.
@@ -26387,7 +26393,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/pull-request-review-comment
+" application/json,#/components/schemas/pull-request-review-comment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pull_request_review_comm( '' ).
       WHEN 403. " 
@@ -26416,7 +26422,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/pull-request-review-comment
+" application/json,#/components/schemas/pull-request-review-comment
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pull_request_review_comm( '' ).
       WHEN 404. " 
@@ -26449,7 +26455,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_pulls_list_commits
+" application/json,#/components/schemas/response_pulls_list_commits
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pulls_list_commits( '' ).
     ENDCASE.
@@ -26480,7 +26486,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_pulls_list_files
+" application/json,#/components/schemas/response_pulls_list_files
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pulls_list_files( '' ).
       WHEN 422. " 
@@ -26526,7 +26532,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " if merge was successful
-" application/json, #/components/schemas/pull-request-merge-result
+" application/json,#/components/schemas/pull-request-merge-result
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pull_request_merge_resul( '' ).
       WHEN 403. " 
@@ -26534,12 +26540,12 @@ CLASS zcl_github IMPLEMENTATION.
       WHEN 404. " 
 " todo, raise
       WHEN 405. " Method Not Allowed if merge cannot be performed
-" application/json, #/components/schemas/response_pulls_merge
+" application/json,#/components/schemas/response_pulls_merge
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_pulls_merge( '' ).
 " todo, raise
       WHEN 409. " Conflict if sha was provided and pull request head did not match
-" application/json, #/components/schemas/response_pulls_merge
+" application/json,#/components/schemas/response_pulls_merge
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_pulls_merge( '' ).
 " todo, raise
@@ -26573,7 +26579,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/pull-request-review-request
+" application/json,#/components/schemas/pull-request-review-request
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pull_request_review_requ( '' ).
     ENDCASE.
@@ -26595,7 +26601,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/pull-request-simple
+" application/json,#/components/schemas/pull-request-simple
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pull_request_simple( '' ).
       WHEN 403. " 
@@ -26621,7 +26627,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/pull-request-simple
+" application/json,#/components/schemas/pull-request-simple
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pull_request_simple( '' ).
       WHEN 422. " 
@@ -26654,7 +26660,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " The list of reviews returns in chronological order.
-" application/json, #/components/schemas/response_pulls_list_reviews
+" application/json,#/components/schemas/response_pulls_list_reviews
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pulls_list_reviews( '' ).
     ENDCASE.
@@ -26676,7 +26682,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/pull-request-review
+" application/json,#/components/schemas/pull-request-review
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pull_request_review( '' ).
       WHEN 403. " 
@@ -26704,7 +26710,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/pull-request-review
+" application/json,#/components/schemas/pull-request-review
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pull_request_review( '' ).
       WHEN 404. " 
@@ -26731,7 +26737,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/pull-request-review
+" application/json,#/components/schemas/pull-request-review
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pull_request_review( '' ).
       WHEN 422. " 
@@ -26758,7 +26764,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/pull-request-review
+" application/json,#/components/schemas/pull-request-review
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pull_request_review( '' ).
       WHEN 404. " 
@@ -26796,7 +26802,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_pulls_list_comments_for_review
+" application/json,#/components/schemas/response_pulls_list_comments_for_review
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pulls_list_comments_for_( '' ).
       WHEN 404. " 
@@ -26823,7 +26829,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/pull-request-review
+" application/json,#/components/schemas/pull-request-review
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pull_request_review( '' ).
       WHEN 404. " 
@@ -26852,7 +26858,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/pull-request-review
+" application/json,#/components/schemas/pull-request-review
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_pull_request_review( '' ).
       WHEN 403. " 
@@ -26880,7 +26886,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 202. " Response
-" application/json, #/components/schemas/response_pulls_update_branch
+" application/json,#/components/schemas/response_pulls_update_branch
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_pulls_update_branch( '' ).
 " todo, raise
@@ -26906,7 +26912,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/content-file
+" application/json,#/components/schemas/content-file
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_content_file( '' ).
       WHEN 404. " 
@@ -26932,7 +26938,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/content-file
+" application/json,#/components/schemas/content-file
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_content_file( '' ).
       WHEN 404. " 
@@ -26964,7 +26970,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_releases
+" application/json,#/components/schemas/response_repos_list_releases
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_releases( '' ).
       WHEN 404. " 
@@ -26985,11 +26991,11 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/release
+" application/json,#/components/schemas/release
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_release( '' ).
       WHEN 404. " Not Found if the discussion category name is invalid
-" application/json, #/components/schemas/basic-error
+" application/json,#/components/schemas/basic-error
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_basic_error( '' ).
 " todo, raise
@@ -27013,7 +27019,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " To download the asset's binary content, set the `Accept` header of the request to [`application/octet-stream`](https://docs.github.com/rest/overview/media-types). The API will either redirect the client to the location, or stream it directly if possible. API clients should handle both a `200` or `302` response.
-" application/json, #/components/schemas/release-asset
+" application/json,#/components/schemas/release-asset
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_release_asset( '' ).
       WHEN 302. " 
@@ -27041,7 +27047,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/release-asset
+" application/json,#/components/schemas/release-asset
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_release_asset( '' ).
     ENDCASE.
@@ -27079,7 +27085,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Name and body of generated release notes
-" application/json, #/components/schemas/release-notes-content
+" application/json,#/components/schemas/release-notes-content
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_release_notes_content( '' ).
       WHEN 404. " 
@@ -27099,7 +27105,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/release
+" application/json,#/components/schemas/release
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_release( '' ).
     ENDCASE.
@@ -27118,7 +27124,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/release
+" application/json,#/components/schemas/release
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_release( '' ).
       WHEN 404. " 
@@ -27141,7 +27147,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " **Note:** This returns an `upload_url` key corresponding to the endpoint for uploading release assets. This key is a [hypermedia resource](https://docs.github.com/rest/overview/resources-in-the-rest-api#hypermedia).
-" application/json, #/components/schemas/release
+" application/json,#/components/schemas/release
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_release( '' ).
       WHEN 404. " 
@@ -27165,11 +27171,11 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/release
+" application/json,#/components/schemas/release
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_release( '' ).
       WHEN 404. " Not Found if the discussion category name is invalid
-" application/json, #/components/schemas/basic-error
+" application/json,#/components/schemas/basic-error
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_basic_error( '' ).
 " todo, raise
@@ -27220,7 +27226,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_release_assets
+" application/json,#/components/schemas/response_repos_list_release_assets
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_release_asset( '' ).
     ENDCASE.
@@ -27245,7 +27251,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response for successful upload
-" application/json, #/components/schemas/release-asset
+" application/json,#/components/schemas/release-asset
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_release_asset( '' ).
       WHEN 422. " Response if you upload an asset with the same filename as another uploaded asset
@@ -27269,11 +27275,11 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Reaction exists
-" application/json, #/components/schemas/reaction
+" application/json,#/components/schemas/reaction
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reaction( '' ).
       WHEN 201. " Reaction created
-" application/json, #/components/schemas/reaction
+" application/json,#/components/schemas/reaction
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_reaction( '' ).
       WHEN 422. " 
@@ -27312,7 +27318,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_secret_scanning_list_alerts_01
+" application/json,#/components/schemas/response_secret_scanning_list_alerts_01
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_secret_scanning_list_a01( '' ).
       WHEN 404. " Repository is public or secret scanning is disabled for the repository
@@ -27328,14 +27334,16 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH alert_number.
+    lv_temp = alert_number.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/secret-scanning-alert
+" application/json,#/components/schemas/secret-scanning-alert
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_secret_scanning_alert( '' ).
       WHEN 304. " 
@@ -27353,7 +27361,9 @@ CLASS zcl_github IMPLEMENTATION.
     DATA lv_uri TYPE string VALUE '/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}'.
     REPLACE ALL OCCURRENCES OF '{owner}' IN lv_uri WITH owner.
     REPLACE ALL OCCURRENCES OF '{repo}' IN lv_uri WITH repo.
-    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH alert_number.
+    lv_temp = alert_number.
+    CONDENSE lv_temp.
+    REPLACE ALL OCCURRENCES OF '{alert_number}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PATCH' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     mi_client->request->set_cdata( json_secret_scanning_update_al( body ) ).
@@ -27361,7 +27371,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/secret-scanning-alert
+" application/json,#/components/schemas/secret-scanning-alert
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_secret_scanning_alert( '' ).
       WHEN 404. " Repository is public, or secret scanning is disabled for the repository, or the resource is not found
@@ -27395,7 +27405,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, 
+" application/json,
       WHEN 422. " 
 " todo, raise
     ENDCASE.
@@ -27413,7 +27423,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Returns a weekly aggregate of the number of additions and deletions pushed to a repository.
-" application/json, #/components/schemas/response_repos_get_code_frequency_stats
+" application/json,#/components/schemas/response_repos_get_code_frequency_stats
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_get_code_frequency( '' ).
       WHEN 202. " 
@@ -27434,7 +27444,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_get_commit_activity_stat
+" application/json,#/components/schemas/response_repos_get_commit_activity_stat
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_get_commit_activit( '' ).
       WHEN 202. " 
@@ -27455,7 +27465,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " *   `w` - Start of the week, given as a [Unix timestamp](http://en.wikipedia.org/wiki/Unix_time).\n*   `a` - Number of additions\n*   `d` - Number of deletions\n*   `c` - Number of commits
-" application/json, #/components/schemas/response_repos_get_contributors_stats
+" application/json,#/components/schemas/response_repos_get_contributors_stats
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_get_contributors_s( '' ).
       WHEN 202. " 
@@ -27476,7 +27486,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " The array order is oldest week (index 0) to most recent week.
-" application/json, #/components/schemas/participation-stats
+" application/json,#/components/schemas/participation-stats
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_participation_stats( '' ).
       WHEN 404. " 
@@ -27496,7 +27506,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " For example, `[2, 14, 25]` indicates that there were 25 total commits, during the 2:00pm hour on Tuesdays. All times are based on the time zone of individual commits.
-" application/json, #/components/schemas/response_repos_get_punch_card_stats
+" application/json,#/components/schemas/response_repos_get_punch_card_stats
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_get_punch_card_sta( '' ).
       WHEN 204. " 
@@ -27517,7 +27527,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/status
+" application/json,#/components/schemas/status
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_status( '' ).
     ENDCASE.
@@ -27545,7 +27555,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_activity_list_watchers_for_rep
+" application/json,#/components/schemas/response_activity_list_watchers_for_rep
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_activity_list_watchers_f( '' ).
     ENDCASE.
@@ -27563,7 +27573,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " if you subscribe to the repository
-" application/json, #/components/schemas/repository-subscription
+" application/json,#/components/schemas/repository-subscription
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repository_subscription( '' ).
       WHEN 403. " 
@@ -27586,7 +27596,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/repository-subscription
+" application/json,#/components/schemas/repository-subscription
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repository_subscription( '' ).
     ENDCASE.
@@ -27630,7 +27640,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_tags
+" application/json,#/components/schemas/response_repos_list_tags
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_tags( '' ).
     ENDCASE.
@@ -27675,7 +27685,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_teams
+" application/json,#/components/schemas/response_repos_list_teams
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_teams( '' ).
     ENDCASE.
@@ -27703,7 +27713,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/topic
+" application/json,#/components/schemas/topic
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_topic( '' ).
       WHEN 404. " 
@@ -27724,7 +27734,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/topic
+" application/json,#/components/schemas/topic
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_topic( '' ).
       WHEN 404. " 
@@ -27749,7 +27759,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/clone-traffic
+" application/json,#/components/schemas/clone-traffic
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_clone_traffic( '' ).
       WHEN 403. " 
@@ -27769,7 +27779,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_get_top_paths
+" application/json,#/components/schemas/response_repos_get_top_paths
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_get_top_paths( '' ).
       WHEN 403. " 
@@ -27789,7 +27799,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_get_top_referrers
+" application/json,#/components/schemas/response_repos_get_top_referrers
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_get_top_referrers( '' ).
       WHEN 403. " 
@@ -27812,7 +27822,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/view-traffic
+" application/json,#/components/schemas/view-traffic
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_view_traffic( '' ).
       WHEN 403. " 
@@ -27833,7 +27843,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 202. " Response
-" application/json, #/components/schemas/minimal-repository
+" application/json,#/components/schemas/minimal-repository
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_minimal_repository( '' ).
 " todo, raise
@@ -27917,7 +27927,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/repository
+" application/json,#/components/schemas/repository
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repository( '' ).
     ENDCASE.
@@ -27938,7 +27948,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_public
+" application/json,#/components/schemas/response_repos_list_public
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_public( '' ).
       WHEN 304. " 
@@ -27972,7 +27982,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_actions_list_environment_secre
+" application/json,#/components/schemas/response_actions_list_environment_secre
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_list_environment( '' ).
     ENDCASE.
@@ -27992,7 +28002,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/actions-public-key
+" application/json,#/components/schemas/actions-public-key
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_public_key( '' ).
     ENDCASE.
@@ -28013,7 +28023,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/actions-secret
+" application/json,#/components/schemas/actions-secret
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_secret( '' ).
     ENDCASE.
@@ -28035,7 +28045,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response when creating a secret
-" application/json, #/components/schemas/empty-object
+" application/json,#/components/schemas/empty-object
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_empty_object( '' ).
       WHEN 204. " Response when updating a secret
@@ -28088,7 +28098,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/scim-group-list-enterprise
+" application/json,#/components/schemas/scim-group-list-enterprise
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_scim_group_list_enterpri( '' ).
     ENDCASE.
@@ -28106,7 +28116,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/scim-enterprise-group
+" application/json,#/components/schemas/scim-enterprise-group
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_scim_enterprise_group( '' ).
     ENDCASE.
@@ -28127,7 +28137,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/scim-enterprise-group
+" application/json,#/components/schemas/scim-enterprise-group
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_scim_enterprise_group( '' ).
     ENDCASE.
@@ -28146,7 +28156,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/scim-enterprise-group
+" application/json,#/components/schemas/scim-enterprise-group
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_scim_enterprise_group( '' ).
     ENDCASE.
@@ -28165,7 +28175,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/scim-enterprise-group
+" application/json,#/components/schemas/scim-enterprise-group
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_scim_enterprise_group( '' ).
     ENDCASE.
@@ -28211,7 +28221,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/scim-user-list-enterprise
+" application/json,#/components/schemas/scim-user-list-enterprise
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_scim_user_list_enterpris( '' ).
     ENDCASE.
@@ -28229,7 +28239,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/scim-enterprise-user
+" application/json,#/components/schemas/scim-enterprise-user
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_scim_enterprise_user( '' ).
     ENDCASE.
@@ -28247,7 +28257,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/scim-enterprise-user
+" application/json,#/components/schemas/scim-enterprise-user
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_scim_enterprise_user( '' ).
     ENDCASE.
@@ -28266,7 +28276,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/scim-enterprise-user
+" application/json,#/components/schemas/scim-enterprise-user
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_scim_enterprise_user( '' ).
     ENDCASE.
@@ -28285,7 +28295,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/scim-enterprise-user
+" application/json,#/components/schemas/scim-enterprise-user
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_scim_enterprise_user( '' ).
     ENDCASE.
@@ -28434,7 +28444,7 @@ CLASS zcl_github IMPLEMENTATION.
       WHEN 404. " 
 " todo, raise
       WHEN 429. " Response
-" application/json, #/components/schemas/basic-error
+" application/json,#/components/schemas/basic-error
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_basic_error( '' ).
 " todo, raise
@@ -28490,7 +28500,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_search_code
+" application/json,#/components/schemas/response_search_code
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_search_code( '' ).
       WHEN 304. " 
@@ -28531,7 +28541,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_search_commits
+" application/json,#/components/schemas/response_search_commits
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_search_commits( '' ).
       WHEN 304. " 
@@ -28566,7 +28576,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_search_issues_and_pull_request
+" application/json,#/components/schemas/response_search_issues_and_pull_request
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_search_issues_and_pull_r( '' ).
       WHEN 304. " 
@@ -28610,7 +28620,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_search_labels
+" application/json,#/components/schemas/response_search_labels
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_search_labels( '' ).
       WHEN 304. " 
@@ -28651,7 +28661,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_search_repos
+" application/json,#/components/schemas/response_search_repos
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_search_repos( '' ).
       WHEN 304. " 
@@ -28684,7 +28694,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_search_topics
+" application/json,#/components/schemas/response_search_topics
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_search_topics( '' ).
       WHEN 304. " 
@@ -28719,7 +28729,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_search_users
+" application/json,#/components/schemas/response_search_users
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_search_users( '' ).
       WHEN 304. " 
@@ -28741,7 +28751,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, 
+" application/json,
       WHEN 304. " 
 " todo, raise
       WHEN 401. " 
@@ -28762,7 +28772,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/private-user
+" application/json,#/components/schemas/private-user
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_private_user( '' ).
       WHEN 304. " 
@@ -28788,7 +28798,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_users_list_blocked_by_authenti
+" application/json,#/components/schemas/response_users_list_blocked_by_authenti
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_users_list_blocked_by_au( '' ).
       WHEN 304. " 
@@ -28822,7 +28832,7 @@ CLASS zcl_github IMPLEMENTATION.
       WHEN 403. " 
 " todo, raise
       WHEN 404. " If the user is not blocked:
-" application/json, #/components/schemas/basic-error
+" application/json,#/components/schemas/basic-error
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_basic_error( '' ).
 " todo, raise
@@ -28900,7 +28910,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_codespaces_list_for_authentica
+" application/json,#/components/schemas/response_codespaces_list_for_authentica
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespaces_list_for_auth( '' ).
       WHEN 304. " 
@@ -28927,11 +28937,11 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response when the codespace was successfully created
-" application/json, #/components/schemas/codespace
+" application/json,#/components/schemas/codespace
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespace( '' ).
       WHEN 202. " Response when the codespace creation partially failed but is being retried in the background
-" application/json, #/components/schemas/codespace
+" application/json,#/components/schemas/codespace
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespace( '' ).
 " todo, raise
@@ -28964,7 +28974,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_codespaces_list_secrets_for_au
+" application/json,#/components/schemas/response_codespaces_list_secrets_for_au
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespaces_list_secrets_( '' ).
     ENDCASE.
@@ -28980,7 +28990,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/codespaces-user-public-key
+" application/json,#/components/schemas/codespaces-user-public-key
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespaces_user_public_k( '' ).
     ENDCASE.
@@ -28997,7 +29007,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/codespaces-secret
+" application/json,#/components/schemas/codespaces-secret
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespaces_secret( '' ).
     ENDCASE.
@@ -29015,7 +29025,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response after successfully creaing a secret
-" application/json, #/components/schemas/response_codespaces_create_or_update_se
+" application/json,#/components/schemas/response_codespaces_create_or_update_se
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespaces_create_or_upd( '' ).
       WHEN 204. " Response after successfully updating a secret
@@ -29052,7 +29062,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_codespaces_list_repositories_f
+" application/json,#/components/schemas/response_codespaces_list_repositories_f
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespaces_list_reposito( '' ).
       WHEN 401. " 
@@ -29150,7 +29160,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/codespace
+" application/json,#/components/schemas/codespace
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespace( '' ).
       WHEN 304. " 
@@ -29178,7 +29188,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/codespace
+" application/json,#/components/schemas/codespace
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespace( '' ).
       WHEN 401. " 
@@ -29227,7 +29237,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_codespaces_codespace_machines_
+" application/json,#/components/schemas/response_codespaces_codespace_machines_
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespaces_codespace_mac( '' ).
       WHEN 304. " 
@@ -29254,7 +29264,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/codespace
+" application/json,#/components/schemas/codespace
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespace( '' ).
       WHEN 304. " 
@@ -29264,7 +29274,7 @@ CLASS zcl_github IMPLEMENTATION.
       WHEN 401. " 
 " todo, raise
       WHEN 402. " Payment required
-" application/json, #/components/schemas/basic-error
+" application/json,#/components/schemas/basic-error
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_basic_error( '' ).
 " todo, raise
@@ -29290,7 +29300,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/codespace
+" application/json,#/components/schemas/codespace
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_codespace( '' ).
       WHEN 401. " 
@@ -29315,7 +29325,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_users_set_primary_email_visibi
+" application/json,#/components/schemas/response_users_set_primary_email_visibi
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_users_set_primary_email_( '' ).
       WHEN 304. " 
@@ -29351,7 +29361,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_users_list_emails_for_authenti
+" application/json,#/components/schemas/response_users_list_emails_for_authenti
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_users_list_emails_for_au( '' ).
       WHEN 304. " 
@@ -29376,7 +29386,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/response_users_add_email_for_authentica
+" application/json,#/components/schemas/response_users_add_email_for_authentica
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_users_add_email_for_auth( '' ).
       WHEN 304. " 
@@ -29436,7 +29446,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_users_list_followers_for_authe
+" application/json,#/components/schemas/response_users_list_followers_for_authe
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_users_list_followers_for( '' ).
       WHEN 304. " 
@@ -29468,7 +29478,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_users_list_followed_by_authent
+" application/json,#/components/schemas/response_users_list_followed_by_authent
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_users_list_followed_by_a( '' ).
       WHEN 304. " 
@@ -29498,7 +29508,7 @@ CLASS zcl_github IMPLEMENTATION.
       WHEN 403. " 
 " todo, raise
       WHEN 404. " if the person is not followed by the authenticated user
-" application/json, #/components/schemas/basic-error
+" application/json,#/components/schemas/basic-error
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_basic_error( '' ).
 " todo, raise
@@ -29569,7 +29579,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_users_list_gpg_keys_for_authen
+" application/json,#/components/schemas/response_users_list_gpg_keys_for_authen
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_users_list_gpg_keys_for_( '' ).
       WHEN 304. " 
@@ -29594,7 +29604,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/gpg-key
+" application/json,#/components/schemas/gpg-key
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gpg_key( '' ).
       WHEN 304. " 
@@ -29623,7 +29633,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/gpg-key
+" application/json,#/components/schemas/gpg-key
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gpg_key( '' ).
       WHEN 304. " 
@@ -29683,7 +29693,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " You can find the permissions for the installation under the `permissions` key.
-" application/json, #/components/schemas/response_apps_list_installations_for_au
+" application/json,#/components/schemas/response_apps_list_installations_for_au
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_apps_list_installations_( '' ).
       WHEN 304. " 
@@ -29720,7 +29730,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " The access the user has to each repository is included in the hash under the `permissions` key.
-" application/json, #/components/schemas/response_apps_list_installation_repos_f
+" application/json,#/components/schemas/response_apps_list_installation_repos_f
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_apps_list_installation_r( '' ).
       WHEN 304. " 
@@ -29792,7 +29802,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Default response
-" application/json, 
+" application/json,
       WHEN 204. " Response when there are no restrictions
     ENDCASE.
   ENDMETHOD.
@@ -29808,7 +29818,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/interaction-limit-response
+" application/json,#/components/schemas/interaction-limit-response
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_interaction_limit_respon( '' ).
       WHEN 422. " 
@@ -29867,7 +29877,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_issues_list_for_authenticated_
+" application/json,#/components/schemas/response_issues_list_for_authenticated_
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_issues_list_for_authenti( '' ).
       WHEN 304. " 
@@ -29897,7 +29907,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_users_list_public_ssh_keys_for
+" application/json,#/components/schemas/response_users_list_public_ssh_keys_for
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_users_list_public_ssh_ke( '' ).
       WHEN 304. " 
@@ -29922,7 +29932,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/key
+" application/json,#/components/schemas/key
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_key( '' ).
       WHEN 304. " 
@@ -29951,7 +29961,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/key
+" application/json,#/components/schemas/key
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_key( '' ).
       WHEN 304. " 
@@ -30009,7 +30019,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_apps_list_subscriptions_for_au
+" application/json,#/components/schemas/response_apps_list_subscriptions_for_au
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_apps_list_subscriptions_( '' ).
       WHEN 304. " 
@@ -30041,7 +30051,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_apps_list_subscriptions_for_01
+" application/json,#/components/schemas/response_apps_list_subscriptions_for_01
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_apps_list_subscription01( '' ).
       WHEN 304. " 
@@ -30074,7 +30084,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_orgs_list_memberships_for_auth
+" application/json,#/components/schemas/response_orgs_list_memberships_for_auth
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_orgs_list_memberships_fo( '' ).
       WHEN 304. " 
@@ -30099,7 +30109,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/org-membership
+" application/json,#/components/schemas/org-membership
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_org_membership( '' ).
       WHEN 403. " 
@@ -30121,7 +30131,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/org-membership
+" application/json,#/components/schemas/org-membership
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_org_membership( '' ).
       WHEN 403. " 
@@ -30153,7 +30163,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_migrations_list_for_authentica
+" application/json,#/components/schemas/response_migrations_list_for_authentica
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_migrations_list_for_auth( '' ).
       WHEN 304. " 
@@ -30176,7 +30186,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/migration
+" application/json,#/components/schemas/migration
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_migration( '' ).
       WHEN 304. " 
@@ -30208,7 +30218,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/migration
+" application/json,#/components/schemas/migration
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_migration( '' ).
       WHEN 304. " 
@@ -30317,7 +30327,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_migrations_list_repos_for_auth
+" application/json,#/components/schemas/response_migrations_list_repos_for_auth
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_migrations_list_repos_01( '' ).
       WHEN 404. " 
@@ -30345,7 +30355,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_orgs_list_for_authenticated_us
+" application/json,#/components/schemas/response_orgs_list_for_authenticated_us
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_orgs_list_for_authentica( '' ).
       WHEN 304. " 
@@ -30371,7 +30381,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_packages_list_packages_for_aut
+" application/json,#/components/schemas/response_packages_list_packages_for_aut
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_packages_list_packages01( '' ).
     ENDCASE.
@@ -30389,7 +30399,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/package
+" application/json,#/components/schemas/package
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_package( '' ).
     ENDCASE.
@@ -30465,7 +30475,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_packages_get_all_package_ver01
+" application/json,#/components/schemas/response_packages_get_all_package_ver01
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_packages_get_all_packa01( '' ).
       WHEN 401. " 
@@ -30492,7 +30502,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/package-version
+" application/json,#/components/schemas/package-version
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_package_version( '' ).
     ENDCASE.
@@ -30557,7 +30567,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/project
+" application/json,#/components/schemas/project
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_project( '' ).
       WHEN 304. " 
@@ -30593,7 +30603,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_users_list_public_emails_for_a
+" application/json,#/components/schemas/response_users_list_public_emails_for_a
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_users_list_public_emails( '' ).
       WHEN 304. " 
@@ -30648,7 +30658,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_for_authenticated_u
+" application/json,#/components/schemas/response_repos_list_for_authenticated_u
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_for_authentic( '' ).
       WHEN 304. " 
@@ -30673,7 +30683,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 201. " Response
-" application/json, #/components/schemas/repository
+" application/json,#/components/schemas/repository
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repository( '' ).
       WHEN 304. " 
@@ -30711,7 +30721,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_invitations_for_aut
+" application/json,#/components/schemas/response_repos_list_invitations_for_aut
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_invitations_f( '' ).
       WHEN 304. " 
@@ -30799,7 +30809,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_activity_list_repos_starred_by
+" application/json,#/components/schemas/response_activity_list_repos_starred_by
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_activity_list_repos_star( '' ).
       WHEN 304. " 
@@ -30830,7 +30840,7 @@ CLASS zcl_github IMPLEMENTATION.
       WHEN 403. " 
 " todo, raise
       WHEN 404. " Not Found if this repository is not starred by you
-" application/json, #/components/schemas/basic-error
+" application/json,#/components/schemas/basic-error
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_basic_error( '' ).
 " todo, raise
@@ -30903,7 +30913,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_activity_list_watched_repos_fo
+" application/json,#/components/schemas/response_activity_list_watched_repos_fo
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_activity_list_watched_re( '' ).
       WHEN 304. " 
@@ -30935,7 +30945,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_teams_list_for_authenticated_u
+" application/json,#/components/schemas/response_teams_list_for_authenticated_u
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_teams_list_for_authentic( '' ).
       WHEN 304. " 
@@ -30967,7 +30977,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_users_list
+" application/json,#/components/schemas/response_users_list
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_users_list( '' ).
       WHEN 304. " 
@@ -30986,7 +30996,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, 
+" application/json,
       WHEN 404. " 
 " todo, raise
     ENDCASE.
@@ -31013,7 +31023,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_activity_list_events_for_authe
+" application/json,#/components/schemas/response_activity_list_events_for_authe
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_activity_list_events_for( '' ).
     ENDCASE.
@@ -31041,7 +31051,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_activity_list_org_events_for_a
+" application/json,#/components/schemas/response_activity_list_org_events_for_a
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_activity_list_org_events( '' ).
     ENDCASE.
@@ -31068,7 +31078,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_activity_list_public_events_01
+" application/json,#/components/schemas/response_activity_list_public_events_01
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_activity_list_public_e02( '' ).
     ENDCASE.
@@ -31095,7 +31105,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_users_list_followers_for_user
+" application/json,#/components/schemas/response_users_list_followers_for_user
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_users_list_followers_f01( '' ).
     ENDCASE.
@@ -31122,7 +31132,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_users_list_following_for_user
+" application/json,#/components/schemas/response_users_list_following_for_user
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_users_list_following_for( '' ).
     ENDCASE.
@@ -31169,7 +31179,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_gists_list_for_user
+" application/json,#/components/schemas/response_gists_list_for_user
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_gists_list_for_user( '' ).
       WHEN 422. " 
@@ -31198,7 +31208,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_users_list_gpg_keys_for_user
+" application/json,#/components/schemas/response_users_list_gpg_keys_for_user
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_users_list_gpg_keys_fo01( '' ).
     ENDCASE.
@@ -31221,7 +31231,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/hovercard
+" application/json,#/components/schemas/hovercard
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_hovercard( '' ).
       WHEN 404. " 
@@ -31242,7 +31252,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/installation
+" application/json,#/components/schemas/installation
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_installation( '' ).
     ENDCASE.
@@ -31269,7 +31279,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_users_list_public_keys_for_use
+" application/json,#/components/schemas/response_users_list_public_keys_for_use
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_users_list_public_keys_f( '' ).
     ENDCASE.
@@ -31296,7 +31306,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_orgs_list_for_user
+" application/json,#/components/schemas/response_orgs_list_for_user
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_orgs_list_for_user( '' ).
     ENDCASE.
@@ -31317,7 +31327,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_packages_list_packages_for_use
+" application/json,#/components/schemas/response_packages_list_packages_for_use
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_packages_list_packages02( '' ).
       WHEN 401. " 
@@ -31340,7 +31350,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/package
+" application/json,#/components/schemas/package
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_package( '' ).
     ENDCASE.
@@ -31406,7 +31416,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_packages_get_all_package_ver02
+" application/json,#/components/schemas/response_packages_get_all_package_ver02
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_packages_get_all_packa02( '' ).
       WHEN 401. " 
@@ -31434,7 +31444,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/package-version
+" application/json,#/components/schemas/package-version
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_package_version( '' ).
     ENDCASE.
@@ -31514,7 +31524,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_projects_list_for_user
+" application/json,#/components/schemas/response_projects_list_for_user
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_projects_list_for_user( '' ).
       WHEN 422. " 
@@ -31543,7 +31553,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_activity_list_received_events_
+" application/json,#/components/schemas/response_activity_list_received_events_
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_activity_list_received_e( '' ).
     ENDCASE.
@@ -31570,7 +31580,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_activity_list_received_public_
+" application/json,#/components/schemas/response_activity_list_received_public_
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_activity_list_received_p( '' ).
     ENDCASE.
@@ -31606,7 +31616,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_repos_list_for_user
+" application/json,#/components/schemas/response_repos_list_for_user
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_repos_list_for_user( '' ).
     ENDCASE.
@@ -31623,7 +31633,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/actions-billing-usage
+" application/json,#/components/schemas/actions-billing-usage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_actions_billing_usage( '' ).
     ENDCASE.
@@ -31640,7 +31650,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/packages-billing-usage
+" application/json,#/components/schemas/packages-billing-usage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_packages_billing_usage( '' ).
     ENDCASE.
@@ -31657,7 +31667,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/combined-billing-usage
+" application/json,#/components/schemas/combined-billing-usage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_combined_billing_usage( '' ).
     ENDCASE.
@@ -31690,7 +31700,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, 
+" application/json,
     ENDCASE.
   ENDMETHOD.
 
@@ -31715,7 +31725,7 @@ CLASS zcl_github IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Response
-" application/json, #/components/schemas/response_activity_list_repos_watched_by
+" application/json,#/components/schemas/response_activity_list_repos_watched_by
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         return_data = parse_activity_list_repos_watc( '' ).
     ENDCASE.

@@ -420,20 +420,15 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |    DATA lv_uri TYPE string VALUE '{ find_uri_prefix( ms_specification-servers ) }{ is_operation-path }'.\n|.
 
     LOOP AT is_operation-parameters INTO ls_parameter WHERE in = 'path'.
-      IF ls_parameter-schema->type = 'string'.
-        rv_abap = rv_abap &&
-          |    REPLACE ALL OCCURRENCES OF '\{{ ls_parameter-name }\}' IN lv_uri WITH { ls_parameter-abap_name }.\n|.
-      ELSE.
-        rv_abap = rv_abap &&
-          |    lv_temp = { ls_parameter-abap_name }.\n| &&
-          |    CONDENSE lv_temp.\n| &&
-          |    REPLACE ALL OCCURRENCES OF '\{{ ls_parameter-name }\}' IN lv_uri WITH lv_temp.\n|.
-      ENDIF.
+      rv_abap = rv_abap &&
+        |    lv_temp = { ls_parameter-abap_name }.\n| && " convert
+        |    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).\n| &&
+        |    REPLACE ALL OCCURRENCES OF '\{{ ls_parameter-name }\}' IN lv_uri WITH lv_temp.\n|.
     ENDLOOP.
 
     LOOP AT is_operation-parameters INTO ls_parameter WHERE in = 'query'.
       lv_value = ls_parameter-abap_name.
-      IF ls_parameter-schema->type <> 'string'.
+      IF ls_parameter-schema IS NOT INITIAL AND ls_parameter-schema->type <> 'string'.
 * todo, booleans and other types should also be converted
         rv_abap = rv_abap && |    lv_temp = { lv_value }.\n|.
         rv_abap = rv_abap && |    CONDENSE lv_temp.\n|.
@@ -455,6 +450,9 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       |    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).\n|.
 *      |    mi_client->request->set_header_field( name = 'Content-Type' value = 'todo' ).\n| &&
 *      |    mi_client->request->set_header_field( name = 'Accept'       value = 'todo' ).\n| &&
+    LOOP AT is_operation-parameters INTO ls_parameter WHERE in = 'header'.
+      rv_abap = rv_abap && |    mi_client->request->set_header_field( name = '{ ls_parameter-name }' value = { ls_parameter-abap_name } ).\n|.
+    ENDLOOP.
 
     IF is_operation-body_schema_ref IS NOT INITIAL.
       rv_abap = rv_abap && abap_schema_to_json( is_operation-body_schema_ref ).

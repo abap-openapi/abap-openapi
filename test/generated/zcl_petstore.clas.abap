@@ -251,7 +251,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/{petId}'.
     lv_temp = petid.
-    CONDENSE lv_temp.
+    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).
     REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -274,7 +274,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/{petId}'.
     lv_temp = petid.
-    CONDENSE lv_temp.
+    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).
     REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH lv_temp.
     IF name IS SUPPLIED.
       mi_client->request->set_form_field( name = 'name' value = name ).
@@ -297,10 +297,11 @@ CLASS zcl_petstore IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/{petId}'.
     lv_temp = petid.
-    CONDENSE lv_temp.
+    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).
     REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_header_field( name = 'api_key' value = api_key ).
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
@@ -314,7 +315,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/pet/{petId}/uploadImage'.
     lv_temp = petid.
-    CONDENSE lv_temp.
+    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).
     REPLACE ALL OCCURRENCES OF '{petId}' IN lv_uri WITH lv_temp.
     IF additionalmetadata IS SUPPLIED.
       mi_client->request->set_form_field( name = 'additionalMetadata' value = additionalmetadata ).
@@ -371,7 +372,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/store/order/{orderId}'.
     lv_temp = orderid.
-    CONDENSE lv_temp.
+    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).
     REPLACE ALL OCCURRENCES OF '{orderId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -394,7 +395,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/store/order/{orderId}'.
     lv_temp = orderid.
-    CONDENSE lv_temp.
+    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).
     REPLACE ALL OCCURRENCES OF '{orderId}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
@@ -479,7 +480,9 @@ CLASS zcl_petstore IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/user/{username}'.
-    REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
+    lv_temp = username.
+    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).
+    REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'GET' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
@@ -500,7 +503,9 @@ CLASS zcl_petstore IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/user/{username}'.
-    REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
+    lv_temp = username.
+    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).
+    REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'PUT' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
 * todo, set body, #/components/schemas/User
@@ -515,7 +520,9 @@ CLASS zcl_petstore IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/api/v3/user/{username}'.
-    REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH username.
+    lv_temp = username.
+    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).
+    REPLACE ALL OCCURRENCES OF '{username}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'DELETE' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).

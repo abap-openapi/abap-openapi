@@ -14380,14 +14380,14 @@ INTERFACE zif_github PUBLIC.
 * Response: 503
   METHODS code_scanning_list_alerts_for_
     IMPORTING
-      state TYPE string OPTIONAL
+      state TYPE code_scanning_alert_state OPTIONAL
       owner TYPE string
       repo TYPE string
-      tool_name TYPE string OPTIONAL
-      tool_guid TYPE string OPTIONAL
+      tool_name TYPE code_scanning_analysis_tool_na OPTIONAL
+      tool_guid TYPE code_scanning_analysis_tool_gu OPTIONAL
       page TYPE i DEFAULT 1
       per_page TYPE i DEFAULT 30
-      ref TYPE string OPTIONAL
+      ref TYPE code_scanning_ref OPTIONAL
     RETURNING
       VALUE(return_data) TYPE response_code_scanning_list_al
     RAISING cx_static_check.
@@ -14406,7 +14406,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      alert_number TYPE string
+      alert_number TYPE alert_number
     RETURNING
       VALUE(return_data) TYPE code_scanning_alert
     RAISING cx_static_check.
@@ -14426,7 +14426,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      alert_number TYPE string
+      alert_number TYPE alert_number
       body TYPE bodycode_scanning_update_alert
     RETURNING
       VALUE(return_data) TYPE code_scanning_alert
@@ -14449,10 +14449,10 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      alert_number TYPE string
+      alert_number TYPE alert_number
       page TYPE i DEFAULT 1
       per_page TYPE i DEFAULT 30
-      ref TYPE string OPTIONAL
+      ref TYPE code_scanning_ref OPTIONAL
     RETURNING
       VALUE(return_data) TYPE response_code_scanning_list_01
     RAISING cx_static_check.
@@ -14474,12 +14474,12 @@ INTERFACE zif_github PUBLIC.
 * Response: 503
   METHODS code_scanning_list_recent_anal
     IMPORTING
-      ref TYPE string OPTIONAL
-      sarif_id TYPE string OPTIONAL
+      ref TYPE code_scanning_ref OPTIONAL
+      sarif_id TYPE code_scanning_analysis_sarif_i OPTIONAL
       owner TYPE string
       repo TYPE string
-      tool_name TYPE string OPTIONAL
-      tool_guid TYPE string OPTIONAL
+      tool_name TYPE code_scanning_analysis_tool_na OPTIONAL
+      tool_guid TYPE code_scanning_analysis_tool_gu OPTIONAL
       page TYPE i DEFAULT 1
       per_page TYPE i DEFAULT 30
     RETURNING
@@ -18333,7 +18333,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      alert_number TYPE string
+      alert_number TYPE alert_number
     RETURNING
       VALUE(return_data) TYPE secret_scanning_alert
     RAISING cx_static_check.
@@ -18353,7 +18353,7 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       owner TYPE string
       repo TYPE string
-      alert_number TYPE string
+      alert_number TYPE alert_number
       body TYPE bodysecret_scanning_update_ale
     RETURNING
       VALUE(return_data) TYPE secret_scanning_alert
