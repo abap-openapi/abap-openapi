@@ -3,7 +3,6 @@
   "private": true,
   "version": "1.0.0",
   "description": "ABAP OpenAPI Client Generator",
-  "main": "index.mjs",
   "scripts": {
     "test": "abaplint && rm -rf output && abap_transpile && node output/index.mjs",
     "petstore": "abaplint && rm -rf output && abap_transpile && node index.mjs https://petstore3.swagger.io/api/v3/openapi.json petstore",
@@ -24,7 +23,7 @@
   },
   "homepage": "https://github.com/abap-openapi/abap-openapi-client#readme",
   "dependencies": {
-    "@abaplint/cli": "^2.80.10",
+    "@abaplint/cli": "^2.81.0",
     "@abaplint/runtime": "^1.6.65",
     "@abaplint/transpiler-cli": "^1.6.65"
   }
