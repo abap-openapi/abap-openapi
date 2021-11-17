@@ -6,6 +6,64 @@
     "version": "1.2.3"
   },
   "paths": {
+    "/queues/{queue-name}/messages/consumption": {
+      "post": {
+        "operationId": "consume-from-queue",
+        "summary": "Consume message from queue",
+        "parameters": [
+          {
+            "name": "queue-name",
+            "in": "path",
+            "description": "Queue name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-qos",
+            "in": "header",
+            "description": "Quality of service",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/QOS"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "headers": {
+              "X-Message-Id": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content, queue is empty"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/queues/{queue-name}/messages": {
       "post": {
         "operationId": "publish-message-to-queue",
