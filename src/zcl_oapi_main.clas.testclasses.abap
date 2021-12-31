@@ -45,7 +45,7 @@ CLASS ltcl_find_prefix IMPLEMENTATION.
     lv_act = mo_cut->find_uri_prefix( lt_servers ).
     cl_abap_unit_assert=>assert_equals(
       act = lv_act
-      exp = '' ).
+      exp = 'https://api.foobar.com' ).
   ENDMETHOD.
 ENDCLASS.
 
