@@ -37,6 +37,30 @@ CLASS zcl_spec01 IMPLEMENTATION.
     qos = mo_json->value_integer( iv_prefix && '/' ).
   ENDMETHOD.
 
+  METHOD zif_spec01~consume_from_queue.
+    DATA lv_code TYPE i.
+    DATA lv_temp TYPE string.
+    DATA lv_uri TYPE string VALUE '/queues/{queue-name}/messages/consumption'.
+    lv_temp = queue_name.
+    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).
+    REPLACE ALL OCCURRENCES OF '{queue-name}' IN lv_uri WITH lv_temp.
+    mi_client->request->set_method( 'POST' ).
+    mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_header_field( name = 'x-qos' value = x_qos ).
+    lv_code = send_receive( ).
+    WRITE / lv_code.
+    CASE lv_code.
+      WHEN 200. " Ok
+" application/json,
+      WHEN 204. " No Content, queue is empty
+      WHEN 404. " Not Found
+" application/json,#/components/schemas/ErrorMessage
+        CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
+        parse_errormessage( '' ).
+" todo, raise
+    ENDCASE.
+  ENDMETHOD.
+
   METHOD zif_spec01~publish_message_to_queue.
     DATA lv_code TYPE i.
     DATA lv_temp TYPE string.

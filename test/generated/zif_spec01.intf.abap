@@ -10,6 +10,21 @@ INTERFACE zif_spec01 PUBLIC.
 * Component schema: QOS, integer
   TYPES qos TYPE i.
 
+* POST - "Consume message from queue"
+* Operation id: consume-from-queue
+* Parameter: queue-name, required, path
+* Parameter: x-qos, required, header
+* Response: 200
+*     application/json, string
+* Response: 204
+* Response: 404
+*     application/json, #/components/schemas/ErrorMessage
+  METHODS consume_from_queue
+    IMPORTING
+      queue_name TYPE string
+      x_qos TYPE qos
+    RAISING cx_static_check.
+
 * POST - "Publish message to a queue"
 * Operation id: publish-message-to-queue
 * Parameter: queue-name, required, path
