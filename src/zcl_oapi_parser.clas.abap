@@ -161,6 +161,9 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
           ls_operation-abap_name = lo_names->to_abap_name( ls_operation-summary ).
         ENDIF.
         IF ls_operation-abap_name IS INITIAL.
+          ls_operation-abap_name = lo_names->to_abap_name( lv_path ).
+        ENDIF.
+        IF ls_operation-abap_name IS INITIAL.
           CONTINUE.
         ENDIF.
 
