@@ -265,7 +265,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         LOOP AT ii_schema->properties INTO ls_property.
           IF ls_property-schema IS INITIAL AND ls_property-ref IS NOT INITIAL.
             lv_method = find_parser_method( ls_property-ref ).
-            rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = { lv_method }( iv_prefix ).\n|.
+            rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = { lv_method }( iv_prefix && '{ iv_hard_prefix }/{ ls_property-name }' ).\n|.
           ELSEIF ls_property-schema IS INITIAL.
             rv_abap = rv_abap && |* todo initial, hmm\n|.
           ELSEIF ls_property-schema->type = 'string'

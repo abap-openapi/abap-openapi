@@ -115,7 +115,7 @@ CLASS zcl_petstore IMPLEMENTATION.
   METHOD parse_pet.
     pet-id = mo_json->value_string( iv_prefix && '/id' ).
     pet-name = mo_json->value_string( iv_prefix && '/name' ).
-    pet-category = parse_category( iv_prefix ).
+    pet-category = parse_category( iv_prefix && '/category' ).
 * todo, array, photourls
 * todo, array, tags
     pet-status = mo_json->value_string( iv_prefix && '/status' ).
