@@ -201,7 +201,6 @@ INTERFACE zif_github PUBLIC.
            actions TYPE string,
            administration TYPE string,
            checks TYPE string,
-           content_references TYPE string,
            contents TYPE string,
            deployments TYPE string,
            environments TYPE string,
@@ -372,6 +371,7 @@ INTERFACE zif_github PUBLIC.
            allow_squash_merge TYPE abap_bool,
            allow_auto_merge TYPE abap_bool,
            delete_branch_on_merge TYPE abap_bool,
+           allow_update_branch TYPE abap_bool,
            allow_merge_commit TYPE abap_bool,
            subscribers_count TYPE i,
            network_count TYPE i,
@@ -599,6 +599,13 @@ INTERFACE zif_github PUBLIC.
            allows_public_repositories TYPE abap_bool,
          END OF runner_groups_enterprise.
 
+* Component schema: runner-label, object
+  TYPES: BEGIN OF runner_label,
+           id TYPE i,
+           name TYPE string,
+           type TYPE string,
+         END OF runner_label.
+
 * Component schema: runner, object
   TYPES: BEGIN OF runner,
            id TYPE i,
@@ -681,6 +688,355 @@ INTERFACE zif_github PUBLIC.
            user TYPE string,
            visibility TYPE string,
          END OF audit_log_event.
+
+* Component schema: alert-number, integer
+  TYPES alert_number TYPE i.
+
+* Component schema: alert-created-at, string
+  TYPES alert_created_at TYPE string.
+
+* Component schema: alert-url, string
+  TYPES alert_url TYPE string.
+
+* Component schema: alert-html-url, string
+  TYPES alert_html_url TYPE string.
+
+* Component schema: secret-scanning-alert-state, string
+  TYPES secret_scanning_alert_state TYPE string.
+
+* Component schema: secret-scanning-alert-resolution, string
+  TYPES secret_scanning_alert_resoluti TYPE string.
+
+* Component schema: nullable-repository, object
+  TYPES: BEGIN OF subsubnullable_repository_te01,
+           admin TYPE abap_bool,
+           maintain TYPE abap_bool,
+           push TYPE abap_bool,
+           triage TYPE abap_bool,
+           pull TYPE abap_bool,
+         END OF subsubnullable_repository_te01.
+  TYPES: BEGIN OF subsubnullable_repository_temp,
+           login TYPE string,
+           id TYPE i,
+           node_id TYPE string,
+           avatar_url TYPE string,
+           gravatar_id TYPE string,
+           url TYPE string,
+           html_url TYPE string,
+           followers_url TYPE string,
+           following_url TYPE string,
+           gists_url TYPE string,
+           starred_url TYPE string,
+           subscriptions_url TYPE string,
+           organizations_url TYPE string,
+           repos_url TYPE string,
+           events_url TYPE string,
+           received_events_url TYPE string,
+           type TYPE string,
+           site_admin TYPE abap_bool,
+         END OF subsubnullable_repository_temp.
+  TYPES: BEGIN OF subnullable_repository_templat,
+           id TYPE i,
+           node_id TYPE string,
+           name TYPE string,
+           full_name TYPE string,
+           owner TYPE subsubnullable_repository_temp,
+           private TYPE abap_bool,
+           html_url TYPE string,
+           description TYPE string,
+           fork TYPE abap_bool,
+           url TYPE string,
+           archive_url TYPE string,
+           assignees_url TYPE string,
+           blobs_url TYPE string,
+           branches_url TYPE string,
+           collaborators_url TYPE string,
+           comments_url TYPE string,
+           commits_url TYPE string,
+           compare_url TYPE string,
+           contents_url TYPE string,
+           contributors_url TYPE string,
+           deployments_url TYPE string,
+           downloads_url TYPE string,
+           events_url TYPE string,
+           forks_url TYPE string,
+           git_commits_url TYPE string,
+           git_refs_url TYPE string,
+           git_tags_url TYPE string,
+           git_url TYPE string,
+           issue_comment_url TYPE string,
+           issue_events_url TYPE string,
+           issues_url TYPE string,
+           keys_url TYPE string,
+           labels_url TYPE string,
+           languages_url TYPE string,
+           merges_url TYPE string,
+           milestones_url TYPE string,
+           notifications_url TYPE string,
+           pulls_url TYPE string,
+           releases_url TYPE string,
+           ssh_url TYPE string,
+           stargazers_url TYPE string,
+           statuses_url TYPE string,
+           subscribers_url TYPE string,
+           subscription_url TYPE string,
+           tags_url TYPE string,
+           teams_url TYPE string,
+           trees_url TYPE string,
+           clone_url TYPE string,
+           mirror_url TYPE string,
+           hooks_url TYPE string,
+           svn_url TYPE string,
+           homepage TYPE string,
+           language TYPE string,
+           forks_count TYPE i,
+           stargazers_count TYPE i,
+           watchers_count TYPE i,
+           size TYPE i,
+           default_branch TYPE string,
+           open_issues_count TYPE i,
+           is_template TYPE abap_bool,
+           topics TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           has_issues TYPE abap_bool,
+           has_projects TYPE abap_bool,
+           has_wiki TYPE abap_bool,
+           has_pages TYPE abap_bool,
+           has_downloads TYPE abap_bool,
+           archived TYPE abap_bool,
+           disabled TYPE abap_bool,
+           visibility TYPE string,
+           pushed_at TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           permissions TYPE subsubnullable_repository_te01,
+           allow_rebase_merge TYPE abap_bool,
+           temp_clone_token TYPE string,
+           allow_squash_merge TYPE abap_bool,
+           allow_auto_merge TYPE abap_bool,
+           delete_branch_on_merge TYPE abap_bool,
+           allow_update_branch TYPE abap_bool,
+           allow_merge_commit TYPE abap_bool,
+           subscribers_count TYPE i,
+           network_count TYPE i,
+         END OF subnullable_repository_templat.
+  TYPES: BEGIN OF subnullable_repository_permiss,
+           admin TYPE abap_bool,
+           pull TYPE abap_bool,
+           triage TYPE abap_bool,
+           push TYPE abap_bool,
+           maintain TYPE abap_bool,
+         END OF subnullable_repository_permiss.
+  TYPES: BEGIN OF nullable_repository,
+           id TYPE i,
+           node_id TYPE string,
+           name TYPE string,
+           full_name TYPE string,
+           license TYPE nullable_license_simple,
+           organization TYPE nullable_simple_user,
+           forks TYPE i,
+           permissions TYPE subnullable_repository_permiss,
+           owner TYPE simple_user,
+           private TYPE abap_bool,
+           html_url TYPE string,
+           description TYPE string,
+           fork TYPE abap_bool,
+           url TYPE string,
+           archive_url TYPE string,
+           assignees_url TYPE string,
+           blobs_url TYPE string,
+           branches_url TYPE string,
+           collaborators_url TYPE string,
+           comments_url TYPE string,
+           commits_url TYPE string,
+           compare_url TYPE string,
+           contents_url TYPE string,
+           contributors_url TYPE string,
+           deployments_url TYPE string,
+           downloads_url TYPE string,
+           events_url TYPE string,
+           forks_url TYPE string,
+           git_commits_url TYPE string,
+           git_refs_url TYPE string,
+           git_tags_url TYPE string,
+           git_url TYPE string,
+           issue_comment_url TYPE string,
+           issue_events_url TYPE string,
+           issues_url TYPE string,
+           keys_url TYPE string,
+           labels_url TYPE string,
+           languages_url TYPE string,
+           merges_url TYPE string,
+           milestones_url TYPE string,
+           notifications_url TYPE string,
+           pulls_url TYPE string,
+           releases_url TYPE string,
+           ssh_url TYPE string,
+           stargazers_url TYPE string,
+           statuses_url TYPE string,
+           subscribers_url TYPE string,
+           subscription_url TYPE string,
+           tags_url TYPE string,
+           teams_url TYPE string,
+           trees_url TYPE string,
+           clone_url TYPE string,
+           mirror_url TYPE string,
+           hooks_url TYPE string,
+           svn_url TYPE string,
+           homepage TYPE string,
+           language TYPE string,
+           forks_count TYPE i,
+           stargazers_count TYPE i,
+           watchers_count TYPE i,
+           size TYPE i,
+           default_branch TYPE string,
+           open_issues_count TYPE i,
+           is_template TYPE abap_bool,
+           topics TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           has_issues TYPE abap_bool,
+           has_projects TYPE abap_bool,
+           has_wiki TYPE abap_bool,
+           has_pages TYPE abap_bool,
+           has_downloads TYPE abap_bool,
+           archived TYPE abap_bool,
+           disabled TYPE abap_bool,
+           visibility TYPE string,
+           pushed_at TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           allow_rebase_merge TYPE abap_bool,
+           template_repository TYPE subnullable_repository_templat,
+           temp_clone_token TYPE string,
+           allow_squash_merge TYPE abap_bool,
+           allow_auto_merge TYPE abap_bool,
+           delete_branch_on_merge TYPE abap_bool,
+           allow_merge_commit TYPE abap_bool,
+           allow_forking TYPE abap_bool,
+           subscribers_count TYPE i,
+           network_count TYPE i,
+           open_issues TYPE i,
+           watchers TYPE i,
+           master_branch TYPE string,
+           starred_at TYPE string,
+         END OF nullable_repository.
+
+* Component schema: minimal-repository, object
+  TYPES: BEGIN OF subminimal_repository_license,
+           key TYPE string,
+           name TYPE string,
+           spdx_id TYPE string,
+           url TYPE string,
+           node_id TYPE string,
+         END OF subminimal_repository_license.
+  TYPES: BEGIN OF subminimal_repository_permissi,
+           admin TYPE abap_bool,
+           maintain TYPE abap_bool,
+           push TYPE abap_bool,
+           triage TYPE abap_bool,
+           pull TYPE abap_bool,
+         END OF subminimal_repository_permissi.
+  TYPES: BEGIN OF minimal_repository,
+           id TYPE i,
+           node_id TYPE string,
+           name TYPE string,
+           full_name TYPE string,
+           owner TYPE simple_user,
+           private TYPE abap_bool,
+           html_url TYPE string,
+           description TYPE string,
+           fork TYPE abap_bool,
+           url TYPE string,
+           archive_url TYPE string,
+           assignees_url TYPE string,
+           blobs_url TYPE string,
+           branches_url TYPE string,
+           collaborators_url TYPE string,
+           comments_url TYPE string,
+           commits_url TYPE string,
+           compare_url TYPE string,
+           contents_url TYPE string,
+           contributors_url TYPE string,
+           deployments_url TYPE string,
+           downloads_url TYPE string,
+           events_url TYPE string,
+           forks_url TYPE string,
+           git_commits_url TYPE string,
+           git_refs_url TYPE string,
+           git_tags_url TYPE string,
+           git_url TYPE string,
+           issue_comment_url TYPE string,
+           issue_events_url TYPE string,
+           issues_url TYPE string,
+           keys_url TYPE string,
+           labels_url TYPE string,
+           languages_url TYPE string,
+           merges_url TYPE string,
+           milestones_url TYPE string,
+           notifications_url TYPE string,
+           pulls_url TYPE string,
+           releases_url TYPE string,
+           ssh_url TYPE string,
+           stargazers_url TYPE string,
+           statuses_url TYPE string,
+           subscribers_url TYPE string,
+           subscription_url TYPE string,
+           tags_url TYPE string,
+           teams_url TYPE string,
+           trees_url TYPE string,
+           clone_url TYPE string,
+           mirror_url TYPE string,
+           hooks_url TYPE string,
+           svn_url TYPE string,
+           homepage TYPE string,
+           language TYPE string,
+           forks_count TYPE i,
+           stargazers_count TYPE i,
+           watchers_count TYPE i,
+           size TYPE i,
+           default_branch TYPE string,
+           open_issues_count TYPE i,
+           is_template TYPE abap_bool,
+           topics TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           has_issues TYPE abap_bool,
+           has_projects TYPE abap_bool,
+           has_wiki TYPE abap_bool,
+           has_pages TYPE abap_bool,
+           has_downloads TYPE abap_bool,
+           archived TYPE abap_bool,
+           disabled TYPE abap_bool,
+           visibility TYPE string,
+           pushed_at TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           permissions TYPE subminimal_repository_permissi,
+           role_name TYPE string,
+           template_repository TYPE nullable_repository,
+           temp_clone_token TYPE string,
+           delete_branch_on_merge TYPE abap_bool,
+           subscribers_count TYPE i,
+           network_count TYPE i,
+           code_of_conduct TYPE code_of_conduct,
+           license TYPE subminimal_repository_license,
+           forks TYPE i,
+           open_issues TYPE i,
+           watchers TYPE i,
+           allow_forking TYPE abap_bool,
+         END OF minimal_repository.
+
+* Component schema: organization-secret-scanning-alert, object
+  TYPES: BEGIN OF organization_secret_scanning_a,
+           number TYPE alert_number,
+           created_at TYPE alert_created_at,
+           url TYPE alert_url,
+           html_url TYPE alert_html_url,
+           locations_url TYPE string,
+           state TYPE secret_scanning_alert_state,
+           resolution TYPE secret_scanning_alert_resoluti,
+           resolved_at TYPE string,
+           resolved_by TYPE nullable_simple_user,
+           secret_type TYPE string,
+           secret TYPE string,
+           repository TYPE minimal_repository,
+         END OF organization_secret_scanning_a.
 
 * Component schema: actions-billing-usage, object
   TYPES: BEGIN OF subactions_billing_usage_minut,
@@ -836,6 +1192,7 @@ INTERFACE zif_github PUBLIC.
            closed_at TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
+           draft TYPE abap_bool,
            closed_by TYPE nullable_simple_user,
            body_html TYPE string,
            body_text TYPE string,
@@ -1174,6 +1531,7 @@ INTERFACE zif_github PUBLIC.
   TYPES: BEGIN OF api_overview,
            verifiable_password_authentica TYPE abap_bool,
            ssh_key_fingerprints TYPE subapi_overview_ssh_key_finger,
+           ssh_keys TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            hooks TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            web TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            api TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
@@ -1184,320 +1542,6 @@ INTERFACE zif_github PUBLIC.
            actions TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            dependabot TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF api_overview.
-
-* Component schema: nullable-repository, object
-  TYPES: BEGIN OF subsubnullable_repository_te01,
-           admin TYPE abap_bool,
-           maintain TYPE abap_bool,
-           push TYPE abap_bool,
-           triage TYPE abap_bool,
-           pull TYPE abap_bool,
-         END OF subsubnullable_repository_te01.
-  TYPES: BEGIN OF subsubnullable_repository_temp,
-           login TYPE string,
-           id TYPE i,
-           node_id TYPE string,
-           avatar_url TYPE string,
-           gravatar_id TYPE string,
-           url TYPE string,
-           html_url TYPE string,
-           followers_url TYPE string,
-           following_url TYPE string,
-           gists_url TYPE string,
-           starred_url TYPE string,
-           subscriptions_url TYPE string,
-           organizations_url TYPE string,
-           repos_url TYPE string,
-           events_url TYPE string,
-           received_events_url TYPE string,
-           type TYPE string,
-           site_admin TYPE abap_bool,
-         END OF subsubnullable_repository_temp.
-  TYPES: BEGIN OF subnullable_repository_templat,
-           id TYPE i,
-           node_id TYPE string,
-           name TYPE string,
-           full_name TYPE string,
-           owner TYPE subsubnullable_repository_temp,
-           private TYPE abap_bool,
-           html_url TYPE string,
-           description TYPE string,
-           fork TYPE abap_bool,
-           url TYPE string,
-           archive_url TYPE string,
-           assignees_url TYPE string,
-           blobs_url TYPE string,
-           branches_url TYPE string,
-           collaborators_url TYPE string,
-           comments_url TYPE string,
-           commits_url TYPE string,
-           compare_url TYPE string,
-           contents_url TYPE string,
-           contributors_url TYPE string,
-           deployments_url TYPE string,
-           downloads_url TYPE string,
-           events_url TYPE string,
-           forks_url TYPE string,
-           git_commits_url TYPE string,
-           git_refs_url TYPE string,
-           git_tags_url TYPE string,
-           git_url TYPE string,
-           issue_comment_url TYPE string,
-           issue_events_url TYPE string,
-           issues_url TYPE string,
-           keys_url TYPE string,
-           labels_url TYPE string,
-           languages_url TYPE string,
-           merges_url TYPE string,
-           milestones_url TYPE string,
-           notifications_url TYPE string,
-           pulls_url TYPE string,
-           releases_url TYPE string,
-           ssh_url TYPE string,
-           stargazers_url TYPE string,
-           statuses_url TYPE string,
-           subscribers_url TYPE string,
-           subscription_url TYPE string,
-           tags_url TYPE string,
-           teams_url TYPE string,
-           trees_url TYPE string,
-           clone_url TYPE string,
-           mirror_url TYPE string,
-           hooks_url TYPE string,
-           svn_url TYPE string,
-           homepage TYPE string,
-           language TYPE string,
-           forks_count TYPE i,
-           stargazers_count TYPE i,
-           watchers_count TYPE i,
-           size TYPE i,
-           default_branch TYPE string,
-           open_issues_count TYPE i,
-           is_template TYPE abap_bool,
-           topics TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-           has_issues TYPE abap_bool,
-           has_projects TYPE abap_bool,
-           has_wiki TYPE abap_bool,
-           has_pages TYPE abap_bool,
-           has_downloads TYPE abap_bool,
-           archived TYPE abap_bool,
-           disabled TYPE abap_bool,
-           visibility TYPE string,
-           pushed_at TYPE string,
-           created_at TYPE string,
-           updated_at TYPE string,
-           permissions TYPE subsubnullable_repository_te01,
-           allow_rebase_merge TYPE abap_bool,
-           temp_clone_token TYPE string,
-           allow_squash_merge TYPE abap_bool,
-           allow_auto_merge TYPE abap_bool,
-           delete_branch_on_merge TYPE abap_bool,
-           allow_merge_commit TYPE abap_bool,
-           subscribers_count TYPE i,
-           network_count TYPE i,
-         END OF subnullable_repository_templat.
-  TYPES: BEGIN OF subnullable_repository_permiss,
-           admin TYPE abap_bool,
-           pull TYPE abap_bool,
-           triage TYPE abap_bool,
-           push TYPE abap_bool,
-           maintain TYPE abap_bool,
-         END OF subnullable_repository_permiss.
-  TYPES: BEGIN OF nullable_repository,
-           id TYPE i,
-           node_id TYPE string,
-           name TYPE string,
-           full_name TYPE string,
-           license TYPE nullable_license_simple,
-           organization TYPE nullable_simple_user,
-           forks TYPE i,
-           permissions TYPE subnullable_repository_permiss,
-           owner TYPE simple_user,
-           private TYPE abap_bool,
-           html_url TYPE string,
-           description TYPE string,
-           fork TYPE abap_bool,
-           url TYPE string,
-           archive_url TYPE string,
-           assignees_url TYPE string,
-           blobs_url TYPE string,
-           branches_url TYPE string,
-           collaborators_url TYPE string,
-           comments_url TYPE string,
-           commits_url TYPE string,
-           compare_url TYPE string,
-           contents_url TYPE string,
-           contributors_url TYPE string,
-           deployments_url TYPE string,
-           downloads_url TYPE string,
-           events_url TYPE string,
-           forks_url TYPE string,
-           git_commits_url TYPE string,
-           git_refs_url TYPE string,
-           git_tags_url TYPE string,
-           git_url TYPE string,
-           issue_comment_url TYPE string,
-           issue_events_url TYPE string,
-           issues_url TYPE string,
-           keys_url TYPE string,
-           labels_url TYPE string,
-           languages_url TYPE string,
-           merges_url TYPE string,
-           milestones_url TYPE string,
-           notifications_url TYPE string,
-           pulls_url TYPE string,
-           releases_url TYPE string,
-           ssh_url TYPE string,
-           stargazers_url TYPE string,
-           statuses_url TYPE string,
-           subscribers_url TYPE string,
-           subscription_url TYPE string,
-           tags_url TYPE string,
-           teams_url TYPE string,
-           trees_url TYPE string,
-           clone_url TYPE string,
-           mirror_url TYPE string,
-           hooks_url TYPE string,
-           svn_url TYPE string,
-           homepage TYPE string,
-           language TYPE string,
-           forks_count TYPE i,
-           stargazers_count TYPE i,
-           watchers_count TYPE i,
-           size TYPE i,
-           default_branch TYPE string,
-           open_issues_count TYPE i,
-           is_template TYPE abap_bool,
-           topics TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-           has_issues TYPE abap_bool,
-           has_projects TYPE abap_bool,
-           has_wiki TYPE abap_bool,
-           has_pages TYPE abap_bool,
-           has_downloads TYPE abap_bool,
-           archived TYPE abap_bool,
-           disabled TYPE abap_bool,
-           visibility TYPE string,
-           pushed_at TYPE string,
-           created_at TYPE string,
-           updated_at TYPE string,
-           allow_rebase_merge TYPE abap_bool,
-           template_repository TYPE subnullable_repository_templat,
-           temp_clone_token TYPE string,
-           allow_squash_merge TYPE abap_bool,
-           allow_auto_merge TYPE abap_bool,
-           delete_branch_on_merge TYPE abap_bool,
-           allow_merge_commit TYPE abap_bool,
-           allow_forking TYPE abap_bool,
-           subscribers_count TYPE i,
-           network_count TYPE i,
-           open_issues TYPE i,
-           watchers TYPE i,
-           master_branch TYPE string,
-           starred_at TYPE string,
-         END OF nullable_repository.
-
-* Component schema: minimal-repository, object
-  TYPES: BEGIN OF subminimal_repository_license,
-           key TYPE string,
-           name TYPE string,
-           spdx_id TYPE string,
-           url TYPE string,
-           node_id TYPE string,
-         END OF subminimal_repository_license.
-  TYPES: BEGIN OF subminimal_repository_permissi,
-           admin TYPE abap_bool,
-           maintain TYPE abap_bool,
-           push TYPE abap_bool,
-           triage TYPE abap_bool,
-           pull TYPE abap_bool,
-         END OF subminimal_repository_permissi.
-  TYPES: BEGIN OF minimal_repository,
-           id TYPE i,
-           node_id TYPE string,
-           name TYPE string,
-           full_name TYPE string,
-           owner TYPE simple_user,
-           private TYPE abap_bool,
-           html_url TYPE string,
-           description TYPE string,
-           fork TYPE abap_bool,
-           url TYPE string,
-           archive_url TYPE string,
-           assignees_url TYPE string,
-           blobs_url TYPE string,
-           branches_url TYPE string,
-           collaborators_url TYPE string,
-           comments_url TYPE string,
-           commits_url TYPE string,
-           compare_url TYPE string,
-           contents_url TYPE string,
-           contributors_url TYPE string,
-           deployments_url TYPE string,
-           downloads_url TYPE string,
-           events_url TYPE string,
-           forks_url TYPE string,
-           git_commits_url TYPE string,
-           git_refs_url TYPE string,
-           git_tags_url TYPE string,
-           git_url TYPE string,
-           issue_comment_url TYPE string,
-           issue_events_url TYPE string,
-           issues_url TYPE string,
-           keys_url TYPE string,
-           labels_url TYPE string,
-           languages_url TYPE string,
-           merges_url TYPE string,
-           milestones_url TYPE string,
-           notifications_url TYPE string,
-           pulls_url TYPE string,
-           releases_url TYPE string,
-           ssh_url TYPE string,
-           stargazers_url TYPE string,
-           statuses_url TYPE string,
-           subscribers_url TYPE string,
-           subscription_url TYPE string,
-           tags_url TYPE string,
-           teams_url TYPE string,
-           trees_url TYPE string,
-           clone_url TYPE string,
-           mirror_url TYPE string,
-           hooks_url TYPE string,
-           svn_url TYPE string,
-           homepage TYPE string,
-           language TYPE string,
-           forks_count TYPE i,
-           stargazers_count TYPE i,
-           watchers_count TYPE i,
-           size TYPE i,
-           default_branch TYPE string,
-           open_issues_count TYPE i,
-           is_template TYPE abap_bool,
-           topics TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-           has_issues TYPE abap_bool,
-           has_projects TYPE abap_bool,
-           has_wiki TYPE abap_bool,
-           has_pages TYPE abap_bool,
-           has_downloads TYPE abap_bool,
-           archived TYPE abap_bool,
-           disabled TYPE abap_bool,
-           visibility TYPE string,
-           pushed_at TYPE string,
-           created_at TYPE string,
-           updated_at TYPE string,
-           permissions TYPE subminimal_repository_permissi,
-           role_name TYPE string,
-           template_repository TYPE nullable_repository,
-           temp_clone_token TYPE string,
-           delete_branch_on_merge TYPE abap_bool,
-           subscribers_count TYPE i,
-           network_count TYPE i,
-           code_of_conduct TYPE code_of_conduct,
-           license TYPE subminimal_repository_license,
-           forks TYPE i,
-           open_issues TYPE i,
-           watchers TYPE i,
-           allow_forking TYPE abap_bool,
-         END OF minimal_repository.
 
 * Component schema: thread, object
   TYPES: BEGIN OF subthread_subject,
@@ -1534,6 +1578,11 @@ INTERFACE zif_github PUBLIC.
            id TYPE i,
            name TYPE string,
          END OF organization_custom_repository.
+
+* Component schema: external-groups, object
+  TYPES: BEGIN OF external_groups,
+           groups TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF external_groups.
 
 * Component schema: organization-full, object
   TYPES: BEGIN OF suborganization_full_plan,
@@ -1589,6 +1638,7 @@ INTERFACE zif_github PUBLIC.
            members_can_create_pages TYPE abap_bool,
            members_can_create_public_page TYPE abap_bool,
            members_can_create_private_pag TYPE abap_bool,
+           members_can_fork_private_repos TYPE abap_bool,
            updated_at TYPE string,
          END OF organization_full.
 
@@ -1602,6 +1652,24 @@ INTERFACE zif_github PUBLIC.
            allowed_actions TYPE allowed_actions,
            selected_actions_url TYPE selected_actions_url,
          END OF actions_organization_permissio.
+
+* Component schema: actions-default-workflow-permissions, string
+  TYPES actions_default_workflow_permi TYPE string.
+
+* Component schema: actions-can-approve-pull-request-reviews, boolean
+  TYPES actions_can_approve_pull_reque TYPE abap_bool.
+
+* Component schema: actions-get-default-workflow-permissions, object
+  TYPES: BEGIN OF actions_get_default_workflow_p,
+           default_workflow_permissions TYPE actions_default_workflow_permi,
+           can_approve_pull_request_revie TYPE actions_can_approve_pull_reque,
+         END OF actions_get_default_workflow_p.
+
+* Component schema: actions-set-default-workflow-permissions, object
+  TYPES: BEGIN OF actions_set_default_workflow_p,
+           default_workflow_permissions TYPE actions_default_workflow_permi,
+           can_approve_pull_request_revie TYPE actions_can_approve_pull_reque,
+         END OF actions_set_default_workflow_p.
 
 * Component schema: runner-groups-org, object
   TYPES: BEGIN OF runner_groups_org,
@@ -1656,6 +1724,21 @@ INTERFACE zif_github PUBLIC.
            authorized_credential_expires_ TYPE string,
          END OF credential_authorization.
 
+* Component schema: organization-dependabot-secret, object
+  TYPES: BEGIN OF organization_dependabot_secret,
+           name TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+           visibility TYPE string,
+           selected_repositories_url TYPE string,
+         END OF organization_dependabot_secret.
+
+* Component schema: dependabot-public-key, object
+  TYPES: BEGIN OF dependabot_public_key,
+           key_id TYPE string,
+           key TYPE string,
+         END OF dependabot_public_key.
+
 * Component schema: external-group, object
   TYPES: BEGIN OF external_group,
            group_id TYPE i,
@@ -1664,11 +1747,6 @@ INTERFACE zif_github PUBLIC.
            teams TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            members TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF external_group.
-
-* Component schema: external-groups, object
-  TYPES: BEGIN OF external_groups,
-           groups TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-         END OF external_groups.
 
 * Component schema: organization-invitation, object
   TYPES: BEGIN OF organization_invitation,
@@ -1963,40 +2041,6 @@ INTERFACE zif_github PUBLIC.
            private TYPE abap_bool,
          END OF project.
 
-* Component schema: alert-number, integer
-  TYPES alert_number TYPE i.
-
-* Component schema: alert-created-at, string
-  TYPES alert_created_at TYPE string.
-
-* Component schema: alert-url, string
-  TYPES alert_url TYPE string.
-
-* Component schema: alert-html-url, string
-  TYPES alert_html_url TYPE string.
-
-* Component schema: secret-scanning-alert-state, string
-  TYPES secret_scanning_alert_state TYPE string.
-
-* Component schema: secret-scanning-alert-resolution, string
-  TYPES secret_scanning_alert_resoluti TYPE string.
-
-* Component schema: organization-secret-scanning-alert, object
-  TYPES: BEGIN OF organization_secret_scanning_a,
-           number TYPE alert_number,
-           created_at TYPE alert_created_at,
-           url TYPE alert_url,
-           html_url TYPE alert_html_url,
-           locations_url TYPE string,
-           state TYPE secret_scanning_alert_state,
-           resolution TYPE secret_scanning_alert_resoluti,
-           resolved_at TYPE string,
-           resolved_by TYPE nullable_simple_user,
-           secret_type TYPE string,
-           secret TYPE string,
-           repository TYPE minimal_repository,
-         END OF organization_secret_scanning_a.
-
 * Component schema: group-mapping, object
   TYPES: BEGIN OF group_mapping,
            groups TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
@@ -2256,6 +2300,7 @@ INTERFACE zif_github PUBLIC.
            integration_manifest TYPE rate_limit,
            code_scanning_upload TYPE rate_limit,
            actions_runner_registration TYPE rate_limit,
+           scim TYPE rate_limit,
          END OF subrate_limit_overview_resourc.
   TYPES: BEGIN OF rate_limit_overview,
            resources TYPE subrate_limit_overview_resourc,
@@ -2638,6 +2683,16 @@ INTERFACE zif_github PUBLIC.
            url_template TYPE string,
          END OF autolink.
 
+* Component schema: protected-branch-required-status-check, object
+  TYPES: BEGIN OF protected_branch_required_stat,
+           url TYPE string,
+           enforcement_level TYPE string,
+           contexts TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           checks TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           contexts_url TYPE string,
+           strict TYPE abap_bool,
+         END OF protected_branch_required_stat.
+
 * Component schema: protected-branch-admin-enforced, object
   TYPES: BEGIN OF protected_branch_admin_enforce,
            url TYPE string,
@@ -2645,6 +2700,10 @@ INTERFACE zif_github PUBLIC.
          END OF protected_branch_admin_enforce.
 
 * Component schema: protected-branch-pull-request-review, object
+  TYPES: BEGIN OF subprotected_branch_pull_req01,
+           users TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           teams TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF subprotected_branch_pull_req01.
   TYPES: BEGIN OF subprotected_branch_pull_reque,
            users TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            teams TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
@@ -2655,6 +2714,7 @@ INTERFACE zif_github PUBLIC.
   TYPES: BEGIN OF protected_branch_pull_request_,
            url TYPE string,
            dismissal_restrictions TYPE subprotected_branch_pull_reque,
+           bypass_pull_request_allowances TYPE subprotected_branch_pull_req01,
            dismiss_stale_reviews TYPE abap_bool,
            require_code_owner_reviews TYPE abap_bool,
            required_approving_review_coun TYPE i,
@@ -2672,43 +2732,36 @@ INTERFACE zif_github PUBLIC.
          END OF branch_restriction_policy.
 
 * Component schema: branch-protection, object
-  TYPES: BEGIN OF subbranch_protection_require03,
+  TYPES: BEGIN OF subbranch_protection_require02,
            url TYPE string,
            enabled TYPE abap_bool,
-         END OF subbranch_protection_require03.
-  TYPES: BEGIN OF subbranch_protection_require02,
-           enabled TYPE abap_bool,
          END OF subbranch_protection_require02.
+  TYPES: BEGIN OF subbranch_protection_require01,
+           enabled TYPE abap_bool,
+         END OF subbranch_protection_require01.
   TYPES: BEGIN OF subbranch_protection_allow_del,
            enabled TYPE abap_bool,
          END OF subbranch_protection_allow_del.
   TYPES: BEGIN OF subbranch_protection_allow_for,
            enabled TYPE abap_bool,
          END OF subbranch_protection_allow_for.
-  TYPES: BEGIN OF subbranch_protection_require01,
-           enabled TYPE abap_bool,
-         END OF subbranch_protection_require01.
   TYPES: BEGIN OF subbranch_protection_required_,
-           url TYPE string,
-           enforcement_level TYPE string,
-           contexts TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-           contexts_url TYPE string,
-           strict TYPE abap_bool,
+           enabled TYPE abap_bool,
          END OF subbranch_protection_required_.
   TYPES: BEGIN OF branch_protection,
            url TYPE string,
            enabled TYPE abap_bool,
-           required_status_checks TYPE subbranch_protection_required_,
+           required_status_checks TYPE protected_branch_required_stat,
            enforce_admins TYPE protected_branch_admin_enforce,
            required_pull_request_reviews TYPE protected_branch_pull_request_,
            restrictions TYPE branch_restriction_policy,
-           required_linear_history TYPE subbranch_protection_require01,
+           required_linear_history TYPE subbranch_protection_required_,
            allow_force_pushes TYPE subbranch_protection_allow_for,
            allow_deletions TYPE subbranch_protection_allow_del,
-           required_conversation_resoluti TYPE subbranch_protection_require02,
+           required_conversation_resoluti TYPE subbranch_protection_require01,
            name TYPE string,
            protection_url TYPE string,
-           required_signatures TYPE subbranch_protection_require03,
+           required_signatures TYPE subbranch_protection_require02,
          END OF branch_protection.
 
 * Component schema: short-branch, object
@@ -2808,6 +2861,7 @@ INTERFACE zif_github PUBLIC.
            url TYPE string,
            strict TYPE abap_bool,
            contexts TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           checks TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            contexts_url TYPE string,
          END OF status_check_policy.
 
@@ -2832,6 +2886,10 @@ INTERFACE zif_github PUBLIC.
            url TYPE string,
            enabled TYPE abap_bool,
          END OF subprotected_branch_required_s.
+  TYPES: BEGIN OF subsubprotected_branch_requi01,
+           users TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           teams TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF subsubprotected_branch_requi01.
   TYPES: BEGIN OF subsubprotected_branch_require,
            url TYPE string,
            users_url TYPE string,
@@ -2845,6 +2903,7 @@ INTERFACE zif_github PUBLIC.
            require_code_owner_reviews TYPE abap_bool,
            required_approving_review_coun TYPE i,
            dismissal_restrictions TYPE subsubprotected_branch_require,
+           bypass_pull_request_allowances TYPE subsubprotected_branch_requi01,
          END OF subprotected_branch_required_p.
   TYPES: BEGIN OF protected_branch,
            url TYPE string,
@@ -2959,6 +3018,8 @@ INTERFACE zif_github PUBLIC.
            head_commit TYPE simple_commit,
            latest_check_runs_count TYPE i,
            check_runs_url TYPE string,
+           rerequestable TYPE abap_bool,
+           runs_rerequestable TYPE abap_bool,
          END OF check_suite.
 
 * Component schema: check-suite-preference, object
@@ -2982,8 +3043,14 @@ INTERFACE zif_github PUBLIC.
 * Component schema: code-scanning-alert-state, string
   TYPES code_scanning_alert_state TYPE string.
 
+* Component schema: alert-updated-at, string
+  TYPES alert_updated_at TYPE string.
+
 * Component schema: alert-instances-url, string
   TYPES alert_instances_url TYPE string.
+
+* Component schema: code-scanning-alert-fixed-at, string
+  TYPES code_scanning_alert_fixed_at TYPE string.
 
 * Component schema: code-scanning-alert-dismissed-at, string
   TYPES code_scanning_alert_dismissed_ TYPE string.
@@ -2995,6 +3062,7 @@ INTERFACE zif_github PUBLIC.
   TYPES: BEGIN OF code_scanning_alert_rule_summa,
            id TYPE string,
            name TYPE string,
+           tags TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            severity TYPE string,
            description TYPE string,
          END OF code_scanning_alert_rule_summa.
@@ -3051,10 +3119,12 @@ INTERFACE zif_github PUBLIC.
   TYPES: BEGIN OF code_scanning_alert_items,
            number TYPE alert_number,
            created_at TYPE alert_created_at,
+           updated_at TYPE alert_updated_at,
            url TYPE alert_url,
            html_url TYPE alert_html_url,
            instances_url TYPE alert_instances_url,
            state TYPE code_scanning_alert_state,
+           fixed_at TYPE code_scanning_alert_fixed_at,
            dismissed_by TYPE nullable_simple_user,
            dismissed_at TYPE code_scanning_alert_dismissed_,
            dismissed_reason TYPE code_scanning_alert_dismisse01,
@@ -3079,10 +3149,12 @@ INTERFACE zif_github PUBLIC.
   TYPES: BEGIN OF code_scanning_alert,
            number TYPE alert_number,
            created_at TYPE alert_created_at,
+           updated_at TYPE alert_updated_at,
            url TYPE alert_url,
            html_url TYPE alert_html_url,
            instances_url TYPE alert_instances_url,
            state TYPE code_scanning_alert_state,
+           fixed_at TYPE code_scanning_alert_fixed_at,
            dismissed_by TYPE nullable_simple_user,
            dismissed_at TYPE code_scanning_alert_dismissed_,
            dismissed_reason TYPE code_scanning_alert_dismisse01,
@@ -3147,6 +3219,7 @@ INTERFACE zif_github PUBLIC.
   TYPES: BEGIN OF code_scanning_sarifs_status,
            processing_status TYPE string,
            analyses_url TYPE string,
+           errors TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF code_scanning_sarifs_status.
 
 * Component schema: nullable-codespace-machine, object
@@ -3161,6 +3234,9 @@ INTERFACE zif_github PUBLIC.
          END OF nullable_codespace_machine.
 
 * Component schema: codespace, object
+  TYPES: BEGIN OF subcodespace_runtime_constrain,
+           allowed_port_privacy_settings TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF subcodespace_runtime_constrain.
   TYPES: BEGIN OF subcodespace_git_status,
            ahead TYPE i,
            behind TYPE i,
@@ -3191,6 +3267,7 @@ INTERFACE zif_github PUBLIC.
            stop_url TYPE string,
            pulls_url TYPE string,
            recent_folders TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           runtime_constraints TYPE subcodespace_runtime_constrain,
          END OF codespace.
 
 * Component schema: codespace-machine, object
@@ -3488,14 +3565,6 @@ INTERFACE zif_github PUBLIC.
            files TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF commit_comparison.
 
-* Component schema: content-reference-attachment, object
-  TYPES: BEGIN OF content_reference_attachment,
-           id TYPE i,
-           title TYPE string,
-           body TYPE string,
-           node_id TYPE string,
-         END OF content_reference_attachment.
-
 * Component schema: content-tree, object
   TYPES: BEGIN OF subcontent_tree__links,
            git TYPE string,
@@ -3661,6 +3730,13 @@ INTERFACE zif_github PUBLIC.
            email TYPE string,
            name TYPE string,
          END OF contributor.
+
+* Component schema: dependabot-secret, object
+  TYPES: BEGIN OF dependabot_secret,
+           name TYPE string,
+           created_at TYPE string,
+           updated_at TYPE string,
+         END OF dependabot_secret.
 
 * Component schema: deployment-status, object
   TYPES: BEGIN OF deployment_status,
@@ -3912,6 +3988,7 @@ INTERFACE zif_github PUBLIC.
            closed_at TYPE string,
            created_at TYPE string,
            updated_at TYPE string,
+           draft TYPE abap_bool,
            closed_by TYPE nullable_simple_user,
            body_html TYPE string,
            body_text TYPE string,
@@ -5145,6 +5222,25 @@ INTERFACE zif_github PUBLIC.
            secret TYPE string,
          END OF secret_scanning_alert.
 
+* Component schema: secret-scanning-location-commit, object
+  TYPES: BEGIN OF secret_scanning_location_commi,
+           path TYPE string,
+           start_line TYPE f,
+           end_line TYPE f,
+           start_column TYPE f,
+           end_column TYPE f,
+           blob_sha TYPE string,
+           blob_url TYPE string,
+           commit_sha TYPE string,
+           commit_url TYPE string,
+         END OF secret_scanning_location_commi.
+
+* Component schema: secret-scanning-location, object
+  TYPES: BEGIN OF secret_scanning_location,
+           type TYPE string,
+           details TYPE string,
+         END OF secret_scanning_location.
+
 * Component schema: stargazer, object
   TYPES: BEGIN OF stargazer,
            starred_at TYPE string,
@@ -5666,6 +5762,16 @@ INTERFACE zif_github PUBLIC.
            key TYPE string,
          END OF codespaces_user_public_key.
 
+* Component schema: codespace-export-details, object
+  TYPES: BEGIN OF codespace_export_details,
+           state TYPE string,
+           completed_at TYPE string,
+           branch TYPE string,
+           sha TYPE string,
+           id TYPE string,
+           export_url TYPE string,
+         END OF codespace_export_details.
+
 * Component schema: email, object
   TYPES: BEGIN OF email,
            email TYPE string,
@@ -5836,6 +5942,21 @@ INTERFACE zif_github PUBLIC.
            runners TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF bodyenterprise_admin_set_self_.
 
+* Component schema: bodyenterprise_admin_add_custo, object
+  TYPES: BEGIN OF bodyenterprise_admin_add_custo,
+           labels TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF bodyenterprise_admin_add_custo.
+
+* Component schema: bodyenterprise_admin_set_custo, object
+  TYPES: BEGIN OF bodyenterprise_admin_set_custo,
+           labels TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF bodyenterprise_admin_set_custo.
+
+* Component schema: bodyenterprise_admin_remove_al, object
+  TYPES: BEGIN OF bodyenterprise_admin_remove_al,
+           labels TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF bodyenterprise_admin_remove_al.
+
 * Component schema: bodygists_create, object
   TYPES: BEGIN OF subbodygists_create_files,
            dummy_workaround TYPE i,
@@ -5922,6 +6043,7 @@ INTERFACE zif_github PUBLIC.
            members_can_create_pages TYPE abap_bool,
            members_can_create_public_page TYPE abap_bool,
            members_can_create_private_pag TYPE abap_bool,
+           members_can_fork_private_repos TYPE abap_bool,
            blog TYPE string,
          END OF bodyorgs_update.
 
@@ -5969,6 +6091,21 @@ INTERFACE zif_github PUBLIC.
            runners TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF bodyactions_set_self_hosted_ru.
 
+* Component schema: bodyactions_add_custom_labels_, object
+  TYPES: BEGIN OF bodyactions_add_custom_labels_,
+           labels TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF bodyactions_add_custom_labels_.
+
+* Component schema: bodyactions_set_custom_labels_, object
+  TYPES: BEGIN OF bodyactions_set_custom_labels_,
+           labels TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF bodyactions_set_custom_labels_.
+
+* Component schema: bodyactions_remove_all_custom_, object
+  TYPES: BEGIN OF bodyactions_remove_all_custom_,
+           labels TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF bodyactions_remove_all_custom_.
+
 * Component schema: bodyactions_create_or_update_o, object
   TYPES: BEGIN OF bodyactions_create_or_update_o,
            encrypted_value TYPE string,
@@ -5989,6 +6126,27 @@ INTERFACE zif_github PUBLIC.
   TYPES: BEGIN OF bodyactions_set_selected_rep01,
            selected_repository_ids TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF bodyactions_set_selected_rep01.
+
+* Component schema: bodydependabot_create_or_updat, object
+  TYPES: BEGIN OF bodydependabot_create_or_updat,
+           encrypted_value TYPE string,
+           key_id TYPE string,
+           visibility TYPE string,
+           selected_repository_ids TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF bodydependabot_create_or_updat.
+
+* Component schema: bodydependabot_delete_org_secr, object
+  TYPES: BEGIN OF bodydependabot_delete_org_secr,
+           encrypted_value TYPE string,
+           key_id TYPE string,
+           visibility TYPE string,
+           selected_repository_ids TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF bodydependabot_delete_org_secr.
+
+* Component schema: bodydependabot_set_selected_re, object
+  TYPES: BEGIN OF bodydependabot_set_selected_re,
+           selected_repository_ids TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF bodydependabot_set_selected_re.
 
 * Component schema: bodyorgs_create_webhook, object
   TYPES: BEGIN OF subbodyorgs_create_webhook_con,
@@ -6352,6 +6510,21 @@ INTERFACE zif_github PUBLIC.
            allowed_actions TYPE allowed_actions,
          END OF bodyactions_set_github_actio01.
 
+* Component schema: bodyactions_add_custom_label01, object
+  TYPES: BEGIN OF bodyactions_add_custom_label01,
+           labels TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF bodyactions_add_custom_label01.
+
+* Component schema: bodyactions_set_custom_label01, object
+  TYPES: BEGIN OF bodyactions_set_custom_label01,
+           labels TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF bodyactions_set_custom_label01.
+
+* Component schema: bodyactions_remove_all_custo01, object
+  TYPES: BEGIN OF bodyactions_remove_all_custo01,
+           labels TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF bodyactions_remove_all_custo01.
+
 * Component schema: bodyactions_review_pending_dep, object
   TYPES: BEGIN OF bodyactions_review_pending_dep,
            environment_ids TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
@@ -6392,6 +6565,10 @@ INTERFACE zif_github PUBLIC.
            teams TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            apps TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF subbodyrepos_update_branch_p02.
+  TYPES: BEGIN OF subsubbodyrepos_update_branc01,
+           users TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           teams TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF subsubbodyrepos_update_branc01.
   TYPES: BEGIN OF subsubbodyrepos_update_branch_,
            users TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            teams TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
@@ -6401,10 +6578,12 @@ INTERFACE zif_github PUBLIC.
            dismiss_stale_reviews TYPE abap_bool,
            require_code_owner_reviews TYPE abap_bool,
            required_approving_review_coun TYPE i,
+           bypass_pull_request_allowances TYPE subsubbodyrepos_update_branc01,
          END OF subbodyrepos_update_branch_p01.
   TYPES: BEGIN OF subbodyrepos_update_branch_pro,
            strict TYPE abap_bool,
            contexts TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           checks TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF subbodyrepos_update_branch_pro.
   TYPES: BEGIN OF bodyrepos_update_branch_protec,
            required_status_checks TYPE subbodyrepos_update_branch_pro,
@@ -6423,6 +6602,10 @@ INTERFACE zif_github PUBLIC.
            teams TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            apps TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF subbodyrepos_delete_branch_p02.
+  TYPES: BEGIN OF subsubbodyrepos_delete_branc01,
+           users TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           teams TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF subsubbodyrepos_delete_branc01.
   TYPES: BEGIN OF subsubbodyrepos_delete_branch_,
            users TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            teams TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
@@ -6432,10 +6615,12 @@ INTERFACE zif_github PUBLIC.
            dismiss_stale_reviews TYPE abap_bool,
            require_code_owner_reviews TYPE abap_bool,
            required_approving_review_coun TYPE i,
+           bypass_pull_request_allowances TYPE subsubbodyrepos_delete_branc01,
          END OF subbodyrepos_delete_branch_p01.
   TYPES: BEGIN OF subbodyrepos_delete_branch_pro,
            strict TYPE abap_bool,
            contexts TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           checks TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF subbodyrepos_delete_branch_pro.
   TYPES: BEGIN OF bodyrepos_delete_branch_protec,
            required_status_checks TYPE subbodyrepos_delete_branch_pro,
@@ -6449,6 +6634,10 @@ INTERFACE zif_github PUBLIC.
          END OF bodyrepos_delete_branch_protec.
 
 * Component schema: bodyrepos_update_pull_request_, object
+  TYPES: BEGIN OF subbodyrepos_update_pull_req01,
+           users TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           teams TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF subbodyrepos_update_pull_req01.
   TYPES: BEGIN OF subbodyrepos_update_pull_reque,
            users TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            teams TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
@@ -6458,9 +6647,14 @@ INTERFACE zif_github PUBLIC.
            dismiss_stale_reviews TYPE abap_bool,
            require_code_owner_reviews TYPE abap_bool,
            required_approving_review_coun TYPE i,
+           bypass_pull_request_allowances TYPE subbodyrepos_update_pull_req01,
          END OF bodyrepos_update_pull_request_.
 
 * Component schema: bodyrepos_delete_pull_request_, object
+  TYPES: BEGIN OF subbodyrepos_delete_pull_req01,
+           users TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           teams TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF subbodyrepos_delete_pull_req01.
   TYPES: BEGIN OF subbodyrepos_delete_pull_reque,
            users TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
            teams TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
@@ -6470,18 +6664,21 @@ INTERFACE zif_github PUBLIC.
            dismiss_stale_reviews TYPE abap_bool,
            require_code_owner_reviews TYPE abap_bool,
            required_approving_review_coun TYPE i,
+           bypass_pull_request_allowances TYPE subbodyrepos_delete_pull_req01,
          END OF bodyrepos_delete_pull_request_.
 
 * Component schema: bodyrepos_update_status_check_, object
   TYPES: BEGIN OF bodyrepos_update_status_check_,
            strict TYPE abap_bool,
            contexts TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           checks TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF bodyrepos_update_status_check_.
 
 * Component schema: bodyrepos_remove_status_check_, object
   TYPES: BEGIN OF bodyrepos_remove_status_check_,
            strict TYPE abap_bool,
            contexts TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           checks TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF bodyrepos_remove_status_check_.
 
 * Component schema: bodyrepos_rename_branch, object
@@ -6562,6 +6759,7 @@ INTERFACE zif_github PUBLIC.
            location TYPE string,
            machine TYPE string,
            working_directory TYPE string,
+           idle_timeout_minutes TYPE i,
          END OF bodycodespaces_create_with_rep.
 
 * Component schema: bodyrepos_add_collaborator, object
@@ -6599,12 +6797,6 @@ INTERFACE zif_github PUBLIC.
            line TYPE i,
          END OF bodyrepos_create_commit_commen.
 
-* Component schema: bodyapps_create_content_attach, object
-  TYPES: BEGIN OF bodyapps_create_content_attach,
-           title TYPE string,
-           body TYPE string,
-         END OF bodyapps_create_content_attach.
-
 * Component schema: bodyrepos_create_or_update_fil, object
   TYPES: BEGIN OF subbodyrepos_create_or_updat01,
            name TYPE string,
@@ -6641,6 +6833,18 @@ INTERFACE zif_github PUBLIC.
            committer TYPE subbodyrepos_delete_file_commi,
            author TYPE subbodyrepos_delete_file_autho,
          END OF bodyrepos_delete_file.
+
+* Component schema: bodydependabot_create_or_upd01, object
+  TYPES: BEGIN OF bodydependabot_create_or_upd01,
+           encrypted_value TYPE string,
+           key_id TYPE string,
+         END OF bodydependabot_create_or_upd01.
+
+* Component schema: bodydependabot_delete_repo_sec, object
+  TYPES: BEGIN OF bodydependabot_delete_repo_sec,
+           encrypted_value TYPE string,
+           key_id TYPE string,
+         END OF bodydependabot_delete_repo_sec.
 
 * Component schema: bodyrepos_create_deployment, object
   TYPES: BEGIN OF bodyrepos_create_deployment,
@@ -7069,6 +7273,7 @@ INTERFACE zif_github PUBLIC.
            location TYPE string,
            machine TYPE string,
            working_directory TYPE string,
+           idle_timeout_minutes TYPE i,
          END OF bodycodespaces_create_with_pr_.
 
 * Component schema: bodypulls_create_review_commen, object
@@ -7407,11 +7612,13 @@ INTERFACE zif_github PUBLIC.
 * Component schema: bodycodespaces_update_for_auth, object
   TYPES: BEGIN OF bodycodespaces_update_for_auth,
            machine TYPE string,
+           recent_folders TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF bodycodespaces_update_for_auth.
 
 * Component schema: bodycodespaces_delete_for_auth, object
   TYPES: BEGIN OF bodycodespaces_delete_for_auth,
            machine TYPE string,
+           recent_folders TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF bodycodespaces_delete_for_auth.
 
 * Component schema: bodyusers_set_primary_email_vi, object
@@ -7560,6 +7767,9 @@ INTERFACE zif_github PUBLIC.
 * Component schema: response_enterprise_admin_get_audit_log, array
   TYPES response_enterprise_admin_get_ TYPE STANDARD TABLE OF audit_log_event WITH DEFAULT KEY.
 
+* Component schema: response_secret_scanning_list_alerts_fo, array
+  TYPES response_secret_scanning_list_ TYPE STANDARD TABLE OF organization_secret_scanning_a WITH DEFAULT KEY.
+
 * Component schema: response_activity_list_public_events, array
   TYPES response_activity_list_public_ TYPE STANDARD TABLE OF event WITH DEFAULT KEY.
 
@@ -7688,6 +7898,18 @@ INTERFACE zif_github PUBLIC.
 * Component schema: response_orgs_list_saml_sso_authorizati, array
   TYPES response_orgs_list_saml_sso_au TYPE STANDARD TABLE OF credential_authorization WITH DEFAULT KEY.
 
+* Component schema: response_dependabot_list_org_secrets, object
+  TYPES: BEGIN OF response_dependabot_list_org_s,
+           total_count TYPE i,
+           secrets TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF response_dependabot_list_org_s.
+
+* Component schema: response_dependabot_list_selected_repos, object
+  TYPES: BEGIN OF response_dependabot_list_selec,
+           total_count TYPE i,
+           repositories TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF response_dependabot_list_selec.
+
 * Component schema: response_activity_list_public_org_event, array
   TYPES response_activity_list_publi02 TYPE STANDARD TABLE OF event WITH DEFAULT KEY.
 
@@ -7753,8 +7975,8 @@ INTERFACE zif_github PUBLIC.
 * Component schema: response_repos_list_for_org, array
   TYPES response_repos_list_for_org TYPE STANDARD TABLE OF minimal_repository WITH DEFAULT KEY.
 
-* Component schema: response_secret_scanning_list_alerts_fo, array
-  TYPES response_secret_scanning_list_ TYPE STANDARD TABLE OF organization_secret_scanning_a WITH DEFAULT KEY.
+* Component schema: response_secret_scanning_list_alerts_01, array
+  TYPES response_secret_scanning_lis01 TYPE STANDARD TABLE OF organization_secret_scanning_a WITH DEFAULT KEY.
 
 * Component schema: response_teams_list, array
   TYPES response_teams_list TYPE STANDARD TABLE OF team WITH DEFAULT KEY.
@@ -8073,6 +8295,17 @@ INTERFACE zif_github PUBLIC.
 * Component schema: response_repos_list_contributors, array
   TYPES response_repos_list_contributo TYPE STANDARD TABLE OF contributor WITH DEFAULT KEY.
 
+* Component schema: response_dependabot_list_repo_secrets, object
+  TYPES: BEGIN OF response_dependabot_list_repo_,
+           total_count TYPE i,
+           secrets TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF response_dependabot_list_repo_.
+
+* Component schema: response_dependabot_create_or_update_re, object
+  TYPES: BEGIN OF response_dependabot_create_or_,
+           dummy_workaround TYPE i,
+         END OF response_dependabot_create_or_.
+
 * Component schema: response_repos_list_deployments, array
   TYPES response_repos_list_deployment TYPE STANDARD TABLE OF deployment WITH DEFAULT KEY.
 
@@ -8225,8 +8458,11 @@ INTERFACE zif_github PUBLIC.
 * Component schema: response_repos_list_release_assets, array
   TYPES response_repos_list_release_as TYPE STANDARD TABLE OF release_asset WITH DEFAULT KEY.
 
-* Component schema: response_secret_scanning_list_alerts_01, array
-  TYPES response_secret_scanning_lis01 TYPE STANDARD TABLE OF secret_scanning_alert WITH DEFAULT KEY.
+* Component schema: response_secret_scanning_list_alerts_02, array
+  TYPES response_secret_scanning_lis02 TYPE STANDARD TABLE OF secret_scanning_alert WITH DEFAULT KEY.
+
+* Component schema: response_secret_scanning_list_locations, array
+  TYPES response_secret_scanning_lis03 TYPE STANDARD TABLE OF secret_scanning_location WITH DEFAULT KEY.
 
 * Component schema: response_repos_get_code_frequency_stats, array
   TYPES response_repos_get_code_freque TYPE STANDARD TABLE OF code_frequency_stat WITH DEFAULT KEY.
@@ -9131,6 +9367,78 @@ INTERFACE zif_github PUBLIC.
       runner_id TYPE i
     RAISING cx_static_check.
 
+* GET - "List labels for a self-hosted runner for an enterprise"
+* Operation id: enterprise-admin/list-labels-for-self-hosted-runner-for-enterprise
+* Parameter: enterprise, required, path
+* Parameter: runner_id, required, path
+* Response: 200
+* Response: 404
+  METHODS enterprise_admin_list_labels_f
+    IMPORTING
+      enterprise TYPE string
+      runner_id TYPE i
+    RAISING cx_static_check.
+
+* POST - "Add custom labels to a self-hosted runner for an enterprise"
+* Operation id: enterprise-admin/add-custom-labels-to-self-hosted-runner-for-enterprise
+* Parameter: enterprise, required, path
+* Parameter: runner_id, required, path
+* Response: 200
+* Response: 404
+* Response: 422
+* Body ref: #/components/schemas/bodyenterprise_admin_add_custo
+  METHODS enterprise_admin_add_custom_la
+    IMPORTING
+      enterprise TYPE string
+      runner_id TYPE i
+      body TYPE bodyenterprise_admin_add_custo
+    RAISING cx_static_check.
+
+* PUT - "Set custom labels for a self-hosted runner for an enterprise"
+* Operation id: enterprise-admin/set-custom-labels-for-self-hosted-runner-for-enterprise
+* Parameter: enterprise, required, path
+* Parameter: runner_id, required, path
+* Response: 200
+* Response: 404
+* Response: 422
+* Body ref: #/components/schemas/bodyenterprise_admin_set_custo
+  METHODS enterprise_admin_set_custom_la
+    IMPORTING
+      enterprise TYPE string
+      runner_id TYPE i
+      body TYPE bodyenterprise_admin_set_custo
+    RAISING cx_static_check.
+
+* DELETE - "Remove all custom labels from a self-hosted runner for an enterprise"
+* Operation id: enterprise-admin/remove-all-custom-labels-from-self-hosted-runner-for-enterprise
+* Parameter: enterprise, required, path
+* Parameter: runner_id, required, path
+* Response: 200
+* Response: 404
+* Response: 422
+* Body ref: #/components/schemas/bodyenterprise_admin_remove_al
+  METHODS enterprise_admin_remove_all_cu
+    IMPORTING
+      enterprise TYPE string
+      runner_id TYPE i
+      body TYPE bodyenterprise_admin_remove_al
+    RAISING cx_static_check.
+
+* DELETE - "Remove a custom label from a self-hosted runner for an enterprise"
+* Operation id: enterprise-admin/remove-custom-label-from-self-hosted-runner-for-enterprise
+* Parameter: enterprise, required, path
+* Parameter: runner_id, required, path
+* Parameter: name, required, path
+* Response: 200
+* Response: 404
+* Response: 422
+  METHODS enterprise_admin_remove_custom
+    IMPORTING
+      enterprise TYPE string
+      runner_id TYPE i
+      name TYPE string
+    RAISING cx_static_check.
+
 * GET - "Get the audit log for an enterprise"
 * Operation id: enterprise-admin/get-audit-log
 * Parameter: enterprise, required, path
@@ -9155,6 +9463,32 @@ INTERFACE zif_github PUBLIC.
       per_page TYPE i DEFAULT 30
     RETURNING
       VALUE(return_data) TYPE response_enterprise_admin_get_
+    RAISING cx_static_check.
+
+* GET - "List secret scanning alerts for an enterprise"
+* Operation id: secret-scanning/list-alerts-for-enterprise
+* Parameter: enterprise, required, path
+* Parameter: state, optional, query
+* Parameter: secret_type, optional, query
+* Parameter: resolution, optional, query
+* Parameter: per_page, optional, query
+* Parameter: before, optional, query
+* Parameter: after, optional, query
+* Response: 200
+*     application/json, #/components/schemas/response_secret_scanning_list_alerts_fo
+* Response: 404
+* Response: 503
+  METHODS secret_scanning_list_alerts_fo
+    IMPORTING
+      enterprise TYPE string
+      state TYPE string OPTIONAL
+      secret_type TYPE string OPTIONAL
+      resolution TYPE string OPTIONAL
+      per_page TYPE i DEFAULT 30
+      before TYPE string OPTIONAL
+      after TYPE string OPTIONAL
+    RETURNING
+      VALUE(return_data) TYPE response_secret_scanning_list_
     RAISING cx_static_check.
 
 * GET - "Get GitHub Actions billing for an enterprise"
@@ -9966,6 +10300,20 @@ INTERFACE zif_github PUBLIC.
       VALUE(return_data) TYPE response_orgs_list_custom_role
     RAISING cx_static_check.
 
+* GET - "List a connection between an external group and a team"
+* Operation id: teams/list-linked-external-idp-groups-to-team-for-org
+* Parameter: org, required, path
+* Parameter: team_slug, required, path
+* Response: 200
+*     application/json, #/components/schemas/external-groups
+  METHODS teams_list_linked_external_idp
+    IMPORTING
+      org TYPE string
+      team_slug TYPE string
+    RETURNING
+      VALUE(return_data) TYPE external_groups
+    RAISING cx_static_check.
+
 * GET - "Get an organization"
 * Operation id: orgs/get
 * Parameter: org, required, path
@@ -10089,6 +10437,29 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       org TYPE string
       body TYPE selected_actions
+    RAISING cx_static_check.
+
+* GET - "Get default workflow permissions"
+* Operation id: actions/get-github-actions-default-workflow-permissions-organization
+* Parameter: org, required, path
+* Response: 200
+*     application/json, #/components/schemas/actions-get-default-workflow-permissions
+  METHODS actions_get_github_actions_def
+    IMPORTING
+      org TYPE string
+    RETURNING
+      VALUE(return_data) TYPE actions_get_default_workflow_p
+    RAISING cx_static_check.
+
+* PUT - "Set default workflow permissions"
+* Operation id: actions/set-github-actions-default-workflow-permissions-organization
+* Parameter: org, required, path
+* Response: 204
+* Body ref: #/components/schemas/actions-set-default-workflow-permissions
+  METHODS actions_set_github_actions_def
+    IMPORTING
+      org TYPE string
+      body TYPE actions_set_default_workflow_p
     RAISING cx_static_check.
 
 * GET - "List self-hosted runner groups for an organization"
@@ -10355,6 +10726,77 @@ INTERFACE zif_github PUBLIC.
       runner_id TYPE i
     RAISING cx_static_check.
 
+* GET - "List labels for a self-hosted runner for an organization"
+* Operation id: actions/list-labels-for-self-hosted-runner-for-org
+* Parameter: org, required, path
+* Parameter: runner_id, required, path
+* Response: 200
+* Response: 404
+  METHODS actions_list_labels_for_self_h
+    IMPORTING
+      org TYPE string
+      runner_id TYPE i
+    RAISING cx_static_check.
+
+* POST - "Add custom labels to a self-hosted runner for an organization"
+* Operation id: actions/add-custom-labels-to-self-hosted-runner-for-org
+* Parameter: org, required, path
+* Parameter: runner_id, required, path
+* Response: 200
+* Response: 404
+* Response: 422
+* Body ref: #/components/schemas/bodyactions_add_custom_labels_
+  METHODS actions_add_custom_labels_to_s
+    IMPORTING
+      org TYPE string
+      runner_id TYPE i
+      body TYPE bodyactions_add_custom_labels_
+    RAISING cx_static_check.
+
+* PUT - "Set custom labels for a self-hosted runner for an organization"
+* Operation id: actions/set-custom-labels-for-self-hosted-runner-for-org
+* Parameter: org, required, path
+* Parameter: runner_id, required, path
+* Response: 200
+* Response: 404
+* Response: 422
+* Body ref: #/components/schemas/bodyactions_set_custom_labels_
+  METHODS actions_set_custom_labels_for_
+    IMPORTING
+      org TYPE string
+      runner_id TYPE i
+      body TYPE bodyactions_set_custom_labels_
+    RAISING cx_static_check.
+
+* DELETE - "Remove all custom labels from a self-hosted runner for an organization"
+* Operation id: actions/remove-all-custom-labels-from-self-hosted-runner-for-org
+* Parameter: org, required, path
+* Parameter: runner_id, required, path
+* Response: 200
+* Response: 404
+* Body ref: #/components/schemas/bodyactions_remove_all_custom_
+  METHODS actions_remove_all_custom_labe
+    IMPORTING
+      org TYPE string
+      runner_id TYPE i
+      body TYPE bodyactions_remove_all_custom_
+    RAISING cx_static_check.
+
+* DELETE - "Remove a custom label from a self-hosted runner for an organization"
+* Operation id: actions/remove-custom-label-from-self-hosted-runner-for-org
+* Parameter: org, required, path
+* Parameter: runner_id, required, path
+* Parameter: name, required, path
+* Response: 200
+* Response: 404
+* Response: 422
+  METHODS actions_remove_custom_label_fr
+    IMPORTING
+      org TYPE string
+      runner_id TYPE i
+      name TYPE string
+    RAISING cx_static_check.
+
 * GET - "List organization secrets"
 * Operation id: actions/list-org-secrets
 * Parameter: org, required, path
@@ -10561,12 +11003,18 @@ INTERFACE zif_github PUBLIC.
 
 * GET - "List SAML SSO authorizations for an organization"
 * Operation id: orgs/list-saml-sso-authorizations
+* Parameter: page, optional, query
+* Parameter: login, optional, query
 * Parameter: org, required, path
+* Parameter: per_page, optional, query
 * Response: 200
 *     application/json, #/components/schemas/response_orgs_list_saml_sso_authorizati
   METHODS orgs_list_saml_sso_authorizati
     IMPORTING
+      page TYPE i OPTIONAL
+      login TYPE string OPTIONAL
       org TYPE string
+      per_page TYPE i DEFAULT 30
     RETURNING
       VALUE(return_data) TYPE response_orgs_list_saml_sso_au
     RAISING cx_static_check.
@@ -10581,6 +11029,137 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       credential_id TYPE i
       org TYPE string
+    RAISING cx_static_check.
+
+* GET - "List organization secrets"
+* Operation id: dependabot/list-org-secrets
+* Parameter: org, required, path
+* Parameter: per_page, optional, query
+* Parameter: page, optional, query
+* Response: 200
+*     application/json, #/components/schemas/response_dependabot_list_org_secrets
+  METHODS dependabot_list_org_secrets
+    IMPORTING
+      org TYPE string
+      per_page TYPE i DEFAULT 30
+      page TYPE i DEFAULT 1
+    RETURNING
+      VALUE(return_data) TYPE response_dependabot_list_org_s
+    RAISING cx_static_check.
+
+* GET - "Get an organization public key"
+* Operation id: dependabot/get-org-public-key
+* Parameter: org, required, path
+* Response: 200
+*     application/json, #/components/schemas/dependabot-public-key
+  METHODS dependabot_get_org_public_key
+    IMPORTING
+      org TYPE string
+    RETURNING
+      VALUE(return_data) TYPE dependabot_public_key
+    RAISING cx_static_check.
+
+* GET - "Get an organization secret"
+* Operation id: dependabot/get-org-secret
+* Parameter: org, required, path
+* Parameter: secret_name, required, path
+* Response: 200
+*     application/json, #/components/schemas/organization-dependabot-secret
+  METHODS dependabot_get_org_secret
+    IMPORTING
+      org TYPE string
+      secret_name TYPE string
+    RETURNING
+      VALUE(return_data) TYPE organization_dependabot_secret
+    RAISING cx_static_check.
+
+* PUT - "Create or update an organization secret"
+* Operation id: dependabot/create-or-update-org-secret
+* Parameter: org, required, path
+* Parameter: secret_name, required, path
+* Response: 201
+*     application/json, #/components/schemas/empty-object
+* Response: 204
+* Body ref: #/components/schemas/bodydependabot_create_or_updat
+  METHODS dependabot_create_or_update_or
+    IMPORTING
+      org TYPE string
+      secret_name TYPE string
+      body TYPE bodydependabot_create_or_updat
+    RETURNING
+      VALUE(return_data) TYPE empty_object
+    RAISING cx_static_check.
+
+* DELETE - "Delete an organization secret"
+* Operation id: dependabot/delete-org-secret
+* Parameter: org, required, path
+* Parameter: secret_name, required, path
+* Response: 204
+* Body ref: #/components/schemas/bodydependabot_delete_org_secr
+  METHODS dependabot_delete_org_secret
+    IMPORTING
+      org TYPE string
+      secret_name TYPE string
+      body TYPE bodydependabot_delete_org_secr
+    RAISING cx_static_check.
+
+* GET - "List selected repositories for an organization secret"
+* Operation id: dependabot/list-selected-repos-for-org-secret
+* Parameter: org, required, path
+* Parameter: secret_name, required, path
+* Parameter: page, optional, query
+* Parameter: per_page, optional, query
+* Response: 200
+*     application/json, #/components/schemas/response_dependabot_list_selected_repos
+  METHODS dependabot_list_selected_repos
+    IMPORTING
+      org TYPE string
+      secret_name TYPE string
+      page TYPE i DEFAULT 1
+      per_page TYPE i DEFAULT 30
+    RETURNING
+      VALUE(return_data) TYPE response_dependabot_list_selec
+    RAISING cx_static_check.
+
+* PUT - "Set selected repositories for an organization secret"
+* Operation id: dependabot/set-selected-repos-for-org-secret
+* Parameter: org, required, path
+* Parameter: secret_name, required, path
+* Response: 204
+* Body ref: #/components/schemas/bodydependabot_set_selected_re
+  METHODS dependabot_set_selected_repos_
+    IMPORTING
+      org TYPE string
+      secret_name TYPE string
+      body TYPE bodydependabot_set_selected_re
+    RAISING cx_static_check.
+
+* PUT - "Add selected repository to an organization secret"
+* Operation id: dependabot/add-selected-repo-to-org-secret
+* Parameter: repository_id, required, path
+* Parameter: org, required, path
+* Parameter: secret_name, required, path
+* Response: 204
+* Response: 409
+  METHODS dependabot_add_selected_repo_t
+    IMPORTING
+      repository_id TYPE i
+      org TYPE string
+      secret_name TYPE string
+    RAISING cx_static_check.
+
+* DELETE - "Remove selected repository from an organization secret"
+* Operation id: dependabot/remove-selected-repo-from-org-secret
+* Parameter: repository_id, required, path
+* Parameter: org, required, path
+* Parameter: secret_name, required, path
+* Response: 204
+* Response: 409
+  METHODS dependabot_remove_selected_rep
+    IMPORTING
+      repository_id TYPE i
+      org TYPE string
+      secret_name TYPE string
     RAISING cx_static_check.
 
 * GET - "List public organization events"
@@ -11503,28 +12082,28 @@ INTERFACE zif_github PUBLIC.
       VALUE(return_data) TYPE repository
     RAISING cx_static_check.
 
-* GET - "List secret scanning alerts by organization"
+* GET - "List secret scanning alerts for an organization"
 * Operation id: secret-scanning/list-alerts-for-org
+* Parameter: org, required, path
 * Parameter: state, optional, query
 * Parameter: secret_type, optional, query
 * Parameter: resolution, optional, query
-* Parameter: org, required, path
 * Parameter: page, optional, query
 * Parameter: per_page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_secret_scanning_list_alerts_fo
+*     application/json, #/components/schemas/response_secret_scanning_list_alerts_01
 * Response: 404
 * Response: 503
-  METHODS secret_scanning_list_alerts_fo
+  METHODS secret_scanning_list_alerts_01
     IMPORTING
+      org TYPE string
       state TYPE string OPTIONAL
       secret_type TYPE string OPTIONAL
       resolution TYPE string OPTIONAL
-      org TYPE string
       page TYPE i DEFAULT 1
       per_page TYPE i DEFAULT 30
     RETURNING
-      VALUE(return_data) TYPE response_secret_scanning_list_
+      VALUE(return_data) TYPE response_secret_scanning_lis01
     RAISING cx_static_check.
 
 * GET - "Get GitHub Actions billing for an organization"
@@ -12928,6 +13507,87 @@ INTERFACE zif_github PUBLIC.
       runner_id TYPE i
     RAISING cx_static_check.
 
+* GET - "List labels for a self-hosted runner for a repository"
+* Operation id: actions/list-labels-for-self-hosted-runner-for-repo
+* Parameter: owner, required, path
+* Parameter: repo, required, path
+* Parameter: runner_id, required, path
+* Response: 200
+* Response: 404
+  METHODS actions_list_labels_for_self01
+    IMPORTING
+      owner TYPE string
+      repo TYPE string
+      runner_id TYPE i
+    RAISING cx_static_check.
+
+* POST - "Add custom labels to a self-hosted runner for a repository"
+* Operation id: actions/add-custom-labels-to-self-hosted-runner-for-repo
+* Parameter: owner, required, path
+* Parameter: repo, required, path
+* Parameter: runner_id, required, path
+* Response: 200
+* Response: 404
+* Response: 422
+* Body ref: #/components/schemas/bodyactions_add_custom_label01
+  METHODS actions_add_custom_labels_to01
+    IMPORTING
+      owner TYPE string
+      repo TYPE string
+      runner_id TYPE i
+      body TYPE bodyactions_add_custom_label01
+    RAISING cx_static_check.
+
+* PUT - "Set custom labels for a self-hosted runner for a repository"
+* Operation id: actions/set-custom-labels-for-self-hosted-runner-for-repo
+* Parameter: owner, required, path
+* Parameter: repo, required, path
+* Parameter: runner_id, required, path
+* Response: 200
+* Response: 404
+* Response: 422
+* Body ref: #/components/schemas/bodyactions_set_custom_label01
+  METHODS actions_set_custom_labels_fo01
+    IMPORTING
+      owner TYPE string
+      repo TYPE string
+      runner_id TYPE i
+      body TYPE bodyactions_set_custom_label01
+    RAISING cx_static_check.
+
+* DELETE - "Remove all custom labels from a self-hosted runner for a repository"
+* Operation id: actions/remove-all-custom-labels-from-self-hosted-runner-for-repo
+* Parameter: owner, required, path
+* Parameter: repo, required, path
+* Parameter: runner_id, required, path
+* Response: 200
+* Response: 404
+* Body ref: #/components/schemas/bodyactions_remove_all_custo01
+  METHODS actions_remove_all_custom_la01
+    IMPORTING
+      owner TYPE string
+      repo TYPE string
+      runner_id TYPE i
+      body TYPE bodyactions_remove_all_custo01
+    RAISING cx_static_check.
+
+* DELETE - "Remove a custom label from a self-hosted runner for a repository"
+* Operation id: actions/remove-custom-label-from-self-hosted-runner-for-repo
+* Parameter: owner, required, path
+* Parameter: repo, required, path
+* Parameter: runner_id, required, path
+* Parameter: name, required, path
+* Response: 200
+* Response: 404
+* Response: 422
+  METHODS actions_remove_custom_label_01
+    IMPORTING
+      owner TYPE string
+      repo TYPE string
+      runner_id TYPE i
+      name TYPE string
+    RAISING cx_static_check.
+
 * GET - "List workflow runs for a repository"
 * Operation id: actions/list-workflow-runs-for-repo
 * Parameter: owner, required, path
@@ -12940,6 +13600,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: page, optional, query
 * Parameter: created, optional, query
 * Parameter: exclude_pull_requests, optional, query
+* Parameter: check_suite_id, optional, query
 * Response: 200
 *     application/json, #/components/schemas/response_actions_list_workflow_runs_for
   METHODS actions_list_workflow_runs_for
@@ -12954,6 +13615,7 @@ INTERFACE zif_github PUBLIC.
       page TYPE i DEFAULT 1
       created TYPE string OPTIONAL
       exclude_pull_requests TYPE abap_bool DEFAULT abap_false
+      check_suite_id TYPE i OPTIONAL
     RETURNING
       VALUE(return_data) TYPE response_actions_list_workflow
     RAISING cx_static_check.
@@ -13156,6 +13818,8 @@ INTERFACE zif_github PUBLIC.
 * Parameter: repo, required, path
 * Parameter: run_id, required, path
 * Response: 204
+* Response: 403
+* Response: 500
   METHODS actions_delete_workflow_run_lo
     IMPORTING
       owner TYPE string
@@ -13383,6 +14047,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: page, optional, query
 * Parameter: created, optional, query
 * Parameter: exclude_pull_requests, optional, query
+* Parameter: check_suite_id, optional, query
 * Response: 200
 *     application/json, #/components/schemas/response_actions_list_workflow_runs
   METHODS actions_list_workflow_runs
@@ -13398,6 +14063,7 @@ INTERFACE zif_github PUBLIC.
       page TYPE i DEFAULT 1
       created TYPE string OPTIONAL
       exclude_pull_requests TYPE abap_bool DEFAULT abap_false
+      check_suite_id TYPE i OPTIONAL
     RETURNING
       VALUE(return_data) TYPE response_actions_list_workfl02
     RAISING cx_static_check.
@@ -14365,6 +15031,7 @@ INTERFACE zif_github PUBLIC.
 
 * GET - "List code scanning alerts for a repository"
 * Operation id: code-scanning/list-alerts-for-repo
+* Parameter: sort, optional, query
 * Parameter: state, optional, query
 * Parameter: owner, required, path
 * Parameter: repo, required, path
@@ -14373,13 +15040,16 @@ INTERFACE zif_github PUBLIC.
 * Parameter: page, optional, query
 * Parameter: per_page, optional, query
 * Parameter: ref, optional, query
+* Parameter: direction, optional, query
 * Response: 200
 *     application/json, #/components/schemas/response_code_scanning_list_alerts_for_
+* Response: 304
 * Response: 403
 * Response: 404
 * Response: 503
   METHODS code_scanning_list_alerts_for_
     IMPORTING
+      sort TYPE string DEFAULT 'number'
       state TYPE code_scanning_alert_state OPTIONAL
       owner TYPE string
       repo TYPE string
@@ -14388,6 +15058,7 @@ INTERFACE zif_github PUBLIC.
       page TYPE i DEFAULT 1
       per_page TYPE i DEFAULT 30
       ref TYPE code_scanning_ref OPTIONAL
+      direction TYPE string DEFAULT 'desc'
     RETURNING
       VALUE(return_data) TYPE response_code_scanning_list_al
     RAISING cx_static_check.
@@ -14399,6 +15070,7 @@ INTERFACE zif_github PUBLIC.
 * Parameter: alert_number, required, path
 * Response: 200
 *     application/json, #/components/schemas/code-scanning-alert
+* Response: 304
 * Response: 403
 * Response: 404
 * Response: 503
@@ -14566,7 +15238,7 @@ INTERFACE zif_github PUBLIC.
       VALUE(return_data) TYPE code_scanning_sarifs_status
     RAISING cx_static_check.
 
-* GET - "List codespaces in a Repository for the authenticated user"
+* GET - "List codespaces in a repository for the authenticated user"
 * Operation id: codespaces/list-in-repository-for-authenticated-user
 * Parameter: per_page, optional, query
 * Parameter: page, optional, query
@@ -15110,30 +15782,6 @@ INTERFACE zif_github PUBLIC.
       VALUE(return_data) TYPE commit_comparison
     RAISING cx_static_check.
 
-* POST - "Create a content attachment"
-* Operation id: apps/create-content-attachment
-* Parameter: owner, required, path
-* Parameter: repo, required, path
-* Parameter: content_reference_id, required, path
-* Response: 200
-*     application/json, #/components/schemas/content-reference-attachment
-* Response: 304
-* Response: 403
-* Response: 404
-* Response: 410
-* Response: 415
-* Response: 422
-* Body ref: #/components/schemas/bodyapps_create_content_attach
-  METHODS apps_create_content_attachment
-    IMPORTING
-      owner TYPE string
-      repo TYPE string
-      content_reference_id TYPE i
-      body TYPE bodyapps_create_content_attach
-    RETURNING
-      VALUE(return_data) TYPE content_reference_attachment
-    RAISING cx_static_check.
-
 * GET - "Get repository content"
 * Operation id: repos/get-content
 * Parameter: path, required, path
@@ -15220,6 +15868,88 @@ INTERFACE zif_github PUBLIC.
       page TYPE i DEFAULT 1
     RETURNING
       VALUE(return_data) TYPE response_repos_list_contributo
+    RAISING cx_static_check.
+
+* GET - "List repository secrets"
+* Operation id: dependabot/list-repo-secrets
+* Parameter: owner, required, path
+* Parameter: repo, required, path
+* Parameter: per_page, optional, query
+* Parameter: page, optional, query
+* Response: 200
+*     application/json, #/components/schemas/response_dependabot_list_repo_secrets
+  METHODS dependabot_list_repo_secrets
+    IMPORTING
+      owner TYPE string
+      repo TYPE string
+      per_page TYPE i DEFAULT 30
+      page TYPE i DEFAULT 1
+    RETURNING
+      VALUE(return_data) TYPE response_dependabot_list_repo_
+    RAISING cx_static_check.
+
+* GET - "Get a repository public key"
+* Operation id: dependabot/get-repo-public-key
+* Parameter: owner, required, path
+* Parameter: repo, required, path
+* Response: 200
+*     application/json, #/components/schemas/dependabot-public-key
+  METHODS dependabot_get_repo_public_key
+    IMPORTING
+      owner TYPE string
+      repo TYPE string
+    RETURNING
+      VALUE(return_data) TYPE dependabot_public_key
+    RAISING cx_static_check.
+
+* GET - "Get a repository secret"
+* Operation id: dependabot/get-repo-secret
+* Parameter: owner, required, path
+* Parameter: repo, required, path
+* Parameter: secret_name, required, path
+* Response: 200
+*     application/json, #/components/schemas/dependabot-secret
+  METHODS dependabot_get_repo_secret
+    IMPORTING
+      owner TYPE string
+      repo TYPE string
+      secret_name TYPE string
+    RETURNING
+      VALUE(return_data) TYPE dependabot_secret
+    RAISING cx_static_check.
+
+* PUT - "Create or update a repository secret"
+* Operation id: dependabot/create-or-update-repo-secret
+* Parameter: owner, required, path
+* Parameter: repo, required, path
+* Parameter: secret_name, required, path
+* Response: 201
+*     application/json, #/components/schemas/response_dependabot_create_or_update_re
+* Response: 204
+* Body ref: #/components/schemas/bodydependabot_create_or_upd01
+  METHODS dependabot_create_or_update_re
+    IMPORTING
+      owner TYPE string
+      repo TYPE string
+      secret_name TYPE string
+      body TYPE bodydependabot_create_or_upd01
+    RETURNING
+      VALUE(return_data) TYPE response_dependabot_create_or_
+    RAISING cx_static_check.
+
+* DELETE - "Delete a repository secret"
+* Operation id: dependabot/delete-repo-secret
+* Parameter: owner, required, path
+* Parameter: repo, required, path
+* Parameter: secret_name, required, path
+* Response: 204
+* Body ref: #/components/schemas/bodydependabot_delete_repo_sec
+  METHODS dependabot_delete_repo_secret
+    IMPORTING
+      owner TYPE string
+      repo TYPE string
+      secret_name TYPE string
+      body TYPE bodydependabot_delete_repo_sec
     RAISING cx_static_check.
 
 * GET - "List deployments"
@@ -18295,28 +19025,28 @@ INTERFACE zif_github PUBLIC.
 
 * GET - "List secret scanning alerts for a repository"
 * Operation id: secret-scanning/list-alerts-for-repo
+* Parameter: owner, required, path
+* Parameter: repo, required, path
 * Parameter: state, optional, query
 * Parameter: secret_type, optional, query
 * Parameter: resolution, optional, query
-* Parameter: owner, required, path
-* Parameter: repo, required, path
 * Parameter: page, optional, query
 * Parameter: per_page, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_secret_scanning_list_alerts_01
+*     application/json, #/components/schemas/response_secret_scanning_list_alerts_02
 * Response: 404
 * Response: 503
-  METHODS secret_scanning_list_alerts_01
+  METHODS secret_scanning_list_alerts_02
     IMPORTING
+      owner TYPE string
+      repo TYPE string
       state TYPE string OPTIONAL
       secret_type TYPE string OPTIONAL
       resolution TYPE string OPTIONAL
-      owner TYPE string
-      repo TYPE string
       page TYPE i DEFAULT 1
       per_page TYPE i DEFAULT 30
     RETURNING
-      VALUE(return_data) TYPE response_secret_scanning_lis01
+      VALUE(return_data) TYPE response_secret_scanning_lis02
     RAISING cx_static_check.
 
 * GET - "Get a secret scanning alert"
@@ -18357,6 +19087,28 @@ INTERFACE zif_github PUBLIC.
       body TYPE bodysecret_scanning_update_ale
     RETURNING
       VALUE(return_data) TYPE secret_scanning_alert
+    RAISING cx_static_check.
+
+* GET - "List locations for a secret scanning alert"
+* Operation id: secret-scanning/list-locations-for-alert
+* Parameter: owner, required, path
+* Parameter: repo, required, path
+* Parameter: alert_number, required, path
+* Parameter: page, optional, query
+* Parameter: per_page, optional, query
+* Response: 200
+*     application/json, #/components/schemas/response_secret_scanning_list_locations
+* Response: 404
+* Response: 503
+  METHODS secret_scanning_list_locations
+    IMPORTING
+      owner TYPE string
+      repo TYPE string
+      alert_number TYPE alert_number
+      page TYPE i DEFAULT 1
+      per_page TYPE i DEFAULT 30
+    RETURNING
+      VALUE(return_data) TYPE response_secret_scanning_lis03
     RAISING cx_static_check.
 
 * GET - "List stargazers"
@@ -19600,6 +20352,36 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       codespace_name TYPE string
       body TYPE bodycodespaces_delete_for_auth
+    RAISING cx_static_check.
+
+* POST - "Export a codespace for the authenticated user"
+* Operation id: codespaces/export-for-authenticated-user
+* Parameter: codespace_name, required, path
+* Response: 202
+*     application/json, #/components/schemas/codespace-export-details
+* Response: 401
+* Response: 403
+* Response: 404
+* Response: 422
+* Response: 500
+  METHODS codespaces_export_for_authenti
+    IMPORTING
+      codespace_name TYPE string
+    RAISING cx_static_check.
+
+* GET - "Get details about a codespace export"
+* Operation id: codespaces/get-export-details-for-authenticated-user
+* Parameter: codespace_name, required, path
+* Parameter: export_id, required, path
+* Response: 200
+*     application/json, #/components/schemas/codespace-export-details
+* Response: 404
+  METHODS codespaces_get_export_details_
+    IMPORTING
+      codespace_name TYPE string
+      export_id TYPE string
+    RETURNING
+      VALUE(return_data) TYPE codespace_export_details
     RAISING cx_static_check.
 
 * GET - "List machine types for a codespace"
