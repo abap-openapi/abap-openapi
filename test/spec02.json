@@ -1,0 +1,20 @@
+{
+  "openapi": "3.0.0",
+  "servers": [],
+  "info": {
+    "title": "ping",
+    "version": "1",
+    "description": "ping"
+  },
+  "paths": {
+    "/ping": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "ping"
+          }
+        }
+      }
+    }
+  }
+}
