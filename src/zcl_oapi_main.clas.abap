@@ -471,7 +471,11 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       IF ls_response-code = 'default'.
         rv_abap = rv_abap && |      WHEN OTHERS.\n|.
       ELSE.
-        rv_abap = rv_abap && |      WHEN { ls_response-code }. " { ls_response-description }\n|.
+        IF ls_response-description IS NOT INITIAL.
+          rv_abap = rv_abap && |      WHEN { ls_response-code }. " { ls_response-description }\n|.
+        ELSE.
+          rv_abap = rv_abap && |      WHEN { ls_response-code }.\n|.
+        ENDIF.
         LOOP AT ls_response-content INTO ls_content WHERE type = 'application/json'.
           rv_abap = rv_abap && |" { ls_content-type },{ ls_content-schema_ref }\n|.
 

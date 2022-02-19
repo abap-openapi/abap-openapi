@@ -1708,6 +1708,112 @@ INTERFACE zif_github PUBLIC.
            dummy_workaround TYPE i,
          END OF empty_object.
 
+* Component schema: code-scanning-alert-state, string
+  TYPES code_scanning_alert_state TYPE string.
+
+* Component schema: alert-updated-at, string
+  TYPES alert_updated_at TYPE string.
+
+* Component schema: alert-instances-url, string
+  TYPES alert_instances_url TYPE string.
+
+* Component schema: code-scanning-alert-fixed-at, string
+  TYPES code_scanning_alert_fixed_at TYPE string.
+
+* Component schema: code-scanning-alert-dismissed-at, string
+  TYPES code_scanning_alert_dismissed_ TYPE string.
+
+* Component schema: code-scanning-alert-dismissed-reason, string
+  TYPES code_scanning_alert_dismisse01 TYPE string.
+
+* Component schema: code-scanning-alert-rule, object
+  TYPES: BEGIN OF code_scanning_alert_rule,
+           id TYPE string,
+           name TYPE string,
+           severity TYPE string,
+           security_severity_level TYPE string,
+           description TYPE string,
+           full_description TYPE string,
+           tags TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           help TYPE string,
+         END OF code_scanning_alert_rule.
+
+* Component schema: code-scanning-analysis-tool-name, string
+  TYPES code_scanning_analysis_tool_na TYPE string.
+
+* Component schema: code-scanning-analysis-tool-version, string
+  TYPES code_scanning_analysis_tool_ve TYPE string.
+
+* Component schema: code-scanning-analysis-tool-guid, string
+  TYPES code_scanning_analysis_tool_gu TYPE string.
+
+* Component schema: code-scanning-analysis-tool, object
+  TYPES: BEGIN OF code_scanning_analysis_tool,
+           name TYPE code_scanning_analysis_tool_na,
+           version TYPE code_scanning_analysis_tool_ve,
+           guid TYPE code_scanning_analysis_tool_gu,
+         END OF code_scanning_analysis_tool.
+
+* Component schema: code-scanning-ref, string
+  TYPES code_scanning_ref TYPE string.
+
+* Component schema: code-scanning-analysis-analysis-key, string
+  TYPES code_scanning_analysis_analysi TYPE string.
+
+* Component schema: code-scanning-alert-environment, string
+  TYPES code_scanning_alert_environmen TYPE string.
+
+* Component schema: code-scanning-analysis-category, string
+  TYPES code_scanning_analysis_categor TYPE string.
+
+* Component schema: code-scanning-alert-location, object
+  TYPES: BEGIN OF code_scanning_alert_location,
+           path TYPE string,
+           start_line TYPE i,
+           end_line TYPE i,
+           start_column TYPE i,
+           end_column TYPE i,
+         END OF code_scanning_alert_location.
+
+* Component schema: code-scanning-alert-classification, string
+  TYPES code_scanning_alert_classifica TYPE string.
+
+* Component schema: code-scanning-alert-instance, object
+  TYPES: BEGIN OF subcode_scanning_alert_instanc,
+           text TYPE string,
+         END OF subcode_scanning_alert_instanc.
+  TYPES: BEGIN OF code_scanning_alert_instance,
+           ref TYPE code_scanning_ref,
+           analysis_key TYPE code_scanning_analysis_analysi,
+           environment TYPE code_scanning_alert_environmen,
+           category TYPE code_scanning_analysis_categor,
+           state TYPE code_scanning_alert_state,
+           commit_sha TYPE string,
+           message TYPE subcode_scanning_alert_instanc,
+           location TYPE code_scanning_alert_location,
+           html_url TYPE string,
+           classifications TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF code_scanning_alert_instance.
+
+* Component schema: code-scanning-organization-alert-items, object
+  TYPES: BEGIN OF code_scanning_organization_ale,
+           number TYPE alert_number,
+           created_at TYPE alert_created_at,
+           updated_at TYPE alert_updated_at,
+           url TYPE alert_url,
+           html_url TYPE alert_html_url,
+           instances_url TYPE alert_instances_url,
+           state TYPE code_scanning_alert_state,
+           fixed_at TYPE code_scanning_alert_fixed_at,
+           dismissed_by TYPE nullable_simple_user,
+           dismissed_at TYPE code_scanning_alert_dismissed_,
+           dismissed_reason TYPE code_scanning_alert_dismisse01,
+           rule TYPE code_scanning_alert_rule,
+           tool TYPE code_scanning_analysis_tool,
+           most_recent_instance TYPE code_scanning_alert_instance,
+           repository TYPE minimal_repository,
+         END OF code_scanning_organization_ale.
+
 * Component schema: credential-authorization, object
   TYPES: BEGIN OF credential_authorization,
            login TYPE string,
@@ -3031,33 +3137,6 @@ INTERFACE zif_github PUBLIC.
            repository TYPE minimal_repository,
          END OF check_suite_preference.
 
-* Component schema: code-scanning-analysis-tool-name, string
-  TYPES code_scanning_analysis_tool_na TYPE string.
-
-* Component schema: code-scanning-analysis-tool-guid, string
-  TYPES code_scanning_analysis_tool_gu TYPE string.
-
-* Component schema: code-scanning-ref, string
-  TYPES code_scanning_ref TYPE string.
-
-* Component schema: code-scanning-alert-state, string
-  TYPES code_scanning_alert_state TYPE string.
-
-* Component schema: alert-updated-at, string
-  TYPES alert_updated_at TYPE string.
-
-* Component schema: alert-instances-url, string
-  TYPES alert_instances_url TYPE string.
-
-* Component schema: code-scanning-alert-fixed-at, string
-  TYPES code_scanning_alert_fixed_at TYPE string.
-
-* Component schema: code-scanning-alert-dismissed-at, string
-  TYPES code_scanning_alert_dismissed_ TYPE string.
-
-* Component schema: code-scanning-alert-dismissed-reason, string
-  TYPES code_scanning_alert_dismisse01 TYPE string.
-
 * Component schema: code-scanning-alert-rule-summary, object
   TYPES: BEGIN OF code_scanning_alert_rule_summa,
            id TYPE string,
@@ -3066,54 +3145,6 @@ INTERFACE zif_github PUBLIC.
            severity TYPE string,
            description TYPE string,
          END OF code_scanning_alert_rule_summa.
-
-* Component schema: code-scanning-analysis-tool-version, string
-  TYPES code_scanning_analysis_tool_ve TYPE string.
-
-* Component schema: code-scanning-analysis-tool, object
-  TYPES: BEGIN OF code_scanning_analysis_tool,
-           name TYPE code_scanning_analysis_tool_na,
-           version TYPE code_scanning_analysis_tool_ve,
-           guid TYPE code_scanning_analysis_tool_gu,
-         END OF code_scanning_analysis_tool.
-
-* Component schema: code-scanning-analysis-analysis-key, string
-  TYPES code_scanning_analysis_analysi TYPE string.
-
-* Component schema: code-scanning-alert-environment, string
-  TYPES code_scanning_alert_environmen TYPE string.
-
-* Component schema: code-scanning-analysis-category, string
-  TYPES code_scanning_analysis_categor TYPE string.
-
-* Component schema: code-scanning-alert-location, object
-  TYPES: BEGIN OF code_scanning_alert_location,
-           path TYPE string,
-           start_line TYPE i,
-           end_line TYPE i,
-           start_column TYPE i,
-           end_column TYPE i,
-         END OF code_scanning_alert_location.
-
-* Component schema: code-scanning-alert-classification, string
-  TYPES code_scanning_alert_classifica TYPE string.
-
-* Component schema: code-scanning-alert-instance, object
-  TYPES: BEGIN OF subcode_scanning_alert_instanc,
-           text TYPE string,
-         END OF subcode_scanning_alert_instanc.
-  TYPES: BEGIN OF code_scanning_alert_instance,
-           ref TYPE code_scanning_ref,
-           analysis_key TYPE code_scanning_analysis_analysi,
-           environment TYPE code_scanning_alert_environmen,
-           category TYPE code_scanning_analysis_categor,
-           state TYPE code_scanning_alert_state,
-           commit_sha TYPE string,
-           message TYPE subcode_scanning_alert_instanc,
-           location TYPE code_scanning_alert_location,
-           html_url TYPE string,
-           classifications TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-         END OF code_scanning_alert_instance.
 
 * Component schema: code-scanning-alert-items, object
   TYPES: BEGIN OF code_scanning_alert_items,
@@ -3132,18 +3163,6 @@ INTERFACE zif_github PUBLIC.
            tool TYPE code_scanning_analysis_tool,
            most_recent_instance TYPE code_scanning_alert_instance,
          END OF code_scanning_alert_items.
-
-* Component schema: code-scanning-alert-rule, object
-  TYPES: BEGIN OF code_scanning_alert_rule,
-           id TYPE string,
-           name TYPE string,
-           severity TYPE string,
-           security_severity_level TYPE string,
-           description TYPE string,
-           full_description TYPE string,
-           tags TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
-           help TYPE string,
-         END OF code_scanning_alert_rule.
 
 * Component schema: code-scanning-alert, object
   TYPES: BEGIN OF code_scanning_alert,
@@ -3222,6 +3241,11 @@ INTERFACE zif_github PUBLIC.
            errors TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF code_scanning_sarifs_status.
 
+* Component schema: codeowners-errors, object
+  TYPES: BEGIN OF codeowners_errors,
+           errors TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+         END OF codeowners_errors.
+
 * Component schema: nullable-codespace-machine, object
   TYPES: BEGIN OF nullable_codespace_machine,
            name TYPE string,
@@ -3247,6 +3271,7 @@ INTERFACE zif_github PUBLIC.
   TYPES: BEGIN OF codespace,
            id TYPE i,
            name TYPE string,
+           display_name TYPE string,
            environment_id TYPE string,
            owner TYPE simple_user,
            billable_owner TYPE simple_user,
@@ -6760,6 +6785,7 @@ INTERFACE zif_github PUBLIC.
            machine TYPE string,
            working_directory TYPE string,
            idle_timeout_minutes TYPE i,
+           display_name TYPE string,
          END OF bodycodespaces_create_with_rep.
 
 * Component schema: bodyrepos_add_collaborator, object
@@ -7274,6 +7300,7 @@ INTERFACE zif_github PUBLIC.
            machine TYPE string,
            working_directory TYPE string,
            idle_timeout_minutes TYPE i,
+           display_name TYPE string,
          END OF bodycodespaces_create_with_pr_.
 
 * Component schema: bodypulls_create_review_commen, object
@@ -7612,12 +7639,14 @@ INTERFACE zif_github PUBLIC.
 * Component schema: bodycodespaces_update_for_auth, object
   TYPES: BEGIN OF bodycodespaces_update_for_auth,
            machine TYPE string,
+           display_name TYPE string,
            recent_folders TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF bodycodespaces_update_for_auth.
 
 * Component schema: bodycodespaces_delete_for_auth, object
   TYPES: BEGIN OF bodycodespaces_delete_for_auth,
            machine TYPE string,
+           display_name TYPE string,
            recent_folders TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF bodycodespaces_delete_for_auth.
 
@@ -7894,6 +7923,9 @@ INTERFACE zif_github PUBLIC.
 
 * Component schema: response_orgs_list_blocked_users, array
   TYPES response_orgs_list_blocked_use TYPE STANDARD TABLE OF simple_user WITH DEFAULT KEY.
+
+* Component schema: response_code_scanning_list_alerts_for_, array
+  TYPES response_code_scanning_list_al TYPE STANDARD TABLE OF code_scanning_organization_ale WITH DEFAULT KEY.
 
 * Component schema: response_orgs_list_saml_sso_authorizati, array
   TYPES response_orgs_list_saml_sso_au TYPE STANDARD TABLE OF credential_authorization WITH DEFAULT KEY.
@@ -8235,11 +8267,11 @@ INTERFACE zif_github PUBLIC.
            dummy_workaround TYPE i,
          END OF response_checks_rerequest_suit.
 
-* Component schema: response_code_scanning_list_alerts_for_, array
-  TYPES response_code_scanning_list_al TYPE STANDARD TABLE OF code_scanning_alert_items WITH DEFAULT KEY.
+* Component schema: response_code_scanning_list_alerts_fo01, array
+  TYPES response_code_scanning_list_01 TYPE STANDARD TABLE OF code_scanning_alert_items WITH DEFAULT KEY.
 
 * Component schema: response_code_scanning_list_alert_insta, array
-  TYPES response_code_scanning_list_01 TYPE STANDARD TABLE OF code_scanning_alert_instance WITH DEFAULT KEY.
+  TYPES response_code_scanning_list_02 TYPE STANDARD TABLE OF code_scanning_alert_instance WITH DEFAULT KEY.
 
 * Component schema: response_code_scanning_list_recent_anal, array
   TYPES response_code_scanning_list_re TYPE STANDARD TABLE OF code_scanning_analysis WITH DEFAULT KEY.
@@ -10999,6 +11031,35 @@ INTERFACE zif_github PUBLIC.
     IMPORTING
       org TYPE string
       username TYPE string
+    RAISING cx_static_check.
+
+* GET - "List code scanning alerts for an organization"
+* Operation id: code-scanning/list-alerts-for-org
+* Parameter: state, optional, query
+* Parameter: sort, optional, query
+* Parameter: org, required, path
+* Parameter: before, optional, query
+* Parameter: after, optional, query
+* Parameter: page, optional, query
+* Parameter: per_page, optional, query
+* Parameter: direction, optional, query
+* Response: 200
+*     application/json, #/components/schemas/response_code_scanning_list_alerts_for_
+* Response: 403
+* Response: 404
+* Response: 503
+  METHODS code_scanning_list_alerts_for_
+    IMPORTING
+      state TYPE code_scanning_alert_state OPTIONAL
+      sort TYPE string DEFAULT 'created'
+      org TYPE string
+      before TYPE string OPTIONAL
+      after TYPE string OPTIONAL
+      page TYPE i DEFAULT 1
+      per_page TYPE i DEFAULT 30
+      direction TYPE string DEFAULT 'desc'
+    RETURNING
+      VALUE(return_data) TYPE response_code_scanning_list_al
     RAISING cx_static_check.
 
 * GET - "List SAML SSO authorizations for an organization"
@@ -15042,12 +15103,12 @@ INTERFACE zif_github PUBLIC.
 * Parameter: ref, optional, query
 * Parameter: direction, optional, query
 * Response: 200
-*     application/json, #/components/schemas/response_code_scanning_list_alerts_for_
+*     application/json, #/components/schemas/response_code_scanning_list_alerts_fo01
 * Response: 304
 * Response: 403
 * Response: 404
 * Response: 503
-  METHODS code_scanning_list_alerts_for_
+  METHODS code_scanning_list_alerts_fo01
     IMPORTING
       sort TYPE string DEFAULT 'number'
       state TYPE code_scanning_alert_state OPTIONAL
@@ -15060,7 +15121,7 @@ INTERFACE zif_github PUBLIC.
       ref TYPE code_scanning_ref OPTIONAL
       direction TYPE string DEFAULT 'desc'
     RETURNING
-      VALUE(return_data) TYPE response_code_scanning_list_al
+      VALUE(return_data) TYPE response_code_scanning_list_01
     RAISING cx_static_check.
 
 * GET - "Get a code scanning alert"
@@ -15126,7 +15187,7 @@ INTERFACE zif_github PUBLIC.
       per_page TYPE i DEFAULT 30
       ref TYPE code_scanning_ref OPTIONAL
     RETURNING
-      VALUE(return_data) TYPE response_code_scanning_list_01
+      VALUE(return_data) TYPE response_code_scanning_list_02
     RAISING cx_static_check.
 
 * GET - "List code scanning analyses for a repository"
@@ -15236,6 +15297,23 @@ INTERFACE zif_github PUBLIC.
       repo TYPE string
     RETURNING
       VALUE(return_data) TYPE code_scanning_sarifs_status
+    RAISING cx_static_check.
+
+* GET - "List CODEOWNERS errors"
+* Operation id: repos/codeowners-errors
+* Parameter: ref, optional, query
+* Parameter: owner, required, path
+* Parameter: repo, required, path
+* Response: 200
+*     application/json, #/components/schemas/codeowners-errors
+* Response: 404
+  METHODS repos_codeowners_errors
+    IMPORTING
+      ref TYPE string OPTIONAL
+      owner TYPE string
+      repo TYPE string
+    RETURNING
+      VALUE(return_data) TYPE codeowners_errors
     RAISING cx_static_check.
 
 * GET - "List codespaces in a repository for the authenticated user"
