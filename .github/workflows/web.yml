@@ -18,12 +18,12 @@ jobs:
         npm install
         npm run build
     - name: Install SSH Client
-      if: github.ref == 'refs/heads/main' && github.repository == 'abap-openapi/abap-openapi-client'
+      if: github.ref == 'refs/heads/main' && github.repository == 'abap-openapi/abap-openapi'
       uses: webfactory/ssh-agent@v0.4.1
       with:
         ssh-private-key: ${{ secrets.DEPLOY_KEY }}
     - name: Deploy
-      if: github.ref == 'refs/heads/main' && github.repository == 'abap-openapi/abap-openapi-client'
+      if: github.ref == 'refs/heads/main' && github.repository == 'abap-openapi/abap-openapi'
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
         SSH: true
