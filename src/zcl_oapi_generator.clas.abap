@@ -5,8 +5,8 @@ CLASS zcl_oapi_generator DEFINITION PUBLIC.
       RETURNING VALUE(rs_result) TYPE zcl_oapi_main=>ty_result.
 
     CLASS-METHODS generate_v2
-      IMPORTING is_input TYPE zcl_oapi_main=>ty_input
-      RETURNING VALUE(rs_result) TYPE zcl_oapi_main=>ty_result.
+      IMPORTING is_input TYPE zcl_oapi_generator_v2=>ty_input
+      RETURNING VALUE(rs_result) TYPE zcl_oapi_generator_v2=>ty_result.
 ENDCLASS.
 
 CLASS zcl_oapi_generator IMPLEMENTATION.

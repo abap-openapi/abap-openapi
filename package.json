@@ -13,7 +13,7 @@
     "spec02": "npm run transpile && node index.mjs ./test/spec02.json spec02",
     "integration_test": "rm -rf output_test && abap_transpile ./abap_transpile_test.json && node output_test/index.mjs",
     "lint": "abaplint",
-    "testv2": "npm run transpile && node test_v2/build.mjs"
+    "testv2": "npm run transpile && node test_v2/test.mjs"
   },
   "repository": {
     "type": "git",
