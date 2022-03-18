@@ -4,14 +4,16 @@
   "version": "1.0.0",
   "description": "ABAP OpenAPI Client Generator",
   "scripts": {
-    "test": "abaplint && rm -rf output && abap_transpile && node output/index.mjs",
-    "petstore": "abaplint && rm -rf output && abap_transpile && node index.mjs https://petstore3.swagger.io/api/v3/openapi.json petstore",
-    "github": "abaplint && rm -rf output && abap_transpile && node index.mjs https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json github",
-    "jira": "abaplint && rm -rf output && abap_transpile && node index.mjs https://developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json jira",
-    "spec01": "abaplint && rm -rf output && abap_transpile && node index.mjs ./test/spec01.json spec01",
-    "spec02": "abaplint && rm -rf output && abap_transpile && node index.mjs ./test/spec02.json spec02",
+    "transpile": "abaplint && rm -rf output && abap_transpile",
+    "test": "npm run transpile && node output/index.mjs",
+    "petstore": "npm run transpile && node index.mjs https://petstore3.swagger.io/api/v3/openapi.json petstore",
+    "github": "npm run transpile && node index.mjs https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json github",
+    "jira": "npm run transpile && node index.mjs https://developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json jira",
+    "spec01": "npm run transpile && node index.mjs ./test/spec01.json spec01",
+    "spec02": "npm run transpile && node index.mjs ./test/spec02.json spec02",
     "integration_test": "rm -rf output_test && abap_transpile ./abap_transpile_test.json && node output_test/index.mjs",
-    "lint": "abaplint"
+    "lint": "abaplint",
+    "testv2": "npm run transpile && node test_v2/build.mjs"
   },
   "repository": {
     "type": "git",
