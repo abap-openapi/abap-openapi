@@ -24,8 +24,8 @@
   },
   "homepage": "https://github.com/abap-openapi/abap-openapi-client#readme",
   "dependencies": {
-    "@abaplint/cli": "^2.85.23",
-    "@abaplint/runtime": "^1.8.9",
-    "@abaplint/transpiler-cli": "^1.8.9"
+    "@abaplint/cli": "^2.85.44",
+    "@abaplint/runtime": "^1.8.18",
+    "@abaplint/transpiler-cli": "^1.8.18"
   }
 }
