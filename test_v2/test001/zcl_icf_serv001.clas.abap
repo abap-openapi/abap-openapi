@@ -1,4 +1,4 @@
-CLASS zcl_icf_serv001 DEFINITION PUBLIC
+CLASS zcl_icf_serv001 DEFINITION PUBLIC.
 * auto generated, do not change
   PUBLIC SECTION.
     INTERFACES if_http_extension.

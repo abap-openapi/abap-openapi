@@ -25,7 +25,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
   METHOD run.
 
-    rs_result-clas_icf_serv = |CLASS { is_input-clas_icf_serv } DEFINITION PUBLIC\n| &&
+    rs_result-clas_icf_serv = |CLASS { is_input-clas_icf_serv } DEFINITION PUBLIC.\n| &&
       |* auto generated, do not change\n| &&
       |  PUBLIC SECTION.\n| &&
       |    INTERFACES if_http_extension.\n| &&
@@ -37,9 +37,24 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |  ENDMETHOD.\n| &&
       |ENDCLASS.|.
 
-    rs_result-clas_icf_impl = 'todoclas'.
-    rs_result-clas_client   = 'todoclas'.
-    rs_result-intf          = 'todointf'.
+    rs_result-clas_icf_impl = |CLASS { is_input-clas_icf_impl } DEFINITION PUBLIC.\n| &&
+      |  PUBLIC SECTION.\n| &&
+      |    INTERFACES { is_input-intf }.\n| &&
+      |ENDCLASS.\n\n| &&
+      |CLASS { is_input-clas_icf_impl } IMPLEMENTATION.\n| &&
+      |ENDCLASS.|.
+
+    rs_result-clas_client = |CLASS { is_input-clas_client } DEFINITION PUBLIC.\n| &&
+      |* auto generated, do not change\n| &&
+      |  PUBLIC SECTION.\n| &&
+      |    INTERFACES { is_input-intf }.\n| &&
+      |ENDCLASS.\n\n| &&
+      |CLASS { is_input-clas_client } IMPLEMENTATION.\n| &&
+      |ENDCLASS.|.
+
+    rs_result-intf = |INTERFACE { is_input-intf } PUBLIC.\n| &&
+      |* auto generated, do not change\n| &&
+      |ENDINTERFACE.|.
 
   ENDMETHOD.
 

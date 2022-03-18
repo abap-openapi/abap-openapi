@@ -1,1 +1,7 @@
-todoclas
+CLASS zcl_icf_impl001 DEFINITION PUBLIC.
+  PUBLIC SECTION.
+    INTERFACES zif_interface001.
+ENDCLASS.
+
+CLASS zcl_icf_impl001 IMPLEMENTATION.
+ENDCLASS.
