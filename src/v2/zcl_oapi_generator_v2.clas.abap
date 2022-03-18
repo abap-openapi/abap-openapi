@@ -33,7 +33,11 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |CLASS { is_input-clas_icf_serv } IMPLEMENTATION.\n| &&
       |  METHOD if_http_extension~handle_request.\n| &&
       |    DATA handler TYPE REF TO { is_input-intf }.\n| &&
+      |    DATA path    TYPE string.\n| &&
       |    CREATE OBJECT handler TYPE { is_input-clas_icf_impl }.\n| &&
+      |    path = server->request->get_header_field( '~path' ).\n| &&
+      |    CASE path.\n| &&
+      |    ENDCASE.\n| &&
       |  ENDMETHOD.\n| &&
       |ENDCLASS.|.
 
