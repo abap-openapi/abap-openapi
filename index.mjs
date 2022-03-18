@@ -36,9 +36,6 @@ async function run() {
   }
   const spec = url.startsWith("http") ? await get(url) : fs.readFileSync(url).toString();
 
-  const main = new abap.Classes["ZCL_OAPI_MAIN"]();
-  await main.constructor_();
-
   const input = new abap.types.Structure({
     class_name: new abap.types.Character({length: 30}),
     interface_name: new abap.types.Character({length: 30}),
@@ -47,7 +44,7 @@ async function run() {
   input.get().json.set(spec);
   input.get().class_name.set('zcl_' + process.argv[3]);
   input.get().interface_name.set('zif_' + process.argv[3]);
-  const result = await main.run({is_input: input});
+  const result = await abap.Classes["ZCL_OAPI_GENERATOR"].generate_v1({is_input: input});
 
   console.log(abap.console.get());
 
