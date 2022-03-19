@@ -1,5 +1,6 @@
-# abap-openapi-client
-ABAP [OpenAPI](https://www.openapis.org) Client Generator in ABAP
+# abap-openapi
+
+ABAP [OpenAPI](https://www.openapis.org) Client & Server Generator in ABAP
 
 - [possibility to run in browser](https://abap-openapi.github.io/web-openapi-client/)
 - possibility to run via command line(NodeJS)
