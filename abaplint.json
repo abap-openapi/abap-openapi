@@ -20,6 +20,14 @@
     "globalMacros": []
   },
   "rules": {
+    "cds_parser_error": true,
+    "no_aliases": true,
+    "no_chained_assignment": true,
+    "nrob_consistency": true,
+    "omit_preceding_zeros": true,
+    "prefer_corresponding": true,
+    "static_call_via_instance": true,
+    "unnecessary_chaining": false,
     "align_parameters": false,
     "constant_classes": true,
     "cyclic_oo": false,
