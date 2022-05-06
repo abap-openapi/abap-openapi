@@ -1,7 +1,6 @@
 {
   "global": {
     "files": "/{src,test}/**/*.*",
-    "exclude": [],
     "skipGeneratedGatewayClasses": true,
     "skipGeneratedPersistentClasses": true,
     "skipGeneratedFunctionGroups": true
@@ -9,17 +8,15 @@
   "dependencies": [
     {
       "url": "https://github.com/open-abap/open-abap",
-      "folder": "/deps",
       "files": "/src/**/*.*"
     }
   ],
   "syntax": {
     "version": "v702",
-    "errorNamespace": "",
-    "globalConstants": [],
-    "globalMacros": []
+    "errorNamespace": "."
   },
   "rules": {
+    "no_external_form_calls": true,
     "cds_parser_error": true,
     "classic_exceptions_overlap": true,
     "local_testclass_consistency": true,
