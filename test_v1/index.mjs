@@ -2,7 +2,7 @@ import * as https from "https";
 import * as fs from "fs";
 import * as path from "path";
 
-await import("./output/init.mjs");
+await import("../output/init.mjs");
 
 async function get(url) {
   return new Promise((resolve, reject) => {
@@ -48,7 +48,7 @@ async function run() {
 
   console.log(abap.console.get());
 
-  const prefix = process.cwd() + path.sep + "test" + path.sep + "generated" + path.sep;
+  const prefix = process.cwd() + path.sep + "test_v1" + path.sep + "generated" + path.sep;
   if (fs.existsSync(prefix) === false) {
     fs.mkdirSync(prefix);
   }

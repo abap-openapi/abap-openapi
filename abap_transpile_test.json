@@ -1,5 +1,5 @@
 {
-  "input_folder": "{test,src}",
+  "input_folder": "{test_v1,src}",
   "input_filter": [],
   "output_folder": "output_test",
   "lib": "https://github.com/open-abap/open-abap",
