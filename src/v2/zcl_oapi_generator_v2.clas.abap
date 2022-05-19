@@ -81,16 +81,16 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |ENDCLASS.\n\n| &&
       |CLASS { is_input-clas_icf_serv } IMPLEMENTATION.\n| &&
       |  METHOD if_http_extension~handle_request.\n| &&
-      |    DATA handler TYPE REF TO { is_input-intf }.\n| &&
-      |    DATA method  TYPE string.\n| &&
-      |    DATA path    TYPE string.\n\n| &&
-      |    CREATE OBJECT handler TYPE { is_input-clas_icf_impl }.\n| &&
-      |    path = server->request->get_header_field( '~path' ).\n| &&
-      |    method = server->request->get_method( ).\n\n|.
+      |    DATA li_handler TYPE REF TO { is_input-intf }.\n| &&
+      |    DATA lv_method  TYPE string.\n| &&
+      |    DATA lv_path    TYPE string.\n\n| &&
+      |    CREATE OBJECT li_handler TYPE { is_input-clas_icf_impl }.\n| &&
+      |    lv_path = server->request->get_header_field( '~path' ).\n| &&
+      |    lv_method = server->request->get_method( ).\n\n|.
     LOOP AT is_schema-operations INTO ls_operation.
       rv_abap = rv_abap &&
-        |    IF path = '{ ls_operation-path }' AND method = '{ to_upper( ls_operation-method ) }'.\n| &&
-        |      handler->{ ls_operation-abap_name }( ).\n| &&
+        |    IF lv_path = '{ ls_operation-path }' AND lv_method = '{ to_upper( ls_operation-method ) }'.\n| &&
+        |      li_handler->{ ls_operation-abap_name }( ).\n| &&
         |    ENDIF.\n|.
     ENDLOOP.
     rv_abap = rv_abap && |  ENDMETHOD.\n| &&

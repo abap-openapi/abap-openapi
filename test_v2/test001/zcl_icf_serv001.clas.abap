@@ -6,16 +6,16 @@ ENDCLASS.
 
 CLASS zcl_icf_serv001 IMPLEMENTATION.
   METHOD if_http_extension~handle_request.
-    DATA handler TYPE REF TO zif_interface001.
-    DATA method  TYPE string.
-    DATA path    TYPE string.
+    DATA li_handler TYPE REF TO zif_interface001.
+    DATA lv_method  TYPE string.
+    DATA lv_path    TYPE string.
 
-    CREATE OBJECT handler TYPE zcl_icf_impl001.
-    path = server->request->get_header_field( '~path' ).
-    method = server->request->get_method( ).
+    CREATE OBJECT li_handler TYPE zcl_icf_impl001.
+    lv_path = server->request->get_header_field( '~path' ).
+    lv_method = server->request->get_method( ).
 
-    IF path = '/ping' AND method = 'POST'.
-      handler->_ping( ).
+    IF lv_path = '/ping' AND lv_method = 'POST'.
+      li_handler->_ping( ).
     ENDIF.
   ENDMETHOD.
 ENDCLASS.
