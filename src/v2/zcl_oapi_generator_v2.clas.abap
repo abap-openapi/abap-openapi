@@ -46,6 +46,11 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
         is_schema TYPE zif_oapi_specification_v3=>ty_specification
       RETURNING VALUE(rv_abap) TYPE string.
 
+    METHODS find_input_parameters
+      IMPORTING
+        is_operation TYPE zif_oapi_specification_v3=>ty_operation
+      RETURNING VALUE(rv_abap) TYPE string.
+
 ENDCLASS.
 
 CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
@@ -179,9 +184,27 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
     LOOP AT is_schema-operations INTO ls_operation.
       rv_abap = rv_abap &&
-        |  METHODS { ls_operation-abap_name }.\n|.
+        |  METHODS { ls_operation-abap_name }{ find_input_parameters( ls_operation ) }.\n|.
     ENDLOOP.
     rv_abap = rv_abap && |ENDINTERFACE.|.
+  ENDMETHOD.
+
+  METHOD find_input_parameters.
+    DATA lt_list TYPE STANDARD TABLE OF string.
+    DATA lv_str TYPE string.
+    DATA ls_parameter LIKE LINE OF is_operation-parameters.
+
+    LOOP AT is_operation-parameters INTO ls_parameter WHERE in = 'query'.
+      lv_str = |      { ls_parameter-abap_name } TYPE { ls_parameter-schema->get_simple_type( ) }|.
+      APPEND lv_str TO lt_list.
+    ENDLOOP.
+
+    rv_abap = concat_lines_of( table = lt_list sep = |\n| ).
+
+    IF rv_abap IS NOT INITIAL.
+      rv_abap = |\n    IMPORTING\n{ rv_abap }|.
+    ENDIF.
+
   ENDMETHOD.
 
 ENDCLASS.

@@ -28,5 +28,7 @@ INTERFACE zif_interface003 PUBLIC.
            levela1 TYPE subposttestresponse_levela1,
            levelb1 TYPE subposttestresponse_levelb1,
          END OF posttestresponse.
-  METHODS _test.
+  METHODS _test
+    IMPORTING
+      operation TYPE string.
 ENDINTERFACE.

@@ -23,5 +23,7 @@ INTERFACE zif_interface004 PUBLIC.
   TYPES: BEGIN OF resultstruct,
            result TYPE f,
          END OF resultstruct.
-  METHODS _test.
+  METHODS _test
+    IMPORTING
+      operation TYPE string.
 ENDINTERFACE.

@@ -7,5 +7,7 @@ INTERFACE zif_interface005 PUBLIC.
   TYPES: BEGIN OF posttestresponse,
            result TYPE string,
          END OF posttestresponse.
-  METHODS _test.
+  METHODS _test
+    IMPORTING
+      separator TYPE string.
 ENDINTERFACE.

@@ -23,5 +23,7 @@ INTERFACE zif_interface007 PUBLIC.
   TYPES: BEGIN OF resultstruct,
            result TYPE string,
          END OF resultstruct.
-  METHODS _test.
+  METHODS _test
+    IMPORTING
+      separator TYPE string.
 ENDINTERFACE.
