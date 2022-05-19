@@ -136,7 +136,7 @@
     "newline_between_methods": true,
     "no_public_attributes": false,
     "object_naming": {
-      "exclude": ["test/"],
+      "exclude": ["test_v1/", "test_v2/"],
       "patternKind": "required",
       "ignoreNames": [],
       "ignorePatterns": [],

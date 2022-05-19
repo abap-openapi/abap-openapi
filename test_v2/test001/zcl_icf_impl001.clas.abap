@@ -6,7 +6,7 @@ ENDCLASS.
 CLASS zcl_icf_impl001 IMPLEMENTATION.
 
   METHOD zif_interface001~_ping.
-* todo
+* Add implementation logic here
   ENDMETHOD.
 
 ENDCLASS.

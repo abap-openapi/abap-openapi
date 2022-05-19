@@ -109,7 +109,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     LOOP AT is_schema-operations INTO ls_operation.
       rv_abap = rv_abap &&
         |  METHOD { is_input-intf }~{ ls_operation-abap_name }.\n| &&
-        |* todo\n| &&
+        |* Add implementation logic here\n| &&
         |  ENDMETHOD.\n\n|.
     ENDLOOP.
 
@@ -123,16 +123,27 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |* auto generated, do not change\n| &&
       |  PUBLIC SECTION.\n| &&
       |    INTERFACES { is_input-intf }.\n| &&
-      |    METHODS constructor IMPORTING host TYPE string.\n| &&
+      |    METHODS constructor\n| &&
+      |      IMPORTING\n| &&
+      |        iv_url    TYPE string\n| &&
+      |        iv_ssl_id TYPE ssfapplssl OPTIONAL.\n| &&
+      |  PROTECTED SECTION.\n| &&
+      |    DATA mi_client TYPE REF TO if_http_client.\n| &&
       |ENDCLASS.\n\n| &&
       |CLASS { is_input-clas_client } IMPLEMENTATION.\n| &&
       |  METHOD constructor.\n| &&
-      |* todo, instantiate CL_HTTP_CLIENT here\n| &&
+      |    cl_http_client=>create_by_url(\n| &&
+      |      EXPORTING\n| &&
+      |        url    = iv_url\n| &&
+      |        ssl_id = iv_ssl_id\n| &&
+      |      IMPORTING\n| &&
+      |        client = mi_client ).\n| &&
       |  ENDMETHOD.\n\n|.
 
     LOOP AT is_schema-operations INTO ls_operation.
       rv_abap = rv_abap &&
         |  METHOD { is_input-intf }~{ ls_operation-abap_name }.\n| &&
+        |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n| &&
         |* todo\n| &&
         |  ENDMETHOD.\n\n|.
     ENDLOOP.
