@@ -52,22 +52,22 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
   METHOD run.
     DATA lo_parser TYPE REF TO zcl_oapi_parser.
-    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_specification.
+    DATA ls_specification TYPE zif_oapi_specification_v3=>ty_specification.
 
     CREATE OBJECT lo_parser.
-    ls_schema = lo_parser->parse( is_input-openapi_json ).
+    ls_specification = lo_parser->parse( is_input-openapi_json ).
 
     rs_result-clas_icf_serv = build_clas_icf_serv(
-      is_schema = ls_schema
+      is_schema = ls_specification
       is_input  = is_input ).
     rs_result-clas_icf_impl = build_clas_icf_impl(
-      is_schema = ls_schema
+      is_schema = ls_specification
       is_input  = is_input ).
     rs_result-clas_client = build_clas_client(
-      is_schema = ls_schema
+      is_schema = ls_specification
       is_input  = is_input ).
     rs_result-intf = build_intf(
-      is_schema = ls_schema
+      is_schema = ls_specification
       is_input  = is_input ).
   ENDMETHOD.
 
@@ -172,9 +172,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |* auto generated, do not change\n|.
 
     LOOP AT is_schema-components-schemas INTO ls_component_schema.
-* todo
-      rv_abap = rv_abap &&
-        |  TYPES { ls_component_schema-abap_name } TYPE string.\n|.
+      rv_abap = rv_abap && ls_component_schema-schema->build_type_definition2(
+        iv_name          = ls_component_schema-abap_name
+        is_specification = is_schema ).
     ENDLOOP.
 
     LOOP AT is_schema-operations INTO ls_operation.

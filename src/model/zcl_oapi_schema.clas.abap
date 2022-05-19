@@ -76,6 +76,22 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
 
   ENDMETHOD.
 
+  METHOD zif_oapi_schema~build_type_definition2.
+    DATA ls_schema LIKE LINE OF is_specification-components-schemas.
+    DATA lo_names TYPE REF TO zcl_oapi_abap_name.
+    CREATE OBJECT lo_names.
+
+    LOOP AT is_specification-components-schemas INTO ls_schema.
+      lo_names->add_used( ls_schema-abap_name ).
+    ENDLOOP.
+
+    rv_abap = zif_oapi_schema~build_type_definition(
+      iv_name  = iv_name
+      it_refs  = is_specification-components-schemas
+      io_names = lo_names ).
+
+  ENDMETHOD.
+
   METHOD zif_oapi_schema~get_simple_type.
 
     CASE zif_oapi_schema~type.

@@ -311,6 +311,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     DATA ls_property TYPE zif_oapi_schema=>ty_property.
     DATA lv_count TYPE i.
     DATA lo_names TYPE REF TO zcl_oapi_abap_name.
+
     CREATE OBJECT lo_names.
 
     LOOP AT ms_specification-components-schemas INTO ls_schema.
