@@ -93,7 +93,12 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |      li_handler->{ ls_operation-abap_name }( ).\n| &&
         |    ENDIF.\n|.
     ENDLOOP.
-    rv_abap = rv_abap && |  ENDMETHOD.\n| &&
+    rv_abap = rv_abap &&
+      |\n| &&
+      |    server->response->set_content_type( 'text/html' ).\n| &&
+      |    server->response->set_cdata( 'todo' ).\n| &&
+      |    server->response->set_status( code = 200 reason = 'Success' ).\n| &&
+      |  ENDMETHOD.\n| &&
       |ENDCLASS.|.
   ENDMETHOD.
 
@@ -143,7 +148,15 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     LOOP AT is_schema-operations INTO ls_operation.
       rv_abap = rv_abap &&
         |  METHOD { is_input-intf }~{ ls_operation-abap_name }.\n| &&
+        |    DATA lv_code TYPE i.\n| &&
+        |\n| &&
         |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n| &&
+        |    mi_client->request->set_data( '112233AABBCCDDEEFF' ).\n| &&
+        |    mi_client->send( ).\n| &&
+        |    mi_client->receive( ).\n| &&
+        |\n| &&
+        |    mi_client->response->get_status( IMPORTING code = lv_code ).\n| &&
+        |    mi_client->response->get_data( ).\n| &&
         |* todo\n| &&
         |  ENDMETHOD.\n\n|.
     ENDLOOP.

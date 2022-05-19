@@ -17,5 +17,9 @@ CLASS zcl_icf_serv001 IMPLEMENTATION.
     IF lv_path = '/ping' AND lv_method = 'POST'.
       li_handler->_ping( ).
     ENDIF.
+
+    server->response->set_content_type( 'text/html' ).
+    server->response->set_cdata( 'todo' ).
+    server->response->set_status( code = 200 reason = 'Success' ).
   ENDMETHOD.
 ENDCLASS.

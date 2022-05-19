@@ -21,7 +21,15 @@ CLASS zcl_client001 IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD zif_interface001~_ping.
+    DATA lv_code TYPE i.
+
     mi_client->request->set_method( 'POST' ).
+    mi_client->request->set_data( '112233AABBCCDDEEFF' ).
+    mi_client->send( ).
+    mi_client->receive( ).
+
+    mi_client->response->get_status( IMPORTING code = lv_code ).
+    mi_client->response->get_data( ).
 * todo
   ENDMETHOD.
 
