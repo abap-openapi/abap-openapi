@@ -13,9 +13,12 @@ async function run() {
 
     const folderName = d.name;
     const folder = root + folderName + path.sep;
-    console.log("* " + folderName);
+
     const spec = fs.readFileSync(folder + "spec.json", "utf-8");
     const number = folderName.match(/test(\d+)/)[1];
+    const title = spec.match(/"title": "(\w+)"/i)[1];
+
+    console.log("* " + folderName + " - " + title);
 
     const input = new abap.types.Structure({
       clas_icf_serv: new abap.types.Character({length: 30}).set('zcl_icf_serv' + number),
