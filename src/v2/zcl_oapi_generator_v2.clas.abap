@@ -166,9 +166,17 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
   METHOD build_intf.
     DATA ls_operation LIKE LINE OF is_schema-operations.
+    DATA ls_component_schema LIKE LINE OF is_schema-components-schemas.
 
     rv_abap = |INTERFACE { is_input-intf } PUBLIC.\n| &&
       |* auto generated, do not change\n|.
+
+    LOOP AT is_schema-components-schemas INTO ls_component_schema.
+* todo
+      rv_abap = rv_abap &&
+        |  TYPES { ls_component_schema-abap_name } TYPE string.\n|.
+    ENDLOOP.
+
     LOOP AT is_schema-operations INTO ls_operation.
       rv_abap = rv_abap &&
         |  METHODS { ls_operation-abap_name }.\n|.
