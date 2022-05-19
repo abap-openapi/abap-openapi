@@ -9,4 +9,5 @@ CLASS zcl_client001 IMPLEMENTATION.
   METHOD constructor.
 * todo, instantiate CL_HTTP_CLIENT here
   ENDMETHOD.
+* todo, operations here
 ENDCLASS.

@@ -181,7 +181,10 @@
     "short_case": false,
     "sicf_consistency": true,
     "space_before_colon": true,
-    "space_before_dot": true,
+    "space_before_dot": {
+      "ignoreExceptions": false,
+      "ignoreGlobalDefinition": false
+    },
     "sql_escape_host_variables": true,
     "start_at_tab": true,
     "superclass_final": true,

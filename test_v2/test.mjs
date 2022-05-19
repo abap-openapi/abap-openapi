@@ -22,7 +22,7 @@ async function run() {
       clas_icf_impl: new abap.types.Character({length: 30}).set('zcl_icf_impl' + number),
       clas_client:   new abap.types.Character({length: 30}).set('zcl_client' + number),
       intf:          new abap.types.Character({length: 30}).set('zif_interface' + number),
-      json:          new abap.types.String().set(spec)},
+      openapi_json:  new abap.types.String().set(spec)},
     );
     const result = await abap.Classes["ZCL_OAPI_GENERATOR"].generate_v2({is_input: input});
 
