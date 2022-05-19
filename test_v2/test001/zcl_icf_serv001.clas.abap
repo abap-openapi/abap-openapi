@@ -13,6 +13,9 @@ CLASS zcl_icf_serv001 IMPLEMENTATION.
     CREATE OBJECT handler TYPE zcl_icf_impl001.
     path = server->request->get_header_field( '~path' ).
     method = server->request->get_method( ).
-* todo, operations here
+
+    IF path = '/ping' AND method = 'POST'.
+      handler->_ping( ).
+    ENDIF.
   ENDMETHOD.
 ENDCLASS.

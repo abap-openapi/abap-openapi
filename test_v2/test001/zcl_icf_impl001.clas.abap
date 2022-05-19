@@ -4,4 +4,9 @@ CLASS zcl_icf_impl001 DEFINITION PUBLIC.
 ENDCLASS.
 
 CLASS zcl_icf_impl001 IMPLEMENTATION.
+
+  METHOD zif_interface001~_ping.
+* todo
+  ENDMETHOD.
+
 ENDCLASS.
