@@ -33,11 +33,12 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |CLASS { is_input-clas_icf_serv } IMPLEMENTATION.\n| &&
       |  METHOD if_http_extension~handle_request.\n| &&
       |    DATA handler TYPE REF TO { is_input-intf }.\n| &&
-      |    DATA path    TYPE string.\n| &&
+      |    DATA method  TYPE string.\n| &&
+      |    DATA path    TYPE string.\n\n| &&
       |    CREATE OBJECT handler TYPE { is_input-clas_icf_impl }.\n| &&
       |    path = server->request->get_header_field( '~path' ).\n| &&
-      |    CASE path.\n| &&
-      |    ENDCASE.\n| &&
+      |    method = server->request->get_method( ).\n| &&
+      |* todo, operations here\n| &&
       |  ENDMETHOD.\n| &&
       |ENDCLASS.|.
 
@@ -52,12 +53,17 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |* auto generated, do not change\n| &&
       |  PUBLIC SECTION.\n| &&
       |    INTERFACES { is_input-intf }.\n| &&
+      |    METHODS constructor IMPORTING host TYPE string.\n| &&
       |ENDCLASS.\n\n| &&
       |CLASS { is_input-clas_client } IMPLEMENTATION.\n| &&
+      |  METHOD constructor.\n| &&
+      |* todo, instantiate CL_HTTP_CLIENT here\n| &&
+      |  ENDMETHOD.\n| &&
       |ENDCLASS.|.
 
     rs_result-intf = |INTERFACE { is_input-intf } PUBLIC.\n| &&
       |* auto generated, do not change\n| &&
+      |* todo, operations here\n| &&
       |ENDINTERFACE.|.
 
   ENDMETHOD.
