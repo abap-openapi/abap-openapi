@@ -25,5 +25,6 @@ INTERFACE zif_interface004 PUBLIC.
          END OF resultstruct.
   METHODS _test
     IMPORTING
-      operation TYPE string.
+      operation TYPE string
+      body TYPE #/components/schemas/POSTtestRequest.
 ENDINTERFACE.

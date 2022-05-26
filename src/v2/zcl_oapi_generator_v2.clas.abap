@@ -22,28 +22,26 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
         VALUE(rs_result) TYPE ty_result.
 
   PRIVATE SECTION.
+    DATA ms_specification TYPE zif_oapi_specification_v3=>ty_specification.
+
     METHODS build_clas_icf_serv
       IMPORTING
         is_input TYPE ty_input
-        is_schema TYPE zif_oapi_specification_v3=>ty_specification
       RETURNING VALUE(rv_abap) TYPE string.
 
     METHODS build_clas_icf_impl
       IMPORTING
         is_input TYPE ty_input
-        is_schema TYPE zif_oapi_specification_v3=>ty_specification
       RETURNING VALUE(rv_abap) TYPE string.
 
     METHODS build_clas_client
       IMPORTING
         is_input TYPE ty_input
-        is_schema TYPE zif_oapi_specification_v3=>ty_specification
       RETURNING VALUE(rv_abap) TYPE string.
 
     METHODS build_intf
       IMPORTING
         is_input TYPE ty_input
-        is_schema TYPE zif_oapi_specification_v3=>ty_specification
       RETURNING VALUE(rv_abap) TYPE string.
 
     METHODS find_input_parameters
@@ -51,33 +49,40 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
         is_operation TYPE zif_oapi_specification_v3=>ty_operation
       RETURNING VALUE(rv_abap) TYPE string.
 
+    METHODS find_schema
+      IMPORTING iv_name TYPE string
+      RETURNING VALUE(rs_schema) TYPE zif_oapi_specification_v3=>ty_component_schema.
+
 ENDCLASS.
 
 CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
+  METHOD find_schema.
+
+    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
+    DATA lv_name TYPE string.
+
+    lv_name = iv_name.
+
+    REPLACE FIRST OCCURRENCE OF '#/components/schemas/' IN lv_name WITH ''.
+    READ TABLE ms_specification-components-schemas INTO rs_schema WITH KEY name = lv_name. "#EC CI_SUBRC
+
+  ENDMETHOD.
+
   METHOD run.
     DATA lo_parser TYPE REF TO zcl_oapi_parser.
-    DATA ls_specification TYPE zif_oapi_specification_v3=>ty_specification.
 
     CREATE OBJECT lo_parser.
-    ls_specification = lo_parser->parse( is_input-openapi_json ).
+    ms_specification = lo_parser->parse( is_input-openapi_json ).
 
-    rs_result-clas_icf_serv = build_clas_icf_serv(
-      is_schema = ls_specification
-      is_input  = is_input ).
-    rs_result-clas_icf_impl = build_clas_icf_impl(
-      is_schema = ls_specification
-      is_input  = is_input ).
-    rs_result-clas_client = build_clas_client(
-      is_schema = ls_specification
-      is_input  = is_input ).
-    rs_result-intf = build_intf(
-      is_schema = ls_specification
-      is_input  = is_input ).
+    rs_result-clas_icf_serv = build_clas_icf_serv( is_input ).
+    rs_result-clas_icf_impl = build_clas_icf_impl( is_input ).
+    rs_result-clas_client = build_clas_client( is_input ).
+    rs_result-intf = build_intf( is_input ).
   ENDMETHOD.
 
   METHOD build_clas_icf_serv.
-    DATA ls_operation LIKE LINE OF is_schema-operations.
+    DATA ls_operation LIKE LINE OF ms_specification-operations.
 
     rv_abap = |CLASS { is_input-clas_icf_serv } DEFINITION PUBLIC.\n| &&
       |* auto generated, do not change\n| &&
@@ -92,7 +97,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    CREATE OBJECT li_handler TYPE { is_input-clas_icf_impl }.\n| &&
       |    lv_path = server->request->get_header_field( '~path' ).\n| &&
       |    lv_method = server->request->get_method( ).\n\n|.
-    LOOP AT is_schema-operations INTO ls_operation.
+    LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
         |    IF lv_path = '{ ls_operation-path }' AND lv_method = '{ to_upper( ls_operation-method ) }'.\n| &&
         |      li_handler->{ ls_operation-abap_name }( ).\n| &&
@@ -108,7 +113,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD build_clas_icf_impl.
-    DATA ls_operation LIKE LINE OF is_schema-operations.
+    DATA ls_operation LIKE LINE OF ms_specification-operations.
 
     rv_abap = |CLASS { is_input-clas_icf_impl } DEFINITION PUBLIC.\n| &&
       |  PUBLIC SECTION.\n| &&
@@ -116,7 +121,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |ENDCLASS.\n\n| &&
       |CLASS { is_input-clas_icf_impl } IMPLEMENTATION.\n\n|.
 
-    LOOP AT is_schema-operations INTO ls_operation.
+    LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
         |  METHOD { is_input-intf }~{ ls_operation-abap_name }.\n| &&
         |* Add implementation logic here\n| &&
@@ -127,7 +132,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD build_clas_client.
-    DATA ls_operation LIKE LINE OF is_schema-operations.
+    DATA ls_operation LIKE LINE OF ms_specification-operations.
 
     rv_abap = |CLASS { is_input-clas_client } DEFINITION PUBLIC.\n| &&
       |* auto generated, do not change\n| &&
@@ -150,7 +155,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |        client = mi_client ).\n| &&
       |  ENDMETHOD.\n\n|.
 
-    LOOP AT is_schema-operations INTO ls_operation.
+    LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
         |  METHOD { is_input-intf }~{ ls_operation-abap_name }.\n| &&
         |    DATA lv_code TYPE i.\n| &&
@@ -170,19 +175,19 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD build_intf.
-    DATA ls_operation LIKE LINE OF is_schema-operations.
-    DATA ls_component_schema LIKE LINE OF is_schema-components-schemas.
+    DATA ls_operation LIKE LINE OF ms_specification-operations.
+    DATA ls_component_schema LIKE LINE OF ms_specification-components-schemas.
 
     rv_abap = |INTERFACE { is_input-intf } PUBLIC.\n| &&
       |* auto generated, do not change\n|.
 
-    LOOP AT is_schema-components-schemas INTO ls_component_schema.
+    LOOP AT ms_specification-components-schemas INTO ls_component_schema.
       rv_abap = rv_abap && ls_component_schema-schema->build_type_definition2(
         iv_name          = ls_component_schema-abap_name
-        is_specification = is_schema ).
+        is_specification = ms_specification ).
     ENDLOOP.
 
-    LOOP AT is_schema-operations INTO ls_operation.
+    LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
         |  METHODS { ls_operation-abap_name }{ find_input_parameters( ls_operation ) }.\n|.
     ENDLOOP.
@@ -198,6 +203,11 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       lv_str = |      { ls_parameter-abap_name } TYPE { ls_parameter-schema->get_simple_type( ) }|.
       APPEND lv_str TO lt_list.
     ENDLOOP.
+
+    IF is_operation-body_schema_ref IS NOT INITIAL.
+      lv_str = |      body TYPE { find_schema( is_operation-body_schema_ref )-abap_name }|.
+      APPEND lv_str TO lt_list.
+    ENDIF.
 
     rv_abap = concat_lines_of( table = lt_list sep = |\n| ).
 

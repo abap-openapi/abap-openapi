@@ -30,5 +30,6 @@ INTERFACE zif_interface003 PUBLIC.
          END OF posttestresponse.
   METHODS _test
     IMPORTING
-      operation TYPE string.
+      operation TYPE string
+      body TYPE #/components/schemas/POSTtestRequest.
 ENDINTERFACE.
