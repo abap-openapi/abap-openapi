@@ -204,7 +204,7 @@
       "exclude": ["generated/"],
       "skipNames": []
     },
-    "unused_variables": false,
+    "unused_variables": true,
     "use_bool_expression": true,
     "use_class_based_exceptions": true,
     "use_line_exists": true,

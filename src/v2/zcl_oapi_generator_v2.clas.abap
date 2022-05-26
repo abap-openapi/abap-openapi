@@ -49,6 +49,11 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
         is_operation TYPE zif_oapi_specification_v3=>ty_operation
       RETURNING VALUE(rv_abap) TYPE string.
 
+    METHODS find_returning_parameter
+      IMPORTING
+        is_operation TYPE zif_oapi_specification_v3=>ty_operation
+      RETURNING VALUE(rv_abap) TYPE string.
+
     METHODS find_schema
       IMPORTING iv_name TYPE string
       RETURNING VALUE(rs_schema) TYPE zif_oapi_specification_v3=>ty_component_schema.
@@ -58,15 +63,12 @@ ENDCLASS.
 CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
   METHOD find_schema.
-
-    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
     DATA lv_name TYPE string.
 
     lv_name = iv_name.
 
     REPLACE FIRST OCCURRENCE OF '#/components/schemas/' IN lv_name WITH ''.
     READ TABLE ms_specification-components-schemas INTO rs_schema WITH KEY name = lv_name. "#EC CI_SUBRC
-
   ENDMETHOD.
 
   METHOD run.
@@ -215,6 +217,17 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       rv_abap = |\n    IMPORTING\n{ rv_abap }|.
     ENDIF.
 
+  ENDMETHOD.
+
+  METHOD find_returning_parameter.
+    DATA ls_response LIKE LINE OF is_operation-responses.
+    DATA ls_content LIKE LINE OF ls_response-content.
+
+    LOOP AT is_operation-responses INTO ls_response.
+      LOOP AT ls_response-content INTO ls_content.
+        rv_abap = rv_abap && |      sdf TYPE { find_schema( ls_content-schema_ref )-abap_name }|.
+      ENDLOOP.
+    ENDLOOP.
   ENDMETHOD.
 
 ENDCLASS.
