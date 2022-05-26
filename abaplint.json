@@ -199,7 +199,7 @@
     "uncaught_exception": true,
     "unknown_types": true,
     "unreachable_code": true,
-    "unused_methods": false,
+    "unused_methods": true,
     "unused_types": {
       "exclude": ["generated/"],
       "skipNames": []
