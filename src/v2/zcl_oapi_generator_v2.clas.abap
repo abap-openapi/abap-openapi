@@ -49,10 +49,14 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
         is_operation TYPE zif_oapi_specification_v3=>ty_operation
       RETURNING VALUE(rv_abap) TYPE string.
 
+    TYPES: BEGIN OF ty_returning,
+        abap TYPE string,
+        type TYPE string,
+      END OF ty_returning.
     METHODS find_returning_parameter
       IMPORTING
         is_operation TYPE zif_oapi_specification_v3=>ty_operation
-      RETURNING VALUE(rv_abap) TYPE string.
+      RETURNING VALUE(rs_returning) TYPE ty_returning.
 
     METHODS find_schema
       IMPORTING iv_name TYPE string
@@ -178,6 +182,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
   METHOD build_intf.
     DATA ls_operation LIKE LINE OF ms_specification-operations.
+    DATA ls_returning TYPE ty_returning.
     DATA ls_component_schema LIKE LINE OF ms_specification-components-schemas.
 
     rv_abap = |INTERFACE { is_input-intf } PUBLIC.\n| &&
@@ -190,8 +195,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     ENDLOOP.
 
     LOOP AT ms_specification-operations INTO ls_operation.
-      rv_abap = rv_abap &&
-        |  METHODS { ls_operation-abap_name }{ find_input_parameters( ls_operation ) }.\n|.
+      ls_returning = find_returning_parameter( ls_operation ).
+      rv_abap = rv_abap && ls_returning-type &&
+        |  METHODS { ls_operation-abap_name }{ find_input_parameters( ls_operation ) }{ ls_returning-abap }.\n|.
     ENDLOOP.
     rv_abap = rv_abap && |ENDINTERFACE.|.
   ENDMETHOD.
@@ -222,10 +228,24 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
   METHOD find_returning_parameter.
     DATA ls_response LIKE LINE OF is_operation-responses.
     DATA ls_content LIKE LINE OF ls_response-content.
+    DATA lv_typename TYPE string.
+
+    lv_typename = 'ty_' && is_operation-abap_name.
+
+    rs_returning-type =
+      |  TYPES: BEGIN OF { lv_typename },\n|.
+    LOOP AT is_operation-responses INTO ls_response.
+      LOOP AT ls_response-content INTO ls_content.
+        rs_returning-type = rs_returning-type &&
+          |           { ls_response-code } TYPE { find_schema( ls_content-schema_ref )-abap_name },\n|.
+      ENDLOOP.
+    ENDLOOP.
+    rs_returning-type = rs_returning-type &&
+      |         END OF { lv_typename }.\n|.
 
     LOOP AT is_operation-responses INTO ls_response.
       LOOP AT ls_response-content INTO ls_content.
-        rv_abap = rv_abap && |      sdf TYPE { find_schema( ls_content-schema_ref )-abap_name }|.
+        rs_returning-abap = rs_returning-abap && |\n    RETURNING\n      VALUE(return) TYPE { lv_typename }|.
       ENDLOOP.
     ENDLOOP.
   ENDMETHOD.

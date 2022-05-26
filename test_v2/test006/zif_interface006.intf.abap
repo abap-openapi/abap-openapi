@@ -28,8 +28,13 @@ INTERFACE zif_interface006 PUBLIC.
            levela1 TYPE subposttestresponse_levela1,
            levelb1 TYPE subposttestresponse_levelb1,
          END OF posttestresponse.
+  TYPES: BEGIN OF ty__test,
+           200 TYPE posttestresponse,
+         END OF ty__test.
   METHODS _test
     IMPORTING
       separator TYPE string
-      body TYPE posttestrequest.
+      body TYPE posttestrequest
+    RETURNING
+      VALUE(return) TYPE ty__test.
 ENDINTERFACE.

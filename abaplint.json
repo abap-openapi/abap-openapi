@@ -119,7 +119,7 @@
     "method_length": false,
     "method_overwrites_builtin": true,
     "method_parameter_names": {
-      "exclude": ["test/"],
+      "exclude": ["test_v"],
       "patternKind": "required",
       "ignoreNames": [],
       "ignorePatterns": [],
@@ -193,7 +193,7 @@
     "try_without_catch": true,
     "type_form_parameters": true,
     "types_naming": {
-      "exclude": ["generated/"],
+      "exclude": ["generated/", "test_v"],
       "pattern": "^TY_.+$"
     },
     "uncaught_exception": true,

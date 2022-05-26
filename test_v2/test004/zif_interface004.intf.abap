@@ -23,8 +23,13 @@ INTERFACE zif_interface004 PUBLIC.
   TYPES: BEGIN OF resultstruct,
            result TYPE f,
          END OF resultstruct.
+  TYPES: BEGIN OF ty__test,
+           200 TYPE posttestresponse,
+         END OF ty__test.
   METHODS _test
     IMPORTING
       operation TYPE string
-      body TYPE posttestrequest.
+      body TYPE posttestrequest
+    RETURNING
+      VALUE(return) TYPE ty__test.
 ENDINTERFACE.
