@@ -31,5 +31,6 @@ INTERFACE zif_interface004 PUBLIC.
       operation TYPE string
       body TYPE posttestrequest
     RETURNING
-      VALUE(return) TYPE ty__test.
+      VALUE(return) TYPE ty__test
+    RAISING cx_static_check.
 ENDINTERFACE.
