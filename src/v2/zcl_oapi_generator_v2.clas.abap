@@ -105,9 +105,13 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    lv_method = server->request->get_method( ).\n\n|.
     LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
-        |    IF lv_path = '{ ls_operation-path }' AND lv_method = '{ to_upper( ls_operation-method ) }'.\n| &&
-        |      li_handler->{ ls_operation-abap_name }( ).\n| &&
-        |    ENDIF.\n|.
+        |    TRY.\n| &&
+        |        IF lv_path = '{ ls_operation-path }' AND lv_method = '{ to_upper( ls_operation-method ) }'.\n| &&
+        |          li_handler->{ ls_operation-abap_name }( ).\n| &&
+        |        ENDIF.\n| &&
+        |      CATCH cx_static_check.\n| &&
+        |        ASSERT 1 = 'todo'.\n| &&
+        |    ENDTRY.\n|.
     ENDLOOP.
     rv_abap = rv_abap &&
       |\n| &&

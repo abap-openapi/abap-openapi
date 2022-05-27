@@ -14,9 +14,13 @@ CLASS zcl_icf_serv006 IMPLEMENTATION.
     lv_path = server->request->get_header_field( '~path' ).
     lv_method = server->request->get_method( ).
 
-    IF lv_path = '/test' AND lv_method = 'POST'.
-      li_handler->_test( ).
-    ENDIF.
+    TRY.
+        IF lv_path = '/test' AND lv_method = 'POST'.
+          li_handler->_test( ).
+        ENDIF.
+      CATCH cx_static_check.
+        ASSERT 1 = 'todo'.
+    ENDTRY.
 
     server->response->set_content_type( 'text/html' ).
     server->response->set_cdata( 'todo' ).
