@@ -49,6 +49,12 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
           rv_abap = rv_abap && ls_ref-abap_name && |,\n|.
         ELSEIF ls_property-schema->is_simple_type( ) = abap_true.
           rv_abap = rv_abap && ls_property-schema->get_simple_type( ) && |,\n|.
+        ELSEIF ls_property-schema->type = 'array' AND ls_property-schema->items_ref IS NOT INITIAL.
+          ls_ref = lookup_ref( iv_name = ls_property-schema->items_ref
+                               it_refs = it_refs ).
+          rv_abap = rv_abap && |STANDARD TABLE OF { ls_ref-abap_name } WITH DEFAULT KEY,\n|.
+*        ELSEIF ls_property-schema->type = 'array' AND ls_property-schema->is_simple_type( ) = abap_true.
+*          rv_abap = rv_abap && |STANDARD TABLE OF { ls_property-schema->get_simple_type( ) } WITH DEFAULT KEY,\n|.
         ELSEIF ls_property-schema->type = 'array'.
           rv_abap = rv_abap && |STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array\n|.
         ELSE.

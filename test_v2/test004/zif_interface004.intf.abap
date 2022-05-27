@@ -3,10 +3,10 @@ INTERFACE zif_interface004 PUBLIC.
 
 * POSTtestRequest
   TYPES: BEGIN OF subposttestrequest_levelb1,
-           levelb11 TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           levelb11 TYPE STANDARD TABLE OF number1andnumber2 WITH DEFAULT KEY,
          END OF subposttestrequest_levelb1.
   TYPES: BEGIN OF posttestrequest,
-           levela1 TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           levela1 TYPE STANDARD TABLE OF number1andnumber2 WITH DEFAULT KEY,
            levelb1 TYPE subposttestrequest_levelb1,
            levelc1 TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF posttestrequest.
@@ -15,7 +15,7 @@ INTERFACE zif_interface004 PUBLIC.
            levelb11 TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
          END OF subposttestresponse_levelb1.
   TYPES: BEGIN OF posttestresponse,
-           levela1 TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           levela1 TYPE STANDARD TABLE OF resultstruct WITH DEFAULT KEY,
            levelb1 TYPE subposttestresponse_levelb1,
            levelc1 TYPE f,
          END OF posttestresponse.
