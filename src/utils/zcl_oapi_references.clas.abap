@@ -2,7 +2,7 @@ CLASS zcl_oapi_references DEFINITION PUBLIC.
 
   PUBLIC SECTION.
 * todo, rename to "normalize"?
-    METHODS fix
+    METHODS normalize
       IMPORTING is_spec TYPE zif_oapi_specification_v3=>ty_specification
       RETURNING VALUE(rs_spec) TYPE zif_oapi_specification_v3=>ty_specification.
 
@@ -16,7 +16,7 @@ ENDCLASS.
 
 CLASS zcl_oapi_references IMPLEMENTATION.
 
-  METHOD fix.
+  METHOD normalize.
     ms_spec = is_spec.
 
 * always dereference all parameters

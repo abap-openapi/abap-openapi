@@ -76,10 +76,14 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD run.
-    DATA lo_parser TYPE REF TO zcl_oapi_parser.
+    DATA lo_parser     TYPE REF TO zcl_oapi_parser.
+    DATA lo_references TYPE REF TO zcl_oapi_references.
 
     CREATE OBJECT lo_parser.
     ms_specification = lo_parser->parse( is_input-openapi_json ).
+
+    CREATE OBJECT lo_references.
+    ms_specification = lo_references->normalize( ms_specification ).
 
     rs_result-clas_icf_serv = build_clas_icf_serv( is_input ).
     rs_result-clas_icf_impl = build_clas_icf_impl( is_input ).

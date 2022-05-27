@@ -94,7 +94,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
     ms_specification = lo_parser->parse( is_input-json ).
 
     CREATE OBJECT lo_references.
-    ms_specification = lo_references->fix( ms_specification ).
+    ms_specification = lo_references->normalize( ms_specification ).
 
     rs_result-clas = build_class( ).
     rs_result-intf = build_interface( ).
