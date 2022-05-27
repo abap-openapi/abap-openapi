@@ -234,16 +234,18 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
     lv_typename = 'ty_' && is_operation-abap_name.
 
-    rs_returning-type =
-      |  TYPES: BEGIN OF { lv_typename },\n|.
     LOOP AT is_operation-responses INTO ls_response.
       LOOP AT ls_response-content INTO ls_content.
         rs_returning-type = rs_returning-type &&
           |           { ls_response-code } TYPE { find_schema( ls_content-schema_ref )-abap_name },\n|.
       ENDLOOP.
     ENDLOOP.
-    rs_returning-type = rs_returning-type &&
-      |         END OF { lv_typename }.\n|.
+    IF rs_returning-type IS NOT INITIAL.
+      rs_returning-type =
+        |  TYPES: BEGIN OF { lv_typename },\n| &&
+        |{ rs_returning-type }| &&
+        |         END OF { lv_typename }.\n|.
+    ENDIF.
 
     LOOP AT is_operation-responses INTO ls_response.
       LOOP AT ls_response-content INTO ls_content.
