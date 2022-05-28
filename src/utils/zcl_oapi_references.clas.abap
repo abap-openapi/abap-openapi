@@ -12,6 +12,12 @@ CLASS zcl_oapi_references DEFINITION PUBLIC.
     METHODS dereference_parameters.
     METHODS create_body_references.
     METHODS create_response_references.
+    METHODS sort_schemas.
+    METHODS sort_traverse
+      IMPORTING
+        iv_parent TYPE string
+        io_graph  TYPE REF TO zcl_oapi_graph
+        ii_schema TYPE REF TO zif_oapi_schema.
 ENDCLASS.
 
 CLASS zcl_oapi_references IMPLEMENTATION.
@@ -29,9 +35,63 @@ CLASS zcl_oapi_references IMPLEMENTATION.
     create_response_references( ).
 
 * sort component schemas so they are ordered with references being defined before used
-* todo, use the jira spec for testing, https://developer.atlassian.com/cloud/jira/platform/swagger-v3.v3.json
+    sort_schemas( ).
 
     rs_spec = ms_spec.
+  ENDMETHOD.
+
+  METHOD sort_traverse.
+    DATA ls_property TYPE zif_oapi_schema=>ty_property.
+    DATA lv_name TYPE string.
+
+    IF ii_schema->items_ref IS NOT INITIAL.
+      lv_name = ii_schema->items_ref.
+      REPLACE FIRST OCCURRENCE OF '#/components/schemas/' IN lv_name WITH ''.
+      io_graph->add_edge(
+        iv_from = iv_parent
+        iv_to   = lv_name ).
+    ENDIF.
+    LOOP AT ii_schema->properties INTO ls_property.
+      IF ls_property-ref IS NOT INITIAL.
+        lv_name = ls_property-ref.
+        REPLACE FIRST OCCURRENCE OF '#/components/schemas/' IN lv_name WITH ''.
+        io_graph->add_edge(
+          iv_from = iv_parent
+          iv_to   = lv_name ).
+      ELSEIF ls_property-schema IS NOT INITIAL.
+        sort_traverse( iv_parent = iv_parent
+                       io_graph  = io_graph
+                       ii_schema = ls_property-schema ).
+      ENDIF.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD sort_schemas.
+    DATA ls_schema LIKE LINE OF ms_spec-components-schemas.
+    DATA lt_copy LIKE ms_spec-components-schemas.
+    DATA ls_copy LIKE LINE OF lt_copy.
+    DATA lv_name TYPE string.
+    DATA lo_graph TYPE REF TO zcl_oapi_graph.
+    CREATE OBJECT lo_graph.
+
+    LOOP AT ms_spec-components-schemas INTO ls_schema.
+      lo_graph->add_vertex( ls_schema-name ).
+    ENDLOOP.
+    LOOP AT ms_spec-components-schemas INTO ls_schema.
+      sort_traverse( iv_parent = ls_schema-name
+                     io_graph  = lo_graph
+                     ii_schema = ls_schema-schema ).
+    ENDLOOP.
+
+    lt_copy = ms_spec-components-schemas.
+    CLEAR ms_spec-components-schemas.
+    WHILE lo_graph->is_empty( ) = abap_false.
+      lv_name = lo_graph->pop( ).
+      READ TABLE lt_copy INTO ls_copy WITH KEY name = lv_name.
+      ASSERT sy-subrc = 0.
+      INSERT ls_copy INTO TABLE ms_spec-components-schemas INDEX 1.
+    ENDWHILE.
+
   ENDMETHOD.
 
   METHOD create_response_references.

@@ -11,6 +11,7 @@ CLASS zcl_oapi_graph DEFINITION PUBLIC.
         iv_to   TYPE string.
     METHODS is_empty RETURNING VALUE(rv_empty) TYPE abap_bool.
     METHODS pop RETURNING VALUE(rv_node) TYPE string.
+    METHODS dump.
   PRIVATE SECTION.
     DATA mt_vertices TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
     DATA mt_edges TYPE STANDARD TABLE OF ty_edge WITH DEFAULT KEY.
@@ -19,6 +20,13 @@ ENDCLASS.
 CLASS zcl_oapi_graph IMPLEMENTATION.
   METHOD is_empty.
     rv_empty = boolc( lines( mt_vertices ) = 0 ).
+  ENDMETHOD.
+
+  METHOD dump.
+    DATA ls_edge LIKE LINE OF mt_edges.
+    LOOP AT mt_edges INTO ls_edge.
+      WRITE: / ls_edge-from, '->', ls_edge-to.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD pop.
