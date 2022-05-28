@@ -12,5 +12,17 @@ CLASS ltcl_graph IMPLEMENTATION.
     lo_graph->add_edge(
       iv_from = |foo|
       iv_to   = |bar| ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_graph->pop( )
+      exp = |foo| ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_graph->pop( )
+      exp = |bar| ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = lo_graph->is_empty( )
+      exp = abap_true ).
   ENDMETHOD.
 ENDCLASS.

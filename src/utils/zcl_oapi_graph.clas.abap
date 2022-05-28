@@ -9,12 +9,32 @@ CLASS zcl_oapi_graph DEFINITION PUBLIC.
       IMPORTING
         iv_from TYPE string
         iv_to   TYPE string.
+    METHODS is_empty RETURNING VALUE(rv_empty) TYPE abap_bool.
+    METHODS pop RETURNING VALUE(rv_node) TYPE string.
   PRIVATE SECTION.
     DATA mt_vertices TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
     DATA mt_edges TYPE STANDARD TABLE OF ty_edge WITH DEFAULT KEY.
 ENDCLASS.
 
 CLASS zcl_oapi_graph IMPLEMENTATION.
+  METHOD is_empty.
+    rv_empty = boolc( lines( mt_vertices ) = 0 ).
+  ENDMETHOD.
+
+  METHOD pop.
+    DATA lv_vertex LIKE LINE OF mt_vertices.
+    DATA lv_index TYPE i.
+    ASSERT is_empty( ) = abap_false.
+    LOOP AT mt_vertices INTO lv_vertex.
+      lv_index = sy-tabix.
+* todo, validation here
+      DELETE mt_vertices INDEX lv_index.
+      DELETE mt_edges WHERE from = lv_vertex.
+      rv_node = lv_vertex.
+      RETURN.
+    ENDLOOP.
+  ENDMETHOD.
+
   METHOD add_vertex.
     READ TABLE mt_vertices WITH KEY table_line = iv_vertex TRANSPORTING NO FIELDS.
     ASSERT sy-subrc <> 0.
@@ -25,10 +45,15 @@ CLASS zcl_oapi_graph IMPLEMENTATION.
     DATA ls_edge TYPE ty_edge.
     ASSERT iv_from IS NOT INITIAL.
     ASSERT iv_to IS NOT INITIAL.
+    READ TABLE mt_vertices WITH KEY table_line = iv_from TRANSPORTING NO FIELDS.
+    ASSERT sy-subrc = 0.
+    READ TABLE mt_vertices WITH KEY table_line = iv_to TRANSPORTING NO FIELDS.
+    ASSERT sy-subrc = 0.
     READ TABLE mt_edges WITH KEY from = iv_from to = iv_to TRANSPORTING NO FIELDS.
-    ASSERT sy-subrc <> 0.
-    ls_edge-from = iv_from.
-    ls_edge-to = iv_to.
-    INSERT ls_edge INTO TABLE mt_edges.
+    IF sy-subrc <> 0.
+      ls_edge-from = iv_from.
+      ls_edge-to = iv_to.
+      INSERT ls_edge INTO TABLE mt_edges.
+    ENDIF.
   ENDMETHOD.
 ENDCLASS.
