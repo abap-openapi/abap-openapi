@@ -27,12 +27,16 @@ CLASS zcl_oapi_graph IMPLEMENTATION.
     ASSERT is_empty( ) = abap_false.
     LOOP AT mt_vertices INTO lv_vertex.
       lv_index = sy-tabix.
-* todo, validation here
+      READ TABLE mt_edges WITH KEY to = lv_vertex TRANSPORTING NO FIELDS.
+      IF sy-subrc = 0.
+        CONTINUE.
+      ENDIF.
       DELETE mt_vertices INDEX lv_index.
       DELETE mt_edges WHERE from = lv_vertex.
       rv_node = lv_vertex.
       RETURN.
     ENDLOOP.
+    ASSERT 1 = 'graph has cycles'.
   ENDMETHOD.
 
   METHOD add_vertex.
