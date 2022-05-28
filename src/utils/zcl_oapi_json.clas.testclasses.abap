@@ -1,9 +1,9 @@
 CLASS ltcl_json DEFINITION FOR TESTING RISK LEVEL HARMLESS DURATION SHORT FINAL.
   PRIVATE SECTION.
-    METHODS object_two_keys FOR TESTING.
-    METHODS basic_array FOR TESTING.
-    METHODS nested_object FOR TESTING.
-    METHODS test2 FOR TESTING.
+    METHODS object_two_keys FOR TESTING RAISING cx_static_check.
+    METHODS basic_array FOR TESTING RAISING cx_static_check.
+    METHODS nested_object FOR TESTING RAISING cx_static_check.
+    METHODS test2 FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 CLASS ltcl_json IMPLEMENTATION.
