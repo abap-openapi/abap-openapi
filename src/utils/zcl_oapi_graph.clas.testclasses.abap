@@ -5,6 +5,12 @@ ENDCLASS.
 
 CLASS ltcl_graph IMPLEMENTATION.
   METHOD test.
-* todo
+    DATA lo_graph TYPE REF TO zcl_oapi_graph.
+    CREATE OBJECT lo_graph.
+    lo_graph->add_vertex( |foo| ).
+    lo_graph->add_vertex( |bar| ).
+    lo_graph->add_edge(
+      iv_from = |foo|
+      iv_to   = |bar| ).
   ENDMETHOD.
 ENDCLASS.
