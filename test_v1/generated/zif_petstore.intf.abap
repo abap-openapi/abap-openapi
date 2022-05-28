@@ -24,7 +24,7 @@ INTERFACE zif_petstore PUBLIC.
            id TYPE i,
            name TYPE string,
            category TYPE category,
-           photourls TYPE STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array
+           photourls TYPE STANDARD TABLE OF string WITH DEFAULT KEY,
            tags TYPE STANDARD TABLE OF tag WITH DEFAULT KEY,
            status TYPE string,
          END OF pet.

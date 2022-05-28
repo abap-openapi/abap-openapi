@@ -11,6 +11,7 @@ INTERFACE zif_oapi_schema PUBLIC.
     type       TYPE string,
     default    TYPE string,
     properties TYPE STANDARD TABLE OF ty_property WITH DEFAULT KEY,
+    items_type TYPE string,
     items_ref  TYPE string.
 
   METHODS is_simple_type

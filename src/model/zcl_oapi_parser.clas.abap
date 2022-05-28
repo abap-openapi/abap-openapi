@@ -76,6 +76,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     ENDIF.
     ri_schema->default = mo_json->value_string( iv_prefix && '/default' ).
     ri_schema->items_ref = mo_json->value_string( iv_prefix && '/items/$ref' ).
+    ri_schema->items_type = mo_json->value_string( iv_prefix && '/items/type' ).
 
     lt_names = mo_json->members( iv_prefix && '/properties/' ).
     LOOP AT lt_names INTO lv_name.
