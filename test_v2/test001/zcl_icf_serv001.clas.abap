@@ -12,6 +12,8 @@ CLASS zcl_icf_serv001 DEFINITION PUBLIC.
            END OF ty_json.
     TYPES ty_json_tt TYPE STANDARD TABLE OF ty_json WITH DEFAULT KEY.
     DATA mt_json TYPE ty_json_tt.
+    METHODS json_parse
+      IMPORTING iv_json TYPE string.
     METHODS json_value_boolean
       IMPORTING iv_path         TYPE string
       RETURNING VALUE(rv_value) TYPE abap_bool.
@@ -33,6 +35,11 @@ CLASS zcl_icf_serv001 DEFINITION PUBLIC.
 ENDCLASS.
 
 CLASS zcl_icf_serv001 IMPLEMENTATION.
+  METHOD json_parse.
+    CLEAR mt_json.
+* todo.
+  ENDMETHOD.
+
   METHOD json_value_boolean.
     rv_value = boolc( json_value_string( iv_path ) = 'true' ).
   ENDMETHOD.

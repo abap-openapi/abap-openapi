@@ -173,7 +173,13 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD json_method_implementations.
-    rv_abap = |  METHOD json_value_boolean.\n| &&
+    rv_abap =
+      |  METHOD json_parse.\n| &&
+      |    CLEAR mt_json.\n| &&
+      |* todo.\n| &&
+      |  ENDMETHOD.\n| &&
+      |\n| &&
+      |  METHOD json_value_boolean.\n| &&
       |    rv_value = boolc( json_value_string( iv_path ) = 'true' ).\n| &&
       |  ENDMETHOD.\n| &&
       |\n| &&
@@ -217,6 +223,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |           END OF ty_json.\n| &&
       |    TYPES ty_json_tt TYPE STANDARD TABLE OF ty_json WITH DEFAULT KEY.\n| &&
       |    DATA mt_json TYPE ty_json_tt.\n| &&
+      |    METHODS json_parse\n| &&
+      |      IMPORTING iv_json TYPE string.\n| &&
       |    METHODS json_value_boolean\n| &&
       |      IMPORTING iv_path         TYPE string\n| &&
       |      RETURNING VALUE(rv_value) TYPE abap_bool.\n| &&
@@ -287,6 +295,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           |\n            { ls_parameter-abap_name } = server->request->get_form_field( '{ ls_parameter-name }' )|.
       ENDLOOP.
       IF ls_operation-body_schema_ref IS NOT INITIAL.
+        rv_abap = rv_abap &&
+          |          json_parse( 'todo' ).\n|.
         lv_parameters = lv_parameters &&
           |\n            body = { find_schema( ls_operation-body_schema_ref )-abap_parser_method }( )|.
       ENDIF.
