@@ -103,7 +103,7 @@ CLASS zcl_icf_serv005 IMPLEMENTATION.
     CLEAR mt_json.
     TRY.
         IF lv_path = '/test' AND lv_method = 'POST'.
-          json_parse( 'todo' ).
+          json_parse( server->request->get_cdata( ) ).
           li_handler->_test(
             separator = server->request->get_form_field( 'separator' )
             body = parse_posttestrequest( ) ).

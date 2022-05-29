@@ -298,7 +298,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       ENDLOOP.
       IF ls_operation-body_schema_ref IS NOT INITIAL.
         rv_abap = rv_abap &&
-          |          json_parse( 'todo' ).\n|.
+          |          json_parse( server->request->get_cdata( ) ).\n|.
         lv_parameters = lv_parameters &&
           |\n            body = { find_schema( ls_operation-body_schema_ref )-abap_parser_method }( )|.
       ENDIF.
