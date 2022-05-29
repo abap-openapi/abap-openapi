@@ -174,17 +174,37 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
   METHOD json_method_implementations.
     rv_abap = |  METHOD json_value_boolean.\n| &&
+      |    rv_value = boolc( json_value_string( iv_path ) = 'true' ).\n| &&
       |  ENDMETHOD.\n| &&
+      |\n| &&
       |  METHOD json_value_integer.\n| &&
+      |    rv_value = json_value_string( iv_path ).\n| &&
       |  ENDMETHOD.\n| &&
+      |\n| &&
       |  METHOD json_value_number.\n| &&
+      |    rv_value = json_value_string( iv_path ).\n| &&
       |  ENDMETHOD.\n| &&
+      |\n| &&
       |  METHOD json_value_string.\n| &&
+      |    DATA ls_data LIKE LINE OF mt_json.\n| &&
+      |    READ TABLE mt_json INTO ls_data WITH KEY full_name = iv_path.\n| &&
+      |    IF sy-subrc = 0.\n| &&
+      |      rv_value = ls_data-value.\n| &&
+      |    ENDIF.\n| &&
       |  ENDMETHOD.\n| &&
+      |\n| &&
       |  METHOD json_exists.\n| &&
+      |    READ TABLE mt_json WITH KEY full_name = iv_path TRANSPORTING NO FIELDS.\n| &&
+      |    rv_exists = boolc( sy-subrc = 0 ).\n| &&
       |  ENDMETHOD.\n| &&
+      |\n| &&
       |  METHOD json_members.\n| &&
-      |  ENDMETHOD.\n|.
+      |    DATA ls_data LIKE LINE OF mt_json.\n| &&
+      |    LOOP AT mt_json INTO ls_data WHERE parent = iv_path.\n| &&
+      |      APPEND ls_data-name TO rt_members.\n| &&
+      |    ENDLOOP.\n| &&
+      |  ENDMETHOD.\n| &&
+      |\n|.
   ENDMETHOD.
 
   METHOD json_method_definitions.

@@ -1,6 +1,6 @@
 {
   "global": {
-    "files": "/{src,test_va}/**/*.*",
+    "files": "/{src,test_v2}/**/*.*",
     "skipGeneratedGatewayClasses": true,
     "skipGeneratedPersistentClasses": true,
     "skipGeneratedFunctionGroups": true

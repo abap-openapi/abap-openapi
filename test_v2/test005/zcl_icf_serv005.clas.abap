@@ -44,17 +44,37 @@ ENDCLASS.
 
 CLASS zcl_icf_serv005 IMPLEMENTATION.
   METHOD json_value_boolean.
+    rv_value = boolc( json_value_string( iv_path ) = 'true' ).
   ENDMETHOD.
+
   METHOD json_value_integer.
+    rv_value = json_value_string( iv_path ).
   ENDMETHOD.
+
   METHOD json_value_number.
+    rv_value = json_value_string( iv_path ).
   ENDMETHOD.
+
   METHOD json_value_string.
+    DATA ls_data LIKE LINE OF mt_json.
+    READ TABLE mt_json INTO ls_data WITH KEY full_name = iv_path.
+    IF sy-subrc = 0.
+      rv_value = ls_data-value.
+    ENDIF.
   ENDMETHOD.
+
   METHOD json_exists.
+    READ TABLE mt_json WITH KEY full_name = iv_path TRANSPORTING NO FIELDS.
+    rv_exists = boolc( sy-subrc = 0 ).
   ENDMETHOD.
+
   METHOD json_members.
+    DATA ls_data LIKE LINE OF mt_json.
+    LOOP AT mt_json INTO ls_data WHERE parent = iv_path.
+      APPEND ls_data-name TO rt_members.
+    ENDLOOP.
   ENDMETHOD.
+
   METHOD parse_posttestresponse.
     parsed-result = json_value_string( iv_prefix && '/result' ).
   ENDMETHOD.
