@@ -18,7 +18,7 @@ CLASS zcl_icf_serv004 IMPLEMENTATION.
         IF lv_path = '/test' AND lv_method = 'POST'.
           DATA ls_body TYPE zif_interface004=>posttestrequest.
           li_handler->_test(
-            operation = ''
+            operation = server->request->get_form_field( 'operation' )
             body = ls_body ).
         ENDIF.
       CATCH cx_static_check.

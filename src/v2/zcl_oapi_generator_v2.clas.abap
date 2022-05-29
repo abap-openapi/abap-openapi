@@ -117,7 +117,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
       CLEAR lv_parameters.
       LOOP AT ls_operation-parameters INTO ls_parameter WHERE in = 'query'.
-        lv_parameters = lv_parameters && |\n            { ls_parameter-abap_name } = ''|.
+        lv_parameters = lv_parameters && |\n            { ls_parameter-abap_name } = server->request->get_form_field( '{ ls_parameter-name }' )|.
       ENDLOOP.
       IF ls_operation-body_schema_ref IS NOT INITIAL.
         rv_abap = rv_abap &&
