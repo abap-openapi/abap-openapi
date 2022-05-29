@@ -201,12 +201,16 @@
     "uncaught_exception": true,
     "unknown_types": true,
     "unreachable_code": true,
-    "unused_methods": true,
+    "unused_methods": {
+      "exclude": ["test_v2"]
+    },
     "unused_types": {
-      "exclude": ["generated/"],
+      "exclude": ["generated/", "test_v2"],
       "skipNames": []
     },
-    "unused_variables": true,
+    "unused_variables": {
+      "exclude": ["test_v2"]
+    },
     "use_bool_expression": true,
     "use_class_based_exceptions": true,
     "use_line_exists": true,
