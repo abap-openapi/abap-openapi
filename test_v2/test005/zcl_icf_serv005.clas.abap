@@ -16,7 +16,10 @@ CLASS zcl_icf_serv005 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/test' AND lv_method = 'POST'.
-          li_handler->_test( ).
+          DATA ls_body TYPE zif_interface005=>posttestrequest.
+          li_handler->_test(
+            separator = ''
+            body = ls_body ).
         ENDIF.
       CATCH cx_static_check.
         ASSERT 1 = 'todo'.

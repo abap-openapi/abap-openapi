@@ -1,6 +1,6 @@
 {
   "global": {
-    "files": "/{src,test}/**/*.*",
+    "files": "/{src,test_v2}/**/*.*",
     "skipGeneratedGatewayClasses": true,
     "skipGeneratedPersistentClasses": true,
     "skipGeneratedFunctionGroups": true
@@ -70,7 +70,9 @@
     "constructor_visibility_public": true,
     "contains_tab": true,
     "cyclomatic_complexity": false,
-    "definitions_top": true,
+    "definitions_top": {
+      "exclude": ["test_v2"]
+    },
     "description_empty": false,
     "double_space": true,
     "downport": false,
