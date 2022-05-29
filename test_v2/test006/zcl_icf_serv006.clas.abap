@@ -13,15 +13,58 @@ CLASS zcl_icf_serv006 DEFINITION PUBLIC.
         iv_prefix TYPE string OPTIONAL
       RETURNING
         VALUE(parsed) TYPE zif_interface006=>posttestrequest.
+
+    TYPES: BEGIN OF ty_json,
+             parent    TYPE string,
+             name      TYPE string,
+             full_name TYPE string,
+             value     TYPE string,
+           END OF ty_json.
+    TYPES ty_json_tt TYPE STANDARD TABLE OF ty_json WITH DEFAULT KEY.
+    DATA mt_json TYPE ty_json_tt.
+    METHODS json_value_boolean
+      IMPORTING iv_path         TYPE string
+      RETURNING VALUE(rv_value) TYPE abap_bool.
+    METHODS json_value_integer
+      IMPORTING iv_path         TYPE string
+      RETURNING VALUE(rv_value) TYPE i.
+    METHODS json_value_number
+      IMPORTING iv_path         TYPE string
+      RETURNING VALUE(rv_value) TYPE i.
+    METHODS json_value_string
+      IMPORTING iv_path         TYPE string
+      RETURNING VALUE(rv_value) TYPE string.
+    METHODS json_exists
+      IMPORTING iv_path          TYPE string
+      RETURNING VALUE(rv_exists) TYPE abap_bool.
+    METHODS json_members
+      IMPORTING iv_path           TYPE string
+      RETURNING VALUE(rt_members) TYPE string_table.
 ENDCLASS.
 
 CLASS zcl_icf_serv006 IMPLEMENTATION.
+  METHOD json_value_boolean.
+  ENDMETHOD.
+  METHOD json_value_integer.
+  ENDMETHOD.
+  METHOD json_value_number.
+  ENDMETHOD.
+  METHOD json_value_string.
+  ENDMETHOD.
+  METHOD json_exists.
+  ENDMETHOD.
+  METHOD json_members.
+  ENDMETHOD.
   METHOD parse_posttestresponse.
-* todo
+    parsed-levela1-result = json_value_string( iv_prefix && '/levelA1/result' ).
+    parsed-levelb1-levelb11-result = json_value_string( iv_prefix && '/levelB1/levelB11/result' ).
   ENDMETHOD.
 
   METHOD parse_posttestrequest.
-* todo
+    parsed-levela1-string1 = json_value_string( iv_prefix && '/levelA1/string1' ).
+    parsed-levela1-string2 = json_value_string( iv_prefix && '/levelA1/string2' ).
+    parsed-levelb1-levelb11-string1 = json_value_string( iv_prefix && '/levelB1/levelB11/string1' ).
+    parsed-levelb1-levelb11-string2 = json_value_string( iv_prefix && '/levelB1/levelB11/string2' ).
   ENDMETHOD.
 
   METHOD if_http_extension~handle_request.
@@ -33,6 +76,7 @@ CLASS zcl_icf_serv006 IMPLEMENTATION.
     lv_path = server->request->get_header_field( '~path' ).
     lv_method = server->request->get_method( ).
 
+    CLEAR mt_json.
     TRY.
         IF lv_path = '/test' AND lv_method = 'POST'.
           li_handler->_test(

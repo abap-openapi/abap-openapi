@@ -23,25 +23,18 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
 
   PRIVATE SECTION.
     DATA ms_specification TYPE zif_oapi_specification_v3=>ty_specification.
+    DATA ms_input TYPE ty_input.
 
     METHODS build_clas_icf_serv
-      IMPORTING
-        is_input TYPE ty_input
       RETURNING VALUE(rv_abap) TYPE string.
 
     METHODS build_clas_icf_impl
-      IMPORTING
-        is_input TYPE ty_input
       RETURNING VALUE(rv_abap) TYPE string.
 
     METHODS build_clas_client
-      IMPORTING
-        is_input TYPE ty_input
       RETURNING VALUE(rv_abap) TYPE string.
 
     METHODS build_intf
-      IMPORTING
-        is_input TYPE ty_input
       RETURNING VALUE(rv_abap) TYPE string.
 
     METHODS find_input_parameters
@@ -62,9 +55,94 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
       IMPORTING iv_name TYPE string
       RETURNING VALUE(rs_schema) TYPE zif_oapi_specification_v3=>ty_component_schema.
 
+    METHODS dump_parser_methods
+      RETURNING VALUE(rv_abap) TYPE string.
+    METHODS dump_parser
+      IMPORTING ii_schema TYPE REF TO zif_oapi_schema
+                iv_abap_name TYPE string
+                iv_hard_prefix TYPE string OPTIONAL
+      RETURNING VALUE(rv_abap) TYPE string.
+    METHODS find_parser_method
+      IMPORTING iv_name TYPE string
+      RETURNING VALUE(rv_method) TYPE string.
+    METHODS json_method_definitions RETURNING VALUE(rv_abap) TYPE string.
+    METHODS json_method_implementations RETURNING VALUE(rv_abap) TYPE string.
 ENDCLASS.
 
 CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
+
+  METHOD find_parser_method.
+    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
+    ls_schema = find_schema( iv_name ).
+    IF ls_schema IS NOT INITIAL.
+      rv_method = ls_schema-abap_parser_method.
+    ELSE.
+      rv_method = 'unknown_not_found'.
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD dump_parser_methods.
+* note: the parser methods might be called recursively, as the structures can be nested
+    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
+    LOOP AT ms_specification-components-schemas INTO ls_schema WHERE abap_parser_method IS NOT INITIAL.
+      rv_abap = rv_abap &&
+            |  METHOD { ls_schema-abap_parser_method }.\n|.
+      rv_abap = rv_abap && dump_parser(
+            ii_schema    = ls_schema-schema
+            iv_abap_name = 'parsed' ).
+      rv_abap = rv_abap && |  ENDMETHOD.\n\n|.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD dump_parser.
+    DATA ls_property TYPE zif_oapi_schema=>ty_property.
+    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
+    DATA lv_method TYPE string.
+
+    CASE ii_schema->type.
+      WHEN 'object'.
+        LOOP AT ii_schema->properties INTO ls_property.
+          IF ls_property-schema IS INITIAL AND ls_property-ref IS NOT INITIAL.
+            lv_method = find_parser_method( ls_property-ref ).
+            rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = { lv_method }( iv_prefix && '{ iv_hard_prefix }/{ ls_property-name }' ).\n|.
+          ELSEIF ls_property-schema IS INITIAL.
+            rv_abap = rv_abap && |* todo initial, hmm\n|.
+          ELSEIF ls_property-schema->type = 'string'
+              OR ls_property-schema->type = 'integer'.
+            rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = json_value_string( iv_prefix && '{ iv_hard_prefix }/{ ls_property-name }' ).\n|.
+          ELSEIF ls_property-schema->type = 'boolean'.
+            rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = json_value_boolean( iv_prefix && '{ iv_hard_prefix }/{ ls_property-name }' ).\n|.
+          ELSEIF ls_property-schema->type = 'object'.
+            rv_abap = rv_abap && dump_parser(
+              ii_schema    = ls_property-schema
+              iv_hard_prefix = iv_hard_prefix && '/' && ls_property-name
+              iv_abap_name = |{ iv_abap_name }-{ ls_property-abap_name }| ).
+          ELSE.
+            rv_abap = rv_abap && |* todo, { ls_property-schema->type }, { ls_property-abap_name }\n|.
+          ENDIF.
+        ENDLOOP.
+      WHEN 'array'.
+        IF ii_schema->items_ref IS NOT INITIAL.
+          ls_schema = find_schema( ii_schema->items_ref ).
+          rv_abap = rv_abap &&
+            |    DATA lt_members TYPE string_table.\n| &&
+            |    DATA lv_member LIKE LINE OF lt_members.\n| &&
+            |    DATA { ls_schema-abap_name } TYPE { ms_input-intf }=>{ ls_schema-abap_name }.\n| &&
+            |    lt_members = json_members( iv_prefix && '/' ).\n| &&
+            |    LOOP AT lt_members INTO lv_member.\n| &&
+            |      CLEAR { ls_schema-abap_name }.\n| &&
+            |      { ls_schema-abap_name } = { ls_schema-abap_parser_method }( iv_prefix && '/' && lv_member ).\n| &&
+            |      APPEND { ls_schema-abap_name } TO { iv_abap_name }.\n| &&
+            |    ENDLOOP.\n|.
+        ELSE.
+          rv_abap = rv_abap && |* todo, handle type { ii_schema->type }, no item_ref\n|.
+        ENDIF.
+      WHEN 'integer'.
+        rv_abap = rv_abap && |    { iv_abap_name } = json_value_integer( iv_prefix && '{ iv_hard_prefix }/{ ls_property-name }' ).\n|.
+      WHEN OTHERS.
+        rv_abap = rv_abap && |* todo, handle type { ii_schema->type }\n|.
+    ENDCASE.
+  ENDMETHOD.
 
   METHOD find_schema.
     DATA lv_name TYPE string.
@@ -80,16 +158,63 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lo_parser     TYPE REF TO zcl_oapi_parser.
     DATA lo_references TYPE REF TO zcl_oapi_references.
 
+    ms_input = is_input.
+
     CREATE OBJECT lo_parser.
     ms_specification = lo_parser->parse( is_input-openapi_json ).
 
     CREATE OBJECT lo_references.
     ms_specification = lo_references->normalize( ms_specification ).
 
-    rs_result-clas_icf_serv = build_clas_icf_serv( is_input ).
-    rs_result-clas_icf_impl = build_clas_icf_impl( is_input ).
-    rs_result-clas_client = build_clas_client( is_input ).
-    rs_result-intf = build_intf( is_input ).
+    rs_result-clas_icf_serv = build_clas_icf_serv( ).
+    rs_result-clas_icf_impl = build_clas_icf_impl( ).
+    rs_result-clas_client = build_clas_client( ).
+    rs_result-intf = build_intf( ).
+  ENDMETHOD.
+
+  METHOD json_method_implementations.
+    rv_abap = |  METHOD json_value_boolean.\n| &&
+      |  ENDMETHOD.\n| &&
+      |  METHOD json_value_integer.\n| &&
+      |  ENDMETHOD.\n| &&
+      |  METHOD json_value_number.\n| &&
+      |  ENDMETHOD.\n| &&
+      |  METHOD json_value_string.\n| &&
+      |  ENDMETHOD.\n| &&
+      |  METHOD json_exists.\n| &&
+      |  ENDMETHOD.\n| &&
+      |  METHOD json_members.\n| &&
+      |  ENDMETHOD.\n|.
+  ENDMETHOD.
+
+  METHOD json_method_definitions.
+    rv_abap = |\n| &&
+      |    TYPES: BEGIN OF ty_json,\n| &&
+      |             parent    TYPE string,\n| &&
+      |             name      TYPE string,\n| &&
+      |             full_name TYPE string,\n| &&
+      |             value     TYPE string,\n| &&
+      |           END OF ty_json.\n| &&
+      |    TYPES ty_json_tt TYPE STANDARD TABLE OF ty_json WITH DEFAULT KEY.\n| &&
+      |    DATA mt_json TYPE ty_json_tt.\n| &&
+      |    METHODS json_value_boolean\n| &&
+      |      IMPORTING iv_path         TYPE string\n| &&
+      |      RETURNING VALUE(rv_value) TYPE abap_bool.\n| &&
+      |    METHODS json_value_integer\n| &&
+      |      IMPORTING iv_path         TYPE string\n| &&
+      |      RETURNING VALUE(rv_value) TYPE i.\n| &&
+      |    METHODS json_value_number\n| &&
+      |      IMPORTING iv_path         TYPE string\n| &&
+      |      RETURNING VALUE(rv_value) TYPE i.\n| &&
+      |    METHODS json_value_string\n| &&
+      |      IMPORTING iv_path         TYPE string\n| &&
+      |      RETURNING VALUE(rv_value) TYPE string.\n| &&
+      |    METHODS json_exists\n| &&
+      |      IMPORTING iv_path          TYPE string\n| &&
+      |      RETURNING VALUE(rv_exists) TYPE abap_bool.\n| &&
+      |    METHODS json_members\n| &&
+      |      IMPORTING iv_path           TYPE string\n| &&
+      |      RETURNING VALUE(rt_members) TYPE string_table.\n|.
   ENDMETHOD.
 
   METHOD build_clas_icf_serv.
@@ -98,7 +223,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA ls_parameter  LIKE LINE OF ls_operation-parameters.
     DATA ls_schema     LIKE LINE OF ms_specification-components-schemas.
 
-    rv_abap = |CLASS { is_input-clas_icf_serv } DEFINITION PUBLIC.\n| &&
+    rv_abap = |CLASS { ms_input-clas_icf_serv } DEFINITION PUBLIC.\n| &&
       |* Auto generated by https://github.com/abap-openapi/abap-openapi\n| &&
       |  PUBLIC SECTION.\n| &&
       |    INTERFACES if_http_extension.\n| &&
@@ -110,34 +235,29 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |      IMPORTING\n| &&
         |        iv_prefix TYPE string OPTIONAL\n| &&
         |      RETURNING\n| &&
-        |        VALUE(parsed) TYPE { is_input-intf }=>{ ls_schema-abap_name }.\n|.
-*        |METHODS { ls_schema-abap_json_method }.\n|.
+        |        VALUE(parsed) TYPE { ms_input-intf }=>{ ls_schema-abap_name }.\n|.
     ENDLOOP.
 
     rv_abap = rv_abap &&
+      json_method_definitions( ) &&
       |ENDCLASS.\n\n| &&
-      |CLASS { is_input-clas_icf_serv } IMPLEMENTATION.\n|.
+      |CLASS { ms_input-clas_icf_serv } IMPLEMENTATION.\n|.
 
-    LOOP AT ms_specification-components-schemas INTO ls_schema.
-      rv_abap = rv_abap &&
-        |  METHOD { ls_schema-abap_parser_method }.\n| &&
-        |* todo\n| &&
-        |  ENDMETHOD.\n\n|.
-*        |  METHOD { ls_schema-abap_json_method }.\n| &&
-*        |* todo\n| &&
-*        |  ENDMETHOD.\n|.
-    ENDLOOP.
+    rv_abap = rv_abap
+      && json_method_implementations( )
+      && dump_parser_methods( ).
 
     rv_abap = rv_abap &&
       |  METHOD if_http_extension~handle_request.\n| &&
-      |    DATA li_handler TYPE REF TO { is_input-intf }.\n| &&
+      |    DATA li_handler TYPE REF TO { ms_input-intf }.\n| &&
       |    DATA lv_method  TYPE string.\n| &&
       |    DATA lv_path    TYPE string.\n\n| &&
-      |    CREATE OBJECT li_handler TYPE { is_input-clas_icf_impl }.\n| &&
+      |    CREATE OBJECT li_handler TYPE { ms_input-clas_icf_impl }.\n| &&
       |    lv_path = server->request->get_header_field( '~path' ).\n| &&
       |    lv_method = server->request->get_method( ).\n\n|.
     LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
+        |    CLEAR mt_json.\n| &&
         |    TRY.\n| &&
         |        IF lv_path = '{ ls_operation-path }' AND lv_method = '{ to_upper( ls_operation-method ) }'.\n|.
 
@@ -170,15 +290,15 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
   METHOD build_clas_icf_impl.
     DATA ls_operation LIKE LINE OF ms_specification-operations.
 
-    rv_abap = |CLASS { is_input-clas_icf_impl } DEFINITION PUBLIC.\n| &&
+    rv_abap = |CLASS { ms_input-clas_icf_impl } DEFINITION PUBLIC.\n| &&
       |  PUBLIC SECTION.\n| &&
-      |    INTERFACES { is_input-intf }.\n| &&
+      |    INTERFACES { ms_input-intf }.\n| &&
       |ENDCLASS.\n\n| &&
-      |CLASS { is_input-clas_icf_impl } IMPLEMENTATION.\n\n|.
+      |CLASS { ms_input-clas_icf_impl } IMPLEMENTATION.\n\n|.
 
     LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
-        |  METHOD { is_input-intf }~{ ls_operation-abap_name }.\n| &&
+        |  METHOD { ms_input-intf }~{ ls_operation-abap_name }.\n| &&
         |* Add implementation logic here\n| &&
         |  ENDMETHOD.\n\n|.
     ENDLOOP.
@@ -189,10 +309,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
   METHOD build_clas_client.
     DATA ls_operation LIKE LINE OF ms_specification-operations.
 
-    rv_abap = |CLASS { is_input-clas_client } DEFINITION PUBLIC.\n| &&
+    rv_abap = |CLASS { ms_input-clas_client } DEFINITION PUBLIC.\n| &&
       |* Auto generated by https://github.com/abap-openapi/abap-openapi\n| &&
       |  PUBLIC SECTION.\n| &&
-      |    INTERFACES { is_input-intf }.\n| &&
+      |    INTERFACES { ms_input-intf }.\n| &&
       |    METHODS constructor\n| &&
       |      IMPORTING\n| &&
       |        iv_url    TYPE string\n| &&
@@ -200,7 +320,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |  PROTECTED SECTION.\n| &&
       |    DATA mi_client TYPE REF TO if_http_client.\n| &&
       |ENDCLASS.\n\n| &&
-      |CLASS { is_input-clas_client } IMPLEMENTATION.\n| &&
+      |CLASS { ms_input-clas_client } IMPLEMENTATION.\n| &&
       |  METHOD constructor.\n| &&
       |    cl_http_client=>create_by_url(\n| &&
       |      EXPORTING\n| &&
@@ -212,7 +332,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
     LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
-        |  METHOD { is_input-intf }~{ ls_operation-abap_name }.\n| &&
+        |  METHOD { ms_input-intf }~{ ls_operation-abap_name }.\n| &&
         |    DATA lv_code TYPE i.\n| &&
         |\n| &&
         |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n| &&
@@ -234,7 +354,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA ls_returning TYPE ty_returning.
     DATA ls_component_schema LIKE LINE OF ms_specification-components-schemas.
 
-    rv_abap = |INTERFACE { is_input-intf } PUBLIC.\n| &&
+    rv_abap = |INTERFACE { ms_input-intf } PUBLIC.\n| &&
       |* Auto generated by https://github.com/abap-openapi/abap-openapi\n\n|.
 
     LOOP AT ms_specification-components-schemas INTO ls_component_schema.

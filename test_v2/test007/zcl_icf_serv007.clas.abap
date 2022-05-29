@@ -23,23 +23,67 @@ CLASS zcl_icf_serv007 DEFINITION PUBLIC.
         iv_prefix TYPE string OPTIONAL
       RETURNING
         VALUE(parsed) TYPE zif_interface007=>posttestrequest.
+
+    TYPES: BEGIN OF ty_json,
+             parent    TYPE string,
+             name      TYPE string,
+             full_name TYPE string,
+             value     TYPE string,
+           END OF ty_json.
+    TYPES ty_json_tt TYPE STANDARD TABLE OF ty_json WITH DEFAULT KEY.
+    DATA mt_json TYPE ty_json_tt.
+    METHODS json_value_boolean
+      IMPORTING iv_path         TYPE string
+      RETURNING VALUE(rv_value) TYPE abap_bool.
+    METHODS json_value_integer
+      IMPORTING iv_path         TYPE string
+      RETURNING VALUE(rv_value) TYPE i.
+    METHODS json_value_number
+      IMPORTING iv_path         TYPE string
+      RETURNING VALUE(rv_value) TYPE i.
+    METHODS json_value_string
+      IMPORTING iv_path         TYPE string
+      RETURNING VALUE(rv_value) TYPE string.
+    METHODS json_exists
+      IMPORTING iv_path          TYPE string
+      RETURNING VALUE(rv_exists) TYPE abap_bool.
+    METHODS json_members
+      IMPORTING iv_path           TYPE string
+      RETURNING VALUE(rt_members) TYPE string_table.
 ENDCLASS.
 
 CLASS zcl_icf_serv007 IMPLEMENTATION.
+  METHOD json_value_boolean.
+  ENDMETHOD.
+  METHOD json_value_integer.
+  ENDMETHOD.
+  METHOD json_value_number.
+  ENDMETHOD.
+  METHOD json_value_string.
+  ENDMETHOD.
+  METHOD json_exists.
+  ENDMETHOD.
+  METHOD json_members.
+  ENDMETHOD.
   METHOD parse_resultstruct.
-* todo
+    parsed-result = json_value_string( iv_prefix && '/result' ).
   ENDMETHOD.
 
   METHOD parse_string1andstring2.
-* todo
+    parsed-string1 = json_value_string( iv_prefix && '/string1' ).
+    parsed-string2 = json_value_string( iv_prefix && '/string2' ).
   ENDMETHOD.
 
   METHOD parse_posttestresponse.
-* todo
+* todo, array, levela1
+* todo, array, levelb11
+    parsed-levelc1 = json_value_string( iv_prefix && '/levelC1' ).
   ENDMETHOD.
 
   METHOD parse_posttestrequest.
-* todo
+* todo, array, levela1
+* todo, array, levelb11
+* todo, array, levelc1
   ENDMETHOD.
 
   METHOD if_http_extension~handle_request.
@@ -51,6 +95,7 @@ CLASS zcl_icf_serv007 IMPLEMENTATION.
     lv_path = server->request->get_header_field( '~path' ).
     lv_method = server->request->get_method( ).
 
+    CLEAR mt_json.
     TRY.
         IF lv_path = '/test' AND lv_method = 'POST'.
           li_handler->_test(
