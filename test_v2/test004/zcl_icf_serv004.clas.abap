@@ -93,18 +93,18 @@ CLASS zcl_icf_serv004 IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_resultstruct.
-* todo, number, result
+    parsed-result = json_value_number( iv_prefix && '/result' ).
   ENDMETHOD.
 
   METHOD parse_number1andnumber2.
-* todo, number, number1
-* todo, number, number2
+    parsed-number1 = json_value_number( iv_prefix && '/number1' ).
+    parsed-number2 = json_value_number( iv_prefix && '/number2' ).
   ENDMETHOD.
 
   METHOD parse_posttestresponse.
 * todo, array, levela1
 * todo, array, levelb11
-* todo, number, levelc1
+    parsed-levelc1 = json_value_number( iv_prefix && '/levelC1' ).
   ENDMETHOD.
 
   METHOD parse_posttestrequest.

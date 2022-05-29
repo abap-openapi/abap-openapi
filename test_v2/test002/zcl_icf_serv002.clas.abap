@@ -83,12 +83,12 @@ CLASS zcl_icf_serv002 IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_posttestresponse.
-* todo, number, result
+    parsed-result = json_value_number( iv_prefix && '/result' ).
   ENDMETHOD.
 
   METHOD parse_posttestrequest.
-* todo, number, number1
-* todo, number, number2
+    parsed-number1 = json_value_number( iv_prefix && '/number1' ).
+    parsed-number2 = json_value_number( iv_prefix && '/number2' ).
   ENDMETHOD.
 
   METHOD if_http_extension~handle_request.

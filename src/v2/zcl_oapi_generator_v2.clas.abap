@@ -112,6 +112,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
             rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = json_value_string( iv_prefix && '{ iv_hard_prefix }/{ ls_property-name }' ).\n|.
           ELSEIF ls_property-schema->type = 'boolean'.
             rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = json_value_boolean( iv_prefix && '{ iv_hard_prefix }/{ ls_property-name }' ).\n|.
+          ELSEIF ls_property-schema->type = 'number'.
+            rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = json_value_number( iv_prefix && '{ iv_hard_prefix }/{ ls_property-name }' ).\n|.
           ELSEIF ls_property-schema->type = 'object'.
             rv_abap = rv_abap && dump_parser(
               ii_schema    = ls_property-schema

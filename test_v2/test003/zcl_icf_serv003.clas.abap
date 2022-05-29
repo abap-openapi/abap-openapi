@@ -83,15 +83,15 @@ CLASS zcl_icf_serv003 IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_posttestresponse.
-* todo, number, result
-* todo, number, result
+    parsed-levela1-result = json_value_number( iv_prefix && '/levelA1/result' ).
+    parsed-levelb1-levelb11-result = json_value_number( iv_prefix && '/levelB1/levelB11/result' ).
   ENDMETHOD.
 
   METHOD parse_posttestrequest.
-* todo, number, number1
-* todo, number, number2
-* todo, number, number1
-* todo, number, number2
+    parsed-levela1-number1 = json_value_number( iv_prefix && '/levelA1/number1' ).
+    parsed-levela1-number2 = json_value_number( iv_prefix && '/levelA1/number2' ).
+    parsed-levelb1-levelb11-number1 = json_value_number( iv_prefix && '/levelB1/levelB11/number1' ).
+    parsed-levelb1-levelb11-number2 = json_value_number( iv_prefix && '/levelB1/levelB11/number2' ).
   ENDMETHOD.
 
   METHOD if_http_extension~handle_request.
