@@ -106,7 +106,7 @@
     "line_only_punc": true,
     "local_class_naming": true,
     "local_variable_names": {
-      "exclude": ["generated/"],
+      "exclude": ["generated/", "test_v2/"],
       "patternKind": "required",
       "ignoreNames": [],
       "ignorePatterns": [],

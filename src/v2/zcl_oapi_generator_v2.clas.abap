@@ -55,96 +55,9 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
       IMPORTING iv_name TYPE string
       RETURNING VALUE(rs_schema) TYPE zif_oapi_specification_v3=>ty_component_schema.
 
-    METHODS dump_parser_methods
-      RETURNING VALUE(rv_abap) TYPE string.
-    METHODS dump_parser
-      IMPORTING ii_schema TYPE REF TO zif_oapi_schema
-                iv_abap_name TYPE string
-                iv_hard_prefix TYPE string OPTIONAL
-      RETURNING VALUE(rv_abap) TYPE string.
-    METHODS find_parser_method
-      IMPORTING iv_name TYPE string
-      RETURNING VALUE(rv_method) TYPE string.
-    METHODS json_method_definitions RETURNING VALUE(rv_abap) TYPE string.
-    METHODS json_method_implementations RETURNING VALUE(rv_abap) TYPE string.
 ENDCLASS.
 
 CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
-
-  METHOD find_parser_method.
-    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
-    ls_schema = find_schema( iv_name ).
-    IF ls_schema IS NOT INITIAL.
-      rv_method = ls_schema-abap_parser_method.
-    ELSE.
-      rv_method = 'unknown_not_found'.
-    ENDIF.
-  ENDMETHOD.
-
-  METHOD dump_parser_methods.
-* note: the parser methods might be called recursively, as the structures can be nested
-    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
-    LOOP AT ms_specification-components-schemas INTO ls_schema WHERE abap_parser_method IS NOT INITIAL.
-      rv_abap = rv_abap &&
-            |  METHOD { ls_schema-abap_parser_method }.\n|.
-      rv_abap = rv_abap && dump_parser(
-            ii_schema    = ls_schema-schema
-            iv_abap_name = 'parsed' ).
-      rv_abap = rv_abap && |  ENDMETHOD.\n\n|.
-    ENDLOOP.
-  ENDMETHOD.
-
-  METHOD dump_parser.
-    DATA ls_property TYPE zif_oapi_schema=>ty_property.
-    DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
-    DATA lv_method TYPE string.
-
-    CASE ii_schema->type.
-      WHEN 'object'.
-        LOOP AT ii_schema->properties INTO ls_property.
-          IF ls_property-schema IS INITIAL AND ls_property-ref IS NOT INITIAL.
-            lv_method = find_parser_method( ls_property-ref ).
-            rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = { lv_method }( iv_prefix && '{ iv_hard_prefix }/{ ls_property-name }' ).\n|.
-          ELSEIF ls_property-schema IS INITIAL.
-            rv_abap = rv_abap && |* todo initial, hmm\n|.
-          ELSEIF ls_property-schema->type = 'string'
-              OR ls_property-schema->type = 'integer'.
-            rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = json_value_string( iv_prefix && '{ iv_hard_prefix }/{ ls_property-name }' ).\n|.
-          ELSEIF ls_property-schema->type = 'boolean'.
-            rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = json_value_boolean( iv_prefix && '{ iv_hard_prefix }/{ ls_property-name }' ).\n|.
-          ELSEIF ls_property-schema->type = 'number'.
-            rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = json_value_number( iv_prefix && '{ iv_hard_prefix }/{ ls_property-name }' ).\n|.
-          ELSEIF ls_property-schema->type = 'object'.
-            rv_abap = rv_abap && dump_parser(
-              ii_schema    = ls_property-schema
-              iv_hard_prefix = iv_hard_prefix && '/' && ls_property-name
-              iv_abap_name = |{ iv_abap_name }-{ ls_property-abap_name }| ).
-          ELSE.
-            rv_abap = rv_abap && |* todo, { ls_property-schema->type }, { ls_property-abap_name }\n|.
-          ENDIF.
-        ENDLOOP.
-      WHEN 'array'.
-        IF ii_schema->items_ref IS NOT INITIAL.
-          ls_schema = find_schema( ii_schema->items_ref ).
-          rv_abap = rv_abap &&
-            |    DATA lt_members TYPE string_table.\n| &&
-            |    DATA lv_member LIKE LINE OF lt_members.\n| &&
-            |    DATA { ls_schema-abap_name } TYPE { ms_input-intf }=>{ ls_schema-abap_name }.\n| &&
-            |    lt_members = json_members( iv_prefix && '/' ).\n| &&
-            |    LOOP AT lt_members INTO lv_member.\n| &&
-            |      CLEAR { ls_schema-abap_name }.\n| &&
-            |      { ls_schema-abap_name } = { ls_schema-abap_parser_method }( iv_prefix && '/' && lv_member ).\n| &&
-            |      APPEND { ls_schema-abap_name } TO { iv_abap_name }.\n| &&
-            |    ENDLOOP.\n|.
-        ELSE.
-          rv_abap = rv_abap && |* todo, handle type { ii_schema->type }, no item_ref\n|.
-        ENDIF.
-      WHEN 'integer'.
-        rv_abap = rv_abap && |    { iv_abap_name } = json_value_integer( iv_prefix && '{ iv_hard_prefix }/{ ls_property-name }' ).\n|.
-      WHEN OTHERS.
-        rv_abap = rv_abap && |* todo, handle type { ii_schema->type }\n|.
-    ENDCASE.
-  ENDMETHOD.
 
   METHOD find_schema.
     DATA lv_name TYPE string.
@@ -174,84 +87,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     rs_result-intf = build_intf( ).
   ENDMETHOD.
 
-  METHOD json_method_implementations.
-    rv_abap =
-      |  METHOD json_parse.\n| &&
-      |    CLEAR mt_json.\n| &&
-      |* todo.\n| &&
-      |  ENDMETHOD.\n| &&
-      |\n| &&
-      |  METHOD json_value_boolean.\n| &&
-      |    rv_value = boolc( json_value_string( iv_path ) = 'true' ).\n| &&
-      |  ENDMETHOD.\n| &&
-      |\n| &&
-      |  METHOD json_value_integer.\n| &&
-      |    rv_value = json_value_string( iv_path ).\n| &&
-      |  ENDMETHOD.\n| &&
-      |\n| &&
-      |  METHOD json_value_number.\n| &&
-      |    rv_value = json_value_string( iv_path ).\n| &&
-      |  ENDMETHOD.\n| &&
-      |\n| &&
-      |  METHOD json_value_string.\n| &&
-      |    DATA ls_data LIKE LINE OF mt_json.\n| &&
-      |    READ TABLE mt_json INTO ls_data WITH KEY full_name = iv_path.\n| &&
-      |    IF sy-subrc = 0.\n| &&
-      |      rv_value = ls_data-value.\n| &&
-      |    ENDIF.\n| &&
-      |  ENDMETHOD.\n| &&
-      |\n| &&
-      |  METHOD json_exists.\n| &&
-      |    READ TABLE mt_json WITH KEY full_name = iv_path TRANSPORTING NO FIELDS.\n| &&
-      |    rv_exists = boolc( sy-subrc = 0 ).\n| &&
-      |  ENDMETHOD.\n| &&
-      |\n| &&
-      |  METHOD json_members.\n| &&
-      |    DATA ls_data LIKE LINE OF mt_json.\n| &&
-      |    LOOP AT mt_json INTO ls_data WHERE parent = iv_path.\n| &&
-      |      APPEND ls_data-name TO rt_members.\n| &&
-      |    ENDLOOP.\n| &&
-      |  ENDMETHOD.\n| &&
-      |\n|.
-  ENDMETHOD.
-
-  METHOD json_method_definitions.
-    rv_abap = |\n| &&
-      |    TYPES: BEGIN OF ty_json,\n| &&
-      |             parent    TYPE string,\n| &&
-      |             name      TYPE string,\n| &&
-      |             full_name TYPE string,\n| &&
-      |             value     TYPE string,\n| &&
-      |           END OF ty_json.\n| &&
-      |    TYPES ty_json_tt TYPE STANDARD TABLE OF ty_json WITH DEFAULT KEY.\n| &&
-      |    DATA mt_json TYPE ty_json_tt.\n| &&
-      |    METHODS json_parse\n| &&
-      |      IMPORTING iv_json TYPE string.\n| &&
-      |    METHODS json_value_boolean\n| &&
-      |      IMPORTING iv_path         TYPE string\n| &&
-      |      RETURNING VALUE(rv_value) TYPE abap_bool.\n| &&
-      |    METHODS json_value_integer\n| &&
-      |      IMPORTING iv_path         TYPE string\n| &&
-      |      RETURNING VALUE(rv_value) TYPE i.\n| &&
-      |    METHODS json_value_number\n| &&
-      |      IMPORTING iv_path         TYPE string\n| &&
-      |      RETURNING VALUE(rv_value) TYPE i.\n| &&
-      |    METHODS json_value_string\n| &&
-      |      IMPORTING iv_path         TYPE string\n| &&
-      |      RETURNING VALUE(rv_value) TYPE string.\n| &&
-      |    METHODS json_exists\n| &&
-      |      IMPORTING iv_path          TYPE string\n| &&
-      |      RETURNING VALUE(rv_exists) TYPE abap_bool.\n| &&
-      |    METHODS json_members\n| &&
-      |      IMPORTING iv_path           TYPE string\n| &&
-      |      RETURNING VALUE(rt_members) TYPE string_table.\n|.
-  ENDMETHOD.
-
   METHOD build_clas_icf_serv.
     DATA ls_operation  LIKE LINE OF ms_specification-operations.
     DATA lv_parameters TYPE string.
     DATA ls_parameter  LIKE LINE OF ls_operation-parameters.
-    DATA ls_schema     LIKE LINE OF ms_specification-components-schemas.
 
     rv_abap = |CLASS { ms_input-clas_icf_serv } DEFINITION PUBLIC.\n| &&
       |* Auto generated by https://github.com/abap-openapi/abap-openapi\n| &&
@@ -259,23 +98,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    INTERFACES if_http_extension.\n| &&
       |  PRIVATE SECTION.\n|.
 
-    LOOP AT ms_specification-components-schemas INTO ls_schema.
-      rv_abap = rv_abap &&
-        |    METHODS { ls_schema-abap_parser_method }\n| &&
-        |      IMPORTING\n| &&
-        |        iv_prefix TYPE string OPTIONAL\n| &&
-        |      RETURNING\n| &&
-        |        VALUE(parsed) TYPE { ms_input-intf }=>{ ls_schema-abap_name }.\n|.
-    ENDLOOP.
-
     rv_abap = rv_abap &&
-      json_method_definitions( ) &&
       |ENDCLASS.\n\n| &&
       |CLASS { ms_input-clas_icf_serv } IMPLEMENTATION.\n|.
-
-    rv_abap = rv_abap
-      && json_method_implementations( )
-      && dump_parser_methods( ).
 
     rv_abap = rv_abap &&
       |  METHOD if_http_extension~handle_request.\n| &&
@@ -287,7 +112,6 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    lv_method = server->request->get_method( ).\n\n|.
     LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
-        |    CLEAR mt_json.\n| &&
         |    TRY.\n| &&
         |        IF lv_path = '{ ls_operation-path }' AND lv_method = '{ to_upper( ls_operation-method ) }'.\n|.
 
@@ -298,9 +122,14 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       ENDLOOP.
       IF ls_operation-body_schema_ref IS NOT INITIAL.
         rv_abap = rv_abap &&
-          |          json_parse( server->request->get_cdata( ) ).\n|.
+          |          DATA { ls_operation-abap_name  } TYPE { ms_input-intf }=>{ find_schema( ls_operation-body_schema_ref )-abap_name }.\n| &&
+          |          /ui2/cl_json=>deserialize(\n| &&
+          |            EXPORTING\n| &&
+          |              json = server->request->get_cdata( )\n| &&
+          |            CHANGING\n| &&
+          |              data = { ls_operation-abap_name } ).\n|.
         lv_parameters = lv_parameters &&
-          |\n            body = { find_schema( ls_operation-body_schema_ref )-abap_parser_method }( )|.
+          |\n            body = { ls_operation-abap_name }|.
       ENDIF.
 
       rv_abap = rv_abap &&
