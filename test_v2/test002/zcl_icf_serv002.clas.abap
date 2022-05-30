@@ -23,16 +23,25 @@ CLASS zcl_icf_serv002 IMPLEMENTATION.
               json = server->request->get_cdata( )
             CHANGING
               data = _test ).
-          li_handler->_test(
+          DATA ret__test TYPE zif_interface002=>ret__test.
+          ret__test = li_handler->_test(
             operation = server->request->get_form_field( 'operation' )
             body = _test ).
+          IF ret__test-200 IS NOT INITIAL.
+            server->response->set_content_type( 'application/json' ).
+            server->response->set_cdata( /ui2/cl_json=>serialize( ret__test-200 ) ).
+            server->response->set_status( code = 200 reason = 'OK' ).
+            RETURN.
+          ENDIF.
         ENDIF.
       CATCH cx_static_check.
-        ASSERT 1 = 'todo'.
+        server->response->set_content_type( 'text/plain' ).
+        server->response->set_cdata( 'exception' ).
+        server->response->set_status( code = 500 reason = 'Error' ).
     ENDTRY.
 
-    server->response->set_content_type( 'text/html' ).
-    server->response->set_cdata( 'todo' ).
-    server->response->set_status( code = 200 reason = 'Success' ).
+    server->response->set_content_type( 'text/plain' ).
+    server->response->set_cdata( 'no handler found' ).
+    server->response->set_status( code = 500 reason = 'Error' ).
   ENDMETHOD.
 ENDCLASS.

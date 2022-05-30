@@ -90,6 +90,11 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
   METHOD build_clas_icf_serv.
     DATA ls_operation  LIKE LINE OF ms_specification-operations.
     DATA lv_parameters TYPE string.
+    DATA lv_typename   TYPE string.
+    DATA lv_post       TYPE string.
+    DATA lv_pre        TYPE string.
+    DATA ls_response   LIKE LINE OF ls_operation-responses.
+    DATA ls_content    LIKE LINE OF ls_response-content.
     DATA ls_parameter  LIKE LINE OF ls_operation-parameters.
 
     rv_abap = |CLASS { ms_input-clas_icf_serv } DEFINITION PUBLIC.\n| &&
@@ -132,18 +137,45 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           |\n            body = { ls_operation-abap_name }|.
       ENDIF.
 
+      lv_typename = 'ret_' && ls_operation-abap_name.
+
+      CLEAR lv_post.
+      LOOP AT ls_operation-responses INTO ls_response.
+        LOOP AT ls_response-content INTO ls_content.
+          lv_post = lv_post &&
+            |          IF { lv_typename }-{ ls_response-code } IS NOT INITIAL.\n| &&
+            |            server->response->set_content_type( '{ ls_content-type }' ).\n| &&
+            |            server->response->set_cdata( /ui2/cl_json=>serialize( { lv_typename }-{ ls_response-code } ) ).\n| &&
+            |            server->response->set_status( code = { ls_response-code } reason = '{ ls_response-description }' ).\n| &&
+            |            RETURN.\n| &&
+            |          ENDIF.\n|.
+        ENDLOOP.
+      ENDLOOP.
+      IF lv_post IS NOT INITIAL.
+        lv_pre =
+          |          DATA { lv_typename } TYPE { ms_input-intf }=>{ lv_typename }.\n| &&
+          |          { lv_typename } = |.
+      ELSE.
+        lv_pre =
+          |          |.
+      ENDIF.
+
       rv_abap = rv_abap &&
-        |          li_handler->{ ls_operation-abap_name }({ lv_parameters } ).\n| &&
+        lv_pre &&
+        |li_handler->{ ls_operation-abap_name }({ lv_parameters } ).\n| &&
+        lv_post &&
         |        ENDIF.\n| &&
         |      CATCH cx_static_check.\n| &&
-        |        ASSERT 1 = 'todo'.\n| &&
+        |        server->response->set_content_type( 'text/plain' ).\n| &&
+        |        server->response->set_cdata( 'exception' ).\n| &&
+        |        server->response->set_status( code = 500 reason = 'Error' ).\n| &&
         |    ENDTRY.\n|.
     ENDLOOP.
     rv_abap = rv_abap &&
       |\n| &&
-      |    server->response->set_content_type( 'text/html' ).\n| &&
-      |    server->response->set_cdata( 'todo' ).\n| &&
-      |    server->response->set_status( code = 200 reason = 'Success' ).\n| &&
+      |    server->response->set_content_type( 'text/plain' ).\n| &&
+      |    server->response->set_cdata( 'no handler found' ).\n| &&
+      |    server->response->set_status( code = 500 reason = 'Error' ).\n| &&
       |  ENDMETHOD.\n| &&
       |ENDCLASS.|.
   ENDMETHOD.
