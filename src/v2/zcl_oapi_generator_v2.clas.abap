@@ -158,6 +158,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       ELSE.
         lv_pre =
           |          |.
+        lv_post =
+          |          RETURN.\n|.
       ENDIF.
 
       rv_abap = rv_abap &&

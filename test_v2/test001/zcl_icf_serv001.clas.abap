@@ -18,6 +18,7 @@ CLASS zcl_icf_serv001 IMPLEMENTATION.
     TRY.
         IF lv_path = '/ping' AND lv_method = 'POST'.
           li_handler->_ping( ).
+          RETURN.
         ENDIF.
       CATCH cx_static_check.
         server->response->set_content_type( 'text/plain' ).
