@@ -1,6 +1,6 @@
 {
   "global": {
-    "files": "/{src,test}/**/*.*",
+    "files": "/{src,test_v2}/**/*.*",
     "skipGeneratedGatewayClasses": true,
     "skipGeneratedPersistentClasses": true,
     "skipGeneratedFunctionGroups": true
@@ -70,7 +70,9 @@
     "constructor_visibility_public": true,
     "contains_tab": true,
     "cyclomatic_complexity": false,
-    "definitions_top": true,
+    "definitions_top": {
+      "exclude": ["test_v2"]
+    },
     "description_empty": false,
     "double_space": true,
     "downport": false,
@@ -104,7 +106,7 @@
     "line_only_punc": true,
     "local_class_naming": true,
     "local_variable_names": {
-      "exclude": ["generated/"],
+      "exclude": ["generated/", "test_v2/"],
       "patternKind": "required",
       "ignoreNames": [],
       "ignorePatterns": [],
@@ -119,7 +121,7 @@
     "method_length": false,
     "method_overwrites_builtin": true,
     "method_parameter_names": {
-      "exclude": ["test/"],
+      "exclude": ["test_v"],
       "patternKind": "required",
       "ignoreNames": [],
       "ignorePatterns": [],
@@ -136,7 +138,7 @@
     "newline_between_methods": true,
     "no_public_attributes": false,
     "object_naming": {
-      "exclude": ["test/"],
+      "exclude": ["test_v1/", "test_v2/"],
       "patternKind": "required",
       "ignoreNames": [],
       "ignorePatterns": [],
@@ -181,7 +183,10 @@
     "short_case": false,
     "sicf_consistency": true,
     "space_before_colon": true,
-    "space_before_dot": true,
+    "space_before_dot": {
+      "ignoreExceptions": false,
+      "ignoreGlobalDefinition": false
+    },
     "sql_escape_host_variables": true,
     "start_at_tab": true,
     "superclass_final": true,
@@ -190,18 +195,22 @@
     "try_without_catch": true,
     "type_form_parameters": true,
     "types_naming": {
-      "exclude": ["generated/"],
+      "exclude": ["generated/", "test_v"],
       "pattern": "^TY_.+$"
     },
     "uncaught_exception": true,
     "unknown_types": true,
     "unreachable_code": true,
-    "unused_methods": false,
+    "unused_methods": {
+      "exclude": ["test_v2"]
+    },
     "unused_types": {
-      "exclude": ["generated/"],
+      "exclude": ["generated/", "test_v2"],
       "skipNames": []
     },
-    "unused_variables": false,
+    "unused_variables": {
+      "exclude": ["test_v2"]
+    },
     "use_bool_expression": true,
     "use_class_based_exceptions": true,
     "use_line_exists": true,

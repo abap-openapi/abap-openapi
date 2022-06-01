@@ -8,53 +8,53 @@ CLASS zcl_petstore DEFINITION PUBLIC.
     DATA mi_client TYPE REF TO if_http_client.
     DATA mo_json TYPE REF TO zcl_oapi_json.
     METHODS send_receive RETURNING VALUE(rv_code) TYPE i.
-    METHODS parse_order
+    METHODS parse_getinventory
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(order) TYPE zif_petstore=>order
-      RAISING cx_static_check.
-    METHODS parse_customer
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(customer) TYPE zif_petstore=>customer
-      RAISING cx_static_check.
-    METHODS parse_address
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(address) TYPE zif_petstore=>address
-      RAISING cx_static_check.
-    METHODS parse_category
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(category) TYPE zif_petstore=>category
-      RAISING cx_static_check.
-    METHODS parse_user
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(user) TYPE zif_petstore=>user
+      RETURNING VALUE(response_getinventory) TYPE zif_petstore=>response_getinventory
       RAISING cx_static_check.
     METHODS parse_tag
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(tag) TYPE zif_petstore=>tag
       RAISING cx_static_check.
+    METHODS parse_category
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(category) TYPE zif_petstore=>category
+      RAISING cx_static_check.
     METHODS parse_pet
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(pet) TYPE zif_petstore=>pet
-      RAISING cx_static_check.
-    METHODS parse_apiresponse
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(apiresponse) TYPE zif_petstore=>apiresponse
-      RAISING cx_static_check.
-    METHODS json_createuserswithlistinput
-      IMPORTING data TYPE zif_petstore=>bodycreateuserswithlistinput
-      RETURNING VALUE(json) TYPE string
-      RAISING cx_static_check.
-    METHODS parse_findpetsbystatus
-      IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(response_findpetsbystatus) TYPE zif_petstore=>response_findpetsbystatus
       RAISING cx_static_check.
     METHODS parse_findpetsbytags
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(response_findpetsbytags) TYPE zif_petstore=>response_findpetsbytags
       RAISING cx_static_check.
-    METHODS parse_getinventory
+    METHODS parse_findpetsbystatus
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(response_getinventory) TYPE zif_petstore=>response_getinventory
+      RETURNING VALUE(response_findpetsbystatus) TYPE zif_petstore=>response_findpetsbystatus
+      RAISING cx_static_check.
+    METHODS parse_user
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(user) TYPE zif_petstore=>user
+      RAISING cx_static_check.
+    METHODS json_createuserswithlistinput
+      IMPORTING data TYPE zif_petstore=>bodycreateuserswithlistinput
+      RETURNING VALUE(json) TYPE string
+      RAISING cx_static_check.
+    METHODS parse_apiresponse
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(apiresponse) TYPE zif_petstore=>apiresponse
+      RAISING cx_static_check.
+    METHODS parse_address
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(address) TYPE zif_petstore=>address
+      RAISING cx_static_check.
+    METHODS parse_customer
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(customer) TYPE zif_petstore=>customer
+      RAISING cx_static_check.
+    METHODS parse_order
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(order) TYPE zif_petstore=>order
       RAISING cx_static_check.
 ENDCLASS.
 
@@ -69,47 +69,17 @@ CLASS zcl_petstore IMPLEMENTATION.
     mi_client->response->get_status( IMPORTING code = rv_code ).
   ENDMETHOD.
 
-  METHOD parse_order.
-    order-id = mo_json->value_string( iv_prefix && '/id' ).
-    order-petid = mo_json->value_string( iv_prefix && '/petId' ).
-    order-quantity = mo_json->value_string( iv_prefix && '/quantity' ).
-    order-shipdate = mo_json->value_string( iv_prefix && '/shipDate' ).
-    order-status = mo_json->value_string( iv_prefix && '/status' ).
-    order-complete = mo_json->value_boolean( iv_prefix && '/complete' ).
-  ENDMETHOD.
-
-  METHOD parse_customer.
-    customer-id = mo_json->value_string( iv_prefix && '/id' ).
-    customer-username = mo_json->value_string( iv_prefix && '/username' ).
-* todo, array, address
-  ENDMETHOD.
-
-  METHOD parse_address.
-    address-street = mo_json->value_string( iv_prefix && '/street' ).
-    address-city = mo_json->value_string( iv_prefix && '/city' ).
-    address-state = mo_json->value_string( iv_prefix && '/state' ).
-    address-zip = mo_json->value_string( iv_prefix && '/zip' ).
-  ENDMETHOD.
-
-  METHOD parse_category.
-    category-id = mo_json->value_string( iv_prefix && '/id' ).
-    category-name = mo_json->value_string( iv_prefix && '/name' ).
-  ENDMETHOD.
-
-  METHOD parse_user.
-    user-id = mo_json->value_string( iv_prefix && '/id' ).
-    user-username = mo_json->value_string( iv_prefix && '/username' ).
-    user-firstname = mo_json->value_string( iv_prefix && '/firstName' ).
-    user-lastname = mo_json->value_string( iv_prefix && '/lastName' ).
-    user-email = mo_json->value_string( iv_prefix && '/email' ).
-    user-password = mo_json->value_string( iv_prefix && '/password' ).
-    user-phone = mo_json->value_string( iv_prefix && '/phone' ).
-    user-userstatus = mo_json->value_string( iv_prefix && '/userStatus' ).
+  METHOD parse_getinventory.
   ENDMETHOD.
 
   METHOD parse_tag.
     tag-id = mo_json->value_string( iv_prefix && '/id' ).
     tag-name = mo_json->value_string( iv_prefix && '/name' ).
+  ENDMETHOD.
+
+  METHOD parse_category.
+    category-id = mo_json->value_string( iv_prefix && '/id' ).
+    category-name = mo_json->value_string( iv_prefix && '/name' ).
   ENDMETHOD.
 
   METHOD parse_pet.
@@ -119,24 +89,6 @@ CLASS zcl_petstore IMPLEMENTATION.
 * todo, array, photourls
 * todo, array, tags
     pet-status = mo_json->value_string( iv_prefix && '/status' ).
-  ENDMETHOD.
-
-  METHOD parse_apiresponse.
-    apiresponse-code = mo_json->value_string( iv_prefix && '/code' ).
-    apiresponse-type = mo_json->value_string( iv_prefix && '/type' ).
-    apiresponse-message = mo_json->value_string( iv_prefix && '/message' ).
-  ENDMETHOD.
-
-  METHOD parse_findpetsbystatus.
-    DATA lt_members TYPE string_table.
-    DATA lv_member LIKE LINE OF lt_members.
-    DATA pet TYPE zif_petstore=>pet.
-    lt_members = mo_json->members( iv_prefix && '/' ).
-    LOOP AT lt_members INTO lv_member.
-      CLEAR pet.
-      pet = parse_pet( iv_prefix && '/' && lv_member ).
-      APPEND pet TO response_findpetsbystatus.
-    ENDLOOP.
   ENDMETHOD.
 
   METHOD parse_findpetsbytags.
@@ -151,7 +103,55 @@ CLASS zcl_petstore IMPLEMENTATION.
     ENDLOOP.
   ENDMETHOD.
 
-  METHOD parse_getinventory.
+  METHOD parse_findpetsbystatus.
+    DATA lt_members TYPE string_table.
+    DATA lv_member LIKE LINE OF lt_members.
+    DATA pet TYPE zif_petstore=>pet.
+    lt_members = mo_json->members( iv_prefix && '/' ).
+    LOOP AT lt_members INTO lv_member.
+      CLEAR pet.
+      pet = parse_pet( iv_prefix && '/' && lv_member ).
+      APPEND pet TO response_findpetsbystatus.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD parse_user.
+    user-id = mo_json->value_string( iv_prefix && '/id' ).
+    user-username = mo_json->value_string( iv_prefix && '/username' ).
+    user-firstname = mo_json->value_string( iv_prefix && '/firstName' ).
+    user-lastname = mo_json->value_string( iv_prefix && '/lastName' ).
+    user-email = mo_json->value_string( iv_prefix && '/email' ).
+    user-password = mo_json->value_string( iv_prefix && '/password' ).
+    user-phone = mo_json->value_string( iv_prefix && '/phone' ).
+    user-userstatus = mo_json->value_string( iv_prefix && '/userStatus' ).
+  ENDMETHOD.
+
+  METHOD parse_apiresponse.
+    apiresponse-code = mo_json->value_string( iv_prefix && '/code' ).
+    apiresponse-type = mo_json->value_string( iv_prefix && '/type' ).
+    apiresponse-message = mo_json->value_string( iv_prefix && '/message' ).
+  ENDMETHOD.
+
+  METHOD parse_address.
+    address-street = mo_json->value_string( iv_prefix && '/street' ).
+    address-city = mo_json->value_string( iv_prefix && '/city' ).
+    address-state = mo_json->value_string( iv_prefix && '/state' ).
+    address-zip = mo_json->value_string( iv_prefix && '/zip' ).
+  ENDMETHOD.
+
+  METHOD parse_customer.
+    customer-id = mo_json->value_string( iv_prefix && '/id' ).
+    customer-username = mo_json->value_string( iv_prefix && '/username' ).
+* todo, array, address
+  ENDMETHOD.
+
+  METHOD parse_order.
+    order-id = mo_json->value_string( iv_prefix && '/id' ).
+    order-petid = mo_json->value_string( iv_prefix && '/petId' ).
+    order-quantity = mo_json->value_string( iv_prefix && '/quantity' ).
+    order-shipdate = mo_json->value_string( iv_prefix && '/shipDate' ).
+    order-status = mo_json->value_string( iv_prefix && '/status' ).
+    order-complete = mo_json->value_boolean( iv_prefix && '/complete' ).
   ENDMETHOD.
 
   METHOD json_createuserswithlistinput.

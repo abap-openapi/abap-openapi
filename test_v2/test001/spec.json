@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "servers": [],
   "info": {
-    "title": "ping",
+    "title": "ping, no inputs or outputs",
     "version": "1",
     "description": "ping"
   },

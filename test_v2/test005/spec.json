@@ -1,0 +1,83 @@
+{
+    "openapi": "3.0.0",
+    "servers": [
+    ],
+    "info": {
+        "title": "c1_string_concat",
+        "version": "1",
+        "description": "c1_string_concat"
+    },
+    "paths": {
+        "/test": {
+            "post": {
+                "parameters": [
+                    {
+                        "name": "separator",
+                        "in": "query",
+                        "example": "",
+                        "required": false,
+                        "description": "",
+                        "schema": {
+                            "type": "string",
+                            "default": ""
+                        }
+                    }
+                ],
+                "description": "",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/POSTtestRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/POSTtestResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "POSTtestRequest": {
+                "type": "object",
+                "properties": {
+                    "string1": {
+                        "type": "string",
+                        "description": "string1 to concatenate",
+                        "example": ""
+                    },
+                    "string2": {
+                        "type": "string",
+                        "description": "string2 to concatenate",
+                        "example": ""
+                    }
+                }
+            },
+            "POSTtestResponse": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string",
+                        "description": "",
+                        "example": ""
+                    }
+                }
+            }
+        }
+    }
+}
