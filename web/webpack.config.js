@@ -6,6 +6,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
+  devtool: "nosources-source-map",
   entry: {
     app: "./src/index.js",
     "editor.worker": "monaco-editor/esm/vs/editor/editor.worker.js",

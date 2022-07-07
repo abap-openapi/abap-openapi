@@ -14,13 +14,10 @@ global.MonacoEnvironment = {
 import "./index.css";
 const monaco = require("monaco-editor"); // make sure this import is not hoisted
 import * as abaplint from "@abaplint/core";
-import {ABAP} from "@abaplint/runtime";
 import * as abapMonaco from "@abaplint/monaco";
 import Split from "split-grid";
 
-global.abap = new ABAP();
-
-await import("../../output/init.mjs");
+import "../../output/_init.mjs";
 
 const spec = `{
   "openapi": "3.0.2",
@@ -126,6 +123,8 @@ observer.observe(document.getElementById("horizon"), {
 window.addEventListener("resize", updateEditorLayouts);
 
 async function jsonChanged() {
+  console.dir(Object.keys(abap.Classes));
+  console.dir(abap.Classes["ZCL_OAPI_MAIN"]);
   const main = new abap.Classes["ZCL_OAPI_MAIN"]();
   await main.constructor_();
 
