@@ -123,8 +123,6 @@ observer.observe(document.getElementById("horizon"), {
 window.addEventListener("resize", updateEditorLayouts);
 
 async function jsonChanged() {
-  console.dir(Object.keys(abap.Classes));
-  console.dir(abap.Classes["ZCL_OAPI_MAIN"]);
   const main = new abap.Classes["ZCL_OAPI_MAIN"]();
   await main.constructor_();
 
