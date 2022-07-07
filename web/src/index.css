@@ -7,7 +7,7 @@ body, html, .inner, .outer {
 
 #horizon {
   display: grid;
-  grid-template-columns: 1fr 5px 1fr 5px 1fr;
+  grid-template-columns: 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr;
   grid-template-rows: 1fr;
 
   position: absolute;
@@ -21,16 +21,25 @@ body, html, .inner, .outer {
   overflow: hidden;
 }
 
-.gutter {
+.gutter-col {
+  grid-row: 1/-1;
   cursor: col-resize;
 }
 
-#gutter1 {
-  grid-area: 1 / 2 / 1 / 2;
+.gutter-col-1 {
+  grid-column: 2;
 }
 
-#gutter2 {
-  grid-area: 1 / 4 / 1 / 4;
+.gutter-col-3 {
+  grid-column: 4;
+}
+
+.gutter-col-5 {
+  grid-column: 6;
+}
+
+.gutter-col-7 {
+  grid-column: 8;
 }
 
 select {
