@@ -6,6 +6,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
+  devtool: "nosources-source-map",
   entry: {
     app: "./src/index.js",
     "editor.worker": "monaco-editor/esm/vs/editor/editor.worker.js",
@@ -21,6 +22,7 @@ module.exports = {
   },
   resolve: {
     fallback: {
+      "./%23ui2%23cl_json.clas.mjs": false,
       "buffer": require.resolve("buffer/"),
       "stream": require.resolve("stream-browserify"),
       "crypto": require.resolve("crypto-browserify"),
@@ -31,6 +33,7 @@ module.exports = {
       "zlib": false,
       "util": false,
       "url": false,
+      "net": false,
       "string_decoder": require.resolve("string_decoder/"),
     },
     extensions: [".ts", ".js"]
