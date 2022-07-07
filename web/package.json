@@ -13,7 +13,7 @@
   "devDependencies": {
     "@abaplint/core": "^2.91.6",
     "@abaplint/monaco": "^2.91.6",
-    "@abaplint/runtime": "^2.0.51",
+    "@abaplint/runtime": "^2.0.52",
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",
     "css-loader": "^6.7.1",
