@@ -3,10 +3,10 @@ CLASS zcl_oapi_references DEFINITION PUBLIC.
   PUBLIC SECTION.
 * todo, rename to "normalize"?
     METHODS normalize
-      IMPORTING is_spec TYPE zif_oapi_specification_v3=>ty_specification
+      IMPORTING is_spec        TYPE zif_oapi_specification_v3=>ty_specification
       RETURNING VALUE(rs_spec) TYPE zif_oapi_specification_v3=>ty_specification.
 
-protected section.
+  PROTECTED SECTION.
   PRIVATE SECTION.
     DATA ms_spec TYPE zif_oapi_specification_v3=>ty_specification.
 
