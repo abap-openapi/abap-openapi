@@ -31,7 +31,7 @@ module.exports = {
       "http": false,
       "https": false,
       "zlib": false,
-      "util": false,
+      "util": require.resolve("web-encoding"),
       "url": false,
       "net": false,
       "string_decoder": require.resolve("string_decoder/"),
