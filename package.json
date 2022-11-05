@@ -3,16 +3,17 @@
   "private": true,
   "version": "1.0.0",
   "description": "ABAP OpenAPI Client Generator",
+  "engines": {
+    "node": "^16"
+  },
   "scripts": {
     "lint": "abaplint",
     "transpile": "abaplint && rm -rf output && abap_transpile",
     "unit_test": "node output/index.mjs",
     "test": "npm run transpile && npm run unit_test && npm run testv2",
-
     "petstore": "npm run transpile && node test_v1/index.mjs https://petstore3.swagger.io/api/v3/openapi.json petstore",
     "github": "npm run transpile && node test_v1/index.mjs https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json github",
     "integration_test": "rm -rf output_test && abap_transpile ./abap_transpile_test.json && node output_test/index.mjs",
-
     "testv1": "npm run transpile && node test_v1/index.mjs ./test_v1/spec01.json spec01 && node test_v1/index.mjs ./test_v1/spec02.json spec02",
     "testv2": "node test_v2/test.mjs"
   },
