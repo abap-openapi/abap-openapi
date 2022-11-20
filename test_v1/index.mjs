@@ -37,8 +37,8 @@ async function run() {
   const spec = url.startsWith("http") ? await get(url) : fs.readFileSync(url).toString();
 
   const input = new abap.types.Structure({
-    class_name: new abap.types.Character({length: 30}),
-    interface_name: new abap.types.Character({length: 30}),
+    class_name: new abap.types.Character(30),
+    interface_name: new abap.types.Character(30),
     json: new abap.types.String()}
   );
   input.get().json.set(spec);
