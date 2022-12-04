@@ -121,10 +121,10 @@ window.addEventListener("resize", updateEditorLayouts);
 
 async function jsonChanged() {
   const input = new abap.types.Structure({
-    clas_icf_serv: new abap.types.Character({length: 30}).set('zcl_icf_server'),
-    clas_icf_impl: new abap.types.Character({length: 30}).set('zcl_icf_implementation'),
-    clas_client: new abap.types.Character({length: 30}).set('zcl_client'),
-    intf: new abap.types.Character({length: 30}).set('zif_interface'),
+    clas_icf_serv: new abap.types.Character(30).set('zcl_icf_server'),
+    clas_icf_impl: new abap.types.Character(30).set('zcl_icf_implementation'),
+    clas_client: new abap.types.Character(30).set('zcl_client'),
+    intf: new abap.types.Character(30).set('zif_interface'),
     openapi_json: new abap.types.String().set(editor1.getValue()),
   });
 
