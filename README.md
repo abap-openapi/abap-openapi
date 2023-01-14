@@ -38,8 +38,11 @@ NOTE: generated code currently uses ZCL_OAPI_JSON, suggest copying the implement
 - clone this repository
 - run `npm install`
 
-`npm test` = run unit tests
+### Testing
+Unit Tests: `npm test`
+Intergration Tests: `npm run integration_test`
 
-`npm run petstore` = run logic and generate petstore files in `./test_v1/generated/`
+You can try out the generation using Swagger's Petstore Example:
+- Just run `npm run petstore`
+- The output files will be generated in `./test_v1/generated/`
 
-`npm run integration_test` = run integration tests
