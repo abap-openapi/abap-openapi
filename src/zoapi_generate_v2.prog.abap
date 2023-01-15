@@ -54,7 +54,9 @@ AT SELECTION-SCREEN ON VALUE-REQUEST FOR p_file.
   ENDIF.
   IF it_tab IS NOT INITIAL.
     READ TABLE it_tab ASSIGNING <fs_file> INDEX 1.
-    p_file = <fs_file>-filename.
+    IF sy-subrc = 0.
+      p_file = <fs_file>-filename.
+    ENDIF.
   ENDIF.
 
 START-OF-SELECTION.
