@@ -31,6 +31,8 @@ AT SELECTION-SCREEN ON VALUE-REQUEST FOR p_file.
         wf_title  TYPE string,
         wf_ext    TYPE string.
 
+  FIELD-SYMBOLS: <fs_file> LIKE LINE OF it_tab.
+
 *  if p_ml = 'X'.                  "Manula Load - PC File
   wf_ext  = '.JSON'.           "Extension of the file
   wf_filter = 'Text Files (*.JSON)|*.JSON'.         "File Type
@@ -46,8 +48,12 @@ AT SELECTION-SCREEN ON VALUE-REQUEST FOR p_file.
     CHANGING
       file_table        = it_tab
       rc                = wf_subrc.
+  IF sy-subrc <> 0.
+    MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
+      WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
+  ENDIF.
   IF it_tab IS NOT INITIAL.
-    READ TABLE it_tab ASSIGNING FIELD-SYMBOL(<fs_file>) INDEX 1.
+    READ TABLE it_tab ASSIGNING <fs_file> INDEX 1.
     p_file = <fs_file>-filename.
   ENDIF.
 
@@ -82,8 +88,7 @@ START-OF-SELECTION.
         dp_timeout              = 16                 " Data provider timeout
         not_supported_by_gui    = 17                 " GUI does not support this
         error_no_gui            = 18                 " GUI not available
-        OTHERS                  = 19
-  ).
+        OTHERS                  = 19 ).
   IF sy-subrc <> 0.
     MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
       WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
@@ -100,7 +105,7 @@ START-OF-SELECTION.
   ls_input-clas_icf_impl = p_serv.
   ls_input-clas_icf_serv = p_impl.
 
-  ls_result = zcl_oapi_generator=>generate_v2( is_input = ls_input ).
+  ls_result = zcl_oapi_generator=>generate_v2( ls_input ).
 
   WRITE: / 'Interface:'.
   WRITE: / ls_result-intf.
