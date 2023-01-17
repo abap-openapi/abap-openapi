@@ -61,8 +61,7 @@ AT SELECTION-SCREEN ON VALUE-REQUEST FOR p_file.
 
 START-OF-SELECTION.
   DATA: filename TYPE string,
-        data_tab TYPE TABLE OF text255,
-        json     TYPE string.
+        data_tab TYPE TABLE OF text255.
   filename = p_file.
   cl_gui_frontend_services=>gui_upload(
       EXPORTING
