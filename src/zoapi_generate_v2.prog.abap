@@ -16,7 +16,7 @@ SELECTION-SCREEN BEGIN OF BLOCK b1 WITH FRAME TITLE TEXT-001.
 SELECTION-SCREEN END OF BLOCK b1.
 
 SELECTION-SCREEN BEGIN OF BLOCK b2 WITH FRAME TITLE TEXT-002.
-  PARAMETERS: p_file LIKE rlgrap-filename.
+  PARAMETERS: p_file TYPE text255.
 SELECTION-SCREEN END OF BLOCK b2.
 
 INITIALIZATION.
@@ -24,7 +24,7 @@ INITIALIZATION.
 AT SELECTION-SCREEN ON VALUE-REQUEST FOR p_file.
   DATA: it_tab   TYPE filetable,
         wf_subrc TYPE i.
-  DATA: wf_pcfile LIKE rlgrap-filename.
+  DATA: wf_pcfile TYPE text255.
 
   DATA: wf_filter TYPE string,
         wf_dir    TYPE string,
@@ -39,7 +39,7 @@ AT SELECTION-SCREEN ON VALUE-REQUEST FOR p_file.
   wf_dir = wf_pcfile.           "Directory
 
 *Adds a GUI-Supported Feature
-  CALL METHOD cl_gui_frontend_services=>file_open_dialog
+  cl_gui_frontend_services=>file_open_dialog(
     EXPORTING
       window_title      = wf_title
       default_extension = wf_ext
@@ -47,7 +47,7 @@ AT SELECTION-SCREEN ON VALUE-REQUEST FOR p_file.
       initial_directory = wf_dir
     CHANGING
       file_table        = it_tab
-      rc                = wf_subrc.
+      rc                = wf_subrc ).
   IF sy-subrc <> 0.
     MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
       WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
@@ -61,7 +61,7 @@ AT SELECTION-SCREEN ON VALUE-REQUEST FOR p_file.
 
 START-OF-SELECTION.
   DATA: filename TYPE string,
-        data_tab TYPE sotr_txts,
+        data_tab TYPE TABLE OF text255,
         json     TYPE string.
   filename = p_file.
   cl_gui_frontend_services=>gui_upload(
