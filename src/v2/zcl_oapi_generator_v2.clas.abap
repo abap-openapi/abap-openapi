@@ -21,6 +21,7 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
       RETURNING
         VALUE(rs_result) TYPE ty_result.
 
+  PROTECTED SECTION.
   PRIVATE SECTION.
     DATA ms_specification TYPE zif_oapi_specification_v3=>ty_specification.
     DATA ms_input TYPE ty_input.
@@ -57,7 +58,10 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
 
 ENDCLASS.
 
-CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
+
+
+CLASS ZCL_OAPI_GENERATOR_V2 IMPLEMENTATION.
+
 
   METHOD find_schema.
     DATA lv_name TYPE string.
@@ -68,6 +72,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     READ TABLE ms_specification-components-schemas
       INTO rs_schema WITH KEY name = lv_name. "#EC CI_SUBRC
   ENDMETHOD.
+
 
   METHOD run.
     DATA lo_parser     TYPE REF TO zcl_oapi_parser.
@@ -86,6 +91,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     rs_result-clas_client = build_clas_client( ).
     rs_result-intf = build_intf( ).
   ENDMETHOD.
+
 
   METHOD build_clas_icf_serv.
     DATA ls_operation  LIKE LINE OF ms_specification-operations.
@@ -182,6 +188,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |ENDCLASS.|.
   ENDMETHOD.
 
+
   METHOD build_clas_icf_impl.
     DATA ls_operation LIKE LINE OF ms_specification-operations.
 
@@ -200,6 +207,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
     rv_abap = rv_abap && |ENDCLASS.|.
   ENDMETHOD.
+
 
   METHOD build_clas_client.
     DATA ls_operation LIKE LINE OF ms_specification-operations.
@@ -244,6 +252,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     rv_abap = rv_abap && |ENDCLASS.|.
   ENDMETHOD.
 
+
   METHOD build_intf.
     DATA ls_operation LIKE LINE OF ms_specification-operations.
     DATA ls_returning TYPE ty_returning.
@@ -271,6 +280,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     rv_abap = rv_abap && |ENDINTERFACE.|.
   ENDMETHOD.
 
+
   METHOD find_input_parameters.
     DATA lt_list TYPE STANDARD TABLE OF string.
     DATA lv_str TYPE string.
@@ -292,6 +302,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       rv_abap = |\n    IMPORTING\n{ rv_abap }|.
     ENDIF.
   ENDMETHOD.
+
 
   METHOD find_returning_parameter.
     DATA ls_response LIKE LINE OF is_operation-responses.
@@ -317,8 +328,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       LOOP AT ls_response-content INTO ls_content.
         rs_returning-abap = rs_returning-abap &&
           |\n    RETURNING\n      VALUE(return) TYPE { lv_typename }|.
+        RETURN. " exit method, as only one return parameter is allowed
       ENDLOOP.
     ENDLOOP.
   ENDMETHOD.
-
 ENDCLASS.
