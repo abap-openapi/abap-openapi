@@ -40,8 +40,9 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
 
     METHODS find_input_parameters
       IMPORTING
-                is_operation   TYPE zif_oapi_specification_v3=>ty_operation
-      RETURNING VALUE(rv_abap) TYPE string.
+        is_operation   TYPE zif_oapi_specification_v3=>ty_operation
+      RETURNING
+        VALUE(rv_abap) TYPE string.
 
     TYPES: BEGIN OF ty_returning,
              abap TYPE string,
@@ -49,12 +50,15 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
            END OF ty_returning.
     METHODS find_returning_parameter
       IMPORTING
-                is_operation        TYPE zif_oapi_specification_v3=>ty_operation
-      RETURNING VALUE(rs_returning) TYPE ty_returning.
+        is_operation        TYPE zif_oapi_specification_v3=>ty_operation
+      RETURNING
+        VALUE(rs_returning) TYPE ty_returning.
 
     METHODS find_schema
-      IMPORTING iv_name          TYPE string
-      RETURNING VALUE(rs_schema) TYPE zif_oapi_specification_v3=>ty_component_schema.
+      IMPORTING
+        iv_name          TYPE string
+      RETURNING
+        VALUE(rs_schema) TYPE zif_oapi_specification_v3=>ty_component_schema.
 
 ENDCLASS.
 
