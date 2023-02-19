@@ -9,15 +9,15 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
            END OF ty_input.
 
     TYPES: BEGIN OF ty_result,
-        clas_icf_serv TYPE string,
-        clas_icf_impl TYPE string,
-        clas_client   TYPE string,
-        intf          TYPE string,
-      END OF ty_result.
+             clas_icf_serv TYPE string,
+             clas_icf_impl TYPE string,
+             clas_client   TYPE string,
+             intf          TYPE string,
+           END OF ty_result.
 
     METHODS run
       IMPORTING
-        is_input TYPE ty_input
+        is_input         TYPE ty_input
       RETURNING
         VALUE(rs_result) TYPE ty_result.
 
@@ -40,28 +40,27 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
 
     METHODS find_input_parameters
       IMPORTING
-        is_operation TYPE zif_oapi_specification_v3=>ty_operation
+                is_operation   TYPE zif_oapi_specification_v3=>ty_operation
       RETURNING VALUE(rv_abap) TYPE string.
 
     TYPES: BEGIN OF ty_returning,
-        abap TYPE string,
-        type TYPE string,
-      END OF ty_returning.
+             abap TYPE string,
+             type TYPE string,
+           END OF ty_returning.
     METHODS find_returning_parameter
       IMPORTING
-        is_operation TYPE zif_oapi_specification_v3=>ty_operation
+                is_operation        TYPE zif_oapi_specification_v3=>ty_operation
       RETURNING VALUE(rs_returning) TYPE ty_returning.
 
     METHODS find_schema
-      IMPORTING iv_name TYPE string
+      IMPORTING iv_name          TYPE string
       RETURNING VALUE(rs_schema) TYPE zif_oapi_specification_v3=>ty_component_schema.
 
 ENDCLASS.
 
 
 
-CLASS ZCL_OAPI_GENERATOR_V2 IMPLEMENTATION.
-
+CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
   METHOD find_schema.
     DATA lv_name TYPE string.
@@ -70,9 +69,8 @@ CLASS ZCL_OAPI_GENERATOR_V2 IMPLEMENTATION.
 
     REPLACE FIRST OCCURRENCE OF '#/components/schemas/' IN lv_name WITH ''.
     READ TABLE ms_specification-components-schemas
-      INTO rs_schema WITH KEY name = lv_name. "#EC CI_SUBRC
+      INTO rs_schema WITH KEY name = lv_name.             "#EC CI_SUBRC
   ENDMETHOD.
-
 
   METHOD run.
     DATA lo_parser     TYPE REF TO zcl_oapi_parser.
@@ -91,7 +89,6 @@ CLASS ZCL_OAPI_GENERATOR_V2 IMPLEMENTATION.
     rs_result-clas_client = build_clas_client( ).
     rs_result-intf = build_intf( ).
   ENDMETHOD.
-
 
   METHOD build_clas_icf_serv.
     DATA ls_operation  LIKE LINE OF ms_specification-operations.
@@ -188,7 +185,6 @@ CLASS ZCL_OAPI_GENERATOR_V2 IMPLEMENTATION.
       |ENDCLASS.|.
   ENDMETHOD.
 
-
   METHOD build_clas_icf_impl.
     DATA ls_operation LIKE LINE OF ms_specification-operations.
 
@@ -207,7 +203,6 @@ CLASS ZCL_OAPI_GENERATOR_V2 IMPLEMENTATION.
 
     rv_abap = rv_abap && |ENDCLASS.|.
   ENDMETHOD.
-
 
   METHOD build_clas_client.
     DATA ls_operation LIKE LINE OF ms_specification-operations.
@@ -252,7 +247,6 @@ CLASS ZCL_OAPI_GENERATOR_V2 IMPLEMENTATION.
     rv_abap = rv_abap && |ENDCLASS.|.
   ENDMETHOD.
 
-
   METHOD build_intf.
     DATA ls_operation LIKE LINE OF ms_specification-operations.
     DATA ls_returning TYPE ty_returning.
@@ -280,7 +274,6 @@ CLASS ZCL_OAPI_GENERATOR_V2 IMPLEMENTATION.
     rv_abap = rv_abap && |ENDINTERFACE.|.
   ENDMETHOD.
 
-
   METHOD find_input_parameters.
     DATA lt_list TYPE STANDARD TABLE OF string.
     DATA lv_str TYPE string.
@@ -302,7 +295,6 @@ CLASS ZCL_OAPI_GENERATOR_V2 IMPLEMENTATION.
       rv_abap = |\n    IMPORTING\n{ rv_abap }|.
     ENDIF.
   ENDMETHOD.
-
 
   METHOD find_returning_parameter.
     DATA ls_response LIKE LINE OF is_operation-responses.
