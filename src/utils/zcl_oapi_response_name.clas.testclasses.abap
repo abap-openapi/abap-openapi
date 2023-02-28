@@ -21,7 +21,7 @@ CLASS ltcl_content_type DEFINITION
 
     DATA cut TYPE REF TO zcl_oapi_response_name.
 
-  ENDCLASS.
+ENDCLASS.
 
 CLASS ltcl_content_type IMPLEMENTATION.
 
