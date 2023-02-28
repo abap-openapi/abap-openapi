@@ -345,11 +345,15 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
 
   METHOD shorten_content_type_name.
-    rv_short_name =
-      SWITCH #( iv_content_type
-        WHEN 'application/json' THEN 'json'
-        WHEN 'application/xml' THEN 'xml'
-        ELSE iv_content_type(25) ).
+
+    CASE iv_content_type.
+      WHEN 'application/json'.
+        rv_short_name = 'json'.
+      WHEN 'application/xml'.
+        rv_short_name = 'json'.
+      WHEN OTHERS.
+        rv_short_name = iv_content_type(25).
+    ENDCASE.
 
     REPLACE ALL OCCURRENCES OF REGEX '[^A-Za-z0-9]' IN rv_short_name WITH '_'.
   ENDMETHOD.
