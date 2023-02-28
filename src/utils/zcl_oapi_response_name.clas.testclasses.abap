@@ -1,9 +1,9 @@
 *"* use this source file for your ABAP unit test classes
 
 CLASS ltcl_content_type DEFINITION
-FOR TESTING
-DURATION SHORT
-RISK LEVEL HARMLESS.
+  FOR TESTING
+  DURATION SHORT
+  RISK LEVEL HARMLESS.
 
   PRIVATE SECTION.
 
