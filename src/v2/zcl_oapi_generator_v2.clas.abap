@@ -157,11 +157,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       LOOP AT ls_operation-responses INTO ls_response.
         LOOP AT ls_response-content INTO ls_content.
 
-          lv_response_name = lo_response_name->generate_response_name(
-            EXPORTING
-              iv_content_type = ls_content-type
-              iv_code         = ls_response-code
-          ).
+          lv_response_name = lo_response_name->generate_response_name( iv_content_type = ls_content-type
+                                                                       iv_code         = ls_response-code ).
 
           lv_post = lv_post &&
             |          IF { lv_typename }-{ lv_response_name } IS NOT INITIAL.\n| &&
@@ -332,16 +329,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
     LOOP AT is_operation-responses INTO ls_response.
       LOOP AT ls_response-content INTO ls_content.
-        lv_response_name = lo_response_name->generate_response_name(
-          EXPORTING
-            iv_content_type = ls_content-type
-            iv_code         = ls_response-code
-
-        ).
+        lv_response_name = lo_response_name->generate_response_name( iv_content_type = ls_content-type
+                                                                     iv_code         = ls_response-code ).
         rs_returning-type = rs_returning-type &&
             |           { lv_response_name } TYPE { find_schema( ls_content-schema_ref )-abap_name },\n|.
-*        rs_returning-type = rs_returning-type &&
-*          |           _{ ls_response-code }_{ shorten_content_type_name( ls_content-type ) } TYPE { find_schema( ls_content-schema_ref )-abap_name },\n|.
       ENDLOOP.
     ENDLOOP.
     IF rs_returning-type IS NOT INITIAL.

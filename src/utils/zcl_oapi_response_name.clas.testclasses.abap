@@ -14,18 +14,14 @@ CLASS ltcl_content_type DEFINITION
         IMPORTING
           iv_content_type    TYPE zif_oapi_specification_v3=>ty_media_type-type
           iv_code            TYPE zif_oapi_specification_v3=>ty_response-code
-          iv_expected_Result TYPE string,
+          iv_expected_result TYPE string,
       application_json FOR TESTING RAISING cx_static_check,
       application_xml FOR TESTING RAISING cx_static_check,
-      app_1d_interleaved_prty FOR TESTING RAISING cx_static_check
-      .
+      app_1d_interleaved_prty FOR TESTING RAISING cx_static_check.
 
     DATA cut TYPE REF TO zcl_oapi_response_name.
-    DATA iv_name TYPE string.
-    DATA actual_result TYPE string.
-    DATA expected_result TYPE string.
 
-ENDCLASS.
+  ENDCLASS.
 
 CLASS ltcl_content_type IMPLEMENTATION.
 
@@ -41,14 +37,11 @@ CLASS ltcl_content_type IMPLEMENTATION.
     DATA: lv_actual_result TYPE string.
     lv_actual_result = cut->generate_response_name(
                          iv_content_type = iv_content_type
-                         iv_code    = iv_code
-                       ).
+                         iv_code    = iv_code ).
     cl_abap_unit_assert=>assert_equals(
-      EXPORTING
         act                  = lv_actual_result
         exp                  = iv_expected_result
-        msg                  = 'Response name not generated correctly'
-        ).
+        msg                  = 'Response name not generated correctly' ).
 
   ENDMETHOD.
 

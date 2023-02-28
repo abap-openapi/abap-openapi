@@ -1,6 +1,6 @@
 CLASS zcl_oapi_response_name DEFINITION
   PUBLIC
-  CREATE PUBLIC .
+  CREATE PUBLIC.
 
   PUBLIC SECTION.
 
