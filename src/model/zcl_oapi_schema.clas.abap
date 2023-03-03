@@ -13,9 +13,13 @@ CLASS zcl_oapi_schema DEFINITION PUBLIC.
         iv_type TYPE string
       RETURNING
         VALUE(rv_simple) TYPE string.
+private section.
 ENDCLASS.
 
-CLASS zcl_oapi_schema IMPLEMENTATION.
+
+
+CLASS ZCL_OAPI_SCHEMA IMPLEMENTATION.
+
 
   METHOD zif_oapi_schema~is_simple_type.
 
@@ -27,6 +31,7 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
 
   ENDMETHOD.
 
+
   METHOD lookup_ref.
     DATA lv_name TYPE string.
     ASSERT iv_name IS NOT INITIAL.
@@ -35,6 +40,7 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
     READ TABLE it_refs INTO rs_ref WITH KEY name = lv_name.
     ASSERT sy-subrc = 0.
   ENDMETHOD.
+
 
   METHOD zif_oapi_schema~build_type_definition.
 
@@ -87,6 +93,7 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
 
   ENDMETHOD.
 
+
   METHOD zif_oapi_schema~build_type_definition2.
     DATA ls_schema LIKE LINE OF is_specification-components-schemas.
     DATA lo_names TYPE REF TO zcl_oapi_abap_name.
@@ -103,9 +110,11 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
 
   ENDMETHOD.
 
+
   METHOD zif_oapi_schema~get_simple_type.
     rv_simple = get_simple_type( zif_oapi_schema~type ).
   ENDMETHOD.
+
 
   METHOD get_simple_type.
     CASE iv_type.
@@ -119,5 +128,4 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
         rv_simple = 'abap_bool'.
     ENDCASE.
   ENDMETHOD.
-
 ENDCLASS.

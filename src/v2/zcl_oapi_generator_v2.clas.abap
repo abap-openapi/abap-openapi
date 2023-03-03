@@ -64,7 +64,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
+CLASS ZCL_OAPI_GENERATOR_V2 IMPLEMENTATION.
 
 
   METHOD find_schema.
@@ -297,9 +297,15 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lt_list TYPE STANDARD TABLE OF string.
     DATA lv_str TYPE string.
     DATA ls_parameter LIKE LINE OF is_operation-parameters.
+    DATA lv_simple_type TYPE string.
 
     LOOP AT is_operation-parameters INTO ls_parameter WHERE in = 'query'.
-      lv_str = |      { ls_parameter-abap_name } TYPE { ls_parameter-schema->get_simple_type( ) }|.
+      IF ls_parameter-schema->type = 'array'.
+        lv_simple_type = 'string_table'.
+      ELSE.
+        lv_simple_type = ls_parameter-schema->get_simple_type( ).
+      ENDIF.
+      lv_str = |      { ls_parameter-abap_name } TYPE { lv_simple_type }|.
       APPEND lv_str TO lt_list.
     ENDLOOP.
 
@@ -322,6 +328,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lv_typename TYPE string.
     DATA lo_response_name TYPE REF TO zcl_oapi_response_name.
     DATA lv_response_name TYPE string.
+    DATA lv_returning_type TYPE string.
 
     CREATE OBJECT lo_response_name.
 
@@ -331,8 +338,13 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       LOOP AT ls_response-content INTO ls_content.
         lv_response_name = lo_response_name->generate_response_name( iv_content_type = ls_content-type
                                                                      iv_code         = ls_response-code ).
+        IF ls_content-schema_ref = space.
+          lv_returning_type = ls_content-schema->type.
+        ELSE.
+          lv_returning_type = find_schema( ls_content-schema_ref )-abap_name.
+        ENDIF.
         rs_returning-type = rs_returning-type &&
-            |           { lv_response_name } TYPE { find_schema( ls_content-schema_ref )-abap_name },\n|.
+              |           { lv_response_name } TYPE { lv_returning_type },\n|.
       ENDLOOP.
     ENDLOOP.
     IF rs_returning-type IS NOT INITIAL.
@@ -350,5 +362,4 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       ENDLOOP.
     ENDLOOP.
   ENDMETHOD.
-
 ENDCLASS.
