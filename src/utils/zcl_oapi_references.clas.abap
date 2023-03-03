@@ -23,12 +23,7 @@ CLASS zcl_oapi_references DEFINITION PUBLIC.
       IMPORTING
         is_content_type TYPE string
       RETURNING
-        VALUE(result)   TYPE abap_bool.
-    METHODS is_existing_schema
-      IMPORTING
-        is_new_name   TYPE string
-      RETURNING
-        VALUE(result) TYPE abap_bool.
+        VALUE(rv_supported)   TYPE abap_bool.
 ENDCLASS.
 
 
@@ -200,17 +195,12 @@ CLASS zcl_oapi_references IMPLEMENTATION.
 
     CASE is_content_type.
       WHEN 'application/json'.
-        result = abap_true.
+        rv_supported = abap_true.
       WHEN 'application/xml'.
-        result = abap_true.
+        rv_supported = abap_true.
       WHEN OTHERS.
-        result = abap_false.
+        rv_supported = abap_false.
     ENDCASE.
-
-  ENDMETHOD.
-
-
-  METHOD is_existing_schema.
 
   ENDMETHOD.
 

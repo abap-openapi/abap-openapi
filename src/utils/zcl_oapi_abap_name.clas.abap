@@ -6,7 +6,7 @@ CLASS zcl_oapi_abap_name DEFINITION PUBLIC.
     METHODS add_used IMPORTING iv_name TYPE string.
     METHODS is_used
       IMPORTING iv_name       TYPE string
-      RETURNING VALUE(result) TYPE abap_bool.
+      RETURNING VALUE(rv_used) TYPE abap_bool.
   PROTECTED SECTION.
   PRIVATE SECTION.
     TYPES ty_name TYPE c LENGTH 30.
@@ -54,8 +54,7 @@ CLASS zcl_oapi_abap_name IMPLEMENTATION.
       RETURN.
     ENDIF.
     rv_name = sanitize_name( iv_name ).
-    READ TABLE mt_used WITH KEY table_line = rv_name TRANSPORTING NO FIELDS.
-    IF sy-subrc = 0.
+    IF is_used( rv_name ).
       rv_name = numbering( rv_name ).
     ENDIF.
     APPEND rv_name TO mt_used.
@@ -85,10 +84,10 @@ CLASS zcl_oapi_abap_name IMPLEMENTATION.
     lv_name = sanitize_name( iv_name ).
     READ TABLE mt_used WITH KEY table_line = lv_name TRANSPORTING NO FIELDS.
     IF sy-subrc = 0.
-      result = abap_true.
+      rv_used = abap_true.
       RETURN.
     ENDIF.
-    result = abap_false.
+    rv_used = abap_false.
   ENDMETHOD.
 
 ENDCLASS.
