@@ -135,25 +135,26 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |        IF lv_path = '{ ls_operation-path }' AND lv_method = '{ to_upper( ls_operation-method ) }'.\n|.
 
       CLEAR lv_parameters.
-      IF lines( ls_operation-parameters ) = 1.
-        lv_parameters = |            server->request->get_form_field( '{ ls_parameter-name }' )|.
+      IF lines( ls_operation-parameters ) = 1 AND ls_operation-body_schema_ref IS NOT INITIAL.
+        lv_parameters = | server->request->get_form_field( '{ ls_parameter-name }' )|.
       ELSE.
         LOOP AT ls_operation-parameters INTO ls_parameter WHERE in = 'query'.
           lv_parameters = lv_parameters &&
             |\n            { ls_parameter-abap_name } = server->request->get_form_field( '{ ls_parameter-name }' )|.
         ENDLOOP.
-      ENDIF.
 
-      IF ls_operation-body_schema_ref IS NOT INITIAL.
-        rv_abap = rv_abap &&
-          |          DATA { ls_operation-abap_name  } TYPE { ms_input-intf }=>{ find_schema( ls_operation-body_schema_ref )-abap_name }.\n| &&
-          |          /ui2/cl_json=>deserialize(\n| &&
-          |            EXPORTING\n| &&
-          |              json = server->request->get_cdata( )\n| &&
-          |            CHANGING\n| &&
-          |              data = { ls_operation-abap_name } ).\n|.
-        lv_parameters = lv_parameters &&
-          |\n            body = { ls_operation-abap_name }|.
+
+        IF ls_operation-body_schema_ref IS NOT INITIAL.
+          rv_abap = rv_abap &&
+            |          DATA { ls_operation-abap_name  } TYPE { ms_input-intf }=>{ find_schema( ls_operation-body_schema_ref )-abap_name }.\n| &&
+            |          /ui2/cl_json=>deserialize(\n| &&
+            |            EXPORTING\n| &&
+            |              json = server->request->get_cdata( )\n| &&
+            |            CHANGING\n| &&
+            |              data = { ls_operation-abap_name } ).\n|.
+          lv_parameters = lv_parameters &&
+            |\n            body = { ls_operation-abap_name }|.
+        ENDIF.
       ENDIF.
 
       lv_typename = 'ret_' && ls_operation-abap_name.
