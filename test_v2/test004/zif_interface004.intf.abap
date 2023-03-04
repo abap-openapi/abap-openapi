@@ -30,7 +30,7 @@ INTERFACE zif_interface004 PUBLIC.
          END OF posttestrequest.
 
   TYPES: BEGIN OF ret__test,
-           200 TYPE posttestresponse,
+           _200_app_json TYPE posttestresponse,
          END OF ret__test.
   METHODS _test
     IMPORTING

@@ -18,8 +18,7 @@ CLASS zcl_icf_serv008 IMPLEMENTATION.
     TRY.
         IF lv_path = '/pet/findByStatus' AND lv_method = 'GET'.
           DATA ret_findpetsbystatus TYPE zif_interface008=>ret_findpetsbystatus.
-          ret_findpetsbystatus = li_handler->findpetsbystatus(
-            status = server->request->get_form_field( 'status' ) ).
+          ret_findpetsbystatus = li_handler->findpetsbystatus( server->request->get_form_field( '' ) ).
           IF ret_findpetsbystatus-_200_app_json IS NOT INITIAL.
             server->response->set_content_type( 'application/json' ).
             server->response->set_cdata( /ui2/cl_json=>serialize( ret_findpetsbystatus-_200_app_json ) ).
