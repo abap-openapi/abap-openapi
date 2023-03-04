@@ -54,7 +54,7 @@ CLASS zcl_oapi_abap_name IMPLEMENTATION.
       RETURN.
     ENDIF.
     rv_name = sanitize_name( iv_name ).
-    IF is_used( rv_name ).
+    IF is_used( rv_name ) = abap_true.
       rv_name = numbering( rv_name ).
     ENDIF.
     APPEND rv_name TO mt_used.

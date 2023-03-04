@@ -4,21 +4,21 @@ CLASS zcl_oapi_schema DEFINITION PUBLIC.
   PROTECTED SECTION.
     METHODS lookup_ref
       IMPORTING
-        iv_name TYPE string
-        it_refs TYPE zif_oapi_specification_v3=>ty_schemas
+        iv_name       TYPE string
+        it_refs       TYPE zif_oapi_specification_v3=>ty_schemas
       RETURNING
         VALUE(rs_ref) TYPE zif_oapi_specification_v3=>ty_component_schema.
     METHODS get_simple_type
       IMPORTING
-        iv_type TYPE string
+        iv_type          TYPE string
       RETURNING
         VALUE(rv_simple) TYPE string.
-private section.
+  PRIVATE SECTION.
 ENDCLASS.
 
 
 
-CLASS ZCL_OAPI_SCHEMA IMPLEMENTATION.
+CLASS zcl_oapi_schema IMPLEMENTATION.
 
 
   METHOD zif_oapi_schema~is_simple_type.

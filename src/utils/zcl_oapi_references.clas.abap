@@ -21,9 +21,9 @@ CLASS zcl_oapi_references DEFINITION PUBLIC.
         ii_schema TYPE REF TO zif_oapi_schema.
     METHODS is_supported_type
       IMPORTING
-        is_content_type TYPE string
+        is_content_type     TYPE string
       RETURNING
-        VALUE(rv_supported)   TYPE abap_bool.
+        VALUE(rv_supported) TYPE abap_bool.
 ENDCLASS.
 
 
@@ -69,7 +69,7 @@ CLASS zcl_oapi_references IMPLEMENTATION.
       LOOP AT <ls_operation>-responses ASSIGNING <ls_response>.
         LOOP AT <ls_response>-content ASSIGNING <ls_content> WHERE schema_ref IS INITIAL AND schema IS NOT INITIAL.
 
-          IF NOT is_supported_type( <ls_content>-type ).
+          IF NOT is_supported_type( <ls_content>-type ) = abap_true.
             CONTINUE.
           ENDIF.
 
@@ -79,7 +79,7 @@ CLASS zcl_oapi_references IMPLEMENTATION.
 
           ls_new-name = |response_{ <ls_operation>-abap_name }|.
 
-          IF NOT lo_names->is_used( ls_new-name ).
+          IF NOT lo_names->is_used( ls_new-name ) = abap_true.
             ls_new-abap_name = lo_names->to_abap_name( ls_new-name ).
             ls_new-abap_parser_method = lo_names->to_abap_name( |parse_{ <ls_operation>-abap_name }| ).
             CLEAR ls_new-abap_json_method. " dumping json not needed, this is a response
