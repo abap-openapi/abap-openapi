@@ -136,7 +136,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
       CLEAR lv_parameters.
       IF lines( ls_operation-parameters ) = 1.
-          lv_parameters = |            server->request->get_form_field( '{ ls_parameter-name }' )|.
+        lv_parameters = |            server->request->get_form_field( '{ ls_parameter-name }' )|.
       ELSE.
         LOOP AT ls_operation-parameters INTO ls_parameter WHERE in = 'query'.
           lv_parameters = lv_parameters &&
