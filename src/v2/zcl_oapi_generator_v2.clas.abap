@@ -135,7 +135,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |        IF lv_path = '{ ls_operation-path }' AND lv_method = '{ to_upper( ls_operation-method ) }'.\n|.
 
       CLEAR lv_parameters.
-      IF lines( ls_operation-parameters ) = 1 AND ls_operation-body_schema_ref IS NOT INITIAL.
+      IF lines( ls_operation-parameters ) = 1 AND ls_operation-body_schema_ref IS INITIAL.
         lv_parameters = | server->request->get_form_field( '{ ls_parameter-name }' )|.
       ELSE.
         LOOP AT ls_operation-parameters INTO ls_parameter WHERE in = 'query'.
