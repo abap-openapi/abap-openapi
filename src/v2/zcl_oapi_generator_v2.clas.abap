@@ -64,7 +64,7 @@ ENDCLASS.
 
 
 
-CLASS ZCL_OAPI_GENERATOR_V2 IMPLEMENTATION.
+CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
 
   METHOD find_schema.
@@ -135,10 +135,15 @@ CLASS ZCL_OAPI_GENERATOR_V2 IMPLEMENTATION.
         |        IF lv_path = '{ ls_operation-path }' AND lv_method = '{ to_upper( ls_operation-method ) }'.\n|.
 
       CLEAR lv_parameters.
-      LOOP AT ls_operation-parameters INTO ls_parameter WHERE in = 'query'.
-        lv_parameters = lv_parameters &&
-          |\n            { ls_parameter-abap_name } = server->request->get_form_field( '{ ls_parameter-name }' )|.
-      ENDLOOP.
+      IF lines( ls_operation-parameters ) = 1.
+          lv_parameters = |            server->request->get_form_field( '{ ls_parameter-name }' )|.
+      ELSE.
+        LOOP AT ls_operation-parameters INTO ls_parameter WHERE in = 'query'.
+          lv_parameters = lv_parameters &&
+            |\n            { ls_parameter-abap_name } = server->request->get_form_field( '{ ls_parameter-name }' )|.
+        ENDLOOP.
+      ENDIF.
+
       IF ls_operation-body_schema_ref IS NOT INITIAL.
         rv_abap = rv_abap &&
           |          DATA { ls_operation-abap_name  } TYPE { ms_input-intf }=>{ find_schema( ls_operation-body_schema_ref )-abap_name }.\n| &&
