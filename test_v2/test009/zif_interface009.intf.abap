@@ -4,7 +4,7 @@ INTERFACE zif_interface009 PUBLIC.
 
   METHODS _test
     IMPORTING
-      _top TYPE i
+      _top TYPE i OPTIONAL
     RAISING
       cx_static_check.
 ENDINTERFACE.
