@@ -109,7 +109,6 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lo_response_name TYPE REF TO zcl_oapi_response_name.
     DATA lv_response_name TYPE string.
     DATA lv_code TYPE string.
-    DATA lv_found_200 TYPE abap_bool.
 
     CREATE OBJECT lo_response_name.
 
