@@ -23,7 +23,7 @@ CLASS zcl_client009 IMPLEMENTATION.
   METHOD zif_interface009~_test.
     DATA lv_code TYPE i.
 
-    mi_client->request->set_method( 'POST' ).
+    mi_client->request->set_method( 'GET' ).
     mi_client->request->set_data( '112233AABBCCDDEEFF' ).
     mi_client->send( ).
     mi_client->receive( ).

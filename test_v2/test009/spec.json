@@ -8,21 +8,18 @@
   },
   "paths": {
     "/test": {
-      "post": {
+      "get": {
         "parameters": [
           {
             "name": "$top",
             "in": "query",
-            "example": "",
             "required": false,
-            "description": "",
             "schema": {
               "type": "integer",
               "default": ""
             }
           }
         ],
-        "description": "",
         "responses": {
           "200": {
             "description": "OK",

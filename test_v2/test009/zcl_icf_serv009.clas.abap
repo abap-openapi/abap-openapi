@@ -16,7 +16,7 @@ CLASS zcl_icf_serv009 IMPLEMENTATION.
     lv_method = server->request->get_method( ).
 
     TRY.
-        IF lv_path = '/test' AND lv_method = 'POST'.
+        IF lv_path = '/test' AND lv_method = 'GET'.
           li_handler->_test( server->request->get_form_field( '' ) ).
           RETURN.
         ENDIF.
