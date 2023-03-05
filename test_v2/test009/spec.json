@@ -1,0 +1,36 @@
+{
+  "openapi": "3.0.0",
+  "servers": [],
+  "info": {
+    "title": "top",
+    "version": "1",
+    "description": "top dollar sign"
+  },
+  "paths": {
+    "/test": {
+      "post": {
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "example": "",
+            "required": false,
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "default": ""
+            }
+          }
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "components": {}
+}
