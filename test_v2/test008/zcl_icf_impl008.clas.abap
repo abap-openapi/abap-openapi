@@ -5,7 +5,7 @@ ENDCLASS.
 
 CLASS zcl_icf_impl008 IMPLEMENTATION.
 
-  METHOD zif_interface008~findpetsbystatus.
+  METHOD zif_interface008~findpetsbytags.
 * Add implementation logic here
   ENDMETHOD.
 
