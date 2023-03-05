@@ -135,20 +135,26 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |        IF lv_path = '{ ls_operation-path }' AND lv_method = '{ to_upper( ls_operation-method ) }'.\n|.
 
       CLEAR lv_parameters.
-      LOOP AT ls_operation-parameters INTO ls_parameter WHERE in = 'query'.
-        lv_parameters = lv_parameters &&
-          |\n            { ls_parameter-abap_name } = server->request->get_form_field( '{ ls_parameter-name }' )|.
-      ENDLOOP.
-      IF ls_operation-body_schema_ref IS NOT INITIAL.
-        rv_abap = rv_abap &&
-          |          DATA { ls_operation-abap_name  } TYPE { ms_input-intf }=>{ find_schema( ls_operation-body_schema_ref )-abap_name }.\n| &&
-          |          /ui2/cl_json=>deserialize(\n| &&
-          |            EXPORTING\n| &&
-          |              json = server->request->get_cdata( )\n| &&
-          |            CHANGING\n| &&
-          |              data = { ls_operation-abap_name } ).\n|.
-        lv_parameters = lv_parameters &&
-          |\n            body = { ls_operation-abap_name }|.
+      IF lines( ls_operation-parameters ) = 1 AND ls_operation-body_schema_ref IS INITIAL.
+        lv_parameters = | server->request->get_form_field( '{ ls_parameter-name }' )|.
+      ELSE.
+        LOOP AT ls_operation-parameters INTO ls_parameter WHERE in = 'query'.
+          lv_parameters = lv_parameters &&
+            |\n            { ls_parameter-abap_name } = server->request->get_form_field( '{ ls_parameter-name }' )|.
+        ENDLOOP.
+
+
+        IF ls_operation-body_schema_ref IS NOT INITIAL.
+          rv_abap = rv_abap &&
+            |          DATA { ls_operation-abap_name  } TYPE { ms_input-intf }=>{ find_schema( ls_operation-body_schema_ref )-abap_name }.\n| &&
+            |          /ui2/cl_json=>deserialize(\n| &&
+            |            EXPORTING\n| &&
+            |              json = server->request->get_cdata( )\n| &&
+            |            CHANGING\n| &&
+            |              data = { ls_operation-abap_name } ).\n|.
+          lv_parameters = lv_parameters &&
+            |\n            body = { ls_operation-abap_name }|.
+        ENDIF.
       ENDIF.
 
       lv_typename = 'ret_' && ls_operation-abap_name.
@@ -297,9 +303,15 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lt_list TYPE STANDARD TABLE OF string.
     DATA lv_str TYPE string.
     DATA ls_parameter LIKE LINE OF is_operation-parameters.
+    DATA lv_simple_type TYPE string.
 
     LOOP AT is_operation-parameters INTO ls_parameter WHERE in = 'query'.
-      lv_str = |      { ls_parameter-abap_name } TYPE { ls_parameter-schema->get_simple_type( ) }|.
+      IF ls_parameter-schema->type = 'array'.
+        lv_simple_type = 'string_table'.
+      ELSE.
+        lv_simple_type = ls_parameter-schema->get_simple_type( ).
+      ENDIF.
+      lv_str = |      { ls_parameter-abap_name } TYPE { lv_simple_type }|.
       APPEND lv_str TO lt_list.
     ENDLOOP.
 
@@ -322,6 +334,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lv_typename TYPE string.
     DATA lo_response_name TYPE REF TO zcl_oapi_response_name.
     DATA lv_response_name TYPE string.
+    DATA lv_returning_type TYPE string.
 
     CREATE OBJECT lo_response_name.
 
@@ -331,8 +344,13 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       LOOP AT ls_response-content INTO ls_content.
         lv_response_name = lo_response_name->generate_response_name( iv_content_type = ls_content-type
                                                                      iv_code         = ls_response-code ).
+        IF ls_content-schema_ref = space.
+          lv_returning_type = ls_content-schema->type.
+        ELSE.
+          lv_returning_type = find_schema( ls_content-schema_ref )-abap_name.
+        ENDIF.
         rs_returning-type = rs_returning-type &&
-            |           { lv_response_name } TYPE { find_schema( ls_content-schema_ref )-abap_name },\n|.
+              |           { lv_response_name } TYPE { lv_returning_type },\n|.
       ENDLOOP.
     ENDLOOP.
     IF rs_returning-type IS NOT INITIAL.
@@ -350,5 +368,4 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       ENDLOOP.
     ENDLOOP.
   ENDMETHOD.
-
 ENDCLASS.

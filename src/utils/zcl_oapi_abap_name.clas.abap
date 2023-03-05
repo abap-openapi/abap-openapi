@@ -4,16 +4,22 @@ CLASS zcl_oapi_abap_name DEFINITION PUBLIC.
       IMPORTING iv_name        TYPE string
       RETURNING VALUE(rv_name) TYPE string.
     METHODS add_used IMPORTING iv_name TYPE string.
+    METHODS is_used
+      IMPORTING iv_name       TYPE string
+      RETURNING VALUE(rv_used) TYPE abap_bool.
   PROTECTED SECTION.
   PRIVATE SECTION.
     TYPES ty_name TYPE c LENGTH 30.
     DATA mt_used TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
     METHODS numbering IMPORTING iv_name TYPE string RETURNING VALUE(rv_name) TYPE ty_name.
+    METHODS sanitize_name
+      IMPORTING iv_name        TYPE string
+      RETURNING VALUE(rv_name) TYPE string.
 ENDCLASS.
 
 
 
-CLASS ZCL_OAPI_ABAP_NAME IMPLEMENTATION.
+CLASS zcl_oapi_abap_name IMPLEMENTATION.
 
 
   METHOD add_used.
@@ -47,6 +53,14 @@ CLASS ZCL_OAPI_ABAP_NAME IMPLEMENTATION.
     IF iv_name IS INITIAL.
       RETURN.
     ENDIF.
+    rv_name = sanitize_name( iv_name ).
+    IF is_used( rv_name ) = abap_true.
+      rv_name = numbering( rv_name ).
+    ENDIF.
+    APPEND rv_name TO mt_used.
+  ENDMETHOD.
+
+  METHOD sanitize_name.
     rv_name = to_lower( iv_name ).
     REPLACE ALL OCCURRENCES OF '-' IN rv_name WITH '_'.
     REPLACE ALL OCCURRENCES OF ` ` IN rv_name WITH '_'.
@@ -60,10 +74,20 @@ CLASS ZCL_OAPI_ABAP_NAME IMPLEMENTATION.
     IF strlen( rv_name ) > 30.
       rv_name = rv_name(30).
     ENDIF.
-    READ TABLE mt_used WITH KEY table_line = rv_name TRANSPORTING NO FIELDS.
-    IF sy-subrc = 0.
-      rv_name = numbering( rv_name ).
-    ENDIF.
-    APPEND rv_name TO mt_used.
   ENDMETHOD.
+
+  METHOD is_used.
+    DATA lv_name TYPE string.
+    IF iv_name IS INITIAL.
+      RETURN.
+    ENDIF.
+    lv_name = sanitize_name( iv_name ).
+    READ TABLE mt_used WITH KEY table_line = lv_name TRANSPORTING NO FIELDS.
+    IF sy-subrc = 0.
+      rv_used = abap_true.
+      RETURN.
+    ENDIF.
+    rv_used = abap_false.
+  ENDMETHOD.
+
 ENDCLASS.
