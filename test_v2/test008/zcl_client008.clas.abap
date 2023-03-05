@@ -20,7 +20,7 @@ CLASS zcl_client008 IMPLEMENTATION.
         client = mi_client ).
   ENDMETHOD.
 
-  METHOD zif_interface008~findpetsbytags.
+  METHOD zif_interface008~findpetsbystatus.
     DATA lv_code TYPE i.
 
     mi_client->request->set_method( 'GET' ).
