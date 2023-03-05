@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "servers": [],
   "info": {
-    "title": "top",
+    "title": "escape name $top",
     "version": "1",
     "description": "top dollar sign"
   },
