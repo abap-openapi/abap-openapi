@@ -34,7 +34,7 @@ INTERFACE zif_interface007 PUBLIC.
          END OF ret__test.
   METHODS _test
     IMPORTING
-      separator TYPE string
+      separator TYPE string OPTIONAL
       body TYPE posttestrequest
     RETURNING
       VALUE(return) TYPE ret__test

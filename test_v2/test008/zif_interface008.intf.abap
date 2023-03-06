@@ -29,7 +29,7 @@ INTERFACE zif_interface008 PUBLIC.
          END OF ret_findpetsbystatus.
   METHODS findpetsbystatus
     IMPORTING
-      status TYPE string
+      status TYPE string OPTIONAL
     RETURNING
       VALUE(return) TYPE ret_findpetsbystatus
     RAISING
