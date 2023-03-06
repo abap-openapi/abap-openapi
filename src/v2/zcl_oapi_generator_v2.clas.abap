@@ -108,6 +108,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA ls_parameter  LIKE LINE OF ls_operation-parameters.
     DATA lo_response_name TYPE REF TO zcl_oapi_response_name.
     DATA lv_response_name TYPE string.
+    DATA lv_code TYPE string.
 
     CREATE OBJECT lo_response_name.
 
@@ -161,6 +162,16 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
       CLEAR lv_post.
       LOOP AT ls_operation-responses INTO ls_response.
+        IF ls_response-code = 'default'.
+          READ TABLE ls_operation-responses WITH KEY code = '200' TRANSPORTING NO FIELDS.
+          IF sy-subrc = 0.
+            lv_code = '400'.
+          ELSE.
+            lv_code = '200'.
+          ENDIF.
+        ELSE.
+          lv_code = ls_response-code.
+        ENDIF.
         LOOP AT ls_response-content INTO ls_content.
 
           lv_response_name = lo_response_name->generate_response_name( iv_content_type = ls_content-type
@@ -170,7 +181,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
             |          IF { lv_typename }-{ lv_response_name } IS NOT INITIAL.\n| &&
             |            server->response->set_content_type( '{ ls_content-type }' ).\n| &&
             |            server->response->set_cdata( /ui2/cl_json=>serialize( { lv_typename }-{ lv_response_name } ) ).\n| &&
-            |            server->response->set_status( code = { ls_response-code } reason = '{ ls_response-description }' ).\n| &&
+            |            server->response->set_status( code = { lv_code } reason = '{ ls_response-description }' ).\n| &&
             |            RETURN.\n| &&
             |          ENDIF.\n|.
         ENDLOOP.
