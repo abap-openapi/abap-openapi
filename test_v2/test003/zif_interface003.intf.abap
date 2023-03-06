@@ -37,7 +37,7 @@ INTERFACE zif_interface003 PUBLIC.
          END OF ret__test.
   METHODS _test
     IMPORTING
-      operation TYPE string
+      operation TYPE string OPTIONAL
       body TYPE posttestrequest
     RETURNING
       VALUE(return) TYPE ret__test

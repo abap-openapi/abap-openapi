@@ -323,6 +323,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         lv_simple_type = ls_parameter-schema->get_simple_type( ).
       ENDIF.
       lv_str = |      { ls_parameter-abap_name } TYPE { lv_simple_type }|.
+      IF ls_parameter-required = abap_false.
+        lv_str = lv_str && | OPTIONAL|.
+      ENDIF.
       APPEND lv_str TO lt_list.
     ENDLOOP.
 
