@@ -9,21 +9,21 @@ DATA input  TYPE zcl_oapi_generator_v2=>ty_input.
 DATA result TYPE zcl_oapi_generator_v2=>ty_result.
 
 SELECTION-SCREEN BEGIN OF BLOCK b1 WITH FRAME TITLE TEXT-001.
-  PARAMETERS: name TYPE char11 DEFAULT 'DEFAULT'.
-  SELECTION-SCREEN SKIP.
-  PARAMETERS: intf   LIKE input-intf,
-              client LIKE input-clas_client,
-              impl   LIKE input-clas_icf_impl,
-              serv   LIKE input-clas_icf_serv.
+PARAMETERS p_name TYPE c LENGTH 11 DEFAULT 'DEFAULT'.
+SELECTION-SCREEN SKIP.
+PARAMETERS: p_intf   TYPE zcl_oapi_generator_v2=>ty_input-intf,
+            p_client TYPE zcl_oapi_generator_v2=>ty_input-clas_client,
+            p_impl   TYPE zcl_oapi_generator_v2=>ty_input-clas_icf_impl,
+            p_serv   TYPE zcl_oapi_generator_v2=>ty_input-clas_icf_serv.
 SELECTION-SCREEN END OF BLOCK b1.
 
 SELECTION-SCREEN BEGIN OF BLOCK b2 WITH FRAME TITLE TEXT-002.
-  PARAMETERS: file TYPE text255.
+PARAMETERS p_file TYPE string.
 SELECTION-SCREEN END OF BLOCK b2.
 
 INITIALIZATION.
 
-AT SELECTION-SCREEN ON VALUE-REQUEST FOR file.
+AT SELECTION-SCREEN ON VALUE-REQUEST FOR p_file.
   DATA files   TYPE filetable.
   DATA return_code TYPE i.
 
@@ -32,7 +32,7 @@ AT SELECTION-SCREEN ON VALUE-REQUEST FOR file.
   DATA window_title TYPE string.
   DATA default_extension TYPE string.
 
-  FIELD-SYMBOLS: <file> LIKE LINE OF files.
+  FIELD-SYMBOLS <file> LIKE LINE OF files.
 
   default_extension  = '.JSON'.
   file_filter = 'Text Files (*.JSON)|*.JSON'.
@@ -53,22 +53,24 @@ AT SELECTION-SCREEN ON VALUE-REQUEST FOR file.
   IF files IS NOT INITIAL.
     READ TABLE files ASSIGNING <file> INDEX 1.
     IF sy-subrc = 0.
-      file = <file>-filename.
+      p_file = <file>-filename.
     ENDIF.
   ENDIF.
 
 AT SELECTION-SCREEN OUTPUT.
-  IF name <> space.
-    intf = |ZIF_{ name }|.
-    client = |ZCL_{ name }|.
-    serv = |ZCL_{ name }_SRVR|.
-    impl = |ZCL_{ name }_IMPL|.
+  IF p_name <> space.
+    p_intf = |ZIF_{ p_name }|.
+    p_client = |ZCL_{ p_name }|.
+    p_serv = |ZCL_{ p_name }_SRVR|.
+    p_impl = |ZCL_{ p_name }_IMPL|.
   ENDIF.
 
 START-OF-SELECTION.
+  TYPES ty_data_line TYPE c LENGTH 2000.
   DATA: filename TYPE string,
-        data_table TYPE TABLE OF char2000.
-  filename = file.
+        data_table TYPE TABLE OF ty_data_line.
+  FIELD-SYMBOLS <data_line> TYPE ty_data_line.
+  filename = p_file.
   cl_gui_frontend_services=>gui_upload(
       EXPORTING
         filename                = filename            " Name of file
@@ -103,15 +105,15 @@ START-OF-SELECTION.
 
   DATA json_string TYPE string.
 
-  LOOP AT data_table ASSIGNING FIELD-SYMBOL(<data_line>).
+  LOOP AT data_table ASSIGNING <data_line>.
     json_string = json_string && <data_line>.
   ENDLOOP.
 
   input-openapi_json = json_string.
-  input-intf = intf.
-  input-clas_client = client.
-  input-clas_icf_impl = impl.
-  input-clas_icf_serv = serv.
+  input-intf = p_intf.
+  input-clas_client = p_client.
+  input-clas_icf_impl = p_impl.
+  input-clas_icf_serv = p_serv.
 
   result = zcl_oapi_generator=>generate_v2( input ).
 
