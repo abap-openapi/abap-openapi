@@ -33,8 +33,8 @@ module.exports = {
       "stream": require.resolve("stream-browserify"),
       "string_decoder": require.resolve("string_decoder/"),
       "url": false,
-      "util": require.resolve("web-encoding"),
       "util/types": false,
+      "util": require.resolve("web-encoding"),
       "zlib": false,
     },
     extensions: [".ts", ".js"]
