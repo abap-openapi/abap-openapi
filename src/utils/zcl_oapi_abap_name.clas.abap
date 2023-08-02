@@ -9,7 +9,7 @@ CLASS zcl_oapi_abap_name DEFINITION PUBLIC.
       RETURNING VALUE(rv_used) TYPE abap_bool.
   PROTECTED SECTION.
   PRIVATE SECTION.
-    TYPES ty_name TYPE c LENGTH 30.
+    TYPES ty_name TYPE c LENGTH 28.
     DATA mt_used TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
     METHODS numbering IMPORTING iv_name TYPE string RETURNING VALUE(rv_name) TYPE ty_name.
     METHODS sanitize_name
@@ -33,8 +33,8 @@ CLASS zcl_oapi_abap_name IMPLEMENTATION.
     DATA lv_number TYPE n LENGTH 2.
     DATA lv_offset TYPE i.
     lv_offset = strlen( iv_name ).
-    IF lv_offset > 28.
-      lv_offset = 28.
+    IF lv_offset > 26.
+      lv_offset = 26.
     ENDIF.
     DO 99 TIMES.
       lv_number = sy-index.
@@ -72,8 +72,8 @@ CLASS zcl_oapi_abap_name IMPLEMENTATION.
     IF rv_name CO '0123456789'.
       rv_name = 'n' && rv_name.
     ENDIF.
-    IF strlen( rv_name ) > 30.
-      rv_name = rv_name(30).
+    IF strlen( rv_name ) > 28.
+      rv_name = rv_name(28).
     ENDIF.
   ENDMETHOD.
 
