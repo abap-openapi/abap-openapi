@@ -1,12 +1,22 @@
-CLASS zcl_oapi_abap_name DEFINITION PUBLIC.
-  PUBLIC SECTION.
-    METHODS to_abap_name
-      IMPORTING iv_name        TYPE string
-      RETURNING VALUE(rv_name) TYPE string.
-    METHODS add_used IMPORTING iv_name TYPE string.
-    METHODS is_used
-      IMPORTING iv_name       TYPE string
-      RETURNING VALUE(rv_used) TYPE abap_bool.
+class ZCL_OAPI_ABAP_NAME definition
+  public
+  create public .
+
+public section.
+
+  methods TO_ABAP_NAME
+    importing
+      !IV_NAME type STRING
+    returning
+      value(RV_NAME) type STRING .
+  methods ADD_USED
+    importing
+      !IV_NAME type STRING .
+  methods IS_USED
+    importing
+      !IV_NAME type STRING
+    returning
+      value(RV_USED) type ABAP_BOOL .
   PROTECTED SECTION.
   PRIVATE SECTION.
     TYPES ty_name TYPE c LENGTH 28.
@@ -19,13 +29,28 @@ ENDCLASS.
 
 
 
-CLASS zcl_oapi_abap_name IMPLEMENTATION.
+CLASS ZCL_OAPI_ABAP_NAME IMPLEMENTATION.
 
 
   METHOD add_used.
     READ TABLE mt_used WITH KEY table_line = iv_name TRANSPORTING NO FIELDS.
     ASSERT sy-subrc <> 0.
     APPEND iv_name TO mt_used.
+  ENDMETHOD.
+
+
+  METHOD is_used.
+    DATA lv_name TYPE string.
+    IF iv_name IS INITIAL.
+      RETURN.
+    ENDIF.
+    lv_name = sanitize_name( iv_name ).
+    READ TABLE mt_used WITH KEY table_line = lv_name TRANSPORTING NO FIELDS.
+    IF sy-subrc = 0.
+      rv_used = abap_true.
+      RETURN.
+    ENDIF.
+    rv_used = abap_false.
   ENDMETHOD.
 
 
@@ -49,17 +74,6 @@ CLASS zcl_oapi_abap_name IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD to_abap_name.
-    IF iv_name IS INITIAL.
-      RETURN.
-    ENDIF.
-    rv_name = sanitize_name( iv_name ).
-    IF is_used( rv_name ) = abap_true.
-      rv_name = numbering( rv_name ).
-    ENDIF.
-    APPEND rv_name TO mt_used.
-  ENDMETHOD.
-
   METHOD sanitize_name.
     rv_name = to_lower( iv_name ).
     REPLACE ALL OCCURRENCES OF '-' IN rv_name WITH '_'.
@@ -77,18 +91,15 @@ CLASS zcl_oapi_abap_name IMPLEMENTATION.
     ENDIF.
   ENDMETHOD.
 
-  METHOD is_used.
-    DATA lv_name TYPE string.
+
+  METHOD to_abap_name.
     IF iv_name IS INITIAL.
       RETURN.
     ENDIF.
-    lv_name = sanitize_name( iv_name ).
-    READ TABLE mt_used WITH KEY table_line = lv_name TRANSPORTING NO FIELDS.
-    IF sy-subrc = 0.
-      rv_used = abap_true.
-      RETURN.
+    rv_name = sanitize_name( iv_name ).
+    IF is_used( rv_name ) = abap_true.
+      rv_name = numbering( rv_name ).
     ENDIF.
-    rv_used = abap_false.
+    APPEND rv_name TO mt_used.
   ENDMETHOD.
-
 ENDCLASS.
