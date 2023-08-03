@@ -345,7 +345,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
   METHOD find_returning_parameter.
     DATA ls_response LIKE LINE OF is_operation-responses.
     DATA ls_content LIKE LINE OF ls_response-content.
-    DATA lv_typename TYPE seoclsname.
+    DATA lv_typename TYPE char30.
     DATA lo_response_name TYPE REF TO zcl_oapi_response_name.
     DATA lv_response_name TYPE string.
     DATA lv_returning_type TYPE string.
