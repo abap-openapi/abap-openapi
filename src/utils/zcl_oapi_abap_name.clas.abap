@@ -1,22 +1,22 @@
-class ZCL_OAPI_ABAP_NAME definition
-  public
-  create public .
+CLASS zcl_oapi_abap_name DEFINITION
+  PUBLIC
+  CREATE PUBLIC .
 
-public section.
+  PUBLIC SECTION.
 
-  methods TO_ABAP_NAME
-    importing
-      !IV_NAME type STRING
-    returning
-      value(RV_NAME) type STRING .
-  methods ADD_USED
-    importing
-      !IV_NAME type STRING .
-  methods IS_USED
-    importing
-      !IV_NAME type STRING
-    returning
-      value(RV_USED) type ABAP_BOOL .
+    METHODS to_abap_name
+      IMPORTING
+        !iv_name       TYPE string
+      RETURNING
+        VALUE(rv_name) TYPE string .
+    METHODS add_used
+      IMPORTING
+        !iv_name TYPE string .
+    METHODS is_used
+      IMPORTING
+        !iv_name       TYPE string
+      RETURNING
+        VALUE(rv_used) TYPE abap_bool .
   PROTECTED SECTION.
   PRIVATE SECTION.
     TYPES ty_name TYPE c LENGTH 28.
@@ -29,7 +29,7 @@ ENDCLASS.
 
 
 
-CLASS ZCL_OAPI_ABAP_NAME IMPLEMENTATION.
+CLASS zcl_oapi_abap_name IMPLEMENTATION.
 
 
   METHOD add_used.
