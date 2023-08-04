@@ -1,6 +1,6 @@
 CLASS zcl_oapi_abap_name DEFINITION
   PUBLIC
-  CREATE PUBLIC.
+  CREATE PUBLIC .
 
   PUBLIC SECTION.
 
@@ -16,7 +16,7 @@ CLASS zcl_oapi_abap_name DEFINITION
       IMPORTING
         !iv_name       TYPE string
       RETURNING
-        VALUE(rv_used) TYPE abap_bool .
+        VALUE(rv_used) TYPE abap_bool.
   PROTECTED SECTION.
   PRIVATE SECTION.
     TYPES ty_name TYPE c LENGTH 28.
