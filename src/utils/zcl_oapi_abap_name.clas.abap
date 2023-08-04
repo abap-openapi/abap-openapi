@@ -8,7 +8,7 @@ CLASS zcl_oapi_abap_name DEFINITION
       IMPORTING
         !iv_name       TYPE string
       RETURNING
-        VALUE(rv_name) TYPE string .
+        VALUE(rv_name) TYPE string.
     METHODS add_used
       IMPORTING
         !iv_name TYPE string .
