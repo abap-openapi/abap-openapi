@@ -11,7 +11,7 @@ CLASS zcl_oapi_abap_name DEFINITION
         VALUE(rv_name) TYPE string.
     METHODS add_used
       IMPORTING
-        !iv_name TYPE string .
+        !iv_name TYPE string.
     METHODS is_used
       IMPORTING
         !iv_name       TYPE string
