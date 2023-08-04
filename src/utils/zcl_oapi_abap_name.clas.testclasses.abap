@@ -15,7 +15,7 @@ CLASS ltcl_abap_name IMPLEMENTATION.
 
     CREATE OBJECT lo_abap_name.
 
-    lv_abap_name = lo_abap_name->to_abap_name( iv_name = 'a_long_name_longer_then_28_Characters' ).
+    lv_abap_name = lo_abap_name->to_abap_name( 'a_long_name_longer_then_28_Characters' ).
 
     cl_abap_unit_assert=>assert_number_between(
         lower = 1
