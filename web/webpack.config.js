@@ -24,10 +24,11 @@ module.exports = {
     fallback: {
       "./%23ui2%23cl_json.clas.mjs": false,
       "buffer": require.resolve("buffer/"),
-      "crypto": require.resolve("crypto-browserify"),
+      "crypto": false,
       "fs": false,
       "http": false,
       "https": false,
+      "process": false,
       "net": false,
       "path": require.resolve("path-browserify"),
       "stream": require.resolve("stream-browserify"),
