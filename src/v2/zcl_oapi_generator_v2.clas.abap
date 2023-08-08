@@ -158,7 +158,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         ENDIF.
       ENDIF.
 
-      lv_typename = 'ret_' && ls_operation-abap_name.
+      lv_typename = 'r_' && ls_operation-abap_name.
 
       CLEAR lv_post.
       LOOP AT ls_operation-responses INTO ls_response.
@@ -345,14 +345,14 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
   METHOD find_returning_parameter.
     DATA ls_response LIKE LINE OF is_operation-responses.
     DATA ls_content LIKE LINE OF ls_response-content.
-    DATA lv_typename TYPE string.
+    DATA lv_typename TYPE char30.
     DATA lo_response_name TYPE REF TO zcl_oapi_response_name.
     DATA lv_response_name TYPE string.
     DATA lv_returning_type TYPE string.
 
     CREATE OBJECT lo_response_name.
 
-    lv_typename = 'ret_' && is_operation-abap_name.
+    lv_typename = 'r_' && is_operation-abap_name.
 
     LOOP AT is_operation-responses INTO ls_response.
       LOOP AT ls_response-content INTO ls_content.

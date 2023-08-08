@@ -53,8 +53,8 @@ async function run() {
     fs.mkdirSync(prefix);
   }
 
-  fs.writeFileSync(prefix + input.get().class_name.get() + ".clas.abap", result.get().clas.get());
-  fs.writeFileSync(prefix + input.get().interface_name.get() + ".intf.abap", result.get().intf.get());
+  fs.writeFileSync(prefix + input.get().class_name.get().trimEnd() + ".clas.abap", result.get().clas.get());
+  fs.writeFileSync(prefix + input.get().interface_name.get().trimEnd() + ".intf.abap", result.get().intf.get());
 }
 
 run().then().catch(err => {
