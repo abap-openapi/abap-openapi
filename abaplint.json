@@ -16,6 +16,18 @@
     "errorNamespace": "."
   },
   "rules": {
+    "cds_comment_style": true,
+    "cds_legacy_view": true,
+    "change_if_to_case": true,
+    "easy_to_find_messages": true,
+    "expand_macros": true,
+    "fully_type_itabs": true,
+    "select_single_full_key": true,
+    "smim_consistency": true,
+    "sql_value_conversion": true,
+    "strict_sql": true,
+    "superfluous_value": true,
+    "unnecessary_return": true,
     "no_external_form_calls": true,
     "cds_parser_error": true,
     "classic_exceptions_overlap": true,

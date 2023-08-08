@@ -311,7 +311,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
 
   METHOD find_input_parameters.
-    DATA lt_list TYPE STANDARD TABLE OF string.
+    DATA lt_list TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
     DATA lv_str TYPE string.
     DATA ls_parameter LIKE LINE OF is_operation-parameters.
     DATA lv_simple_type TYPE string.
