@@ -19,11 +19,16 @@ CLASS zcl_oapi_references DEFINITION PUBLIC.
         iv_parent TYPE string
         io_graph  TYPE REF TO zcl_oapi_graph
         ii_schema TYPE REF TO zif_oapi_schema.
+    METHODS is_supported_type
+      IMPORTING
+        is_content_type     TYPE string
+      RETURNING
+        VALUE(rv_supported) TYPE abap_bool.
 ENDCLASS.
 
 
 
-CLASS ZCL_OAPI_REFERENCES IMPLEMENTATION.
+CLASS zcl_oapi_references IMPLEMENTATION.
 
 
   METHOD create_body_references.
@@ -62,17 +67,25 @@ CLASS ZCL_OAPI_REFERENCES IMPLEMENTATION.
 
     LOOP AT ms_spec-operations ASSIGNING <ls_operation> WHERE deprecated = abap_false.
       LOOP AT <ls_operation>-responses ASSIGNING <ls_response>.
-        LOOP AT <ls_response>-content ASSIGNING <ls_content> WHERE type = 'application/json' AND schema_ref IS INITIAL AND schema IS NOT INITIAL.
+        LOOP AT <ls_response>-content ASSIGNING <ls_content> WHERE schema_ref IS INITIAL AND schema IS NOT INITIAL.
+
+          IF is_supported_type( <ls_content>-type ) = abap_false.
+            CONTINUE.
+          ENDIF.
+
           IF <ls_content>-schema->is_simple_type( ) = abap_true.
             CONTINUE.
           ENDIF.
 
           ls_new-name = |response_{ <ls_operation>-abap_name }|.
-          ls_new-abap_name = lo_names->to_abap_name( ls_new-name ).
-          ls_new-abap_parser_method = lo_names->to_abap_name( |parse_{ <ls_operation>-abap_name }| ).
-          CLEAR ls_new-abap_json_method. " dumping json not needed, this is a response
-          ls_new-schema = <ls_content>-schema.
-          APPEND ls_new TO ms_spec-components-schemas.
+
+          IF lo_names->is_used( ls_new-name ) = abap_false.
+            ls_new-abap_name = lo_names->to_abap_name( ls_new-name ).
+            ls_new-abap_parser_method = lo_names->to_abap_name( |parse_{ <ls_operation>-abap_name }| ).
+            CLEAR ls_new-abap_json_method. " dumping json not needed, this is a response
+            ls_new-schema = <ls_content>-schema.
+            APPEND ls_new TO ms_spec-components-schemas.
+          ENDIF.
 
           <ls_content>-schema_ref = '#/components/schemas/' && ls_new-name.
         ENDLOOP.
@@ -177,4 +190,18 @@ CLASS ZCL_OAPI_REFERENCES IMPLEMENTATION.
       ENDIF.
     ENDLOOP.
   ENDMETHOD.
+
+  METHOD is_supported_type.
+
+    CASE is_content_type.
+      WHEN 'application/json'.
+        rv_supported = abap_true.
+      WHEN 'application/xml'.
+        rv_supported = abap_true.
+      WHEN OTHERS.
+        rv_supported = abap_false.
+    ENDCASE.
+
+  ENDMETHOD.
+
 ENDCLASS.

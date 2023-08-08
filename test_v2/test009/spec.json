@@ -1,0 +1,33 @@
+{
+  "openapi": "3.0.0",
+  "servers": [],
+  "info": {
+    "title": "escape name $top",
+    "version": "1",
+    "description": "top dollar sign"
+  },
+  "paths": {
+    "/test": {
+      "get": {
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "components": {}
+}

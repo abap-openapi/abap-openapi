@@ -21,7 +21,7 @@ CLASS lcl_stack IMPLEMENTATION.
   METHOD push.
     DATA ls_data LIKE LINE OF mt_data.
     ls_data-name = iv_name.
-    ls_data-is_array = boolc( iv_type = 'array').
+    ls_data-is_array = boolc( iv_type = 'array' ).
     APPEND ls_data TO mt_data.
   ENDMETHOD.
 
