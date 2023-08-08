@@ -23,15 +23,15 @@ INTERFACE zif_interface008 PUBLIC.
 * response_findpetsbystatus
   TYPES response_findpetsbystatus TYPE STANDARD TABLE OF pet WITH DEFAULT KEY.
 
-  TYPES: BEGIN OF ret_findpetsbystatus,
+  TYPES: BEGIN OF r_findpetsbystatus,
            _200_app_json TYPE response_findpetsbystatus,
            _200_app_xml TYPE response_findpetsbystatus,
-         END OF ret_findpetsbystatus.
+         END OF r_findpetsbystatus.
   METHODS findpetsbystatus
     IMPORTING
       status TYPE string OPTIONAL
     RETURNING
-      VALUE(return) TYPE ret_findpetsbystatus
+      VALUE(return) TYPE r_findpetsbystatus
     RAISING
       cx_static_check.
 ENDINTERFACE.
