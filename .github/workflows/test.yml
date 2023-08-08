@@ -15,3 +15,4 @@ jobs:
     - run: npm install
     - run: npm test
     - run: npm run petstore
+    - run: git diff --exit-code
