@@ -221,6 +221,7 @@
       "skipNames": []
     },
     "unused_variables": {
+      "skipAbstract": false,
       "exclude": ["test_v2"]
     },
     "use_bool_expression": true,
