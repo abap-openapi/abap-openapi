@@ -28,6 +28,7 @@ module.exports = {
       "fs": false,
       "http": false,
       "https": false,
+      "tls": false,
       "process": false,
       "net": false,
       "path": require.resolve("path-browserify"),
