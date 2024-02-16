@@ -4,18 +4,16 @@ CLASS zcl_client002 DEFINITION PUBLIC.
     INTERFACES zif_interface002.
     METHODS constructor
       IMPORTING
-        iv_url    TYPE string
-        iv_ssl_id TYPE ssfapplssl OPTIONAL.
+        iv_destination TYPE rfcdest.
   PROTECTED SECTION.
     DATA mi_client TYPE REF TO if_http_client.
 ENDCLASS.
 
 CLASS zcl_client002 IMPLEMENTATION.
   METHOD constructor.
-    cl_http_client=>create_by_url(
+    cl_http_client=>create_by_destination(
       EXPORTING
-        url    = iv_url
-        ssl_id = iv_ssl_id
+        destination = iv_destination
       IMPORTING
         client = mi_client ).
   ENDMETHOD.
