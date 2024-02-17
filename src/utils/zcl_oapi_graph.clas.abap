@@ -44,7 +44,7 @@ CLASS zcl_oapi_graph IMPLEMENTATION.
       rv_node = lv_vertex.
       RETURN.
     ENDLOOP.
-    ASSERT 1 = 'graph has cycles'.
+    ASSERT '' = 'graph has cycles'.
   ENDMETHOD.
 
   METHOD add_vertex.
