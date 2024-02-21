@@ -247,17 +247,15 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    INTERFACES { ms_input-intf }.\n| &&
       |    METHODS constructor\n| &&
       |      IMPORTING\n| &&
-      |        iv_url    TYPE string\n| &&
-      |        iv_ssl_id TYPE ssfapplssl OPTIONAL.\n| &&
+      |        iv_destination TYPE rfcdest.\n| &&
       |  PROTECTED SECTION.\n| &&
       |    DATA mi_client TYPE REF TO if_http_client.\n| &&
       |ENDCLASS.\n\n| &&
       |CLASS { ms_input-clas_client } IMPLEMENTATION.\n| &&
       |  METHOD constructor.\n| &&
-      |    cl_http_client=>create_by_url(\n| &&
+      |    cl_http_client=>create_by_destination(\n| &&
       |      EXPORTING\n| &&
-      |        url    = iv_url\n| &&
-      |        ssl_id = iv_ssl_id\n| &&
+      |        destination = iv_destination\n| &&
       |      IMPORTING\n| &&
       |        client = mi_client ).\n| &&
       |  ENDMETHOD.\n\n|.
