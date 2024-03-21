@@ -17,7 +17,7 @@ CLASS zcl_icf_serv009 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/test' AND lv_method = 'GET'.
-          li_handler->_test( server->request->get_form_field( '' ) ).
+          li_handler->_test( server->request->get_form_field( '$top' ) ).
           RETURN.
         ENDIF.
       CATCH cx_static_check.

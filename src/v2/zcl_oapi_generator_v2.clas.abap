@@ -137,7 +137,13 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
       CLEAR lv_parameters.
       IF lines( ls_operation-parameters ) = 1 AND ls_operation-body_schema_ref IS INITIAL.
-        lv_parameters = | server->request->get_form_field( '{ ls_parameter-name }' )|.
+        READ TABLE ls_operation-parameters INDEX 1 INTO ls_parameter ##SUBRC_OK.
+        IF ls_parameter-in = 'path'.
+* todo
+        ELSE.
+* todo, it might be a query parameter
+          lv_parameters = | server->request->get_form_field( '{ ls_parameter-name }' )|.
+        ENDIF.
       ELSE.
         LOOP AT ls_operation-parameters INTO ls_parameter WHERE in = 'query'.
           lv_parameters = lv_parameters &&
