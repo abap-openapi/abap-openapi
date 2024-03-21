@@ -17,7 +17,7 @@ CLASS zcl_icf_serv011 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/foo/{param}' AND lv_method = 'POST'.
-          li_handler->_foo_{param}( server->request->get_form_field( '' ) ).
+          li_handler->_foo_param( server->request->get_form_field( '' ) ).
           RETURN.
         ENDIF.
       CATCH cx_static_check.

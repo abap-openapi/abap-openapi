@@ -18,7 +18,7 @@ CLASS zcl_client011 IMPLEMENTATION.
         client = mi_client ).
   ENDMETHOD.
 
-  METHOD zif_interface011~_foo_{param}.
+  METHOD zif_interface011~_foo_param.
     DATA lv_code TYPE i.
 
     mi_client->request->set_method( 'POST' ).

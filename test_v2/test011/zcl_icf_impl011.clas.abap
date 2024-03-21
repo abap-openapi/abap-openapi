@@ -5,7 +5,7 @@ ENDCLASS.
 
 CLASS zcl_icf_impl011 IMPLEMENTATION.
 
-  METHOD zif_interface011~_foo_{param}.
+  METHOD zif_interface011~_foo_param.
 * Add implementation logic here
   ENDMETHOD.
 
