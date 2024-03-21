@@ -3,6 +3,8 @@ INTERFACE zif_interface011 PUBLIC.
 
 
   METHODS _foo_param
+    IMPORTING
+      param TYPE string
     RAISING
       cx_static_check.
 ENDINTERFACE.

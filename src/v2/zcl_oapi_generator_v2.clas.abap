@@ -131,6 +131,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    lv_path = server->request->get_header_field( '~path' ).\n| &&
       |    lv_method = server->request->get_method( ).\n\n|.
     LOOP AT ms_specification-operations INTO ls_operation.
+* todo, handing path parameters, do wildcard with CP?
       rv_abap = rv_abap &&
         |    TRY.\n| &&
         |        IF lv_path = '{ ls_operation-path }' AND lv_method = '{ to_upper( ls_operation-method ) }'.\n|.
@@ -138,10 +139,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       CLEAR lv_parameters.
       IF lines( ls_operation-parameters ) = 1 AND ls_operation-body_schema_ref IS INITIAL.
         READ TABLE ls_operation-parameters INDEX 1 INTO ls_parameter ##SUBRC_OK.
+* todo, it might be a header parameter
         IF ls_parameter-in = 'path'.
-* todo
+          lv_parameters = | server->request->get_form_field( 'todo' )|.
         ELSE.
-* todo, it might be a query parameter
           lv_parameters = | server->request->get_form_field( '{ ls_parameter-name }' )|.
         ENDIF.
       ELSE.
@@ -320,12 +321,13 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA ls_parameter LIKE LINE OF is_operation-parameters.
     DATA lv_simple_type TYPE string.
 
-    LOOP AT is_operation-parameters INTO ls_parameter WHERE in = 'query'.
+    LOOP AT is_operation-parameters INTO ls_parameter.
       IF ls_parameter-schema->type = 'array'.
         lv_simple_type = 'string_table'.
       ELSE.
         lv_simple_type = ls_parameter-schema->get_simple_type( ).
       ENDIF.
+
       lv_str = |      { ls_parameter-abap_name } TYPE { lv_simple_type }|.
       IF ls_parameter-required = abap_false.
         lv_str = lv_str && | OPTIONAL|.
