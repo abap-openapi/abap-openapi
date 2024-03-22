@@ -254,15 +254,18 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    INTERFACES { ms_input-intf }.\n| &&
       |    METHODS constructor\n| &&
       |      IMPORTING\n| &&
-      |        ii_client TYPE REF TO if_http_client.\n| &&
+      |        ii_client  TYPE REF TO if_http_client\n| &&
+      |        iv_timeout TYPE i DEFAULT if_http_client=>co_timeout_default.\n| &&
       |  PROTECTED SECTION.\n| &&
-      |    DATA mi_client TYPE REF TO if_http_client.\n| &&
+      |    DATA mi_client  TYPE REF TO if_http_client.\n| &&
+      |    DATA mv_timeout TYPE i.\n| &&
       |ENDCLASS.\n\n| &&
       |CLASS { ms_input-clas_client } IMPLEMENTATION.\n| &&
       |  METHOD constructor.\n| &&
-      |    " Use cl_http_client=>create_by_destination or cl_http_client=>create_by_url to create the client\n| &&
+      |    " Use cl_http_client=>create_by_destination() or cl_http_client=>create_by_url() to create the client\n| &&
       |    " the caller must close() the client\n| &&
       |    mi_client = ii_client.\n| &&
+      |    mv_timeout = iv_timeout.\n| &&
       |  ENDMETHOD.\n\n|.
 
     LOOP AT ms_specification-operations INTO ls_operation.
@@ -272,7 +275,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |\n| &&
         |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n| &&
         |    mi_client->request->set_data( '112233AABBCCDDEEFF' ).\n| &&
-        |    mi_client->send( ).\n| &&
+        |    mi_client->send( mv_timeout ).\n| &&
         |    mi_client->receive( ).\n| &&
         |\n| &&
         |    mi_client->response->get_status( IMPORTING code = lv_code ).\n| &&
