@@ -1,0 +1,37 @@
+{
+  "openapi": "3.0.0",
+  "servers": [],
+  "info": {
+    "title": "two path parameters",
+    "version": "1"
+  },
+  "paths": {
+    "/foo/{param}/{another}": {
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "param",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "another",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response"
+          }
+        }
+      }
+    }
+  }
+}

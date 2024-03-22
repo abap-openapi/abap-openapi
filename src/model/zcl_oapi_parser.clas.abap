@@ -147,6 +147,10 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
       ls_operation-path = lv_path.
       lt_methods = mo_json->members( '/paths/' && lv_path && '/' ).
       LOOP AT lt_methods INTO lv_method.
+        IF lv_method = 'summary' OR lv_method = 'description'.
+          CONTINUE.
+        ENDIF.
+
         ls_operation-method = lv_method.
         lv_prefix = '/paths/' && lv_path && '/' && lv_method.
         ls_operation-summary = mo_json->value_string( lv_prefix && '/summary' ).

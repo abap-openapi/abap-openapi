@@ -4,7 +4,6 @@ INTERFACE zif_interface012 PUBLIC.
 * Description: header parameter
 * Version: 1
 
-
   METHODS _something
     IMPORTING
       user_agent TYPE string

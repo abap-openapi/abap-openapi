@@ -170,9 +170,15 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           lv_parameters = | server->request->get_form_field( '{ ls_parameter-name }' )|.
         ENDIF.
       ELSE.
-        LOOP AT ls_operation-parameters INTO ls_parameter WHERE in = 'query'.
-          lv_parameters = lv_parameters &&
-            |\n            { ls_parameter-abap_name } = server->request->get_form_field( '{ ls_parameter-name }' )|.
+        LOOP AT ls_operation-parameters INTO ls_parameter.
+          CASE ls_parameter-in.
+            WHEN 'query'.
+              lv_parameters = lv_parameters &&
+                |\n            { ls_parameter-abap_name } = server->request->get_form_field( '{ ls_parameter-name }' )|.
+            WHEN OTHERS.
+              lv_parameters = lv_parameters &&
+                |\n            { ls_parameter-abap_name } = '{ ls_parameter-in }-todo'|.
+          ENDCASE.
         ENDLOOP.
 
 
@@ -222,10 +228,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           |          DATA { lv_typename } TYPE { ms_input-intf }=>{ lv_typename }.\n| &&
           |          { lv_typename } = |.
       ELSE.
-        lv_pre =
-          |          |.
-        lv_post =
-          |          RETURN.\n|.
+        lv_pre = |          |.
+        lv_post = |          RETURN.\n|.
       ENDIF.
 
       rv_abap = rv_abap &&
@@ -362,8 +366,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         iv_name          = ls_component_schema-abap_name
         is_specification = ms_specification ).
     ENDLOOP.
-
-    rv_abap = rv_abap && |\n|.
+    IF sy-subrc = 0.
+      rv_abap = rv_abap && |\n|.
+    ENDIF.
 
     LOOP AT ms_specification-operations INTO ls_operation.
       ls_returning = find_returning_parameter( ls_operation ).
