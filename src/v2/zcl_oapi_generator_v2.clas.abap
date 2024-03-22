@@ -279,6 +279,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |\n| &&
         |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n| &&
         |    LOOP AT mt_extra_headers INTO ls_header.\n| &&
+        |      mi_client->request->set_header_field(\n| &&
+        |        name  = ls_header-name\n| &&
+        |        value = ls_header-value ).\n| &&
         |    ENDLOOP.\n| &&
         |    mi_client->request->set_data( '112233AABBCCDDEEFF' ).\n| &&
         |    mi_client->send( mv_timeout ).\n| &&

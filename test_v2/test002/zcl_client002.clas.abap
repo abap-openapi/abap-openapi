@@ -28,6 +28,9 @@ CLASS zcl_client002 IMPLEMENTATION.
 
     mi_client->request->set_method( 'POST' ).
     LOOP AT mt_extra_headers INTO ls_header.
+      mi_client->request->set_header_field(
+        name  = ls_header-name
+        value = ls_header-value ).
     ENDLOOP.
     mi_client->request->set_data( '112233AABBCCDDEEFF' ).
     mi_client->send( mv_timeout ).
