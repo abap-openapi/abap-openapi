@@ -1,0 +1,30 @@
+{
+  "openapi": "3.0.0",
+  "servers": [],
+  "info": {
+    "title": "header parameter",
+    "version": "1",
+    "description": "header parameter"
+  },
+  "paths": {
+    "/something": {
+      "post": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "user-agent",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response"
+          }
+        }
+      }
+    }
+  }
+}
