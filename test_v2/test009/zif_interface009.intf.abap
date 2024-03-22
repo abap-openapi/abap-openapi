@@ -4,7 +4,6 @@ INTERFACE zif_interface009 PUBLIC.
 * Description: top dollar sign
 * Version: 1
 
-
   METHODS _test
     IMPORTING
       _top TYPE i OPTIONAL

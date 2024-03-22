@@ -4,7 +4,6 @@ INTERFACE zif_interface011 PUBLIC.
 * Description: path parameter
 * Version: 1
 
-
   METHODS _foo_param
     IMPORTING
       param TYPE string

@@ -3,7 +3,6 @@ INTERFACE zif_interface013 PUBLIC.
 * Title: two path parameters
 * Version: 1
 
-
   METHODS _foo_param_another
     IMPORTING
       param TYPE string

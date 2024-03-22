@@ -366,8 +366,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         iv_name          = ls_component_schema-abap_name
         is_specification = ms_specification ).
     ENDLOOP.
-
-    rv_abap = rv_abap && |\n|.
+    IF sy-subrc = 0.
+      rv_abap = rv_abap && |\n|.
+    ENDIF.
 
     LOOP AT ms_specification-operations INTO ls_operation.
       ls_returning = find_returning_parameter( ls_operation ).
