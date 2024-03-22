@@ -32,6 +32,7 @@ CLASS zcl_client005 IMPLEMENTATION.
         name  = ls_header-name
         value = ls_header-value ).
     ENDLOOP.
+" todo, in=query name=separator
     mi_client->request->set_data( '112233AABBCCDDEEFF' ).
     mi_client->send( mv_timeout ).
     mi_client->receive( ).
