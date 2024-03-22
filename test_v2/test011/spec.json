@@ -1,0 +1,30 @@
+{
+  "openapi": "3.0.0",
+  "servers": [],
+  "info": {
+    "title": "path parameter",
+    "version": "1",
+    "description": "path parameter"
+  },
+  "paths": {
+    "/foo/{param}": {
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "param",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response"
+          }
+        }
+      }
+    }
+  }
+}

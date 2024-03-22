@@ -83,6 +83,8 @@ CLASS zcl_oapi_abap_name IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '$' IN rv_name WITH '_'.
     REPLACE ALL OCCURRENCES OF '@' IN rv_name WITH ''.
     REPLACE ALL OCCURRENCES OF '+' IN rv_name WITH ''.
+    REPLACE ALL OCCURRENCES OF '{' IN rv_name WITH ''.
+    REPLACE ALL OCCURRENCES OF '}' IN rv_name WITH ''.
     IF rv_name CO '0123456789'.
       rv_name = 'n' && rv_name.
     ENDIF.
