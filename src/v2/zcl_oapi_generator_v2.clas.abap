@@ -279,6 +279,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |    DATA ls_header LIKE LINE OF mt_extra_headers.\n| &&
         |\n| &&
         |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n| &&
+        |    cl_http_utility=>set_request_uri(\n| &&
+        |      request = mi_client->request\n| &&
+        |      uri     = '{ ls_operation-path }' ).\n| &&
         |    LOOP AT mt_extra_headers INTO ls_header.\n| &&
         |      mi_client->request->set_header_field(\n| &&
         |        name  = ls_header-name\n| &&

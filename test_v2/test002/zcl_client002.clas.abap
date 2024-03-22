@@ -27,6 +27,9 @@ CLASS zcl_client002 IMPLEMENTATION.
     DATA ls_header LIKE LINE OF mt_extra_headers.
 
     mi_client->request->set_method( 'POST' ).
+    cl_http_utility=>set_request_uri(
+      request = mi_client->request
+      uri     = '/test' ).
     LOOP AT mt_extra_headers INTO ls_header.
       mi_client->request->set_header_field(
         name  = ls_header-name
