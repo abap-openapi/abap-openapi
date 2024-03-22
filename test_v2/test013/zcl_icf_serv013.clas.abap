@@ -19,7 +19,9 @@ CLASS zcl_icf_serv013 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/foo/{param}/{another}' AND lv_method = 'POST'.
-          li_handler->_foo_param_another( ).
+          li_handler->_foo_param_another(
+            param = 'path-todo'
+            another = 'path-todo' ).
           RETURN.
         ENDIF.
       CATCH cx_static_check.
