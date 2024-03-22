@@ -4,26 +4,36 @@ CLASS zcl_client001 DEFINITION PUBLIC.
     INTERFACES zif_interface001.
     METHODS constructor
       IMPORTING
-        iv_destination TYPE rfcdest.
+        ii_client        TYPE REF TO if_http_client
+        it_extra_headers TYPE tihttpnvp OPTIONAL
+        iv_timeout       TYPE i DEFAULT if_http_client=>co_timeout_default.
   PROTECTED SECTION.
-    DATA mi_client TYPE REF TO if_http_client.
+    DATA mi_client        TYPE REF TO if_http_client.
+    DATA mv_timeout       TYPE i.
+    DATA mt_extra_headers TYPE tihttpnvp.
 ENDCLASS.
 
 CLASS zcl_client001 IMPLEMENTATION.
   METHOD constructor.
-    cl_http_client=>create_by_destination(
-      EXPORTING
-        destination = iv_destination
-      IMPORTING
-        client = mi_client ).
+    " Use cl_http_client=>create_by_destination() or cl_http_client=>create_by_url() to create the client
+    " the caller must close() the client
+    mi_client = ii_client.
+    mv_timeout = iv_timeout.
+    mt_extra_headers = it_extra_headers.
   ENDMETHOD.
 
   METHOD zif_interface001~_ping.
     DATA lv_code TYPE i.
+    DATA ls_header LIKE LINE OF mt_extra_headers.
 
     mi_client->request->set_method( 'POST' ).
+    LOOP AT mt_extra_headers INTO ls_header.
+      mi_client->request->set_header_field(
+        name  = ls_header-name
+        value = ls_header-value ).
+    ENDLOOP.
     mi_client->request->set_data( '112233AABBCCDDEEFF' ).
-    mi_client->send( ).
+    mi_client->send( mv_timeout ).
     mi_client->receive( ).
 
     mi_client->response->get_status( IMPORTING code = lv_code ).
