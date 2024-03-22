@@ -4,11 +4,13 @@ CLASS zcl_client006 DEFINITION PUBLIC.
     INTERFACES zif_interface006.
     METHODS constructor
       IMPORTING
-        ii_client  TYPE REF TO if_http_client
-        iv_timeout TYPE i DEFAULT if_http_client=>co_timeout_default.
+        ii_client        TYPE REF TO if_http_client
+        it_extra_headers TYPE tihttpnvp OPTIONAL
+        iv_timeout       TYPE i DEFAULT if_http_client=>co_timeout_default.
   PROTECTED SECTION.
-    DATA mi_client  TYPE REF TO if_http_client.
-    DATA mv_timeout TYPE i.
+    DATA mi_client        TYPE REF TO if_http_client.
+    DATA mv_timeout       TYPE i.
+    DATA mt_extra_headers TYPE tihttpnvp.
 ENDCLASS.
 
 CLASS zcl_client006 IMPLEMENTATION.
@@ -17,12 +19,16 @@ CLASS zcl_client006 IMPLEMENTATION.
     " the caller must close() the client
     mi_client = ii_client.
     mv_timeout = iv_timeout.
+    mt_extra_headers = it_extra_headers.
   ENDMETHOD.
 
   METHOD zif_interface006~_test.
     DATA lv_code TYPE i.
+    DATA ls_header LIKE LINE OF mt_extra_headers.
 
     mi_client->request->set_method( 'POST' ).
+    LOOP AT mt_extra_headers INTO ls_header.
+    ENDLOOP.
     mi_client->request->set_data( '112233AABBCCDDEEFF' ).
     mi_client->send( mv_timeout ).
     mi_client->receive( ).

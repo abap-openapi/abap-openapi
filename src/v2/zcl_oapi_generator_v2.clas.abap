@@ -254,11 +254,13 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    INTERFACES { ms_input-intf }.\n| &&
       |    METHODS constructor\n| &&
       |      IMPORTING\n| &&
-      |        ii_client  TYPE REF TO if_http_client\n| &&
-      |        iv_timeout TYPE i DEFAULT if_http_client=>co_timeout_default.\n| &&
+      |        ii_client        TYPE REF TO if_http_client\n| &&
+      |        it_extra_headers TYPE tihttpnvp OPTIONAL\n| &&
+      |        iv_timeout       TYPE i DEFAULT if_http_client=>co_timeout_default.\n| &&
       |  PROTECTED SECTION.\n| &&
-      |    DATA mi_client  TYPE REF TO if_http_client.\n| &&
-      |    DATA mv_timeout TYPE i.\n| &&
+      |    DATA mi_client        TYPE REF TO if_http_client.\n| &&
+      |    DATA mv_timeout       TYPE i.\n| &&
+      |    DATA mt_extra_headers TYPE tihttpnvp.\n| &&
       |ENDCLASS.\n\n| &&
       |CLASS { ms_input-clas_client } IMPLEMENTATION.\n| &&
       |  METHOD constructor.\n| &&
@@ -266,14 +268,18 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    " the caller must close() the client\n| &&
       |    mi_client = ii_client.\n| &&
       |    mv_timeout = iv_timeout.\n| &&
+      |    mt_extra_headers = it_extra_headers.\n| &&
       |  ENDMETHOD.\n\n|.
 
     LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
         |  METHOD { ms_input-intf }~{ ls_operation-abap_name }.\n| &&
         |    DATA lv_code TYPE i.\n| &&
+        |    DATA ls_header LIKE LINE OF mt_extra_headers.\n| &&
         |\n| &&
         |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n| &&
+        |    LOOP AT mt_extra_headers INTO ls_header.\n| &&
+        |    ENDLOOP.\n| &&
         |    mi_client->request->set_data( '112233AABBCCDDEEFF' ).\n| &&
         |    mi_client->send( mv_timeout ).\n| &&
         |    mi_client->receive( ).\n| &&
