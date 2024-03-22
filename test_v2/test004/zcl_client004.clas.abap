@@ -4,18 +4,16 @@ CLASS zcl_client004 DEFINITION PUBLIC.
     INTERFACES zif_interface004.
     METHODS constructor
       IMPORTING
-        iv_destination TYPE rfcdest.
+        ii_client TYPE REF TO if_http_client.
   PROTECTED SECTION.
     DATA mi_client TYPE REF TO if_http_client.
 ENDCLASS.
 
 CLASS zcl_client004 IMPLEMENTATION.
   METHOD constructor.
-    cl_http_client=>create_by_destination(
-      EXPORTING
-        destination = iv_destination
-      IMPORTING
-        client = mi_client ).
+    " Use cl_http_client=>create_by_destination or cl_http_client=>create_by_url to create the client
+    " the caller must close() the client
+    mi_client = ii_client.
   ENDMETHOD.
 
   METHOD zif_interface004~_test.

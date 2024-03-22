@@ -254,17 +254,15 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    INTERFACES { ms_input-intf }.\n| &&
       |    METHODS constructor\n| &&
       |      IMPORTING\n| &&
-      |        iv_destination TYPE rfcdest.\n| &&
+      |        ii_client TYPE REF TO if_http_client.\n| &&
       |  PROTECTED SECTION.\n| &&
       |    DATA mi_client TYPE REF TO if_http_client.\n| &&
       |ENDCLASS.\n\n| &&
       |CLASS { ms_input-clas_client } IMPLEMENTATION.\n| &&
       |  METHOD constructor.\n| &&
-      |    cl_http_client=>create_by_destination(\n| &&
-      |      EXPORTING\n| &&
-      |        destination = iv_destination\n| &&
-      |      IMPORTING\n| &&
-      |        client = mi_client ).\n| &&
+      |    " Use cl_http_client=>create_by_destination or cl_http_client=>create_by_url to create the client\n| &&
+      |    " the caller must close() the client\n| &&
+      |    mi_client = ii_client.\n| &&
       |  ENDMETHOD.\n\n|.
 
     LOOP AT ms_specification-operations INTO ls_operation.
