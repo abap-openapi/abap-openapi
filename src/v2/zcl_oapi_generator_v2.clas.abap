@@ -275,18 +275,12 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
         |  METHOD { ms_input-intf }~{ ls_operation-abap_name }.\n| &&
-        |    DATA lv_code TYPE i.\n| &&
+        |    DATA lv_code   TYPE i.\n| &&
+        |    DATA lv_uri    TYPE string.\n| &&
         |    DATA ls_header LIKE LINE OF mt_extra_headers.\n| &&
         |\n| &&
         |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n| &&
-        |    cl_http_utility=>set_request_uri(\n| &&
-        |      request = mi_client->request\n| &&
-        |      uri     = '{ ls_operation-path }' ).\n| &&
-        |    LOOP AT mt_extra_headers INTO ls_header.\n| &&
-        |      mi_client->request->set_header_field(\n| &&
-        |        name  = ls_header-name\n| &&
-        |        value = ls_header-value ).\n| &&
-        |    ENDLOOP.\n|.
+        |    lv_uri = '{ ls_operation-path }'.\n|.
 
       LOOP AT ls_operation-parameters INTO ls_parameter.
         CASE ls_parameter-in.
@@ -295,11 +289,24 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
               |    mi_client->request->set_header_field(\n| &&
               |      name  = '{ ls_parameter-name }'\n| &&
               |      value = { ls_parameter-abap_name } ).\n|.
+          WHEN 'path'.
+            rv_abap = rv_abap &&
+              |    REPLACE FIRST OCCURRENCE OF '\{{ ls_parameter-name }\}' IN lv_uri WITH { ls_parameter-abap_name }.\n|.
           WHEN OTHERS.
             rv_abap = rv_abap &&
               |" todo, in={ ls_parameter-in } name={ ls_parameter-name }\n|.
         ENDCASE.
       ENDLOOP.
+
+      rv_abap = rv_abap &&
+        |    cl_http_utility=>set_request_uri(\n| &&
+        |      request = mi_client->request\n| &&
+        |      uri     = lv_uri ).\n| &&
+        |    LOOP AT mt_extra_headers INTO ls_header.\n| &&
+        |      mi_client->request->set_header_field(\n| &&
+        |        name  = ls_header-name\n| &&
+        |        value = ls_header-value ).\n| &&
+        |    ENDLOOP.\n|.
 
       rv_abap = rv_abap &&
         |    mi_client->request->set_data( '112233AABBCCDDEEFF' ).\n| &&

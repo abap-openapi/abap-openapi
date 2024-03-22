@@ -23,19 +23,21 @@ CLASS zcl_client002 IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD zif_interface002~_test.
-    DATA lv_code TYPE i.
+    DATA lv_code   TYPE i.
+    DATA lv_uri    TYPE string.
     DATA ls_header LIKE LINE OF mt_extra_headers.
 
     mi_client->request->set_method( 'POST' ).
+    lv_uri = '/test'.
+" todo, in=query name=operation
     cl_http_utility=>set_request_uri(
       request = mi_client->request
-      uri     = '/test' ).
+      uri     = lv_uri ).
     LOOP AT mt_extra_headers INTO ls_header.
       mi_client->request->set_header_field(
         name  = ls_header-name
         value = ls_header-value ).
     ENDLOOP.
-" todo, in=query name=operation
     mi_client->request->set_data( '112233AABBCCDDEEFF' ).
     mi_client->send( mv_timeout ).
     mi_client->receive( ).
