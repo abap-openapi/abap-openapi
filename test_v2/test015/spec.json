@@ -27,7 +27,7 @@
       "Something": {
         "type": "object",
         "properties": {
-          "something": {
+          "subsomething": {
             "type": "array",
             "items": {
               "type": "object",
