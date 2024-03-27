@@ -77,7 +77,9 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     ri_schema->default = mo_json->value_string( iv_prefix && '/default' ).
     ri_schema->items_ref = mo_json->value_string( iv_prefix && '/items/$ref' ).
     ri_schema->items_type = mo_json->value_string( iv_prefix && '/items/type' ).
-    ri_schema->items_schema = parse_schema( iv_prefix && '/items' ).
+    IF ri_schema->items_ref IS INITIAL.
+      ri_schema->items_schema = parse_schema( iv_prefix && '/items' ).
+    ENDIF.
 
     lt_names = mo_json->members( iv_prefix && '/properties/' ).
     LOOP AT lt_names INTO lv_name.
