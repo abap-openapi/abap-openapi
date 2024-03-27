@@ -8,11 +8,12 @@ INTERFACE zif_oapi_schema PUBLIC.
          END OF ty_property.
 
   DATA:
-    type       TYPE string,
-    default    TYPE string,
-    properties TYPE STANDARD TABLE OF ty_property WITH DEFAULT KEY,
-    items_type TYPE string,
-    items_ref  TYPE string.
+    type         TYPE string,
+    default      TYPE string,
+    properties   TYPE STANDARD TABLE OF ty_property WITH DEFAULT KEY,
+    items_type   TYPE string, " todo, deprecate this field? use items_schema instead?
+    items_schema TYPE REF TO zif_oapi_schema,
+    items_ref    TYPE string.
 
   METHODS is_simple_type
     RETURNING

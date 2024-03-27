@@ -2,7 +2,7 @@
   "name": "abap-openapi-client",
   "private": true,
   "version": "1.0.0",
-  "description": "ABAP OpenAPI Client Generator",
+  "description": "ABAP OpenAPI Client/Server Generator",
   "scripts": {
     "lint": "abaplint",
     "transpile": "abaplint && npx rimraf output && abap_transpile",
@@ -25,9 +25,9 @@
   },
   "homepage": "https://github.com/abap-openapi/abap-openapi-client#readme",
   "dependencies": {
-    "@abaplint/cli": "^2.106.2",
-    "@abaplint/runtime": "^2.8.18",
-    "@abaplint/transpiler-cli": "^2.8.18",
+    "@abaplint/cli": "^2.106.3",
+    "@abaplint/runtime": "^2.8.19",
+    "@abaplint/transpiler-cli": "^2.8.19",
     "rimraf": "^5.0.5"
   }
 }

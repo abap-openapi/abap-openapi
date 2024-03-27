@@ -1,24 +1,32 @@
 CLASS zcl_oapi_references DEFINITION PUBLIC.
 
   PUBLIC SECTION.
-* todo, rename to "normalize"?
     METHODS normalize
-      IMPORTING is_spec        TYPE zif_oapi_specification_v3=>ty_specification
-      RETURNING VALUE(rs_spec) TYPE zif_oapi_specification_v3=>ty_specification.
+      IMPORTING
+        is_spec        TYPE zif_oapi_specification_v3=>ty_specification
+      RETURNING
+        VALUE(rs_spec) TYPE zif_oapi_specification_v3=>ty_specification.
 
   PROTECTED SECTION.
   PRIVATE SECTION.
     DATA ms_spec TYPE zif_oapi_specification_v3=>ty_specification.
 
     METHODS dereference_parameters.
+
     METHODS create_body_references.
+
     METHODS create_response_references.
+
+    METHODS create_array_references.
+
     METHODS sort_schemas.
+
     METHODS sort_traverse
       IMPORTING
         iv_parent TYPE string
         io_graph  TYPE REF TO zcl_oapi_graph
         ii_schema TYPE REF TO zif_oapi_schema.
+
     METHODS is_supported_type
       IMPORTING
         is_content_type     TYPE string
@@ -51,6 +59,43 @@ CLASS zcl_oapi_references IMPLEMENTATION.
         <ls_operation>-body_schema_ref = '#/components/schemas/' && ls_new-name.
         CLEAR <ls_operation>-body_schema.
       ENDIF.
+    ENDLOOP.
+
+  ENDMETHOD.
+
+  METHOD create_array_references.
+
+    DATA ls_schema LIKE LINE OF ms_spec-components-schemas.
+    FIELD-SYMBOLS <ls_property> TYPE zif_oapi_schema=>ty_property.
+    DATA ls_new TYPE zif_oapi_specification_v3=>ty_component_schema.
+    DATA lo_names TYPE REF TO zcl_oapi_abap_name.
+    CREATE OBJECT lo_names.
+
+    LOOP AT ms_spec-components-schemas INTO ls_schema.
+      IF ls_schema-schema->type <> 'object'.
+        CONTINUE.
+      ENDIF.
+
+      LOOP AT ls_schema-schema->properties ASSIGNING <ls_property>.
+        IF <ls_property>-schema IS INITIAL
+            OR <ls_property>-schema->type <> 'array'
+            OR <ls_property>-schema->items_ref IS NOT INITIAL
+            OR <ls_property>-schema->items_type <> 'object'.
+          CONTINUE.
+        ENDIF.
+
+        CLEAR ls_new.
+        ls_new-name = lo_names->to_abap_name( |arr{ <ls_property>-abap_name }| ).
+        ls_new-abap_name = ls_new-name.
+        ls_new-abap_json_method = lo_names->to_abap_name( |json_{ ls_new-name }| ).
+        ls_new-abap_parser_method = lo_names->to_abap_name( |parse_{ ls_new-name }| ).
+        ls_new-schema = <ls_property>-schema->items_schema.
+        APPEND ls_new TO ms_spec-components-schemas.
+
+        <ls_property>-schema->items_ref = '#/components/schemas/' && ls_new-name.
+        CLEAR <ls_property>-schema->items_schema.
+      ENDLOOP.
+
     ENDLOOP.
 
   ENDMETHOD.
@@ -104,13 +149,9 @@ CLASS zcl_oapi_references IMPLEMENTATION.
       LOOP AT <ls_operation>-parameters_ref INTO lv_ref.
         REPLACE FIRST OCCURRENCE OF '#/components/parameters/' IN lv_ref WITH ''.
         READ TABLE ms_spec-components-parameters WITH KEY id = lv_ref INTO ls_parameter.
-        IF sy-subrc = 0.
-          APPEND ls_parameter TO <ls_operation>-parameters.
-        ELSE.
-          ASSERT 0 = 1.
-*        ELSE.
-*          WRITE '@KERNEL console.dir(lv_ref.get() + "not found");'.
-        ENDIF.
+        ASSERT sy-subrc = 0.
+
+        APPEND ls_parameter TO <ls_operation>-parameters.
       ENDLOOP.
       CLEAR <ls_operation>-parameters_ref.
     ENDLOOP.
@@ -119,6 +160,9 @@ CLASS zcl_oapi_references IMPLEMENTATION.
 
   METHOD normalize.
     ms_spec = is_spec.
+
+* if an object contains an array directly, move it to schema ref
+    create_array_references( ).
 
 * always dereference all parameters
     dereference_parameters( ).
