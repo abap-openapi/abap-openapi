@@ -1,24 +1,30 @@
 CLASS zcl_oapi_references DEFINITION PUBLIC.
 
   PUBLIC SECTION.
-* todo, rename to "normalize"?
     METHODS normalize
-      IMPORTING is_spec        TYPE zif_oapi_specification_v3=>ty_specification
-      RETURNING VALUE(rs_spec) TYPE zif_oapi_specification_v3=>ty_specification.
+      IMPORTING
+        is_spec        TYPE zif_oapi_specification_v3=>ty_specification
+      RETURNING
+        VALUE(rs_spec) TYPE zif_oapi_specification_v3=>ty_specification.
 
   PROTECTED SECTION.
   PRIVATE SECTION.
     DATA ms_spec TYPE zif_oapi_specification_v3=>ty_specification.
 
     METHODS dereference_parameters.
+
     METHODS create_body_references.
+
     METHODS create_response_references.
+
     METHODS sort_schemas.
+
     METHODS sort_traverse
       IMPORTING
         iv_parent TYPE string
         io_graph  TYPE REF TO zcl_oapi_graph
         ii_schema TYPE REF TO zif_oapi_schema.
+
     METHODS is_supported_type
       IMPORTING
         is_content_type     TYPE string
@@ -104,13 +110,9 @@ CLASS zcl_oapi_references IMPLEMENTATION.
       LOOP AT <ls_operation>-parameters_ref INTO lv_ref.
         REPLACE FIRST OCCURRENCE OF '#/components/parameters/' IN lv_ref WITH ''.
         READ TABLE ms_spec-components-parameters WITH KEY id = lv_ref INTO ls_parameter.
-        IF sy-subrc = 0.
-          APPEND ls_parameter TO <ls_operation>-parameters.
-        ELSE.
-          ASSERT 0 = 1.
-*        ELSE.
-*          WRITE '@KERNEL console.dir(lv_ref.get() + "not found");'.
-        ENDIF.
+        ASSERT sy-subrc = 0.
+
+        APPEND ls_parameter TO <ls_operation>-parameters.
       ENDLOOP.
       CLEAR <ls_operation>-parameters_ref.
     ENDLOOP.
