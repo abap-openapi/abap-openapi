@@ -25,9 +25,10 @@ CLASS zcl_client007 IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD zif_interface007~_test.
-    DATA lv_code   TYPE i.
-    DATA lv_uri    TYPE string.
-    DATA ls_header LIKE LINE OF mt_extra_headers.
+    DATA lv_code         TYPE i.
+    DATA lv_uri          TYPE string.
+    DATA ls_header       LIKE LINE OF mt_extra_headers.
+    DATA lv_content_type TYPE string.
 
     mi_client->request->set_method( 'POST' ).
     lv_uri = '/test'.
@@ -44,11 +45,15 @@ CLASS zcl_client007 IMPLEMENTATION.
     mi_client->send( mv_timeout ).
     mi_client->receive( ).
 
+    lv_content_type = mi_client->response->get_content_type( ).
     mi_client->response->get_status( IMPORTING code = lv_code ).
     CASE lv_code.
-      WHEN 200.
+      WHEN '200'.
+        CASE lv_content_type.
+          WHEN 'application/json'.
 * todo, response handling
-        mi_client->response->get_data( ).
+            mi_client->response->get_data( ).
+        ENDCASE.
       WHEN OTHERS.
 * todo, error handling
     ENDCASE.

@@ -277,6 +277,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA ls_operation LIKE LINE OF ms_specification-operations.
     DATA ls_parameter LIKE LINE OF ls_operation-parameters.
     DATA ls_response  LIKE LINE OF ls_operation-responses.
+    DATA ls_content   LIKE LINE OF ls_response-content.
 
     rv_abap = |CLASS { ms_input-clas_client } DEFINITION PUBLIC.\n| &&
       generation_information( ) &&
@@ -304,9 +305,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
         |  METHOD { ms_input-intf }~{ ls_operation-abap_name }.\n| &&
-        |    DATA lv_code   TYPE i.\n| &&
-        |    DATA lv_uri    TYPE string.\n| &&
-        |    DATA ls_header LIKE LINE OF mt_extra_headers.\n| &&
+        |    DATA lv_code         TYPE i.\n| &&
+        |    DATA lv_uri          TYPE string.\n| &&
+        |    DATA ls_header       LIKE LINE OF mt_extra_headers.\n| &&
+        |    DATA lv_content_type TYPE string.\n| &&
         |\n| &&
         |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n| &&
         |    lv_uri = '{ ls_operation-path }'.\n|.
@@ -347,14 +349,29 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |    mi_client->send( mv_timeout ).\n| &&
         |    mi_client->receive( ).\n| &&
         |\n| &&
+        |    lv_content_type = mi_client->response->get_content_type( ).\n| &&
         |    mi_client->response->get_status( IMPORTING code = lv_code ).\n| &&
         |    CASE lv_code.\n|.
 
       LOOP AT ls_operation-responses INTO ls_response.
         rv_abap = rv_abap &&
-          |      WHEN { ls_response-code }.\n| &&
-          |* todo, response handling\n| &&
-          |        mi_client->response->get_data( ).\n|.
+          |      WHEN '{ ls_response-code }'.\n|.
+
+        IF lines( ls_response-content ) > 0.
+          rv_abap = rv_abap &&
+            |        CASE lv_content_type.\n|.
+          LOOP AT ls_response-content INTO ls_content.
+            rv_abap = rv_abap &&
+              |          WHEN '{ ls_content-type }'.\n| &&
+              |* todo, response handling\n| &&
+              |            mi_client->response->get_data( ).\n|.
+          ENDLOOP.
+          rv_abap = rv_abap &&
+            |        ENDCASE.\n|.
+        ELSE.
+          rv_abap = rv_abap &&
+            |* todo, no content types\n|.
+        ENDIF.
       ENDLOOP.
 
       rv_abap = rv_abap &&
