@@ -41,7 +41,7 @@
     "nrob_consistency": true,
     "omit_preceding_zeros": true,
     "prefer_corresponding": true,
-    "static_call_via_instance": true,
+    "static_call_via_instance": false,
     "unnecessary_chaining": false,
     "align_parameters": false,
     "constant_classes": true,

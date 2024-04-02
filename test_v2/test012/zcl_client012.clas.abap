@@ -26,9 +26,10 @@ CLASS zcl_client012 IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD zif_interface012~_something.
-    DATA lv_code   TYPE i.
-    DATA lv_uri    TYPE string.
-    DATA ls_header LIKE LINE OF mt_extra_headers.
+    DATA lv_code         TYPE i.
+    DATA lv_uri          TYPE string.
+    DATA ls_header       LIKE LINE OF mt_extra_headers.
+    DATA lv_content_type TYPE string.
 
     mi_client->request->set_method( 'POST' ).
     lv_uri = '/something'.
@@ -47,9 +48,15 @@ CLASS zcl_client012 IMPLEMENTATION.
     mi_client->send( mv_timeout ).
     mi_client->receive( ).
 
+    lv_content_type = mi_client->response->get_content_type( ).
     mi_client->response->get_status( IMPORTING code = lv_code ).
-    mi_client->response->get_data( ).
-* todo
+    CASE lv_code.
+      WHEN '200'.
+* todo, no content types
+      WHEN OTHERS.
+* todo, error handling
+    ENDCASE.
+
   ENDMETHOD.
 
 ENDCLASS.

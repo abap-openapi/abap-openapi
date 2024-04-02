@@ -276,6 +276,12 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
   METHOD build_clas_client.
     DATA ls_operation LIKE LINE OF ms_specification-operations.
     DATA ls_parameter LIKE LINE OF ls_operation-parameters.
+    DATA ls_response  LIKE LINE OF ls_operation-responses.
+    DATA ls_content   LIKE LINE OF ls_response-content.
+    DATA lo_response_name TYPE REF TO zcl_oapi_response_name.
+    DATA lv_name TYPE string.
+
+    CREATE OBJECT lo_response_name.
 
     rv_abap = |CLASS { ms_input-clas_client } DEFINITION PUBLIC.\n| &&
       generation_information( ) &&
@@ -303,9 +309,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
         |  METHOD { ms_input-intf }~{ ls_operation-abap_name }.\n| &&
-        |    DATA lv_code   TYPE i.\n| &&
-        |    DATA lv_uri    TYPE string.\n| &&
-        |    DATA ls_header LIKE LINE OF mt_extra_headers.\n| &&
+        |    DATA lv_code         TYPE i.\n| &&
+        |    DATA lv_uri          TYPE string.\n| &&
+        |    DATA ls_header       LIKE LINE OF mt_extra_headers.\n| &&
+        |    DATA lv_content_type TYPE string.\n| &&
         |\n| &&
         |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n| &&
         |    lv_uri = '{ ls_operation-path }'.\n|.
@@ -346,9 +353,46 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |    mi_client->send( mv_timeout ).\n| &&
         |    mi_client->receive( ).\n| &&
         |\n| &&
+        |    lv_content_type = mi_client->response->get_content_type( ).\n| &&
         |    mi_client->response->get_status( IMPORTING code = lv_code ).\n| &&
-        |    mi_client->response->get_data( ).\n| &&
-        |* todo\n| &&
+        |    CASE lv_code.\n|.
+
+      LOOP AT ls_operation-responses INTO ls_response.
+        rv_abap = rv_abap &&
+          |      WHEN '{ ls_response-code }'.\n|.
+
+        IF lines( ls_response-content ) > 0.
+          rv_abap = rv_abap &&
+            |        CASE lv_content_type.\n|.
+          LOOP AT ls_response-content INTO ls_content.
+            rv_abap = rv_abap &&
+              |          WHEN '{ ls_content-type }'.\n|.
+            IF ls_content-type = 'application/json'.
+              lv_name = lo_response_name->generate_response_name(
+                iv_content_type = ls_content-type
+                iv_code         = ls_response-code ).
+
+              rv_abap = rv_abap &&
+                |            /ui2/cl_json=>deserialize(\n| &&
+                |              EXPORTING json = mi_client->response->get_cdata( )\n| &&
+                |              CHANGING data = return-{ lv_name } ).\n|.
+            ELSE.
+              rv_abap = rv_abap &&
+                |* todo, content type = '{ ls_content-type }'\n|.
+            ENDIF.
+          ENDLOOP.
+          rv_abap = rv_abap &&
+            |        ENDCASE.\n|.
+        ELSE.
+          rv_abap = rv_abap &&
+            |* todo, no content types\n|.
+        ENDIF.
+      ENDLOOP.
+
+      rv_abap = rv_abap &&
+        |      WHEN OTHERS.\n| &&
+        |* todo, error handling\n| &&
+        |    ENDCASE.\n\n| &&
         |  ENDMETHOD.\n\n|.
     ENDLOOP.
 
