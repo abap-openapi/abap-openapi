@@ -367,7 +367,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           LOOP AT ls_response-content INTO ls_content.
             rv_abap = rv_abap &&
               |          WHEN '{ ls_content-type }'.\n|.
-            IF ls_content-type = 'application/json'.
+            IF ls_content-type = 'application/json'
+                OR ls_content-type CP 'application/*#+json'.
               lv_name = lo_response_name->generate_response_name(
                 iv_content_type = ls_content-type
                 iv_code         = ls_response-code ).
