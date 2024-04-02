@@ -362,9 +362,14 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
             |        CASE lv_content_type.\n|.
           LOOP AT ls_response-content INTO ls_content.
             rv_abap = rv_abap &&
-              |          WHEN '{ ls_content-type }'.\n| &&
-              |* todo, response handling\n| &&
-              |            mi_client->response->get_data( ).\n|.
+              |          WHEN '{ ls_content-type }'.\n|.
+            IF ls_content-type = 'application/json'.
+              rv_abap = rv_abap &&
+                |            mi_client->response->get_cdata( ).\n|.
+            ELSE.
+              rv_abap = rv_abap &&
+                |* todo, content type = '{ ls_content-type }'\n|.
+            ENDIF.
           ENDLOOP.
           rv_abap = rv_abap &&
             |        ENDCASE.\n|.

@@ -51,11 +51,9 @@ CLASS zcl_client008 IMPLEMENTATION.
       WHEN '200'.
         CASE lv_content_type.
           WHEN 'application/json'.
-* todo, response handling
-            mi_client->response->get_data( ).
+            mi_client->response->get_cdata( ).
           WHEN 'application/xml'.
-* todo, response handling
-            mi_client->response->get_data( ).
+* todo, content type = 'application/xml'
         ENDCASE.
       WHEN '400'.
 * todo, no content types
