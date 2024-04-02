@@ -52,9 +52,9 @@ CLASS zcl_client002 IMPLEMENTATION.
       WHEN '200'.
         CASE lv_content_type.
           WHEN 'application/json'.
-* /ui2/cl_json=>deserialize(
-*   EXPORTING json = mi_client->response->get_cdata( )
-*   CHANGING data = r__test-_200_app_json ).
+            /ui2/cl_json=>deserialize(
+              EXPORTING json = mi_client->response->get_cdata( )
+              CHANGING data = return-_200_app_json ).
         ENDCASE.
       WHEN OTHERS.
 * todo, error handling

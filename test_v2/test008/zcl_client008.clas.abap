@@ -51,9 +51,9 @@ CLASS zcl_client008 IMPLEMENTATION.
       WHEN '200'.
         CASE lv_content_type.
           WHEN 'application/json'.
-* /ui2/cl_json=>deserialize(
-*   EXPORTING json = mi_client->response->get_cdata( )
-*   CHANGING data = r_findpetsbystatus-_200_app_json ).
+            /ui2/cl_json=>deserialize(
+              EXPORTING json = mi_client->response->get_cdata( )
+              CHANGING data = return-_200_app_json ).
           WHEN 'application/xml'.
 * todo, content type = 'application/xml'
         ENDCASE.

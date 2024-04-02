@@ -373,10 +373,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
                 iv_code         = ls_response-code ).
 
               rv_abap = rv_abap &&
-                |* /ui2/cl_json=>deserialize(\n| &&
-                |*   EXPORTING json = mi_client->response->get_cdata( )\n| &&
-                |*   CHANGING data = r_{ ls_operation-abap_name }-{ lv_name } ).\n|.
-
+                |            /ui2/cl_json=>deserialize(\n| &&
+                |              EXPORTING json = mi_client->response->get_cdata( )\n| &&
+                |              CHANGING data = return-{ lv_name } ).\n|.
             ELSE.
               rv_abap = rv_abap &&
                 |* todo, content type = '{ ls_content-type }'\n|.
