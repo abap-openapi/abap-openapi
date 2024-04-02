@@ -57,6 +57,7 @@ CLASS zcl_client004 IMPLEMENTATION.
       WHEN OTHERS.
 * todo, error handling
     ENDCASE.
+
   ENDMETHOD.
 
 ENDCLASS.

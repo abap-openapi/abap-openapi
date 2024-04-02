@@ -392,7 +392,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       rv_abap = rv_abap &&
         |      WHEN OTHERS.\n| &&
         |* todo, error handling\n| &&
-        |    ENDCASE.\n| &&
+        |    ENDCASE.\n\n| &&
         |  ENDMETHOD.\n\n|.
     ENDLOOP.
 
