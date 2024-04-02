@@ -336,8 +336,13 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |        value = ls_header-value ).\n| &&
         |    ENDLOOP.\n|.
 
+      IF to_upper( ls_operation-method ) = 'POST'.
+        rv_abap = rv_abap &&
+*          |    mi_client->request->set_content_type( 'application/json' ).\n| &&
+          |    mi_client->request->set_data( '112233AABBCCDDEEFF' ).\n|.
+      ENDIF.
+
       rv_abap = rv_abap &&
-        |    mi_client->request->set_data( '112233AABBCCDDEEFF' ).\n| &&
         |    mi_client->send( mv_timeout ).\n| &&
         |    mi_client->receive( ).\n| &&
         |\n| &&
