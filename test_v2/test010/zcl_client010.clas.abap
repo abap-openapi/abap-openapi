@@ -51,8 +51,9 @@ CLASS zcl_client010 IMPLEMENTATION.
       WHEN 'default'.
         CASE lv_content_type.
           WHEN 'application/json'.
-            mi_client->response->get_cdata( ).
-* r_createuser-_default_app_json
+* /ui2/cl_json=>deserialize(
+*   EXPORTING json = mi_client->response->get_cdata( )
+*   CHANGING data = r_createuser-_default_app_json ).
         ENDCASE.
       WHEN OTHERS.
 * todo, error handling
