@@ -278,6 +278,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA ls_parameter LIKE LINE OF ls_operation-parameters.
     DATA ls_response  LIKE LINE OF ls_operation-responses.
     DATA ls_content   LIKE LINE OF ls_response-content.
+    DATA lo_response_name TYPE REF TO zcl_oapi_response_name.
+    DATA lv_name TYPE string.
+
+    CREATE OBJECT lo_response_name.
 
     rv_abap = |CLASS { ms_input-clas_client } DEFINITION PUBLIC.\n| &&
       generation_information( ) &&
@@ -364,8 +368,14 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
             rv_abap = rv_abap &&
               |          WHEN '{ ls_content-type }'.\n|.
             IF ls_content-type = 'application/json'.
+              lv_name = lo_response_name->generate_response_name(
+                iv_content_type = ls_content-type
+                iv_code         = ls_response-code ).
+
               rv_abap = rv_abap &&
-                |            mi_client->response->get_cdata( ).\n|.
+                |            mi_client->response->get_cdata( ).\n| &&
+                |* r_{ ls_operation-abap_name }-{ lv_name }\n|.
+
             ELSE.
               rv_abap = rv_abap &&
                 |* todo, content type = '{ ls_content-type }'\n|.

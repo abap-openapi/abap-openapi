@@ -114,9 +114,9 @@ CLASS zcl_oapi_response_name IMPLEMENTATION.
 
   METHOD generate_response_name.
 
-    DATA: lv_name TYPE string.
-    DATA: ls_content_type TYPE ty_content_type.
-    DATA: lo_abap_name TYPE REF TO zcl_oapi_abap_name.
+    DATA lv_name         TYPE string.
+    DATA ls_content_type TYPE ty_content_type.
+    DATA lo_abap_name    TYPE REF TO zcl_oapi_abap_name.
 
     ls_content_type = parse_content_name( iv_content_type ).
     lv_name = |{ condense_primary_name( ls_content_type-primary ) }_{ condense_secondary_name( ls_content_type-secondary ) }|.

@@ -52,6 +52,7 @@ CLASS zcl_client010 IMPLEMENTATION.
         CASE lv_content_type.
           WHEN 'application/json'.
             mi_client->response->get_cdata( ).
+* r_createuser-_default_app_json
         ENDCASE.
       WHEN OTHERS.
 * todo, error handling
