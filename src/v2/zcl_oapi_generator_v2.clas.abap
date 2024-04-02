@@ -276,6 +276,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
   METHOD build_clas_client.
     DATA ls_operation LIKE LINE OF ms_specification-operations.
     DATA ls_parameter LIKE LINE OF ls_operation-parameters.
+    DATA ls_response  LIKE LINE OF ls_operation-responses.
 
     rv_abap = |CLASS { ms_input-clas_client } DEFINITION PUBLIC.\n| &&
       generation_information( ) &&
@@ -349,12 +350,17 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |    mi_client->response->get_status( IMPORTING code = lv_code ).\n| &&
         |    CASE lv_code.\n|.
 
+      LOOP AT ls_operation-responses INTO ls_response.
+        rv_abap = rv_abap &&
+          |      WHEN { ls_response-code }.\n| &&
+          |* todo, response handling\n| &&
+          |        mi_client->response->get_data( ).\n|.
+      ENDLOOP.
+
       rv_abap = rv_abap &&
         |      WHEN OTHERS.\n| &&
         |* todo, error handling\n| &&
         |    ENDCASE.\n| &&
-        |    mi_client->response->get_data( ).\n| &&
-        |* todo\n| &&
         |  ENDMETHOD.\n\n|.
     ENDLOOP.
 

@@ -46,11 +46,15 @@ CLASS zcl_client008 IMPLEMENTATION.
 
     mi_client->response->get_status( IMPORTING code = lv_code ).
     CASE lv_code.
+      WHEN 200.
+* todo, response handling
+        mi_client->response->get_data( ).
+      WHEN 400.
+* todo, response handling
+        mi_client->response->get_data( ).
       WHEN OTHERS.
 * todo, error handling
     ENDCASE.
-    mi_client->response->get_data( ).
-* todo
   ENDMETHOD.
 
 ENDCLASS.
