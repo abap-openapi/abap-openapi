@@ -347,6 +347,12 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |    mi_client->receive( ).\n| &&
         |\n| &&
         |    mi_client->response->get_status( IMPORTING code = lv_code ).\n| &&
+        |    CASE lv_code.\n|.
+
+      rv_abap = rv_abap &&
+        |      WHEN OTHERS.\n| &&
+        |* todo, error handling\n| &&
+        |    ENDCASE.\n| &&
         |    mi_client->response->get_data( ).\n| &&
         |* todo\n| &&
         |  ENDMETHOD.\n\n|.

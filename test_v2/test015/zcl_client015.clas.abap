@@ -44,6 +44,10 @@ CLASS zcl_client015 IMPLEMENTATION.
     mi_client->receive( ).
 
     mi_client->response->get_status( IMPORTING code = lv_code ).
+    CASE lv_code.
+      WHEN OTHERS.
+* todo, error handling
+    ENDCASE.
     mi_client->response->get_data( ).
 * todo
   ENDMETHOD.
