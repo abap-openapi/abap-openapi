@@ -7,11 +7,13 @@ CLASS zcl_client013 DEFINITION PUBLIC.
     METHODS constructor
       IMPORTING
         ii_client        TYPE REF TO if_http_client
+        iv_uri_prefix    TYPE string OPTIONAL
         it_extra_headers TYPE tihttpnvp OPTIONAL
         iv_timeout       TYPE i DEFAULT if_http_client=>co_timeout_default.
   PROTECTED SECTION.
     DATA mi_client        TYPE REF TO if_http_client.
     DATA mv_timeout       TYPE i.
+    DATA mv_uri_prefix    TYPE string.
     DATA mt_extra_headers TYPE tihttpnvp.
 ENDCLASS.
 
@@ -21,6 +23,7 @@ CLASS zcl_client013 IMPLEMENTATION.
     " the caller must close() the client
     mi_client = ii_client.
     mv_timeout = iv_timeout.
+    mv_uri_prefix = iv_uri_prefix.
     mt_extra_headers = it_extra_headers.
   ENDMETHOD.
 
@@ -28,10 +31,12 @@ CLASS zcl_client013 IMPLEMENTATION.
     DATA lv_code         TYPE i.
     DATA lv_uri          TYPE string.
     DATA ls_header       LIKE LINE OF mt_extra_headers.
+    DATA lv_dummy        TYPE string.
     DATA lv_content_type TYPE string.
 
+    mi_client->propertytype_logon_popup = if_http_client=>co_disabled.
     mi_client->request->set_method( 'POST' ).
-    lv_uri = '/foo/{param}/{another}'.
+    lv_uri = mv_uri_prefix && '/foo/{param}/{another}'.
     REPLACE FIRST OCCURRENCE OF '{param}' IN lv_uri WITH param.
     REPLACE FIRST OCCURRENCE OF '{another}' IN lv_uri WITH another.
     cl_http_utility=>set_request_uri(

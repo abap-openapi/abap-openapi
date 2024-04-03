@@ -8,11 +8,13 @@ CLASS zcl_client002 DEFINITION PUBLIC.
     METHODS constructor
       IMPORTING
         ii_client        TYPE REF TO if_http_client
+        iv_uri_prefix    TYPE string OPTIONAL
         it_extra_headers TYPE tihttpnvp OPTIONAL
         iv_timeout       TYPE i DEFAULT if_http_client=>co_timeout_default.
   PROTECTED SECTION.
     DATA mi_client        TYPE REF TO if_http_client.
     DATA mv_timeout       TYPE i.
+    DATA mv_uri_prefix    TYPE string.
     DATA mt_extra_headers TYPE tihttpnvp.
 ENDCLASS.
 
@@ -22,6 +24,7 @@ CLASS zcl_client002 IMPLEMENTATION.
     " the caller must close() the client
     mi_client = ii_client.
     mv_timeout = iv_timeout.
+    mv_uri_prefix = iv_uri_prefix.
     mt_extra_headers = it_extra_headers.
   ENDMETHOD.
 
@@ -29,10 +32,12 @@ CLASS zcl_client002 IMPLEMENTATION.
     DATA lv_code         TYPE i.
     DATA lv_uri          TYPE string.
     DATA ls_header       LIKE LINE OF mt_extra_headers.
+    DATA lv_dummy        TYPE string.
     DATA lv_content_type TYPE string.
 
+    mi_client->propertytype_logon_popup = if_http_client=>co_disabled.
     mi_client->request->set_method( 'POST' ).
-    lv_uri = '/test'.
+    lv_uri = mv_uri_prefix && '/test'.
 " todo, in=query name=operation
     cl_http_utility=>set_request_uri(
       request = mi_client->request
@@ -50,11 +55,14 @@ CLASS zcl_client002 IMPLEMENTATION.
     mi_client->response->get_status( IMPORTING code = lv_code ).
     CASE lv_code.
       WHEN '200'.
+        SPLIT lv_content_type AT ';' INTO lv_content_type lv_dummy.
         CASE lv_content_type.
           WHEN 'application/json'.
             /ui2/cl_json=>deserialize(
               EXPORTING json = mi_client->response->get_cdata( )
               CHANGING data = return-_200_app_json ).
+          WHEN OTHERS.
+* unexpected content type
         ENDCASE.
       WHEN OTHERS.
 * todo, error handling
