@@ -31,6 +31,7 @@ CLASS zcl_client002 IMPLEMENTATION.
     DATA ls_header       LIKE LINE OF mt_extra_headers.
     DATA lv_content_type TYPE string.
 
+    mi_client->propertytype_logon_popup = if_http_client=>co_disabled.
     mi_client->request->set_method( 'POST' ).
     lv_uri = '/test'.
 " todo, in=query name=operation

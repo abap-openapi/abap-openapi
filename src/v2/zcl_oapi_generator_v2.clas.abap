@@ -314,6 +314,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |    DATA ls_header       LIKE LINE OF mt_extra_headers.\n| &&
         |    DATA lv_content_type TYPE string.\n| &&
         |\n| &&
+        |    mi_client->propertytype_logon_popup = if_http_client=>co_disabled.\n| &&
         |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n| &&
         |    lv_uri = '{ ls_operation-path }'.\n|.
 
