@@ -32,6 +32,7 @@ CLASS zcl_client008 IMPLEMENTATION.
     DATA lv_code         TYPE i.
     DATA lv_uri          TYPE string.
     DATA ls_header       LIKE LINE OF mt_extra_headers.
+    DATA lv_dummy        TYPE string.
     DATA lv_content_type TYPE string.
 
     mi_client->propertytype_logon_popup = if_http_client=>co_disabled.
@@ -53,6 +54,7 @@ CLASS zcl_client008 IMPLEMENTATION.
     mi_client->response->get_status( IMPORTING code = lv_code ).
     CASE lv_code.
       WHEN '200'.
+        SPLIT lv_content_type AT ';' INTO lv_content_type lv_dummy.
         CASE lv_content_type.
           WHEN 'application/json'.
             /ui2/cl_json=>deserialize(
@@ -60,6 +62,8 @@ CLASS zcl_client008 IMPLEMENTATION.
               CHANGING data = return-_200_app_json ).
           WHEN 'application/xml'.
 * todo, content type = 'application/xml'
+          WHEN OTHERS.
+* unexpected content type
         ENDCASE.
       WHEN '400'.
 * todo, no content types

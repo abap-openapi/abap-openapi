@@ -315,6 +315,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |    DATA lv_code         TYPE i.\n| &&
         |    DATA lv_uri          TYPE string.\n| &&
         |    DATA ls_header       LIKE LINE OF mt_extra_headers.\n| &&
+        |    DATA lv_dummy        TYPE string.\n| &&
         |    DATA lv_content_type TYPE string.\n| &&
         |\n| &&
         |    mi_client->propertytype_logon_popup = if_http_client=>co_disabled.\n| &&
@@ -367,6 +368,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
         IF lines( ls_response-content ) > 0.
           rv_abap = rv_abap &&
+            |        SPLIT lv_content_type AT ';' INTO lv_content_type lv_dummy.\n| &&
             |        CASE lv_content_type.\n|.
           LOOP AT ls_response-content INTO ls_content.
             rv_abap = rv_abap &&
@@ -387,6 +389,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
             ENDIF.
           ENDLOOP.
           rv_abap = rv_abap &&
+            |          WHEN OTHERS.\n| &&
+            |* unexpected content type\n| &&
             |        ENDCASE.\n|.
         ELSE.
           rv_abap = rv_abap &&

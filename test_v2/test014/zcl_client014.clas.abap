@@ -31,6 +31,7 @@ CLASS zcl_client014 IMPLEMENTATION.
     DATA lv_code         TYPE i.
     DATA lv_uri          TYPE string.
     DATA ls_header       LIKE LINE OF mt_extra_headers.
+    DATA lv_dummy        TYPE string.
     DATA lv_content_type TYPE string.
 
     mi_client->propertytype_logon_popup = if_http_client=>co_disabled.
