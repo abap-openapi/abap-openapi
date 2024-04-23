@@ -313,6 +313,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       rv_abap = rv_abap &&
         |  METHOD { ms_input-intf }~{ ls_operation-abap_name }.\n| &&
         |    DATA lv_code         TYPE i.\n| &&
+        |    DATA lv_message      TYPE string.\n| &&
         |    DATA lv_uri          TYPE string.\n| &&
         |    DATA ls_header       LIKE LINE OF mt_extra_headers.\n| &&
         |    DATA lv_dummy        TYPE string.\n| &&

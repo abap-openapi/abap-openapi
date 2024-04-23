@@ -29,6 +29,7 @@ CLASS zcl_client013 IMPLEMENTATION.
 
   METHOD zif_interface013~_foo_param_another.
     DATA lv_code         TYPE i.
+    DATA lv_message      TYPE string.
     DATA lv_uri          TYPE string.
     DATA ls_header       LIKE LINE OF mt_extra_headers.
     DATA lv_dummy        TYPE string.

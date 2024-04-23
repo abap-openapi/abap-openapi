@@ -29,6 +29,7 @@ CLASS zcl_client014 IMPLEMENTATION.
 
   METHOD zif_interface014~_ping.
     DATA lv_code         TYPE i.
+    DATA lv_message      TYPE string.
     DATA lv_uri          TYPE string.
     DATA ls_header       LIKE LINE OF mt_extra_headers.
     DATA lv_dummy        TYPE string.
