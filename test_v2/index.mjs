@@ -30,21 +30,39 @@ async function get(url) {
 async function run() {
   const url = process.argv[2];
   if (url === undefined || url === "") {
-    throw "supply url";
+    throw "supply a url or path to a file";
   } else if (process.argv[3] === undefined || process.argv[3] === "") {
-    throw "supply name";
+    throw "supply a target folder name";
   }
-  const name = process.argv[3];
+  const folder = process.argv[3] + "/";
+  const number = folder.match(/test(\d+)/)[1];
+
+  let name = "_";
+  if (process.argv[4] !== undefined && process.argv[4] !== "") {
+    name = name + process.argv[4] + "_";
+  }
 
   const spec = url.startsWith("http")
     ? await get(url)
     : fs.readFileSync(url).toString();
 
+  let clas_icf_serv = `zcl${name}icf_serv`;
+  let clas_icf_impl = `zcl${name}icf_impl`;
+  let clas_client = `zcl${name}client`;
+  let intf = `zif${name}interface`;
+
+  if (!url.startsWith("http") && number !== undefined && number !== "") {
+    clas_icf_serv += number;
+    clas_icf_impl += number;
+    clas_client += number;
+    intf += number;
+  }
+
   const input = new abap.types.Structure({
-    clas_icf_serv: new abap.types.Character(30).set(`zcl_${name}_icf_serv`),
-    clas_icf_impl: new abap.types.Character(30).set(`zcl_${name}_icf_impl`),
-    clas_client: new abap.types.Character(30).set(`zcl_${name}_client`),
-    intf: new abap.types.Character(30).set(`zif_${name}_interface`),
+    clas_icf_serv: new abap.types.Character(30).set(clas_icf_serv),
+    clas_icf_impl: new abap.types.Character(30).set(clas_icf_impl),
+    clas_client: new abap.types.Character(30).set(clas_client),
+    intf: new abap.types.Character(30).set(intf),
     openapi_json: new abap.types.String().set(spec),
   });
   const result = await abap.Classes["ZCL_OAPI_GENERATOR"].generate_v2({
@@ -52,21 +70,18 @@ async function run() {
   });
 
   fs.writeFileSync(
-    folder + input.get().clas_icf_serv.get() + ".clas.abap",
+    folder + clas_icf_serv + ".clas.abap",
     result.get().clas_icf_serv.get()
   );
   fs.writeFileSync(
-    folder + input.get().clas_icf_impl.get() + ".clas.abap",
+    folder + clas_icf_impl + ".clas.abap",
     result.get().clas_icf_impl.get()
   );
   fs.writeFileSync(
-    folder + input.get().clas_client.get() + ".clas.abap",
+    folder + clas_client + ".clas.abap",
     result.get().clas_client.get()
   );
-  fs.writeFileSync(
-    folder + input.get().intf.get() + ".intf.abap",
-    result.get().intf.get()
-  );
+  fs.writeFileSync(folder + intf + ".intf.abap", result.get().intf.get());
 
   const consoleOutput = abap.console.get();
   if (consoleOutput !== "") {
