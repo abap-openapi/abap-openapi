@@ -30,6 +30,7 @@ CLASS zcl_client011 IMPLEMENTATION.
 
   METHOD zif_interface011~_foo_param.
     DATA lv_code         TYPE i.
+    DATA lv_message      TYPE string.
     DATA lv_uri          TYPE string.
     DATA ls_header       LIKE LINE OF mt_extra_headers.
     DATA lv_dummy        TYPE string.
@@ -49,7 +50,19 @@ CLASS zcl_client011 IMPLEMENTATION.
     ENDLOOP.
     mi_client->request->set_data( '112233AABBCCDDEEFF' ).
     mi_client->send( mv_timeout ).
-    mi_client->receive( ).
+    mi_client->receive(
+      EXCEPTIONS
+        http_communication_failure = 1
+        http_invalid_state         = 2
+        http_processing_failed     = 3
+        OTHERS                     = 4 ).
+    IF sy-subrc <> 0.
+      mi_client->get_last_error(
+        IMPORTING
+          code    = lv_code
+          message = lv_message ).
+      ASSERT 1 = 2.
+    ENDIF.
 
     lv_content_type = mi_client->response->get_content_type( ).
     mi_client->response->get_status( IMPORTING code = lv_code ).

@@ -313,6 +313,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       rv_abap = rv_abap &&
         |  METHOD { ms_input-intf }~{ ls_operation-abap_name }.\n| &&
         |    DATA lv_code         TYPE i.\n| &&
+        |    DATA lv_message      TYPE string.\n| &&
         |    DATA lv_uri          TYPE string.\n| &&
         |    DATA ls_header       LIKE LINE OF mt_extra_headers.\n| &&
         |    DATA lv_dummy        TYPE string.\n| &&
@@ -356,7 +357,19 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
       rv_abap = rv_abap &&
         |    mi_client->send( mv_timeout ).\n| &&
-        |    mi_client->receive( ).\n| &&
+        |    mi_client->receive(\n| &&
+        |      EXCEPTIONS\n| &&
+        |        http_communication_failure = 1\n| &&
+        |        http_invalid_state         = 2\n| &&
+        |        http_processing_failed     = 3\n| &&
+        |        OTHERS                     = 4 ).\n| &&
+        |    IF sy-subrc <> 0.\n| &&
+        |      mi_client->get_last_error(\n| &&
+        |        IMPORTING\n| &&
+        |          code    = lv_code\n| &&
+        |          message = lv_message ).\n| &&
+        |      ASSERT 1 = 2.\n| &&
+        |    ENDIF.\n| &&
         |\n| &&
         |    lv_content_type = mi_client->response->get_content_type( ).\n| &&
         |    mi_client->response->get_status( IMPORTING code = lv_code ).\n| &&
