@@ -61,7 +61,7 @@ AT SELECTION-SCREEN ON VALUE-REQUEST FOR p_file.
 
 START-OF-SELECTION.
   DATA: filename TYPE string,
-        data_tab TYPE TABLE OF text255.
+        data_tab TYPE STANDARD TABLE OF text255 WITH EMPTY KEY.
   filename = p_file.
   cl_gui_frontend_services=>gui_upload(
       EXPORTING
@@ -96,7 +96,8 @@ START-OF-SELECTION.
   ENDIF.
 
   DATA json_string TYPE string.
-  LOOP AT data_tab ASSIGNING FIELD-SYMBOL(<wa>).
+  FIELD-SYMBOLS <wa> LIKE LINE OF data_tab.
+  LOOP AT data_tab ASSIGNING <wa>.
     json_string = json_string && <wa>.
   ENDLOOP.
   ls_input-openapi_json = json_string.
