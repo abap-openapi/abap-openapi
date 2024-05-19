@@ -107,7 +107,16 @@
     "if_in_if": true,
     "implement_methods": true,
     "in_statement_indentation": true,
-    "indentation": true,
+    "indentation": {
+      "exclude": [],
+      "severity": "Error",
+      "ignoreExceptions": true,
+      "alignTryCatch": false,
+      "selectionScreenBlockIndentation": true,
+      "globalClassSkipFirst": false,
+      "ignoreGlobalClassDefinition": false,
+      "ignoreGlobalInterface": false
+    },
     "inline_data_old_versions": true,
     "intf_referencing_clas": false,
     "keep_single_parameter_on_one_line": true,
