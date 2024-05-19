@@ -95,11 +95,11 @@ START-OF-SELECTION.
       WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
   ENDIF.
 
-  CALL FUNCTION 'SOTR_SERV_TABLE_TO_STRING'
-    IMPORTING
-      text     = ls_input-openapi_json
-    TABLES
-      text_tab = data_tab.
+  DATA json_string TYPE string.
+  LOOP AT data_tab ASSIGNING FIELD-SYMBOL(<wa>).
+    json_string = json_string && <wa>.
+  ENDLOOP.
+  ls_input-openapi_json = json_string.
 
   ls_input-intf = p_intf.
   ls_input-clas_client = p_client.
