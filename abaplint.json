@@ -1,6 +1,7 @@
 {
   "global": {
     "files": "/{src,test_v2}/**/*.*",
+    "noIssues": ["zoapi_generate_v2.prog.abap"],
     "skipGeneratedGatewayClasses": true,
     "skipGeneratedPersistentClasses": true,
     "skipGeneratedFunctionGroups": true
@@ -107,7 +108,16 @@
     "if_in_if": true,
     "implement_methods": true,
     "in_statement_indentation": true,
-    "indentation": true,
+    "indentation": {
+      "exclude": [],
+      "severity": "Error",
+      "ignoreExceptions": true,
+      "alignTryCatch": false,
+      "selectionScreenBlockIndentation": true,
+      "globalClassSkipFirst": false,
+      "ignoreGlobalClassDefinition": false,
+      "ignoreGlobalInterface": false
+    },
     "inline_data_old_versions": true,
     "intf_referencing_clas": false,
     "keep_single_parameter_on_one_line": true,

@@ -1,3 +1,4 @@
+import { exec } from "child_process";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -6,7 +7,7 @@ await import("../output/init.mjs");
 async function run() {
   const root = "./test_v2/";
 
-  for (const d of fs.readdirSync(root, {withFileTypes: true})) {
+  for (const d of fs.readdirSync(root, { withFileTypes: true })) {
     if (d.isDirectory() === false) {
       continue;
     }
@@ -14,30 +15,18 @@ async function run() {
     const folderName = d.name;
     const folder = root + folderName + path.sep;
 
-    const spec = fs.readFileSync(folder + "spec.json", "utf-8");
-    const number = folderName.match(/test(\d+)/)[1];
-    const title = spec.match(/"title": "([\w,\. $]+)"/i)[1];
+    console.log("* " + folderName);
 
-    console.log("* " + folderName + " - " + title);
-
-    const input = new abap.types.Structure({
-      clas_icf_serv: new abap.types.Character(30).set('zcl_icf_serv' + number),
-      clas_icf_impl: new abap.types.Character(30).set('zcl_icf_impl' + number),
-      clas_client:   new abap.types.Character(30).set('zcl_client' + number),
-      intf:          new abap.types.Character(30).set('zif_interface' + number),
-      openapi_json:  new abap.types.String().set(spec)},
+    exec(
+      "node " +
+        root +
+        "index.mjs " +
+        folder +
+        "/spec.json " +
+        root +
+        path.sep +
+        folderName
     );
-    const result = await abap.Classes["ZCL_OAPI_GENERATOR"].generate_v2({is_input: input});
-
-    fs.writeFileSync(folder + input.get().clas_icf_serv.get().trimEnd() + ".clas.abap", result.get().clas_icf_serv.get());
-    fs.writeFileSync(folder + input.get().clas_icf_impl.get().trimEnd() + ".clas.abap", result.get().clas_icf_impl.get());
-    fs.writeFileSync(folder + input.get().clas_client.get().trimEnd() + ".clas.abap", result.get().clas_client.get());
-    fs.writeFileSync(folder + input.get().intf.get().trimEnd() + ".intf.abap", result.get().intf.get());
-
-    const consoleOutput = abap.console.get();
-    if (consoleOutput !== "") {
-      console.log(consoleOutput);
-    }
   }
 }
 
