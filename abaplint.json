@@ -1,6 +1,7 @@
 {
   "global": {
     "files": "/{src,test_v2}/**/*.*",
+    "noIssues": ["zoapi_generate_v2.prog.abap"],
     "skipGeneratedGatewayClasses": true,
     "skipGeneratedPersistentClasses": true,
     "skipGeneratedFunctionGroups": true
