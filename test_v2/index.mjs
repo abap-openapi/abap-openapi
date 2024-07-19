@@ -35,7 +35,12 @@ async function run() {
     throw "supply a target folder name";
   }
   const folder = process.argv[3] + "/";
-  const number = folder.match(/test(\d+)/)[1];
+  let number = "";
+  const constFolderMatch = folder.match(/test(\d+)/);
+  console.log("constFolderMatch: " + constFolderMatch);
+  if (constFolderMatch !== null) {
+    number = constFolderMatch[1];
+  }
 
   let name = "_";
   if (process.argv[4] !== undefined && process.argv[4] !== "") {
