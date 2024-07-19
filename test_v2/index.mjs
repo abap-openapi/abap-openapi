@@ -37,7 +37,6 @@ async function run() {
   const folder = process.argv[3] + "/";
   let number = "";
   const constFolderMatch = folder.match(/test(\d+)/);
-  console.log("constFolderMatch: " + constFolderMatch);
   if (constFolderMatch !== null) {
     number = constFolderMatch[1];
   }
