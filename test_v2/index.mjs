@@ -1,6 +1,5 @@
 import * as https from "https";
 import * as fs from "fs";
-import * as path from "path";
 
 await import("../output/init.mjs");
 

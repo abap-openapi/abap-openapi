@@ -3,15 +3,15 @@ INTERFACE zif_interface016 PUBLIC.
 * Title: Swagger Petstore - OpenAPI 3.0
 * Version: 1.0.11
 
-* body_createdog
-  TYPES: BEGIN OF body_createdog,
-           detail TYPE string,
-         END OF body_createdog.
 * Dog
   TYPES: BEGIN OF dog,
            bark TYPE abap_bool,
            breed TYPE string,
          END OF dog.
+* body_createdog
+  TYPES: BEGIN OF body_createdog,
+           detail TYPE dog,
+         END OF body_createdog.
 
   METHODS _createdog
     IMPORTING
