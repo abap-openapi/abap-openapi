@@ -1,118 +1,116 @@
 {
-    "openapi": "3.0.0",
-    "servers": [
-    ],
-    "info": {
-        "title": "c1_number_add_object",
-        "version": "1",
-        "description": ""
-    },
-    "paths": {
-        "/test": {
-            "post": {
-                "parameters": [
-                    {
-                        "name": "operation",
-                        "in": "query",
-                        "example": "",
-                        "required": false,
-                        "description": "",
-                        "schema": {
-                            "type": "string",
-                            "default": ""
-                        }
-                    }
-                ],
-                "description": "",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/POSTtestRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {},
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/POSTtestResponse"
-                                }
-                            }
-                        }
-                    }
-                },
-                "tags": [
-                ]
+  "openapi": "3.0.0",
+  "servers": [],
+  "info": {
+    "title": "c1_number_add_object",
+    "version": "1",
+    "description": ""
+  },
+  "paths": {
+    "/test": {
+      "post": {
+        "parameters": [
+          {
+            "name": "operation",
+            "in": "query",
+            "example": "",
+            "required": false,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "default": ""
             }
-        }
-    },
-    "components": {
-        "schemas": {
-            "POSTtestRequest": {
-                "type": "object",
-                "properties": {
-                    "levelA1": {
-                        "type": "object",
-                        "properties": {
-                            "number1": {
-                                "type": "number"
-                            },
-                            "number2": {
-                                "type": "number"
-                            }
-                        }
-                    },
-                    "levelB1": {
-                        "type": "object",
-                        "properties": {
-                            "levelB11": {
-                                "type": "object",
-                                "properties": {
-                                    "number1": {
-                                        "type": "number"
-                                    },
-                                    "number2": {
-                                        "type": "number"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "POSTtestResponse": {
-                "type": "object",
-                "properties": {
-                    "levelA1": {
-                        "type": "object",
-                        "properties": {
-                            "result": {
-                                "type": "number",
-                                "example": 123
-                            }
-                        }
-                    },
-                    "levelB1": {
-                        "type": "object",
-                        "properties": {
-                            "levelB11": {
-                                "type": "object",
-                                "properties": {
-                                    "result": {
-                                        "type": "number",
-                                        "example": 123
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+          }
+        ],
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/POSTtestRequest"
+              }
             }
-        }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/POSTtestResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": []
+      }
     }
+  },
+  "components": {
+    "schemas": {
+      "POSTtestRequest": {
+        "type": "object",
+        "properties": {
+          "levelA1": {
+            "type": "object",
+            "properties": {
+              "number1": {
+                "type": "number"
+              },
+              "number2": {
+                "type": "number"
+              }
+            }
+          },
+          "levelB1": {
+            "type": "object",
+            "properties": {
+              "levelB11": {
+                "type": "object",
+                "properties": {
+                  "number1": {
+                    "type": "number"
+                  },
+                  "number2": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "POSTtestResponse": {
+        "type": "object",
+        "properties": {
+          "levelA1": {
+            "type": "object",
+            "properties": {
+              "result": {
+                "type": "number",
+                "example": 123
+              }
+            }
+          },
+          "levelB1": {
+            "type": "object",
+            "properties": {
+              "levelB11": {
+                "type": "object",
+                "properties": {
+                  "result": {
+                    "type": "number",
+                    "example": 123
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
