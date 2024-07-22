@@ -62,16 +62,16 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_schema.
-    DATA lt_names TYPE string_table.
-    DATA lv_name TYPE string.
+    DATA lt_names    TYPE string_table.
+    DATA lv_name     TYPE string.
     DATA ls_property TYPE zif_oapi_schema=>ty_property.
-    DATA lo_names TYPE REF TO zcl_oapi_abap_name.
+    DATA lo_names    TYPE REF TO zcl_oapi_abap_name.
     CREATE OBJECT lo_names.
 
     CREATE OBJECT ri_schema TYPE zcl_oapi_schema.
     ri_schema->type = mo_json->value_string( iv_prefix && '/type' ).
     IF ri_schema->type IS INITIAL.
-      ri_schema->type = 'string'. " todo, handle "oneOf" and "anyOf"
+      ri_schema->type = 'string'. " todo, handle "allOf", "oneOf" and "anyOf"
       RETURN.
     ENDIF.
     ri_schema->default = mo_json->value_string( iv_prefix && '/default' ).
@@ -87,6 +87,13 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
       ls_property-name = lv_name.
       ls_property-abap_name = lo_names->to_abap_name( lv_name ).
       ls_property-ref = mo_json->value_string( iv_prefix && '/properties/' && lv_name && '/$ref' ).
+
+      IF ls_property-ref IS INITIAL
+          AND mo_json->exists( iv_prefix && '/properties/' && lv_name && '/allOf' ) = abap_true
+          AND lines( mo_json->members( iv_prefix && '/properties/' && lv_name && '/allOf' ) ) = 1.
+        ls_property-ref = mo_json->value_string( iv_prefix && '/properties/' && lv_name && '/allOf/1/$ref' ).
+      ENDIF.
+
       IF ls_property-ref IS INITIAL.
         ls_property-schema = parse_schema( iv_prefix && '/properties/' && lv_name ).
       ENDIF.

@@ -1,4 +1,4 @@
-import { exec } from "child_process";
+import { execSync } from "child_process";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -17,7 +17,7 @@ async function run() {
 
     console.log("* " + folderName);
 
-    exec(
+    const output = execSync(
       "node " +
         root +
         "index.mjs " +
@@ -27,6 +27,11 @@ async function run() {
         path.sep +
         folderName
     );
+
+    const text = output.toString();
+    if (text !== "") {
+      console.log(text);
+    }
   }
 }
 
