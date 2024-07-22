@@ -17,7 +17,9 @@ CLASS zcl_oapi_references DEFINITION PUBLIC.
 
     METHODS create_response_references.
 
-    METHODS create_array_references.
+    METHODS create_array_references_top.
+    METHODS create_array_references_sub
+      IMPORTING ii_schema TYPE REF TO zif_oapi_schema.
 
     METHODS sort_schemas.
 
@@ -37,7 +39,6 @@ ENDCLASS.
 
 
 CLASS zcl_oapi_references IMPLEMENTATION.
-
 
   METHOD create_body_references.
     FIELD-SYMBOLS <ls_operation> LIKE LINE OF ms_spec-operations.
@@ -63,39 +64,52 @@ CLASS zcl_oapi_references IMPLEMENTATION.
 
   ENDMETHOD.
 
-  METHOD create_array_references.
+  METHOD create_array_references_sub.
 
-    DATA ls_schema LIKE LINE OF ms_spec-components-schemas.
     FIELD-SYMBOLS <ls_property> TYPE zif_oapi_schema=>ty_property.
+"    FIELD-SYMBOLS <ls_property_sub> TYPE zif_oapi_schema=>ty_property.
     DATA ls_new TYPE zif_oapi_specification_v3=>ty_component_schema.
     DATA lo_names TYPE REF TO zcl_oapi_abap_name.
     CREATE OBJECT lo_names.
 
-    LOOP AT ms_spec-components-schemas INTO ls_schema.
-      IF ls_schema-schema->type <> 'object'.
+
+    IF ii_schema->type <> 'object'.
+      RETURN.
+    ENDIF.
+
+    LOOP AT ii_schema->properties ASSIGNING <ls_property>.
+      IF <ls_property>-schema IS NOT INITIAL
+          AND <ls_property>-schema->type = 'object'.
+* recursion
+        create_array_references_sub( <ls_property>-schema ).
+        CONTINUE.
+      ELSEIF <ls_property>-schema IS INITIAL
+          OR <ls_property>-schema->type <> 'array'
+          OR <ls_property>-schema->items_ref IS NOT INITIAL
+          OR <ls_property>-schema->items_type <> 'object'.
         CONTINUE.
       ENDIF.
 
-      LOOP AT ls_schema-schema->properties ASSIGNING <ls_property>.
-        IF <ls_property>-schema IS INITIAL
-            OR <ls_property>-schema->type <> 'array'
-            OR <ls_property>-schema->items_ref IS NOT INITIAL
-            OR <ls_property>-schema->items_type <> 'object'.
-          CONTINUE.
-        ENDIF.
+      CLEAR ls_new.
+      ls_new-name = lo_names->to_abap_name( |arr{ <ls_property>-abap_name }| ).
+      ls_new-abap_name = ls_new-name.
+      ls_new-abap_json_method = lo_names->to_abap_name( |json_{ ls_new-name }| ).
+      ls_new-abap_parser_method = lo_names->to_abap_name( |parse_{ ls_new-name }| ).
+      ls_new-schema = <ls_property>-schema->items_schema.
+      APPEND ls_new TO ms_spec-components-schemas.
 
-        CLEAR ls_new.
-        ls_new-name = lo_names->to_abap_name( |arr{ <ls_property>-abap_name }| ).
-        ls_new-abap_name = ls_new-name.
-        ls_new-abap_json_method = lo_names->to_abap_name( |json_{ ls_new-name }| ).
-        ls_new-abap_parser_method = lo_names->to_abap_name( |parse_{ ls_new-name }| ).
-        ls_new-schema = <ls_property>-schema->items_schema.
-        APPEND ls_new TO ms_spec-components-schemas.
+      <ls_property>-schema->items_ref = '#/components/schemas/' && ls_new-name.
+      CLEAR <ls_property>-schema->items_schema.
+    ENDLOOP.
 
-        <ls_property>-schema->items_ref = '#/components/schemas/' && ls_new-name.
-        CLEAR <ls_property>-schema->items_schema.
-      ENDLOOP.
+  ENDMETHOD.
 
+  METHOD create_array_references_top.
+
+    DATA ls_schema LIKE LINE OF ms_spec-components-schemas.
+
+    LOOP AT ms_spec-components-schemas INTO ls_schema.
+      create_array_references_sub( ls_schema-schema ).
     ENDLOOP.
 
   ENDMETHOD.
@@ -162,7 +176,7 @@ CLASS zcl_oapi_references IMPLEMENTATION.
     ms_spec = is_spec.
 
 * if an object contains an array directly, move it to schema ref
-    create_array_references( ).
+    create_array_references_top( ).
 
 * always dereference all parameters
     dereference_parameters( ).
