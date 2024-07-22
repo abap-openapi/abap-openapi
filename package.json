@@ -3,6 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "description": "ABAP OpenAPI Client/Server Generator",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "lint": "abaplint",
     "transpile": "abaplint && npx rimraf output && abap_transpile",
