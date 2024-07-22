@@ -120,7 +120,10 @@
     },
     "inline_data_old_versions": true,
     "intf_referencing_clas": false,
-    "keep_single_parameter_on_one_line": true,
+    "keep_single_parameter_on_one_line": {
+      "exclude": ["test_v2"],
+      "length": 120
+    },
     "keyword_case": true,
     "line_break_multiple_parameters": false,
     "line_break_style": false,
@@ -184,7 +187,9 @@
       "shlp": "^Z"
     },
     "obsolete_statement": true,
-    "omit_parameter_name": true,
+    "omit_parameter_name": {
+      "exclude": ["test_v2"]
+    },
     "omit_receiving": true,
     "parser_702_chaining": true,
     "parser_error": true,
