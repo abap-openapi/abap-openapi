@@ -12,10 +12,20 @@ INTERFACE zif_interface016 PUBLIC.
   TYPES: BEGIN OF body_createdog,
            detail TYPE dog,
          END OF body_createdog.
+* response
+  TYPES: BEGIN OF response,
+           success TYPE abap_bool,
+           errors TYPE STANDARD TABLE OF string WITH DEFAULT KEY,
+         END OF response.
 
+  TYPES: BEGIN OF r__createdog,
+           _200_app_json TYPE response,
+         END OF r__createdog.
   METHODS _createdog
     IMPORTING
       body TYPE body_createdog
+    RETURNING
+      VALUE(return) TYPE r__createdog
     RAISING
       cx_static_check.
 ENDINTERFACE.

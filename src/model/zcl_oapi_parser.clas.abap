@@ -265,6 +265,12 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
       CLEAR ls_media_type.
       ls_media_type-type = lv_member.
       ls_media_type-schema_ref = mo_json->value_string( iv_prefix && lv_member && '/schema/$ref' ).
+      IF ls_media_type-schema_ref IS INITIAL
+          AND mo_json->exists( iv_prefix && lv_member && '/schema/allOf' ) = abap_true
+          AND lines( mo_json->members( iv_prefix && lv_member && '/schema/allOf' ) ) = 1.
+* squash single allOf in response schema
+        ls_media_type-schema_ref = mo_json->value_string( iv_prefix && lv_member && '/schema/allOf/1/$ref' ).
+      ENDIF.
       IF ls_media_type-schema_ref IS INITIAL.
         ls_media_type-schema = parse_schema( iv_prefix && lv_member && '/schema' ).
       ENDIF.

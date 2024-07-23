@@ -27,7 +27,19 @@
         },
         "responses": {
           "200": {
-            "description": "Created"
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/response"
+                    }
+                  ],
+                  "nullable": true
+                }
+              }
+            }
           }
         }
       }
@@ -44,6 +56,23 @@
           "breed": {
             "type": "string",
             "enum": ["Dingo", "Husky", "Retriever", "Shepherd"]
+          }
+        }
+      },
+      "response": {
+        "title": "response",
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "nullable": true
+            }
           }
         }
       }
