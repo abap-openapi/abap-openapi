@@ -9,16 +9,18 @@ ENDCLASS.
 
 CLASS zcl_icf_serv015 IMPLEMENTATION.
   METHOD if_http_extension~handle_request.
-    DATA li_handler TYPE REF TO zif_interface015.
-    DATA lv_method  TYPE string.
-    DATA lv_path    TYPE string.
+    DATA li_handler      TYPE REF TO zif_interface015.
+    DATA lv_method       TYPE string.
+    DATA lv_path         TYPE string.
+    DATA lv_handler_path TYPE string.
 
     CREATE OBJECT li_handler TYPE zcl_icf_impl015.
     lv_path = server->request->get_header_field( '~path' ).
     lv_method = server->request->get_method( ).
 
     TRY.
-        IF lv_path = '/array' AND lv_method = 'POST'.
+        CONCATENATE zif_interface015=>base_path '/array' INTO lv_handler_path.
+        IF lv_path = lv_handler_path AND lv_method = 'POST'.
           DATA r__array TYPE zif_interface015=>r__array.
           r__array = li_handler->_array( ).
           IF r__array-_200_app_json IS NOT INITIAL.

@@ -10,16 +10,18 @@ ENDCLASS.
 
 CLASS zcl_icf_serv008 IMPLEMENTATION.
   METHOD if_http_extension~handle_request.
-    DATA li_handler TYPE REF TO zif_interface008.
-    DATA lv_method  TYPE string.
-    DATA lv_path    TYPE string.
+    DATA li_handler      TYPE REF TO zif_interface008.
+    DATA lv_method       TYPE string.
+    DATA lv_path         TYPE string.
+    DATA lv_handler_path TYPE string.
 
     CREATE OBJECT li_handler TYPE zcl_icf_impl008.
     lv_path = server->request->get_header_field( '~path' ).
     lv_method = server->request->get_method( ).
 
     TRY.
-        IF lv_path = '/pet/findByStatus' AND lv_method = 'GET'.
+        CONCATENATE zif_interface008=>base_path '/pet/findByStatus' INTO lv_handler_path.
+        IF lv_path = lv_handler_path AND lv_method = 'GET'.
           DATA r_findpetsbystatus TYPE zif_interface008=>r_findpetsbystatus.
           r_findpetsbystatus = li_handler->findpetsbystatus( server->request->get_form_field( 'status' ) ).
           IF r_findpetsbystatus-_200_app_json IS NOT INITIAL.
