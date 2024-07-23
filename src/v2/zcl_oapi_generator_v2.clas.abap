@@ -159,7 +159,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 * todo, handing path parameters, do wildcard with CP?
       rv_abap = rv_abap &&
         |    TRY.\n| &&
-        |        CONCATENATE zif_cable_builder_interface=>base_path '{ ls_operation-path }' INTO lv_handler_path.\n| &&
+        |        CONCATENATE { ms_input-intf }=>base_path '{ ls_operation-path }' INTO lv_handler_path.\n| &&
         |        IF lv_path = lv_handler_path AND lv_method = '{ to_upper( ls_operation-method ) }'.\n|.
 
       CLEAR lv_parameters.
