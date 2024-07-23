@@ -25,9 +25,15 @@ CLASS zcl_icf_serv016 IMPLEMENTATION.
               json = server->request->get_cdata( )
             CHANGING
               data = _createdog ).
-          li_handler->_createdog(
+          DATA r__createdog TYPE zif_interface016=>r__createdog.
+          r__createdog = li_handler->_createdog(
             body = _createdog ).
-          RETURN.
+          IF r__createdog-_200_app_json IS NOT INITIAL.
+            server->response->set_content_type( 'application/json' ).
+            server->response->set_cdata( /ui2/cl_json=>serialize( r__createdog-_200_app_json ) ).
+            server->response->set_status( code = 200 reason = 'Created' ).
+            RETURN.
+          ENDIF.
         ENDIF.
       CATCH cx_static_check.
         server->response->set_content_type( 'text/plain' ).
