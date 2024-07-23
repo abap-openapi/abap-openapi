@@ -1,17 +1,28 @@
 {
-    "openapi": "3.0.3",
-    "info": {
-      "title": "default_response",
-      "description": "default_response",
-      "version": "1.0.11"
-    },
-    "paths": {
-      "/user": {
-        "post": {
-          "description": "test",
-          "operationId": "createUser",
-          "requestBody": {
-            "description": "Created user object",
+  "openapi": "3.0.3",
+  "info": {
+    "title": "default_response",
+    "description": "default_response",
+    "version": "1.0.11"
+  },
+  "paths": {
+    "/user": {
+      "post": {
+        "description": "test",
+        "operationId": "createUser",
+        "requestBody": {
+          "description": "Created user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -19,21 +30,10 @@
                 }
               }
             }
-          },
-          "responses": {
-            "default": {
-              "description": "successful operation",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
           }
         }
       }
-    },
-    "components": {}
-  }
+    }
+  },
+  "components": {}
+}

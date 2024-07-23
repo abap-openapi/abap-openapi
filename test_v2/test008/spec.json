@@ -8,9 +8,7 @@
   "paths": {
     "/pet/findByStatus": {
       "get": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Finds Pets by status",
         "description": "Multiple status values can be provided with comma separated strings",
         "operationId": "findPetsByStatus",
@@ -24,11 +22,7 @@
             "schema": {
               "type": "string",
               "default": "available",
-              "enum": [
-                "available",
-                "pending",
-                "sold"
-              ]
+              "enum": ["available", "pending", "sold"]
             }
           }
         ],
@@ -96,10 +90,7 @@
         }
       },
       "Pet": {
-        "required": [
-          "name",
-          "photoUrls"
-        ],
+        "required": ["name", "photoUrls"],
         "type": "object",
         "properties": {
           "id": {
@@ -138,14 +129,10 @@
           "status": {
             "type": "string",
             "description": "pet status in the store",
-            "enum": [
-              "available",
-              "pending",
-              "sold"
-            ]
+            "enum": ["available", "pending", "sold"]
           }
         }
-      }      
+      }
     }
   }
 }

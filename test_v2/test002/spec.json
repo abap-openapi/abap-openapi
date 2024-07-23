@@ -1,87 +1,82 @@
 {
-    "openapi": "3.0.0",
-    "servers": [
-    ],
-    "info": {
-        "title": "c1_number_add",
-        "version": "1",
-        "description": "c1_number_add"
-    },
-    "paths": {
-        "/test": {
-            "post": {
-                "parameters": [
-                    {
-                        "name": "operation",
-                        "in": "query",
-                        "example": "",
-                        "required": false,
-                        "description": "",
-                        "schema": {
-                            "type": "string",
-                            "default": ""
-                        }
-                    }
-                ],
-                "description": "",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/POSTtestRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "headers": {},
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/POSTtestResponse"
-                                }
-                            }
-                        }
-                    }
-                },
-                "tags": [
-                ]
+  "openapi": "3.0.0",
+  "servers": [],
+  "info": {
+    "title": "c1_number_add",
+    "version": "1",
+    "description": "c1_number_add"
+  },
+  "paths": {
+    "/test": {
+      "post": {
+        "parameters": [
+          {
+            "name": "operation",
+            "in": "query",
+            "example": "",
+            "required": false,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "default": ""
             }
-        }
-    },
-    "components": {
-        "schemas": {
-            "POSTtestRequest": {
-                "type": "object",
-                "required": [
-                    "number1",
-                    "number2"
-                ],
-                "properties": {
-                    "number1": {
-                        "type": "number",
-                        "description": "",
-                        "example": ""
-                    },
-                    "number2": {
-                        "type": "number",
-                        "description": "",
-                        "example": ""
-                    }
-                }
-            },
-            "POSTtestResponse": {
-                "type": "object",
-                "properties": {
-                    "result": {
-                        "type": "number",
-                        "description": "",
-                        "example": ""
-                    }
-                }
+          }
+        ],
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/POSTtestRequest"
+              }
             }
-        }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/POSTtestResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": []
+      }
     }
+  },
+  "components": {
+    "schemas": {
+      "POSTtestRequest": {
+        "type": "object",
+        "required": ["number1", "number2"],
+        "properties": {
+          "number1": {
+            "type": "number",
+            "description": "",
+            "example": ""
+          },
+          "number2": {
+            "type": "number",
+            "description": "",
+            "example": ""
+          }
+        }
+      },
+      "POSTtestResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "number",
+            "description": "",
+            "example": ""
+          }
+        }
+      }
+    }
+  }
 }
