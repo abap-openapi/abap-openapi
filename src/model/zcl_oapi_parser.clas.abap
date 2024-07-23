@@ -76,6 +76,12 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     ENDIF.
     ri_schema->default = mo_json->value_string( iv_prefix && '/default' ).
     ri_schema->items_ref = mo_json->value_string( iv_prefix && '/items/$ref' ).
+    IF ri_schema->type = 'array'
+        AND mo_json->exists( iv_prefix && '/items/allOf' ) = abap_true
+        AND lines( mo_json->members( iv_prefix && '/items/allOf' ) ) = 1.
+* squash single allOf in array type
+      ri_schema->items_ref = mo_json->value_string( iv_prefix && '/items/allOf/1/$ref' ).
+    ENDIF.
     ri_schema->items_type = mo_json->value_string( iv_prefix && '/items/type' ).
     IF ri_schema->items_ref IS INITIAL.
       ri_schema->items_schema = parse_schema( iv_prefix && '/items' ).
@@ -91,6 +97,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
       IF ls_property-ref IS INITIAL
           AND mo_json->exists( iv_prefix && '/properties/' && lv_name && '/allOf' ) = abap_true
           AND lines( mo_json->members( iv_prefix && '/properties/' && lv_name && '/allOf' ) ) = 1.
+* squash single allOf in object type
         ls_property-ref = mo_json->value_string( iv_prefix && '/properties/' && lv_name && '/allOf/1/$ref' ).
       ENDIF.
 
