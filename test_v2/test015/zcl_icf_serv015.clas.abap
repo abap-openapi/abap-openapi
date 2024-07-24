@@ -16,11 +16,11 @@ CLASS zcl_icf_serv015 IMPLEMENTATION.
 
     CREATE OBJECT li_handler TYPE zcl_icf_impl015.
     lv_path = server->request->get_header_field( '~path' ).
+    REPLACE FIRST OCCURRENCE OF zif_interface015=>base_path IN lv_path WITH ''.
     lv_method = server->request->get_method( ).
 
     TRY.
-        CONCATENATE zif_interface015=>base_path '/array' INTO lv_handler_path.
-        IF lv_path = lv_handler_path AND lv_method = 'POST'.
+        IF lv_path = '/array' AND lv_method = 'POST'.
           DATA r__array TYPE zif_interface015=>r__array.
           r__array = li_handler->_array( ).
           IF r__array-_200_app_json IS NOT INITIAL.

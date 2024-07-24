@@ -17,11 +17,11 @@ CLASS zcl_icf_serv011 IMPLEMENTATION.
 
     CREATE OBJECT li_handler TYPE zcl_icf_impl011.
     lv_path = server->request->get_header_field( '~path' ).
+    REPLACE FIRST OCCURRENCE OF zif_interface011=>base_path IN lv_path WITH ''.
     lv_method = server->request->get_method( ).
 
     TRY.
-        CONCATENATE zif_interface011=>base_path '/foo/{param}' INTO lv_handler_path.
-        IF lv_path = lv_handler_path AND lv_method = 'POST'.
+        IF lv_path = '/foo/{param}' AND lv_method = 'POST'.
           li_handler->_foo_param( server->request->get_form_field( 'todo' ) ).
           RETURN.
         ENDIF.

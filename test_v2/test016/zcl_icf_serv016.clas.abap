@@ -16,11 +16,11 @@ CLASS zcl_icf_serv016 IMPLEMENTATION.
 
     CREATE OBJECT li_handler TYPE zcl_icf_impl016.
     lv_path = server->request->get_header_field( '~path' ).
+    REPLACE FIRST OCCURRENCE OF zif_interface016=>base_path IN lv_path WITH ''.
     lv_method = server->request->get_method( ).
 
     TRY.
-        CONCATENATE zif_interface016=>base_path '/createDog' INTO lv_handler_path.
-        IF lv_path = lv_handler_path AND lv_method = 'POST'.
+        IF lv_path = '/createDog' AND lv_method = 'POST'.
           DATA _createdog TYPE zif_interface016=>body_createdog.
           /ui2/cl_json=>deserialize(
             EXPORTING

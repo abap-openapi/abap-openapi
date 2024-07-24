@@ -17,11 +17,11 @@ CLASS zcl_icf_serv010 IMPLEMENTATION.
 
     CREATE OBJECT li_handler TYPE zcl_icf_impl010.
     lv_path = server->request->get_header_field( '~path' ).
+    REPLACE FIRST OCCURRENCE OF zif_interface010=>base_path IN lv_path WITH ''.
     lv_method = server->request->get_method( ).
 
     TRY.
-        CONCATENATE zif_interface010=>base_path '/user' INTO lv_handler_path.
-        IF lv_path = lv_handler_path AND lv_method = 'POST'.
+        IF lv_path = '/user' AND lv_method = 'POST'.
           DATA r_createuser TYPE zif_interface010=>r_createuser.
           r_createuser = li_handler->createuser( ).
           IF r_createuser-_default_app_json IS NOT INITIAL.
