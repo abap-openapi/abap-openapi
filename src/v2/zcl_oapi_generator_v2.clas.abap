@@ -154,13 +154,13 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    DATA lv_handler_path TYPE string.\n\n| &&
       |    CREATE OBJECT li_handler TYPE { ms_input-clas_icf_impl }.\n| &&
       |    lv_path = server->request->get_header_field( '~path' ).\n| &&
+      |    REPLACE FIRST OCCURRENCE OF { ms_input-intf }=>base_path IN lv_path WITH ''.\n| &&
       |    lv_method = server->request->get_method( ).\n\n|.
     LOOP AT ms_specification-operations INTO ls_operation.
 * todo, handing path parameters, do wildcard with CP?
       rv_abap = rv_abap &&
         |    TRY.\n| &&
-        |        CONCATENATE { ms_input-intf }=>base_path '{ ls_operation-path }' INTO lv_handler_path.\n| &&
-        |        IF lv_path = lv_handler_path AND lv_method = '{ to_upper( ls_operation-method ) }'.\n|.
+        |        IF lv_path = '{ ls_operation-path }' AND lv_method = '{ to_upper( ls_operation-method ) }'.\n|.
 
       CLEAR lv_parameters.
       IF lines( ls_operation-parameters ) = 1 AND ls_operation-body_schema_ref IS INITIAL.
