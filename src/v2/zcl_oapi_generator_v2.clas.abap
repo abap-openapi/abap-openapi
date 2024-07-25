@@ -151,7 +151,6 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    DATA li_handler      TYPE REF TO { ms_input-intf }.\n| &&
       |    DATA lv_method       TYPE string.\n| &&
       |    DATA lv_path         TYPE string.\n| &&
-      |    DATA lv_handler_path TYPE string.\n\n| &&
       |    CREATE OBJECT li_handler TYPE { ms_input-clas_icf_impl }.\n| &&
       |    lv_path = server->request->get_header_field( '~path' ).\n| &&
       |    REPLACE FIRST OCCURRENCE OF { ms_input-intf }=>base_path IN lv_path WITH ''.\n| &&

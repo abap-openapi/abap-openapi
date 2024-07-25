@@ -12,8 +12,6 @@ CLASS zcl_icf_serv007 IMPLEMENTATION.
     DATA li_handler      TYPE REF TO zif_interface007.
     DATA lv_method       TYPE string.
     DATA lv_path         TYPE string.
-    DATA lv_handler_path TYPE string.
-
     CREATE OBJECT li_handler TYPE zcl_icf_impl007.
     lv_path = server->request->get_header_field( '~path' ).
     REPLACE FIRST OCCURRENCE OF zif_interface007=>base_path IN lv_path WITH ''.
