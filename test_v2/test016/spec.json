@@ -4,6 +4,11 @@
     "title": "Swagger Petstore - OpenAPI 3.0",
     "version": "1.0.11"
   },
+  "servers": [
+    {
+      "url": "/sap/zpetstore"
+    }
+  ],
   "paths": {
     "/createDog": {
       "post": {

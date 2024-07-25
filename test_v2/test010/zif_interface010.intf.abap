@@ -4,6 +4,8 @@ INTERFACE zif_interface010 PUBLIC.
 * Description: default_response
 * Version: 1.0.11
 
+  CONSTANTS: base_path TYPE string VALUE ''.
+
   TYPES: BEGIN OF r_createuser,
            _default_app_json TYPE string,
          END OF r_createuser.

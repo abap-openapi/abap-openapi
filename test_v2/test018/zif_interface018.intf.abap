@@ -3,6 +3,8 @@ INTERFACE zif_interface018 PUBLIC.
 * Title: Swagger Petstore - OpenAPI 3.0
 * Version: 1.0.11
 
+  CONSTANTS: base_path TYPE string VALUE ''.
+
 * Operation
   TYPES: BEGIN OF operation,
            operation TYPE i,

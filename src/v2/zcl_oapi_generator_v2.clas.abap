@@ -148,11 +148,13 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
     rv_abap = rv_abap &&
       |  METHOD if_http_extension~handle_request.\n| &&
-      |    DATA li_handler TYPE REF TO { ms_input-intf }.\n| &&
-      |    DATA lv_method  TYPE string.\n| &&
-      |    DATA lv_path    TYPE string.\n\n| &&
+      |    DATA li_handler      TYPE REF TO { ms_input-intf }.\n| &&
+      |    DATA lv_method       TYPE string.\n| &&
+      |    DATA lv_path         TYPE string.\n| &&
+      |    DATA lv_handler_path TYPE string.\n\n| &&
       |    CREATE OBJECT li_handler TYPE { ms_input-clas_icf_impl }.\n| &&
       |    lv_path = server->request->get_header_field( '~path' ).\n| &&
+      |    REPLACE FIRST OCCURRENCE OF { ms_input-intf }=>base_path IN lv_path WITH ''.\n| &&
       |    lv_method = server->request->get_method( ).\n\n|.
     LOOP AT ms_specification-operations INTO ls_operation.
 * todo, handing path parameters, do wildcard with CP?
@@ -426,10 +428,21 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA ls_operation LIKE LINE OF ms_specification-operations.
     DATA ls_returning TYPE ty_returning.
     DATA ls_component_schema LIKE LINE OF ms_specification-components-schemas.
+    DATA: ls_server LIKE LINE OF ms_specification-servers.
 
     rv_abap = |INTERFACE { ms_input-intf } PUBLIC.\n| &&
       generation_information( ) &&
       |\n|.
+
+    IF ms_specification-servers IS NOT INITIAL.
+      READ TABLE ms_specification-servers INDEX 1 INTO ls_server.
+      IF sy-subrc = 0.
+        rv_abap = rv_abap && |  CONSTANTS: base_path TYPE string VALUE '{ ls_server-url }'.\n\n|.
+      ENDIF.
+    ELSE.
+      rv_abap = rv_abap && |  CONSTANTS: base_path TYPE string VALUE ''.\n\n|.
+    ENDIF.
+
 
     LOOP AT ms_specification-components-schemas INTO ls_component_schema.
       rv_abap = rv_abap && |* { ls_component_schema-name }\n|.

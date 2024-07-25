@@ -3,6 +3,8 @@ INTERFACE zif_interface016 PUBLIC.
 * Title: Swagger Petstore - OpenAPI 3.0
 * Version: 1.0.11
 
+  CONSTANTS: base_path TYPE string VALUE '/sap/zpetstore'.
+
 * Dog
   TYPES: BEGIN OF dog,
            bark TYPE abap_bool,

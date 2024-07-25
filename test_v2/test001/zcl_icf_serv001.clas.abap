@@ -10,12 +10,14 @@ ENDCLASS.
 
 CLASS zcl_icf_serv001 IMPLEMENTATION.
   METHOD if_http_extension~handle_request.
-    DATA li_handler TYPE REF TO zif_interface001.
-    DATA lv_method  TYPE string.
-    DATA lv_path    TYPE string.
+    DATA li_handler      TYPE REF TO zif_interface001.
+    DATA lv_method       TYPE string.
+    DATA lv_path         TYPE string.
+    DATA lv_handler_path TYPE string.
 
     CREATE OBJECT li_handler TYPE zcl_icf_impl001.
     lv_path = server->request->get_header_field( '~path' ).
+    REPLACE FIRST OCCURRENCE OF zif_interface001=>base_path IN lv_path WITH ''.
     lv_method = server->request->get_method( ).
 
     TRY.
