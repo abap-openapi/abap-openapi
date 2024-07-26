@@ -13,8 +13,6 @@ CLASS zcl_icf_serv009 IMPLEMENTATION.
     DATA li_handler      TYPE REF TO zif_interface009.
     DATA lv_method       TYPE string.
     DATA lv_path         TYPE string.
-    DATA lv_handler_path TYPE string.
-
     CREATE OBJECT li_handler TYPE zcl_icf_impl009.
     lv_path = server->request->get_header_field( '~path' ).
     REPLACE FIRST OCCURRENCE OF zif_interface009=>base_path IN lv_path WITH ''.
