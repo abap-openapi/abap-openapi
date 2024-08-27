@@ -18,7 +18,7 @@ It is possible to generate the objects using different processes:
 | ABAP Versions | v702 and up  |
 | Object Creation | one self-contained global class & interface per OpenAPI definition |
 
-\* OpenAPI v2 is currently only cabable by converting the v2 file to a v3 file. This can be done manually using the [Swagger Editor](https://editor.swagger.io/), or programmatically using [Swagger Converter](https://github.com/swagger-api/swagger-converter)
+\* OpenAPI v2 is currently only capable by converting the v2 file to a v3 file. This can be done manually using the [Swagger Editor](https://editor.swagger.io/), or programmatically using [Swagger Converter](https://github.com/swagger-api/swagger-converter)
 
 NOTE: generated code currently uses ZCL_OAPI_JSON, suggest copying the implementation to a local class in the generated global class
 
