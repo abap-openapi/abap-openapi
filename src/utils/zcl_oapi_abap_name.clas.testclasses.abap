@@ -7,6 +7,7 @@ CLASS ltcl_abap_name DEFINITION FOR TESTING
 
     METHODS setup.
     METHODS normal FOR TESTING RAISING cx_static_check.
+    METHODS with_space FOR TESTING RAISING cx_static_check.
     METHODS max_abap_name_length FOR TESTING RAISING cx_static_check.
     METHODS camel_to_snake1 FOR TESTING RAISING cx_static_check.
     METHODS camel_to_snake2 FOR TESTING RAISING cx_static_check.
@@ -24,6 +25,18 @@ CLASS ltcl_abap_name IMPLEMENTATION.
     DATA lv_abap_name TYPE string.
 
     lv_abap_name = mo_cut->to_abap_name( 'foo_bar' ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = lv_abap_name
+      exp = 'foo_bar' ).
+
+  ENDMETHOD.
+
+  METHOD with_space.
+
+    DATA lv_abap_name TYPE string.
+
+    lv_abap_name = mo_cut->to_abap_name( 'foo bar' ).
 
     cl_abap_unit_assert=>assert_equals(
       act = lv_abap_name
