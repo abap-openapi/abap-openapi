@@ -6,7 +6,7 @@ INTERFACE zif_interface020 PUBLIC.
   CONSTANTS base_path TYPE string VALUE ''.
 
 * bodysend
-  TYPES bodysend TYPE ANY TABLE.
+  TYPES bodysend TYPE string. " array  todo
 
   METHODS send
     IMPORTING
