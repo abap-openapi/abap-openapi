@@ -5,7 +5,8 @@ INTERFACE zif_interface014 PUBLIC.
 
   CONSTANTS: base_path TYPE string VALUE ''.
 
-  METHODS _ping
+  "! ping summary
+  METHODS ping_summary
     RAISING
       cx_static_check.
 ENDINTERFACE.

@@ -6,9 +6,9 @@
   },
   "paths": {
     "/ping": {
-      "summary": "ping summary",
-      "description": "ping description",
       "post": {
+        "summary": "ping summary",
+        "description": "ping description",
         "responses": {
           "200": {
             "description": "ping"
