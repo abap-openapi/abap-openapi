@@ -9,6 +9,7 @@ INTERFACE zif_oapi_schema PUBLIC.
 
   DATA:
     type         TYPE string,
+    format       TYPE string,
     default      TYPE string,
     properties   TYPE STANDARD TABLE OF ty_property WITH DEFAULT KEY,
     items_type   TYPE string, " todo, deprecate this field? use items_schema instead?

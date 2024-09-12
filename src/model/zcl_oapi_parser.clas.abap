@@ -74,6 +74,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
       ri_schema->type = 'string'. " todo, handle "allOf", "oneOf" and "anyOf"
       RETURN.
     ENDIF.
+    ri_schema->format = mo_json->value_string( iv_prefix && '/format' ).
     ri_schema->default = mo_json->value_string( iv_prefix && '/default' ).
     ri_schema->items_ref = mo_json->value_string( iv_prefix && '/items/$ref' ).
     IF ri_schema->type = 'array'
