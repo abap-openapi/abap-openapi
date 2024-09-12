@@ -291,6 +291,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       generation_information( ) &&
       |  PUBLIC SECTION.\n| &&
       |    INTERFACES { ms_input-intf }.\n| &&
+      |    "! Supply http client and possibily extra http headers to instantiate the openAPI client\n| &&
       |    METHODS constructor\n| &&
       |      IMPORTING\n| &&
       |        ii_client        TYPE REF TO if_http_client\n| &&

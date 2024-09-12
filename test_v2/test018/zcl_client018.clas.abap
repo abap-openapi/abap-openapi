@@ -4,6 +4,7 @@ CLASS zcl_client018 DEFINITION PUBLIC.
 * Version: 1.0.11
   PUBLIC SECTION.
     INTERFACES zif_interface018.
+    "! Supply http client and possibily extra http headers to instantiate the openAPI client
     METHODS constructor
       IMPORTING
         ii_client        TYPE REF TO if_http_client
