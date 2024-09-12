@@ -292,6 +292,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |  PUBLIC SECTION.\n| &&
       |    INTERFACES { ms_input-intf }.\n| &&
       |    "! Supply http client and possibily extra http headers to instantiate the openAPI client\n| &&
+      |    "! Use cl_http_client=>create_by_destination() or cl_http_client=>create_by_url() to create the client\n| &&
+      |    "! the caller must close() the client\n| &&
       |    METHODS constructor\n| &&
       |      IMPORTING\n| &&
       |        ii_client        TYPE REF TO if_http_client\n| &&
@@ -306,8 +308,6 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |ENDCLASS.\n\n| &&
       |CLASS { ms_input-clas_client } IMPLEMENTATION.\n| &&
       |  METHOD constructor.\n| &&
-      |    " Use cl_http_client=>create_by_destination() or cl_http_client=>create_by_url() to create the client\n| &&
-      |    " the caller must close() the client\n| &&
       |    mi_client = ii_client.\n| &&
       |    mv_timeout = iv_timeout.\n| &&
       |    mv_uri_prefix = iv_uri_prefix.\n| &&
