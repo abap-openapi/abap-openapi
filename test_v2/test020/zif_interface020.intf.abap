@@ -5,12 +5,9 @@ INTERFACE zif_interface020 PUBLIC.
 
   CONSTANTS base_path TYPE string VALUE ''.
 
-* bodysend
-  TYPES bodysend TYPE ANY TABLE.
-
   METHODS send
     IMPORTING
-      body TYPE bodysend
+      body TYPE any
     RAISING
       cx_static_check.
 ENDINTERFACE.

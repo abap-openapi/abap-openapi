@@ -8,7 +8,7 @@ CLASS zcl_oapi_schema DEFINITION PUBLIC.
         it_refs       TYPE zif_oapi_specification_v3=>ty_schemas
       RETURNING
         VALUE(rs_ref) TYPE zif_oapi_specification_v3=>ty_component_schema.
-    CLASS-METHODS get_simple_type
+    METHODS get_simple_type
       IMPORTING
         iv_type          TYPE string
         iv_format        TYPE string OPTIONAL
@@ -89,8 +89,6 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
       rv_abap = rv_abap && |  TYPES { iv_name } TYPE STANDARD TABLE OF { ls_ref-abap_name } WITH DEFAULT KEY.\n|.
     ELSEIF zif_oapi_schema~is_simple_type( ) = abap_true.
       rv_abap = rv_abap && |  TYPES { iv_name } TYPE { zif_oapi_schema~get_simple_type( ) }.\n|.
-    ELSEIF zif_oapi_schema~type = 'array' AND zif_oapi_schema~items_type = 'object'.
-      rv_abap = rv_abap && |  TYPES { iv_name } TYPE ANY TABLE.\n|.
     ELSE.
       rv_abap = rv_abap && |  TYPES { iv_name } TYPE string. " { zif_oapi_schema~type } { zif_oapi_schema~items_ref } todo\n|.
     ENDIF.
@@ -132,6 +130,10 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
         rv_simple = 'string'.
         IF iv_format = 'binary'.
           rv_simple = 'xstring'.
+        ENDIF.
+      WHEN 'array'.
+        IF zif_oapi_schema~items_type = 'object' AND zif_oapi_schema~items_ref IS INITIAL.
+          rv_simple = 'any'.
         ENDIF.
       WHEN 'boolean'.
         rv_simple = 'abap_bool'.
