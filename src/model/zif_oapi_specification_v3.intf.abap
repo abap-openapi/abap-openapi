@@ -39,8 +39,9 @@ INTERFACE zif_oapi_specification_v3 PUBLIC.
            operation_id   TYPE string,
            deprecated     TYPE abap_bool,
            abap_name      TYPE string,
-           body_schema     TYPE REF TO zif_oapi_schema,
-           body_schema_ref TYPE string,
+           request_body    TYPE ty_media_type, " only one supported
+          "  body_schema     TYPE REF TO zif_oapi_schema,
+          "  body_schema_ref TYPE string,
            parameters      TYPE ty_parameters,
            parameters_ref  TYPE string_table,
            responses       TYPE ty_responses,

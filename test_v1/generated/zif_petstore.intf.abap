@@ -185,10 +185,12 @@ INTERFACE zif_petstore PUBLIC.
 * Parameter: additionalMetadata, optional, query
 * Response: 200
 *     application/json, #/components/schemas/ApiResponse
+* Body schema: string
   METHODS upload_file
     IMPORTING
       pet_id TYPE i
       additional_metadata TYPE string OPTIONAL
+      body TYPE string
     RETURNING
       VALUE(return_data) TYPE api_response
     RAISING cx_static_check.

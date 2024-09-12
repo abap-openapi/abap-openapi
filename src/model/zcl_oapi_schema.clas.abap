@@ -8,9 +8,10 @@ CLASS zcl_oapi_schema DEFINITION PUBLIC.
         it_refs       TYPE zif_oapi_specification_v3=>ty_schemas
       RETURNING
         VALUE(rs_ref) TYPE zif_oapi_specification_v3=>ty_component_schema.
-    METHODS get_simple_type
+    CLASS-METHODS get_simple_type
       IMPORTING
         iv_type          TYPE string
+        iv_format        TYPE string OPTIONAL
       RETURNING
         VALUE(rv_simple) TYPE string.
   PRIVATE SECTION.
@@ -65,7 +66,8 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
                                it_refs = it_refs ).
           rv_abap = rv_abap && |STANDARD TABLE OF { ls_ref-abap_name } WITH DEFAULT KEY,\n|.
         ELSEIF ls_property-schema->type = 'array' AND ls_property-schema->items_type IS NOT INITIAL.
-          rv_abap = rv_abap && |STANDARD TABLE OF { get_simple_type( ls_property-schema->items_type ) } WITH DEFAULT KEY,\n|.
+          rv_abap = rv_abap && |STANDARD TABLE OF { get_simple_type(
+            ls_property-schema->items_type ) } WITH DEFAULT KEY,\n|.
         ELSEIF ls_property-schema->type = 'array'.
           rv_abap = rv_abap && |STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array\n|.
         ELSE.
@@ -112,7 +114,9 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
 
 
   METHOD zif_oapi_schema~get_simple_type.
-    rv_simple = get_simple_type( zif_oapi_schema~type ).
+    rv_simple = get_simple_type(
+      iv_type   = zif_oapi_schema~type
+      iv_format = zif_oapi_schema~format ).
   ENDMETHOD.
 
 
@@ -124,6 +128,9 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
         rv_simple = 'f'.
       WHEN 'string'.
         rv_simple = 'string'.
+        IF iv_format = 'binary'.
+          rv_simple = 'xstring'.
+        ENDIF.
       WHEN 'boolean'.
         rv_simple = 'abap_bool'.
     ENDCASE.

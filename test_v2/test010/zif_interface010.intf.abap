@@ -10,6 +10,8 @@ INTERFACE zif_interface010 PUBLIC.
            _default_app_json TYPE string,
          END OF r_create_user.
   METHODS create_user
+    IMPORTING
+      body TYPE string
     RETURNING
       VALUE(return) TYPE r_create_user
     RAISING
