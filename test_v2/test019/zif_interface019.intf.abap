@@ -7,7 +7,7 @@ INTERFACE zif_interface019 PUBLIC.
 
   METHODS send_binary
     IMPORTING
-      body TYPE string
+      body TYPE xstring
     RAISING
       cx_static_check.
 ENDINTERFACE.
