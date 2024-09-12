@@ -5,6 +5,8 @@ CLASS zcl_client017 DEFINITION PUBLIC.
   PUBLIC SECTION.
     INTERFACES zif_interface017.
     "! Supply http client and possibily extra http headers to instantiate the openAPI client
+    "! Use cl_http_client=>create_by_destination() or cl_http_client=>create_by_url() to create the client
+    "! the caller must close() the client
     METHODS constructor
       IMPORTING
         ii_client        TYPE REF TO if_http_client
@@ -20,8 +22,6 @@ ENDCLASS.
 
 CLASS zcl_client017 IMPLEMENTATION.
   METHOD constructor.
-    " Use cl_http_client=>create_by_destination() or cl_http_client=>create_by_url() to create the client
-    " the caller must close() the client
     mi_client = ii_client.
     mv_timeout = iv_timeout.
     mv_uri_prefix = iv_uri_prefix.
