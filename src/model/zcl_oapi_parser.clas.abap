@@ -151,6 +151,8 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
 
   METHOD parse_operations.
     DATA lt_paths TYPE string_table.
+    DATA lt_contents TYPE string_table.
+    DATA lv_content LIKE LINE OF lt_contents.
     DATA lv_path LIKE LINE OF lt_paths.
     DATA lt_methods TYPE string_table.
     DATA lv_method LIKE LINE OF lt_methods.
@@ -190,9 +192,17 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
           CONTINUE.
         ENDIF.
 
-        ls_operation-request_body-schema_ref = mo_json->value_string( lv_prefix && '/requestBody/content/application/json/schema/$ref' ).
-        IF ls_operation-request_body-schema_ref IS INITIAL AND lines( mo_json->members( lv_prefix && '/requestBody/content/application/json/schema/' ) ) > 0.
-          ls_operation-request_body-schema = parse_schema( lv_prefix && '/requestBody/content/application/json/schema' ).
+        lt_contents = mo_json->members( lv_prefix && '/requestBody/content/' ).
+        IF lines( lt_contents ) > 0.
+          " only one content body currently supported
+          READ TABLE lt_contents INTO lv_content INDEX 1.
+          ASSERT sy-subrc = 0.
+
+          ls_operation-request_body-type = lv_content.
+          ls_operation-request_body-schema_ref = mo_json->value_string( lv_prefix && '/requestBody/content/' && lv_content && '/schema/$ref' ).
+          IF ls_operation-request_body-schema_ref IS INITIAL AND lines( mo_json->members( lv_prefix && '/requestBody/content/' && lv_content && '/schema/' ) ) > 0.
+            ls_operation-request_body-schema = parse_schema( lv_prefix && '/requestBody/content/' && lv_content && '/schema' ).
+          ENDIF.
         ENDIF.
 
         APPEND ls_operation TO rt_operations.
