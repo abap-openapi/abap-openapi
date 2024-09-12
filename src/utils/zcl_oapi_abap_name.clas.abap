@@ -79,8 +79,9 @@ CLASS zcl_oapi_abap_name IMPLEMENTATION.
 
     IF rv_name NA '_'
         AND rv_name NA space
-        AND to_lower( rv_name ) <> rv_name.
-* no underscores, no spaces, contains upper case
+        AND to_lower( rv_name ) <> rv_name
+        AND match( val = rv_name regex = '[A-Z]{2}' ) = abap_false.
+* no underscores, no spaces, contains upper case, no double upper case
       rv_name = from_mixed( rv_name ).
     ENDIF.
 
