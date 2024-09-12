@@ -192,6 +192,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
           CONTINUE.
         ENDIF.
 
+        CLEAR ls_operation-request_body.
         lt_contents = mo_json->members( lv_prefix && '/requestBody/content/' ).
         IF lines( lt_contents ) > 0.
           " only one content body currently supported

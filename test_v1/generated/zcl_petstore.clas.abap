@@ -322,6 +322,7 @@ CLASS zcl_petstore IMPLEMENTATION.
     ENDIF.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
