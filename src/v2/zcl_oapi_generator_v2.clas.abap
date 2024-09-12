@@ -193,6 +193,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
             |              data = { ls_operation-abap_name } ).\n|.
           lv_parameters = lv_parameters &&
             |\n            body = { ls_operation-abap_name }|.
+        ELSEIF ls_operation-request_body-schema IS NOT INITIAL.
+          lv_parameters = lv_parameters &&
+            |\n            body = 'todo'|.
         ENDIF.
       ENDIF.
 

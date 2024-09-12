@@ -19,7 +19,8 @@ CLASS zcl_icf_serv019 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/sendBinary' AND lv_method = 'POST'.
-          li_handler->send_binary( ).
+          li_handler->send_binary(
+            body = 'todo' ).
           RETURN.
         ENDIF.
       CATCH cx_static_check.

@@ -21,7 +21,8 @@ CLASS zcl_icf_serv010 IMPLEMENTATION.
     TRY.
         IF lv_path = '/user' AND lv_method = 'POST'.
           DATA r_create_user TYPE zif_interface010=>r_create_user.
-          r_create_user = li_handler->create_user( ).
+          r_create_user = li_handler->create_user(
+            body = 'todo' ).
           IF r_create_user-_default_app_json IS NOT INITIAL.
             server->response->set_content_type( 'application/json' ).
             server->response->set_cdata( /ui2/cl_json=>serialize( r_create_user-_default_app_json ) ).
