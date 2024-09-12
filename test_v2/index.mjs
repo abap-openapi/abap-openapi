@@ -74,17 +74,20 @@ async function run() {
 
   fs.writeFileSync(
     folder + clas_icf_serv + ".clas.abap",
-    result.get().clas_icf_serv.get()
+    result.get().clas_icf_serv.get() + "\n"
   );
   fs.writeFileSync(
     folder + clas_icf_impl + ".clas.abap",
-    result.get().clas_icf_impl.get()
+    result.get().clas_icf_impl.get() + "\n"
   );
   fs.writeFileSync(
     folder + clas_client + ".clas.abap",
-    result.get().clas_client.get()
+    result.get().clas_client.get() + "\n"
   );
-  fs.writeFileSync(folder + intf + ".intf.abap", result.get().intf.get());
+  fs.writeFileSync(
+    folder + intf + ".intf.abap",
+    result.get().intf.get() + "\n"
+  );
 
   const consoleOutput = abap.console.get();
   if (consoleOutput !== "") {
