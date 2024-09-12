@@ -47,18 +47,18 @@ CLASS zcl_oapi_references IMPLEMENTATION.
     CREATE OBJECT lo_names.
 
     LOOP AT ms_spec-operations ASSIGNING <ls_operation> WHERE deprecated = abap_false.
-      IF <ls_operation>-body_schema IS NOT INITIAL
-          AND <ls_operation>-body_schema->is_simple_type( ) = abap_false.
+      IF <ls_operation>-request_body-schema IS NOT INITIAL
+          AND <ls_operation>-request_body-schema->is_simple_type( ) = abap_false.
 
         ls_new-name = lo_names->to_abap_name( |body{ <ls_operation>-abap_name }| ).
         ls_new-abap_name = ls_new-name.
         ls_new-abap_json_method = lo_names->to_abap_name( |json_{ <ls_operation>-abap_name }| ).
         CLEAR ls_new-abap_parser_method. " parser method is not needed for body which is input
-        ls_new-schema = <ls_operation>-body_schema.
+        ls_new-schema = <ls_operation>-request_body-schema.
         APPEND ls_new TO ms_spec-components-schemas.
 
-        <ls_operation>-body_schema_ref = '#/components/schemas/' && ls_new-name.
-        CLEAR <ls_operation>-body_schema.
+        <ls_operation>-request_body-schema_ref = '#/components/schemas/' && ls_new-name.
+        CLEAR <ls_operation>-request_body-schema.
       ENDIF.
     ENDLOOP.
 

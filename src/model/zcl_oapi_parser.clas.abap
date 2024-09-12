@@ -190,10 +190,11 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
           CONTINUE.
         ENDIF.
 
-        ls_operation-body_schema_ref = mo_json->value_string( lv_prefix && '/requestBody/content/application/json/schema/$ref' ).
-        IF ls_operation-body_schema_ref IS INITIAL AND lines( mo_json->members( lv_prefix && '/requestBody/content/application/json/schema/' ) ) > 0.
-          ls_operation-body_schema = parse_schema( lv_prefix && '/requestBody/content/application/json/schema' ).
+        ls_operation-request_body-schema_ref = mo_json->value_string( lv_prefix && '/requestBody/content/application/json/schema/$ref' ).
+        IF ls_operation-request_body-schema_ref IS INITIAL AND lines( mo_json->members( lv_prefix && '/requestBody/content/application/json/schema/' ) ) > 0.
+          ls_operation-request_body-schema = parse_schema( lv_prefix && '/requestBody/content/application/json/schema' ).
         ENDIF.
+
         APPEND ls_operation TO rt_operations.
       ENDLOOP.
 

@@ -162,7 +162,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |        IF lv_path = '{ ls_operation-path }' AND lv_method = '{ to_upper( ls_operation-method ) }'.\n|.
 
       CLEAR lv_parameters.
-      IF lines( ls_operation-parameters ) = 1 AND ls_operation-body_schema_ref IS INITIAL.
+      IF lines( ls_operation-parameters ) = 1 AND ls_operation-request_body-schema_ref IS INITIAL.
         READ TABLE ls_operation-parameters INDEX 1 INTO ls_parameter ##SUBRC_OK.
 * todo, it might be a header parameter
         IF ls_parameter-in = 'path'.
@@ -183,9 +183,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         ENDLOOP.
 
 
-        IF ls_operation-body_schema_ref IS NOT INITIAL.
+        IF ls_operation-request_body-schema_ref IS NOT INITIAL.
           rv_abap = rv_abap &&
-            |          DATA { ls_operation-abap_name  } TYPE { ms_input-intf }=>{ find_schema( ls_operation-body_schema_ref )-abap_name }.\n| &&
+            |          DATA { ls_operation-abap_name  } TYPE { ms_input-intf }=>{ find_schema( ls_operation-request_body-schema_ref )-abap_name }.\n| &&
             |          /ui2/cl_json=>deserialize(\n| &&
             |            EXPORTING\n| &&
             |              json = server->request->get_cdata( )\n| &&
@@ -487,8 +487,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       APPEND lv_str TO lt_list.
     ENDLOOP.
 
-    IF is_operation-body_schema_ref IS NOT INITIAL.
-      lv_str = |      body TYPE { find_schema( is_operation-body_schema_ref )-abap_name }|.
+    IF is_operation-request_body-schema_ref IS NOT INITIAL.
+      lv_str = |      body TYPE { find_schema( is_operation-request_body-schema_ref )-abap_name }|.
       APPEND lv_str TO lt_list.
     ENDIF.
 

@@ -369,12 +369,12 @@ CLASS zcl_oapi_main IMPLEMENTATION.
             |*     { ls_content-type }{ lv_extra }\n|.
         ENDLOOP.
       ENDLOOP.
-      IF ls_operation-body_schema_ref IS NOT INITIAL.
+      IF ls_operation-request_body-schema_ref IS NOT INITIAL.
         rv_abap = rv_abap &&
-          |* Body ref: { ls_operation-body_schema_ref }\n|.
-      ELSEIF ls_operation-body_schema IS NOT INITIAL.
+          |* Body ref: { ls_operation-request_body-schema_ref }\n|.
+      ELSEIF ls_operation-request_body-schema IS NOT INITIAL.
         rv_abap = rv_abap &&
-          |* Body schema: { ls_operation-body_schema->type }\n|.
+          |* Body schema: { ls_operation-request_body-schema->type }\n|.
       ENDIF.
       rv_abap = rv_abap &&
         |  METHODS { ls_operation-abap_name }{ build_abap_parameters( ls_operation ) }|.
@@ -450,9 +450,9 @@ CLASS zcl_oapi_main IMPLEMENTATION.
       rv_abap = rv_abap && |    mi_client->request->set_header_field( name = '{ ls_parameter-name }' value = { ls_parameter-abap_name } ).\n|.
     ENDLOOP.
 
-    IF is_operation-body_schema_ref IS NOT INITIAL.
-      rv_abap = rv_abap && abap_schema_to_json( is_operation-body_schema_ref ).
-    ELSEIF is_operation-body_schema IS NOT INITIAL AND is_operation-body_schema->type = 'string'.
+    IF is_operation-request_body-schema_ref IS NOT INITIAL.
+      rv_abap = rv_abap && abap_schema_to_json( is_operation-request_body-schema_ref ).
+    ELSEIF is_operation-request_body-schema IS NOT INITIAL AND is_operation-request_body-schema->type = 'string'.
       rv_abap = rv_abap && |    mi_client->request->set_cdata( body ).\n|.
     ENDIF.
 
@@ -577,8 +577,8 @@ CLASS zcl_oapi_main IMPLEMENTATION.
                                  sep = |\n| ).
     ENDIF.
 
-    IF is_operation-body_schema_ref IS NOT INITIAL.
-      ls_schema = find_schema( is_operation-body_schema_ref ).
+    IF is_operation-request_body-schema_ref IS NOT INITIAL.
+      ls_schema = find_schema( is_operation-request_body-schema_ref ).
       IF ls_schema IS NOT INITIAL.
         IF lv_text IS NOT INITIAL.
           lv_text = lv_text && |\n|.
@@ -586,7 +586,7 @@ CLASS zcl_oapi_main IMPLEMENTATION.
         lv_text = lv_text &&
           |      body TYPE { ls_schema-abap_name }|.
       ENDIF.
-    ELSEIF is_operation-body_schema IS NOT INITIAL AND is_operation-body_schema->type = 'string'.
+    ELSEIF is_operation-request_body-schema IS NOT INITIAL AND is_operation-request_body-schema->type = 'string'.
       IF lv_text IS NOT INITIAL.
         lv_text = lv_text && |\n|.
       ENDIF.
