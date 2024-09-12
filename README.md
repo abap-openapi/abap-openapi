@@ -46,3 +46,17 @@ You can try out the generation using Swagger's Petstore Example:
 - Just run `npm run petstore`
 - The output files will be generated in `./test_v1/generated/`
 
+## Example
+
+```sh
+#!/usr/bin/env bash
+
+rm -rf abap-openapi
+git clone --depth=1 https://github.com/abap-openapi/abap-openapi
+rm -rf abap-openapi/.git
+cd abap-openapi
+npm ci
+npm run transpile
+rm ../src/api/*.abap
+node test_v2/index.mjs <filename> ../src/api <name>
+```
