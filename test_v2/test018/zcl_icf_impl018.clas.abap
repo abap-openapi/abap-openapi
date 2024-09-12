@@ -5,7 +5,7 @@ ENDCLASS.
 
 CLASS zcl_icf_impl018 IMPLEMENTATION.
 
-  METHOD zif_interface018~_createdog.
+  METHOD zif_interface018~_create_dog.
 * Add implementation logic here
   ENDMETHOD.
 

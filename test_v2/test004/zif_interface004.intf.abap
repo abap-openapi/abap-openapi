@@ -6,31 +6,31 @@ INTERFACE zif_interface004 PUBLIC.
   CONSTANTS base_path TYPE string VALUE ''.
 
 * resultStruct
-  TYPES: BEGIN OF resultstruct,
+  TYPES: BEGIN OF result_struct,
            result TYPE f,
-         END OF resultstruct.
+         END OF result_struct.
 * number1andnumber2
   TYPES: BEGIN OF number1andnumber2,
            number1 TYPE f,
            number2 TYPE f,
          END OF number1andnumber2.
 * POSTtestResponse
-  TYPES: BEGIN OF subposttestresponse_levelb1,
-           levelb11 TYPE STANDARD TABLE OF f WITH DEFAULT KEY,
-         END OF subposttestresponse_levelb1.
+  TYPES: BEGIN OF subposttestresponse_level_b1,
+           level_b11 TYPE STANDARD TABLE OF f WITH DEFAULT KEY,
+         END OF subposttestresponse_level_b1.
   TYPES: BEGIN OF posttestresponse,
-           levela1 TYPE STANDARD TABLE OF resultstruct WITH DEFAULT KEY,
-           levelb1 TYPE subposttestresponse_levelb1,
-           levelc1 TYPE f,
+           level_a1 TYPE STANDARD TABLE OF result_struct WITH DEFAULT KEY,
+           level_b1 TYPE subposttestresponse_level_b1,
+           level_c1 TYPE f,
          END OF posttestresponse.
 * POSTtestRequest
-  TYPES: BEGIN OF subposttestrequest_levelb1,
-           levelb11 TYPE STANDARD TABLE OF number1andnumber2 WITH DEFAULT KEY,
-         END OF subposttestrequest_levelb1.
+  TYPES: BEGIN OF subposttestrequest_level_b1,
+           level_b11 TYPE STANDARD TABLE OF number1andnumber2 WITH DEFAULT KEY,
+         END OF subposttestrequest_level_b1.
   TYPES: BEGIN OF posttestrequest,
-           levela1 TYPE STANDARD TABLE OF number1andnumber2 WITH DEFAULT KEY,
-           levelb1 TYPE subposttestrequest_levelb1,
-           levelc1 TYPE STANDARD TABLE OF f WITH DEFAULT KEY,
+           level_a1 TYPE STANDARD TABLE OF number1andnumber2 WITH DEFAULT KEY,
+           level_b1 TYPE subposttestrequest_level_b1,
+           level_c1 TYPE STANDARD TABLE OF f WITH DEFAULT KEY,
          END OF posttestrequest.
 
   TYPES: BEGIN OF r__test,

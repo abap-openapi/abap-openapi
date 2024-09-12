@@ -20,17 +20,17 @@ CLASS zcl_icf_serv008 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/pet/findByStatus' AND lv_method = 'GET'.
-          DATA r_findpetsbystatus TYPE zif_interface008=>r_findpetsbystatus.
-          r_findpetsbystatus = li_handler->findpetsbystatus( server->request->get_form_field( 'status' ) ).
-          IF r_findpetsbystatus-_200_app_json IS NOT INITIAL.
+          DATA r_find_pets_by_status TYPE zif_interface008=>r_find_pets_by_status.
+          r_find_pets_by_status = li_handler->find_pets_by_status( server->request->get_form_field( 'status' ) ).
+          IF r_find_pets_by_status-_200_app_json IS NOT INITIAL.
             server->response->set_content_type( 'application/json' ).
-            server->response->set_cdata( /ui2/cl_json=>serialize( r_findpetsbystatus-_200_app_json ) ).
+            server->response->set_cdata( /ui2/cl_json=>serialize( r_find_pets_by_status-_200_app_json ) ).
             server->response->set_status( code = 200 reason = 'successful operation' ).
             RETURN.
           ENDIF.
-          IF r_findpetsbystatus-_200_app_xml IS NOT INITIAL.
+          IF r_find_pets_by_status-_200_app_xml IS NOT INITIAL.
             server->response->set_content_type( 'application/xml' ).
-            server->response->set_cdata( /ui2/cl_json=>serialize( r_findpetsbystatus-_200_app_xml ) ).
+            server->response->set_cdata( /ui2/cl_json=>serialize( r_find_pets_by_status-_200_app_xml ) ).
             server->response->set_status( code = 200 reason = 'successful operation' ).
             RETURN.
           ENDIF.

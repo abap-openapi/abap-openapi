@@ -28,7 +28,7 @@ CLASS zcl_client008 IMPLEMENTATION.
     mt_extra_headers = it_extra_headers.
   ENDMETHOD.
 
-  METHOD zif_interface008~findpetsbystatus.
+  METHOD zif_interface008~find_pets_by_status.
     DATA lv_code         TYPE i.
     DATA lv_message      TYPE string.
     DATA lv_uri          TYPE string.

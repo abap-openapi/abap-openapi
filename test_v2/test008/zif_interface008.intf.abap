@@ -21,23 +21,23 @@ INTERFACE zif_interface008 PUBLIC.
            id TYPE i,
            name TYPE string,
            category TYPE category,
-           photourls TYPE STANDARD TABLE OF string WITH DEFAULT KEY,
+           photo_urls TYPE STANDARD TABLE OF string WITH DEFAULT KEY,
            tags TYPE STANDARD TABLE OF tag WITH DEFAULT KEY,
            status TYPE string,
          END OF pet.
-* response_findpetsbystatus
-  TYPES response_findpetsbystatus TYPE STANDARD TABLE OF pet WITH DEFAULT KEY.
+* response_find_pets_by_status
+  TYPES response_find_pets_by_status TYPE STANDARD TABLE OF pet WITH DEFAULT KEY.
 
-  TYPES: BEGIN OF r_findpetsbystatus,
-           _200_app_json TYPE response_findpetsbystatus,
-           _200_app_xml TYPE response_findpetsbystatus,
-         END OF r_findpetsbystatus.
+  TYPES: BEGIN OF r_find_pets_by_status,
+           _200_app_json TYPE response_find_pets_by_status,
+           _200_app_xml TYPE response_find_pets_by_status,
+         END OF r_find_pets_by_status.
   "! Finds Pets by status
-  METHODS findpetsbystatus
+  METHODS find_pets_by_status
     IMPORTING
       status TYPE string OPTIONAL
     RETURNING
-      VALUE(return) TYPE r_findpetsbystatus
+      VALUE(return) TYPE r_find_pets_by_status
     RAISING
       cx_static_check.
 ENDINTERFACE.

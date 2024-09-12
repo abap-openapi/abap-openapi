@@ -9,31 +9,31 @@ INTERFACE zif_interface006 PUBLIC.
   TYPES: BEGIN OF subsubposttestresponse_level,
            result TYPE string,
          END OF subsubposttestresponse_level.
-  TYPES: BEGIN OF subposttestresponse_levelb1,
-           levelb11 TYPE subsubposttestresponse_level,
-         END OF subposttestresponse_levelb1.
-  TYPES: BEGIN OF subposttestresponse_levela1,
+  TYPES: BEGIN OF subposttestresponse_level_b1,
+           level_b11 TYPE subsubposttestresponse_level,
+         END OF subposttestresponse_level_b1.
+  TYPES: BEGIN OF subposttestresponse_level_a1,
            result TYPE string,
-         END OF subposttestresponse_levela1.
+         END OF subposttestresponse_level_a1.
   TYPES: BEGIN OF posttestresponse,
-           levela1 TYPE subposttestresponse_levela1,
-           levelb1 TYPE subposttestresponse_levelb1,
+           level_a1 TYPE subposttestresponse_level_a1,
+           level_b1 TYPE subposttestresponse_level_b1,
          END OF posttestresponse.
 * POSTtestRequest
-  TYPES: BEGIN OF subsubposttestrequest_levelb,
+  TYPES: BEGIN OF subsubposttestrequest_level_,
            string1 TYPE string,
            string2 TYPE string,
-         END OF subsubposttestrequest_levelb.
-  TYPES: BEGIN OF subposttestrequest_levelb1,
-           levelb11 TYPE subsubposttestrequest_levelb,
-         END OF subposttestrequest_levelb1.
-  TYPES: BEGIN OF subposttestrequest_levela1,
+         END OF subsubposttestrequest_level_.
+  TYPES: BEGIN OF subposttestrequest_level_b1,
+           level_b11 TYPE subsubposttestrequest_level_,
+         END OF subposttestrequest_level_b1.
+  TYPES: BEGIN OF subposttestrequest_level_a1,
            string1 TYPE string,
            string2 TYPE string,
-         END OF subposttestrequest_levela1.
+         END OF subposttestrequest_level_a1.
   TYPES: BEGIN OF posttestrequest,
-           levela1 TYPE subposttestrequest_levela1,
-           levelb1 TYPE subposttestrequest_levelb1,
+           level_a1 TYPE subposttestrequest_level_a1,
+           level_b1 TYPE subposttestrequest_level_b1,
          END OF posttestrequest.
 
   TYPES: BEGIN OF r__test,

@@ -14,15 +14,15 @@ INTERFACE zif_interface018 PUBLIC.
            bark TYPE abap_bool,
            breed TYPE string,
          END OF dog.
-* body_createdog
-  TYPES: BEGIN OF body_createdog,
+* body_create_dog
+  TYPES: BEGIN OF body_create_dog,
            detail TYPE dog,
            operations TYPE STANDARD TABLE OF operation WITH DEFAULT KEY,
-         END OF body_createdog.
+         END OF body_create_dog.
 
-  METHODS _createdog
+  METHODS _create_dog
     IMPORTING
-      body TYPE body_createdog
+      body TYPE body_create_dog
     RAISING
       cx_static_check.
 ENDINTERFACE.

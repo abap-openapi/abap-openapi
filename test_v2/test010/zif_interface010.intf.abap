@@ -6,12 +6,12 @@ INTERFACE zif_interface010 PUBLIC.
 
   CONSTANTS base_path TYPE string VALUE ''.
 
-  TYPES: BEGIN OF r_createuser,
+  TYPES: BEGIN OF r_create_user,
            _default_app_json TYPE string,
-         END OF r_createuser.
-  METHODS createuser
+         END OF r_create_user.
+  METHODS create_user
     RETURNING
-      VALUE(return) TYPE r_createuser
+      VALUE(return) TYPE r_create_user
     RAISING
       cx_static_check.
 ENDINTERFACE.
