@@ -8,7 +8,7 @@
   },
   "dependencies": [
     {
-      "url": "https://github.com/open-abap/open-abap",
+      "url": "https://github.com/open-abap/open-abap-core",
       "files": "/src/**/*.*"
     }
   ],
@@ -17,6 +17,9 @@
     "errorNamespace": "."
   },
   "rules": {
+    "add_test_attributes": true,
+    "align_pseudo_comments": true,
+    "dynpro_checks": true,
     "cds_comment_style": true,
     "cds_legacy_view": true,
     "change_if_to_case": true,
