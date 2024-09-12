@@ -80,7 +80,7 @@ CLASS zcl_oapi_abap_name IMPLEMENTATION.
     IF rv_name NA '_'
         AND rv_name NA space
         AND to_lower( rv_name ) <> rv_name.
-* no spaces and contains upper case
+* no underscores, no spaces, contains upper case
       rv_name = from_mixed( rv_name ).
     ENDIF.
 
