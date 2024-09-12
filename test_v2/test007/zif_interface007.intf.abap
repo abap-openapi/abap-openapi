@@ -3,7 +3,7 @@ INTERFACE zif_interface007 PUBLIC.
 * Title: c1_string_concat_table
 * Version: 1
 
-  CONSTANTS: base_path TYPE string VALUE ''.
+  CONSTANTS base_path TYPE string VALUE ''.
 
 * resultStruct
   TYPES: BEGIN OF resultstruct,

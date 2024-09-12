@@ -4,7 +4,7 @@ INTERFACE zif_interface012 PUBLIC.
 * Description: header parameter
 * Version: 1
 
-  CONSTANTS: base_path TYPE string VALUE ''.
+  CONSTANTS base_path TYPE string VALUE ''.
 
   METHODS _something
     IMPORTING

@@ -4,7 +4,7 @@ INTERFACE zif_interface005 PUBLIC.
 * Description: c1_string_concat
 * Version: 1
 
-  CONSTANTS: base_path TYPE string VALUE ''.
+  CONSTANTS base_path TYPE string VALUE ''.
 
 * POSTtestResponse
   TYPES: BEGIN OF posttestresponse,

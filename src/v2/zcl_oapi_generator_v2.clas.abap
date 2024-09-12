@@ -427,7 +427,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA ls_operation LIKE LINE OF ms_specification-operations.
     DATA ls_returning TYPE ty_returning.
     DATA ls_component_schema LIKE LINE OF ms_specification-components-schemas.
-    DATA: ls_server LIKE LINE OF ms_specification-servers.
+    DATA ls_server LIKE LINE OF ms_specification-servers.
 
     rv_abap = |INTERFACE { ms_input-intf } PUBLIC.\n| &&
       generation_information( ) &&
@@ -436,10 +436,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     IF ms_specification-servers IS NOT INITIAL.
       READ TABLE ms_specification-servers INDEX 1 INTO ls_server.
       IF sy-subrc = 0.
-        rv_abap = rv_abap && |  CONSTANTS: base_path TYPE string VALUE '{ ls_server-url }'.\n\n|.
+        rv_abap = rv_abap && |  CONSTANTS base_path TYPE string VALUE '{ ls_server-url }'.\n\n|.
       ENDIF.
     ELSE.
-      rv_abap = rv_abap && |  CONSTANTS: base_path TYPE string VALUE ''.\n\n|.
+      rv_abap = rv_abap && |  CONSTANTS base_path TYPE string VALUE ''.\n\n|.
     ENDIF.
 
 

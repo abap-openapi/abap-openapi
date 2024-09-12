@@ -3,7 +3,7 @@ INTERFACE zif_interface017 PUBLIC.
 * Title: return structured array
 * Version: 1
 
-  CONSTANTS: base_path TYPE string VALUE ''.
+  CONSTANTS base_path TYPE string VALUE ''.
 
 * arrdetails
   TYPES: BEGIN OF arrdetails,

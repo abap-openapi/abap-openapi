@@ -4,7 +4,7 @@ INTERFACE zif_interface008 PUBLIC.
 * Description: intf_return_struc_component_types
 * Version: 1.0.11
 
-  CONSTANTS: base_path TYPE string VALUE ''.
+  CONSTANTS base_path TYPE string VALUE ''.
 
 * Tag
   TYPES: BEGIN OF tag,

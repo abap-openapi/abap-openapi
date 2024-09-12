@@ -3,7 +3,7 @@ INTERFACE zif_interface015 PUBLIC.
 * Title: return structured array
 * Version: 1
 
-  CONSTANTS: base_path TYPE string VALUE ''.
+  CONSTANTS base_path TYPE string VALUE ''.
 
 * arrsubsomething
   TYPES: BEGIN OF arrsubsomething,

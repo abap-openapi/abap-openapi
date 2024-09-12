@@ -3,7 +3,7 @@ INTERFACE zif_interface003 PUBLIC.
 * Title: c1_number_add_object
 * Version: 1
 
-  CONSTANTS: base_path TYPE string VALUE ''.
+  CONSTANTS base_path TYPE string VALUE ''.
 
 * POSTtestResponse
   TYPES: BEGIN OF subsubposttestresponse_level,
