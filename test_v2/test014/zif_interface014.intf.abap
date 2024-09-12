@@ -3,9 +3,10 @@ INTERFACE zif_interface014 PUBLIC.
 * Title: path summary and description
 * Version: 1
 
-  CONSTANTS: base_path TYPE string VALUE ''.
+  CONSTANTS base_path TYPE string VALUE ''.
 
-  METHODS _ping
+  "! ping summary
+  METHODS ping_summary
     RAISING
       cx_static_check.
 ENDINTERFACE.

@@ -3,7 +3,7 @@ INTERFACE zif_interface013 PUBLIC.
 * Title: two path parameters
 * Version: 1
 
-  CONSTANTS: base_path TYPE string VALUE ''.
+  CONSTANTS base_path TYPE string VALUE ''.
 
   METHODS _foo_param_another
     IMPORTING

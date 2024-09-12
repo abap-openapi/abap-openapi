@@ -4,7 +4,7 @@ INTERFACE zif_interface001 PUBLIC.
 * Description: ping
 * Version: 1
 
-  CONSTANTS: base_path TYPE string VALUE ''.
+  CONSTANTS base_path TYPE string VALUE ''.
 
   METHODS _ping
     RAISING

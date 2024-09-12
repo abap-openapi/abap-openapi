@@ -3,34 +3,34 @@ INTERFACE zif_interface007 PUBLIC.
 * Title: c1_string_concat_table
 * Version: 1
 
-  CONSTANTS: base_path TYPE string VALUE ''.
+  CONSTANTS base_path TYPE string VALUE ''.
 
 * resultStruct
-  TYPES: BEGIN OF resultstruct,
+  TYPES: BEGIN OF result_struct,
            result TYPE string,
-         END OF resultstruct.
+         END OF result_struct.
 * string1andstring2
   TYPES: BEGIN OF string1andstring2,
            string1 TYPE string,
            string2 TYPE string,
          END OF string1andstring2.
 * POSTtestResponse
-  TYPES: BEGIN OF subposttestresponse_levelb1,
-           levelb11 TYPE STANDARD TABLE OF string WITH DEFAULT KEY,
-         END OF subposttestresponse_levelb1.
+  TYPES: BEGIN OF subposttestresponse_level_b1,
+           level_b11 TYPE STANDARD TABLE OF string WITH DEFAULT KEY,
+         END OF subposttestresponse_level_b1.
   TYPES: BEGIN OF posttestresponse,
-           levela1 TYPE STANDARD TABLE OF resultstruct WITH DEFAULT KEY,
-           levelb1 TYPE subposttestresponse_levelb1,
-           levelc1 TYPE string,
+           level_a1 TYPE STANDARD TABLE OF result_struct WITH DEFAULT KEY,
+           level_b1 TYPE subposttestresponse_level_b1,
+           level_c1 TYPE string,
          END OF posttestresponse.
 * POSTtestRequest
-  TYPES: BEGIN OF subposttestrequest_levelb1,
-           levelb11 TYPE STANDARD TABLE OF string1andstring2 WITH DEFAULT KEY,
-         END OF subposttestrequest_levelb1.
+  TYPES: BEGIN OF subposttestrequest_level_b1,
+           level_b11 TYPE STANDARD TABLE OF string1andstring2 WITH DEFAULT KEY,
+         END OF subposttestrequest_level_b1.
   TYPES: BEGIN OF posttestrequest,
-           levela1 TYPE STANDARD TABLE OF string1andstring2 WITH DEFAULT KEY,
-           levelb1 TYPE subposttestrequest_levelb1,
-           levelc1 TYPE STANDARD TABLE OF string WITH DEFAULT KEY,
+           level_a1 TYPE STANDARD TABLE OF string1andstring2 WITH DEFAULT KEY,
+           level_b1 TYPE subposttestrequest_level_b1,
+           level_c1 TYPE STANDARD TABLE OF string WITH DEFAULT KEY,
          END OF posttestrequest.
 
   TYPES: BEGIN OF r__test,

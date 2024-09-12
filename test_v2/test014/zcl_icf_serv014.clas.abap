@@ -19,7 +19,7 @@ CLASS zcl_icf_serv014 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/ping' AND lv_method = 'POST'.
-          li_handler->_ping( ).
+          li_handler->ping_summary( ).
           RETURN.
         ENDIF.
       CATCH cx_static_check.

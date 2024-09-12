@@ -19,14 +19,14 @@ CLASS zcl_icf_serv018 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/createDog' AND lv_method = 'POST'.
-          DATA _createdog TYPE zif_interface018=>body_createdog.
+          DATA _create_dog TYPE zif_interface018=>body_create_dog.
           /ui2/cl_json=>deserialize(
             EXPORTING
               json = server->request->get_cdata( )
             CHANGING
-              data = _createdog ).
-          li_handler->_createdog(
-            body = _createdog ).
+              data = _create_dog ).
+          li_handler->_create_dog(
+            body = _create_dog ).
           RETURN.
         ENDIF.
       CATCH cx_static_check.

@@ -27,7 +27,7 @@ CLASS zcl_client014 IMPLEMENTATION.
     mt_extra_headers = it_extra_headers.
   ENDMETHOD.
 
-  METHOD zif_interface014~_ping.
+  METHOD zif_interface014~ping_summary.
     DATA lv_code         TYPE i.
     DATA lv_message      TYPE string.
     DATA lv_uri          TYPE string.

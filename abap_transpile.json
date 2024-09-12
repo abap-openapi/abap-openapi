@@ -2,7 +2,7 @@
   "input_folder": "src",
   "input_filter": [".clas.", ".intf."],
   "output_folder": "output",
-  "lib": "https://github.com/open-abap/open-abap",
+  "lib": "https://github.com/open-abap/open-abap-core",
   "write_unit_tests": true,
   "options": {
     "ignoreSyntaxCheck": false,

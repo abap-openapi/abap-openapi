@@ -27,7 +27,7 @@ CLASS zcl_client016 IMPLEMENTATION.
     mt_extra_headers = it_extra_headers.
   ENDMETHOD.
 
-  METHOD zif_interface016~_createdog.
+  METHOD zif_interface016~_create_dog.
     DATA lv_code         TYPE i.
     DATA lv_message      TYPE string.
     DATA lv_uri          TYPE string.

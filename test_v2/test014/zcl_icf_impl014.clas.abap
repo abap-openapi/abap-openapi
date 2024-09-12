@@ -5,7 +5,7 @@ ENDCLASS.
 
 CLASS zcl_icf_impl014 IMPLEMENTATION.
 
-  METHOD zif_interface014~_ping.
+  METHOD zif_interface014~ping_summary.
 * Add implementation logic here
   ENDMETHOD.
 

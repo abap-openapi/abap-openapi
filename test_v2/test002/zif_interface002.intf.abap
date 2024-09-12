@@ -4,7 +4,7 @@ INTERFACE zif_interface002 PUBLIC.
 * Description: c1_number_add
 * Version: 1
 
-  CONSTANTS: base_path TYPE string VALUE ''.
+  CONSTANTS base_path TYPE string VALUE ''.
 
 * POSTtestResponse
   TYPES: BEGIN OF posttestresponse,
