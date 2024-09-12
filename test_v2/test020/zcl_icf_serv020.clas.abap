@@ -19,7 +19,7 @@ CLASS zcl_icf_serv020 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/send' AND lv_method = 'POST'.
-          DATA send TYPE zif_interface020=>bodysend.
+          DATA send TYPE string. " todo, workaround
           /ui2/cl_json=>deserialize(
             EXPORTING
               json = server->request->get_cdata( )
