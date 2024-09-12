@@ -89,6 +89,8 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
       rv_abap = rv_abap && |  TYPES { iv_name } TYPE STANDARD TABLE OF { ls_ref-abap_name } WITH DEFAULT KEY.\n|.
     ELSEIF zif_oapi_schema~is_simple_type( ) = abap_true.
       rv_abap = rv_abap && |  TYPES { iv_name } TYPE { zif_oapi_schema~get_simple_type( ) }.\n|.
+    ELSEIF zif_oapi_schema~type = 'array' AND zif_oapi_schema~items_type = 'object'.
+      rv_abap = rv_abap && |  TYPES { iv_name } TYPE ANY TABLE.\n|.
     ELSE.
       rv_abap = rv_abap && |  TYPES { iv_name } TYPE string. " { zif_oapi_schema~type } { zif_oapi_schema~items_ref } todo\n|.
     ENDIF.
