@@ -8,7 +8,7 @@ CLASS zcl_oapi_schema DEFINITION PUBLIC.
         it_refs       TYPE zif_oapi_specification_v3=>ty_schemas
       RETURNING
         VALUE(rs_ref) TYPE zif_oapi_specification_v3=>ty_component_schema.
-    CLASS-METHODS get_simple_type
+    METHODS get_simple_type
       IMPORTING
         iv_type          TYPE string
         iv_format        TYPE string OPTIONAL
@@ -130,6 +130,10 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
         rv_simple = 'string'.
         IF iv_format = 'binary'.
           rv_simple = 'xstring'.
+        ENDIF.
+      WHEN 'array'.
+        IF zif_oapi_schema~items_type = 'object' AND zif_oapi_schema~items_ref IS INITIAL.
+          rv_simple = 'any'.
         ENDIF.
       WHEN 'boolean'.
         rv_simple = 'abap_bool'.

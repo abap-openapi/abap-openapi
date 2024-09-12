@@ -19,14 +19,8 @@ CLASS zcl_icf_serv020 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/send' AND lv_method = 'POST'.
-          DATA send TYPE string. " todo, workaround
-          /ui2/cl_json=>deserialize(
-            EXPORTING
-              json = server->request->get_cdata( )
-            CHANGING
-              data = send ).
           li_handler->send(
-            body = send ).
+            body = 'todo' ).
           RETURN.
         ENDIF.
       CATCH cx_static_check.
