@@ -32,6 +32,7 @@ INTERFACE zif_interface008 PUBLIC.
            _200_app_json TYPE response_findpetsbystatus,
            _200_app_xml TYPE response_findpetsbystatus,
          END OF r_findpetsbystatus.
+  "! Finds Pets by status
   METHODS findpetsbystatus
     IMPORTING
       status TYPE string OPTIONAL

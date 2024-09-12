@@ -455,8 +455,11 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
     LOOP AT ms_specification-operations INTO ls_operation.
       ls_returning = find_returning_parameter( ls_operation ).
-      rv_abap = rv_abap && ls_returning-type &&
-        |  METHODS { ls_operation-abap_name }{
+      rv_abap = rv_abap && ls_returning-type.
+      IF ls_operation-summary IS NOT INITIAL.
+        rv_abap = rv_abap && |  "! { ls_operation-summary }\n|.
+      ENDIF.
+      rv_abap = rv_abap && |  METHODS { ls_operation-abap_name }{
           find_input_parameters( ls_operation ) }{
           ls_returning-abap }\n    RAISING\n      cx_static_check.\n|.
     ENDLOOP.
