@@ -75,7 +75,16 @@ CLASS zcl_oapi_abap_name IMPLEMENTATION.
 
 
   METHOD sanitize_name.
-    rv_name = to_lower( iv_name ).
+    rv_name = iv_name.
+
+    IF rv_name NA '_'
+        AND rv_name NA space
+        AND to_lower( rv_name ) <> rv_name.
+* no spaces and contains upper case
+      rv_name = from_mixed( rv_name ).
+    ENDIF.
+
+    rv_name = to_lower( rv_name ).
     REPLACE ALL OCCURRENCES OF '-' IN rv_name WITH '_'.
     REPLACE ALL OCCURRENCES OF ` ` IN rv_name WITH '_'.
     REPLACE ALL OCCURRENCES OF '.' IN rv_name WITH '_'.
