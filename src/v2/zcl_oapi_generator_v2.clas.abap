@@ -468,9 +468,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
 
   METHOD find_input_parameters.
-    DATA lt_list TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
-    DATA lv_str TYPE string.
-    DATA ls_parameter LIKE LINE OF is_operation-parameters.
+    DATA lt_list        TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
+    DATA lv_str         TYPE string.
+    DATA ls_parameter   LIKE LINE OF is_operation-parameters.
     DATA lv_simple_type TYPE string.
 
     LOOP AT is_operation-parameters INTO ls_parameter.
@@ -489,6 +489,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
     IF is_operation-request_body-schema_ref IS NOT INITIAL.
       lv_str = |      body TYPE { find_schema( is_operation-request_body-schema_ref )-abap_name }|.
+      APPEND lv_str TO lt_list.
+    ELSEIF is_operation-request_body-schema IS NOT INITIAL.
+      lv_str = |      body TYPE { is_operation-request_body-schema->get_simple_type( ) }|.
       APPEND lv_str TO lt_list.
     ENDIF.
 

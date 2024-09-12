@@ -6,6 +6,8 @@ INTERFACE zif_interface019 PUBLIC.
   CONSTANTS base_path TYPE string VALUE ''.
 
   METHODS send_binary
+    IMPORTING
+      body TYPE string
     RAISING
       cx_static_check.
 ENDINTERFACE.
