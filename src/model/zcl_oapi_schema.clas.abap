@@ -127,7 +127,22 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
       WHEN 'number'.
         rv_simple = 'f'.
       WHEN 'string'.
-        rv_simple = 'string'.
+* this is using released DDIC types, however I'd like to just use built-in
+* so this is a quick and dirty workaround, also consider case sensitivity?
+        CASE zif_oapi_schema~max_length.
+          WHEN 1.
+            rv_simple = 'char1'.
+          WHEN 2.
+            rv_simple = 'char2'.
+          WHEN 4.
+            rv_simple = 'char4'.
+          WHEN 30.
+            rv_simple = 'char30'.
+          WHEN 40.
+            rv_simple = 'char40'.
+          WHEN OTHERS.
+            rv_simple = 'string'.
+        ENDCASE.
         IF iv_format = 'binary'.
           rv_simple = 'xstring'.
         ENDIF.
