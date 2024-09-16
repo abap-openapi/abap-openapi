@@ -7,7 +7,7 @@ INTERFACE zif_interface021 PUBLIC.
 
   METHODS send
     IMPORTING
-      body TYPE char2
+      body TYPE char4
     RAISING
       cx_static_check.
 ENDINTERFACE.
