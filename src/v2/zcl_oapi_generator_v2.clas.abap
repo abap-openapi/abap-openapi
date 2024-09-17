@@ -326,6 +326,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |\n| &&
         |    mi_client->propertytype_logon_popup = if_http_client=>co_disabled.\n| &&
         |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n| &&
+        |    mi_client->request->set_compression( ).\n| &&
         |    lv_uri = mv_uri_prefix && '{ ls_operation-path }'.\n|.
 
       LOOP AT ls_operation-parameters INTO ls_parameter.
