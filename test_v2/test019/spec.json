@@ -11,7 +11,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "multipart/form-data": {
+            "application/x-zip": {
               "schema": {
                 "type": "string",
                 "format": "binary"
