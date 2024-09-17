@@ -358,9 +358,13 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         rv_abap = rv_abap && |    mi_client->request->set_content_type( '{ ls_operation-request_body-type }' ).\n|.
       ENDIF.
 
-      IF ls_operation-request_body-schema IS NOT INITIAL
-          AND ls_operation-request_body-schema->get_simple_type( ) = 'xstring'.
-        rv_abap = rv_abap && |    mi_client->request->set_data( body ).\n|.
+      IF ls_operation-request_body-schema IS NOT INITIAL.
+        CASE ls_operation-request_body-schema->get_simple_type( ).
+          WHEN 'xstring'.
+            rv_abap = rv_abap && |    mi_client->request->set_data( body ).\n|.
+          WHEN 'string'.
+            rv_abap = rv_abap && |    mi_client->request->set_cdata( body ).\n|.
+        ENDCASE.
       ENDIF.
 
       rv_abap = rv_abap &&
