@@ -49,7 +49,6 @@ CLASS zcl_client010 IMPLEMENTATION.
         value = ls_header-value ).
     ENDLOOP.
     mi_client->request->set_content_type( 'application/json' ).
-    mi_client->request->set_data( '112233AABBCCDDEEFF' ).
     mi_client->send( mv_timeout ).
     mi_client->receive(
       EXCEPTIONS

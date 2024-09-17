@@ -48,7 +48,7 @@ CLASS zcl_client019 IMPLEMENTATION.
         value = ls_header-value ).
     ENDLOOP.
     mi_client->request->set_content_type( 'application/x-zip' ).
-    mi_client->request->set_data( '112233AABBCCDDEEFF' ).
+    mi_client->request->set_data( body ).
     mi_client->send( mv_timeout ).
     mi_client->receive(
       EXCEPTIONS
