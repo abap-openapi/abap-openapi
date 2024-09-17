@@ -6,7 +6,7 @@
   },
   "paths": {
     "/sendBinary": {
-      "post": {
+      "put": {
         "operationId": "sendBinary",
         "requestBody": {
           "required": true,

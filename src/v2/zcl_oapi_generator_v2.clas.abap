@@ -354,10 +354,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |        value = ls_header-value ).\n| &&
         |    ENDLOOP.\n|.
 
-      IF to_upper( ls_operation-method ) = 'POST'.
-        rv_abap = rv_abap &&
-*          |    mi_client->request->set_content_type( 'application/json' ).\n| &&
-          |    mi_client->request->set_data( '112233AABBCCDDEEFF' ).\n|.
+      IF ls_operation-request_body-type IS NOT INITIAL.
+        rv_abap = rv_abap && |    mi_client->request->set_content_type( '{ ls_operation-request_body-type }' ).\n|.
+        rv_abap = rv_abap && |    mi_client->request->set_data( '112233AABBCCDDEEFF' ).\n|.
       ENDIF.
 
       rv_abap = rv_abap &&

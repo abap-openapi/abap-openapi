@@ -18,7 +18,7 @@ CLASS zcl_icf_serv019 IMPLEMENTATION.
     lv_method = server->request->get_method( ).
 
     TRY.
-        IF lv_path = '/sendBinary' AND lv_method = 'POST'.
+        IF lv_path = '/sendBinary' AND lv_method = 'PUT'.
           li_handler->send_binary(
             body = 'todo' ).
           RETURN.

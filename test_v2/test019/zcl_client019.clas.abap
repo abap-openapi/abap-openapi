@@ -37,7 +37,7 @@ CLASS zcl_client019 IMPLEMENTATION.
     DATA lv_content_type TYPE string.
 
     mi_client->propertytype_logon_popup = if_http_client=>co_disabled.
-    mi_client->request->set_method( 'POST' ).
+    mi_client->request->set_method( 'PUT' ).
     lv_uri = mv_uri_prefix && '/sendBinary'.
     cl_http_utility=>set_request_uri(
       request = mi_client->request
@@ -47,6 +47,7 @@ CLASS zcl_client019 IMPLEMENTATION.
         name  = ls_header-name
         value = ls_header-value ).
     ENDLOOP.
+    mi_client->request->set_content_type( 'application/x-zip' ).
     mi_client->request->set_data( '112233AABBCCDDEEFF' ).
     mi_client->send( mv_timeout ).
     mi_client->receive(
