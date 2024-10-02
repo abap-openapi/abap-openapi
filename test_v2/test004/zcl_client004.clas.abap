@@ -50,6 +50,9 @@ CLASS zcl_client004 IMPLEMENTATION.
         value = ls_header-value ).
     ENDLOOP.
     mi_client->request->set_content_type( 'application/json' ).
+    mi_client->request->set_cdata( /ui2/cl_json=>serialize(
+      data        = body
+      pretty_name = /ui2/cl_json=>pretty_mode-camel_case ) ).
     mi_client->send( mv_timeout ).
     mi_client->receive(
       EXCEPTIONS

@@ -132,7 +132,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA ls_parameter  LIKE LINE OF ls_operation-parameters.
     DATA lo_response_name TYPE REF TO zcl_oapi_response_name.
     DATA lv_response_name TYPE string.
-    DATA lv_code TYPE string.
+    DATA lv_code          TYPE string.
 
     CREATE OBJECT lo_response_name.
 
@@ -366,6 +366,13 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           WHEN 'string'.
             rv_abap = rv_abap && |    mi_client->request->set_cdata( body ).\n|.
         ENDCASE.
+      ELSEIF ls_operation-request_body-schema_ref IS NOT INITIAL
+          AND ls_operation-request_body-type = 'application/json'.
+* this does make some assumptions on the names in the openapi, it should work for every case, eventually,
+        rv_abap = rv_abap &&
+          |    mi_client->request->set_cdata( /ui2/cl_json=>serialize(\n| &&
+          |      data        = body\n| &&
+          |      pretty_name = /ui2/cl_json=>pretty_mode-camel_case ) ).\n|.
       ENDIF.
 
       rv_abap = rv_abap &&
