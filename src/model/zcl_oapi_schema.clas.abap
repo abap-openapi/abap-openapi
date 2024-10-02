@@ -136,6 +136,8 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
             rv_simple = 'char2'.
           WHEN 4.
             rv_simple = 'char4'.
+          WHEN 8.
+            rv_simple = 'char8'.
           WHEN 30.
             rv_simple = 'char30'.
           WHEN 40.
