@@ -76,8 +76,11 @@ CLASS zcl_client004 IMPLEMENTATION.
         CASE lv_content_type.
           WHEN 'application/json'.
             /ui2/cl_json=>deserialize(
-              EXPORTING json = mi_client->response->get_cdata( )
-              CHANGING data = return-_200_app_json ).
+              EXPORTING
+                json        = mi_client->response->get_cdata( )
+                pretty_name = /ui2/cl_json=>pretty_mode-camel_case
+              CHANGING
+                data        = return-_200_app_json ).
           WHEN OTHERS.
 * unexpected content type
         ENDCASE.

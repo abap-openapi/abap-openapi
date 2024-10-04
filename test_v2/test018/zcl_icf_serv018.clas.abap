@@ -22,9 +22,10 @@ CLASS zcl_icf_serv018 IMPLEMENTATION.
           DATA _create_dog TYPE zif_interface018=>body_create_dog.
           /ui2/cl_json=>deserialize(
             EXPORTING
-              json = server->request->get_cdata( )
+              json        = server->request->get_cdata( )
+              pretty_name = /ui2/cl_json=>pretty_mode-camel_case
             CHANGING
-              data = _create_dog ).
+              data        = _create_dog ).
           li_handler->_create_dog(
             body = _create_dog ).
           RETURN.
