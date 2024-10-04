@@ -22,9 +22,10 @@ CLASS zcl_icf_serv004 IMPLEMENTATION.
           DATA _test TYPE zif_interface004=>posttestrequest.
           /ui2/cl_json=>deserialize(
             EXPORTING
-              json = server->request->get_cdata( )
+              json        = server->request->get_cdata( )
+              pretty_name = /ui2/cl_json=>pretty_mode-camel_case
             CHANGING
-              data = _test ).
+              data        = _test ).
           DATA r__test TYPE zif_interface004=>r__test.
           r__test = li_handler->_test(
             operation = server->request->get_form_field( 'operation' )

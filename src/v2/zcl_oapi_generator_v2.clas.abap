@@ -188,9 +188,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
             |          DATA { ls_operation-abap_name  } TYPE { ms_input-intf }=>{ find_schema( ls_operation-request_body-schema_ref )-abap_name }.\n| &&
             |          /ui2/cl_json=>deserialize(\n| &&
             |            EXPORTING\n| &&
-            |              json = server->request->get_cdata( )\n| &&
+            |              json        = server->request->get_cdata( )\n| &&
+            |              pretty_name = /ui2/cl_json=>pretty_mode-camel_case\n| &&
             |            CHANGING\n| &&
-            |              data = { ls_operation-abap_name } ).\n|.
+            |              data        = { ls_operation-abap_name } ).\n|.
           lv_parameters = lv_parameters &&
             |\n            body = { ls_operation-abap_name }|.
         ELSEIF ls_operation-request_body-schema IS NOT INITIAL.
@@ -414,8 +415,11 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
               rv_abap = rv_abap &&
                 |            /ui2/cl_json=>deserialize(\n| &&
-                |              EXPORTING json = mi_client->response->get_cdata( )\n| &&
-                |              CHANGING data = return-{ lv_name } ).\n|.
+                |              EXPORTING\n| &&
+                |                json        = mi_client->response->get_cdata( )\n| &&
+                |                pretty_name = /ui2/cl_json=>pretty_mode-camel_case\n| &&
+                |              CHANGING\n| &&
+                |                data        = return-{ lv_name } ).\n|.
             ELSE.
               rv_abap = rv_abap &&
                 |* todo, content type = '{ ls_content-type }'\n|.
