@@ -117,18 +117,19 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
 
   METHOD parse_component_responses.
 
-    DATA lt_names TYPE string_table.
-    DATA lv_name TYPE string.
+    DATA lt_names    TYPE string_table.
+    DATA lv_name     TYPE string.
     DATA ls_response LIKE LINE OF rt_responses.
-    DATA lo_names TYPE REF TO zcl_oapi_abap_name.
-    CREATE OBJECT lo_names.
 
     lt_names = mo_json->members( iv_prefix ).
+    WRITE / iv_prefix.
     LOOP AT lt_names INTO lv_name.
+      WRITE / lv_name.
       CLEAR ls_response.
       ls_response-name = lv_name.
-      ls_response-description = mo_json->value_string( iv_prefix && '/' && lv_name && '/description' ).
-      ls_response-content = parse_media_types( iv_prefix && '/' && lv_name && '/content/' ).
+      ls_response-description = mo_json->value_string( iv_prefix && lv_name && '/description' ).
+      WRITE / ls_response-description.
+      ls_response-content = parse_media_types( iv_prefix && lv_name && '/content/' ).
       APPEND ls_response TO rt_responses.
     ENDLOOP.
 
