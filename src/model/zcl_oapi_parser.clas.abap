@@ -21,7 +21,7 @@ CLASS zcl_oapi_parser DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(rt_parameters) TYPE string_table.
 
-    METHODS parse_responses
+    METHODS parse_operation_responses
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(rt_responses) TYPE zif_oapi_specification_v3=>ty_operation_responses.
 
@@ -181,7 +181,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
         ls_operation-operation_id = mo_json->value_string( lv_prefix && '/operationId' ).
         ls_operation-parameters = parse_parameters( lv_prefix && '/parameters/' ).
         ls_operation-parameters_ref = parse_parameters_ref( lv_prefix && '/parameters/' ).
-        ls_operation-responses = parse_responses( lv_prefix && '/responses/' ).
+        ls_operation-responses = parse_operation_responses( lv_prefix && '/responses/' ).
 
         ls_operation-abap_name = lo_names->to_abap_name( ls_operation-operation_id ).
         IF ls_operation-abap_name IS INITIAL.
@@ -254,7 +254,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     ENDLOOP.
   ENDMETHOD.
 
-  METHOD parse_responses.
+  METHOD parse_operation_responses.
     DATA lt_members TYPE string_table.
     DATA lv_member LIKE LINE OF lt_members.
     DATA ls_response LIKE LINE OF rt_responses.
