@@ -13,7 +13,7 @@ CLASS ltcl_content_type DEFINITION
       run_test
         IMPORTING
           iv_content_type    TYPE zif_oapi_specification_v3=>ty_media_type-type
-          iv_code            TYPE zif_oapi_specification_v3=>ty_response-code
+          iv_code            TYPE zif_oapi_specification_v3=>ty_operation_response-code
           iv_expected_result TYPE string,
       application_json FOR TESTING RAISING cx_static_check,
       application_xml FOR TESTING RAISING cx_static_check,

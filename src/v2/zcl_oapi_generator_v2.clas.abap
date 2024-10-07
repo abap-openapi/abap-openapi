@@ -279,12 +279,13 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
 
   METHOD build_clas_client.
-    DATA ls_operation LIKE LINE OF ms_specification-operations.
-    DATA ls_parameter LIKE LINE OF ls_operation-parameters.
-    DATA ls_response  LIKE LINE OF ls_operation-responses.
-    DATA ls_content   LIKE LINE OF ls_response-content.
+    DATA ls_operation     LIKE LINE OF ms_specification-operations.
+    DATA ls_parameter     LIKE LINE OF ls_operation-parameters.
+    DATA ls_response      LIKE LINE OF ls_operation-responses.
+    DATA ls_content       LIKE LINE OF ls_response-content.
     DATA lo_response_name TYPE REF TO zcl_oapi_response_name.
-    DATA lv_name TYPE string.
+    DATA ls_cresponse     LIKE LINE OF ms_specification-components-responses.
+    DATA lv_name          TYPE string.
 
     CREATE OBJECT lo_response_name.
 
@@ -400,6 +401,15 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         rv_abap = rv_abap &&
           |      WHEN '{ ls_response-code }'.\n|.
 
+        IF ls_response-ref IS NOT INITIAL.
+          lv_name = ls_response-ref.
+          REPLACE FIRST OCCURRENCE OF '#/components/responses/' IN lv_name WITH ''.
+          READ TABLE ms_specification-components-responses WITH KEY name = lv_name INTO ls_cresponse.
+          IF sy-subrc = 0.
+            APPEND LINES OF ls_cresponse-content TO ls_response-content.
+          ENDIF.
+        ENDIF.
+
         IF lines( ls_response-content ) > 0.
           rv_abap = rv_abap &&
             |        SPLIT lv_content_type AT ';' INTO lv_content_type lv_dummy.\n| &&
@@ -429,6 +439,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
             |          WHEN OTHERS.\n| &&
             |* unexpected content type\n| &&
             |        ENDCASE.\n|.
+        ELSEIF ls_response-ref IS NOT INITIAL.
+          rv_abap = rv_abap &&
+            |* todo, no content types { ls_response-ref }\n|.
         ELSE.
           rv_abap = rv_abap &&
             |* todo, no content types\n|.
@@ -527,21 +540,35 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
 
   METHOD find_returning_parameter.
-    DATA ls_response LIKE LINE OF is_operation-responses.
-    DATA ls_content LIKE LINE OF ls_response-content.
-    DATA lv_typename TYPE char30.
-    DATA lo_response_name TYPE REF TO zcl_oapi_response_name.
-    DATA lv_response_name TYPE string.
+    DATA ls_response       LIKE LINE OF is_operation-responses.
+    DATA ls_content        LIKE LINE OF ls_response-content.
+    DATA lv_typename       TYPE char30.
+    DATA lo_response_name  TYPE REF TO zcl_oapi_response_name.
+    DATA lv_response_name  TYPE string.
     DATA lv_returning_type TYPE string.
+    DATA lv_name           TYPE string.
+    DATA ls_cresponse      LIKE LINE OF ms_specification-components-responses.
+
+    FIELD-SYMBOLS <ls_response> LIKE LINE OF is_operation-responses.
 
     CREATE OBJECT lo_response_name.
 
     lv_typename = 'r_' && is_operation-abap_name.
 
-    LOOP AT is_operation-responses INTO ls_response.
-      LOOP AT ls_response-content INTO ls_content.
-        lv_response_name = lo_response_name->generate_response_name( iv_content_type = ls_content-type
-                                                                     iv_code         = ls_response-code ).
+    LOOP AT is_operation-responses ASSIGNING <ls_response>.
+      IF <ls_response>-ref IS NOT INITIAL.
+        lv_name = <ls_response>-ref.
+        REPLACE FIRST OCCURRENCE OF '#/components/responses/' IN lv_name WITH ''.
+        READ TABLE ms_specification-components-responses WITH KEY name = lv_name INTO ls_cresponse.
+        IF sy-subrc = 0.
+          APPEND LINES OF ls_cresponse-content TO <ls_response>-content.
+        ENDIF.
+      ENDIF.
+
+      LOOP AT <ls_response>-content INTO ls_content.
+        lv_response_name = lo_response_name->generate_response_name(
+          iv_content_type = ls_content-type
+          iv_code         = <ls_response>-code ).
         IF ls_content-schema_ref = space.
           lv_returning_type = ls_content-schema->type.
         ELSE.

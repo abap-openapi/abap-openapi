@@ -21,9 +21,9 @@ CLASS zcl_oapi_parser DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(rt_parameters) TYPE string_table.
 
-    METHODS parse_responses
+    METHODS parse_operation_responses
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(rt_responses) TYPE zif_oapi_specification_v3=>ty_responses.
+      RETURNING VALUE(rt_responses) TYPE zif_oapi_specification_v3=>ty_operation_responses.
 
     METHODS parse_media_types
       IMPORTING iv_prefix TYPE string
@@ -39,6 +39,10 @@ CLASS zcl_oapi_parser DEFINITION PUBLIC.
     METHODS parse_schemas
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(rt_schemas) TYPE zif_oapi_specification_v3=>ty_schemas.
+
+    METHODS parse_component_responses
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(rt_responses) TYPE zif_oapi_specification_v3=>ty_responses.
 
 ENDCLASS.
 
@@ -111,9 +115,27 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     ENDLOOP.
   ENDMETHOD.
 
+  METHOD parse_component_responses.
+
+    DATA lt_names    TYPE string_table.
+    DATA lv_name     TYPE string.
+    DATA ls_response LIKE LINE OF rt_responses.
+
+    lt_names = mo_json->members( iv_prefix ).
+    LOOP AT lt_names INTO lv_name.
+      CLEAR ls_response.
+      ls_response-name = lv_name.
+      ls_response-description = mo_json->value_string( iv_prefix && lv_name && '/description' ).
+      ls_response-content = parse_media_types( iv_prefix && lv_name && '/content/' ).
+      APPEND ls_response TO rt_responses.
+    ENDLOOP.
+
+  ENDMETHOD.
+
   METHOD parse_components.
     rs_components-parameters = parse_parameters( '/components/parameters/' ).
     rs_components-schemas = parse_schemas( '/components/schemas/' ).
+    rs_components-responses = parse_component_responses( '/components/responses/' ).
   ENDMETHOD.
 
   METHOD parse_schemas.
@@ -181,7 +203,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
         ls_operation-operation_id = mo_json->value_string( lv_prefix && '/operationId' ).
         ls_operation-parameters = parse_parameters( lv_prefix && '/parameters/' ).
         ls_operation-parameters_ref = parse_parameters_ref( lv_prefix && '/parameters/' ).
-        ls_operation-responses = parse_responses( lv_prefix && '/responses/' ).
+        ls_operation-responses = parse_operation_responses( lv_prefix && '/responses/' ).
 
         ls_operation-abap_name = lo_names->to_abap_name( ls_operation-operation_id ).
         IF ls_operation-abap_name IS INITIAL.
@@ -215,10 +237,10 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_parameters.
-    DATA lt_members TYPE string_table.
-    DATA lv_member LIKE LINE OF lt_members.
+    DATA lt_members   TYPE string_table.
+    DATA lv_member    LIKE LINE OF lt_members.
     DATA ls_parameter LIKE LINE OF rt_parameters.
-    DATA lo_names TYPE REF TO zcl_oapi_abap_name.
+    DATA lo_names     TYPE REF TO zcl_oapi_abap_name.
 
     lt_members = mo_json->members( iv_prefix ).
     LOOP AT lt_members INTO lv_member.
@@ -254,9 +276,9 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     ENDLOOP.
   ENDMETHOD.
 
-  METHOD parse_responses.
-    DATA lt_members TYPE string_table.
-    DATA lv_member LIKE LINE OF lt_members.
+  METHOD parse_operation_responses.
+    DATA lt_members  TYPE string_table.
+    DATA lv_member   LIKE LINE OF lt_members.
     DATA ls_response LIKE LINE OF rt_responses.
 
     lt_members = mo_json->members( iv_prefix ).
@@ -265,6 +287,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
       ls_response-code = lv_member.
       ls_response-description = mo_json->value_string( iv_prefix && lv_member && '/description' ).
       ls_response-content = parse_media_types( iv_prefix && lv_member && '/content/' ).
+      ls_response-ref = mo_json->value_string( iv_prefix && lv_member && '/$ref' ).
       APPEND ls_response TO rt_responses.
     ENDLOOP.
   ENDMETHOD.
