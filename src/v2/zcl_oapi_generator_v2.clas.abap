@@ -279,12 +279,13 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
 
   METHOD build_clas_client.
-    DATA ls_operation LIKE LINE OF ms_specification-operations.
-    DATA ls_parameter LIKE LINE OF ls_operation-parameters.
-    DATA ls_response  LIKE LINE OF ls_operation-responses.
-    DATA ls_content   LIKE LINE OF ls_response-content.
+    DATA ls_operation     LIKE LINE OF ms_specification-operations.
+    DATA ls_parameter     LIKE LINE OF ls_operation-parameters.
+    DATA ls_response      LIKE LINE OF ls_operation-responses.
+    DATA ls_content       LIKE LINE OF ls_response-content.
     DATA lo_response_name TYPE REF TO zcl_oapi_response_name.
-    DATA lv_name TYPE string.
+    DATA ls_cresponse     LIKE LINE OF ms_specification-components-responses.
+    DATA lv_name          TYPE string.
 
     CREATE OBJECT lo_response_name.
 
@@ -399,6 +400,15 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       LOOP AT ls_operation-responses INTO ls_response.
         rv_abap = rv_abap &&
           |      WHEN '{ ls_response-code }'.\n|.
+
+        IF ls_response-ref IS NOT INITIAL.
+          lv_name = ls_response-ref.
+          REPLACE FIRST OCCURRENCE OF '#/components/responses/' IN lv_name WITH ''.
+          READ TABLE ms_specification-components-responses WITH KEY name = lv_name INTO ls_cresponse.
+          IF sy-subrc = 0.
+            APPEND LINES OF ls_cresponse-content TO ls_response-content.
+          ENDIF.
+        ENDIF.
 
         IF lines( ls_response-content ) > 0.
           rv_abap = rv_abap &&

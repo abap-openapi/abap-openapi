@@ -40,6 +40,10 @@ CLASS zcl_oapi_parser DEFINITION PUBLIC.
       IMPORTING iv_prefix TYPE string
       RETURNING VALUE(rt_schemas) TYPE zif_oapi_specification_v3=>ty_schemas.
 
+    METHODS parse_component_responses
+      IMPORTING iv_prefix TYPE string
+      RETURNING VALUE(rt_responses) TYPE zif_oapi_specification_v3=>ty_responses.
+
 ENDCLASS.
 
 CLASS zcl_oapi_parser IMPLEMENTATION.
@@ -111,9 +115,29 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     ENDLOOP.
   ENDMETHOD.
 
+  METHOD parse_component_responses.
+
+    DATA lt_names TYPE string_table.
+    DATA lv_name TYPE string.
+    DATA ls_response LIKE LINE OF rt_responses.
+    DATA lo_names TYPE REF TO zcl_oapi_abap_name.
+    CREATE OBJECT lo_names.
+
+    lt_names = mo_json->members( iv_prefix ).
+    LOOP AT lt_names INTO lv_name.
+      CLEAR ls_response.
+      ls_response-name = lv_name.
+      ls_response-description = mo_json->value_string( iv_prefix && '/' && lv_name && '/description' ).
+      ls_response-content = parse_media_types( iv_prefix && '/' && lv_name && '/content/' ).
+      APPEND ls_response TO rt_responses.
+    ENDLOOP.
+
+  ENDMETHOD.
+
   METHOD parse_components.
     rs_components-parameters = parse_parameters( '/components/parameters/' ).
     rs_components-schemas = parse_schemas( '/components/schemas/' ).
+    rs_components-responses = parse_component_responses( '/components/responses/' ).
   ENDMETHOD.
 
   METHOD parse_schemas.
@@ -215,10 +239,10 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_parameters.
-    DATA lt_members TYPE string_table.
-    DATA lv_member LIKE LINE OF lt_members.
+    DATA lt_members   TYPE string_table.
+    DATA lv_member    LIKE LINE OF lt_members.
     DATA ls_parameter LIKE LINE OF rt_parameters.
-    DATA lo_names TYPE REF TO zcl_oapi_abap_name.
+    DATA lo_names     TYPE REF TO zcl_oapi_abap_name.
 
     lt_members = mo_json->members( iv_prefix ).
     LOOP AT lt_members INTO lv_member.
