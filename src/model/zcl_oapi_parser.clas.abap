@@ -255,8 +255,8 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_operation_responses.
-    DATA lt_members TYPE string_table.
-    DATA lv_member LIKE LINE OF lt_members.
+    DATA lt_members  TYPE string_table.
+    DATA lv_member   LIKE LINE OF lt_members.
     DATA ls_response LIKE LINE OF rt_responses.
 
     lt_members = mo_json->members( iv_prefix ).
@@ -265,6 +265,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
       ls_response-code = lv_member.
       ls_response-description = mo_json->value_string( iv_prefix && lv_member && '/description' ).
       ls_response-content = parse_media_types( iv_prefix && lv_member && '/content/' ).
+      ls_response-ref = mo_json->value_string( iv_prefix && lv_member && '/$ref' ).
       APPEND ls_response TO rt_responses.
     ENDLOOP.
   ENDMETHOD.

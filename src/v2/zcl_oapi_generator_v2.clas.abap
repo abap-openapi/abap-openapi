@@ -429,6 +429,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
             |          WHEN OTHERS.\n| &&
             |* unexpected content type\n| &&
             |        ENDCASE.\n|.
+        ELSEIF ls_response-ref IS NOT INITIAL.
+          rv_abap = rv_abap &&
+            |* todo, no content types { ls_response-ref }\n|.
         ELSE.
           rv_abap = rv_abap &&
             |* todo, no content types\n|.
