@@ -67,7 +67,18 @@ CLASS zcl_client017 IMPLEMENTATION.
     mi_client->response->get_status( IMPORTING code = lv_code ).
     CASE lv_code.
       WHEN '400'.
+        SPLIT lv_content_type AT ';' INTO lv_content_type lv_dummy.
+        CASE lv_content_type.
+          WHEN 'application/json'.
+            /ui2/cl_json=>deserialize(
+              EXPORTING
+                json        = mi_client->response->get_cdata( )
+                pretty_name = /ui2/cl_json=>pretty_mode-camel_case
+              CHANGING
+                data        = return-_400_app_json ).
+          WHEN OTHERS.
 * unexpected content type
+        ENDCASE.
       WHEN OTHERS.
 * todo, error handling
     ENDCASE.

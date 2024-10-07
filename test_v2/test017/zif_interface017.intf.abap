@@ -20,7 +20,12 @@ INTERFACE zif_interface017 PUBLIC.
            error TYPE suberror_error,
          END OF error.
 
+  TYPES: BEGIN OF r__array,
+           _400_app_json TYPE error,
+         END OF r__array.
   METHODS _array
+    RETURNING
+      VALUE(return) TYPE r__array
     RAISING
       cx_static_check.
 ENDINTERFACE.
