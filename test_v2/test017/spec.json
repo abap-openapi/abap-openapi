@@ -8,7 +8,7 @@
     "/array": {
       "post": {
         "responses": {
-          "4XX": {
+          "400": {
             "$ref": "#/components/responses/error"
           }
         }

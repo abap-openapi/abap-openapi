@@ -66,7 +66,7 @@ CLASS zcl_client017 IMPLEMENTATION.
     lv_content_type = mi_client->response->get_content_type( ).
     mi_client->response->get_status( IMPORTING code = lv_code ).
     CASE lv_code.
-      WHEN '4XX'.
+      WHEN '400'.
 * todo, no content types
       WHEN OTHERS.
 * todo, error handling
