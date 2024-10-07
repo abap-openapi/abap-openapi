@@ -60,9 +60,17 @@ INTERFACE zif_oapi_specification_v3 PUBLIC.
 
   TYPES ty_schemas TYPE STANDARD TABLE OF ty_component_schema WITH DEFAULT KEY.
 
+  TYPES: BEGIN OF ty_response,
+           name        TYPE string,
+           description TYPE string,
+           content     TYPE ty_media_types,
+         END OF ty_response.
+
+  TYPES ty_responses TYPE STANDARD TABLE OF ty_response WITH DEFAULT KEY.
+
   TYPES: BEGIN OF ty_components,
            schemas          TYPE ty_schemas,
-           responses        TYPE string, " todo
+           responses        TYPE ty_responses,
            parameters       TYPE ty_parameters,
            examples         TYPE string, " todo
            request_bodies   TYPE string, " todo
