@@ -8,7 +8,7 @@ CLASS zcl_oapi_response_name DEFINITION
       generate_response_name
         IMPORTING
           iv_content_type TYPE zif_oapi_specification_v3=>ty_media_type-type
-          iv_code         TYPE zif_oapi_specification_v3=>ty_response-code
+          iv_code         TYPE zif_oapi_specification_v3=>ty_operation_response-code
         RETURNING
           VALUE(rv_name)  TYPE string.
 

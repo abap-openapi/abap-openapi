@@ -23,7 +23,7 @@ CLASS zcl_oapi_parser DEFINITION PUBLIC.
 
     METHODS parse_responses
       IMPORTING iv_prefix TYPE string
-      RETURNING VALUE(rt_responses) TYPE zif_oapi_specification_v3=>ty_responses.
+      RETURNING VALUE(rt_responses) TYPE zif_oapi_specification_v3=>ty_operation_responses.
 
     METHODS parse_media_types
       IMPORTING iv_prefix TYPE string

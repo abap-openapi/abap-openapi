@@ -23,13 +23,14 @@ INTERFACE zif_oapi_specification_v3 PUBLIC.
 
   TYPES ty_media_types TYPE STANDARD TABLE OF ty_media_type WITH DEFAULT KEY.
 
-  TYPES: BEGIN OF ty_response,
+  TYPES: BEGIN OF ty_operation_response,
            code        TYPE string,
            description TYPE string,
            content     TYPE ty_media_types,
-         END OF ty_response.
+           ref         TYPE string,
+         END OF ty_operation_response.
 
-  TYPES ty_responses TYPE STANDARD TABLE OF ty_response WITH DEFAULT KEY.
+  TYPES ty_operation_responses TYPE STANDARD TABLE OF ty_operation_response WITH DEFAULT KEY.
 
   TYPES: BEGIN OF ty_operation,
            path           TYPE string,
@@ -44,8 +45,7 @@ INTERFACE zif_oapi_specification_v3 PUBLIC.
           "  body_schema_ref TYPE string,
            parameters      TYPE ty_parameters,
            parameters_ref  TYPE string_table,
-           responses       TYPE ty_responses,
-           responses_ref   TYPE string_table, " ? todo
+           responses       TYPE ty_operation_responses,
          END OF ty_operation.
 
   TYPES ty_operations TYPE STANDARD TABLE OF ty_operation WITH DEFAULT KEY.
