@@ -13,7 +13,7 @@ CLASS zcl_oapi_main DEFINITION PUBLIC.
       END OF ty_result.
 
     METHODS run
-      IMPORTING is_input TYPE ty_input
+      IMPORTING is_input         TYPE ty_input
       RETURNING VALUE(rs_result) TYPE ty_result.
 
   PRIVATE SECTION.
@@ -21,19 +21,19 @@ CLASS zcl_oapi_main DEFINITION PUBLIC.
     DATA ms_input TYPE ty_input.
 
     METHODS is_success_code
-      IMPORTING iv_code TYPE string
+      IMPORTING iv_code        TYPE string
       RETURNING VALUE(rv_bool) TYPE abap_bool.
 
     METHODS operation_implementation
-      IMPORTING is_operation TYPE zif_oapi_specification_v3=>ty_operation
+      IMPORTING is_operation   TYPE zif_oapi_specification_v3=>ty_operation
       RETURNING VALUE(rv_abap) TYPE string.
 
     METHODS find_return
-      IMPORTING is_operation TYPE zif_oapi_specification_v3=>ty_operation
+      IMPORTING is_operation   TYPE zif_oapi_specification_v3=>ty_operation
       RETURNING VALUE(rs_type) TYPE zif_oapi_specification_v3=>ty_component_schema.
 
     METHODS build_abap_parameters
-      IMPORTING is_operation TYPE zif_oapi_specification_v3=>ty_operation
+      IMPORTING is_operation   TYPE zif_oapi_specification_v3=>ty_operation
       RETURNING VALUE(rv_abap) TYPE string.
 
     METHODS build_class
@@ -52,29 +52,29 @@ CLASS zcl_oapi_main DEFINITION PUBLIC.
       RETURNING VALUE(rv_abap) TYPE string.
 
     METHODS dump_json
-      IMPORTING ii_schema TYPE REF TO zif_oapi_schema
+      IMPORTING ii_schema      TYPE REF TO zif_oapi_schema
       RETURNING VALUE(rv_abap) TYPE string.
 
     METHODS find_parser_method
-      IMPORTING iv_name TYPE string
+      IMPORTING iv_name          TYPE string
       RETURNING VALUE(rv_method) TYPE string.
 
     METHODS abap_schema_to_json
-      IMPORTING iv_name TYPE string
+      IMPORTING iv_name        TYPE string
       RETURNING VALUE(rv_abap) TYPE string.
 
     METHODS find_schema
-      IMPORTING iv_name TYPE string
+      IMPORTING iv_name          TYPE string
       RETURNING VALUE(rs_schema) TYPE zif_oapi_specification_v3=>ty_component_schema.
 
     METHODS dump_parser
-      IMPORTING ii_schema TYPE REF TO zif_oapi_schema
-                iv_abap_name TYPE string
+      IMPORTING ii_schema      TYPE REF TO zif_oapi_schema
+                iv_abap_name   TYPE string
                 iv_hard_prefix TYPE string OPTIONAL
       RETURNING VALUE(rv_abap) TYPE string.
 
     METHODS find_uri_prefix
-      IMPORTING is_servers LIKE ms_specification-servers
+      IMPORTING is_servers       LIKE ms_specification-servers
       RETURNING VALUE(rv_prefix) TYPE string.
 
 ENDCLASS.

@@ -1,11 +1,13 @@
 CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
   PUBLIC SECTION.
+
     TYPES: BEGIN OF ty_input,
-             clas_icf_serv TYPE c LENGTH 30,
-             clas_icf_impl TYPE c LENGTH 30,
-             clas_client   TYPE c LENGTH 30,
-             intf          TYPE c LENGTH 30,
-             openapi_json  TYPE string,
+             clas_icf_serv  TYPE c LENGTH 30,
+             clas_icf_impl  TYPE c LENGTH 30,
+             clas_client    TYPE c LENGTH 30,
+             intf           TYPE c LENGTH 30,
+             openapi_json   TYPE string,
+             no_compression TYPE abap_bool,
            END OF ty_input.
 
     TYPES: BEGIN OF ty_result,
@@ -327,9 +329,13 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |    DATA lv_content_type TYPE string.\n| &&
         |\n| &&
         |    mi_client->propertytype_logon_popup = if_http_client=>co_disabled.\n| &&
-        |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n| &&
-        |    mi_client->request->set_compression( ).\n| &&
-        |    lv_uri = mv_uri_prefix && '{ ls_operation-path }'.\n|.
+        |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n|.
+      IF ms_input-no_compression = abap_false.
+        rv_abap = rv_abap &&
+          |    mi_client->request->set_compression( ).\n|.
+      ENDIF.
+      rv_abap = rv_abap &&
+          |    lv_uri = mv_uri_prefix && '{ ls_operation-path }'.\n|.
 
       LOOP AT ls_operation-parameters INTO ls_parameter.
         CASE ls_parameter-in.
