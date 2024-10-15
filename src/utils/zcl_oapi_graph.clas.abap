@@ -2,7 +2,7 @@ CLASS zcl_oapi_graph DEFINITION PUBLIC.
   PUBLIC SECTION.
     TYPES: BEGIN OF ty_edge,
              from TYPE string,
-             to  TYPE string,
+             to   TYPE string,
            END OF ty_edge.
     METHODS add_vertex IMPORTING iv_vertex TYPE string.
     METHODS add_edge

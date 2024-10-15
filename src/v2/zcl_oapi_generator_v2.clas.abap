@@ -1,11 +1,12 @@
 CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
   PUBLIC SECTION.
     TYPES: BEGIN OF ty_input,
-             clas_icf_serv TYPE c LENGTH 30,
-             clas_icf_impl TYPE c LENGTH 30,
-             clas_client   TYPE c LENGTH 30,
-             intf          TYPE c LENGTH 30,
-             openapi_json  TYPE string,
+             clas_icf_serv  TYPE c LENGTH 30,
+             clas_icf_impl  TYPE c LENGTH 30,
+             clas_client    TYPE c LENGTH 30,
+             intf           TYPE c LENGTH 30,
+             openapi_json   TYPE string,
+             no_compression TYPE abap_bool,
            END OF ty_input.
 
     TYPES: BEGIN OF ty_result,
