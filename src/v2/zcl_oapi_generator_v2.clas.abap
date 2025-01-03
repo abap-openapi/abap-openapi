@@ -114,6 +114,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     CREATE OBJECT lo_parser.
     ms_specification = lo_parser->parse( is_input-openapi_json ).
 
+    IF is_input-skip_deprecated = abap_true.
+      DELETE ms_specification-operations WHERE deprecated = abap_true.
+    ENDIF.
+
     CREATE OBJECT lo_references.
     ms_specification = lo_references->normalize( ms_specification ).
 

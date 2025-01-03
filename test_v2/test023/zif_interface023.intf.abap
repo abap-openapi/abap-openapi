@@ -5,9 +5,4 @@ INTERFACE zif_interface023 PUBLIC.
 
   CONSTANTS base_path TYPE string VALUE ''.
 
-  METHODS send_text
-    IMPORTING
-      body TYPE string
-    RAISING
-      cx_static_check.
 ENDINTERFACE.

@@ -5,8 +5,4 @@ ENDCLASS.
 
 CLASS zcl_icf_impl023 IMPLEMENTATION.
 
-  METHOD zif_interface023~send_text.
-* Add implementation logic here
-  ENDMETHOD.
-
 ENDCLASS.

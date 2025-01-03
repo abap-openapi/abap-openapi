@@ -17,17 +17,6 @@ CLASS zcl_icf_serv023 IMPLEMENTATION.
     REPLACE FIRST OCCURRENCE OF zif_interface023=>base_path IN lv_path WITH ''.
     lv_method = server->request->get_method( ).
 
-    TRY.
-        IF lv_path = '/sendText' AND lv_method = 'PUT'.
-          li_handler->send_text(
-            body = 'todo' ).
-          RETURN.
-        ENDIF.
-      CATCH cx_static_check.
-        server->response->set_content_type( 'text/plain' ).
-        server->response->set_cdata( 'exception' ).
-        server->response->set_status( code = 500 reason = 'Error' ).
-    ENDTRY.
 
     server->response->set_content_type( 'text/plain' ).
     server->response->set_cdata( 'no handler found' ).
