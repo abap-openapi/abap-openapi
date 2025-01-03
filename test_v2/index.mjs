@@ -67,6 +67,8 @@ async function run() {
     clas_client: new abap.types.Character(30).set(clas_client),
     intf: new abap.types.Character(30).set(intf),
     openapi_json: new abap.types.String().set(spec),
+    // no_compression: new abap.types.Character(1).set("X"),
+    skip_deprecated: new abap.types.Character(1).set("X"),
   });
   const result = await abap.Classes["ZCL_OAPI_GENERATOR"].generate_v2({
     is_input: input,

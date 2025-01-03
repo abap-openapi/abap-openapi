@@ -38,7 +38,6 @@ CLASS zcl_client013 IMPLEMENTATION.
 
     mi_client->propertytype_logon_popup = if_http_client=>co_disabled.
     mi_client->request->set_method( 'POST' ).
-    mi_client->request->set_compression( ).
     lv_uri = mv_uri_prefix && '/foo/{param}/{another}'.
     REPLACE FIRST OCCURRENCE OF '{param}' IN lv_uri WITH param.
     REPLACE FIRST OCCURRENCE OF '{another}' IN lv_uri WITH another.

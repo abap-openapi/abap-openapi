@@ -39,7 +39,6 @@ CLASS zcl_client009 IMPLEMENTATION.
 
     mi_client->propertytype_logon_popup = if_http_client=>co_disabled.
     mi_client->request->set_method( 'GET' ).
-    mi_client->request->set_compression( ).
     lv_uri = mv_uri_prefix && '/test'.
 " todo, in=query name=$top
     cl_http_utility=>set_request_uri(
