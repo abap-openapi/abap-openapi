@@ -22,7 +22,7 @@
     "type": "git",
     "url": "git+https://github.com/abap-openapi/abap-openapi-client.git"
   },
-  "author": "Lars Hvam Petersenn",
+  "author": "Lars Hvam Petersen",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/abap-openapi/abap-openapi-client/issues"
