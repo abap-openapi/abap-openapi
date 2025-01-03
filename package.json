@@ -22,16 +22,16 @@
     "type": "git",
     "url": "git+https://github.com/abap-openapi/abap-openapi-client.git"
   },
-  "author": "",
+  "author": "Lars Hvam Petersen",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/abap-openapi/abap-openapi-client/issues"
   },
   "homepage": "https://github.com/abap-openapi/abap-openapi-client#readme",
   "dependencies": {
-    "@abaplint/cli": "^2.113.21",
-    "@abaplint/runtime": "^2.10.20",
-    "@abaplint/transpiler-cli": "^2.10.20",
+    "@abaplint/cli": "^2.113.85",
+    "@abaplint/runtime": "^2.10.23",
+    "@abaplint/transpiler-cli": "^2.10.23",
     "rimraf": "^6.0.1"
   }
 }
