@@ -145,9 +145,15 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
           WHEN OTHERS.
             rv_simple = 'string'.
         ENDCASE.
-        IF iv_format = 'binary'.
-          rv_simple = 'xstring'.
-        ENDIF.
+
+        CASE iv_format.
+          WHEN 'binary'.
+            rv_simple = 'xstring'.
+          WHEN 'uuid'.
+            " https://json-schema.org/understanding-json-schema/reference/string#resource-identifiers
+            " https://abapedia.org/steampunk-2305-api/sysuuid_c36.dtel.html
+            rv_simple = 'sysuuid_c36'.
+        ENDCASE.
       WHEN 'array'.
         IF zif_oapi_schema~items_type = 'object' AND zif_oapi_schema~items_ref IS INITIAL.
           rv_simple = 'any'.
