@@ -29,8 +29,6 @@ CLASS zcl_client014 IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD zif_interface014~ping_summary.
-    DATA lv_code         TYPE i.
-    DATA lv_message      TYPE string.
     DATA lv_uri          TYPE string.
     DATA ls_header       LIKE LINE OF mt_extra_headers.
     DATA lv_dummy        TYPE string.
@@ -58,14 +56,17 @@ CLASS zcl_client014 IMPLEMENTATION.
     IF sy-subrc <> 0.
       mi_client->get_last_error(
         IMPORTING
-          code    = lv_code
-          message = lv_message ).
+          code    = return-code
+          message = return-reason ).
       ASSERT 1 = 2.
     ENDIF.
 
     lv_content_type = mi_client->response->get_content_type( ).
-    mi_client->response->get_status( IMPORTING code = lv_code ).
-    CASE lv_code.
+    mi_client->response->get_status(
+      IMPORTING
+        code   = return-code
+        reason = return-reason ).
+    CASE return-code.
       WHEN '200'.
 * todo, no content types
       WHEN OTHERS.

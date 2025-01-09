@@ -6,9 +6,15 @@ INTERFACE zif_interface011 PUBLIC.
 
   CONSTANTS base_path TYPE string VALUE ''.
 
+  TYPES: BEGIN OF r__foo_param,
+           code          TYPE i,
+           reason        TYPE string,
+         END OF r__foo_param.
   METHODS _foo_param
     IMPORTING
       param TYPE string
+    RETURNING
+      VALUE(return) TYPE r__foo_param
     RAISING
       cx_static_check.
 ENDINTERFACE.

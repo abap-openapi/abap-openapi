@@ -29,6 +29,8 @@ INTERFACE zif_interface008 PUBLIC.
   TYPES response_find_pets_by_status TYPE STANDARD TABLE OF pet WITH DEFAULT KEY.
 
   TYPES: BEGIN OF r_find_pets_by_status,
+           code          TYPE i,
+           reason        TYPE string,
            _200_app_json TYPE response_find_pets_by_status,
            _200_app_xml TYPE response_find_pets_by_status,
          END OF r_find_pets_by_status.

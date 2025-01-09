@@ -37,6 +37,8 @@ INTERFACE zif_interface006 PUBLIC.
          END OF posttestrequest.
 
   TYPES: BEGIN OF r__test,
+           code          TYPE i,
+           reason        TYPE string,
            _200_app_json TYPE posttestresponse,
          END OF r__test.
   METHODS _test

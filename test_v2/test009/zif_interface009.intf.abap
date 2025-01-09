@@ -6,9 +6,15 @@ INTERFACE zif_interface009 PUBLIC.
 
   CONSTANTS base_path TYPE string VALUE ''.
 
+  TYPES: BEGIN OF r__test,
+           code          TYPE i,
+           reason        TYPE string,
+         END OF r__test.
   METHODS _test
     IMPORTING
       _top TYPE i OPTIONAL
+    RETURNING
+      VALUE(return) TYPE r__test
     RAISING
       cx_static_check.
 ENDINTERFACE.
