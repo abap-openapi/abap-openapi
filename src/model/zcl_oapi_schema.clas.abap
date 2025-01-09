@@ -46,9 +46,10 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
   METHOD zif_oapi_schema~build_type_definition.
 
     DATA ls_property TYPE zif_oapi_schema=>ty_property.
-    DATA ls_ref TYPE zif_oapi_specification_v3=>ty_component_schema.
-    DATA lv_count TYPE i.
-    DATA lv_name TYPE string.
+    DATA ls_ref      TYPE zif_oapi_specification_v3=>ty_component_schema.
+    DATA lv_count    TYPE i.
+    DATA lv_enums    TYPE string.
+    DATA lv_name     TYPE string.
 
     IF zif_oapi_schema~type = 'object'.
       rv_abap = rv_abap && |  TYPES: BEGIN OF { iv_name },\n|.
@@ -60,6 +61,9 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
                                it_refs = it_refs ).
           rv_abap = rv_abap && ls_ref-abap_name && |,\n|.
         ELSEIF ls_property-schema->is_simple_type( ) = abap_true.
+          IF lines( ls_property-schema->enum ) > 0.
+            lv_enums = lv_enums && |* Enum: { iv_name }-{ ls_property-abap_name }\n|.
+          ENDIF.
           rv_abap = rv_abap && ls_property-schema->get_simple_type( ) && |,\n|.
         ELSEIF ls_property-schema->type = 'array' AND ls_property-schema->items_ref IS NOT INITIAL.
           ls_ref = lookup_ref( iv_name = ls_property-schema->items_ref
@@ -92,6 +96,8 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
     ELSE.
       rv_abap = rv_abap && |  TYPES { iv_name } TYPE string. " { zif_oapi_schema~type } { zif_oapi_schema~items_ref } todo\n|.
     ENDIF.
+
+    rv_abap = lv_enums && rv_abap.
 
   ENDMETHOD.
 

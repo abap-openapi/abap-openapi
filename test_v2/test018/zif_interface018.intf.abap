@@ -10,6 +10,7 @@ INTERFACE zif_interface018 PUBLIC.
            operation TYPE i,
          END OF operation.
 * Dog
+* Enum: dog-breed
   TYPES: BEGIN OF dog,
            bark TYPE abap_bool,
            breed TYPE string,

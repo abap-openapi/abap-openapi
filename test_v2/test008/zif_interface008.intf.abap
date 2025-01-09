@@ -17,6 +17,7 @@ INTERFACE zif_interface008 PUBLIC.
            name TYPE string,
          END OF category.
 * Pet
+* Enum: pet-status
   TYPES: BEGIN OF pet,
            id TYPE i,
            name TYPE string,
