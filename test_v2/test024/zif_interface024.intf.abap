@@ -5,13 +5,18 @@ INTERFACE zif_interface024 PUBLIC.
 
   CONSTANTS base_path TYPE string VALUE ''.
 
+* POSTtestRequest
+  TYPES: BEGIN OF posttestrequest,
+           string1 TYPE timestampl,
+         END OF posttestrequest.
+
   TYPES: BEGIN OF r_send_date_time,
            code          TYPE i,
            reason        TYPE string,
          END OF r_send_date_time.
   METHODS send_date_time
     IMPORTING
-      body TYPE string
+      body TYPE posttestrequest
     RETURNING
       VALUE(return) TYPE r_send_date_time
     RAISING

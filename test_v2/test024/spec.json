@@ -11,10 +11,9 @@
         "requestBody": {
           "required": true,
           "content": {
-            "text/json": {
+            "application/json": {
               "schema": {
-                "type": "string",
-                "format": "date-time"
+                "$ref": "#/components/schemas/POSTtestRequest"
               }
             }
           }
@@ -22,6 +21,19 @@
         "responses": {
           "200": {
             "description": "ok"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "POSTtestRequest": {
+        "type": "object",
+        "properties": {
+          "string1": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       }

@@ -19,8 +19,15 @@ CLASS zcl_icf_serv024 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/sendDateTime' AND lv_method = 'PUT'.
+          DATA send_date_time TYPE zif_interface024=>posttestrequest.
+          /ui2/cl_json=>deserialize(
+            EXPORTING
+              json        = server->request->get_cdata( )
+              pretty_name = /ui2/cl_json=>pretty_mode-camel_case
+            CHANGING
+              data        = send_date_time ).
           li_handler->send_date_time(
-            body = 'todo' ).
+            body = send_date_time ).
           RETURN.
         ENDIF.
       CATCH cx_static_check.
