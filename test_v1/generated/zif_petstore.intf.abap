@@ -77,7 +77,7 @@ INTERFACE zif_petstore PUBLIC.
            id TYPE i,
            pet_id TYPE i,
            quantity TYPE i,
-           ship_date TYPE string,
+           ship_date TYPE timestampl,
            status TYPE string,
            complete TYPE abap_bool,
          END OF order.
