@@ -595,8 +595,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     IF rs_returning-type IS NOT INITIAL.
       rs_returning-type =
         |  TYPES: BEGIN OF { lv_typename },\n| &&
-        |           code          TYPE i,| &&
-        |           reason        TYPE string,| &&
+        |           code          TYPE i,\n| &&
+        |           reason        TYPE string,\n| &&
         |{ rs_returning-type }| &&
         |         END OF { lv_typename }.\n|.
     ENDIF.
