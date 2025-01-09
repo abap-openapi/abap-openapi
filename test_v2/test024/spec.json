@@ -1,0 +1,30 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "text body",
+    "version": "1"
+  },
+  "paths": {
+    "/sendDateTime": {
+      "put": {
+        "operationId": "sendDateTime",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "text/json": {
+              "schema": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    }
+  }
+}

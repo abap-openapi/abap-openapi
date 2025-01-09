@@ -149,6 +149,9 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
         CASE iv_format.
           WHEN 'binary'.
             rv_simple = 'xstring'.
+          WHEN 'date-time'.
+            " https://abapedia.org/steampunk-2305-api/timestampl.dtel.html
+            rv_simple = 'timestampl'.
           WHEN 'uuid'.
             " https://json-schema.org/understanding-json-schema/reference/string#resource-identifiers
             " https://abapedia.org/steampunk-2305-api/sysuuid_c36.dtel.html
