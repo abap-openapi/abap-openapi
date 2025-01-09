@@ -405,8 +405,11 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |    ENDIF.\n| &&
         |\n| &&
         |    lv_content_type = mi_client->response->get_content_type( ).\n| &&
-        |    mi_client->response->get_status( IMPORTING code = lv_code ).\n| &&
-        |    CASE lv_code.\n|.
+        |    mi_client->response->get_status(\n| &&
+        |      IMPORTING\n| &&
+        |        code   = return-code\n| &&
+        |        reason = return-reason ).\n| &&
+        |    CASE return-code.\n|.
 
       LOOP AT ls_operation-responses INTO ls_response.
         rv_abap = rv_abap &&
@@ -592,6 +595,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     IF rs_returning-type IS NOT INITIAL.
       rs_returning-type =
         |  TYPES: BEGIN OF { lv_typename },\n| &&
+        |           code          TYPE i,| &&
+        |           reason        TYPE string,| &&
         |{ rs_returning-type }| &&
         |         END OF { lv_typename }.\n|.
     ENDIF.
