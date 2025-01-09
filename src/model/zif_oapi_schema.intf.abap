@@ -13,6 +13,7 @@ INTERFACE zif_oapi_schema PUBLIC.
     default      TYPE string,
     max_length   TYPE i,
     properties   TYPE STANDARD TABLE OF ty_property WITH DEFAULT KEY,
+    enum         TYPE STANDARD TABLE OF string WITH DEFAULT KEY,
     items_type   TYPE string, " todo, deprecate this field? use items_schema instead?
     items_schema TYPE REF TO zif_oapi_schema,
     items_ref    TYPE string.
