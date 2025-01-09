@@ -5,9 +5,15 @@ INTERFACE zif_interface022 PUBLIC.
 
   CONSTANTS base_path TYPE string VALUE ''.
 
+  TYPES: BEGIN OF r_send_text,
+           code          TYPE i,
+           reason        TYPE string,
+         END OF r_send_text.
   METHODS send_text
     IMPORTING
       body TYPE string
+    RETURNING
+      VALUE(return) TYPE r_send_text
     RAISING
       cx_static_check.
 ENDINTERFACE.

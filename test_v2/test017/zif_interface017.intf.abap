@@ -21,6 +21,8 @@ INTERFACE zif_interface017 PUBLIC.
          END OF error.
 
   TYPES: BEGIN OF r__array,
+           code          TYPE i,
+           reason        TYPE string,
            _400_app_json TYPE error,
          END OF r__array.
   METHODS _array

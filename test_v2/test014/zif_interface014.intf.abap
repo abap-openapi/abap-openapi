@@ -5,8 +5,14 @@ INTERFACE zif_interface014 PUBLIC.
 
   CONSTANTS base_path TYPE string VALUE ''.
 
+  TYPES: BEGIN OF r_ping_summary,
+           code          TYPE i,
+           reason        TYPE string,
+         END OF r_ping_summary.
   "! ping summary
   METHODS ping_summary
+    RETURNING
+      VALUE(return) TYPE r_ping_summary
     RAISING
       cx_static_check.
 ENDINTERFACE.
