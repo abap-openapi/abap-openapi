@@ -326,8 +326,6 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     LOOP AT ms_specification-operations INTO ls_operation.
       rv_abap = rv_abap &&
         |  METHOD { ms_input-intf }~{ ls_operation-abap_name }.\n| &&
-        |    DATA lv_code         TYPE i.\n| &&
-        |    DATA lv_message      TYPE string.\n| &&
         |    DATA lv_uri          TYPE string.\n| &&
         |    DATA ls_header       LIKE LINE OF mt_extra_headers.\n| &&
         |    DATA lv_dummy        TYPE string.\n| &&
@@ -399,8 +397,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |    IF sy-subrc <> 0.\n| &&
         |      mi_client->get_last_error(\n| &&
         |        IMPORTING\n| &&
-        |          code    = lv_code\n| &&
-        |          message = lv_message ).\n| &&
+        |          code    = return-code\n| &&
+        |          message = return-reason ).\n| &&
         |      ASSERT 1 = 2.\n| &&
         |    ENDIF.\n| &&
         |\n| &&
@@ -592,21 +590,15 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
               |           { lv_response_name } TYPE { lv_returning_type },\n|.
       ENDLOOP.
     ENDLOOP.
-    IF rs_returning-type IS NOT INITIAL.
-      rs_returning-type =
-        |  TYPES: BEGIN OF { lv_typename },\n| &&
-        |           code          TYPE i,\n| &&
-        |           reason        TYPE string,\n| &&
-        |{ rs_returning-type }| &&
-        |         END OF { lv_typename }.\n|.
-    ENDIF.
+    rs_returning-type =
+      |  TYPES: BEGIN OF { lv_typename },\n| &&
+      |           code          TYPE i,\n| &&
+      |           reason        TYPE string,\n| &&
+      |{ rs_returning-type }| &&
+      |         END OF { lv_typename }.\n|.
 
-    LOOP AT is_operation-responses INTO ls_response.
-      LOOP AT ls_response-content INTO ls_content.
-        rs_returning-abap = rs_returning-abap &&
-          |\n    RETURNING\n      VALUE(return) TYPE { lv_typename }|.
-        RETURN. " exit method, as only one return parameter is allowed
-      ENDLOOP.
-    ENDLOOP.
+    rs_returning-abap = rs_returning-abap &&
+      |\n    RETURNING\n      VALUE(return) TYPE { lv_typename }|.
+
   ENDMETHOD.
 ENDCLASS.
