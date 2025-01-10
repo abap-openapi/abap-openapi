@@ -20,6 +20,12 @@ INTERFACE zif_petstore PUBLIC.
          END OF category.
 
 * Component schema: Pet, object
+* Enum: pet-status
+  CONSTANTS: BEGIN OF c_enum_pet_status,
+               available TYPE string VALUE 'available',
+               pending TYPE string VALUE 'pending',
+               sold TYPE string VALUE 'sold',
+             END OF c_enum_pet_status.
   TYPES: BEGIN OF pet,
            id TYPE i,
            name TYPE string,
@@ -73,6 +79,12 @@ INTERFACE zif_petstore PUBLIC.
          END OF customer.
 
 * Component schema: Order, object
+* Enum: order-status
+  CONSTANTS: BEGIN OF c_enum_order_status,
+               placed TYPE string VALUE 'placed',
+               approved TYPE string VALUE 'approved',
+               delivered TYPE string VALUE 'delivered',
+             END OF c_enum_order_status.
   TYPES: BEGIN OF order,
            id TYPE i,
            pet_id TYPE i,
