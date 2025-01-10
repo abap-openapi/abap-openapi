@@ -11,6 +11,12 @@ INTERFACE zif_interface018 PUBLIC.
          END OF operation.
 * Dog
 * Enum: dog-breed
+  CONSTANTS: BEGIN OF c_enum_dog_breed,
+               dingo TYPE string VALUE 'Dingo',
+               husky TYPE string VALUE 'Husky',
+               retriever TYPE string VALUE 'Retriever',
+               shepherd TYPE string VALUE 'Shepherd',
+             END OF c_enum_dog_breed.
   TYPES: BEGIN OF dog,
            bark TYPE abap_bool,
            breed TYPE string,

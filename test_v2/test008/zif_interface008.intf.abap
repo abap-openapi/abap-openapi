@@ -18,6 +18,11 @@ INTERFACE zif_interface008 PUBLIC.
          END OF category.
 * Pet
 * Enum: pet-status
+  CONSTANTS: BEGIN OF c_enum_pet_status,
+               available TYPE string VALUE 'available',
+               pending TYPE string VALUE 'pending',
+               sold TYPE string VALUE 'sold',
+             END OF c_enum_pet_status.
   TYPES: BEGIN OF pet,
            id TYPE i,
            name TYPE string,
