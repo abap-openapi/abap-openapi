@@ -6,6 +6,13 @@ INTERFACE zif_interface016 PUBLIC.
   CONSTANTS base_path TYPE string VALUE '/sap/zpetstore'.
 
 * Dog
+* Enum: dog-breed
+  CONSTANTS: BEGIN OF c_enum_dog_breed,
+               dingo TYPE string VALUE 'Dingo',
+               husky TYPE string VALUE 'Husky',
+               retriever TYPE string VALUE 'Retriever',
+               shepherd TYPE string VALUE 'Shepherd',
+             END OF c_enum_dog_breed.
   TYPES: BEGIN OF dog,
            bark TYPE abap_bool,
            breed TYPE string,
