@@ -36,6 +36,7 @@ CLASS zcl_client006 IMPLEMENTATION.
 
     mi_client->propertytype_logon_popup = if_http_client=>co_disabled.
     mi_client->request->set_method( 'POST' ).
+    mi_client->request->set_version( if_http_request=>co_protocol_version_1_1 ).
     mi_client->request->set_compression( ).
     lv_uri = mv_uri_prefix && '/test'.
 " todo, in=query name=separator
