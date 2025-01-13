@@ -332,7 +332,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |    DATA lv_content_type TYPE string.\n| &&
         |\n| &&
         |    mi_client->propertytype_logon_popup = if_http_client=>co_disabled.\n| &&
-        |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n|.
+        |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n| &&
+        |    mi_client->request->set_version( if_http_request=>co_protocol_version_1_1 ).\n|.
       IF ms_input-no_compression = abap_false.
         rv_abap = rv_abap &&
           |    mi_client->request->set_compression( ).\n|.
