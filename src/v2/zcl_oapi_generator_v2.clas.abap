@@ -383,8 +383,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 * this does make some assumptions on the names in the openapi, it should work for every case, eventually,
         rv_abap = rv_abap &&
           |    mi_client->request->set_cdata( /ui2/cl_json=>serialize(\n| &&
-          |      data        = body\n| &&
-          |      pretty_name = /ui2/cl_json=>pretty_mode-camel_case ) ).\n|.
+          |      data          = body\n| &&
+          |      ts_as_iso8601 = abap_true\n| &&
+          |      pretty_name   = /ui2/cl_json=>pretty_mode-camel_case ) ).\n|.
       ENDIF.
 
       rv_abap = rv_abap &&
