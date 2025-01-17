@@ -308,10 +308,12 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |        ii_client        TYPE REF TO if_http_client\n| &&
       |        iv_uri_prefix    TYPE string OPTIONAL\n| &&
       |        it_extra_headers TYPE tihttpnvp OPTIONAL\n| &&
+      |        iv_logon_popup   TYPE i DEFAULT if_http_client=>co_disabled\n| &&
       |        iv_timeout       TYPE i DEFAULT if_http_client=>co_timeout_default.\n| &&
       |  PROTECTED SECTION.\n| &&
       |    DATA mi_client        TYPE REF TO if_http_client.\n| &&
       |    DATA mv_timeout       TYPE i.\n| &&
+      |    DATA mv_logon_popup   TYPE i.\n| &&
       |    DATA mv_uri_prefix    TYPE string.\n| &&
       |    DATA mt_extra_headers TYPE tihttpnvp.\n| &&
       |ENDCLASS.\n\n| &&
@@ -319,6 +321,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |  METHOD constructor.\n| &&
       |    mi_client = ii_client.\n| &&
       |    mv_timeout = iv_timeout.\n| &&
+      |    mv_logon_popup = iv_logon_popup.\n| &&
       |    mv_uri_prefix = iv_uri_prefix.\n| &&
       |    mt_extra_headers = it_extra_headers.\n| &&
       |  ENDMETHOD.\n\n|.
@@ -331,7 +334,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |    DATA lv_dummy        TYPE string.\n| &&
         |    DATA lv_content_type TYPE string.\n| &&
         |\n| &&
-        |    mi_client->propertytype_logon_popup = if_http_client=>co_disabled.\n| &&
+        |    mi_client->propertytype_logon_popup = mv_logon_popup.\n| &&
         |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n| &&
         |    mi_client->request->set_version( if_http_request=>co_protocol_version_1_1 ).\n|.
       IF ms_input-no_compression = abap_false.
