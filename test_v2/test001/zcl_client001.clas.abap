@@ -13,10 +13,12 @@ CLASS zcl_client001 DEFINITION PUBLIC.
         ii_client        TYPE REF TO if_http_client
         iv_uri_prefix    TYPE string OPTIONAL
         it_extra_headers TYPE tihttpnvp OPTIONAL
+        iv_logon_popup   TYPE i DEFAULT if_http_client=>co_disabled
         iv_timeout       TYPE i DEFAULT if_http_client=>co_timeout_default.
   PROTECTED SECTION.
     DATA mi_client        TYPE REF TO if_http_client.
     DATA mv_timeout       TYPE i.
+    DATA mv_logon_popup   TYPE i.
     DATA mv_uri_prefix    TYPE string.
     DATA mt_extra_headers TYPE tihttpnvp.
 ENDCLASS.
@@ -25,6 +27,7 @@ CLASS zcl_client001 IMPLEMENTATION.
   METHOD constructor.
     mi_client = ii_client.
     mv_timeout = iv_timeout.
+    mv_logon_popup = iv_logon_popup.
     mv_uri_prefix = iv_uri_prefix.
     mt_extra_headers = it_extra_headers.
   ENDMETHOD.
@@ -35,7 +38,7 @@ CLASS zcl_client001 IMPLEMENTATION.
     DATA lv_dummy        TYPE string.
     DATA lv_content_type TYPE string.
 
-    mi_client->propertytype_logon_popup = if_http_client=>co_disabled.
+    mi_client->propertytype_logon_popup = mv_logon_popup.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_version( if_http_request=>co_protocol_version_1_1 ).
     mi_client->request->set_compression( ).
