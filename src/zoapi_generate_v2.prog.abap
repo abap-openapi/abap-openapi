@@ -61,7 +61,7 @@ AT SELECTION-SCREEN ON VALUE-REQUEST FOR p_file.
 
 START-OF-SELECTION.
   DATA: filename TYPE string,
-        data_tab TYPE STANDARD TABLE OF text255 WITH EMPTY KEY.
+        data_tab TYPE STANDARD TABLE OF string WITH EMPTY KEY.
   filename = p_file.
   cl_gui_frontend_services=>gui_upload(
       EXPORTING
