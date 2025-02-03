@@ -72,7 +72,7 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
         VALUE(rv_info) TYPE string.
 
     methods SPLIT_STRING
-    importing
+      importing
       IV_SIZE          type I
       IV_INPUT         type STRING
     returning
