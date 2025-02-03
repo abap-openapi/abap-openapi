@@ -635,7 +635,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     cv_info = cv_info && |* Description:|.
 
 * ---------- Split desription at new line ---------------------------------------------------------
-    SPLIT ms_specification-info-description AT cl_abap_char_utilities=>newline INTO TABLE lt_descr1.
+    SPLIT iv_description AT cl_abap_char_utilities=>newline INTO TABLE lt_descr1.
 
     LOOP AT lt_descr1 ASSIGNING <ls_desc1>.
 * ---------- Init loop data -----------------------------------------------------------------------
