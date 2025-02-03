@@ -627,7 +627,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           lt_descr2     TYPE TABLE OF string,
           lv_first_time TYPE abap_bool.
 
-FIELD-SYMBOLS: <ls_desc1> type string,
+    FIELD-SYMBOLS: <ls_desc1> type string,
                <ls_desc2> type string.
 
 * ---------- Set description title ----------------------------------------------------------------
