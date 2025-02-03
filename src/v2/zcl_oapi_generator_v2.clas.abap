@@ -73,16 +73,16 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
 
     METHODS split_string
       IMPORTING
-        iv_size          type I
-        iv_input         type STRING
+        iv_size          TYPE i
+        iv_input         TYPE string
       RETURNING
-        value(rt_output) type STRING_TABLE.
+        value(rt_output) TYPE STRING_TABLE.
 
     METHODS split_description
       IMPORTING
-        iv_description type STRING
+        iv_description TYPE string
       CHANGING
-        cv_info        type STRING.
+        cv_info        TYPE string.
 ENDCLASS.
 
 
