@@ -78,7 +78,7 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
       returning
       value(RT_OUTPUT) type STRING_TABLE .
     methods SPLIT_DESCRIPTION
-    importing
+      importing
       IV_DESCRIPTION type STRING
     changing
       CV_INFO        type STRING .
