@@ -674,7 +674,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 * ---------- If still some last characters to add, calculate last substring -----------------------
     IF lv_size_end IS NOT INITIAL.
       CLEAR lv_substring.
-      lv_substring = substring( val  = iv_input off = lv_pos len =  lv_size_end ).
+      lv_substring = substring( val  = iv_input off = lv_pos len = lv_size_end ).
       INSERT lv_substring INTO TABLE rt_output.
     ENDIF.
   ENDMETHOD.
