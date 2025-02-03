@@ -81,7 +81,7 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
     importing
       IV_DESCRIPTION type STRING
     changing
-      CV_INFO type STRING .
+      CV_INFO        type STRING .
 ENDCLASS.
 
 
