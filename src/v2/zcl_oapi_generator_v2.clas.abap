@@ -75,7 +75,7 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
       importing
       IV_SIZE          type I
       IV_INPUT         type STRING
-    returning
+      returning
       value(RT_OUTPUT) type STRING_TABLE .
   methods SPLIT_DESCRIPTION
     importing
