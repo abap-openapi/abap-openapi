@@ -71,17 +71,17 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
       RETURNING
         VALUE(rv_info) TYPE string.
 
-    methods SPLIT_STRING
+    METHODS SPLIT_STRING
       importing
       IV_SIZE          type I
       IV_INPUT         type STRING
       returning
-      value(RT_OUTPUT) type STRING_TABLE .
-    methods SPLIT_DESCRIPTION
+      value(RT_OUTPUT) type STRING_TABLE.
+    METHODS SPLIT_DESCRIPTION
       importing
       IV_DESCRIPTION type STRING
       changing
-      CV_INFO        type STRING .
+      CV_INFO        type STRING.
 ENDCLASS.
 
 
@@ -97,8 +97,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       rv_info = rv_info && |* Title: { ms_specification-info-title }\n|.
     ENDIF.
     IF ms_specification-info-description IS NOT INITIAL.
-      me->split_description( EXPORTING  iv_description = ms_specification-info-description
-                                  CHANGING   cv_info         = rv_info ).
+      split_description( EXPORTING  iv_description = ms_specification-info-description
+                         CHANGING   cv_info         = rv_info ).
     ENDIF.
     IF ms_specification-info-version IS NOT INITIAL.
       rv_info = rv_info && |* Version: { ms_specification-info-version }\n|.
@@ -623,12 +623,12 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 *----------------------------------------------------------------------*
 * LOCAL DATA DEFINITION
 *----------------------------------------------------------------------*
-    DATA: lt_descr1     TYPE TABLE OF string,
-          lt_descr2     TYPE TABLE OF string,
+    DATA: lt_descr1     TYPE STANDARD TABLE OF string WITH DEFAULT KEY,
+          lt_descr2     TYPE STANDARD TABLE OF string WITH DEFAULT KEY,
           lv_first_time TYPE abap_bool.
 
-    FIELD-SYMBOLS: <ls_desc1> type string,
-               <ls_desc2> type string.
+    FIELD-SYMBOLS: <ls_desc1> TYPE string,
+                   <ls_desc2> TYPE string.
 
 * ---------- Set description title ----------------------------------------------------------------
     cv_info = cv_info && |* Description:|.
@@ -639,11 +639,11 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     LOOP AT lt_descr1 ASSIGNING <ls_desc1>.
 * ---------- Init loop data -----------------------------------------------------------------------
       CLEAR: lt_descr2.
-      unassign: <ls_desc2>.
+      UNASSIGN: <ls_desc2>.
 
 * ---------- Split remaining string by fix length -------------------------------------------------
-      lt_descr2 = me->split_string( iv_size   = 200
-                                    iv_input  = <ls_desc1> ).
+      lt_descr2 = split_string( iv_size   = 200
+                                iv_input  = <ls_desc1> ).
 
       LOOP AT lt_descr2 ASSIGNING <ls_desc2>.
         IF lv_first_time = abap_false.
