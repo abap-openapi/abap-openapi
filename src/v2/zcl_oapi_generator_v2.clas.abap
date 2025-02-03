@@ -71,6 +71,17 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
       RETURNING
         VALUE(rv_info) TYPE string.
 
+    methods SPLIT_STRING
+    importing
+      IV_SIZE type I
+      IV_INPUT type STRING
+    returning
+      value(RT_OUTPUT) type STRING_TABLE .
+  methods SPLIT_DESCRIPTION
+    importing
+      IV_DESCRIPTION type STRING
+    changing
+      CV_INFO type STRING .
 ENDCLASS.
 
 
@@ -605,5 +616,66 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     rs_returning-abap = rs_returning-abap &&
       |\n    RETURNING\n      VALUE(return) TYPE { lv_typename }|.
 
+  ENDMETHOD.
+
+  METHOD split_description.
+*----------------------------------------------------------------------*
+* LOCAL DATA DEFINITION
+*----------------------------------------------------------------------*
+    DATA: lt_descr1     TYPE TABLE OF string,
+          lt_descr2     TYPE TABLE OF string,
+          lv_first_time TYPE abap_bool.
+
+* ---------- Set description title ----------------------------------------------------------------
+    cv_info = cv_info && |* Description:|.
+
+* ---------- Split desription at new line ---------------------------------------------------------
+    SPLIT ms_specification-info-description AT cl_abap_char_utilities=>newline INTO TABLE lt_descr1.
+
+    LOOP AT lt_descr1 ASSIGNING FIELD-SYMBOL(<ls_desc1>).
+* ---------- Init loop data -----------------------------------------------------------------------
+      CLEAR: lt_descr2.
+
+* ---------- Split remaining string by fix length -------------------------------------------------
+      lt_descr2 = me->split_string( iv_size   = 200
+                                    iv_input  = <ls_desc1> ).
+
+      LOOP AT lt_descr2 ASSIGNING FIELD-SYMBOL(<ls_desc2>).
+        IF lv_first_time = abap_false.
+          cv_info = cv_info && | { <ls_desc2> }\n|.
+          lv_first_time = abap_true.
+        ELSE.
+          cv_info = cv_info && |* { <ls_desc2> }\n|.
+        ENDIF.
+      ENDLOOP.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD split_string.
+*----------------------------------------------------------------------*
+* LOCAL DATA DEFINITION
+*----------------------------------------------------------------------*
+    DATA: lv_size      TYPE i,
+          lv_size_end  TYPE i,
+          lv_pos       TYPE i,
+          lv_substring TYPE string.
+
+    lv_size = strlen( iv_input ) DIV iv_size.
+    lv_size_end = strlen( iv_input ) MOD iv_size.
+
+* ---------- Main split ---------------------------------------------------------------------------
+    DO lv_size TIMES.
+      CLEAR lv_substring.
+      lv_substring = substring( val = iv_input off = lv_pos len = iv_size ).
+      lv_pos = lv_pos + iv_size.
+      INSERT lv_substring INTO TABLE rt_output.
+    ENDDO.
+
+* ---------- If still some last characters to add, calculate last substring -----------------------
+    IF lv_size_end IS NOT INITIAL.
+      CLEAR lv_substring.
+      lv_substring = substring( val  = iv_input off = lv_pos len =  lv_size_end ).
+      INSERT lv_substring INTO TABLE rt_output.
+    ENDIF.
   ENDMETHOD.
 ENDCLASS.
