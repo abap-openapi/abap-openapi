@@ -627,21 +627,25 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           lt_descr2     TYPE TABLE OF string,
           lv_first_time TYPE abap_bool.
 
+FIELD-SYMBOLS: <ls_desc1> type string,
+               <ls_desc2> type string.
+
 * ---------- Set description title ----------------------------------------------------------------
     cv_info = cv_info && |* Description:|.
 
 * ---------- Split desription at new line ---------------------------------------------------------
     SPLIT ms_specification-info-description AT cl_abap_char_utilities=>newline INTO TABLE lt_descr1.
 
-    LOOP AT lt_descr1 ASSIGNING FIELD-SYMBOL(<ls_desc1>).
+    LOOP AT lt_descr1 ASSIGNING <ls_desc1>.
 * ---------- Init loop data -----------------------------------------------------------------------
       CLEAR: lt_descr2.
+      unassign: <ls_desc2>.
 
 * ---------- Split remaining string by fix length -------------------------------------------------
       lt_descr2 = me->split_string( iv_size   = 200
                                     iv_input  = <ls_desc1> ).
 
-      LOOP AT lt_descr2 ASSIGNING FIELD-SYMBOL(<ls_desc2>).
+      LOOP AT lt_descr2 ASSIGNING <ls_desc2>.
         IF lv_first_time = abap_false.
           cv_info = cv_info && | { <ls_desc2> }\n|.
           lv_first_time = abap_true.
