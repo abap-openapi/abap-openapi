@@ -71,17 +71,18 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
       RETURNING
         VALUE(rv_info) TYPE string.
 
-    METHODS SPLIT_STRING
+    METHODS split_string
       importing
-      IV_SIZE          type I
-      IV_INPUT         type STRING
+        iv_size          type I
+        iv_input         type STRING
       returning
-      value(RT_OUTPUT) type STRING_TABLE.
-    METHODS SPLIT_DESCRIPTION
+        value(rt_output) type STRING_TABLE.
+
+    METHODS split_description
       importing
-      IV_DESCRIPTION type STRING
+        iv_description type STRING
       changing
-      CV_INFO        type STRING.
+        cv_info        type STRING.
 ENDCLASS.
 
 
