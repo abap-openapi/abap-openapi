@@ -97,7 +97,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       rv_info = rv_info && |* Title: { ms_specification-info-title }\n|.
     ENDIF.
     IF ms_specification-info-description IS NOT INITIAL.
-      rv_info = rv_info && |* Description: { ms_specification-info-description }\n|.
+            me->split_description( EXPORTING  iv_description = ms_specification-info-description
+                                  CHANGING   cv_info         = rv_info ).
     ENDIF.
     IF ms_specification-info-version IS NOT INITIAL.
       rv_info = rv_info && |* Version: { ms_specification-info-version }\n|.
