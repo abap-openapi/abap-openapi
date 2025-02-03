@@ -80,7 +80,7 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
     methods SPLIT_DESCRIPTION
       importing
       IV_DESCRIPTION type STRING
-    changing
+      changing
       CV_INFO        type STRING .
 ENDCLASS.
 
