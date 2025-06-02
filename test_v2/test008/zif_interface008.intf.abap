@@ -37,6 +37,7 @@ INTERFACE zif_interface008 PUBLIC.
   TYPES: BEGIN OF r_find_pets_by_status,
            code          TYPE i,
            reason        TYPE string,
+           sent_body     TYPE string,
            _200_app_json TYPE response_find_pets_by_status,
            _200_app_xml TYPE response_find_pets_by_status,
          END OF r_find_pets_by_status.

@@ -419,8 +419,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |      mi_client->get_last_error(\n| &&
         |        IMPORTING\n| &&
         |          code      = return-code\n| &&
-        |          message   = return-reason\n| &&
-        |          sent_body = lv_json ).\n| &&
+        |          message   = return-reason ).\n| &&
+        |      return-sent_body = lv_json.\n| &&
         |      ASSERT 1 = 2.\n| &&
         |    ENDIF.\n| &&
         |\n| &&

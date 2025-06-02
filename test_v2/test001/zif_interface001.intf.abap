@@ -9,6 +9,7 @@ INTERFACE zif_interface001 PUBLIC.
   TYPES: BEGIN OF r__ping,
            code          TYPE i,
            reason        TYPE string,
+           sent_body     TYPE string,
          END OF r__ping.
   METHODS _ping
     RETURNING

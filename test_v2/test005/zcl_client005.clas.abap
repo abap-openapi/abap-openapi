@@ -37,6 +37,7 @@ CLASS zcl_client005 IMPLEMENTATION.
     DATA ls_header       LIKE LINE OF mt_extra_headers.
     DATA lv_dummy        TYPE string.
     DATA lv_content_type TYPE string.
+    DATA lv_json         TYPE string.
 
     mi_client->propertytype_logon_popup = mv_logon_popup.
     mi_client->request->set_method( 'POST' ).
@@ -53,10 +54,11 @@ CLASS zcl_client005 IMPLEMENTATION.
         value = ls_header-value ).
     ENDLOOP.
     mi_client->request->set_content_type( 'application/json' ).
-    mi_client->request->set_cdata( /ui2/cl_json=>serialize(
+    lv_json = /ui2/cl_json=>serialize(
       data          = body
       ts_as_iso8601 = abap_true
-      pretty_name   = /ui2/cl_json=>pretty_mode-camel_case ) ).
+      pretty_name   = /ui2/cl_json=>pretty_mode-camel_case ).
+    mi_client->request->set_cdata( lv_json ).
     mi_client->send( mv_timeout ).
     mi_client->receive(
       EXCEPTIONS
@@ -67,8 +69,9 @@ CLASS zcl_client005 IMPLEMENTATION.
     IF sy-subrc <> 0.
       mi_client->get_last_error(
         IMPORTING
-          code    = return-code
-          message = return-reason ).
+          code      = return-code
+          message   = return-reason ).
+      return-sent_body = lv_json.
       ASSERT 1 = 2.
     ENDIF.
 

@@ -8,6 +8,7 @@ INTERFACE zif_interface020 PUBLIC.
   TYPES: BEGIN OF r_send,
            code          TYPE i,
            reason        TYPE string,
+           sent_body     TYPE string,
          END OF r_send.
   METHODS send
     IMPORTING
