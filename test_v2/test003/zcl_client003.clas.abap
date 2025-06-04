@@ -79,6 +79,7 @@ CLASS zcl_client003 IMPLEMENTATION.
       IMPORTING
         code   = return-code
         reason = return-reason ).
+    return-sent_body = lv_json.
     CASE return-code.
       WHEN '200'.
         SPLIT lv_content_type AT ';' INTO lv_content_type lv_dummy.
