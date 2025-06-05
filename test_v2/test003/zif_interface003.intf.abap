@@ -39,6 +39,7 @@ INTERFACE zif_interface003 PUBLIC.
   TYPES: BEGIN OF r__test,
            code          TYPE i,
            reason        TYPE string,
+           sent_body     TYPE string,
            _200_app_json TYPE posttestresponse,
          END OF r__test.
   METHODS _test
