@@ -430,7 +430,6 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |        code   = return-code\n| &&
         |        reason = return-reason ).\n| &&
         |    return-sent_body = lv_json.\n| &&
-        |\n| &&
         |    CASE return-code.\n|.
 
       LOOP AT ls_operation-responses INTO ls_response.

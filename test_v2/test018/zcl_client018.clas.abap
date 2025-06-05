@@ -79,7 +79,6 @@ CLASS zcl_client018 IMPLEMENTATION.
         code   = return-code
         reason = return-reason ).
     return-sent_body = lv_json.
-
     CASE return-code.
       WHEN '200'.
 * todo, no content types
