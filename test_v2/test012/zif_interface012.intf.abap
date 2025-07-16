@@ -9,6 +9,7 @@ INTERFACE zif_interface012 PUBLIC.
   TYPES: BEGIN OF r__something,
            code          TYPE i,
            reason        TYPE string,
+           sent_body     TYPE string,
          END OF r__something.
   METHODS _something
     IMPORTING

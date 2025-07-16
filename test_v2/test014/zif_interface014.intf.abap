@@ -8,6 +8,7 @@ INTERFACE zif_interface014 PUBLIC.
   TYPES: BEGIN OF r_ping_summary,
            code          TYPE i,
            reason        TYPE string,
+           sent_body     TYPE string,
          END OF r_ping_summary.
   "! ping summary
   METHODS ping_summary
