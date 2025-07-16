@@ -73,7 +73,7 @@ CLASS zcl_client008 IMPLEMENTATION.
         code   = return-code
         reason = return-reason ).
     CASE return-code.
-      WHEN '200'.
+      WHEN 200. " successful operation
         SPLIT lv_content_type AT ';' INTO lv_content_type lv_dummy.
         CASE lv_content_type.
           WHEN 'application/json'.
@@ -88,7 +88,7 @@ CLASS zcl_client008 IMPLEMENTATION.
           WHEN OTHERS.
 * unexpected content type
         ENDCASE.
-      WHEN '400'.
+      WHEN 400. " Invalid status value
 * todo, no content types
       WHEN OTHERS.
 * todo, error handling

@@ -306,6 +306,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lo_response_name TYPE REF TO zcl_oapi_response_name.
     DATA ls_cresponse     LIKE LINE OF ms_specification-components-responses.
     DATA lv_name          TYPE string.
+    DATA lv_has_others       TYPE abap_bool.
 
     CREATE OBJECT lo_response_name.
 
@@ -427,9 +428,16 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |        reason = return-reason ).\n| &&
         |    CASE return-code.\n|.
 
+      lv_has_others = abap_false.
       LOOP AT ls_operation-responses INTO ls_response.
-        rv_abap = rv_abap &&
-          |      WHEN '{ ls_response-code }'.\n|.
+        IF ls_response-code = 'default'.
+          rv_abap = rv_abap && |      WHEN OTHERS.\n|.
+          lv_has_others = abap_true.
+        ELSEIF ls_response-description IS NOT INITIAL.
+          rv_abap = rv_abap && |      WHEN { ls_response-code }. " { ls_response-description }\n|.
+        ELSE.
+          rv_abap = rv_abap && |      WHEN { ls_response-code }.\n|.
+        ENDIF.
 
         IF ls_response-ref IS NOT INITIAL.
           lv_name = ls_response-ref.
@@ -478,9 +486,12 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         ENDIF.
       ENDLOOP.
 
+      IF lv_has_others = abap_false.
+        rv_abap = rv_abap &&
+          |      WHEN OTHERS.\n| &&
+          |* todo, error handling\n|.
+      ENDIF.
       rv_abap = rv_abap &&
-        |      WHEN OTHERS.\n| &&
-        |* todo, error handling\n| &&
         |    ENDCASE.\n\n| &&
         |  ENDMETHOD.\n\n|.
     ENDLOOP.
@@ -538,7 +549,18 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lv_str         TYPE string.
     DATA ls_parameter   LIKE LINE OF is_operation-parameters.
     DATA lv_simple_type TYPE string.
+    DATA ls_parameter_ref   LIKE LINE OF is_operation-parameters_ref.
+    DATA lv_name     TYPE string.
+    DATA ls_cparameter      LIKE LINE OF ms_specification-components-parameters.
 
+    LOOP AT is_operation-parameters_ref INTO ls_parameter_ref.
+      lv_name = ls_parameter_ref.
+      REPLACE FIRST OCCURRENCE OF '#/components/parameters/' IN lv_name WITH ''.
+      READ TABLE ms_specification-components-parameters WITH KEY name = lv_name INTO ls_cparameter.
+      IF sy-subrc = 0.
+        APPEND LINES OF ls_cparameter TO is_operation-parameters.
+      ENDIF.
+    ENDLOOP.
     LOOP AT is_operation-parameters INTO ls_parameter.
       IF ls_parameter-schema->type = 'array'.
         lv_simple_type = 'string_table'.
