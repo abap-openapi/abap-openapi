@@ -73,7 +73,7 @@ CLASS zcl_client011 IMPLEMENTATION.
         code   = return-code
         reason = return-reason ).
     CASE return-code.
-      WHEN '200'.
+      WHEN 200. " response
 * todo, no content types
       WHEN OTHERS.
 * todo, error handling

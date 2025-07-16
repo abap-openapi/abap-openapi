@@ -76,7 +76,7 @@ CLASS zcl_client016 IMPLEMENTATION.
         code   = return-code
         reason = return-reason ).
     CASE return-code.
-      WHEN '200'.
+      WHEN 200. " Created
         SPLIT lv_content_type AT ';' INTO lv_content_type lv_dummy.
         CASE lv_content_type.
           WHEN 'application/json'.
