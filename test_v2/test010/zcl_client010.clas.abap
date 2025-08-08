@@ -77,7 +77,7 @@ CLASS zcl_client010 IMPLEMENTATION.
         reason = return-reason ).
     return-sent_body = lv_json.
     CASE return-code.
-      WHEN 'default'.
+      WHEN OTHERS.
         SPLIT lv_content_type AT ';' INTO lv_content_type lv_dummy.
         CASE lv_content_type.
           WHEN 'application/json'.
@@ -90,8 +90,6 @@ CLASS zcl_client010 IMPLEMENTATION.
           WHEN OTHERS.
 * unexpected content type
         ENDCASE.
-      WHEN OTHERS.
-* todo, error handling
     ENDCASE.
 
   ENDMETHOD.

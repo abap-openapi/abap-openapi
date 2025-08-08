@@ -74,7 +74,7 @@ CLASS zcl_client015 IMPLEMENTATION.
         reason = return-reason ).
     return-sent_body = lv_json.
     CASE return-code.
-      WHEN '200'.
+      WHEN 200. " foo
         SPLIT lv_content_type AT ';' INTO lv_content_type lv_dummy.
         CASE lv_content_type.
           WHEN 'application/json'.

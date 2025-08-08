@@ -251,6 +251,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     DATA lv_member    LIKE LINE OF lt_members.
     DATA ls_parameter LIKE LINE OF rt_parameters.
     DATA lo_names     TYPE REF TO zcl_oapi_abap_name.
+    DATA lv_name      TYPE string.
 
     lt_members = mo_json->members( iv_prefix ).
     LOOP AT lt_members INTO lv_member.
@@ -266,6 +267,10 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
         ls_parameter-schema_ref = mo_json->value_string( iv_prefix && lv_member && '/schema/$ref' ).
         IF ls_parameter-schema_ref IS INITIAL.
           ls_parameter-schema = parse_schema( iv_prefix && lv_member && '/schema' ).
+        ELSE.
+          " Fill the schema based on the reference
+          lv_name = ls_parameter-schema_ref(1).
+          ls_parameter-schema = parse_schema( lv_name ).
         ENDIF.
         APPEND ls_parameter TO rt_parameters.
       ENDIF.
