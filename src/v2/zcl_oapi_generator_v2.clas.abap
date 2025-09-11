@@ -545,23 +545,26 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
 
   METHOD find_input_parameters.
-    DATA lt_list        TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
-    DATA lv_str         TYPE string.
-    DATA ls_parameter   LIKE LINE OF is_operation-parameters.
-    DATA lv_simple_type TYPE string.
-    DATA ls_parameter_ref   LIKE LINE OF is_operation-parameters_ref.
-    DATA lv_name     TYPE string.
-    DATA ls_cparameter      LIKE LINE OF ms_specification-components-parameters.
+    DATA lt_list          TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
+    DATA lv_str           TYPE string.
+    DATA ls_parameter     LIKE LINE OF is_operation-parameters.
+    DATA lv_simple_type   TYPE string.
+    DATA ls_parameter_ref LIKE LINE OF is_operation-parameters_ref.
+    DATA lv_name          TYPE string.
+    DATA ls_cparameter    LIKE LINE OF ms_specification-components-parameters.
+    DATA lt_parameters    LIKE is_operation-parameters.
 
+    lt_parameters = is_operation-parameters.
     LOOP AT is_operation-parameters_ref INTO ls_parameter_ref.
       lv_name = ls_parameter_ref.
       REPLACE FIRST OCCURRENCE OF '#/components/parameters/' IN lv_name WITH ''.
       READ TABLE ms_specification-components-parameters WITH KEY name = lv_name INTO ls_cparameter.
       IF sy-subrc = 0.
-        APPEND LINES OF ls_cparameter TO is_operation-parameters.
+        APPEND ls_cparameter TO lt_parameters.
       ENDIF.
     ENDLOOP.
-    LOOP AT is_operation-parameters INTO ls_parameter.
+
+    LOOP AT lt_parameters INTO ls_parameter.
       IF ls_parameter-schema->type = 'array'.
         lv_simple_type = 'string_table'.
       ELSE.
