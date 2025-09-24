@@ -37,6 +37,7 @@ CLASS zcl_client011 IMPLEMENTATION.
     DATA ls_header       LIKE LINE OF mt_extra_headers.
     DATA lv_dummy        TYPE string.
     DATA lv_content_type TYPE string.
+    DATA lv_json         TYPE string.
 
     mi_client->propertytype_logon_popup = mv_logon_popup.
     mi_client->request->set_method( 'POST' ).
@@ -62,8 +63,9 @@ CLASS zcl_client011 IMPLEMENTATION.
     IF sy-subrc <> 0.
       mi_client->get_last_error(
         IMPORTING
-          code    = return-code
-          message = return-reason ).
+          code      = return-code
+          message   = return-reason ).
+      return-sent_body = lv_json.
       ASSERT 1 = 2.
     ENDIF.
 
@@ -72,6 +74,7 @@ CLASS zcl_client011 IMPLEMENTATION.
       IMPORTING
         code   = return-code
         reason = return-reason ).
+    return-sent_body = lv_json.
     CASE return-code.
       WHEN 200. " response
 * todo, no content types

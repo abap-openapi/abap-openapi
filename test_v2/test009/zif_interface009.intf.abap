@@ -9,6 +9,7 @@ INTERFACE zif_interface009 PUBLIC.
   TYPES: BEGIN OF r__test,
            code          TYPE i,
            reason        TYPE string,
+           sent_body     TYPE string,
          END OF r__test.
   METHODS _test
     IMPORTING
