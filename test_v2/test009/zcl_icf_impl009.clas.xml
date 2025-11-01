@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_ICF_IMPL009</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>top dollar sign</DESCRIPT>
+    <DESCRIPT>Implementation escape name $top</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

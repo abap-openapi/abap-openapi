@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_ICF_IMPL007</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>c1_string_concat_table</DESCRIPT>
+    <DESCRIPT>Implementation c1_string_concat_table</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

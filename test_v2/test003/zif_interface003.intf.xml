@@ -5,7 +5,7 @@
    <VSEOINTERF>
     <CLSNAME>ZIF_INTERFACE003</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>c1_number_add_object</DESCRIPT>
+    <DESCRIPT>Interface c1_number_add_object</DESCRIPT>
     <EXPOSURE>2</EXPOSURE>
     <STATE>1</STATE>
     <UNICODE>X</UNICODE>

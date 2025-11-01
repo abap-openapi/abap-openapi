@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_ICF_SERV014</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>path summary and description</DESCRIPT>
+    <DESCRIPT>Server path summary and description</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

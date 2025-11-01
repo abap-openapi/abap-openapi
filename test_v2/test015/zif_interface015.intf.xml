@@ -5,7 +5,7 @@
    <VSEOINTERF>
     <CLSNAME>ZIF_INTERFACE015</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>return structured array</DESCRIPT>
+    <DESCRIPT>Interface return structured array</DESCRIPT>
     <EXPOSURE>2</EXPOSURE>
     <STATE>1</STATE>
     <UNICODE>X</UNICODE>

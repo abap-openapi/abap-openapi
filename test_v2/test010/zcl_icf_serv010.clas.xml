@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_ICF_SERV010</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>default_response</DESCRIPT>
+    <DESCRIPT>Server default_response</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

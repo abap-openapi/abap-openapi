@@ -5,7 +5,7 @@
    <VSEOINTERF>
     <CLSNAME>ZIF_INTERFACE001</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>ping</DESCRIPT>
+    <DESCRIPT>Interface ping, no inputs or outputs</DESCRIPT>
     <EXPOSURE>2</EXPOSURE>
     <STATE>1</STATE>
     <UNICODE>X</UNICODE>

@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_CLIENT001</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>ping</DESCRIPT>
+    <DESCRIPT>Client ping, no inputs or outputs</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

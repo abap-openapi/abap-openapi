@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_ICF_SERV012</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>header parameter</DESCRIPT>
+    <DESCRIPT>Server header parameter</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

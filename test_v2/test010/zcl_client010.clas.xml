@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_CLIENT010</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>default_response</DESCRIPT>
+    <DESCRIPT>Client default_response</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

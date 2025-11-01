@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_ICF_SERV013</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>two path parameters</DESCRIPT>
+    <DESCRIPT>Server two path parameters</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

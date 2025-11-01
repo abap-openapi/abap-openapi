@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_ICF_IMPL012</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>header parameter</DESCRIPT>
+    <DESCRIPT>Implementation header parameter</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

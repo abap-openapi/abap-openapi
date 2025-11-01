@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_CLIENT011</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>path parameter</DESCRIPT>
+    <DESCRIPT>Client path parameter</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

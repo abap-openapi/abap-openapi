@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_CLIENT021</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>max length string</DESCRIPT>
+    <DESCRIPT>Client max length string</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

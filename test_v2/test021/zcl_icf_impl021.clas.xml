@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_ICF_IMPL021</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>max length string</DESCRIPT>
+    <DESCRIPT>Implementation max length string</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

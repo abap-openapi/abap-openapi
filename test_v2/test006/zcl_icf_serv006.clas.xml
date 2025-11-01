@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_ICF_SERV006</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>c1_string_concat_object</DESCRIPT>
+    <DESCRIPT>Server c1_string_concat_object</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

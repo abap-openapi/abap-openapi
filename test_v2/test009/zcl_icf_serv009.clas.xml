@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_ICF_SERV009</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>top dollar sign</DESCRIPT>
+    <DESCRIPT>Server escape name $top</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

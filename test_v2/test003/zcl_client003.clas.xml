@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_CLIENT003</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>c1_number_add_object</DESCRIPT>
+    <DESCRIPT>Client c1_number_add_object</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

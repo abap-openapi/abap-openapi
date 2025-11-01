@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_CLIENT005</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>c1_string_concat</DESCRIPT>
+    <DESCRIPT>Client c1_string_concat</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

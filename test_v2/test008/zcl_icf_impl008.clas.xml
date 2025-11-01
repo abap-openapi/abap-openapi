@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_ICF_IMPL008</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>intf_return_struc_component_types</DESCRIPT>
+    <DESCRIPT>Implementation intf_return_struc_component_types</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

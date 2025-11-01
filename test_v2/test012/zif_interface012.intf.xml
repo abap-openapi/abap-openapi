@@ -5,7 +5,7 @@
    <VSEOINTERF>
     <CLSNAME>ZIF_INTERFACE012</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>header parameter</DESCRIPT>
+    <DESCRIPT>Interface header parameter</DESCRIPT>
     <EXPOSURE>2</EXPOSURE>
     <STATE>1</STATE>
     <UNICODE>X</UNICODE>

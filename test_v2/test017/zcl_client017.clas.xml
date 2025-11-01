@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_CLIENT017</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>return structured array</DESCRIPT>
+    <DESCRIPT>Client return structured array</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

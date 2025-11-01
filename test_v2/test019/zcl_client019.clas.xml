@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_CLIENT019</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>binary body</DESCRIPT>
+    <DESCRIPT>Client binary body</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>
