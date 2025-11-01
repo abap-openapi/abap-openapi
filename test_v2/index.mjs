@@ -133,31 +133,32 @@ async function run() {
   // Generate abapGit XML metadata files
   const specJson = JSON.parse(spec);
   const title = specJson.info?.title || "";
-  const description = specJson.info?.description || title;
-  
-  const classXmlIcfServ = generateClassXml(clas_icf_serv.toUpperCase(), description);
-  fs.writeFileSync(
-    folder + clas_icf_serv + ".clas.xml",
-    classXmlIcfServ
+  const fullDescription = title || specJson.info?.description || "";
+  const description =
+    fullDescription.length > 60
+      ? fullDescription.substring(0, 60)
+      : fullDescription;
+
+  const classXmlIcfServ = generateClassXml(
+    clas_icf_serv.toUpperCase(),
+    description
   );
-  
-  const classXmlIcfImpl = generateClassXml(clas_icf_impl.toUpperCase(), description);
-  fs.writeFileSync(
-    folder + clas_icf_impl + ".clas.xml",
-    classXmlIcfImpl
+  fs.writeFileSync(folder + clas_icf_serv + ".clas.xml", classXmlIcfServ);
+
+  const classXmlIcfImpl = generateClassXml(
+    clas_icf_impl.toUpperCase(),
+    description
   );
-  
-  const classXmlClient = generateClassXml(clas_client.toUpperCase(), description);
-  fs.writeFileSync(
-    folder + clas_client + ".clas.xml",
-    classXmlClient
+  fs.writeFileSync(folder + clas_icf_impl + ".clas.xml", classXmlIcfImpl);
+
+  const classXmlClient = generateClassXml(
+    clas_client.toUpperCase(),
+    description
   );
+  fs.writeFileSync(folder + clas_client + ".clas.xml", classXmlClient);
 
   const intfXml = generateInterfaceXml(intf.toUpperCase(), description);
-  fs.writeFileSync(
-    folder + intf + ".intf.xml",
-    intfXml
-  );
+  fs.writeFileSync(folder + intf + ".intf.xml", intfXml);
 
   const consoleOutput = abap.console.get();
   if (consoleOutput !== "") {
