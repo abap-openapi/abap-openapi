@@ -133,31 +133,55 @@ async function run() {
   // Generate abapGit XML metadata files
   const specJson = JSON.parse(spec);
   const title = specJson.info?.title || "";
-  const fullDescription = title || specJson.info?.description || "";
-  const description =
-    fullDescription.length > 60
-      ? fullDescription.substring(0, 60)
-      : fullDescription;
+  const baseDescription = title || specJson.info?.description || "";
+
+  // Helper function to create prefixed description within 60 char limit
+  function createPrefixedDescription(prefix, baseDesc) {
+    const prefixedDesc = `${prefix} ${baseDesc}`;
+    return prefixedDesc.length > 60
+      ? prefixedDesc.substring(0, 60)
+      : prefixedDesc;
+  }
+
+  const serverDescription = createPrefixedDescription(
+    "Server",
+    baseDescription
+  );
+  const implDescription = createPrefixedDescription(
+    "Implementation",
+    baseDescription
+  );
+  const clientDescription = createPrefixedDescription(
+    "Client",
+    baseDescription
+  );
+  const interfaceDescription = createPrefixedDescription(
+    "Interface",
+    baseDescription
+  );
 
   const classXmlIcfServ = generateClassXml(
     clas_icf_serv.toUpperCase(),
-    description
+    serverDescription
   );
   fs.writeFileSync(folder + clas_icf_serv + ".clas.xml", classXmlIcfServ);
 
   const classXmlIcfImpl = generateClassXml(
     clas_icf_impl.toUpperCase(),
-    description
+    implDescription
   );
   fs.writeFileSync(folder + clas_icf_impl + ".clas.xml", classXmlIcfImpl);
 
   const classXmlClient = generateClassXml(
     clas_client.toUpperCase(),
-    description
+    clientDescription
   );
   fs.writeFileSync(folder + clas_client + ".clas.xml", classXmlClient);
 
-  const intfXml = generateInterfaceXml(intf.toUpperCase(), description);
+  const intfXml = generateInterfaceXml(
+    intf.toUpperCase(),
+    interfaceDescription
+  );
   fs.writeFileSync(folder + intf + ".intf.xml", intfXml);
 
   const consoleOutput = abap.console.get();
