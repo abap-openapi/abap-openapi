@@ -3,6 +3,45 @@ import * as fs from "fs";
 
 await import("../output/init.mjs");
 
+function generateClassXml(className, description) {
+  return `<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>${className}</CLSNAME>
+    <LANGU>E</LANGU>
+    <DESCRIPT>${description}</DESCRIPT>
+    <STATE>1</STATE>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+   </VSEOCLASS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
+`;
+}
+
+function generateInterfaceXml(interfaceName, description) {
+  return `<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_INTF" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOINTERF>
+    <CLSNAME>${interfaceName}</CLSNAME>
+    <LANGU>E</LANGU>
+    <DESCRIPT>${description}</DESCRIPT>
+    <EXPOSURE>2</EXPOSURE>
+    <STATE>1</STATE>
+    <UNICODE>X</UNICODE>
+   </VSEOINTERF>
+  </asx:values>
+ </asx:abap>
+</abapGit>
+`;
+}
+
 async function get(url) {
   return new Promise((resolve, reject) => {
     const req = https.get(url, (res) => {
@@ -89,6 +128,35 @@ async function run() {
   fs.writeFileSync(
     folder + intf + ".intf.abap",
     result.get().intf.get() + "\n"
+  );
+
+  // Generate abapGit XML metadata files
+  const specJson = JSON.parse(spec);
+  const title = specJson.info?.title || "";
+  const description = specJson.info?.description || title;
+  
+  const classXmlIcfServ = generateClassXml(clas_icf_serv.toUpperCase(), description);
+  fs.writeFileSync(
+    folder + clas_icf_serv + ".clas.xml",
+    classXmlIcfServ
+  );
+  
+  const classXmlIcfImpl = generateClassXml(clas_icf_impl.toUpperCase(), description);
+  fs.writeFileSync(
+    folder + clas_icf_impl + ".clas.xml",
+    classXmlIcfImpl
+  );
+  
+  const classXmlClient = generateClassXml(clas_client.toUpperCase(), description);
+  fs.writeFileSync(
+    folder + clas_client + ".clas.xml",
+    classXmlClient
+  );
+
+  const intfXml = generateInterfaceXml(intf.toUpperCase(), description);
+  fs.writeFileSync(
+    folder + intf + ".intf.xml",
+    intfXml
   );
 
   const consoleOutput = abap.console.get();
