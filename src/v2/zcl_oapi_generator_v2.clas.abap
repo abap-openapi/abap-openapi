@@ -242,13 +242,19 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           lv_response_name = lo_response_name->generate_response_name( iv_content_type = ls_content-type
                                                                        iv_code         = ls_response-code ).
 
+          IF lines( ls_response-content ) > 1.
+            lv_post = lv_post &&
+              |          IF { lv_typename }-{ lv_response_name } IS NOT INITIAL.\n|.
+          ENDIF.
           lv_post = lv_post &&
-            |          IF { lv_typename }-{ lv_response_name } IS NOT INITIAL.\n| &&
             |            server->response->set_content_type( '{ ls_content-type }' ).\n| &&
             |            server->response->set_cdata( /ui2/cl_json=>serialize( { lv_typename }-{ lv_response_name } ) ).\n| &&
             |            server->response->set_status( code = { lv_code } reason = '{ ls_response-description }' ).\n| &&
-            |            RETURN.\n| &&
-            |          ENDIF.\n|.
+            |            RETURN.\n|.
+          IF lines( ls_response-content ) > 1.
+            lv_post = lv_post &&
+              |          ENDIF.\n|.
+          ENDIF.
         ENDLOOP.
       ENDLOOP.
       IF lv_post IS NOT INITIAL.
