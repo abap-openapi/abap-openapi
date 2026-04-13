@@ -274,7 +274,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     rv_abap = rv_abap &&
       |\n| &&
       |    server->response->set_content_type( 'text/plain' ).\n| &&
-      |    server->response->set_cdata( 'no handler found' ).\n| &&
+      |    server->response->set_cdata( \|No handler found for \{ lv_path \} \{ lv_method \}\| ).\n| &&
       |    server->response->set_status( code = 500 reason = 'Error' ).\n| &&
       |  ENDMETHOD.\n| &&
       |ENDCLASS.|.
