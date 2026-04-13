@@ -51,6 +51,13 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
     DATA lv_enums    TYPE string.
     DATA lv_name     TYPE string.
     DATA lv_value    TYPE string.
+    DATA lv_key      TYPE string.
+
+    IF iv_use_empty_key = abap_true.
+      lv_key = |EMPTY KEY|.
+    ELSE.
+      lv_key = |DEFAULT KEY|.
+    ENDIF.
 
     IF zif_oapi_schema~type = 'object'.
       rv_abap = rv_abap && |  TYPES: BEGIN OF { iv_name },\n|.
@@ -75,18 +82,19 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
         ELSEIF ls_property-schema->type = 'array' AND ls_property-schema->items_ref IS NOT INITIAL.
           ls_ref = lookup_ref( iv_name = ls_property-schema->items_ref
                                it_refs = it_refs ).
-          rv_abap = rv_abap && |STANDARD TABLE OF { ls_ref-abap_name } WITH DEFAULT KEY,\n|.
+          rv_abap = rv_abap && |STANDARD TABLE OF { ls_ref-abap_name } WITH { lv_key },\n|.
         ELSEIF ls_property-schema->type = 'array' AND ls_property-schema->items_type IS NOT INITIAL.
           rv_abap = rv_abap && |STANDARD TABLE OF { get_simple_type(
-            ls_property-schema->items_type ) } WITH DEFAULT KEY,\n|.
+            ls_property-schema->items_type ) } WITH { lv_key },\n|.
         ELSEIF ls_property-schema->type = 'array'.
-          rv_abap = rv_abap && |STANDARD TABLE OF string WITH DEFAULT KEY, " todo, handle array\n|.
+          rv_abap = rv_abap && |STANDARD TABLE OF string WITH { lv_key }, " todo, handle array\n|.
         ELSE.
           lv_name = io_names->to_abap_name( 'sub' && iv_name && '_' && ls_property-abap_name ).
           rv_abap = ls_property-schema->build_type_definition(
-            iv_name  = lv_name
-            io_names = io_names
-            it_refs  = it_refs ) && rv_abap && lv_name && |,\n|.
+            iv_name          = lv_name
+            io_names         = io_names
+            it_refs          = it_refs
+            iv_use_empty_key = iv_use_empty_key ) && rv_abap && lv_name && |,\n|.
         ENDIF.
         lv_count = lv_count + 1.
       ENDLOOP.
@@ -97,7 +105,7 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
     ELSEIF zif_oapi_schema~type = 'array' AND zif_oapi_schema~items_ref IS NOT INITIAL.
       ls_ref = lookup_ref( iv_name = zif_oapi_schema~items_ref
                            it_refs = it_refs ).
-      rv_abap = rv_abap && |  TYPES { iv_name } TYPE STANDARD TABLE OF { ls_ref-abap_name } WITH DEFAULT KEY.\n|.
+      rv_abap = rv_abap && |  TYPES { iv_name } TYPE STANDARD TABLE OF { ls_ref-abap_name } WITH { lv_key }.\n|.
     ELSEIF zif_oapi_schema~is_simple_type( ) = abap_true.
       rv_abap = rv_abap && |  TYPES { iv_name } TYPE { zif_oapi_schema~get_simple_type( ) }.\n|.
     ELSE.
@@ -119,9 +127,10 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
     ENDLOOP.
 
     rv_abap = zif_oapi_schema~build_type_definition(
-      iv_name  = iv_name
-      it_refs  = is_specification-components-schemas
-      io_names = lo_names ).
+      iv_name          = iv_name
+      it_refs          = is_specification-components-schemas
+      io_names         = lo_names
+      iv_use_empty_key = iv_use_empty_key ).
 
   ENDMETHOD.
 

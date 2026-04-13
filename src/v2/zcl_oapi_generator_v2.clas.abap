@@ -9,6 +9,7 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
              openapi_json    TYPE string,
              no_compression  TYPE abap_bool,
              skip_deprecated TYPE abap_bool,
+             use_empty_key   TYPE abap_bool,
            END OF ty_input.
 
     TYPES: BEGIN OF ty_result,
@@ -524,7 +525,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       rv_abap = rv_abap && |* { ls_component_schema-name }\n|.
       rv_abap = rv_abap && ls_component_schema-schema->build_type_definition2(
         iv_name          = ls_component_schema-abap_name
-        is_specification = ms_specification ).
+        is_specification = ms_specification
+        iv_use_empty_key = ms_input-use_empty_key ).
     ENDLOOP.
     IF sy-subrc = 0.
       rv_abap = rv_abap && |\n|.
