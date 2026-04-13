@@ -30,7 +30,7 @@ CLASS zcl_icf_serv019 IMPLEMENTATION.
     ENDTRY.
 
     server->response->set_content_type( 'text/plain' ).
-    server->response->set_cdata( 'no handler found' ).
+    server->response->set_cdata( |No handler found for { lv_path } { lv_method }| ).
     server->response->set_status( code = 500 reason = 'Error' ).
   ENDMETHOD.
 ENDCLASS.

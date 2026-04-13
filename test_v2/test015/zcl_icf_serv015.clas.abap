@@ -21,12 +21,10 @@ CLASS zcl_icf_serv015 IMPLEMENTATION.
         IF lv_path = '/array' AND lv_method = 'POST'.
           DATA r__array TYPE zif_interface015=>r__array.
           r__array = li_handler->_array( ).
-          IF r__array-_200_app_json IS NOT INITIAL.
-            server->response->set_content_type( 'application/json' ).
-            server->response->set_cdata( /ui2/cl_json=>serialize( r__array-_200_app_json ) ).
-            server->response->set_status( code = 200 reason = 'foo' ).
-            RETURN.
-          ENDIF.
+          server->response->set_content_type( 'application/json' ).
+          server->response->set_cdata( /ui2/cl_json=>serialize( r__array-_200_app_json ) ).
+          server->response->set_status( code = 200 reason = 'foo' ).
+          RETURN.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).
         server->response->set_content_type( 'text/plain' ).
@@ -35,7 +33,7 @@ CLASS zcl_icf_serv015 IMPLEMENTATION.
     ENDTRY.
 
     server->response->set_content_type( 'text/plain' ).
-    server->response->set_cdata( 'no handler found' ).
+    server->response->set_cdata( |No handler found for { lv_path } { lv_method }| ).
     server->response->set_status( code = 500 reason = 'Error' ).
   ENDMETHOD.
 ENDCLASS.

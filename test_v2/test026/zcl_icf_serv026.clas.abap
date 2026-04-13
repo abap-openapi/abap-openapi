@@ -21,12 +21,10 @@ CLASS zcl_icf_serv026 IMPLEMENTATION.
         IF lv_path = '/ping' AND lv_method = 'GET'.
           DATA r_ping TYPE zif_interface026=>r_ping.
           r_ping = li_handler->ping( ).
-          IF r_ping-_200_app_json IS NOT INITIAL.
-            server->response->set_content_type( 'application/json' ).
-            server->response->set_cdata( /ui2/cl_json=>serialize( r_ping-_200_app_json ) ).
-            server->response->set_status( code = 200 reason = 'OK' ).
-            RETURN.
-          ENDIF.
+          server->response->set_content_type( 'application/json' ).
+          server->response->set_cdata( /ui2/cl_json=>serialize( r_ping-_200_app_json ) ).
+          server->response->set_status( code = 200 reason = 'OK' ).
+          RETURN.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).
         server->response->set_content_type( 'text/plain' ).
@@ -38,12 +36,10 @@ CLASS zcl_icf_serv026 IMPLEMENTATION.
           DATA r_echo TYPE zif_interface026=>r_echo.
           r_echo = li_handler->echo(
             body = 'todo' ).
-          IF r_echo-_200_app_json IS NOT INITIAL.
-            server->response->set_content_type( 'application/json' ).
-            server->response->set_cdata( /ui2/cl_json=>serialize( r_echo-_200_app_json ) ).
-            server->response->set_status( code = 200 reason = 'OK' ).
-            RETURN.
-          ENDIF.
+          server->response->set_content_type( 'application/json' ).
+          server->response->set_cdata( /ui2/cl_json=>serialize( r_echo-_200_app_json ) ).
+          server->response->set_status( code = 200 reason = 'OK' ).
+          RETURN.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error2).
         server->response->set_content_type( 'text/plain' ).
@@ -52,7 +48,7 @@ CLASS zcl_icf_serv026 IMPLEMENTATION.
     ENDTRY.
 
     server->response->set_content_type( 'text/plain' ).
-    server->response->set_cdata( 'no handler found' ).
+    server->response->set_cdata( |No handler found for { lv_path } { lv_method }| ).
     server->response->set_status( code = 500 reason = 'Error' ).
   ENDMETHOD.
 ENDCLASS.
