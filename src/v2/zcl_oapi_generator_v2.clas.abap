@@ -262,9 +262,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |li_handler->{ ls_operation-abap_name }({ lv_parameters } ).\n| &&
         lv_post &&
         |        ENDIF.\n| &&
-        |      CATCH cx_static_check.\n| &&
+        |      CATCH cx_static_check INTO DATA(lx_error).\n| &&
         |        server->response->set_content_type( 'text/plain' ).\n| &&
-        |        server->response->set_cdata( 'exception' ).\n| &&
+        |        server->response->set_cdata( lx_error->get_text( ) ).\n| &&
         |        server->response->set_status( code = 500 reason = 'Error' ).\n| &&
         |    ENDTRY.\n|.
     ENDLOOP.

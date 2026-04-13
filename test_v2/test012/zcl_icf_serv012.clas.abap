@@ -23,9 +23,9 @@ CLASS zcl_icf_serv012 IMPLEMENTATION.
           li_handler->_something( server->request->get_form_field( 'user-agent' ) ).
           RETURN.
         ENDIF.
-      CATCH cx_static_check.
+      CATCH cx_static_check INTO DATA(lx_error).
         server->response->set_content_type( 'text/plain' ).
-        server->response->set_cdata( 'exception' ).
+        server->response->set_cdata( lx_error->get_text( ) ).
         server->response->set_status( code = 500 reason = 'Error' ).
     ENDTRY.
 
