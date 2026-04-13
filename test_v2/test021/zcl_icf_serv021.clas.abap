@@ -23,9 +23,9 @@ CLASS zcl_icf_serv021 IMPLEMENTATION.
             body = 'todo' ).
           RETURN.
         ENDIF.
-      CATCH cx_static_check INTO DATA(lx_error).
+      CATCH cx_static_check INTO DATA(lx_error1).
         server->response->set_content_type( 'text/plain' ).
-        server->response->set_cdata( lx_error->get_text( ) ).
+        server->response->set_cdata( lx_error1->get_text( ) ).
         server->response->set_status( code = 500 reason = 'Error' ).
     ENDTRY.
 
