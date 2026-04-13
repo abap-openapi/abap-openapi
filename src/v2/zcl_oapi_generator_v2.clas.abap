@@ -154,6 +154,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lo_response_name TYPE REF TO zcl_oapi_response_name.
     DATA lv_response_name TYPE string.
     DATA lv_code          TYPE string.
+    DATA lv_counter       TYPE i.
 
     CREATE OBJECT lo_response_name.
 
@@ -177,6 +178,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    REPLACE FIRST OCCURRENCE OF { ms_input-intf }=>base_path IN lv_path WITH ''.\n| &&
       |    lv_method = server->request->get_method( ).\n\n|.
     LOOP AT ms_specification-operations INTO ls_operation.
+      lv_counter = lv_counter + 1.
 * todo, handing path parameters, do wildcard with CP?
       rv_abap = rv_abap &&
         |    TRY.\n| &&
@@ -263,9 +265,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |li_handler->{ ls_operation-abap_name }({ lv_parameters } ).\n| &&
         lv_post &&
         |        ENDIF.\n| &&
-        |      CATCH cx_static_check INTO DATA(lx_error).\n| &&
+        |      CATCH cx_static_check INTO DATA(lx_error{ lv_counter }).\n| &&
         |        server->response->set_content_type( 'text/plain' ).\n| &&
-        |        server->response->set_cdata( lx_error->get_text( ) ).\n| &&
+        |        server->response->set_cdata( lx_error{ lv_counter }->get_text( ) ).\n| &&
         |        server->response->set_status( code = 500 reason = 'Error' ).\n| &&
         |    ENDTRY.\n|.
     ENDLOOP.
