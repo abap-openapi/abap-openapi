@@ -29,12 +29,10 @@ CLASS zcl_icf_serv016 IMPLEMENTATION.
           DATA r__create_dog TYPE zif_interface016=>r__create_dog.
           r__create_dog = li_handler->_create_dog(
             body = _create_dog ).
-          IF r__create_dog-_200_app_json IS NOT INITIAL.
             server->response->set_content_type( 'application/json' ).
             server->response->set_cdata( /ui2/cl_json=>serialize( r__create_dog-_200_app_json ) ).
             server->response->set_status( code = 200 reason = 'Created' ).
             RETURN.
-          ENDIF.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).
         server->response->set_content_type( 'text/plain' ).

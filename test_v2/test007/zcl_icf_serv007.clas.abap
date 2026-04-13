@@ -30,12 +30,10 @@ CLASS zcl_icf_serv007 IMPLEMENTATION.
           r__test = li_handler->_test(
             separator = server->request->get_form_field( 'separator' )
             body = _test ).
-          IF r__test-_200_app_json IS NOT INITIAL.
             server->response->set_content_type( 'application/json' ).
             server->response->set_cdata( /ui2/cl_json=>serialize( r__test-_200_app_json ) ).
             server->response->set_status( code = 200 reason = 'OK' ).
             RETURN.
-          ENDIF.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).
         server->response->set_content_type( 'text/plain' ).
