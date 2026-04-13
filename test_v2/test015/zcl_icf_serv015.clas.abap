@@ -21,10 +21,10 @@ CLASS zcl_icf_serv015 IMPLEMENTATION.
         IF lv_path = '/array' AND lv_method = 'POST'.
           DATA r__array TYPE zif_interface015=>r__array.
           r__array = li_handler->_array( ).
-            server->response->set_content_type( 'application/json' ).
-            server->response->set_cdata( /ui2/cl_json=>serialize( r__array-_200_app_json ) ).
-            server->response->set_status( code = 200 reason = 'foo' ).
-            RETURN.
+          server->response->set_content_type( 'application/json' ).
+          server->response->set_cdata( /ui2/cl_json=>serialize( r__array-_200_app_json ) ).
+          server->response->set_status( code = 200 reason = 'foo' ).
+          RETURN.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).
         server->response->set_content_type( 'text/plain' ).

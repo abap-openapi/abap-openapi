@@ -148,6 +148,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lv_typename   TYPE string.
     DATA lv_post       TYPE string.
     DATA lv_pre        TYPE string.
+    DATA lv_indentation TYPE string.
     DATA ls_response   LIKE LINE OF ls_operation-responses.
     DATA ls_content    LIKE LINE OF ls_response-content.
     DATA ls_parameter  LIKE LINE OF ls_operation-parameters.
@@ -242,15 +243,17 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           lv_response_name = lo_response_name->generate_response_name( iv_content_type = ls_content-type
                                                                        iv_code         = ls_response-code ).
 
+          lv_indentation = ||.
           IF lines( ls_response-content ) > 1.
             lv_post = lv_post &&
               |          IF { lv_typename }-{ lv_response_name } IS NOT INITIAL.\n|.
+            lv_indentation = |  |.
           ENDIF.
           lv_post = lv_post &&
-            |            server->response->set_content_type( '{ ls_content-type }' ).\n| &&
-            |            server->response->set_cdata( /ui2/cl_json=>serialize( { lv_typename }-{ lv_response_name } ) ).\n| &&
-            |            server->response->set_status( code = { lv_code } reason = '{ ls_response-description }' ).\n| &&
-            |            RETURN.\n|.
+            |{ lv_indentation }          server->response->set_content_type( '{ ls_content-type }' ).\n| &&
+            |{ lv_indentation }          server->response->set_cdata( /ui2/cl_json=>serialize( { lv_typename }-{ lv_response_name } ) ).\n| &&
+            |{ lv_indentation }          server->response->set_status( code = { lv_code } reason = '{ ls_response-description }' ).\n| &&
+            |{ lv_indentation }          RETURN.\n|.
           IF lines( ls_response-content ) > 1.
             lv_post = lv_post &&
               |          ENDIF.\n|.
