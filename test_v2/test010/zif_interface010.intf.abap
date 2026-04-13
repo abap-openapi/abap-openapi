@@ -9,6 +9,7 @@ INTERFACE zif_interface010 PUBLIC.
   TYPES: BEGIN OF r_create_user,
            code          TYPE i,
            reason        TYPE string,
+           sent_body     TYPE string,
            _default_app_json TYPE string,
          END OF r_create_user.
   METHODS create_user

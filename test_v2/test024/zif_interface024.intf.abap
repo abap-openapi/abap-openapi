@@ -13,6 +13,7 @@ INTERFACE zif_interface024 PUBLIC.
   TYPES: BEGIN OF r_send_date_time,
            code          TYPE i,
            reason        TYPE string,
+           sent_body     TYPE string,
          END OF r_send_date_time.
   METHODS send_date_time
     IMPORTING

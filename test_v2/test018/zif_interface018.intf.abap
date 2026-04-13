@@ -30,6 +30,7 @@ INTERFACE zif_interface018 PUBLIC.
   TYPES: BEGIN OF r__create_dog,
            code          TYPE i,
            reason        TYPE string,
+           sent_body     TYPE string,
          END OF r__create_dog.
   METHODS _create_dog
     IMPORTING

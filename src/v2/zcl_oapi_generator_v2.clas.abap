@@ -347,6 +347,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |    DATA ls_header       LIKE LINE OF mt_extra_headers.\n| &&
         |    DATA lv_dummy        TYPE string.\n| &&
         |    DATA lv_content_type TYPE string.\n| &&
+        |    DATA lv_json         TYPE string.\n| &&
         |\n| &&
         |    mi_client->propertytype_logon_popup = mv_logon_popup.\n| &&
         |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n| &&
@@ -399,10 +400,12 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           AND ls_operation-request_body-type = 'application/json'.
 * this does make some assumptions on the names in the openapi, it should work for every case, eventually,
         rv_abap = rv_abap &&
-          |    mi_client->request->set_cdata( /ui2/cl_json=>serialize(\n| &&
+          |    lv_json = /ui2/cl_json=>serialize(\n| &&
           |      data          = body\n| &&
           |      ts_as_iso8601 = abap_true\n| &&
-          |      pretty_name   = /ui2/cl_json=>pretty_mode-camel_case ) ).\n|.
+          |      pretty_name   = /ui2/cl_json=>pretty_mode-camel_case ).\n|.
+        rv_abap = rv_abap &&
+          |    mi_client->request->set_cdata( lv_json ).\n|.
       ENDIF.
 
       rv_abap = rv_abap &&
@@ -416,8 +419,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |    IF sy-subrc <> 0.\n| &&
         |      mi_client->get_last_error(\n| &&
         |        IMPORTING\n| &&
-        |          code    = return-code\n| &&
-        |          message = return-reason ).\n| &&
+        |          code      = return-code\n| &&
+        |          message   = return-reason ).\n| &&
+        |      return-sent_body = lv_json.\n| &&
         |      ASSERT 1 = 2.\n| &&
         |    ENDIF.\n| &&
         |\n| &&
@@ -426,6 +430,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         |      IMPORTING\n| &&
         |        code   = return-code\n| &&
         |        reason = return-reason ).\n| &&
+        |    return-sent_body = lv_json.\n| &&
         |    CASE return-code.\n|.
 
       lv_has_others = abap_false.
@@ -637,6 +642,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |  TYPES: BEGIN OF { lv_typename },\n| &&
       |           code          TYPE i,\n| &&
       |           reason        TYPE string,\n| &&
+      |           sent_body     TYPE string,\n| &&
       |{ rs_returning-type }| &&
       |         END OF { lv_typename }.\n|.
 

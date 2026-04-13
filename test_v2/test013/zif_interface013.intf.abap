@@ -8,6 +8,7 @@ INTERFACE zif_interface013 PUBLIC.
   TYPES: BEGIN OF r__foo_param_another,
            code          TYPE i,
            reason        TYPE string,
+           sent_body     TYPE string,
          END OF r__foo_param_another.
   METHODS _foo_param_another
     IMPORTING
