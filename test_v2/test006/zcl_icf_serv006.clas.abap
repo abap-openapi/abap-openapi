@@ -31,7 +31,9 @@ CLASS zcl_icf_serv006 IMPLEMENTATION.
             separator = server->request->get_form_field( 'separator' )
             body = _test ).
           server->response->set_content_type( 'application/json' ).
-          server->response->set_cdata( /ui2/cl_json=>serialize( r__test-_200_app_json ) ).
+          server->response->set_cdata( /ui2/cl_json=>serialize(
+            data        = r__test-_200_app_json
+            pretty_name = /ui2/cl_json=>pretty_mode-camel_case ) ).
           server->response->set_status( code = 200 reason = 'OK' ).
           RETURN.
         ENDIF.

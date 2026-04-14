@@ -126,6 +126,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
     ms_input = is_input.
 
+    IF ms_input-pretty_name IS INITIAL.
+      ms_input-pretty_name = '/ui2/cl_json=>pretty_mode-camel_case'.
+    ENDIF.
+
     CREATE OBJECT lo_parser.
     ms_specification = lo_parser->parse( is_input-openapi_json ).
 

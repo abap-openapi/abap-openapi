@@ -22,7 +22,9 @@ CLASS zcl_icf_serv015 IMPLEMENTATION.
           DATA r__array TYPE zif_interface015=>r__array.
           r__array = li_handler->_array( ).
           server->response->set_content_type( 'application/json' ).
-          server->response->set_cdata( /ui2/cl_json=>serialize( r__array-_200_app_json ) ).
+          server->response->set_cdata( /ui2/cl_json=>serialize(
+            data        = r__array-_200_app_json
+            pretty_name = /ui2/cl_json=>pretty_mode-camel_case ) ).
           server->response->set_status( code = 200 reason = 'foo' ).
           RETURN.
         ENDIF.

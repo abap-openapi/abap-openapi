@@ -30,7 +30,9 @@ CLASS zcl_icf_serv016 IMPLEMENTATION.
           r__create_dog = li_handler->_create_dog(
             body = _create_dog ).
           server->response->set_content_type( 'application/json' ).
-          server->response->set_cdata( /ui2/cl_json=>serialize( r__create_dog-_200_app_json ) ).
+          server->response->set_cdata( /ui2/cl_json=>serialize(
+            data        = r__create_dog-_200_app_json
+            pretty_name = /ui2/cl_json=>pretty_mode-camel_case ) ).
           server->response->set_status( code = 200 reason = 'Created' ).
           RETURN.
         ENDIF.
