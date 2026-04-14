@@ -10,6 +10,7 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
              no_compression  TYPE abap_bool,
              skip_deprecated TYPE abap_bool,
              use_empty_key   TYPE abap_bool,
+             pretty_name     TYPE string,
            END OF ty_input.
 
     TYPES: BEGIN OF ty_result,
@@ -213,7 +214,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
             |          /ui2/cl_json=>deserialize(\n| &&
             |            EXPORTING\n| &&
             |              json        = server->request->get_cdata( )\n| &&
-            |              pretty_name = /ui2/cl_json=>pretty_mode-camel_case\n| &&
+            |              pretty_name = { ms_input-pretty_name }\n| &&
             |            CHANGING\n| &&
             |              data        = { ls_operation-abap_name } ).\n|.
           lv_parameters = lv_parameters &&
@@ -251,7 +252,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           ENDIF.
           lv_post = lv_post &&
             |{ lv_indentation }          server->response->set_content_type( '{ ls_content-type }' ).\n| &&
-            |{ lv_indentation }          server->response->set_cdata( /ui2/cl_json=>serialize( { lv_typename }-{ lv_response_name } ) ).\n| &&
+            |{ lv_indentation }          server->response->set_cdata( /ui2/cl_json=>serialize(\n| &&
+            |{ lv_indentation }            data        = { lv_typename }-{ lv_response_name }\n| &&
+            |{ lv_indentation }            pretty_name = { ms_input-pretty_name } ) ).\n| &&
             |{ lv_indentation }          server->response->set_status( code = { lv_code } reason = '{ ls_response-description }' ).\n| &&
             |{ lv_indentation }          RETURN.\n|.
           IF lines( ls_response-content ) > 1.
@@ -414,7 +417,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           |    mi_client->request->set_cdata( /ui2/cl_json=>serialize(\n| &&
           |      data          = body\n| &&
           |      ts_as_iso8601 = abap_true\n| &&
-          |      pretty_name   = /ui2/cl_json=>pretty_mode-camel_case ) ).\n|.
+          |      pretty_name   = { ms_input-pretty_name } ) ).\n|.
       ENDIF.
 
       rv_abap = rv_abap &&
@@ -477,7 +480,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
                 |            /ui2/cl_json=>deserialize(\n| &&
                 |              EXPORTING\n| &&
                 |                json        = mi_client->response->get_cdata( )\n| &&
-                |                pretty_name = /ui2/cl_json=>pretty_mode-camel_case\n| &&
+                |                pretty_name = { ms_input-pretty_name }\n| &&
                 |              CHANGING\n| &&
                 |                data        = return-{ lv_name } ).\n|.
             ELSE.
