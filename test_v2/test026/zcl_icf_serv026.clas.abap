@@ -22,7 +22,9 @@ CLASS zcl_icf_serv026 IMPLEMENTATION.
           DATA r_ping TYPE zif_interface026=>r_ping.
           r_ping = li_handler->ping( ).
           server->response->set_content_type( 'application/json' ).
-          server->response->set_cdata( /ui2/cl_json=>serialize( r_ping-_200_app_json ) ).
+          server->response->set_cdata( /ui2/cl_json=>serialize(
+            data        = r_ping-_200_app_json
+            pretty_name = /ui2/cl_json=>pretty_mode-camel_case ) ).
           server->response->set_status( code = 200 reason = 'OK' ).
           RETURN.
         ENDIF.
@@ -37,7 +39,9 @@ CLASS zcl_icf_serv026 IMPLEMENTATION.
           r_echo = li_handler->echo(
             body = 'todo' ).
           server->response->set_content_type( 'application/json' ).
-          server->response->set_cdata( /ui2/cl_json=>serialize( r_echo-_200_app_json ) ).
+          server->response->set_cdata( /ui2/cl_json=>serialize(
+            data        = r_echo-_200_app_json
+            pretty_name = /ui2/cl_json=>pretty_mode-camel_case ) ).
           server->response->set_status( code = 200 reason = 'OK' ).
           RETURN.
         ENDIF.
