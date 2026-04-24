@@ -18,8 +18,15 @@ CLASS zcl_icf_serv025 IMPLEMENTATION.
     lv_method = server->request->get_method( ).
 
     TRY.
-        IF lv_path = '/{configId}/searches' AND lv_method = 'POST'.
-          li_handler->search_v2( server->request->get_form_field( 'todo' ) ).
+        IF lv_path CP '/*/searches' AND lv_method = 'POST'.
+          DATA lt_path_segments_1 TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
+          SPLIT lv_path AT '/' INTO TABLE lt_path_segments_1.
+          DELETE lt_path_segments_1 WHERE table_line IS INITIAL.
+          DATA lv_path_segment_1_1 TYPE string.
+          READ TABLE lt_path_segments_1 INDEX 1 INTO lv_path_segment_1_1.
+          ASSERT sy-subrc = 0.
+          li_handler->search_v2(
+            config_id = lv_path_segment_1_1 ).
           RETURN.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).

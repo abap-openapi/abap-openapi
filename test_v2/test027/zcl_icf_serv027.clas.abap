@@ -18,9 +18,16 @@ CLASS zcl_icf_serv027 IMPLEMENTATION.
     lv_method = server->request->get_method( ).
 
     TRY.
-        IF lv_path = '/user/{id}' AND lv_method = 'GET'.
+        IF lv_path CP '/user/*' AND lv_method = 'GET'.
+          DATA lt_path_segments_1 TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
+          SPLIT lv_path AT '/' INTO TABLE lt_path_segments_1.
+          DELETE lt_path_segments_1 WHERE table_line IS INITIAL.
+          DATA lv_path_segment_1_2 TYPE string.
+          READ TABLE lt_path_segments_1 INDEX 2 INTO lv_path_segment_1_2.
+          ASSERT sy-subrc = 0.
           DATA r_get_user TYPE zif_interface027=>r_get_user.
-          r_get_user = li_handler->get_user( server->request->get_form_field( 'todo' ) ).
+          r_get_user = li_handler->get_user(
+            id = lv_path_segment_1_2 ).
           server->response->set_content_type( 'application/json' ).
           server->response->set_cdata( /ui2/cl_json=>serialize(
             data        = r_get_user-_200_app_json
