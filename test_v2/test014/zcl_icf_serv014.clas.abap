@@ -19,7 +19,9 @@ CLASS zcl_icf_serv014 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/ping' AND lv_method = 'POST'.
-          li_handler->ping_summary( ).
+          DATA r_ping_summary TYPE zif_interface014=>r_ping_summary.
+          r_ping_summary = li_handler->ping_summary( ).
+          server->response->set_status( code = 200 reason = 'ping' ).
           RETURN.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).

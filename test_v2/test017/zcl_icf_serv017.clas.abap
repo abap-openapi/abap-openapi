@@ -19,7 +19,9 @@ CLASS zcl_icf_serv017 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/array' AND lv_method = 'POST'.
-          li_handler->_array( ).
+          DATA r__array TYPE zif_interface017=>r__array.
+          r__array = li_handler->_array( ).
+          server->response->set_status( code = 400 reason = '' ).
           RETURN.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).

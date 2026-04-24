@@ -20,8 +20,10 @@ CLASS zcl_icf_serv012 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/something' AND lv_method = 'POST'.
-          li_handler->_something(
+          DATA r__something TYPE zif_interface012=>r__something.
+          r__something = li_handler->_something(
             user_agent = server->request->get_header_field( 'user-agent' ) ).
+          server->response->set_status( code = 200 reason = 'response' ).
           RETURN.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).

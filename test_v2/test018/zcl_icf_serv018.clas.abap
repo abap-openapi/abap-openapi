@@ -26,8 +26,10 @@ CLASS zcl_icf_serv018 IMPLEMENTATION.
               pretty_name = /ui2/cl_json=>pretty_mode-camel_case
             CHANGING
               data        = _create_dog ).
-          li_handler->_create_dog(
+          DATA r__create_dog TYPE zif_interface018=>r__create_dog.
+          r__create_dog = li_handler->_create_dog(
             body = _create_dog ).
+          server->response->set_status( code = 200 reason = 'Created' ).
           RETURN.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).

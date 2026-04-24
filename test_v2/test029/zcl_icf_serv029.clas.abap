@@ -25,8 +25,10 @@ CLASS zcl_icf_serv029 IMPLEMENTATION.
           DATA lv_path_segment_1_2 TYPE string.
           READ TABLE lt_path_segments_1 INDEX 2 INTO lv_path_segment_1_2.
           ASSERT sy-subrc = 0.
-          li_handler->delete_user(
+          DATA r_delete_user TYPE zif_interface029=>r_delete_user.
+          r_delete_user = li_handler->delete_user(
             id = lv_path_segment_1_2 ).
+          server->response->set_status( code = 204 reason = 'No Content' ).
           RETURN.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).
