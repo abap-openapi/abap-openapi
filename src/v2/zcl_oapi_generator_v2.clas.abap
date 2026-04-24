@@ -218,8 +218,14 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
               |\n            { ls_parameter-abap_name } = server->request->get_header_field( '{ ls_parameter-name }' )|.
           WHEN 'path'.
             IF lv_path_parameter_setup IS INITIAL.
+              IF ms_input-use_empty_key = abap_true.
+                lv_path_parameter_setup = lv_path_parameter_setup &&
+                  |          DATA lt_path_segments_{ lv_counter } TYPE STANDARD TABLE OF string WITH EMPTY KEY.\n|.
+              ELSE.
+                lv_path_parameter_setup = lv_path_parameter_setup &&
+                  |          DATA lt_path_segments_{ lv_counter } TYPE STANDARD TABLE OF string WITH DEFAULT KEY.\n|.
+              ENDIF.
               lv_path_parameter_setup = lv_path_parameter_setup &&
-                |          DATA lt_path_segments_{ lv_counter } TYPE STANDARD TABLE OF string WITH DEFAULT KEY.\n| &&
                 |          SPLIT lv_path AT '/' INTO TABLE lt_path_segments_{ lv_counter }.\n| &&
                 |          DELETE lt_path_segments_{ lv_counter } WHERE table_line IS INITIAL.\n|.
             ENDIF.
