@@ -161,6 +161,12 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lv_response_name TYPE string.
     DATA lv_code          TYPE string.
     DATA lv_counter       TYPE i.
+    DATA lv_path_match    TYPE string.
+    DATA lt_template_segments TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
+    DATA lv_path_placeholder  TYPE string.
+    DATA lv_segment_index     TYPE i.
+    DATA lv_path_parameter_setup TYPE string.
+    DATA lv_path_segment_var  TYPE string.
 
     CREATE OBJECT lo_response_name.
 
@@ -185,48 +191,79 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    lv_method = server->request->get_method( ).\n\n|.
     LOOP AT ms_specification-operations INTO ls_operation.
       lv_counter = lv_counter + 1.
-* todo, handing path parameters, do wildcard with CP?
+
+      lv_path_match = ls_operation-path.
+      REPLACE ALL OCCURRENCES OF REGEX '\{[^}]+\}' IN lv_path_match WITH '*'.
+
       rv_abap = rv_abap &&
         |    TRY.\n| &&
-        |        IF lv_path = '{ ls_operation-path }' AND lv_method = '{ to_upper( ls_operation-method ) }'.\n|.
+        COND string(
+          WHEN lv_path_match = ls_operation-path
+            THEN |        IF lv_path = '{ ls_operation-path }' AND lv_method = '{ to_upper( ls_operation-method ) }'.\n|
+            ELSE |        IF lv_path CP '{ lv_path_match }' AND lv_method = '{ to_upper( ls_operation-method ) }'.\n| ).
 
       CLEAR lv_parameters.
-      IF lines( ls_operation-parameters ) = 1 AND ls_operation-request_body-schema_ref IS INITIAL.
-        READ TABLE ls_operation-parameters INDEX 1 INTO ls_parameter ##SUBRC_OK.
-* todo, it might be a header parameter
-        IF ls_parameter-in = 'path'.
-          lv_parameters = | server->request->get_form_field( 'todo' )|.
-        ELSE.
-          lv_parameters = | server->request->get_form_field( '{ ls_parameter-name }' )|.
-        ENDIF.
-      ELSE.
-        LOOP AT ls_operation-parameters INTO ls_parameter.
-          CASE ls_parameter-in.
-            WHEN 'query'.
+      CLEAR lv_path_parameter_setup.
+      CLEAR lt_template_segments.
+      SPLIT ls_operation-path AT '/' INTO TABLE lt_template_segments.
+      DELETE lt_template_segments WHERE table_line IS INITIAL.
+
+      LOOP AT ls_operation-parameters INTO ls_parameter.
+        CASE ls_parameter-in.
+          WHEN 'query'.
+            lv_parameters = lv_parameters &&
+              |\n            { ls_parameter-abap_name } = server->request->get_form_field( '{ ls_parameter-name }' )|.
+          WHEN 'header'.
+            lv_parameters = lv_parameters &&
+              |\n            { ls_parameter-abap_name } = server->request->get_header_field( '{ ls_parameter-name }' )|.
+          WHEN 'path'.
+            IF lv_path_parameter_setup IS INITIAL.
+              lv_path_parameter_setup = lv_path_parameter_setup &&
+                |          DATA lt_path_segments_{ lv_counter } TYPE STANDARD TABLE OF string WITH DEFAULT KEY.\n| &&
+                |          SPLIT lv_path AT '/' INTO TABLE lt_path_segments_{ lv_counter }.\n| &&
+                |          DELETE lt_path_segments_{ lv_counter } WHERE table_line IS INITIAL.\n|.
+            ENDIF.
+
+            lv_path_placeholder = '{' && ls_parameter-name && '}'.
+            CLEAR lv_segment_index.
+            READ TABLE lt_template_segments WITH KEY table_line = lv_path_placeholder TRANSPORTING NO FIELDS.
+            IF sy-subrc = 0.
+              lv_segment_index = sy-tabix.
+            ENDIF.
+
+            IF lv_segment_index > 0.
+              lv_path_segment_var = |lv_path_segment_{ lv_counter }_{ lv_segment_index }|.
+              lv_path_parameter_setup = lv_path_parameter_setup &&
+                |          DATA { lv_path_segment_var } TYPE string.\n| &&
+                |          READ TABLE lt_path_segments_{ lv_counter } INDEX { lv_segment_index } INTO { lv_path_segment_var }.\n| &&
+                |          ASSERT sy-subrc = 0.\n|.
               lv_parameters = lv_parameters &&
-                |\n            { ls_parameter-abap_name } = server->request->get_form_field( '{ ls_parameter-name }' )|.
-            WHEN OTHERS.
+                |\n            { ls_parameter-abap_name } = { lv_path_segment_var }|.
+            ELSE.
               lv_parameters = lv_parameters &&
-                |\n            { ls_parameter-abap_name } = '{ ls_parameter-in }-todo'|.
-          ENDCASE.
-        ENDLOOP.
+                |\n            { ls_parameter-abap_name } = ''|.
+            ENDIF.
+          WHEN OTHERS.
+            lv_parameters = lv_parameters &&
+              |\n            { ls_parameter-abap_name } = '{ ls_parameter-in }-todo'|.
+        ENDCASE.
+      ENDLOOP.
 
 
-        IF ls_operation-request_body-schema_ref IS NOT INITIAL.
-          rv_abap = rv_abap &&
-            |          DATA { ls_operation-abap_name  } TYPE { ms_input-intf }=>{ find_schema( ls_operation-request_body-schema_ref )-abap_name }.\n| &&
-            |          /ui2/cl_json=>deserialize(\n| &&
-            |            EXPORTING\n| &&
-            |              json        = server->request->get_cdata( )\n| &&
-            |              pretty_name = { ms_input-pretty_name }\n| &&
-            |            CHANGING\n| &&
-            |              data        = { ls_operation-abap_name } ).\n|.
-          lv_parameters = lv_parameters &&
-            |\n            body = { ls_operation-abap_name }|.
-        ELSEIF ls_operation-request_body-schema IS NOT INITIAL.
-          lv_parameters = lv_parameters &&
-            |\n            body = 'todo'|.
-        ENDIF.
+      IF ls_operation-request_body-schema_ref IS NOT INITIAL.
+        rv_abap = rv_abap &&
+          |          DATA { ls_operation-abap_name  } TYPE { ms_input-intf }=>{ find_schema( ls_operation-request_body-schema_ref )-abap_name }.\n| &&
+          |          /ui2/cl_json=>deserialize(\n| &&
+          |            EXPORTING\n| &&
+          |              json        = server->request->get_cdata( )\n| &&
+          |              pretty_name = { ms_input-pretty_name }\n| &&
+          |            CHANGING\n| &&
+          |              data        = { ls_operation-abap_name } ).\n|.
+        lv_parameters = lv_parameters &&
+          |\n            body = { ls_operation-abap_name }|.
+      ELSEIF ls_operation-request_body-schema IS NOT INITIAL.
+        lv_parameters = lv_parameters &&
+          |\n            body = 'todo'|.
       ENDIF.
 
       lv_typename = 'r_' && ls_operation-abap_name.
@@ -277,6 +314,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       ENDIF.
 
       rv_abap = rv_abap &&
+        lv_path_parameter_setup &&
         lv_pre &&
         |li_handler->{ ls_operation-abap_name }({ lv_parameters } ).\n| &&
         lv_post &&

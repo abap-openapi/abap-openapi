@@ -20,7 +20,8 @@ CLASS zcl_icf_serv012 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/something' AND lv_method = 'POST'.
-          li_handler->_something( server->request->get_form_field( 'user-agent' ) ).
+          li_handler->_something(
+            user_agent = server->request->get_header_field( 'user-agent' ) ).
           RETURN.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).
