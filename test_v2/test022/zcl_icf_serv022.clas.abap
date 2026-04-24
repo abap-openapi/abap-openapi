@@ -19,8 +19,10 @@ CLASS zcl_icf_serv022 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/sendText' AND lv_method = 'PUT'.
-          li_handler->send_text(
+          DATA r_send_text TYPE zif_interface022=>r_send_text.
+          r_send_text = li_handler->send_text(
             body = 'todo' ).
+          server->response->set_status( code = 200 reason = 'ok' ).
           RETURN.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).

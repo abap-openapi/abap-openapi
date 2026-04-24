@@ -26,8 +26,10 @@ CLASS zcl_icf_serv024 IMPLEMENTATION.
               pretty_name = /ui2/cl_json=>pretty_mode-camel_case
             CHANGING
               data        = send_date_time ).
-          li_handler->send_date_time(
+          DATA r_send_date_time TYPE zif_interface024=>r_send_date_time.
+          r_send_date_time = li_handler->send_date_time(
             body = send_date_time ).
+          server->response->set_status( code = 200 reason = 'ok' ).
           RETURN.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).

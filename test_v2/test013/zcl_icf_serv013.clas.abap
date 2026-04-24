@@ -28,9 +28,11 @@ CLASS zcl_icf_serv013 IMPLEMENTATION.
           DATA lv_path_segment_1_3 TYPE string.
           READ TABLE lt_path_segments_1 INDEX 3 INTO lv_path_segment_1_3.
           ASSERT sy-subrc = 0.
-          li_handler->_foo_param_another(
+          DATA r__foo_param_another TYPE zif_interface013=>r__foo_param_another.
+          r__foo_param_another = li_handler->_foo_param_another(
             param = lv_path_segment_1_2
             another = lv_path_segment_1_3 ).
+          server->response->set_status( code = 200 reason = 'response' ).
           RETURN.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).

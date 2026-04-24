@@ -39,6 +39,8 @@ CLASS zcl_icf_serv008 IMPLEMENTATION.
             server->response->set_status( code = 200 reason = 'successful operation' ).
             RETURN.
           ENDIF.
+          server->response->set_status( code = 400 reason = 'Invalid status value' ).
+          RETURN.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).
         server->response->set_content_type( 'text/plain' ).

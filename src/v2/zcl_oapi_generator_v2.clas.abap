@@ -286,29 +286,35 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         ELSE.
           lv_code = ls_response-code.
         ENDIF.
-        LOOP AT ls_response-content INTO ls_content.
-
-          lv_response_name = lo_response_name->generate_response_name( iv_content_type = ls_content-type
-                                                                       iv_code         = ls_response-code ).
-
-          lv_indentation = ||.
-          IF lines( ls_response-content ) > 1.
-            lv_post = lv_post &&
-              |          IF { lv_typename }-{ lv_response_name } IS NOT INITIAL.\n|.
-            lv_indentation = |  |.
-          ENDIF.
+        IF lines( ls_response-content ) = 0.
           lv_post = lv_post &&
-            |{ lv_indentation }          server->response->set_content_type( '{ ls_content-type }' ).\n| &&
-            |{ lv_indentation }          server->response->set_cdata( /ui2/cl_json=>serialize(\n| &&
-            |{ lv_indentation }            data        = { lv_typename }-{ lv_response_name }\n| &&
-            |{ lv_indentation }            pretty_name = { ms_input-pretty_name } ) ).\n| &&
-            |{ lv_indentation }          server->response->set_status( code = { lv_code } reason = '{ ls_response-description }' ).\n| &&
-            |{ lv_indentation }          RETURN.\n|.
-          IF lines( ls_response-content ) > 1.
+            |          server->response->set_status( code = { lv_code } reason = '{ ls_response-description }' ).\n| &&
+            |          RETURN.\n|.
+        ELSE.
+          LOOP AT ls_response-content INTO ls_content.
+
+            lv_response_name = lo_response_name->generate_response_name( iv_content_type = ls_content-type
+                                                                         iv_code         = ls_response-code ).
+
+            lv_indentation = ||.
+            IF lines( ls_response-content ) > 1.
+              lv_post = lv_post &&
+                |          IF { lv_typename }-{ lv_response_name } IS NOT INITIAL.\n|.
+              lv_indentation = |  |.
+            ENDIF.
             lv_post = lv_post &&
-              |          ENDIF.\n|.
-          ENDIF.
-        ENDLOOP.
+              |{ lv_indentation }          server->response->set_content_type( '{ ls_content-type }' ).\n| &&
+              |{ lv_indentation }          server->response->set_cdata( /ui2/cl_json=>serialize(\n| &&
+              |{ lv_indentation }            data        = { lv_typename }-{ lv_response_name }\n| &&
+              |{ lv_indentation }            pretty_name = { ms_input-pretty_name } ) ).\n| &&
+              |{ lv_indentation }          server->response->set_status( code = { lv_code } reason = '{ ls_response-description }' ).\n| &&
+              |{ lv_indentation }          RETURN.\n|.
+            IF lines( ls_response-content ) > 1.
+              lv_post = lv_post &&
+                |          ENDIF.\n|.
+            ENDIF.
+          ENDLOOP.
+        ENDIF.
       ENDLOOP.
       IF lv_post IS NOT INITIAL.
         lv_pre =

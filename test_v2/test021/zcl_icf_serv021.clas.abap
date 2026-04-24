@@ -19,8 +19,10 @@ CLASS zcl_icf_serv021 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/send' AND lv_method = 'POST'.
-          li_handler->send(
+          DATA r_send TYPE zif_interface021=>r_send.
+          r_send = li_handler->send(
             body = 'todo' ).
+          server->response->set_status( code = 200 reason = 'ok' ).
           RETURN.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).

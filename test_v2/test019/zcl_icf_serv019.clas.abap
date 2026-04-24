@@ -19,8 +19,10 @@ CLASS zcl_icf_serv019 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/sendBinary' AND lv_method = 'PUT'.
-          li_handler->send_binary(
+          DATA r_send_binary TYPE zif_interface019=>r_send_binary.
+          r_send_binary = li_handler->send_binary(
             body = 'todo' ).
+          server->response->set_status( code = 200 reason = 'ok' ).
           RETURN.
         ENDIF.
       CATCH cx_static_check INTO DATA(lx_error1).
