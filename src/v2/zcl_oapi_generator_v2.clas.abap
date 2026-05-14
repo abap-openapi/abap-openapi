@@ -53,6 +53,12 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
       RETURNING
         VALUE(rv_abap) TYPE string.
 
+    METHODS find_parameter_type
+      IMPORTING
+        is_parameter   TYPE zif_oapi_specification_v3=>ty_parameter
+      RETURNING
+        VALUE(rv_type) TYPE string.
+
     TYPES: BEGIN OF ty_returning,
              abap TYPE string,
              type TYPE string,
@@ -240,7 +246,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
             IF lv_segment_index > 0.
               lv_path_segment_var = |lv_path_segment_{ lv_counter }_{ lv_segment_index }|.
               lv_path_parameter_setup = lv_path_parameter_setup &&
-                |          DATA { lv_path_segment_var } TYPE string.\n| &&
+                |          DATA { lv_path_segment_var } TYPE { find_parameter_type( ls_parameter ) }.\n| &&
                 |          READ TABLE lt_path_segments_{ lv_counter } INDEX { lv_segment_index } INTO { lv_path_segment_var }.\n| &&
                 |          ASSERT sy-subrc = 0.\n|.
               lv_parameters = lv_parameters &&
@@ -618,7 +624,6 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lt_list          TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
     DATA lv_str           TYPE string.
     DATA ls_parameter     LIKE LINE OF is_operation-parameters.
-    DATA lv_simple_type   TYPE string.
     DATA ls_parameter_ref LIKE LINE OF is_operation-parameters_ref.
     DATA lv_name          TYPE string.
     DATA ls_cparameter    LIKE LINE OF ms_specification-components-parameters.
@@ -635,13 +640,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     ENDLOOP.
 
     LOOP AT lt_parameters INTO ls_parameter.
-      IF ls_parameter-schema->type = 'array'.
-        lv_simple_type = 'string_table'.
-      ELSE.
-        lv_simple_type = ls_parameter-schema->get_simple_type( ).
-      ENDIF.
-
-      lv_str = |      { ls_parameter-abap_name } TYPE { lv_simple_type }|.
+      lv_str = |      { ls_parameter-abap_name } TYPE { find_parameter_type( ls_parameter ) }|.
       IF ls_parameter-required = abap_false.
         lv_str = lv_str && | OPTIONAL|.
       ENDIF.
@@ -660,6 +659,15 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
     IF rv_abap IS NOT INITIAL.
       rv_abap = |\n    IMPORTING\n{ rv_abap }|.
+    ENDIF.
+  ENDMETHOD.
+
+
+  METHOD find_parameter_type.
+    IF is_parameter-schema->type = 'array'.
+      rv_type = 'string_table'.
+    ELSE.
+      rv_type = is_parameter-schema->get_simple_type( ).
     ENDIF.
   ENDMETHOD.
 
