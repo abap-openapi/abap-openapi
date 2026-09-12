@@ -35,9 +35,11 @@ CLASS zcl_icf_serv026 IMPLEMENTATION.
     ENDTRY.
     TRY.
         IF lv_path = '/echo' AND lv_method = 'POST'.
+          DATA lv_body_2 TYPE string.
+          lv_body_2 = server->request->get_cdata( ).
           DATA r_echo TYPE zif_interface026=>r_echo.
           r_echo = li_handler->echo(
-            body = 'todo' ).
+            body = lv_body_2 ).
           server->response->set_content_type( 'application/json' ).
           server->response->set_cdata( /ui2/cl_json=>serialize(
             data        = r_echo-_200_app_json

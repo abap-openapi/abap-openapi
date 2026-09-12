@@ -173,6 +173,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lv_segment_index     TYPE i.
     DATA lv_path_parameter_setup TYPE string.
     DATA lv_path_segment_var  TYPE string.
+    DATA lv_body_name         TYPE string.
+    DATA lv_body_type         TYPE string.
 
     CREATE OBJECT lo_response_name.
 
@@ -274,8 +276,22 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         lv_parameters = lv_parameters &&
           |\n            body = { ls_operation-abap_name }|.
       ELSEIF ls_operation-request_body-schema IS NOT INITIAL.
+        lv_body_name = |lv_body_{ lv_counter }|.
+        lv_body_type = ls_operation-request_body-schema->get_simple_type( ).
+        IF lv_body_type = 'any' OR lv_body_type IS INITIAL.
+          lv_body_type = 'string'.
+        ENDIF.
+        rv_abap = rv_abap &&
+          |          DATA { lv_body_name } TYPE { lv_body_type }.\n|.
+        IF lv_body_type = 'xstring'.
+          rv_abap = rv_abap &&
+            |          { lv_body_name } = server->request->get_data( ).\n|.
+        ELSE.
+          rv_abap = rv_abap &&
+            |          { lv_body_name } = server->request->get_cdata( ).\n|.
+        ENDIF.
         lv_parameters = lv_parameters &&
-          |\n            body = 'todo'|.
+          |\n            body = { lv_body_name }|.
       ENDIF.
 
       lv_typename = 'r_' && ls_operation-abap_name.
