@@ -719,7 +719,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           |      ts_as_iso8601 = abap_true\n| &&
           |      pretty_name   = { ms_input-pretty_name }\n| &&
           |      name_mappings = mt_name_mappings\n| &&
-          |    ) ).\n|.      ENDIF.
+          |    ) ).\n|.
+      ENDIF.
 
       rv_abap = rv_abap &&
         |    mi_client->send( mv_timeout ).\n| &&
