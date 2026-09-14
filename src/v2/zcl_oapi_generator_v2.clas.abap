@@ -298,7 +298,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           ELSE.
             lv_prefix_length = 29 - strlen( |{ lv_variant }| ).
           ENDIF.
-          IF lv_prefix_length > strlen( lv_base_name ).
+          IF strlen( lv_base_name ) <= lv_prefix_length.
             lv_prefix_length = strlen( lv_base_name ).
           ENDIF.
           lv_candidate_name = CONV abap_compname(
