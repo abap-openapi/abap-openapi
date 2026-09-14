@@ -208,7 +208,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           INSERT ls_existing_mapping-json INTO TABLE ct_blocked_json_names.
         ENDIF.
       ELSEIF ls_property-abap_name IS NOT INITIAL.
-        IF    line_exists( ct_blocked_abap_names[ table_line = CONV abap_compname( ls_property-abap_name ) ] )
+        IF line_exists( ct_blocked_abap_names[ table_line = CONV abap_compname( ls_property-abap_name ) ] )
            OR line_exists( ct_blocked_json_names[ table_line = ls_property-name ] ).
           CONTINUE.
         ENDIF.
