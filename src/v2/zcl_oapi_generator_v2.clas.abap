@@ -389,9 +389,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       generation_information( ) &&
       |  PUBLIC SECTION.\n| &&
       |    INTERFACES if_http_extension.\n| &&
+      |    CLASS-METHODS class_constructor.\n| &&
       |  PRIVATE SECTION.\n| &&
-      |    CLASS-DATA mt_name_mappings TYPE /ui2/cl_json=>name_mappings.\n| &&
-      |    CLASS-METHODS class_constructor.\n|.
+      |    CLASS-DATA mt_name_mappings TYPE /ui2/cl_json=>name_mappings.\n|.
 
     rv_abap = rv_abap &&
       |ENDCLASS.\n\n| &&
