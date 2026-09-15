@@ -4,10 +4,15 @@ CLASS zcl_icf_serv015 DEFINITION PUBLIC.
 * Version: 1
   PUBLIC SECTION.
     INTERFACES if_http_extension.
+    CLASS-METHODS class_constructor.
   PRIVATE SECTION.
+    CLASS-DATA mt_name_mappings TYPE /ui2/cl_json=>name_mappings.
 ENDCLASS.
 
 CLASS zcl_icf_serv015 IMPLEMENTATION.
+  METHOD class_constructor.
+  ENDMETHOD.
+
   METHOD if_http_extension~handle_request.
     DATA li_handler      TYPE REF TO zif_interface015.
     DATA lv_method       TYPE string.
@@ -23,8 +28,9 @@ CLASS zcl_icf_serv015 IMPLEMENTATION.
           r__array = li_handler->_array( ).
           server->response->set_content_type( 'application/json' ).
           server->response->set_cdata( /ui2/cl_json=>serialize(
-            data        = r__array-_200_app_json
-            pretty_name = /ui2/cl_json=>pretty_mode-camel_case ) ).
+            data          = r__array-_200_app_json
+            pretty_name   = /ui2/cl_json=>pretty_mode-camel_case
+            name_mappings = mt_name_mappings ) ).
           server->response->set_status( code = 200 reason = 'foo' ).
           RETURN.
         ENDIF.

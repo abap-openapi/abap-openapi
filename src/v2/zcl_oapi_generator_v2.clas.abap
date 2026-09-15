@@ -1,6 +1,7 @@
 CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
   PUBLIC SECTION.
 
+
     TYPES: BEGIN OF ty_input,
              clas_icf_serv   TYPE c LENGTH 30,
              clas_icf_impl   TYPE c LENGTH 30,
@@ -30,6 +31,25 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
   PRIVATE SECTION.
     DATA ms_specification TYPE zif_oapi_specification_v3=>ty_specification.
     DATA ms_input TYPE ty_input.
+
+    TYPES ty_abap_names TYPE HASHED TABLE OF abap_compname WITH UNIQUE KEY table_line.
+    TYPES ty_strings    TYPE HASHED TABLE OF string WITH UNIQUE KEY table_line.
+
+    METHODS build_name_mappings
+      RETURNING VALUE(rv_abap) TYPE string.
+
+    METHODS collect_name_mappings
+      IMPORTING io_schema              TYPE REF TO zif_oapi_schema OPTIONAL
+                iv_schema_ref          TYPE string                 OPTIONAL
+      CHANGING  ct_name_mappings       TYPE /ui2/cl_json=>name_mappings
+                ct_blocked_abap_names  TYPE ty_abap_names
+                ct_blocked_json_names  TYPE ty_strings
+                ct_visited_schema_refs TYPE ty_strings.
+
+    METHODS make_property_names_unique
+      IMPORTING io_schema              TYPE REF TO zif_oapi_schema OPTIONAL
+                iv_schema_ref          TYPE string                 OPTIONAL
+      CHANGING  ct_visited_schema_refs TYPE ty_strings.
 
     METHODS build_clas_icf_serv
       RETURNING
@@ -125,10 +145,190 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       INTO rs_schema WITH KEY name = lv_name.             "#EC CI_SUBRC
   ENDMETHOD.
 
+  METHOD build_name_mappings.
+    DATA lt_name_mappings       TYPE /ui2/cl_json=>name_mappings.
+    DATA ls_component_schema    LIKE LINE OF ms_specification-components-schemas.
+    DATA lt_blocked_abap_names  TYPE ty_abap_names.
+    DATA lt_blocked_json_names  TYPE ty_strings.
+    DATA lt_visited_schema_refs TYPE ty_strings.
+    DATA ls_name_mapping        LIKE LINE OF lt_name_mappings.
+    DATA lv_json_name           TYPE string.
+
+    LOOP AT ms_specification-components-schemas INTO ls_component_schema.
+      collect_name_mappings( EXPORTING io_schema              = ls_component_schema-schema
+                                       iv_schema_ref          = ''
+                             CHANGING  ct_name_mappings       = lt_name_mappings
+                                       ct_blocked_abap_names  = lt_blocked_abap_names
+                                       ct_blocked_json_names  = lt_blocked_json_names
+                                       ct_visited_schema_refs = lt_visited_schema_refs ).
+    ENDLOOP.
+
+    IF lt_name_mappings IS INITIAL.
+      RETURN.
+    ENDIF.
+
+    rv_abap = |VALUE /ui2/cl_json=>name_mappings(\n|.
+    LOOP AT lt_name_mappings INTO ls_name_mapping.
+      lv_json_name = ls_name_mapping-json.
+      REPLACE ALL OCCURRENCES OF '''' IN lv_json_name WITH ''''''.
+      rv_abap = |{ rv_abap }                ( abap = '{ ls_name_mapping-abap }' json = '{ lv_json_name }' )\n|.
+    ENDLOOP.
+    rv_abap = |{ rv_abap }              )|.
+  ENDMETHOD.
+
+  METHOD collect_name_mappings.
+    DATA lo_schema           TYPE REF TO zif_oapi_schema.
+    DATA lv_schema_name      TYPE string.
+    DATA ls_component_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
+    DATA ls_property         TYPE zif_oapi_schema=>ty_property.
+    DATA ls_existing_mapping LIKE LINE OF ct_name_mappings.
+    DATA ls_json_mapping     LIKE LINE OF ct_name_mappings.
+
+    lo_schema = io_schema.
+    IF lo_schema IS NOT BOUND AND iv_schema_ref IS NOT INITIAL.
+      lv_schema_name = iv_schema_ref.
+      REPLACE FIRST OCCURRENCE OF '#/components/schemas/' IN lv_schema_name WITH ''.
+      IF line_exists( ct_visited_schema_refs[ table_line = lv_schema_name ] ).
+        RETURN.
+      ENDIF.
+      INSERT lv_schema_name INTO TABLE ct_visited_schema_refs.
+      ls_component_schema = find_schema( iv_schema_ref ).
+      lo_schema = ls_component_schema-schema.
+    ENDIF.
+
+    IF lo_schema IS NOT BOUND.
+      RETURN.
+    ENDIF.
+
+    LOOP AT lo_schema->properties INTO ls_property.
+      IF strlen( ls_property-name ) <= 30.
+        READ TABLE ct_name_mappings WITH TABLE KEY abap = ls_property-abap_name INTO ls_existing_mapping.
+        IF sy-subrc = 0.
+          DELETE TABLE ct_name_mappings FROM ls_existing_mapping.
+          INSERT CONV abap_compname( ls_property-abap_name ) INTO TABLE ct_blocked_abap_names.
+          INSERT ls_existing_mapping-json INTO TABLE ct_blocked_json_names.
+        ENDIF.
+      ELSEIF ls_property-abap_name IS NOT INITIAL.
+        IF line_exists( ct_blocked_abap_names[ table_line = CONV abap_compname( ls_property-abap_name ) ] )
+            OR line_exists( ct_blocked_json_names[ table_line = ls_property-name ] ).
+          CONTINUE.
+        ENDIF.
+
+        READ TABLE ct_name_mappings WITH TABLE KEY abap = ls_property-abap_name INTO ls_existing_mapping.
+        IF sy-subrc = 0 AND ls_existing_mapping-json <> ls_property-name.
+          DELETE TABLE ct_name_mappings FROM ls_existing_mapping.
+          INSERT CONV abap_compname( ls_property-abap_name ) INTO TABLE ct_blocked_abap_names.
+          INSERT ls_existing_mapping-json INTO TABLE ct_blocked_json_names.
+          INSERT ls_property-name INTO TABLE ct_blocked_json_names.
+        ELSEIF sy-subrc <> 0.
+          CLEAR ls_json_mapping.
+          LOOP AT ct_name_mappings INTO ls_json_mapping WHERE json = ls_property-name.
+            EXIT.
+          ENDLOOP.
+          IF ls_json_mapping IS NOT INITIAL AND ls_json_mapping-abap <> ls_property-abap_name.
+            DELETE TABLE ct_name_mappings FROM ls_json_mapping.
+            INSERT ls_json_mapping-abap INTO TABLE ct_blocked_abap_names.
+            INSERT CONV abap_compname( ls_property-abap_name ) INTO TABLE ct_blocked_abap_names.
+            INSERT ls_property-name INTO TABLE ct_blocked_json_names.
+          ELSE.
+            INSERT VALUE #( abap = ls_property-abap_name
+                            json = ls_property-name ) INTO TABLE ct_name_mappings.
+          ENDIF.
+        ENDIF.
+      ENDIF.
+
+      collect_name_mappings( EXPORTING io_schema              = ls_property-schema
+                                       iv_schema_ref          = ls_property-ref
+                             CHANGING  ct_name_mappings       = ct_name_mappings
+                                       ct_blocked_abap_names  = ct_blocked_abap_names
+                                       ct_blocked_json_names  = ct_blocked_json_names
+                                       ct_visited_schema_refs = ct_visited_schema_refs ).
+    ENDLOOP.
+
+    collect_name_mappings( EXPORTING io_schema              = lo_schema->items_schema
+                                     iv_schema_ref          = lo_schema->items_ref
+                           CHANGING  ct_name_mappings       = ct_name_mappings
+                                     ct_blocked_abap_names  = ct_blocked_abap_names
+                                     ct_blocked_json_names  = ct_blocked_json_names
+                                     ct_visited_schema_refs = ct_visited_schema_refs ).
+  ENDMETHOD.
+
+  METHOD make_property_names_unique.
+    DATA lo_schema           TYPE REF TO zif_oapi_schema.
+    DATA lv_schema_name      TYPE string.
+    DATA ls_component_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
+    DATA lv_candidate_name   TYPE abap_compname.
+    DATA lt_used_names       TYPE ty_abap_names.
+    DATA lv_base_name        TYPE string.
+    DATA lv_variant          TYPE i.
+    DATA lv_suffix           TYPE c LENGTH 1.
+    DATA lv_prefix_length    TYPE i.
+
+    FIELD-SYMBOLS <ls_property> TYPE zif_oapi_schema=>ty_property.
+
+    lo_schema = io_schema.
+    IF lo_schema IS NOT BOUND AND iv_schema_ref IS NOT INITIAL.
+      lv_schema_name = iv_schema_ref.
+      REPLACE FIRST OCCURRENCE OF '#/components/schemas/' IN lv_schema_name WITH ''.
+      IF line_exists( ct_visited_schema_refs[ table_line = lv_schema_name ] ).
+        RETURN.
+      ENDIF.
+      INSERT lv_schema_name INTO TABLE ct_visited_schema_refs.
+      ls_component_schema = find_schema( iv_schema_ref ).
+      lo_schema = ls_component_schema-schema.
+    ENDIF.
+
+    IF lo_schema IS NOT BOUND.
+      RETURN.
+    ENDIF.
+
+    LOOP AT lo_schema->properties ASSIGNING <ls_property>.
+      IF <ls_property>-abap_name IS INITIAL.
+        CONTINUE.
+      ENDIF.
+
+      lv_candidate_name = CONV abap_compname( <ls_property>-abap_name ).
+      IF line_exists( lt_used_names[ table_line = lv_candidate_name ] ).
+        lv_base_name = <ls_property>-abap_name.
+        DO 90 TIMES.
+          lv_variant = ( sy-index - 1 ) DIV 9.
+          lv_suffix = ( sy-index - 1 ) MOD 9 + 1.
+          IF lv_variant = 0.
+            lv_prefix_length = 29.
+          ELSE.
+            lv_prefix_length = 29 - strlen( |{ lv_variant }| ).
+          ENDIF.
+          IF strlen( lv_base_name ) <= lv_prefix_length.
+            lv_prefix_length = strlen( lv_base_name ).
+          ENDIF.
+          lv_candidate_name = CONV abap_compname(
+            |{ substring( val = lv_base_name
+                          off = 0
+                          len = lv_prefix_length ) }{ COND string(
+              WHEN lv_variant > 0 THEN lv_variant ) }{ lv_suffix }| ).
+          IF NOT line_exists( lt_used_names[ table_line = lv_candidate_name ] ).
+            <ls_property>-abap_name = lv_candidate_name.
+            EXIT.
+          ENDIF.
+        ENDDO.
+      ENDIF.
+
+      INSERT lv_candidate_name INTO TABLE lt_used_names.
+
+      make_property_names_unique( EXPORTING io_schema              = <ls_property>-schema
+                                            iv_schema_ref          = <ls_property>-ref
+                                  CHANGING  ct_visited_schema_refs = ct_visited_schema_refs ).
+    ENDLOOP.
+
+    make_property_names_unique( EXPORTING io_schema              = lo_schema->items_schema
+                                          iv_schema_ref          = lo_schema->items_ref
+                                CHANGING  ct_visited_schema_refs = ct_visited_schema_refs ).
+  ENDMETHOD.
 
   METHOD run.
     DATA lo_parser     TYPE REF TO zcl_oapi_parser.
     DATA lo_references TYPE REF TO zcl_oapi_references.
+    DATA lt_visited_schema_refs TYPE ty_strings.
 
     ms_input = is_input.
 
@@ -145,6 +345,11 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
     CREATE OBJECT lo_references.
     ms_specification = lo_references->normalize( ms_specification ).
+
+    LOOP AT ms_specification-components-schemas ASSIGNING FIELD-SYMBOL(<ls_component_schema>).
+      make_property_names_unique( EXPORTING io_schema              = <ls_component_schema>-schema
+                                  CHANGING  ct_visited_schema_refs = lt_visited_schema_refs ).
+    ENDLOOP.
 
     rs_result-clas_icf_serv = build_clas_icf_serv( ).
     rs_result-clas_icf_impl = build_clas_icf_impl( ).
@@ -175,18 +380,26 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lv_path_segment_var  TYPE string.
     DATA lv_body_name         TYPE string.
     DATA lv_body_type         TYPE string.
+    DATA lv_name_mappings        TYPE string.
 
     CREATE OBJECT lo_response_name.
+    lv_name_mappings = build_name_mappings( ).
 
     rv_abap = |CLASS { ms_input-clas_icf_serv } DEFINITION PUBLIC.\n| &&
       generation_information( ) &&
       |  PUBLIC SECTION.\n| &&
       |    INTERFACES if_http_extension.\n| &&
-      |  PRIVATE SECTION.\n|.
+      |    CLASS-METHODS class_constructor.\n| &&
+      |  PRIVATE SECTION.\n| &&
+      |    CLASS-DATA mt_name_mappings TYPE /ui2/cl_json=>name_mappings.\n|.
 
     rv_abap = rv_abap &&
       |ENDCLASS.\n\n| &&
-      |CLASS { ms_input-clas_icf_serv } IMPLEMENTATION.\n|.
+      |CLASS { ms_input-clas_icf_serv } IMPLEMENTATION.\n| &&
+      |  METHOD class_constructor.\n| &&
+      COND string( WHEN lv_name_mappings IS NOT INITIAL
+                   THEN |    mt_name_mappings = { lv_name_mappings }.\n| ) &&
+      |  ENDMETHOD.\n\n|.
 
     rv_abap = rv_abap &&
       |  METHOD if_http_extension~handle_request.\n| &&
@@ -238,7 +451,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
                 |          DELETE lt_path_segments_{ lv_counter } WHERE table_line IS INITIAL.\n|.
             ENDIF.
 
-            lv_path_placeholder = '{' && ls_parameter-name && '}'.
+            lv_path_placeholder = |\{{ ls_parameter-name }\}|.
             CLEAR lv_segment_index.
             READ TABLE lt_template_segments WITH KEY table_line = lv_path_placeholder TRANSPORTING NO FIELDS.
             IF sy-subrc = 0.
@@ -269,10 +482,11 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           |          DATA { ls_operation-abap_name  } TYPE { ms_input-intf }=>{ find_schema( ls_operation-request_body-schema_ref )-abap_name }.\n| &&
           |          /ui2/cl_json=>deserialize(\n| &&
           |            EXPORTING\n| &&
-          |              json        = server->request->get_cdata( )\n| &&
-          |              pretty_name = { ms_input-pretty_name }\n| &&
+          |              json          = server->request->get_cdata( )\n| &&
+          |              pretty_name   = { ms_input-pretty_name }\n| &&
+          |              name_mappings = mt_name_mappings\n| &&
           |            CHANGING\n| &&
-          |              data        = { ls_operation-abap_name } ).\n|.
+          |              data          = { ls_operation-abap_name } ).\n|.
         lv_parameters = lv_parameters &&
           |\n            body = { ls_operation-abap_name }|.
       ELSEIF ls_operation-request_body-schema IS NOT INITIAL.
@@ -327,8 +541,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
             lv_post = lv_post &&
               |{ lv_indentation }          server->response->set_content_type( '{ ls_content-type }' ).\n| &&
               |{ lv_indentation }          server->response->set_cdata( /ui2/cl_json=>serialize(\n| &&
-              |{ lv_indentation }            data        = { lv_typename }-{ lv_response_name }\n| &&
-              |{ lv_indentation }            pretty_name = { ms_input-pretty_name } ) ).\n| &&
+              |{ lv_indentation }            data          = { lv_typename }-{ lv_response_name }\n| &&
+              |{ lv_indentation }            pretty_name   = { ms_input-pretty_name }\n| &&
+              |{ lv_indentation }            name_mappings = mt_name_mappings ) ).\n| &&
               |{ lv_indentation }          server->response->set_status( code = { lv_code } reason = '{ ls_response-description }' ).\n| &&
               |{ lv_indentation }          RETURN.\n|.
             IF lines( ls_response-content ) > 1.
@@ -398,8 +613,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA ls_cresponse     LIKE LINE OF ms_specification-components-responses.
     DATA lv_name          TYPE string.
     DATA lv_has_others       TYPE abap_bool.
+    DATA lv_name_mappings TYPE string.
 
     CREATE OBJECT lo_response_name.
+    lv_name_mappings = build_name_mappings( ).
 
     rv_abap = |CLASS { ms_input-clas_client } DEFINITION PUBLIC.\n| &&
       generation_information( ) &&
@@ -408,6 +625,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    "! Supply http client and possibily extra http headers to instantiate the openAPI client\n| &&
       |    "! Use cl_http_client=>create_by_destination() or cl_http_client=>create_by_url() to create the client\n| &&
       |    "! the caller must close() the client\n| &&
+      |    CLASS-METHODS class_constructor.\n| &&
       |    METHODS constructor\n| &&
       |      IMPORTING\n| &&
       |        ii_client        TYPE REF TO if_http_client\n| &&
@@ -421,6 +639,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    DATA mv_logon_popup   TYPE i.\n| &&
       |    DATA mv_uri_prefix    TYPE string.\n| &&
       |    DATA mt_extra_headers TYPE tihttpnvp.\n| &&
+      |  PRIVATE SECTION.\n| &&
+      |    CLASS-DATA mt_name_mappings TYPE /ui2/cl_json=>name_mappings.\n| &&
       |ENDCLASS.\n\n| &&
       |CLASS { ms_input-clas_client } IMPLEMENTATION.\n| &&
       |  METHOD constructor.\n| &&
@@ -429,6 +649,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    mv_logon_popup = iv_logon_popup.\n| &&
       |    mv_uri_prefix = iv_uri_prefix.\n| &&
       |    mt_extra_headers = it_extra_headers.\n| &&
+      |  ENDMETHOD.\n\n| &&
+      |  METHOD class_constructor.\n| &&
+      COND string( WHEN lv_name_mappings IS NOT INITIAL
+                   THEN |    mt_name_mappings = { lv_name_mappings }.\n| ) &&
       |  ENDMETHOD.\n\n|.
 
     LOOP AT ms_specification-operations INTO ls_operation.
@@ -493,7 +717,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           |    mi_client->request->set_cdata( /ui2/cl_json=>serialize(\n| &&
           |      data          = body\n| &&
           |      ts_as_iso8601 = abap_true\n| &&
-          |      pretty_name   = { ms_input-pretty_name } ) ).\n|.
+          |      pretty_name   = { ms_input-pretty_name }\n| &&
+          |      name_mappings = mt_name_mappings ) ).\n|.
       ENDIF.
 
       rv_abap = rv_abap &&
@@ -555,10 +780,11 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
               rv_abap = rv_abap &&
                 |            /ui2/cl_json=>deserialize(\n| &&
                 |              EXPORTING\n| &&
-                |                json        = mi_client->response->get_cdata( )\n| &&
-                |                pretty_name = { ms_input-pretty_name }\n| &&
+                |                json          = mi_client->response->get_cdata( )\n| &&
+                |                pretty_name   = { ms_input-pretty_name }\n| &&
+                |                name_mappings = mt_name_mappings\n| &&
                 |              CHANGING\n| &&
-                |                data        = return-{ lv_name } ).\n|.
+                |                data          = return-{ lv_name } ).\n|.
             ELSE.
               rv_abap = rv_abap &&
                 |* todo, content type = '{ ls_content-type }'\n|.

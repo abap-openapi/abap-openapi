@@ -8,6 +8,7 @@ CLASS zcl_client001 DEFINITION PUBLIC.
     "! Supply http client and possibily extra http headers to instantiate the openAPI client
     "! Use cl_http_client=>create_by_destination() or cl_http_client=>create_by_url() to create the client
     "! the caller must close() the client
+    CLASS-METHODS class_constructor.
     METHODS constructor
       IMPORTING
         ii_client        TYPE REF TO if_http_client
@@ -21,6 +22,8 @@ CLASS zcl_client001 DEFINITION PUBLIC.
     DATA mv_logon_popup   TYPE i.
     DATA mv_uri_prefix    TYPE string.
     DATA mt_extra_headers TYPE tihttpnvp.
+  PRIVATE SECTION.
+    CLASS-DATA mt_name_mappings TYPE /ui2/cl_json=>name_mappings.
 ENDCLASS.
 
 CLASS zcl_client001 IMPLEMENTATION.
@@ -30,6 +33,9 @@ CLASS zcl_client001 IMPLEMENTATION.
     mv_logon_popup = iv_logon_popup.
     mv_uri_prefix = iv_uri_prefix.
     mt_extra_headers = it_extra_headers.
+  ENDMETHOD.
+
+  METHOD class_constructor.
   ENDMETHOD.
 
   METHOD zif_interface001~_ping.

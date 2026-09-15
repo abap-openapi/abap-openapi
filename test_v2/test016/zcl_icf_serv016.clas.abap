@@ -4,10 +4,15 @@ CLASS zcl_icf_serv016 DEFINITION PUBLIC.
 * Version: 1.0.11
   PUBLIC SECTION.
     INTERFACES if_http_extension.
+    CLASS-METHODS class_constructor.
   PRIVATE SECTION.
+    CLASS-DATA mt_name_mappings TYPE /ui2/cl_json=>name_mappings.
 ENDCLASS.
 
 CLASS zcl_icf_serv016 IMPLEMENTATION.
+  METHOD class_constructor.
+  ENDMETHOD.
+
   METHOD if_http_extension~handle_request.
     DATA li_handler      TYPE REF TO zif_interface016.
     DATA lv_method       TYPE string.
@@ -22,17 +27,19 @@ CLASS zcl_icf_serv016 IMPLEMENTATION.
           DATA _create_dog TYPE zif_interface016=>body_create_dog.
           /ui2/cl_json=>deserialize(
             EXPORTING
-              json        = server->request->get_cdata( )
-              pretty_name = /ui2/cl_json=>pretty_mode-camel_case
+              json          = server->request->get_cdata( )
+              pretty_name   = /ui2/cl_json=>pretty_mode-camel_case
+              name_mappings = mt_name_mappings
             CHANGING
-              data        = _create_dog ).
+              data          = _create_dog ).
           DATA r__create_dog TYPE zif_interface016=>r__create_dog.
           r__create_dog = li_handler->_create_dog(
             body = _create_dog ).
           server->response->set_content_type( 'application/json' ).
           server->response->set_cdata( /ui2/cl_json=>serialize(
-            data        = r__create_dog-_200_app_json
-            pretty_name = /ui2/cl_json=>pretty_mode-camel_case ) ).
+            data          = r__create_dog-_200_app_json
+            pretty_name   = /ui2/cl_json=>pretty_mode-camel_case
+            name_mappings = mt_name_mappings ) ).
           server->response->set_status( code = 200 reason = 'Created' ).
           RETURN.
         ENDIF.

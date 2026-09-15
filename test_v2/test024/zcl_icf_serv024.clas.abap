@@ -4,10 +4,15 @@ CLASS zcl_icf_serv024 DEFINITION PUBLIC.
 * Version: 1
   PUBLIC SECTION.
     INTERFACES if_http_extension.
+    CLASS-METHODS class_constructor.
   PRIVATE SECTION.
+    CLASS-DATA mt_name_mappings TYPE /ui2/cl_json=>name_mappings.
 ENDCLASS.
 
 CLASS zcl_icf_serv024 IMPLEMENTATION.
+  METHOD class_constructor.
+  ENDMETHOD.
+
   METHOD if_http_extension~handle_request.
     DATA li_handler      TYPE REF TO zif_interface024.
     DATA lv_method       TYPE string.
@@ -22,10 +27,11 @@ CLASS zcl_icf_serv024 IMPLEMENTATION.
           DATA send_date_time TYPE zif_interface024=>posttestrequest.
           /ui2/cl_json=>deserialize(
             EXPORTING
-              json        = server->request->get_cdata( )
-              pretty_name = /ui2/cl_json=>pretty_mode-camel_case
+              json          = server->request->get_cdata( )
+              pretty_name   = /ui2/cl_json=>pretty_mode-camel_case
+              name_mappings = mt_name_mappings
             CHANGING
-              data        = send_date_time ).
+              data          = send_date_time ).
           DATA r_send_date_time TYPE zif_interface024=>r_send_date_time.
           r_send_date_time = li_handler->send_date_time(
             body = send_date_time ).

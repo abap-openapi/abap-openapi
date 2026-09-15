@@ -4,10 +4,15 @@ CLASS zcl_icf_serv013 DEFINITION PUBLIC.
 * Version: 1
   PUBLIC SECTION.
     INTERFACES if_http_extension.
+    CLASS-METHODS class_constructor.
   PRIVATE SECTION.
+    CLASS-DATA mt_name_mappings TYPE /ui2/cl_json=>name_mappings.
 ENDCLASS.
 
 CLASS zcl_icf_serv013 IMPLEMENTATION.
+  METHOD class_constructor.
+  ENDMETHOD.
+
   METHOD if_http_extension~handle_request.
     DATA li_handler      TYPE REF TO zif_interface013.
     DATA lv_method       TYPE string.

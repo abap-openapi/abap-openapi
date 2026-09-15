@@ -4,10 +4,15 @@ CLASS zcl_icf_serv006 DEFINITION PUBLIC.
 * Version: 1
   PUBLIC SECTION.
     INTERFACES if_http_extension.
+    CLASS-METHODS class_constructor.
   PRIVATE SECTION.
+    CLASS-DATA mt_name_mappings TYPE /ui2/cl_json=>name_mappings.
 ENDCLASS.
 
 CLASS zcl_icf_serv006 IMPLEMENTATION.
+  METHOD class_constructor.
+  ENDMETHOD.
+
   METHOD if_http_extension~handle_request.
     DATA li_handler      TYPE REF TO zif_interface006.
     DATA lv_method       TYPE string.
@@ -22,18 +27,20 @@ CLASS zcl_icf_serv006 IMPLEMENTATION.
           DATA _test TYPE zif_interface006=>posttestrequest.
           /ui2/cl_json=>deserialize(
             EXPORTING
-              json        = server->request->get_cdata( )
-              pretty_name = /ui2/cl_json=>pretty_mode-camel_case
+              json          = server->request->get_cdata( )
+              pretty_name   = /ui2/cl_json=>pretty_mode-camel_case
+              name_mappings = mt_name_mappings
             CHANGING
-              data        = _test ).
+              data          = _test ).
           DATA r__test TYPE zif_interface006=>r__test.
           r__test = li_handler->_test(
             separator = server->request->get_form_field( 'separator' )
             body = _test ).
           server->response->set_content_type( 'application/json' ).
           server->response->set_cdata( /ui2/cl_json=>serialize(
-            data        = r__test-_200_app_json
-            pretty_name = /ui2/cl_json=>pretty_mode-camel_case ) ).
+            data          = r__test-_200_app_json
+            pretty_name   = /ui2/cl_json=>pretty_mode-camel_case
+            name_mappings = mt_name_mappings ) ).
           server->response->set_status( code = 200 reason = 'OK' ).
           RETURN.
         ENDIF.
