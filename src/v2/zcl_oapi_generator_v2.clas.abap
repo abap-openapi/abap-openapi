@@ -39,17 +39,17 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
 
     METHODS sanitize_abap_name
       IMPORTING
-        iv_name          TYPE string
-        iv_max_length    TYPE i DEFAULT 30
+        iv_name        TYPE string
+        iv_max_length  TYPE i DEFAULT 30
       RETURNING
-        VALUE(rv_abap)   TYPE string.
+        VALUE(rv_abap) TYPE string.
 
     METHODS ensure_unique_abap_name
       IMPORTING
-        iv_name               TYPE string
+        iv_name        TYPE string
       CHANGING
-        ct_used_names         TYPE ty_abap_names
-        cv_abap               TYPE string.
+        ct_used_names  TYPE ty_abap_names
+        cv_abap        TYPE string.
 
     METHODS build_name_mappings
       RETURNING VALUE(rv_abap) TYPE string.
@@ -473,9 +473,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         CONTINUE.
       ENDIF.
 
-      <ls_property>-abap_name = ensure_unique_abap_name(
+      ensure_unique_abap_name(
         EXPORTING iv_name       = <ls_property>-abap_name
-        CHANGING  ct_used_names = lt_used_names ).
+        CHANGING  ct_used_names = lt_used_names
+                  cv_abap       = <ls_property>-abap_name ).
 
       make_property_names_unique( EXPORTING io_schema              = <ls_property>-schema
                                             iv_schema_ref          = <ls_property>-ref
