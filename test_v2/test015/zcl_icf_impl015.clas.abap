@@ -5,7 +5,7 @@ ENDCLASS.
 
 CLASS zcl_icf_impl015 IMPLEMENTATION.
 
-  METHOD zif_interface015~_array.
+  METHOD zif_interface015~array.
 * Add implementation logic here
   ENDMETHOD.
 

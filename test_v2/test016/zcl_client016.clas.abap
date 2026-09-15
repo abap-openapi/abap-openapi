@@ -37,7 +37,7 @@ CLASS zcl_client016 IMPLEMENTATION.
   METHOD class_constructor.
   ENDMETHOD.
 
-  METHOD zif_interface016~_create_dog.
+  METHOD zif_interface016~create_dog.
     DATA lv_uri          TYPE string.
     DATA ls_header       LIKE LINE OF mt_extra_headers.
     DATA lv_dummy        TYPE string.

@@ -24,8 +24,8 @@ CLASS zcl_icf_serv017 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/array' AND lv_method = 'POST'.
-          DATA r__array TYPE zif_interface017=>r__array.
-          r__array = li_handler->_array( ).
+          DATA r_array TYPE zif_interface017=>r_array.
+          r_array = li_handler->array( ).
           server->response->set_status( code = 400 reason = '' ).
           RETURN.
         ENDIF.

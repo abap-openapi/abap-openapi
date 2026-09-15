@@ -27,15 +27,15 @@ INTERFACE zif_interface018 PUBLIC.
            operations TYPE STANDARD TABLE OF operation WITH DEFAULT KEY,
          END OF body_create_dog.
 
-  TYPES: BEGIN OF r__create_dog,
+  TYPES: BEGIN OF r_create_dog,
            code          TYPE i,
            reason        TYPE string,
-         END OF r__create_dog.
-  METHODS _create_dog
+         END OF r_create_dog.
+  METHODS create_dog
     IMPORTING
       body TYPE body_create_dog
     RETURNING
-      VALUE(return) TYPE r__create_dog
+      VALUE(return) TYPE r_create_dog
     RAISING
       cx_static_check.
 ENDINTERFACE.

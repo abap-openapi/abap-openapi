@@ -5,7 +5,7 @@ ENDCLASS.
 
 CLASS zcl_icf_impl007 IMPLEMENTATION.
 
-  METHOD zif_interface007~_test.
+  METHOD zif_interface007~test.
 * Add implementation logic here
   ENDMETHOD.
 

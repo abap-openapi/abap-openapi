@@ -5,16 +5,16 @@ INTERFACE zif_interface013 PUBLIC.
 
   CONSTANTS base_path TYPE string VALUE ''.
 
-  TYPES: BEGIN OF r__foo_param_another,
+  TYPES: BEGIN OF r_foo_param_another,
            code          TYPE i,
            reason        TYPE string,
-         END OF r__foo_param_another.
-  METHODS _foo_param_another
+         END OF r_foo_param_another.
+  METHODS foo_param_another
     IMPORTING
       param TYPE string
       another TYPE string
     RETURNING
-      VALUE(return) TYPE r__foo_param_another
+      VALUE(return) TYPE r_foo_param_another
     RAISING
       cx_static_check.
 ENDINTERFACE.
