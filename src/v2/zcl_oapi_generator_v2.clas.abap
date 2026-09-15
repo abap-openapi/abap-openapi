@@ -49,8 +49,7 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
         iv_name               TYPE string
       CHANGING
         ct_used_names         TYPE ty_abap_names
-      RETURNING
-        VALUE(rv_abap)        TYPE string.
+        cv_abap               TYPE string.
 
     METHODS build_name_mappings
       RETURNING VALUE(rv_abap) TYPE string.
@@ -225,14 +224,14 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lv_index      TYPE i.
     DATA lv_compname   TYPE abap_compname.
 
-    lv_base = sanitize_abap_name( iv_name = iv_name ).
+    lv_base = sanitize_abap_name( iv_name ).
     lv_candidate = lv_base.
 
     lv_compname = lv_candidate.
     READ TABLE ct_used_names WITH TABLE KEY table_line = lv_compname TRANSPORTING NO FIELDS.
     IF sy-subrc <> 0.
       INSERT lv_compname INTO TABLE ct_used_names.
-      rv_abap = lv_candidate.
+      cv_abap = lv_candidate.
       RETURN.
     ENDIF.
 
@@ -252,7 +251,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       ENDIF.
 
       lv_candidate = lv_base.
-      IF lv_trim_len < strlen( lv_base ).
+      IF strlen( lv_base ) >= lv_trim_len.
         lv_candidate = lv_base(lv_trim_len).
       ENDIF.
 
@@ -262,12 +261,12 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       READ TABLE ct_used_names WITH TABLE KEY table_line = lv_compname TRANSPORTING NO FIELDS.
       IF sy-subrc <> 0.
         INSERT lv_compname INTO TABLE ct_used_names.
-        rv_abap = lv_candidate.
+        cv_abap = lv_candidate.
         RETURN.
       ENDIF.
     ENDDO.
 
-    rv_abap = lv_base.
+    cv_abap = lv_base.
   ENDMETHOD.
 
 
