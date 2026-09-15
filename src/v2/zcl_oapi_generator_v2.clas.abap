@@ -542,7 +542,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
               |{ lv_indentation }          server->response->set_content_type( '{ ls_content-type }' ).\n| &&
               |{ lv_indentation }          server->response->set_cdata( /ui2/cl_json=>serialize(\n| &&
               |{ lv_indentation }            data        = { lv_typename }-{ lv_response_name }\n| &&
-              |{ lv_indentation }            pretty_name = { ms_input-pretty_name } ) ).\n| &&
+              |{ lv_indentation }            pretty_name = { ms_input-pretty_name }\n| &&
               |{ lv_indentation }            name_mappings = mt_name_mappings\n| &&
               |{ lv_indentation }          server->response->set_status( code = { lv_code } reason = '{ ls_response-description }' ).\n| &&
               |{ lv_indentation }          RETURN.\n|.
