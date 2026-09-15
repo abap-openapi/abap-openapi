@@ -39,7 +39,7 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
 
     METHODS sanitize_abap_name
       IMPORTING
-        iv_name        TYPE string
+        iv_name          TYPE string
         iv_max_length    TYPE i DEFAULT 30
       RETURNING
         VALUE(rv_abap)   TYPE string.
