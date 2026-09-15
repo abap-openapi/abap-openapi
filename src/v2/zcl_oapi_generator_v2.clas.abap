@@ -281,9 +281,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     FIELD-SYMBOLS <ls_op_parameter>     TYPE zif_oapi_specification_v3=>ty_parameter.
 
     LOOP AT ms_specification-components-schemas ASSIGNING <ls_component_schema>.
-      <ls_component_schema>-abap_name = ensure_unique_abap_name(
+      ensure_unique_abap_name(
         EXPORTING iv_name       = <ls_component_schema>-abap_name
-        CHANGING  ct_used_names = lt_used_schema_names ).
+        CHANGING  ct_used_names = lt_used_schema_names
+                  cv_abap       = <ls_component_schema>-abap_name ).
     ENDLOOP.
 
     LOOP AT ms_specification-components-parameters ASSIGNING <ls_parameter>.
@@ -291,15 +292,17 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     ENDLOOP.
 
     LOOP AT ms_specification-operations ASSIGNING <ls_operation>.
-      <ls_operation>-abap_name = ensure_unique_abap_name(
+      ensure_unique_abap_name(
         EXPORTING iv_name       = <ls_operation>-abap_name
-        CHANGING  ct_used_names = lt_used_operation_names ).
+        CHANGING  ct_used_names = lt_used_operation_names
+                  cv_abap       = <ls_operation>-abap_name ).
 
       CLEAR lt_used_parameter_names.
       LOOP AT <ls_operation>-parameters ASSIGNING <ls_op_parameter>.
-        <ls_op_parameter>-abap_name = ensure_unique_abap_name(
+        ensure_unique_abap_name(
           EXPORTING iv_name       = <ls_op_parameter>-abap_name
-          CHANGING  ct_used_names = lt_used_parameter_names ).
+          CHANGING  ct_used_names = lt_used_parameter_names
+                    cv_abap       = <ls_op_parameter>-abap_name ).
       ENDLOOP.
     ENDLOOP.
   ENDMETHOD.
