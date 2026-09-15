@@ -37,7 +37,7 @@ CLASS zcl_client013 IMPLEMENTATION.
   METHOD class_constructor.
   ENDMETHOD.
 
-  METHOD zif_interface013~_foo_param_another.
+  METHOD zif_interface013~foo_param_another.
     DATA lv_uri          TYPE string.
     DATA ls_header       LIKE LINE OF mt_extra_headers.
     DATA lv_dummy        TYPE string.

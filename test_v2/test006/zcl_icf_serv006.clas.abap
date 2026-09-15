@@ -24,21 +24,21 @@ CLASS zcl_icf_serv006 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/test' AND lv_method = 'POST'.
-          DATA _test TYPE zif_interface006=>posttestrequest.
+          DATA test TYPE zif_interface006=>posttestrequest.
           /ui2/cl_json=>deserialize(
             EXPORTING
               json          = server->request->get_cdata( )
               pretty_name   = /ui2/cl_json=>pretty_mode-camel_case
               name_mappings = mt_name_mappings
             CHANGING
-              data          = _test ).
-          DATA r__test TYPE zif_interface006=>r__test.
-          r__test = li_handler->_test(
+              data          = test ).
+          DATA r_test TYPE zif_interface006=>r_test.
+          r_test = li_handler->test(
             separator = server->request->get_form_field( 'separator' )
-            body = _test ).
+            body = test ).
           server->response->set_content_type( 'application/json' ).
           server->response->set_cdata( /ui2/cl_json=>serialize(
-            data          = r__test-_200_app_json
+            data          = r_test-_200_app_json
             pretty_name   = /ui2/cl_json=>pretty_mode-camel_case
             name_mappings = mt_name_mappings ) ).
           server->response->set_status( code = 200 reason = 'OK' ).

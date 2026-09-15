@@ -35,6 +35,22 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
     TYPES ty_abap_names TYPE HASHED TABLE OF abap_compname WITH UNIQUE KEY table_line.
     TYPES ty_strings    TYPE HASHED TABLE OF string WITH UNIQUE KEY table_line.
 
+    METHODS sanitize_specification_names.
+
+    METHODS sanitize_abap_name
+      IMPORTING
+        iv_name        TYPE string
+        iv_max_length  TYPE i DEFAULT 30
+      RETURNING
+        VALUE(rv_abap) TYPE string.
+
+    METHODS ensure_unique_abap_name
+      IMPORTING
+        iv_name       TYPE string
+      CHANGING
+        ct_used_names TYPE ty_abap_names
+        cv_abap       TYPE string.
+
     METHODS build_name_mappings
       RETURNING VALUE(rv_abap) TYPE string.
 
@@ -116,6 +132,181 @@ ENDCLASS.
 
 
 CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
+
+  METHOD sanitize_abap_name.
+    DATA lv_name TYPE string.
+    DATA lv_char TYPE c LENGTH 1.
+    DATA lv_offset TYPE i.
+    DATA lv_len TYPE i.
+
+    lv_name = iv_name.
+    TRANSLATE lv_name TO LOWER CASE.
+
+    " Replace common language-specific characters with ASCII fallback.
+    REPLACE ALL OCCURRENCES OF 'ä' IN lv_name WITH 'ae'.
+    REPLACE ALL OCCURRENCES OF 'ö' IN lv_name WITH 'oe'.
+    REPLACE ALL OCCURRENCES OF 'ü' IN lv_name WITH 'ue'.
+    REPLACE ALL OCCURRENCES OF 'ß' IN lv_name WITH 'ss'.
+    REPLACE ALL OCCURRENCES OF 'à' IN lv_name WITH 'a'.
+    REPLACE ALL OCCURRENCES OF 'á' IN lv_name WITH 'a'.
+    REPLACE ALL OCCURRENCES OF 'â' IN lv_name WITH 'a'.
+    REPLACE ALL OCCURRENCES OF 'ã' IN lv_name WITH 'a'.
+    REPLACE ALL OCCURRENCES OF 'å' IN lv_name WITH 'a'.
+    REPLACE ALL OCCURRENCES OF 'ç' IN lv_name WITH 'c'.
+    REPLACE ALL OCCURRENCES OF 'è' IN lv_name WITH 'e'.
+    REPLACE ALL OCCURRENCES OF 'é' IN lv_name WITH 'e'.
+    REPLACE ALL OCCURRENCES OF 'ê' IN lv_name WITH 'e'.
+    REPLACE ALL OCCURRENCES OF 'ë' IN lv_name WITH 'e'.
+    REPLACE ALL OCCURRENCES OF 'ì' IN lv_name WITH 'i'.
+    REPLACE ALL OCCURRENCES OF 'í' IN lv_name WITH 'i'.
+    REPLACE ALL OCCURRENCES OF 'î' IN lv_name WITH 'i'.
+    REPLACE ALL OCCURRENCES OF 'ï' IN lv_name WITH 'i'.
+    REPLACE ALL OCCURRENCES OF 'ñ' IN lv_name WITH 'n'.
+    REPLACE ALL OCCURRENCES OF 'ò' IN lv_name WITH 'o'.
+    REPLACE ALL OCCURRENCES OF 'ó' IN lv_name WITH 'o'.
+    REPLACE ALL OCCURRENCES OF 'ô' IN lv_name WITH 'o'.
+    REPLACE ALL OCCURRENCES OF 'õ' IN lv_name WITH 'o'.
+    REPLACE ALL OCCURRENCES OF 'ù' IN lv_name WITH 'u'.
+    REPLACE ALL OCCURRENCES OF 'ú' IN lv_name WITH 'u'.
+    REPLACE ALL OCCURRENCES OF 'û' IN lv_name WITH 'u'.
+    REPLACE ALL OCCURRENCES OF 'ý' IN lv_name WITH 'y'.
+
+    CLEAR rv_abap.
+    lv_len = strlen( lv_name ).
+    DO lv_len TIMES.
+      lv_offset = sy-index - 1.
+      lv_char = lv_name+lv_offset(1).
+      IF lv_char CO 'abcdefghijklmnopqrstuvwxyz0123456789_'.
+        CONCATENATE rv_abap lv_char INTO rv_abap IN CHARACTER MODE.
+      ELSE.
+        CONCATENATE rv_abap '_' INTO rv_abap IN CHARACTER MODE.
+      ENDIF.
+    ENDDO.
+
+    WHILE rv_abap CS '__'.
+      REPLACE ALL OCCURRENCES OF '__' IN rv_abap WITH '_'.
+
+    ENDWHILE.
+
+    SHIFT rv_abap LEFT DELETING LEADING '_'.
+
+    WHILE rv_abap IS NOT INITIAL.
+      lv_offset = strlen( rv_abap ) - 1.
+      IF rv_abap+lv_offset(1) = '_'.
+
+        rv_abap = rv_abap(lv_offset).
+      ELSE.
+        EXIT.
+      ENDIF.
+    ENDWHILE.
+
+    IF rv_abap IS INITIAL.
+      rv_abap = 'field'.
+    ENDIF.
+
+    lv_char = rv_abap(1).
+    IF lv_char CO '0123456789'.
+      CONCATENATE 'f_' rv_abap INTO rv_abap IN CHARACTER MODE.
+    ENDIF.
+
+    IF strlen( rv_abap ) > iv_max_length.
+      rv_abap = rv_abap(iv_max_length).
+    ENDIF.
+  ENDMETHOD.
+
+
+  METHOD ensure_unique_abap_name.
+    DATA lv_base       TYPE string.
+    DATA lv_candidate  TYPE string.
+    DATA lv_suffix     TYPE c LENGTH 10.
+    DATA lv_prefix_len TYPE i.
+    DATA lv_trim_len   TYPE i.
+    DATA lv_index      TYPE i.
+    DATA lv_compname   TYPE abap_compname.
+
+    lv_base = sanitize_abap_name( iv_name ).
+    lv_candidate = lv_base.
+
+    lv_compname = lv_candidate.
+    READ TABLE ct_used_names WITH TABLE KEY table_line = lv_compname TRANSPORTING NO FIELDS.
+    IF sy-subrc <> 0.
+      INSERT lv_compname INTO TABLE ct_used_names.
+      cv_abap = lv_candidate.
+      RETURN.
+    ENDIF.
+
+    DO 999 TIMES.
+      lv_index = sy-index.
+      WRITE lv_index TO lv_suffix LEFT-JUSTIFIED.
+      CONDENSE lv_suffix NO-GAPS.
+
+      lv_prefix_len = 30 - strlen( lv_suffix ).
+      IF lv_prefix_len < 1.
+        CONTINUE.
+      ENDIF.
+
+      lv_trim_len = strlen( lv_base ).
+      IF lv_trim_len > lv_prefix_len.
+        lv_trim_len = lv_prefix_len.
+      ENDIF.
+
+      lv_candidate = lv_base.
+      IF strlen( lv_base ) >= lv_trim_len.
+        lv_candidate = lv_base(lv_trim_len).
+      ENDIF.
+
+      CONCATENATE lv_candidate lv_suffix INTO lv_candidate IN CHARACTER MODE.
+
+      lv_compname = lv_candidate.
+      READ TABLE ct_used_names WITH TABLE KEY table_line = lv_compname TRANSPORTING NO FIELDS.
+      IF sy-subrc <> 0.
+        INSERT lv_compname INTO TABLE ct_used_names.
+        cv_abap = lv_candidate.
+        RETURN.
+      ENDIF.
+    ENDDO.
+
+    cv_abap = lv_base.
+  ENDMETHOD.
+
+
+  METHOD sanitize_specification_names.
+    DATA lt_used_schema_names     TYPE ty_abap_names.
+    DATA lt_used_operation_names  TYPE ty_abap_names.
+    DATA lt_used_parameter_names  TYPE ty_abap_names.
+
+    FIELD-SYMBOLS <ls_component_schema> LIKE LINE OF ms_specification-components-schemas.
+    FIELD-SYMBOLS <ls_operation>        LIKE LINE OF ms_specification-operations.
+    FIELD-SYMBOLS <ls_parameter>        LIKE LINE OF ms_specification-components-parameters.
+    FIELD-SYMBOLS <ls_op_parameter>     TYPE zif_oapi_specification_v3=>ty_parameter.
+
+    LOOP AT ms_specification-components-schemas ASSIGNING <ls_component_schema>.
+      ensure_unique_abap_name(
+        EXPORTING iv_name       = <ls_component_schema>-abap_name
+        CHANGING  ct_used_names = lt_used_schema_names
+                  cv_abap       = <ls_component_schema>-abap_name ).
+    ENDLOOP.
+
+    LOOP AT ms_specification-components-parameters ASSIGNING <ls_parameter>.
+      <ls_parameter>-abap_name = sanitize_abap_name( <ls_parameter>-abap_name ).
+    ENDLOOP.
+
+    LOOP AT ms_specification-operations ASSIGNING <ls_operation>.
+      ensure_unique_abap_name(
+        EXPORTING iv_name       = <ls_operation>-abap_name
+        CHANGING  ct_used_names = lt_used_operation_names
+                  cv_abap       = <ls_operation>-abap_name ).
+
+      CLEAR lt_used_parameter_names.
+      LOOP AT <ls_operation>-parameters ASSIGNING <ls_op_parameter>.
+        ensure_unique_abap_name(
+          EXPORTING iv_name       = <ls_op_parameter>-abap_name
+          CHANGING  ct_used_names = lt_used_parameter_names
+                    cv_abap       = <ls_op_parameter>-abap_name ).
+      ENDLOOP.
+    ENDLOOP.
+  ENDMETHOD.
+
 
   METHOD generation_information.
 
@@ -257,12 +448,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lo_schema           TYPE REF TO zif_oapi_schema.
     DATA lv_schema_name      TYPE string.
     DATA ls_component_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
-    DATA lv_candidate_name   TYPE abap_compname.
     DATA lt_used_names       TYPE ty_abap_names.
-    DATA lv_base_name        TYPE string.
-    DATA lv_variant          TYPE i.
-    DATA lv_suffix           TYPE c LENGTH 1.
-    DATA lv_prefix_length    TYPE i.
 
     FIELD-SYMBOLS <ls_property> TYPE zif_oapi_schema=>ty_property.
 
@@ -287,33 +473,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         CONTINUE.
       ENDIF.
 
-      lv_candidate_name = CONV abap_compname( <ls_property>-abap_name ).
-      IF line_exists( lt_used_names[ table_line = lv_candidate_name ] ).
-        lv_base_name = <ls_property>-abap_name.
-        DO 90 TIMES.
-          lv_variant = ( sy-index - 1 ) DIV 9.
-          lv_suffix = ( sy-index - 1 ) MOD 9 + 1.
-          IF lv_variant = 0.
-            lv_prefix_length = 29.
-          ELSE.
-            lv_prefix_length = 29 - strlen( |{ lv_variant }| ).
-          ENDIF.
-          IF strlen( lv_base_name ) <= lv_prefix_length.
-            lv_prefix_length = strlen( lv_base_name ).
-          ENDIF.
-          lv_candidate_name = CONV abap_compname(
-            |{ substring( val = lv_base_name
-                          off = 0
-                          len = lv_prefix_length ) }{ COND string(
-              WHEN lv_variant > 0 THEN lv_variant ) }{ lv_suffix }| ).
-          IF NOT line_exists( lt_used_names[ table_line = lv_candidate_name ] ).
-            <ls_property>-abap_name = lv_candidate_name.
-            EXIT.
-          ENDIF.
-        ENDDO.
-      ENDIF.
-
-      INSERT lv_candidate_name INTO TABLE lt_used_names.
+      ensure_unique_abap_name(
+        EXPORTING iv_name       = <ls_property>-abap_name
+        CHANGING  ct_used_names = lt_used_names
+                  cv_abap       = <ls_property>-abap_name ).
 
       make_property_names_unique( EXPORTING io_schema              = <ls_property>-schema
                                             iv_schema_ref          = <ls_property>-ref
@@ -345,6 +508,8 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
     CREATE OBJECT lo_references.
     ms_specification = lo_references->normalize( ms_specification ).
+
+    sanitize_specification_names( ).
 
     LOOP AT ms_specification-components-schemas ASSIGNING FIELD-SYMBOL(<ls_component_schema>).
       make_property_names_unique( EXPORTING io_schema              = <ls_component_schema>-schema

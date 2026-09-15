@@ -16,17 +16,17 @@ INTERFACE zif_interface005 PUBLIC.
            string2 TYPE string,
          END OF posttestrequest.
 
-  TYPES: BEGIN OF r__test,
+  TYPES: BEGIN OF r_test,
            code          TYPE i,
            reason        TYPE string,
            _200_app_json TYPE posttestresponse,
-         END OF r__test.
-  METHODS _test
+         END OF r_test.
+  METHODS test
     IMPORTING
       separator TYPE string OPTIONAL
       body TYPE posttestrequest
     RETURNING
-      VALUE(return) TYPE r__test
+      VALUE(return) TYPE r_test
     RAISING
       cx_static_check.
 ENDINTERFACE.

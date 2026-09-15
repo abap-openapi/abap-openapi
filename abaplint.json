@@ -81,7 +81,7 @@
     "unused_ddic": true,
     "select_performance": true,
     "dangerous_statement": true,
-    "7bit_ascii": true,
+    "7bit_ascii": false,
     "abapdoc": false,
     "allowed_object_naming": true,
     "allowed_object_types": true,

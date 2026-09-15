@@ -25,9 +25,9 @@ CLASS zcl_icf_serv009 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/test' AND lv_method = 'GET'.
-          DATA r__test TYPE zif_interface009=>r__test.
-          r__test = li_handler->_test(
-            _top = server->request->get_form_field( '$top' ) ).
+          DATA r_test TYPE zif_interface009=>r_test.
+          r_test = li_handler->test(
+            top = server->request->get_form_field( '$top' ) ).
           server->response->set_status( code = 200 reason = 'OK' ).
           RETURN.
         ENDIF.

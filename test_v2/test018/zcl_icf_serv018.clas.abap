@@ -24,17 +24,17 @@ CLASS zcl_icf_serv018 IMPLEMENTATION.
 
     TRY.
         IF lv_path = '/createDog' AND lv_method = 'POST'.
-          DATA _create_dog TYPE zif_interface018=>body_create_dog.
+          DATA create_dog TYPE zif_interface018=>body_create_dog.
           /ui2/cl_json=>deserialize(
             EXPORTING
               json          = server->request->get_cdata( )
               pretty_name   = /ui2/cl_json=>pretty_mode-camel_case
               name_mappings = mt_name_mappings
             CHANGING
-              data          = _create_dog ).
-          DATA r__create_dog TYPE zif_interface018=>r__create_dog.
-          r__create_dog = li_handler->_create_dog(
-            body = _create_dog ).
+              data          = create_dog ).
+          DATA r_create_dog TYPE zif_interface018=>r_create_dog.
+          r_create_dog = li_handler->create_dog(
+            body = create_dog ).
           server->response->set_status( code = 200 reason = 'Created' ).
           RETURN.
         ENDIF.

@@ -38,7 +38,7 @@ CLASS zcl_client001 IMPLEMENTATION.
   METHOD class_constructor.
   ENDMETHOD.
 
-  METHOD zif_interface001~_ping.
+  METHOD zif_interface001~ping.
     DATA lv_uri          TYPE string.
     DATA ls_header       LIKE LINE OF mt_extra_headers.
     DATA lv_dummy        TYPE string.

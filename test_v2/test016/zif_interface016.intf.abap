@@ -27,16 +27,16 @@ INTERFACE zif_interface016 PUBLIC.
            errors TYPE STANDARD TABLE OF string WITH DEFAULT KEY,
          END OF response.
 
-  TYPES: BEGIN OF r__create_dog,
+  TYPES: BEGIN OF r_create_dog,
            code          TYPE i,
            reason        TYPE string,
            _200_app_json TYPE response,
-         END OF r__create_dog.
-  METHODS _create_dog
+         END OF r_create_dog.
+  METHODS create_dog
     IMPORTING
       body TYPE body_create_dog
     RETURNING
-      VALUE(return) TYPE r__create_dog
+      VALUE(return) TYPE r_create_dog
     RAISING
       cx_static_check.
 ENDINTERFACE.

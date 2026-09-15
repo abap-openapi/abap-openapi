@@ -15,14 +15,14 @@ INTERFACE zif_interface015 PUBLIC.
            subsomething TYPE STANDARD TABLE OF arrsubsomething WITH DEFAULT KEY,
          END OF something.
 
-  TYPES: BEGIN OF r__array,
+  TYPES: BEGIN OF r_array,
            code          TYPE i,
            reason        TYPE string,
            _200_app_json TYPE something,
-         END OF r__array.
-  METHODS _array
+         END OF r_array.
+  METHODS array
     RETURNING
-      VALUE(return) TYPE r__array
+      VALUE(return) TYPE r_array
     RAISING
       cx_static_check.
 ENDINTERFACE.
