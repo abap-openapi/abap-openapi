@@ -5,10 +5,15 @@ CLASS zcl_icf_serv008 DEFINITION PUBLIC.
 * Version: 1.0.11
   PUBLIC SECTION.
     INTERFACES if_http_extension.
+    CLASS-METHODS class_constructor.
   PRIVATE SECTION.
+    CLASS-DATA mt_name_mappings TYPE /ui2/cl_json=>name_mappings.
 ENDCLASS.
 
 CLASS zcl_icf_serv008 IMPLEMENTATION.
+  METHOD class_constructor.
+  ENDMETHOD.
+
   METHOD if_http_extension~handle_request.
     DATA li_handler      TYPE REF TO zif_interface008.
     DATA lv_method       TYPE string.
@@ -26,16 +31,18 @@ CLASS zcl_icf_serv008 IMPLEMENTATION.
           IF r_find_pets_by_status-_200_app_json IS NOT INITIAL.
             server->response->set_content_type( 'application/json' ).
             server->response->set_cdata( /ui2/cl_json=>serialize(
-              data        = r_find_pets_by_status-_200_app_json
-              pretty_name = /ui2/cl_json=>pretty_mode-camel_case ) ).
+              data          = r_find_pets_by_status-_200_app_json
+              pretty_name   = /ui2/cl_json=>pretty_mode-camel_case
+              name_mappings = mt_name_mappings ) ).
             server->response->set_status( code = 200 reason = 'successful operation' ).
             RETURN.
           ENDIF.
           IF r_find_pets_by_status-_200_app_xml IS NOT INITIAL.
             server->response->set_content_type( 'application/xml' ).
             server->response->set_cdata( /ui2/cl_json=>serialize(
-              data        = r_find_pets_by_status-_200_app_xml
-              pretty_name = /ui2/cl_json=>pretty_mode-camel_case ) ).
+              data          = r_find_pets_by_status-_200_app_xml
+              pretty_name   = /ui2/cl_json=>pretty_mode-camel_case
+              name_mappings = mt_name_mappings ) ).
             server->response->set_status( code = 200 reason = 'successful operation' ).
             RETURN.
           ENDIF.
