@@ -138,8 +138,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lv_name TYPE string.
     DATA lv_char TYPE c LENGTH 1.
     DATA lv_offset TYPE i.
+    DATA lv_len TYPE i.
 
-    lv_name = to_lower( iv_name ).
+    lv_name = iv_name.
+    TRANSLATE lv_name TO LOWER CASE.
 
     " Replace common language-specific characters with ASCII fallback.
     REPLACE ALL OCCURRENCES OF 'ä' IN lv_name WITH 'ae'.
@@ -171,14 +173,14 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF 'ý' IN lv_name WITH 'y'.
 
     CLEAR rv_abap.
-    DO strlen( lv_name ) TIMES.
+    lv_len = strlen( lv_name ).
+    DO lv_len TIMES.
       lv_offset = sy-index - 1.
       lv_char = lv_name+lv_offset(1).
       IF lv_char CO 'abcdefghijklmnopqrstuvwxyz0123456789_'.
-        rv_abap = rv_abap && lv_char.
+        CONCATENATE rv_abap lv_char INTO rv_abap IN CHARACTER MODE.
       ELSE.
-        rv_abap = rv_abap && '_'.
-
+        CONCATENATE rv_abap '_' INTO rv_abap IN CHARACTER MODE.
       ENDIF.
     ENDDO.
 
@@ -189,18 +191,27 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
     SHIFT rv_abap LEFT DELETING LEADING '_'.
 
-    REPLACE ALL OCCURRENCES OF REGEX '_+$' IN rv_abap WITH ''.
+    WHILE rv_abap IS NOT INITIAL.
+      lv_offset = strlen( rv_abap ) - 1.
+      IF rv_abap+lv_offset(1) = '_'.
+
+        rv_abap = rv_abap(lv_offset).
+      ELSE.
+        EXIT.
+      ENDIF.
+    ENDWHILE.
 
     IF rv_abap IS INITIAL.
       rv_abap = 'field'.
     ENDIF.
 
-    IF rv_abap(1) CO '0123456789'.
-      rv_abap = |f_{ rv_abap }|.
+    lv_char = rv_abap(1).
+    IF lv_char CO '0123456789'.
+      CONCATENATE 'f_' rv_abap INTO rv_abap IN CHARACTER MODE.
     ENDIF.
 
     IF strlen( rv_abap ) > iv_max_length.
-      rv_abap = substring( val = rv_abap off = 0 len = iv_max_length ).
+      rv_abap = rv_abap(iv_max_length).
     ENDIF.
   ENDMETHOD.
 
@@ -208,21 +219,28 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
   METHOD ensure_unique_abap_name.
     DATA lv_base       TYPE string.
     DATA lv_candidate  TYPE string.
-    DATA lv_suffix     TYPE string.
+    DATA lv_suffix     TYPE c LENGTH 10.
     DATA lv_prefix_len TYPE i.
     DATA lv_trim_len   TYPE i.
+    DATA lv_index      TYPE i.
+    DATA lv_compname   TYPE abap_compname.
 
     lv_base = sanitize_abap_name( iv_name = iv_name ).
     lv_candidate = lv_base.
 
-    IF NOT line_exists( ct_used_names[ table_line = CONV abap_compname( lv_candidate ) ] ).
-      INSERT CONV abap_compname( lv_candidate ) INTO TABLE ct_used_names.
+    lv_compname = lv_candidate.
+    READ TABLE ct_used_names WITH TABLE KEY table_line = lv_compname TRANSPORTING NO FIELDS.
+    IF sy-subrc <> 0.
+      INSERT lv_compname INTO TABLE ct_used_names.
       rv_abap = lv_candidate.
       RETURN.
     ENDIF.
 
     DO 999 TIMES.
-      lv_suffix = |{ sy-index }|.
+      lv_index = sy-index.
+      WRITE lv_index TO lv_suffix LEFT-JUSTIFIED.
+      CONDENSE lv_suffix NO-GAPS.
+
       lv_prefix_len = 30 - strlen( lv_suffix ).
       IF lv_prefix_len < 1.
         CONTINUE.
@@ -233,9 +251,17 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         lv_trim_len = lv_prefix_len.
       ENDIF.
 
-      lv_candidate = |{ substring( val = lv_base off = 0 len = lv_trim_len ) }{ lv_suffix }|.
-      IF NOT line_exists( ct_used_names[ table_line = CONV abap_compname( lv_candidate ) ] ).
-        INSERT CONV abap_compname( lv_candidate ) INTO TABLE ct_used_names.
+      lv_candidate = lv_base.
+      IF lv_trim_len < strlen( lv_base ).
+        lv_candidate = lv_base(lv_trim_len).
+      ENDIF.
+
+      CONCATENATE lv_candidate lv_suffix INTO lv_candidate IN CHARACTER MODE.
+
+      lv_compname = lv_candidate.
+      READ TABLE ct_used_names WITH TABLE KEY table_line = lv_compname TRANSPORTING NO FIELDS.
+      IF sy-subrc <> 0.
+        INSERT lv_compname INTO TABLE ct_used_names.
         rv_abap = lv_candidate.
         RETURN.
       ENDIF.
