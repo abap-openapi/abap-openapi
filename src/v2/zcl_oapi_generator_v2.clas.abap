@@ -625,6 +625,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    "! Supply http client and possibily extra http headers to instantiate the openAPI client\n| &&
       |    "! Use cl_http_client=>create_by_destination() or cl_http_client=>create_by_url() to create the client\n| &&
       |    "! the caller must close() the client\n| &&
+      |    CLASS-METHODS class_constructor.\n| &&
       |    METHODS constructor\n| &&
       |      IMPORTING\n| &&
       |        ii_client        TYPE REF TO if_http_client\n| &&
@@ -640,7 +641,6 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |    DATA mt_extra_headers TYPE tihttpnvp.\n| &&
       |  PRIVATE SECTION.\n| &&
       |    CLASS-DATA mt_name_mappings TYPE /ui2/cl_json=>name_mappings.\n| &&
-      |    CLASS-METHODS class_constructor.\n| &&
       |ENDCLASS.\n\n| &&
       |CLASS { ms_input-clas_client } IMPLEMENTATION.\n| &&
       |  METHOD constructor.\n| &&
