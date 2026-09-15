@@ -46,10 +46,10 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
 
     METHODS ensure_unique_abap_name
       IMPORTING
-        iv_name        TYPE string
+        iv_name       TYPE string
       CHANGING
-        ct_used_names  TYPE ty_abap_names
-        cv_abap        TYPE string.
+        ct_used_names TYPE ty_abap_names
+        cv_abap       TYPE string.
 
     METHODS build_name_mappings
       RETURNING VALUE(rv_abap) TYPE string.
