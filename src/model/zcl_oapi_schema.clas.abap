@@ -1,6 +1,12 @@
 CLASS zcl_oapi_schema DEFINITION PUBLIC.
   PUBLIC SECTION.
     INTERFACES zif_oapi_schema.
+    DATA mv_json_pattern TYPE string.
+    DATA mv_json_example TYPE string.
+    METHODS set_json_pattern
+      IMPORTING iv_pattern TYPE string.
+    METHODS set_json_example
+      IMPORTING iv_example TYPE string.
   PROTECTED SECTION.
     METHODS lookup_ref
       IMPORTING
@@ -139,6 +145,14 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
     rv_simple = get_simple_type(
       iv_type   = zif_oapi_schema~type
       iv_format = zif_oapi_schema~format ).
+  ENDMETHOD.
+
+  METHOD set_json_pattern.
+    mv_json_pattern = iv_pattern.
+  ENDMETHOD.
+
+  METHOD set_json_example.
+    mv_json_example = iv_example.
   ENDMETHOD.
 
 
