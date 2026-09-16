@@ -86,9 +86,12 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
       OR mo_json->exists( iv_prefix && '/oneOf' ) = abap_true
       OR mo_json->exists( iv_prefix && '/anyOf' ) = abap_true
       OR mo_json->exists( iv_prefix && '/allOf' ) = abap_true.
-      APPEND iv_prefix && '/oneOf/' TO lt_composition_prefixes.
-      APPEND iv_prefix && '/anyOf/' TO lt_composition_prefixes.
-      APPEND iv_prefix && '/allOf/' TO lt_composition_prefixes.
+      CONCATENATE iv_prefix '/oneOf/' INTO lv_prefix.
+      APPEND lv_prefix TO lt_composition_prefixes.
+      CONCATENATE iv_prefix '/anyOf/' INTO lv_prefix.
+      APPEND lv_prefix TO lt_composition_prefixes.
+      CONCATENATE iv_prefix '/allOf/' INTO lv_prefix.
+      APPEND lv_prefix TO lt_composition_prefixes.
 
       LOOP AT lt_composition_prefixes INTO lv_prefix.
         lt_composition_members = mo_json->members( lv_prefix ).
@@ -102,7 +105,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
             lo_composition = parse_schema( lv_ref ).
           ENDIF.
 
-          IF lo_composition IS BOUND.
+          IF lo_composition IS NOT INITIAL.
             ri_schema->type = 'object'.
             LOOP AT lo_composition->properties INTO ls_composition_property.
               READ TABLE ri_schema->properties
