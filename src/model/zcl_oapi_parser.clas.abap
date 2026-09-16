@@ -77,10 +77,12 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     DATA ls_property             TYPE zif_oapi_schema=>ty_property.
     DATA ls_composition_property TYPE zif_oapi_schema=>ty_property.
     DATA lo_names                TYPE REF TO zcl_oapi_abap_name.
+    DATA lo_schema_impl          TYPE REF TO zcl_oapi_schema.
     DATA lo_composition          TYPE REF TO zif_oapi_schema.
     CREATE OBJECT lo_names.
 
     CREATE OBJECT ri_schema TYPE zcl_oapi_schema.
+    lo_schema_impl ?= ri_schema.
     ri_schema->type = mo_json->value_string( iv_prefix && '/type' ).
     IF ri_schema->type IS INITIAL
         OR mo_json->exists( iv_prefix && '/oneOf' ) = abap_true
@@ -127,6 +129,8 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     ENDIF.
     ri_schema->format = mo_json->value_string( iv_prefix && '/format' ).
     ri_schema->default = mo_json->value_string( iv_prefix && '/default' ).
+    lo_schema_impl->set_json_pattern( mo_json->value_string( iv_prefix && '/pattern' ) ).
+    lo_schema_impl->set_json_example( mo_json->value_string( iv_prefix && '/example' ) ).
     ri_schema->max_length = mo_json->value_string( iv_prefix && '/maxLength' ).
     ri_schema->items_ref = mo_json->value_string( iv_prefix && '/items/$ref' ).
     IF ri_schema->type = 'array'

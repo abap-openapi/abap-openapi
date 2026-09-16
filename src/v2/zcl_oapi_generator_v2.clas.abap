@@ -83,6 +83,35 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
       RETURNING
         VALUE(rv_abap) TYPE string.
 
+    METHODS build_pattern_support
+      RETURNING
+        VALUE(rv_abap) TYPE string.
+
+    METHODS collect_pattern_rules
+      IMPORTING
+        io_schema              TYPE REF TO zif_oapi_schema OPTIONAL
+        iv_schema_ref          TYPE string                 OPTIONAL
+        iv_path                TYPE string                 OPTIONAL
+      CHANGING
+        ct_rules               TYPE string_table
+        ct_visited_schema_refs TYPE ty_strings.
+
+    METHODS escape_abap_literal
+      IMPORTING
+        iv_value        TYPE string
+      RETURNING
+        VALUE(rv_value) TYPE string.
+
+    METHODS build_validation_code
+      IMPORTING
+        io_schema          TYPE REF TO zif_oapi_schema OPTIONAL
+        iv_schema_ref      TYPE string                 OPTIONAL
+        iv_expression      TYPE string
+        iv_path            TYPE string
+        iv_validator_class TYPE string
+      RETURNING
+        VALUE(rv_abap)     TYPE string.
+
     METHODS find_input_parameters
       IMPORTING
         is_operation   TYPE zif_oapi_specification_v3=>ty_operation
@@ -520,6 +549,165 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     rs_result-clas_icf_impl = build_clas_icf_impl( ).
     rs_result-clas_client = build_clas_client( ).
     rs_result-intf = build_intf( ).
+    rs_result-clas_icf_impl = rs_result-clas_icf_impl && build_pattern_support( ).
+  ENDMETHOD.
+
+
+  METHOD escape_abap_literal.
+    rv_value = iv_value.
+    REPLACE ALL OCCURRENCES OF '''' IN rv_value WITH ''''''.
+  ENDMETHOD.
+
+
+  METHOD collect_pattern_rules.
+    DATA lo_schema           TYPE REF TO zif_oapi_schema.
+    DATA lo_schema_impl      TYPE REF TO zcl_oapi_schema.
+    DATA lv_schema_name      TYPE string.
+    DATA lv_path             TYPE string.
+    DATA lv_negative         TYPE string.
+    DATA ls_component_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
+    DATA ls_property         TYPE zif_oapi_schema=>ty_property.
+
+    lo_schema = io_schema.
+    IF lo_schema IS NOT BOUND AND iv_schema_ref IS NOT INITIAL.
+      lv_schema_name = iv_schema_ref.
+      REPLACE FIRST OCCURRENCE OF '#/components/schemas/' IN lv_schema_name WITH ''.
+      IF line_exists( ct_visited_schema_refs[ table_line = lv_schema_name ] ).
+        RETURN.
+      ENDIF.
+      INSERT lv_schema_name INTO TABLE ct_visited_schema_refs.
+      ls_component_schema = find_schema( iv_schema_ref ).
+      lo_schema = ls_component_schema-schema.
+    ENDIF.
+    IF lo_schema IS NOT BOUND.
+      RETURN.
+    ENDIF.
+
+    lo_schema_impl ?= lo_schema.
+    IF lo_schema_impl->mv_json_pattern IS NOT INITIAL.
+      IF lv_schema_name IS INITIAL.
+        lv_schema_name = iv_path.
+      ENDIF.
+      lv_negative = lo_schema_impl->mv_json_example.
+      IF lv_negative IS INITIAL.
+        lv_negative = '!'.
+      ELSE.
+        lv_negative = substring( val = lv_negative off = 0 len = strlen( lv_negative ) - 1 ) && '!'.
+      ENDIF.
+      APPEND lv_schema_name && cl_abap_char_utilities=>horizontal_tab && iv_path
+        && cl_abap_char_utilities=>horizontal_tab && lo_schema_impl->mv_json_pattern
+        && cl_abap_char_utilities=>horizontal_tab && lo_schema_impl->mv_json_example
+        && cl_abap_char_utilities=>horizontal_tab && lv_negative TO ct_rules.
+    ENDIF.
+
+    LOOP AT lo_schema->properties INTO ls_property.
+      lv_path = COND string( WHEN iv_path IS INITIAL
+                             THEN ls_property-abap_name
+                             ELSE iv_path && '.' && ls_property-abap_name ).
+      collect_pattern_rules( EXPORTING io_schema = ls_property-schema
+                                        iv_schema_ref = ls_property-ref
+                                        iv_path = lv_path
+                              CHANGING ct_rules = ct_rules
+                                       ct_visited_schema_refs = ct_visited_schema_refs ).
+    ENDLOOP.
+    collect_pattern_rules( EXPORTING io_schema = lo_schema->items_schema
+                                      iv_schema_ref = lo_schema->items_ref
+                                      iv_path = iv_path
+                            CHANGING ct_rules = ct_rules
+                                     ct_visited_schema_refs = ct_visited_schema_refs ).
+  ENDMETHOD.
+
+
+  METHOD build_pattern_support.
+    DATA lt_rules TYPE string_table.
+    DATA lt_visited TYPE ty_strings.
+    DATA lv_rule TYPE string.
+    DATA lt_parts TYPE string_table.
+    DATA lv_validator_class TYPE string.
+    DATA lv_test_class TYPE string.
+    DATA lv_schema_name TYPE string.
+    DATA lv_pattern TYPE string.
+
+    LOOP AT ms_specification-components-schemas INTO DATA(ls_component_schema).
+      collect_pattern_rules( EXPORTING io_schema = ls_component_schema-schema
+                                        iv_schema_ref = '#/components/schemas/' && ls_component_schema-name
+                                        iv_path = ls_component_schema-abap_name
+                              CHANGING ct_rules = lt_rules
+                                       ct_visited_schema_refs = lt_visited ).
+    ENDLOOP.
+    IF lt_rules IS INITIAL.
+      RETURN.
+    ENDIF.
+
+    lv_validator_class = sanitize_abap_name( iv_name = |{ ms_input-clas_icf_impl }| iv_max_length = 24 ) && '_val'.
+    lv_test_class = sanitize_abap_name( iv_name = |{ ms_input-clas_icf_impl }| iv_max_length = 24 ) && '_tst'.
+    rv_abap = |\n\nCLASS { lv_validator_class } DEFINITION PUBLIC FINAL CREATE PUBLIC.\n| &&
+      |  PUBLIC SECTION.\n| &&
+      |    CLASS-METHODS check IMPORTING iv_schema_name TYPE string iv_value TYPE string RETURNING VALUE(rv_valid) TYPE abap_bool.\n| &&
+      |ENDCLASS.\n\nCLASS { lv_validator_class } IMPLEMENTATION.\n| &&
+      |  METHOD check.\n| &&
+      |    DATA lo_regex TYPE REF TO cl_abap_regex.\n| &&
+      |    lo_regex = NEW #( pattern = ''.*'' ).\n| &&
+      |    rv_valid = abap_false.\n|.
+
+    LOOP AT lt_rules INTO lv_rule.
+      SPLIT lv_rule AT cl_abap_char_utilities=>horizontal_tab INTO TABLE lt_parts.
+      READ TABLE lt_parts INDEX 1 INTO lv_schema_name.
+      IF sy-subrc <> 0.
+        CONTINUE.
+      ENDIF.
+      READ TABLE lt_parts INDEX 3 INTO lv_pattern.
+      IF sy-subrc <> 0.
+        CONTINUE.
+      ENDIF.
+      rv_abap = rv_abap && |    IF iv_schema_name = '{ escape_abap_literal( lv_schema_name ) }'.\n| &&
+        |      lo_regex = NEW #( pattern = '{ escape_abap_literal( lv_pattern ) }' ).\n| &&
+        |      rv_valid = lo_regex->create_matcher( text = iv_value )->match( ).\n| &&
+        |      RETURN.\n| &&
+        |    ENDIF.\n|.
+    ENDLOOP.
+    rv_abap = rv_abap && |  ENDMETHOD.\nENDCLASS.\n| &&
+      |CLASS { lv_test_class } DEFINITION FINAL FOR TESTING DURATION SHORT RISK LEVEL HARMLESS.\n| &&
+      |ENDCLASS.\n\nCLASS { lv_test_class } IMPLEMENTATION.\nENDCLASS.|.
+  ENDMETHOD.
+
+
+  METHOD build_validation_code.
+    DATA lo_schema TYPE REF TO zif_oapi_schema.
+    DATA lo_schema_impl TYPE REF TO zcl_oapi_schema.
+    DATA ls_component TYPE zif_oapi_specification_v3=>ty_component_schema.
+    DATA ls_property TYPE zif_oapi_schema=>ty_property.
+    DATA lv_schema_name TYPE string.
+    DATA lv_path TYPE string.
+    DATA lv_expression TYPE string.
+
+    lo_schema = io_schema.
+    IF lo_schema IS NOT BOUND AND iv_schema_ref IS NOT INITIAL.
+      lv_schema_name = iv_schema_ref.
+      REPLACE FIRST OCCURRENCE OF '#/components/schemas/' IN lv_schema_name WITH ''.
+      ls_component = find_schema( iv_schema_ref ).
+      lo_schema = ls_component-schema.
+    ENDIF.
+    IF lo_schema IS NOT BOUND.
+      RETURN.
+    ENDIF.
+    lo_schema_impl ?= lo_schema.
+    IF lo_schema_impl->mv_json_pattern IS NOT INITIAL.
+      IF lv_schema_name IS INITIAL.
+        lv_schema_name = iv_path.
+      ENDIF.
+      rv_abap = |          IF { iv_validator_class }=>check( iv_schema_name = '{ escape_abap_literal( lv_schema_name ) }' iv_value = { iv_expression } ) = abap_false.\n| &&
+        |            server->response->set_status( code = 400 reason = 'Pattern validation failed' ).\n| &&
+        |            RETURN.\n| &&
+        |          ENDIF.\n|.
+      RETURN.
+    ENDIF.
+    LOOP AT lo_schema->properties INTO ls_property.
+      lv_path = COND string( WHEN iv_path IS INITIAL THEN ls_property-abap_name ELSE iv_path && '.' && ls_property-abap_name ).
+      lv_expression = iv_expression && '-' && ls_property-abap_name.
+      rv_abap = rv_abap && build_validation_code( io_schema = ls_property-schema iv_schema_ref = ls_property-ref
+        iv_expression = lv_expression iv_path = lv_path iv_validator_class = iv_validator_class ).
+    ENDLOOP.
   ENDMETHOD.
 
 
@@ -546,9 +734,11 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lv_body_name         TYPE string.
     DATA lv_body_type         TYPE string.
     DATA lv_name_mappings        TYPE string.
+    DATA lv_validator_class   TYPE string.
 
     CREATE OBJECT lo_response_name.
     lv_name_mappings = build_name_mappings( ).
+    lv_validator_class = sanitize_abap_name( iv_name = |{ ms_input-clas_icf_impl }| iv_max_length = 24 ) && '_val'.
 
     rv_abap = |CLASS { ms_input-clas_icf_serv } DEFINITION PUBLIC.\n| &&
       generation_information( ) &&
@@ -652,6 +842,11 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           |              name_mappings = mt_name_mappings\n| &&
           |            CHANGING\n| &&
           |              data          = { ls_operation-abap_name } ).\n|.
+        rv_abap = rv_abap && build_validation_code(
+          io_schema          = find_schema( ls_operation-request_body-schema_ref )-schema
+          iv_expression      = ls_operation-abap_name
+          iv_path            = find_schema( ls_operation-request_body-schema_ref )-abap_name
+          iv_validator_class = lv_validator_class ).
         lv_parameters = lv_parameters &&
           |\n            body = { ls_operation-abap_name }|.
       ELSEIF ls_operation-request_body-schema IS NOT INITIAL.
