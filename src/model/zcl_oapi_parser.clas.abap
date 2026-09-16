@@ -83,7 +83,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     CREATE OBJECT ri_schema TYPE zcl_oapi_schema.
     ri_schema->type = mo_json->value_string( iv_prefix && '/type' ).
     IF ri_schema->type IS INITIAL
-      OR mo_json->exists( iv_prefix && '/oneOf' ) = abap_true
+        OR mo_json->exists( iv_prefix && '/oneOf' ) = abap_true
       OR mo_json->exists( iv_prefix && '/anyOf' ) = abap_true
       OR mo_json->exists( iv_prefix && '/allOf' ) = abap_true.
       CONCATENATE iv_prefix '/oneOf/' INTO lv_prefix.
