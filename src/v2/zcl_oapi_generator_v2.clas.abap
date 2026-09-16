@@ -627,6 +627,18 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lv_test_class TYPE string.
     DATA lv_schema_name TYPE string.
     DATA lv_pattern TYPE string.
+    DATA lv_has_request_body TYPE abap_bool.
+
+    LOOP AT ms_specification-operations INTO DATA(ls_operation).
+      IF ls_operation-request_body-schema_ref IS NOT INITIAL
+          OR ls_operation-request_body-schema IS NOT INITIAL.
+        lv_has_request_body = abap_true.
+        EXIT.
+      ENDIF.
+    ENDLOOP.
+    IF lv_has_request_body = abap_false.
+      RETURN.
+    ENDIF.
 
     LOOP AT ms_specification-components-schemas INTO DATA(ls_component_schema).
       collect_pattern_rules( EXPORTING io_schema = ls_component_schema-schema
@@ -647,7 +659,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |ENDCLASS.\n\nCLASS { lv_validator_class } IMPLEMENTATION.\n| &&
       |  METHOD check.\n| &&
       |    DATA lo_regex TYPE REF TO cl_abap_regex.\n| &&
-      |    lo_regex = NEW #( pattern = ''.*'' ).\n| &&
+      |    DATA lo_matcher TYPE REF TO cl_abap_matcher.\n| &&
       |    rv_valid = abap_false.\n|.
 
     LOOP AT lt_rules INTO lv_rule.
@@ -661,8 +673,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         CONTINUE.
       ENDIF.
       rv_abap = rv_abap && |    IF iv_schema_name = '{ escape_abap_literal( lv_schema_name ) }'.\n| &&
-        |      lo_regex = NEW #( pattern = '{ escape_abap_literal( lv_pattern ) }' ).\n| &&
-        |      rv_valid = lo_regex->create_matcher( text = iv_value )->match( ).\n| &&
+        |      CREATE OBJECT lo_regex EXPORTING pattern = '{ escape_abap_literal( lv_pattern ) }'.\n| &&
+        |      lo_matcher = lo_regex->create_matcher( text = iv_value ).\n| &&
+        |      rv_valid = lo_matcher->match( ).\n| &&
         |      RETURN.\n| &&
         |    ENDIF.\n|.
     ENDLOOP.
