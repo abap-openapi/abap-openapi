@@ -8,7 +8,9 @@ INTERFACE zif_interface025 PUBLIC.
 * SafeIdentifier
   TYPES safe_identifier TYPE string.
 * BucketConfigurationId
-  TYPES bucket_configuration_id TYPE string.
+  TYPES: BEGIN OF bucket_configuration_id,
+           dummy_workaround TYPE i,
+         END OF bucket_configuration_id.
 * Error
   TYPES error TYPE string.
 
