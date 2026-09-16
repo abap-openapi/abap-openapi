@@ -85,7 +85,7 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     IF ri_schema->type IS INITIAL
         OR mo_json->exists( iv_prefix && '/oneOf' ) = abap_true
         OR mo_json->exists( iv_prefix && '/anyOf' ) = abap_true
-      OR mo_json->exists( iv_prefix && '/allOf' ) = abap_true.
+        OR mo_json->exists( iv_prefix && '/allOf' ) = abap_true.
       CONCATENATE iv_prefix '/oneOf/' INTO lv_prefix.
       APPEND lv_prefix TO lt_composition_prefixes.
       CONCATENATE iv_prefix '/anyOf/' INTO lv_prefix.
