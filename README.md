@@ -15,7 +15,6 @@ It is possible to generate the objects using different processes:
 | --- | --- |
 | OpenAPI File Types | JSON |
 | OpenAPI Versions | v2\*, v3 |
-| ABAP Versions | v702 and up  |
 | Object Creation | one self-contained global class & interface per OpenAPI definition |
 
 \* OpenAPI v2 is currently only capable by converting the v2 file to a v3 file. This can be done manually using the [Swagger Editor](https://editor.swagger.io/), or programmatically using [Swagger Converter](https://github.com/swagger-api/swagger-converter)
