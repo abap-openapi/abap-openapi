@@ -19,7 +19,8 @@ ENDCLASS.
 CLASS zcl_icf_impl025_val IMPLEMENTATION.
   METHOD check.
     DATA lo_regex TYPE REF TO cl_abap_regex.
-    lo_regex = NEW #( pattern = ''.*'' ).
+    lo_regex = NEW #( pattern = ''.
+*'' ).
     rv_valid = abap_false.
     IF iv_schema_name = 'safe_identifier'.
       lo_regex = NEW #( pattern = '^[A-Za-z0-9.-]+$' ).
