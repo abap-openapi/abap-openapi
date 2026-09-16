@@ -68,17 +68,62 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_schema.
-    DATA lt_strings  TYPE string_table.
-    DATA lv_string   TYPE string.
-    DATA ls_property TYPE zif_oapi_schema=>ty_property.
-    DATA lo_names    TYPE REF TO zcl_oapi_abap_name.
+    DATA lt_strings              TYPE string_table.
+    DATA lt_composition_prefixes TYPE string_table.
+    DATA lt_composition_members  TYPE string_table.
+    DATA lv_string               TYPE string.
+    DATA lv_prefix               TYPE string.
+    DATA lv_ref                  TYPE string.
+    DATA ls_property             TYPE zif_oapi_schema=>ty_property.
+    DATA ls_composition_property TYPE zif_oapi_schema=>ty_property.
+    DATA lo_names                TYPE REF TO zcl_oapi_abap_name.
+    DATA lo_composition          TYPE REF TO zif_oapi_schema.
     CREATE OBJECT lo_names.
 
     CREATE OBJECT ri_schema TYPE zcl_oapi_schema.
     ri_schema->type = mo_json->value_string( iv_prefix && '/type' ).
-    IF ri_schema->type IS INITIAL.
-      ri_schema->type = 'string'. " todo, handle "allOf", "oneOf" and "anyOf"
-      RETURN.
+    IF ri_schema->type IS INITIAL
+        OR mo_json->exists( iv_prefix && '/oneOf' ) = abap_true
+        OR mo_json->exists( iv_prefix && '/anyOf' ) = abap_true
+        OR mo_json->exists( iv_prefix && '/allOf' ) = abap_true.
+      CONCATENATE iv_prefix '/oneOf/' INTO lv_prefix.
+      APPEND lv_prefix TO lt_composition_prefixes.
+      CONCATENATE iv_prefix '/anyOf/' INTO lv_prefix.
+      APPEND lv_prefix TO lt_composition_prefixes.
+      CONCATENATE iv_prefix '/allOf/' INTO lv_prefix.
+      APPEND lv_prefix TO lt_composition_prefixes.
+
+      LOOP AT lt_composition_prefixes INTO lv_prefix.
+        lt_composition_members = mo_json->members( lv_prefix ).
+        LOOP AT lt_composition_members INTO lv_string.
+          CLEAR lv_ref.
+          lv_ref = mo_json->value_string( lv_prefix && lv_string && '/$ref' ).
+          IF lv_ref IS INITIAL.
+            lo_composition = parse_schema( lv_prefix && lv_string ).
+          ELSE.
+            REPLACE FIRST OCCURRENCE OF '#/components' IN lv_ref WITH '/components'.
+            lo_composition = parse_schema( lv_ref ).
+          ENDIF.
+
+          IF lo_composition IS NOT INITIAL.
+            ri_schema->type = 'object'.
+            LOOP AT lo_composition->properties INTO ls_composition_property.
+              READ TABLE ri_schema->properties
+                WITH KEY name = ls_composition_property-name
+                TRANSPORTING NO FIELDS.
+              IF sy-subrc <> 0.
+                APPEND ls_composition_property TO ri_schema->properties.
+              ENDIF.
+            ENDLOOP.
+          ENDIF.
+        ENDLOOP.
+        CLEAR lt_composition_members.
+      ENDLOOP.
+
+      IF ri_schema->type IS INITIAL.
+        ri_schema->type = 'string'.
+        RETURN.
+      ENDIF.
     ENDIF.
     ri_schema->format = mo_json->value_string( iv_prefix && '/format' ).
     ri_schema->default = mo_json->value_string( iv_prefix && '/default' ).
@@ -121,7 +166,12 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
         ls_property-schema = parse_schema( iv_prefix && '/properties/' && lv_string ).
       ENDIF.
 
-      APPEND ls_property TO ri_schema->properties.
+      READ TABLE ri_schema->properties
+        WITH KEY name = ls_property-name
+        TRANSPORTING NO FIELDS.
+      IF sy-subrc <> 0.
+        APPEND ls_property TO ri_schema->properties.
+      ENDIF.
     ENDLOOP.
   ENDMETHOD.
 
