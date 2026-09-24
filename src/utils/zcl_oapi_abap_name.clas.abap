@@ -95,6 +95,8 @@ CLASS zcl_oapi_abap_name IMPLEMENTATION.
     REPLACE ALL OCCURRENCES OF '+' IN rv_name WITH ''.
     REPLACE ALL OCCURRENCES OF '{' IN rv_name WITH ''.
     REPLACE ALL OCCURRENCES OF '}' IN rv_name WITH ''.
+* anything else which is not valid in ABAP names, eg. enum values like 'not in' or '>='
+    REPLACE ALL OCCURRENCES OF REGEX '[^a-z0-9_]' IN rv_name WITH '_'.
     IF rv_name CO '0123456789'.
       rv_name = 'n' && rv_name.
     ENDIF.
