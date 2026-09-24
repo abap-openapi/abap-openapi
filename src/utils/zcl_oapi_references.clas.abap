@@ -19,7 +19,9 @@ CLASS zcl_oapi_references DEFINITION PUBLIC.
 
     METHODS create_array_references_top.
     METHODS create_array_references_sub
-      IMPORTING ii_schema TYPE REF TO zif_oapi_schema.
+      IMPORTING
+        ii_schema TYPE REF TO zif_oapi_schema
+        io_names  TYPE REF TO zcl_oapi_abap_name.
 
     METHODS sort_schemas.
 
@@ -27,6 +29,11 @@ CLASS zcl_oapi_references DEFINITION PUBLIC.
       IMPORTING
         iv_parent TYPE string
         io_graph  TYPE REF TO zcl_oapi_graph
+        ii_schema TYPE REF TO zif_oapi_schema.
+
+    METHODS break_reference
+      IMPORTING
+        iv_target TYPE string
         ii_schema TYPE REF TO zif_oapi_schema.
 
     METHODS is_supported_type
@@ -69,9 +76,6 @@ CLASS zcl_oapi_references IMPLEMENTATION.
     FIELD-SYMBOLS <ls_property> TYPE zif_oapi_schema=>ty_property.
 "    FIELD-SYMBOLS <ls_property_sub> TYPE zif_oapi_schema=>ty_property.
     DATA ls_new TYPE zif_oapi_specification_v3=>ty_component_schema.
-    DATA lo_names TYPE REF TO zcl_oapi_abap_name.
-    CREATE OBJECT lo_names.
-
 
     IF ii_schema->type <> 'object'.
       RETURN.
@@ -81,7 +85,8 @@ CLASS zcl_oapi_references IMPLEMENTATION.
       IF <ls_property>-schema IS NOT INITIAL
           AND <ls_property>-schema->type = 'object'.
 * recursion
-        create_array_references_sub( <ls_property>-schema ).
+        create_array_references_sub( ii_schema = <ls_property>-schema
+                                     io_names  = io_names ).
         CONTINUE.
       ELSEIF <ls_property>-schema IS INITIAL
           OR <ls_property>-schema->type <> 'array'
@@ -91,10 +96,10 @@ CLASS zcl_oapi_references IMPLEMENTATION.
       ENDIF.
 
       CLEAR ls_new.
-      ls_new-name = lo_names->to_abap_name( |arr{ <ls_property>-abap_name }| ).
+      ls_new-name = io_names->to_abap_name( |arr{ <ls_property>-abap_name }| ).
       ls_new-abap_name = ls_new-name.
-      ls_new-abap_json_method = lo_names->to_abap_name( |json_{ ls_new-name }| ).
-      ls_new-abap_parser_method = lo_names->to_abap_name( |parse_{ ls_new-name }| ).
+      ls_new-abap_json_method = io_names->to_abap_name( |json_{ ls_new-name }| ).
+      ls_new-abap_parser_method = io_names->to_abap_name( |parse_{ ls_new-name }| ).
       ls_new-schema = <ls_property>-schema->items_schema.
       APPEND ls_new TO ms_spec-components-schemas.
 
@@ -107,9 +112,13 @@ CLASS zcl_oapi_references IMPLEMENTATION.
   METHOD create_array_references_top.
 
     DATA ls_schema LIKE LINE OF ms_spec-components-schemas.
+    DATA lo_names TYPE REF TO zcl_oapi_abap_name.
+* shared across all schemas, so the new array schema names are unique
+    CREATE OBJECT lo_names.
 
     LOOP AT ms_spec-components-schemas INTO ls_schema.
-      create_array_references_sub( ls_schema-schema ).
+      create_array_references_sub( ii_schema = ls_schema-schema
+                                   io_names  = lo_names ).
     ENDLOOP.
 
   ENDMETHOD.
@@ -121,10 +130,12 @@ CLASS zcl_oapi_references IMPLEMENTATION.
     FIELD-SYMBOLS <ls_response> LIKE LINE OF <ls_operation>-responses.
     FIELD-SYMBOLS <ls_content> LIKE LINE OF <ls_response>-content.
     DATA ls_new TYPE zif_oapi_specification_v3=>ty_component_schema.
+    DATA lv_operation_schema TYPE string.
     DATA lo_names TYPE REF TO zcl_oapi_abap_name.
     CREATE OBJECT lo_names.
 
     LOOP AT ms_spec-operations ASSIGNING <ls_operation> WHERE deprecated = abap_false.
+      CLEAR lv_operation_schema.
       LOOP AT <ls_operation>-responses ASSIGNING <ls_response>.
         LOOP AT <ls_response>-content ASSIGNING <ls_content> WHERE schema_ref IS INITIAL AND schema IS NOT INITIAL.
 
@@ -136,17 +147,19 @@ CLASS zcl_oapi_references IMPLEMENTATION.
             CONTINUE.
           ENDIF.
 
-          ls_new-name = |response_{ <ls_operation>-abap_name }|.
-
-          IF lo_names->is_used( ls_new-name ) = abap_false.
-            ls_new-abap_name = lo_names->to_abap_name( ls_new-name ).
+* one schema per operation, the name must be unique as long operation names are truncated
+          IF lv_operation_schema IS INITIAL.
+            CLEAR ls_new.
+            ls_new-name = lo_names->to_abap_name( |response_{ <ls_operation>-abap_name }| ).
+            ls_new-abap_name = ls_new-name.
             ls_new-abap_parser_method = lo_names->to_abap_name( |parse_{ <ls_operation>-abap_name }| ).
             CLEAR ls_new-abap_json_method. " dumping json not needed, this is a response
             ls_new-schema = <ls_content>-schema.
             APPEND ls_new TO ms_spec-components-schemas.
+            lv_operation_schema = ls_new-name.
           ENDIF.
 
-          <ls_content>-schema_ref = '#/components/schemas/' && ls_new-name.
+          <ls_content>-schema_ref = '#/components/schemas/' && lv_operation_schema.
         ENDLOOP.
       ENDLOOP.
     ENDLOOP.
@@ -175,9 +188,6 @@ CLASS zcl_oapi_references IMPLEMENTATION.
   METHOD normalize.
     ms_spec = is_spec.
 
-* if an object contains an array directly, move it to schema ref
-    create_array_references_top( ).
-
 * always dereference all parameters
     dereference_parameters( ).
 
@@ -186,6 +196,9 @@ CLASS zcl_oapi_references IMPLEMENTATION.
 
 * if response schema is not simple, move to schema ref
     create_response_references( ).
+
+* if an object contains an array directly, move it to schema ref, after body and responses are moved to schemas
+    create_array_references_top( ).
 
 * sort component schemas so they are ordered with references being defined before used
     sort_schemas( ).
@@ -200,6 +213,8 @@ CLASS zcl_oapi_references IMPLEMENTATION.
     DATA ls_copy LIKE LINE OF lt_copy.
     DATA lv_name TYPE string.
     DATA lo_graph TYPE REF TO zcl_oapi_graph.
+    DATA lt_removed TYPE zcl_oapi_graph=>ty_edges.
+    DATA ls_removed LIKE LINE OF lt_removed.
     CREATE OBJECT lo_graph.
 
     LOOP AT ms_spec-components-schemas INTO ls_schema.
@@ -209,6 +224,15 @@ CLASS zcl_oapi_references IMPLEMENTATION.
       sort_traverse( iv_parent = ls_schema-name
                      io_graph  = lo_graph
                      ii_schema = ls_schema-schema ).
+    ENDLOOP.
+
+* recursive schemas cannot be represented as ABAP types, break the cycles
+    lt_removed = lo_graph->remove_cycles( ).
+    LOOP AT lt_removed INTO ls_removed.
+      READ TABLE ms_spec-components-schemas INTO ls_schema WITH KEY name = ls_removed-from.
+      ASSERT sy-subrc = 0.
+      break_reference( iv_target = ls_removed-to
+                       ii_schema = ls_schema-schema ).
     ENDLOOP.
 
     lt_copy = ms_spec-components-schemas.
@@ -245,6 +269,30 @@ CLASS zcl_oapi_references IMPLEMENTATION.
         sort_traverse( iv_parent = iv_parent
                        io_graph  = io_graph
                        ii_schema = ls_property-schema ).
+      ENDIF.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD break_reference.
+* replaces references to iv_target, found the same way as in sort_traverse, with generic data references
+    DATA lv_ref TYPE string.
+    FIELD-SYMBOLS <ls_property> TYPE zif_oapi_schema=>ty_property.
+
+    lv_ref = '#/components/schemas/' && iv_target.
+
+    IF ii_schema->items_ref = lv_ref.
+      ii_schema->type = zif_oapi_schema=>c_type_ref_to_data.
+      CLEAR ii_schema->items_ref.
+      CLEAR ii_schema->items_type.
+    ENDIF.
+    LOOP AT ii_schema->properties ASSIGNING <ls_property>.
+      IF <ls_property>-ref = lv_ref.
+        CLEAR <ls_property>-ref.
+        CREATE OBJECT <ls_property>-schema TYPE zcl_oapi_schema.
+        <ls_property>-schema->type = zif_oapi_schema=>c_type_ref_to_data.
+      ELSEIF <ls_property>-schema IS NOT INITIAL.
+        break_reference( iv_target = iv_target
+                         ii_schema = <ls_property>-schema ).
       ENDIF.
     ENDLOOP.
   ENDMETHOD.

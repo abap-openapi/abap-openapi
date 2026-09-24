@@ -11,6 +11,7 @@ CLASS ltcl_abap_name DEFINITION FOR TESTING
     METHODS max_abap_name_length FOR TESTING RAISING cx_static_check.
     METHODS camel_to_snake1 FOR TESTING RAISING cx_static_check.
     METHODS camel_to_snake2 FOR TESTING RAISING cx_static_check.
+    METHODS special_characters FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 
@@ -77,6 +78,18 @@ CLASS ltcl_abap_name IMPLEMENTATION.
     cl_abap_unit_assert=>assert_equals(
       act = lv_abap_name
       exp = 'put_data' ).
+
+  ENDMETHOD.
+
+  METHOD special_characters.
+
+    cl_abap_unit_assert=>assert_equals(
+      act = mo_cut->to_abap_name( 'com.atlassian:simplified' )
+      exp = 'com_atlassian_simplified' ).
+
+    cl_abap_unit_assert=>assert_equals(
+      act = mo_cut->to_abap_name( '>=' )
+      exp = '__' ).
 
   ENDMETHOD.
 

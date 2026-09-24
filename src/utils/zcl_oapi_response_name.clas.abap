@@ -72,8 +72,13 @@ CLASS zcl_oapi_response_name IMPLEMENTATION.
         rv_result = 'txt'.
       WHEN 'video'.
         rv_result = 'vid'.
+      WHEN '*'.
+        rv_result = 'any'.
       WHEN OTHERS.
-        rv_result = iv_name(3).
+        rv_result = iv_name.
+        IF strlen( rv_result ) > 3.
+          rv_result = rv_result(3).
+        ENDIF.
     ENDCASE.
   ENDMETHOD.
 
@@ -85,6 +90,11 @@ CLASS zcl_oapi_response_name IMPLEMENTATION.
     DATA lv_descriptor_primary TYPE string.
     DATA lv_descriptor_secondary TYPE string.
 
+    IF iv_name = '*'.
+      rv_result = 'any'.
+      RETURN.
+    ENDIF.
+
     SPLIT iv_name AT '+' INTO lv_descriptor_full lv_type.
 
 *    REPLACE ALL OCCURRENCES OF REGEX '[aeiouy]' IN lv_descriptor_full WITH ''.
@@ -95,7 +105,10 @@ CLASS zcl_oapi_response_name IMPLEMENTATION.
       rv_result = lv_descriptor_primary.
 
       IF lv_descriptor_secondary <> space.
-        rv_result = |{ rv_result }_{ lv_descriptor_secondary(3) }|.
+        IF strlen( lv_descriptor_secondary ) > 3.
+          lv_descriptor_secondary = lv_descriptor_secondary(3).
+        ENDIF.
+        rv_result = |{ rv_result }_{ lv_descriptor_secondary }|.
       ENDIF.
 
       IF lv_type <> space.

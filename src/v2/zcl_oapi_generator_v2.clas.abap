@@ -102,6 +102,13 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
       RETURNING
         VALUE(rv_value) TYPE string.
 
+    METHODS single_line
+      IMPORTING
+        iv_value        TYPE string
+        iv_max_length   TYPE i DEFAULT 150
+      RETURNING
+        VALUE(rv_value) TYPE string.
+
     METHODS build_validation_code
       IMPORTING
         io_schema          TYPE REF TO zif_oapi_schema OPTIONAL
@@ -559,6 +566,19 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
   ENDMETHOD.
 
 
+  METHOD single_line.
+* descriptions can span multiple lines, output them in comments and literals on a single line
+    rv_value = iv_value.
+    REPLACE ALL OCCURRENCES OF cl_abap_char_utilities=>cr_lf IN rv_value WITH ` `.
+    REPLACE ALL OCCURRENCES OF cl_abap_char_utilities=>newline IN rv_value WITH ` `.
+    REPLACE ALL OCCURRENCES OF cl_abap_char_utilities=>horizontal_tab IN rv_value WITH ` `.
+    CONDENSE rv_value.
+    IF strlen( rv_value ) > iv_max_length.
+      rv_value = rv_value(iv_max_length).
+    ENDIF.
+  ENDMETHOD.
+
+
   METHOD collect_pattern_rules.
     DATA lo_schema           TYPE REF TO zif_oapi_schema.
     DATA lo_schema_impl      TYPE REF TO zcl_oapi_schema.
@@ -897,7 +917,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
         ENDIF.
         IF lines( ls_response-content ) = 0.
           lv_post = lv_post &&
-            |          server->response->set_status( code = { lv_code } reason = '{ ls_response-description }' ).\n| &&
+            |          server->response->set_status( code = { lv_code } reason = '{ escape_abap_literal( single_line( iv_value = ls_response-description iv_max_length = 100 ) ) }' ).\n| &&
             |          RETURN.\n|.
         ELSE.
           LOOP AT ls_response-content INTO ls_content.
@@ -917,7 +937,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
               |{ lv_indentation }            data          = { lv_typename }-{ lv_response_name }\n| &&
               |{ lv_indentation }            pretty_name   = { ms_input-pretty_name }\n| &&
               |{ lv_indentation }            name_mappings = mt_name_mappings ) ).\n| &&
-              |{ lv_indentation }          server->response->set_status( code = { lv_code } reason = '{ ls_response-description }' ).\n| &&
+              |{ lv_indentation }          server->response->set_status( code = { lv_code } reason = '{ escape_abap_literal( single_line( iv_value = ls_response-description iv_max_length = 100 ) ) }' ).\n| &&
               |{ lv_indentation }          RETURN.\n|.
             IF lines( ls_response-content ) > 1.
               lv_post = lv_post &&
@@ -1123,7 +1143,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           rv_abap = rv_abap && |      WHEN OTHERS.\n|.
           lv_has_others = abap_true.
         ELSEIF ls_response-description IS NOT INITIAL.
-          rv_abap = rv_abap && |      WHEN { ls_response-code }. " { ls_response-description }\n|.
+          rv_abap = rv_abap && |      WHEN { ls_response-code }. " { single_line( ls_response-description ) }\n|.
         ELSE.
           rv_abap = rv_abap && |      WHEN { ls_response-code }.\n|.
         ENDIF.
@@ -1195,6 +1215,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA ls_returning TYPE ty_returning.
     DATA ls_component_schema LIKE LINE OF ms_specification-components-schemas.
     DATA ls_server LIKE LINE OF ms_specification-servers.
+    DATA lo_names TYPE REF TO zcl_oapi_abap_name.
 
     rv_abap = |INTERFACE { ms_input-intf } PUBLIC.\n| &&
       generation_information( ) &&
@@ -1210,11 +1231,18 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     ENDIF.
 
 
+* names are shared across all schemas, so generated sub types are unique in the interface
+    CREATE OBJECT lo_names.
+    LOOP AT ms_specification-components-schemas INTO ls_component_schema.
+      lo_names->add_used( ls_component_schema-abap_name ).
+    ENDLOOP.
+
     LOOP AT ms_specification-components-schemas INTO ls_component_schema.
       rv_abap = rv_abap && |* { ls_component_schema-name }\n|.
-      rv_abap = rv_abap && ls_component_schema-schema->build_type_definition2(
+      rv_abap = rv_abap && ls_component_schema-schema->build_type_definition(
         iv_name          = ls_component_schema-abap_name
-        is_specification = ms_specification
+        it_refs          = ms_specification-components-schemas
+        io_names         = lo_names
         iv_use_empty_key = ms_input-use_empty_key ).
     ENDLOOP.
     IF sy-subrc = 0.
@@ -1318,7 +1346,10 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           iv_content_type = ls_content-type
           iv_code         = <ls_response>-code ).
         IF ls_content-schema_ref = space.
-          lv_returning_type = ls_content-schema->type.
+          lv_returning_type = ls_content-schema->get_simple_type( ).
+          IF lv_returning_type IS INITIAL OR lv_returning_type = 'any'.
+            lv_returning_type = 'string'.
+          ENDIF.
         ELSE.
           lv_returning_type = find_schema( ls_content-schema_ref )-abap_name.
         ENDIF.

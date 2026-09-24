@@ -17,7 +17,9 @@ CLASS ltcl_content_type DEFINITION
           iv_expected_result TYPE string,
       application_json FOR TESTING RAISING cx_static_check,
       application_xml FOR TESTING RAISING cx_static_check,
-      app_1d_interleaved_prty FOR TESTING RAISING cx_static_check.
+      app_1d_interleaved_prty FOR TESTING RAISING cx_static_check,
+      any_any FOR TESTING RAISING cx_static_check,
+      short_names FOR TESTING RAISING cx_static_check.
 
     DATA cut TYPE REF TO zcl_oapi_response_name.
 
@@ -66,6 +68,20 @@ CLASS ltcl_content_type IMPLEMENTATION.
             iv_content_type = 'application/1d-interleaved-parityfec'
             iv_code    = '200'
             iv_expected_result = '_200_app_1d_int' ).
+  ENDMETHOD.
+
+  METHOD any_any.
+    run_test(
+        iv_content_type = '*/*'
+        iv_code    = '200'
+        iv_expected_result = '_200_any_any' ).
+  ENDMETHOD.
+
+  METHOD short_names.
+    run_test(
+        iv_content_type = 'ab/cd-ef'
+        iv_code    = '200'
+        iv_expected_result = '_200_ab_cd_ef' ).
   ENDMETHOD.
 
 ENDCLASS.

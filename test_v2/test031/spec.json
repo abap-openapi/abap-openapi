@@ -1,0 +1,82 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Test 031",
+    "description": "Recursive schemas",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/group": {
+      "post": {
+        "operationId": "createGroup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Group"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Clause"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Group": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Group"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Group"
+            }
+          }
+        }
+      },
+      "Clause": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "compound": {
+            "$ref": "#/components/schemas/CompoundClause"
+          }
+        }
+      },
+      "CompoundClause": {
+        "type": "object",
+        "properties": {
+          "operator": {
+            "type": "string"
+          },
+          "clauses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Clause"
+            }
+          }
+        }
+      }
+    }
+  }
+}

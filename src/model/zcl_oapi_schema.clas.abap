@@ -58,6 +58,8 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
     DATA lv_name     TYPE string.
     DATA lv_value    TYPE string.
     DATA lv_key      TYPE string.
+    DATA lv_escaped  TYPE string.
+    DATA lo_enum_names TYPE REF TO zcl_oapi_abap_name.
 
     IF iv_use_empty_key = abap_true.
       lv_key = |EMPTY KEY|.
@@ -79,8 +81,13 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
             lv_name = io_names->to_abap_name( 'c_enum_' && iv_name && '_' && ls_property-abap_name ).
             lv_enums = lv_enums && |* Enum: { iv_name }-{ ls_property-abap_name }\n|.
             lv_enums = lv_enums && |  CONSTANTS: BEGIN OF { lv_name },\n|.
+* enum values are not necessarily valid ABAP names, and must be unique within the constant
+            CREATE OBJECT lo_enum_names.
             LOOP AT ls_property-schema->enum INTO lv_value.
-              lv_enums = lv_enums && |               { to_lower( lv_value ) } TYPE string VALUE '{ lv_value }',\n|.
+              lv_escaped = lv_value.
+              REPLACE ALL OCCURRENCES OF '''' IN lv_escaped WITH ''''''.
+              lv_enums = lv_enums && |               { lo_enum_names->to_abap_name( lv_value )
+                } TYPE string VALUE '{ lv_escaped }',\n|.
             ENDLOOP.
             lv_enums = lv_enums && |             END OF { lv_name }.\n|.
           ENDIF.
@@ -199,6 +206,8 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
         ENDIF.
       WHEN 'boolean'.
         rv_simple = 'abap_bool'.
+      WHEN zif_oapi_schema=>c_type_ref_to_data.
+        rv_simple = 'REF TO data'.
     ENDCASE.
   ENDMETHOD.
 ENDCLASS.
