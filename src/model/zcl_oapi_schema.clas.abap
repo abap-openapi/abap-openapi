@@ -199,6 +199,8 @@ CLASS zcl_oapi_schema IMPLEMENTATION.
         ENDIF.
       WHEN 'boolean'.
         rv_simple = 'abap_bool'.
+      WHEN zif_oapi_schema=>c_type_ref_to_data.
+        rv_simple = 'REF TO data'.
     ENDCASE.
   ENDMETHOD.
 ENDCLASS.

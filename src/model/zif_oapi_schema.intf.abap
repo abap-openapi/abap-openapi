@@ -7,6 +7,9 @@ INTERFACE zif_oapi_schema PUBLIC.
            schema    TYPE REF TO zif_oapi_schema,
          END OF ty_property.
 
+* used for references which would make the ABAP types recursive
+  CONSTANTS c_type_ref_to_data TYPE string VALUE 'ref_to_data'.
+
   DATA:
     type         TYPE string,
     format       TYPE string,

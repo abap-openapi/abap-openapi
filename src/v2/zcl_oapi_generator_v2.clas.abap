@@ -1195,6 +1195,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA ls_returning TYPE ty_returning.
     DATA ls_component_schema LIKE LINE OF ms_specification-components-schemas.
     DATA ls_server LIKE LINE OF ms_specification-servers.
+    DATA lo_names TYPE REF TO zcl_oapi_abap_name.
 
     rv_abap = |INTERFACE { ms_input-intf } PUBLIC.\n| &&
       generation_information( ) &&
@@ -1210,11 +1211,18 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     ENDIF.
 
 
+* names are shared across all schemas, so generated sub types are unique in the interface
+    CREATE OBJECT lo_names.
+    LOOP AT ms_specification-components-schemas INTO ls_component_schema.
+      lo_names->add_used( ls_component_schema-abap_name ).
+    ENDLOOP.
+
     LOOP AT ms_specification-components-schemas INTO ls_component_schema.
       rv_abap = rv_abap && |* { ls_component_schema-name }\n|.
-      rv_abap = rv_abap && ls_component_schema-schema->build_type_definition2(
+      rv_abap = rv_abap && ls_component_schema-schema->build_type_definition(
         iv_name          = ls_component_schema-abap_name
-        is_specification = ms_specification
+        it_refs          = ms_specification-components-schemas
+        io_names         = lo_names
         iv_use_empty_key = ms_input-use_empty_key ).
     ENDLOOP.
     IF sy-subrc = 0.

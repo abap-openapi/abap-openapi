@@ -29,6 +29,11 @@ CLASS zcl_oapi_references DEFINITION PUBLIC.
         io_graph  TYPE REF TO zcl_oapi_graph
         ii_schema TYPE REF TO zif_oapi_schema.
 
+    METHODS break_reference
+      IMPORTING
+        iv_target TYPE string
+        ii_schema TYPE REF TO zif_oapi_schema.
+
     METHODS is_supported_type
       IMPORTING
         is_content_type     TYPE string
@@ -200,6 +205,8 @@ CLASS zcl_oapi_references IMPLEMENTATION.
     DATA ls_copy LIKE LINE OF lt_copy.
     DATA lv_name TYPE string.
     DATA lo_graph TYPE REF TO zcl_oapi_graph.
+    DATA lt_removed TYPE zcl_oapi_graph=>ty_edges.
+    DATA ls_removed LIKE LINE OF lt_removed.
     CREATE OBJECT lo_graph.
 
     LOOP AT ms_spec-components-schemas INTO ls_schema.
@@ -209,6 +216,15 @@ CLASS zcl_oapi_references IMPLEMENTATION.
       sort_traverse( iv_parent = ls_schema-name
                      io_graph  = lo_graph
                      ii_schema = ls_schema-schema ).
+    ENDLOOP.
+
+* recursive schemas cannot be represented as ABAP types, break the cycles
+    lt_removed = lo_graph->remove_cycles( ).
+    LOOP AT lt_removed INTO ls_removed.
+      READ TABLE ms_spec-components-schemas INTO ls_schema WITH KEY name = ls_removed-from.
+      ASSERT sy-subrc = 0.
+      break_reference( iv_target = ls_removed-to
+                       ii_schema = ls_schema-schema ).
     ENDLOOP.
 
     lt_copy = ms_spec-components-schemas.
@@ -245,6 +261,30 @@ CLASS zcl_oapi_references IMPLEMENTATION.
         sort_traverse( iv_parent = iv_parent
                        io_graph  = io_graph
                        ii_schema = ls_property-schema ).
+      ENDIF.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD break_reference.
+* replaces references to iv_target, found the same way as in sort_traverse, with generic data references
+    DATA lv_ref TYPE string.
+    FIELD-SYMBOLS <ls_property> TYPE zif_oapi_schema=>ty_property.
+
+    lv_ref = '#/components/schemas/' && iv_target.
+
+    IF ii_schema->items_ref = lv_ref.
+      ii_schema->type = zif_oapi_schema=>c_type_ref_to_data.
+      CLEAR ii_schema->items_ref.
+      CLEAR ii_schema->items_type.
+    ENDIF.
+    LOOP AT ii_schema->properties ASSIGNING <ls_property>.
+      IF <ls_property>-ref = lv_ref.
+        CLEAR <ls_property>-ref.
+        CREATE OBJECT <ls_property>-schema TYPE zcl_oapi_schema.
+        <ls_property>-schema->type = zif_oapi_schema=>c_type_ref_to_data.
+      ELSEIF <ls_property>-schema IS NOT INITIAL.
+        break_reference( iv_target = iv_target
+                         ii_schema = <ls_property>-schema ).
       ENDIF.
     ENDLOOP.
   ENDMETHOD.
