@@ -327,6 +327,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       <ls_parameter>-abap_name = sanitize_abap_name( <ls_parameter>-abap_name ).
     ENDLOOP.
 
+* methods and types share the same namespace in the generated interface
+    lt_used_operation_names = lt_used_schema_names.
+
     LOOP AT ms_specification-operations ASSIGNING <ls_operation>.
       ensure_unique_abap_name(
         EXPORTING iv_name       = <ls_operation>-abap_name
@@ -1235,6 +1238,9 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     CREATE OBJECT lo_names.
     LOOP AT ms_specification-components-schemas INTO ls_component_schema.
       lo_names->add_used( ls_component_schema-abap_name ).
+    ENDLOOP.
+    LOOP AT ms_specification-operations INTO ls_operation.
+      lo_names->add_used( ls_operation-abap_name ).
     ENDLOOP.
 
     LOOP AT ms_specification-components-schemas INTO ls_component_schema.
