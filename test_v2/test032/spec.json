@@ -1,0 +1,42 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Test 032",
+    "description": "Operation and schema with the same name, issue 241",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/scheme": {
+      "get": {
+        "operationId": "getFieldAssociationScheme",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetFieldAssociationScheme"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GetFieldAssociationScheme": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

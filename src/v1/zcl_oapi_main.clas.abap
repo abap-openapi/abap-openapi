@@ -306,12 +306,16 @@ CLASS zcl_oapi_main IMPLEMENTATION.
   METHOD dump_types.
 
     DATA ls_schema TYPE zif_oapi_specification_v3=>ty_component_schema.
+    DATA ls_operation LIKE LINE OF ms_specification-operations.
     DATA lo_names TYPE REF TO zcl_oapi_abap_name.
 
     CREATE OBJECT lo_names.
 
     LOOP AT ms_specification-components-schemas INTO ls_schema.
       lo_names->add_used( ls_schema-abap_name ).
+    ENDLOOP.
+    LOOP AT ms_specification-operations INTO ls_operation.
+      lo_names->add_used( ls_operation-abap_name ).
     ENDLOOP.
 
     LOOP AT ms_specification-components-schemas INTO ls_schema.

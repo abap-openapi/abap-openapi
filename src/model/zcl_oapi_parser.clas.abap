@@ -10,6 +10,7 @@ CLASS zcl_oapi_parser DEFINITION PUBLIC.
     DATA mo_json TYPE REF TO zcl_oapi_json.
 
     METHODS parse_operations
+      IMPORTING it_schemas           TYPE zif_oapi_specification_v3=>ty_schemas
       RETURNING VALUE(rt_operations) TYPE zif_oapi_specification_v3=>ty_operations.
 
     METHODS parse_servers
@@ -61,9 +62,9 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     rs_schema-info-version = mo_json->value_string( '/info/version' ).
     rs_schema-info-description = mo_json->value_string( '/info/description' ).
 
-    rs_schema-operations = parse_operations( ).
-    rs_schema-servers = parse_servers( ).
     rs_schema-components = parse_components( ).
+    rs_schema-operations = parse_operations( rs_schema-components-schemas ).
+    rs_schema-servers = parse_servers( ).
 
   ENDMETHOD.
 
@@ -246,8 +247,14 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     DATA lv_method LIKE LINE OF lt_methods.
     DATA lv_prefix TYPE string.
     DATA ls_operation LIKE LINE OF rt_operations.
+    DATA ls_schema LIKE LINE OF it_schemas.
     DATA lo_names TYPE REF TO zcl_oapi_abap_name.
     CREATE OBJECT lo_names.
+
+* methods and types share the same namespace in the generated interface
+    LOOP AT it_schemas INTO ls_schema.
+      lo_names->add_used( ls_schema-abap_name ).
+    ENDLOOP.
 
     lt_paths = mo_json->members( '/paths/' ).
     LOOP AT lt_paths INTO lv_path.
