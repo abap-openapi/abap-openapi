@@ -104,8 +104,8 @@ START-OF-SELECTION.
 
   ls_input-intf = p_intf.
   ls_input-clas_client = p_client.
-  ls_input-clas_icf_impl = p_serv.
-  ls_input-clas_icf_serv = p_impl.
+  ls_input-clas_icf_serv = p_serv.
+  ls_input-clas_icf_impl = p_impl.
 
   ls_result = zcl_oapi_generator=>generate_v2( ls_input ).
 
