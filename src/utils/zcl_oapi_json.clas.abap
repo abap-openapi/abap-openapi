@@ -29,11 +29,18 @@ CLASS zcl_oapi_json DEFINITION PUBLIC.
         iv_path          TYPE string
       RETURNING
         VALUE(rv_exists) TYPE abap_bool.
+"! returns the unescaped member names, escape them before using in a path
     METHODS members
       IMPORTING
         iv_path           TYPE string
       RETURNING
         VALUE(rt_members) TYPE string_table.
+"! escapes a key for use in a path, as in JSON Pointer RFC 6901, "~" to "~0" and "/" to "~1"
+    CLASS-METHODS escape_key
+      IMPORTING
+        iv_name           TYPE string
+      RETURNING
+        VALUE(rv_escaped) TYPE string.
 
   PROTECTED SECTION.
   PRIVATE SECTION.
@@ -80,6 +87,13 @@ CLASS zcl_oapi_json IMPLEMENTATION.
       ENDIF.
       APPEND ls_data-name TO <ls_members>-members.
     ENDLOOP.
+  ENDMETHOD.
+
+
+  METHOD escape_key.
+    rv_escaped = iv_name.
+    REPLACE ALL OCCURRENCES OF '~' IN rv_escaped WITH '~0'.
+    REPLACE ALL OCCURRENCES OF '/' IN rv_escaped WITH '~1'.
   ENDMETHOD.
 
 
