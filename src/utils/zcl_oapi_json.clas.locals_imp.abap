@@ -119,17 +119,19 @@ CLASS lcl_parser IMPLEMENTATION.
 *          WRITE '@KERNEL console.dir(lt_attributes.array().length);'.
           READ TABLE lt_attributes INDEX 1 INTO li_attribute.
           IF sy-subrc = 0.
-            lv_push = li_attribute->get_value( ).
+            lv_name = li_attribute->get_value( ).
+            lv_push = zcl_oapi_json=>escape_key( lv_name ).
           ELSEIF lo_stack->is_array( ) = abap_true.
             lv_push = lo_stack->get_and_increase_index( ).
+            lv_name = lv_push.
           ENDIF.
 
           IF lv_push IS NOT INITIAL.
 
             CLEAR ls_data.
             ls_data-parent = lo_stack->get_full_name( ).
-            ls_data-name = lv_push.
-            ls_data-full_name = ls_data-parent && ls_data-name.
+            ls_data-name = lv_name.
+            ls_data-full_name = ls_data-parent && lv_push.
 
             lv_index = lv_index + 1.
             READ TABLE lt_nodes INDEX lv_index INTO li_next.

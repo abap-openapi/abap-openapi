@@ -268,13 +268,13 @@ CLASS zcl_oapi_main IMPLEMENTATION.
             rv_abap = rv_abap && |* todo initial, hmm\n|.
           ELSEIF ls_property-schema->type = 'string'
               OR ls_property-schema->type = 'integer'.
-            rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = mo_json->value_string( iv_prefix && '{ iv_hard_prefix }/{ ls_property-name }' ).\n|.
+            rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = mo_json->value_string( iv_prefix && '{ iv_hard_prefix }/{ zcl_oapi_json=>escape_key( ls_property-name ) }' ).\n|.
           ELSEIF ls_property-schema->type = 'boolean'.
-            rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = mo_json->value_boolean( iv_prefix && '{ iv_hard_prefix }/{ ls_property-name }' ).\n|.
+            rv_abap = rv_abap && |    { iv_abap_name }-{ ls_property-abap_name } = mo_json->value_boolean( iv_prefix && '{ iv_hard_prefix }/{ zcl_oapi_json=>escape_key( ls_property-name ) }' ).\n|.
           ELSEIF ls_property-schema->type = 'object'.
             rv_abap = rv_abap && dump_parser(
               ii_schema    = ls_property-schema
-              iv_hard_prefix = iv_hard_prefix && '/' && ls_property-name
+              iv_hard_prefix = iv_hard_prefix && '/' && zcl_oapi_json=>escape_key( ls_property-name )
               iv_abap_name = |{ iv_abap_name }-{ ls_property-abap_name }| ).
           ELSE.
             rv_abap = rv_abap && |* todo, { ls_property-schema->type }, { ls_property-abap_name }\n|.
