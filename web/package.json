@@ -11,9 +11,9 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@abaplint/core": "^2.118.11",
-    "@abaplint/monaco": "^2.118.11",
-    "@abaplint/runtime": "^2.13.12",
+    "@abaplint/core": "^2.120.83",
+    "@abaplint/monaco": "^2.120.83",
+    "@abaplint/runtime": "^2.14.9",
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.1",
     "css-loader": "^6.11.0",

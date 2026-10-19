@@ -22,7 +22,7 @@ module.exports = {
   },
   resolve: {
     fallback: {
-      "./%23ui2%23cl_json.clas.mjs": false,
+      "./open-abap-core/%23ui2%23cl_json.clas.mjs": false,
       "buffer": require.resolve("buffer/"),
       "crypto": false,
       "fs": false,
