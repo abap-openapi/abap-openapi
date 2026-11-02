@@ -1,0 +1,91 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Test 033",
+    "description": "Parameters defined on path item level",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/tenants/{tenant}/items/{item}/keys": {
+      "summary": "Keys for item",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "tenant",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "item",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "in": "header",
+          "name": "correlation-id",
+          "description": "overridden on put",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "getKeys",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Keys"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateKeys",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "correlation-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Keys"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Keys": {
+        "type": "object",
+        "properties": {
+          "publicKey": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
