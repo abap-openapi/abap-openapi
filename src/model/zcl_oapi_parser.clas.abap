@@ -252,6 +252,8 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     DATA ls_operation LIKE LINE OF rt_operations.
     DATA ls_schema LIKE LINE OF it_schemas.
     DATA lo_names TYPE REF TO zcl_oapi_abap_name.
+    DATA lt_path_parameters TYPE zif_oapi_specification_v3=>ty_parameters.
+    DATA ls_path_parameter LIKE LINE OF lt_path_parameters.
     CREATE OBJECT lo_names.
 
 * methods and types share the same namespace in the generated interface
@@ -265,7 +267,8 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
       ls_operation-path = lv_path.
       lt_methods = mo_json->members( '/paths/' && zcl_oapi_json=>escape_key( lv_path ) && '/' ).
       LOOP AT lt_methods INTO lv_method.
-        IF lv_method = 'summary' OR lv_method = 'description'.
+        IF lv_method <> 'get' AND lv_method <> 'put' AND lv_method <> 'post' AND lv_method <> 'delete'
+            AND lv_method <> 'options' AND lv_method <> 'head' AND lv_method <> 'patch' AND lv_method <> 'trace'.
           CONTINUE.
         ENDIF.
 
@@ -277,6 +280,18 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
         ls_operation-operation_id = mo_json->value_string( lv_prefix && '/operationId' ).
         ls_operation-parameters = parse_parameters( lv_prefix && '/parameters/' ).
         ls_operation-parameters_ref = parse_parameters_ref( lv_prefix && '/parameters/' ).
+
+* parameters on path item level apply to all operations, unless overridden on operation level
+        lt_path_parameters = parse_parameters( '/paths/' && zcl_oapi_json=>escape_key( lv_path ) && '/parameters/' ).
+        LOOP AT lt_path_parameters INTO ls_path_parameter.
+          READ TABLE ls_operation-parameters WITH KEY name = ls_path_parameter-name in = ls_path_parameter-in
+            TRANSPORTING NO FIELDS.
+          IF sy-subrc <> 0.
+            APPEND ls_path_parameter TO ls_operation-parameters.
+          ENDIF.
+        ENDLOOP.
+        APPEND LINES OF parse_parameters_ref( '/paths/' && zcl_oapi_json=>escape_key( lv_path ) && '/parameters/' )
+          TO ls_operation-parameters_ref.
         ls_operation-responses = parse_operation_responses( lv_prefix && '/responses/' ).
 
         ls_operation-abap_name = lo_names->to_abap_name( ls_operation-operation_id ).
