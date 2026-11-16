@@ -1,0 +1,59 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Test 034",
+    "description": "OpenAPI 3.1 nullable, anyOf with type null",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/items": {
+      "get": {
+        "operationId": "listItems",
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Item" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Owner": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" }
+        }
+      },
+      "Item": {
+        "type": "object",
+        "properties": {
+          "note": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }]
+          },
+          "count": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }]
+          },
+          "owner": {
+            "anyOf": [{ "$ref": "#/components/schemas/Owner" }, { "type": "null" }]
+          }
+        }
+      }
+    }
+  }
+}
