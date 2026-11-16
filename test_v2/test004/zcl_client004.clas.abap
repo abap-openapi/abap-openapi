@@ -42,13 +42,21 @@ CLASS zcl_client004 IMPLEMENTATION.
     DATA ls_header       LIKE LINE OF mt_extra_headers.
     DATA lv_dummy        TYPE string.
     DATA lv_content_type TYPE string.
+    DATA lv_query        TYPE string.
+    DATA lv_query_value  TYPE string.
 
     mi_client->propertytype_logon_popup = mv_logon_popup.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_version( if_http_request=>co_protocol_version_1_1 ).
     mi_client->request->set_compression( ).
     lv_uri = mv_uri_prefix && '/test'.
-" todo, in=query name=operation
+    IF operation IS SUPPLIED.
+      lv_query_value = |{ operation }|.
+      lv_query = lv_query && '&operation=' && escape( val = lv_query_value format = cl_abap_format=>e_url_full ).
+    ENDIF.
+    IF lv_query IS NOT INITIAL.
+      lv_uri = lv_uri && '?' && substring( val = lv_query off = 1 ).
+    ENDIF.
     cl_http_utility=>set_request_uri(
       request = mi_client->request
       uri     = lv_uri ).
