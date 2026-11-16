@@ -79,6 +79,12 @@ CLASS zcl_oapi_generator_v2 DEFINITION PUBLIC.
       RETURNING
         VALUE(rv_abap) TYPE string.
 
+    METHODS build_query_parameter
+      IMPORTING
+        is_parameter   TYPE zif_oapi_specification_v3=>ty_parameter
+      RETURNING
+        VALUE(rv_abap) TYPE string.
+
     METHODS build_intf
       RETURNING
         VALUE(rv_abap) TYPE string.
@@ -1008,6 +1014,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA ls_cresponse     LIKE LINE OF ms_specification-components-responses.
     DATA lv_name          TYPE string.
     DATA lv_has_others       TYPE abap_bool.
+    DATA lv_has_query     TYPE abap_bool.
     DATA lv_name_mappings TYPE string.
 
     CREATE OBJECT lo_response_name.
@@ -1051,12 +1058,24 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
       |  ENDMETHOD.\n\n|.
 
     LOOP AT ms_specification-operations INTO ls_operation.
+      lv_has_query = abap_false.
+      READ TABLE ls_operation-parameters WITH KEY in = 'query' TRANSPORTING NO FIELDS.
+      IF sy-subrc = 0.
+        lv_has_query = abap_true.
+      ENDIF.
+
       rv_abap = rv_abap &&
         |  METHOD { ms_input-intf }~{ ls_operation-abap_name }.\n| &&
         |    DATA lv_uri          TYPE string.\n| &&
         |    DATA ls_header       LIKE LINE OF mt_extra_headers.\n| &&
         |    DATA lv_dummy        TYPE string.\n| &&
-        |    DATA lv_content_type TYPE string.\n| &&
+        |    DATA lv_content_type TYPE string.\n|.
+      IF lv_has_query = abap_true.
+        rv_abap = rv_abap &&
+          |    DATA lv_query        TYPE string.\n| &&
+          |    DATA lv_query_value  TYPE string.\n|.
+      ENDIF.
+      rv_abap = rv_abap &&
         |\n| &&
         |    mi_client->propertytype_logon_popup = mv_logon_popup.\n| &&
         |    mi_client->request->set_method( '{ to_upper( ls_operation-method ) }' ).\n| &&
@@ -1078,11 +1097,20 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
           WHEN 'path'.
             rv_abap = rv_abap &&
               |    REPLACE FIRST OCCURRENCE OF '\{{ ls_parameter-name }\}' IN lv_uri WITH { ls_parameter-abap_name }.\n|.
+          WHEN 'query'.
+            rv_abap = rv_abap && build_query_parameter( ls_parameter ).
           WHEN OTHERS.
             rv_abap = rv_abap &&
               |" todo, in={ ls_parameter-in } name={ ls_parameter-name }\n|.
         ENDCASE.
       ENDLOOP.
+
+      IF lv_has_query = abap_true.
+        rv_abap = rv_abap &&
+          |    IF lv_query IS NOT INITIAL.\n| &&
+          |      lv_uri = lv_uri && '?' && substring( val = lv_query off = 1 ).\n| &&
+          |    ENDIF.\n|.
+      ENDIF.
 
       rv_abap = rv_abap &&
         |    cl_http_utility=>set_request_uri(\n| &&
@@ -1307,6 +1335,45 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
     IF rv_abap IS NOT INITIAL.
       rv_abap = |\n    IMPORTING\n{ rv_abap }|.
+    ENDIF.
+  ENDMETHOD.
+
+
+  METHOD build_query_parameter.
+* style "form" with explode, the OpenAPI default for query parameters: name=value, arrays repeat the name
+    DATA lv_indent TYPE string.
+    DATA lv_append TYPE string.
+
+    lv_indent = `    `.
+    IF is_parameter-required = abap_false.
+      rv_abap = |    IF { is_parameter-abap_name } IS SUPPLIED.\n|.
+      lv_indent = `      `.
+    ENDIF.
+
+* the name is used as is, so OData names like $top stay readable
+    lv_append = |lv_query = lv_query && '&{ escape_abap_literal( is_parameter-name ) }='|.
+
+    CASE find_parameter_type( is_parameter ).
+      WHEN 'string_table'.
+        rv_abap = rv_abap &&
+          |{ lv_indent }LOOP AT { is_parameter-abap_name } INTO lv_query_value.\n| &&
+          |{ lv_indent }  { lv_append } && escape( val = lv_query_value format = cl_abap_format=>e_url_full ).\n| &&
+          |{ lv_indent }ENDLOOP.\n|.
+      WHEN 'abap_bool'.
+        rv_abap = rv_abap &&
+          |{ lv_indent }IF { is_parameter-abap_name } = abap_true.\n| &&
+          |{ lv_indent }  { lv_append } && 'true'.\n| &&
+          |{ lv_indent }ELSE.\n| &&
+          |{ lv_indent }  { lv_append } && 'false'.\n| &&
+          |{ lv_indent }ENDIF.\n|.
+      WHEN OTHERS.
+        rv_abap = rv_abap &&
+          |{ lv_indent }lv_query_value = \|\{ { is_parameter-abap_name } \}\|.\n| &&
+          |{ lv_indent }{ lv_append } && escape( val = lv_query_value format = cl_abap_format=>e_url_full ).\n|.
+    ENDCASE.
+
+    IF is_parameter-required = abap_false.
+      rv_abap = rv_abap && |    ENDIF.\n|.
     ENDIF.
   ENDMETHOD.
 
