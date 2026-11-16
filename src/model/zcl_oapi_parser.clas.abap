@@ -39,6 +39,10 @@ CLASS zcl_oapi_parser DEFINITION PUBLIC.
       IMPORTING iv_prefix        TYPE string
       RETURNING VALUE(ri_schema) TYPE REF TO zif_oapi_schema.
 
+    METHODS find_nullable_member
+      IMPORTING iv_prefix        TYPE string
+      RETURNING VALUE(rv_prefix) TYPE string.
+
     METHODS parse_schemas
       IMPORTING iv_prefix         TYPE string
       RETURNING VALUE(rt_schemas) TYPE zif_oapi_specification_v3=>ty_schemas.
@@ -80,7 +84,26 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     DATA lo_names                TYPE REF TO zcl_oapi_abap_name.
     DATA lo_schema_impl          TYPE REF TO zcl_oapi_schema.
     DATA lo_composition          TYPE REF TO zif_oapi_schema.
+    DATA lv_nullable             TYPE string.
+    DATA lv_default              TYPE string.
     CREATE OBJECT lo_names.
+
+* "X or null" is parsed as X, ABAP has no null
+    lv_nullable = find_nullable_member( iv_prefix ).
+    IF lv_nullable IS NOT INITIAL.
+      lv_ref = mo_json->value_string( lv_nullable && '/$ref' ).
+      IF lv_ref IS INITIAL.
+        ri_schema = parse_schema( lv_nullable ).
+      ELSE.
+        REPLACE FIRST OCCURRENCE OF '#/components' IN lv_ref WITH '/components'.
+        ri_schema = parse_schema( lv_ref ).
+      ENDIF.
+      lv_default = mo_json->value_string( iv_prefix && '/default' ).
+      IF lv_default IS NOT INITIAL.
+        ri_schema->default = lv_default.
+      ENDIF.
+      RETURN.
+    ENDIF.
 
     CREATE OBJECT ri_schema TYPE zcl_oapi_schema.
     lo_schema_impl ?= ri_schema.
@@ -166,6 +189,14 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
           AND lines( mo_json->members( lv_prefix && '/allOf' ) ) = 1.
 * squash single allOf in object type
         ls_property-ref = mo_json->value_string( lv_prefix && '/allOf/1/$ref' ).
+      ENDIF.
+
+      IF ls_property-ref IS INITIAL.
+* reference or null, keep the reference
+        lv_nullable = find_nullable_member( lv_prefix ).
+        IF lv_nullable IS NOT INITIAL.
+          ls_property-ref = mo_json->value_string( lv_nullable && '/$ref' ).
+        ENDIF.
       ENDIF.
 
       IF ls_property-ref IS INITIAL.
@@ -323,6 +354,43 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
         APPEND ls_operation TO rt_operations.
       ENDLOOP.
 
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD find_nullable_member.
+* OpenAPI 3.1 has no "nullable", it is written as anyOf/oneOf with a {"type": "null"} member,
+* returns the prefix of the other member when the schema is exactly "X or null"
+    DATA lt_compositions TYPE string_table.
+    DATA lv_composition  TYPE string.
+    DATA lt_members      TYPE string_table.
+    DATA lv_member       TYPE string.
+    DATA lv_nulls        TYPE i.
+    DATA lv_other        TYPE string.
+
+    IF mo_json->exists( iv_prefix && '/type' ) = abap_true.
+      RETURN.
+    ENDIF.
+
+    APPEND '/anyOf/' TO lt_compositions.
+    APPEND '/oneOf/' TO lt_compositions.
+    LOOP AT lt_compositions INTO lv_composition.
+      lt_members = mo_json->members( iv_prefix && lv_composition ).
+      IF lines( lt_members ) <> 2.
+        CONTINUE.
+      ENDIF.
+      CLEAR lv_nulls.
+      CLEAR lv_other.
+      LOOP AT lt_members INTO lv_member.
+        IF mo_json->value_string( iv_prefix && lv_composition && lv_member && '/type' ) = 'null'.
+          lv_nulls = lv_nulls + 1.
+        ELSE.
+          lv_other = iv_prefix && lv_composition && lv_member.
+        ENDIF.
+      ENDLOOP.
+      IF lv_nulls = 1.
+        rv_prefix = lv_other.
+        RETURN.
+      ENDIF.
     ENDLOOP.
   ENDMETHOD.
 
