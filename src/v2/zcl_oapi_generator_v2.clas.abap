@@ -175,8 +175,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lv_offset TYPE i.
     DATA lv_len TYPE i.
 
-    lv_name = iv_name.
-    TRANSLATE lv_name TO LOWER CASE.
+    lv_name = to_lower( iv_name ).
 
     " Replace common language-specific characters with ASCII fallback.
     REPLACE ALL OCCURRENCES OF 'ä' IN lv_name WITH 'ae'.
