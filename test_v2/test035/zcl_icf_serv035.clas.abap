@@ -31,13 +31,21 @@ CLASS zcl_icf_serv035 IMPLEMENTATION.
           DATA lv_path_segment_1_2 TYPE string.
           READ TABLE lt_path_segments_1 INDEX 2 INTO lv_path_segment_1_2.
           ASSERT sy-subrc = 0.
+          DATA lv_parameter_1_3 TYPE i.
+          lv_parameter_1_3 = server->request->get_form_field( 'limit' ).
+          DATA lv_parameter_1_4 TYPE abap_bool.
+          IF to_lower( server->request->get_form_field( 'active' ) ) = 'true'.
+            lv_parameter_1_4 = abap_true.
+          ENDIF.
+          DATA lv_parameter_1_5 TYPE i.
+          lv_parameter_1_5 = server->request->get_form_field( '$top' ).
           DATA r_list_children TYPE zif_interface035=>r_list_children.
           r_list_children = li_handler->list_children(
             id = lv_path_segment_1_2
             q = server->request->get_form_field( 'q' )
-            limit = server->request->get_form_field( 'limit' )
-            active = server->request->get_form_field( 'active' )
-            top = server->request->get_form_field( '$top' ) ).
+            limit = lv_parameter_1_3
+            active = lv_parameter_1_4
+            top = lv_parameter_1_5 ).
           server->response->set_content_type( 'application/json' ).
           server->response->set_cdata( /ui2/cl_json=>serialize(
             data          = r_list_children-_200_app_json
