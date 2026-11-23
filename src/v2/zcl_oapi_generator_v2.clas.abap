@@ -772,7 +772,12 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
     DATA lv_segment_index     TYPE i.
     DATA lv_path_parameter_setup TYPE string.
     DATA lv_path_segment_var  TYPE string.
-    DATA lv_body_name         TYPE string.
+    DATA lv_parameter_setup   TYPE string.
+    DATA lv_parameter_type    TYPE string.
+    DATA lv_parameter_var     TYPE string.
+    DATA lv_field_getter      TYPE string.
+    DATA lv_parameter_index   TYPE i.
+    DATA lv_body_name        TYPE string.
     DATA lv_body_type         TYPE string.
     DATA lv_name_mappings        TYPE string.
     DATA lv_validator_class   TYPE string.
@@ -821,18 +826,47 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
       CLEAR lv_parameters.
       CLEAR lv_path_parameter_setup.
+      CLEAR lv_parameter_setup.
       CLEAR lt_template_segments.
       SPLIT ls_operation-path AT '/' INTO TABLE lt_template_segments.
       DELETE lt_template_segments WHERE table_line IS INITIAL.
 
+      CLEAR lv_parameter_index.
       LOOP AT ls_operation-parameters INTO ls_parameter.
+        lv_parameter_index = lv_parameter_index + 1.
         CASE ls_parameter-in.
-          WHEN 'query'.
-            lv_parameters = lv_parameters &&
-              |\n            { ls_parameter-abap_name } = server->request->get_form_field( '{ ls_parameter-name }' )|.
-          WHEN 'header'.
-            lv_parameters = lv_parameters &&
-              |\n            { ls_parameter-abap_name } = server->request->get_header_field( '{ ls_parameter-name }' )|.
+          WHEN 'query' OR 'header'.
+            IF ls_parameter-in = 'query'.
+              lv_field_getter = |server->request->get_form_field( '{ ls_parameter-name }' )|.
+            ELSE.
+              lv_field_getter = |server->request->get_header_field( '{ ls_parameter-name }' )|.
+            ENDIF.
+            lv_parameter_type = find_parameter_type( ls_parameter ).
+            IF lv_parameter_type = 'string'.
+              lv_parameters = lv_parameters &&
+                |\n            { ls_parameter-abap_name } = { lv_field_getter }|.
+            ELSE.
+              lv_parameter_var = |lv_parameter_{ lv_counter }_{ lv_parameter_index }|.
+              lv_parameter_setup = lv_parameter_setup &&
+                |          DATA { lv_parameter_var } TYPE { lv_parameter_type }.\n|.
+              CASE lv_parameter_type.
+                WHEN 'abap_bool'.
+                  lv_parameter_setup = lv_parameter_setup &&
+                    |          IF to_lower( { lv_field_getter } ) = 'true'.\n| &&
+                    |            { lv_parameter_var } = abap_true.\n| &&
+                    |          ENDIF.\n|.
+                WHEN 'string_table'.
+                  lv_parameter_setup = lv_parameter_setup &&
+                    |          IF { lv_field_getter } IS NOT INITIAL.\n| &&
+                    |            SPLIT { lv_field_getter } AT ',' INTO TABLE { lv_parameter_var }.\n| &&
+                    |          ENDIF.\n|.
+                WHEN OTHERS.
+                  lv_parameter_setup = lv_parameter_setup &&
+                    |          { lv_parameter_var } = { lv_field_getter }.\n|.
+              ENDCASE.
+              lv_parameters = lv_parameters &&
+                |\n            { ls_parameter-abap_name } = { lv_parameter_var }|.
+            ENDIF.
           WHEN 'path'.
             IF lv_path_parameter_setup IS INITIAL.
               IF ms_input-use_empty_key = abap_true.
@@ -965,6 +999,7 @@ CLASS zcl_oapi_generator_v2 IMPLEMENTATION.
 
       rv_abap = rv_abap &&
         lv_path_parameter_setup &&
+        lv_parameter_setup &&
         lv_pre &&
         |li_handler->{ ls_operation-abap_name }({ lv_parameters } ).\n| &&
         lv_post &&
